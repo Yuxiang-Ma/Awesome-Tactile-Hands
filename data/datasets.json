@@ -471,7 +471,8 @@
     "tasks=22 counts motor primitives; the card's total_tasks=5,370 counts unique language captions.",
     "scenes=6 = 'six distinct tabletop backdrops' (App. G); collected in a controlled lab, so scene_types left empty.",
     "Head ZED X Mini is a stereo camera but only its left monocular RGB stream is recorded."
-   ]
+   ],
+   "viewer": "tr_ep001061"
   },
   {
    "id": "opentouch",
@@ -1500,7 +1501,8 @@
     "Sensor principle 'piezoresistive' comes from PSYONIC's own API (touch data parsed as FSR, 'Hand Observer now shares offset FSR readings'); the HATO paper only says 'touch sensors'.",
     "RealSense model not named in paper or code; camera driver streams 640x480 RGB + depth, logged at 10 Hz (paper: 'streamed at a resolution of 480x640').",
     "The stationary third camera is a 'head-view' camera on a fixed mount, not robot- or operator-mounted, so it is listed as third_person."
-   ]
+   ],
+   "viewer": "ha_stack_0309_235138"
   },
   {
    "id": "tdex",

@@ -415,9 +415,9 @@ function mountControls(){
 function mountGrid(){
   const vs=R.cams.map(k=>R.vid[k]),card=(v,big)=>`<div class="card"><h3>${esc(v.title)} <small id="meta_${v.key}"></small></h3><div class="vwrap"><video id="v_${v.key}" muted playsinline preload="auto"></video>${big?'<canvas id="poseC"></canvas>':''}</div></div>`;
   const rest=vs.slice(1);
-  const lay=document.querySelector('.layout');lay.classList.toggle('gl',R.hlist.length===2);lay.innerHTML=`<div>${vs.length?card(vs[0],true):'<div class="card"><h3>No video in this dataset</h3></div>'}
+  const lay=document.querySelector('.layout');lay.classList.toggle('gl',R.hlist.length===2&&R.hlist.every(h=>R.hands[h].cols<=30));lay.innerHTML=`<div>${vs.length?card(vs[0],true):'<div class="card"><h3>No video in this dataset</h3></div>'}
     ${rest.length?`<div class="wrists" style="grid-template-columns:repeat(${Math.min(rest.length,3)},minmax(0,1fr))">${rest.map(v=>card(v,false)).join('')}</div>`:''}</div>
-    <div class="side"><div class="gloves">${R.hlist.map(h=>{const H=R.hands[h];return`<div class="card hand"><h3><span style="color:var(--${h==='lh'?'lh':'rh'})">${esc(H.title)}</span><small>${H.nc} taxels · ${H.rate} Hz</small></h3>
+    <div class="side"><div class="gloves">${R.hlist.map(h=>{const H=R.hands[h];return`<div class="card hand"><h3><span style="color:var(--${h==='lh'?'lh':'rh'})">${esc(H.title)}</span><small>${esc(H.label||`${H.nc} taxels`)} · ${H.rate} Hz</small></h3>
       <div class="hm${H.rows>H.cols?' tall':''}"><canvas id="hand_${h}"></canvas></div><div class="vals" id="vals_${h}" style="--nv:${Math.max(1,H.regs.length)}"></div></div>`}).join('')}</div>
     <div class="card" style="margin-top:14px"><div class="scale" id="scale"></div></div></div>`;
   for(const v of vs){const m=$('meta_'+v.key);m.dataset.base=[v.src_size&&v.src_size.join('×'),v.fps_src&&`${v.fps_src} fps`].filter(Boolean).join(' · ');m.textContent=m.dataset.base;

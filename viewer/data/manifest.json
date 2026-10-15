@@ -1066,6 +1066,160 @@
      "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
     }
    ]
+  },
+  {
+   "id": "trex",
+   "group": "public",
+   "title": "T-Rex",
+   "provider": "Niu, Liu, Wang et al. 2026 (UC Berkeley)",
+   "kind": "recording",
+   "status": {
+    "label": "MIT",
+    "tone": "ok"
+   },
+   "about": "Teleoperated bimanual robot with two Sharpa Wave hands, five camera-based fingertip tactile sensors per hand; 5,464 episodes over 22 motor primitives and 207 objects.",
+   "link": {
+    "label": "zekaiwang/trex_dataset",
+    "href": "https://huggingface.co/datasets/zekaiwang/trex_dataset"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip"
+    ]
+   },
+   "hardware": [
+    {
+     "k": "Hands",
+     "v": "2 \u00d7 Sharpa Wave, 22 DoF each",
+     "d": "5 fingertip tactile sensors per hand \u00b7 raw image, deformation map, 6-axis wrench \u00b7 30 Hz"
+    },
+    {
+     "k": "Robot",
+     "v": "Dexmate Vega-1",
+     "d": "2 \u00d7 7-DoF arms; wheels, torso and head fixed during collection"
+    },
+    {
+     "k": "Cameras",
+     "v": "Head ZED X Mini + 2 wrist ZED X One S",
+     "d": "640\u00d7360 \u00b7 30 fps"
+    },
+    {
+     "k": "Teleoperation",
+     "v": "Manus gloves + VIVE trackers",
+     "d": "Language caption, motor primitive and object per episode"
+    }
+   ],
+   "notes": "Paper: arXiv 2606.17055. Released under the MIT license. Each episode is a slice of the release's multi-episode video files, re-encoded and hosted here; the tactile view is the fingertip deformation map pooled to 10 \u00d7 10 cells per fingertip.",
+   "items": [
+    {
+     "id": "tr_ep000557",
+     "title": "Rub the books with the cloth using your left hand while your right hand holds them steady.",
+     "label": "wipe \u00b7 books",
+     "sub": "19 s \u00b7 episode 557",
+     "poster": "media/tr_ep000557.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tr_ep001061",
+     "title": "Fold the bubble wrap in half with both hands, leaving the power cable in place.",
+     "label": "fold \u00b7 bubble wrap",
+     "sub": "17 s \u00b7 episode 1061",
+     "poster": "media/tr_ep001061.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tr_ep001113",
+     "title": "Beside the maraca, use your right hand to tilt-pour the milk carton.",
+     "label": "pour \u00b7 milk carton",
+     "sub": "20 s \u00b7 episode 1113",
+     "poster": "media/tr_ep001113.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tr_ep002019",
+     "title": "Compress the ball with your left hand beside the yellow ball.",
+     "label": "squeeze \u00b7 ball",
+     "sub": "17 s \u00b7 episode 2019",
+     "poster": "media/tr_ep002019.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tr_ep002848",
+     "title": "Peel the plastic screen protector with both hands, leaving the toy banana and block in place.",
+     "label": "peel \u00b7 plastic screen protector",
+     "sub": "20 s \u00b7 episode 2848",
+     "poster": "media/tr_ep002848.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "hato",
+   "group": "public",
+   "title": "HATO",
+   "provider": "Lin et al. 2024 (UC Berkeley)",
+   "kind": "recording",
+   "status": {
+    "label": "License not stated",
+    "tone": "neutral"
+   },
+   "about": "Teleoperated bimanual UR5e arms with two Psyonic Ability hands, six touch sites per fingertip; four tasks: banana handover, block stacking, wine pouring, steak serving.",
+   "link": {
+    "label": "toruowo.github.io/hato",
+    "href": "https://toruowo.github.io/hato/"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip"
+    ],
+    "taxels": 30
+   },
+   "hardware": [
+    {
+     "k": "Hands",
+     "v": "2 \u00d7 Psyonic Ability Hand, 6 DoF",
+     "d": "6 force-sensing sites per fingertip, 30 per hand \u00b7 12-bit ADC \u00b7 logged at \u224810 Hz"
+    },
+    {
+     "k": "Arms",
+     "v": "2 \u00d7 UR5e",
+     "d": "Teleoperated with Meta Quest 2 controllers"
+    },
+    {
+     "k": "Cameras",
+     "v": "3 \u00d7 Intel RealSense RGB-D",
+     "d": "One third-view, one on each wrist \u00b7 640\u00d7480"
+    }
+   ],
+   "notes": "Paper: arXiv 2404.16823; code github.com/toruowo/hato; data on Berkeley Box (linked from the code README). The release states no license; the sample videos are re-hosted here for preview with attribution. Videos are built from the RGB frames stored in each step's pickle; depth is not shown. In the converted episodes the right hand's middle fingertip reads zero throughout, and some steps carry corrupted touch bytes (handled as described in each episode's notes). The wine-pouring task is not shown: every pour episode sampled had the right hand's touch bytes corrupted in most steps.",
+   "items": [
+    {
+     "id": "ha_banana_0307_221050",
+     "title": "Slippery handover (banana)",
+     "label": "banana \u00b7 0307_221050",
+     "sub": "9 s \u00b7 93 steps",
+     "poster": "media/ha_banana_0307_221050.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ha_stack_0309_235138",
+     "title": "Tower block stacking",
+     "label": "stack \u00b7 0309_235138",
+     "sub": "18 s \u00b7 182 steps",
+     "poster": "media/ha_stack_0309_235138.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ha_steak_0306_150701",
+     "title": "Steak serving",
+     "label": "steak \u00b7 0306_150701",
+     "sub": "30 s \u00b7 304 steps",
+     "poster": "media/ha_steak_0306_150701.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
   }
  ]
 }
