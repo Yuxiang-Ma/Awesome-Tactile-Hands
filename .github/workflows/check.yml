@@ -1,0 +1,8 @@
+name: Check catalog
+on: [push, pull_request]
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/build_readme.py --check

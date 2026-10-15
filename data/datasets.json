@@ -1,0 +1,966 @@
+{
+ "metadata": {
+  "title": "Awesome Tactile Hands",
+  "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
+  "last_updated": "2026-10-15"
+ },
+ "datasets": [
+  {
+   "id": "touchscale",
+   "name": "TouchScale",
+   "title": "TouchScale: 500 Hours of Human Vision and Touch for Visual-Tactile Learning",
+   "authors": "Dayou Li et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.10288",
+   "summary": "Bimanual tactile gloves with 880 taxels per hand, recorded with head-mounted RGB-D and two wrist cameras across about 2K everyday tasks.",
+   "embodiment": "human",
+   "hand": "Tachin glove (commercial)",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 880,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": "50-100",
+    "note": "Normal pressure, 1.5 mm cells over five fingers and palm. The paper does not name the transduction principle."
+   },
+   "modalities": [
+    "egocentric",
+    "depth",
+    "wrist_rgb",
+    "language"
+   ],
+   "scale": {
+    "hours": 500,
+    "episodes": 87000,
+    "tasks": 2000,
+    "objects": 1500,
+    "subjects": 20,
+    "text": "500 h, ~87K episodes, ~2K tasks, 1.5K+ objects, ~20 participants"
+   },
+   "availability": "gated",
+   "access": "Gated on Hugging Face. 100 h / 15,324 episodes / 929 tasks (~1.08 TB) released so far; the rest is planned before November 2026.",
+   "license": "CC BY-NC 4.0",
+   "caveats": [
+    "No hand-pose capture; the paper estimates pose with WiLoR."
+   ],
+   "links": {
+    "project": "https://touch-scale.github.io/",
+    "paper": "https://arxiv.org/abs/2610.10288",
+    "data": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale",
+    "code": "https://github.com/phai-lab/touchscale"
+   },
+   "image": "https://touch-scale.github.io/assets/images/hero-human-tubes-composite.webp",
+   "thumb": "assets/thumbs/touchscale.jpg"
+  },
+  {
+   "id": "egotouch",
+   "name": "EgoTouch",
+   "title": "TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video",
+   "authors": "Jianyi Zhou et al.",
+   "year": 2026,
+   "venue": "arXiv 2605.13083",
+   "summary": "Bimanual pressure gloves with Rokoko hand pose, an egocentric camera and two wrist cameras over 208 tasks.",
+   "embodiment": "human",
+   "hand": "Custom pressure gloves + Rokoko mocap gloves",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 256,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": "30",
+    "note": "16 x 16 values per hand, remapped to a hand-shaped 21 x 21 grid covering fingers and palm."
+   },
+   "modalities": [
+    "egocentric",
+    "wrist_rgb",
+    "hand_pose"
+   ],
+   "scale": {
+    "hours": 20,
+    "episodes": 1891,
+    "tasks": 208,
+    "objects": 1000,
+    "text": "~20 h, 1,891 episodes, 208 tasks, 1,000+ objects, ~2.1M frames"
+   },
+   "availability": "public",
+   "access": "Hugging Face, 88.5 GB.",
+   "license": "not stated",
+   "caveats": [],
+   "links": {
+    "project": "https://jianyi2004.github.io/TouchAnything-Website/",
+    "paper": "https://arxiv.org/abs/2605.13083",
+    "data": "https://huggingface.co/datasets/zhouzhoujy/EgoTouch",
+    "code": "https://github.com/Jianyi2004/TouchAnything"
+   },
+   "image": "https://jianyi2004.github.io/TouchAnything-Website/static/figures/teaser.png",
+   "thumb": "assets/thumbs/egotouch.jpg"
+  },
+  {
+   "id": "tactidex",
+   "name": "TactiDex",
+   "title": "TactiDex: A Real-World Tactile-Guided Benchmark for Human-Like Dexterous Manipulation",
+   "authors": "Suting Ni et al.",
+   "year": 2026,
+   "venue": "ACM MM 2026",
+   "summary": "Piezoresistive glove over a MANUS mocap glove with OptiTrack object tracking, single-hand and bimanual, retargeted to Inspire hands.",
+   "embodiment": "human",
+   "hand": "Piezoresistive glove over MANUS Metagloves Pro",
+   "bimanual": true,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 162,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "rate_hz": "17",
+    "note": "162 elements per glove on fingertips and palm."
+   },
+   "modalities": [
+    "hand_pose",
+    "object_pose",
+    "mocap"
+   ],
+   "scale": {
+    "episodes": 757,
+    "objects": 49,
+    "subjects": 10,
+    "text": "757 sequences, 49 objects, 10 subjects, 5.1M frames"
+   },
+   "availability": "not_released",
+   "access": "No data or code link on the project page or arXiv as of 2026-10-15.",
+   "license": "unconfirmed",
+   "caveats": [],
+   "links": {
+    "project": "https://tactidex.github.io/",
+    "paper": "https://arxiv.org/abs/2607.09190"
+   },
+   "image": "https://tactidex.github.io/static/images/f1_dataset.png",
+   "thumb": "assets/thumbs/tactidex.jpg"
+  },
+  {
+   "id": "trex",
+   "name": "T-Rex",
+   "title": "T-Rex: Tactile-Reactive Dexterous Manipulation",
+   "authors": "Dantong Niu et al.",
+   "year": 2026,
+   "venue": "arXiv 2606.17055",
+   "summary": "Bimanual teleoperation on two 22-DoF Sharpa Wave hands with five fingertip tactile sensors each, in LeRobot format.",
+   "embodiment": "robot",
+   "hand": "Sharpa Wave (22 DoF) x 2 on Dexmate Vega-1",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "sensors_per_hand": 5,
+    "coverage": [
+     "tip"
+    ],
+    "note": "Five fingertip sensors per hand, each storing a raw sensor image, a deformation map and a 6-axis wrench. No palm sensing."
+   },
+   "modalities": [
+    "egocentric",
+    "wrist_rgb",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "hours": 50,
+    "episodes": 5464,
+    "objects": 207,
+    "text": "Public release: ~50 h, 5,464 episodes, 207 objects (paper: 100 h)"
+   },
+   "availability": "public",
+   "access": "Hugging Face, ungated, 1.53 TB, LeRobot v3.",
+   "license": "MIT",
+   "caveats": [
+    "Fingertips only."
+   ],
+   "links": {
+    "project": "https://tactile-rex.github.io/",
+    "paper": "https://arxiv.org/abs/2606.17055",
+    "data": "https://huggingface.co/datasets/zekaiwang/trex_dataset",
+    "code": "https://github.com/ZhuoyangLiu2005/T-Rex"
+   },
+   "image": "https://tactile-rex.github.io/figures/teaser.png",
+   "thumb": "assets/thumbs/trex.jpg"
+  },
+  {
+   "id": "opentouch",
+   "name": "OpenTouch",
+   "title": "OpenTouch: Bringing Full-Hand Touch to Real-World Interaction",
+   "authors": "Yuxin Ray Song et al.",
+   "year": 2025,
+   "venue": "arXiv 2512.16842",
+   "summary": "In-the-wild right-hand pressure glove with Meta Aria egocentric video, Rokoko hand pose and text labels across 14 environments.",
+   "embodiment": "human",
+   "hand": "Piezoresistive film glove + Rokoko",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 169,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": "30",
+    "note": "Palmar side of the hand; the paper is inconsistent about finger coverage."
+   },
+   "modalities": [
+    "egocentric",
+    "hand_pose",
+    "language"
+   ],
+   "scale": {
+    "hours": 5.1,
+    "episodes": 2900,
+    "text": "5.1 h, 2,900 reviewed clips, 14 environments"
+   },
+   "availability": "public",
+   "access": "Google Drive, via scripts/download_data.sh in the code repo.",
+   "license": "not stated",
+   "caveats": [
+    "Right hand only."
+   ],
+   "links": {
+    "project": "https://opentouch-tactile.github.io/",
+    "paper": "https://arxiv.org/abs/2512.16842",
+    "code": "https://github.com/OpenTouch-MIT/opentouch",
+    "data": "https://github.com/OpenTouch-MIT/opentouch"
+   },
+   "image": "https://opentouch-tactile.github.io/assets/examples/ex1.png",
+   "thumb": "assets/thumbs/opentouch.jpg"
+  },
+  {
+   "id": "egotactile",
+   "name": "EgoTactile",
+   "title": "EgoTactile: Learning Grasp Pressure for Everyday Objects from Egocentric Video",
+   "authors": "Yuan Zeng et al.",
+   "year": 2026,
+   "venue": "ICML 2026",
+   "summary": "Full-hand 162-sensor pressure glove with egocentric video of grasps on 63 everyday objects, plus a bare-hand test set.",
+   "embodiment": "human",
+   "hand": "162-sensor pressure glove",
+   "bimanual": false,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 162,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "rate_hz": "17",
+    "note": "Full-hand glove, 0-350 N range."
+   },
+   "modalities": [
+    "egocentric",
+    "segmentation"
+   ],
+   "scale": {
+    "hours": 5.82,
+    "episodes": 768,
+    "objects": 63,
+    "subjects": 12,
+    "text": "5.82 h, 768 clips, 63 objects, 12 participants"
+   },
+   "availability": "public",
+   "access": "Hugging Face, 5.48 GB.",
+   "license": "CC BY-NC 4.0",
+   "caveats": [
+    "Grasping everyday objects rather than dexterous manipulation.",
+    "No hand pose."
+   ],
+   "links": {
+    "project": "https://egotactile.github.io/",
+    "paper": "https://arxiv.org/abs/2606.09243",
+    "data": "https://huggingface.co/datasets/HustleHard/EgoTactile",
+    "code": "https://github.com/Russell-Zeng/EgoTactile"
+   },
+   "image": "https://egotactile.github.io/assets/dataset_overview.png",
+   "thumb": "assets/thumbs/egotactile.jpg"
+  },
+  {
+   "id": "hrdexdb",
+   "name": "HRDexDB",
+   "title": "HRDexDB: A 4D Dexterous Grasping Dataset Across Human and Multiple Robot Embodiments",
+   "authors": "Jongbin Lim et al.",
+   "year": 2026,
+   "venue": "arXiv 2604.14944",
+   "summary": "Paired human and robot grasps (Allegro, two Inspire hands, Robotiq) with 21 cameras and object 6D pose; tactile on the robot fingertips only.",
+   "embodiment": "both",
+   "hand": "Human (no tactile); Allegro V5 Plus, Inspire RH56DFTP, Inspire RH56F1, Robotiq 2F-85",
+   "bimanual": false,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "coverage": [
+     "tip"
+    ],
+    "note": "Robot fingertip sensors only; the authors call them too noisy or sparse to use as contact labels."
+   },
+   "modalities": [
+    "multiview_rgb",
+    "egocentric",
+    "hand_pose",
+    "object_pose",
+    "robot_action"
+   ],
+   "scale": {
+    "episodes": 3215,
+    "objects": 100,
+    "text": "3,215 trials (541 human), 100 objects, 43.5M frames"
+   },
+   "availability": "public",
+   "access": "Hugging Face, 1.57 TB.",
+   "license": "CC BY-NC 4.0",
+   "caveats": [
+    "Grasping only.",
+    "No human tactile."
+   ],
+   "links": {
+    "project": "https://snuvclab.github.io/HRDexDB/",
+    "paper": "https://arxiv.org/abs/2604.14944",
+    "data": "https://huggingface.co/datasets/HRDexDB/HRDexDB"
+   },
+   "image": "https://snuvclab.github.io/HRDexDB/static/image/teaser_icra.png",
+   "thumb": "assets/thumbs/hrdexdb.jpg"
+  },
+  {
+   "id": "actionsense",
+   "name": "ActionSense",
+   "title": "ActionSense: A Multimodal Dataset and Recording Framework for Human Activities Using Wearable Sensors in a Kitchen Environment",
+   "authors": "Joseph DelPreto et al.",
+   "year": 2022,
+   "venue": "NeurIPS 2022 Datasets & Benchmarks",
+   "summary": "Kitchen activities with bimanual tactile gloves, finger bend sensors, EMG, body IMUs, eye tracking and multi-view video.",
+   "embodiment": "human",
+   "hand": "Conductive-thread tactile gloves (open finger) + Manus Prime II",
+   "bimanual": true,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 682,
+    "coverage": [
+     "phalanx",
+     "palm"
+    ],
+    "note": "32 x 32 thread matrix; open-finger gloves, so no fingertips."
+   },
+   "modalities": [
+    "egocentric",
+    "multiview_rgb",
+    "depth",
+    "hand_pose",
+    "emg",
+    "imu",
+    "eye_tracking",
+    "audio"
+   ],
+   "scale": {
+    "hours": 13,
+    "subjects": 10,
+    "tasks": 20,
+    "text": "10 subjects, ~778 min, 20 activities"
+   },
+   "availability": "public",
+   "access": "HDF5 files at data.csail.mit.edu/ActionNet.",
+   "license": "CC BY-NC-SA 4.0",
+   "caveats": [
+    "Subjects S06-S09 have no tactile or finger tracking."
+   ],
+   "links": {
+    "project": "https://action-sense.csail.mit.edu/",
+    "paper": "https://neurips.cc/virtual/2022/poster/55638",
+    "data": "https://action-sense.csail.mit.edu/data.html"
+   },
+   "image": "https://action-sense.csail.mit.edu/images/wearable_sensors_v0.jpg",
+   "thumb": "assets/thumbs/actionsense.jpg"
+  },
+  {
+   "id": "stag",
+   "name": "STAG",
+   "title": "Learning the signatures of the human grasp using a scalable tactile glove",
+   "authors": "Subramanian Sundaram et al.",
+   "year": 2019,
+   "venue": "Nature 569",
+   "summary": "Knitted glove with 548 piezoresistive sensors over the whole hand; 135K frames of single-hand grasps on 26 objects.",
+   "embodiment": "human",
+   "hand": "STAG knitted glove",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 548,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "note": "Piezoresistive film with conductive-thread electrodes."
+   },
+   "modalities": [
+    "rgb",
+    "hand_pose"
+   ],
+   "scale": {
+    "objects": 26,
+    "text": "~135K frames, 26 objects"
+   },
+   "availability": "public",
+   "access": "Zip archives on stag.csail.mit.edu, with pressure-only lite versions.",
+   "license": "research only",
+   "caveats": [
+    "Grasping and object identification rather than dexterous manipulation."
+   ],
+   "links": {
+    "project": "http://stag.csail.mit.edu/",
+    "paper": "https://doi.org/10.1038/s41586-019-1234-z",
+    "code": "https://github.com/Erkil1452/touch",
+    "data": "http://stag.csail.mit.edu/"
+   },
+   "image": "http://stag.csail.mit.edu/assets/teaser3_800.png",
+   "thumb": "assets/thumbs/stag.jpg"
+  },
+  {
+   "id": "senstextile",
+   "name": "Tactile textiles",
+   "title": "Learning human-environment interactions using conformal tactile textiles",
+   "authors": "Yiyue Luo et al.",
+   "year": 2021,
+   "venue": "Nature Electronics 4",
+   "summary": "Machine-knitted piezoresistive wearables including a full-hand glove; the glove data covers calibration and 26-object classification.",
+   "embodiment": "human",
+   "hand": "Knitted tactile glove",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": null,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "note": "Glove sensor count not confirmed."
+   },
+   "modalities": [],
+   "scale": {
+    "text": ">1M tactile frames across all wearables; glove share not stated"
+   },
+   "availability": "public",
+   "access": "Dropbox links in the code repository.",
+   "license": "not stated",
+   "caveats": [
+    "Glove data is object classification, not manipulation."
+   ],
+   "links": {
+    "project": "https://senstextile.csail.mit.edu/",
+    "paper": "https://doi.org/10.1038/s41928-021-00558-0",
+    "code": "https://github.com/YunzhuLi/senstextile",
+    "data": "https://github.com/YunzhuLi/senstextile"
+   },
+   "image": "https://senstextile.csail.mit.edu/img/teaserv2.png",
+   "thumb": "assets/thumbs/senstextile.jpg"
+  },
+  {
+   "id": "vtdexmanip",
+   "name": "VTDexManip",
+   "title": "VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning",
+   "authors": "Qingtao Liu et al.",
+   "year": 2025,
+   "venue": "ICLR 2025",
+   "summary": "Piezoresistive tactile gloves with egocentric HoloLens 2 video across 10 manipulation tasks and 182 objects, for visual-tactile pretraining.",
+   "embodiment": "human",
+   "hand": "Glove with 20 piezoresistive pads",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 20,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "rate_hz": "200",
+    "note": "20 pads per glove, force-calibrated against an F/T sensor; 18.3 mm pads on the thumb tip and palm, 10 mm elsewhere."
+   },
+   "modalities": [
+    "egocentric"
+   ],
+   "scale": {
+    "episodes": 2032,
+    "tasks": 10,
+    "objects": 182,
+    "subjects": 5,
+    "text": "2,032 sequences, 10 tasks, 182 objects, 5 subjects, 565K frame pairs"
+   },
+   "availability": "public",
+   "access": "OneDrive (password vtdexmanip, given in the repository).",
+   "license": "code MIT; data not stated",
+   "caveats": [
+    "Sparse pads rather than a dense array.",
+    "No hand pose."
+   ],
+   "links": {
+    "paper": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+    "code": "https://github.com/LQTS/VTDexManip",
+    "data": "https://github.com/LQTS/VTDexManip"
+   },
+   "image": "https://raw.githubusercontent.com/LQTS/VTDexManip/main/asset/scr/benchmark.png",
+   "thumb": "assets/thumbs/vtdexmanip.jpg"
+  },
+  {
+   "id": "adl21",
+   "name": "ADL-21",
+   "title": "Dataset of Tactile Signatures of the Human Right Hand in Twenty-One Activities of Daily Living",
+   "authors": "Rafael Cepriá-Bernal et al.",
+   "year": 2021,
+   "venue": "Sensors 2021",
+   "summary": "Tekscan Grip pressure system on the right hand of 22 subjects performing 21 activities of daily living.",
+   "embodiment": "human",
+   "hand": "Tekscan Grip 4256E sewn on a glove",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 361,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": "50",
+    "note": "Sensels on the phalanges and palm; palm coverage is sparser than STAG."
+   },
+   "modalities": [],
+   "scale": {
+    "tasks": 21,
+    "subjects": 22,
+    "text": "22 subjects, 21 activities"
+   },
+   "availability": "public",
+   "access": "Zenodo, about 50 MB.",
+   "license": "CC BY 4.0",
+   "caveats": [
+    "Tactile only: no video or hand pose."
+   ],
+   "links": {
+    "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8068022/",
+    "data": "https://zenodo.org/records/4607289"
+   }
+  },
+  {
+   "id": "reachgrasp",
+   "name": "Reach&Grasp",
+   "title": "Reach&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements",
+   "authors": "Dario Di Domenico et al.",
+   "year": 2025,
+   "venue": "Scientific Data 2025",
+   "summary": "Upper-limb reaching and grasping with a tactile glove, CyberGlove joint angles, Vicon motion capture and high-density EMG.",
+   "embodiment": "human",
+   "hand": "Bielefeld tactile glove + CyberGlove",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 58,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "note": "17 taxels on the palm and 41 on the fingers, uncalibrated; three taxels are faulty."
+   },
+   "modalities": [
+    "hand_pose",
+    "mocap",
+    "emg"
+   ],
+   "scale": {
+    "tasks": 16,
+    "subjects": 10,
+    "text": "10 subjects, 16 tasks"
+   },
+   "availability": "public",
+   "access": "IIT Dataverse, BIDS format.",
+   "license": "not stated",
+   "caveats": [
+    "Reach-and-grasp movements rather than dexterous manipulation.",
+    "No video."
+   ],
+   "links": {
+    "paper": "https://doi.org/10.1038/s41597-025-04552-5",
+    "code": "https://github.com/DarioDiDomenico/SData_ReachGrasp"
+   }
+  },
+  {
+   "id": "hato",
+   "name": "HATO",
+   "title": "Learning Visuotactile Skills with Two Multifingered Hands",
+   "authors": "Toru Lin et al.",
+   "year": 2024,
+   "venue": "ICRA 2025",
+   "summary": "Bimanual teleoperation of two Psyonic Ability hands on UR5e arms, with fingertip pressure sensing and three RGB-D cameras.",
+   "embodiment": "robot",
+   "hand": "Psyonic Ability x 2 on UR5e",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 30,
+    "coverage": [
+     "tip"
+    ],
+    "rate_hz": "10",
+    "note": "Six pressure sensors per fingertip."
+   },
+   "modalities": [
+    "egocentric",
+    "wrist_rgb",
+    "depth",
+    "robot_action"
+   ],
+   "scale": {
+    "episodes": 800,
+    "tasks": 4,
+    "text": "800 demonstrations, 4 tasks"
+   },
+   "availability": "public",
+   "access": "Berkeley Box, with a download script in the repository.",
+   "license": "not stated",
+   "caveats": [
+    "Fingertips only."
+   ],
+   "links": {
+    "project": "https://toruowo.github.io/hato/",
+    "paper": "https://arxiv.org/abs/2404.16823",
+    "code": "https://github.com/toruowo/hato",
+    "data": "https://github.com/toruowo/hato"
+   },
+   "image": "https://toruowo.github.io/hato/figures/overview.png",
+   "thumb": "assets/thumbs/hato.jpg"
+  },
+  {
+   "id": "tdex",
+   "name": "T-Dex",
+   "title": "Dexterity from Touch: Self-Supervised Pre-Training of Tactile Representations with Robotic Play",
+   "authors": "Irmak Guzey et al.",
+   "year": 2023,
+   "venue": "CoRL 2023",
+   "summary": "Allegro hand covered with XELA uSkin pads, recorded during 2.5 hours of teleoperated play plus task demonstrations.",
+   "embodiment": "robot",
+   "hand": "Allegro on a Kinova arm",
+   "bimanual": false,
+   "sensor": {
+    "type": "magnetic",
+    "taxels_per_hand": 240,
+    "coverage": [
+     "tip",
+     "phalanx"
+    ],
+    "note": "15 XELA uSkin pads (4 per finger, 3 on the thumb), each 4 x 4 three-axis taxels."
+   },
+   "modalities": [
+    "rgb",
+    "robot_action"
+   ],
+   "scale": {
+    "hours": 2.5,
+    "tasks": 5,
+    "text": "~2.5 h play data plus 6 demonstrations per task, 5 tasks"
+   },
+   "availability": "public",
+   "access": "Google Drive, linked from the project page.",
+   "license": "not stated",
+   "caveats": [
+    "No palm sensing reported."
+   ],
+   "links": {
+    "project": "https://tactile-dexterity.github.io/",
+    "paper": "https://arxiv.org/abs/2303.12076"
+   },
+   "image": "https://tactile-dexterity.github.io/mfiles/tdex_algo.png",
+   "thumb": "assets/thumbs/tdex.jpg"
+  },
+  {
+   "id": "gist_vta",
+   "name": "Humanoid VTA",
+   "title": "A Humanoid Visual-Tactile-Action Dataset for Contact-Rich Manipulation",
+   "authors": "Eunju Kwon et al.",
+   "year": 2025,
+   "venue": "arXiv 2510.25725",
+   "summary": "Humanoid with two Inspire hands carrying 1,062 tactile sensors each over fingers and palm, teleoperated on deformable-object tasks.",
+   "embodiment": "robot",
+   "hand": "Inspire RH56DFX x 2 on a humanoid",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 1062,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "note": "Sensor technology not stated. A tactile carpet under the robot is recorded too."
+   },
+   "modalities": [
+    "egocentric",
+    "rgb",
+    "robot_action"
+   ],
+   "scale": {
+    "tasks": 4,
+    "text": "101.9K frames, 4 tasks, ~80 episodes per task"
+   },
+   "availability": "not_released",
+   "access": "No release link found as of 2026-10-15.",
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2510.25725"
+   },
+   "caveats": []
+  },
+  {
+   "id": "tacross",
+   "name": "TACROSS",
+   "title": "TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors",
+   "authors": "Bo Chen et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.11945",
+   "summary": "Piezoresistive fabric glove for large-scale human touch collection, paired with robot data from a capacitive Revo2 tactile hand.",
+   "embodiment": "both",
+   "hand": "Fabric tactile glove; BrainCo Revo2 tactile hand",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 256,
+    "coverage": [],
+    "rate_hz": "150",
+    "note": "285 sensing points on the glove, 256 read out. Coverage not confirmed."
+   },
+   "modalities": [
+    "rgb",
+    "hand_pose",
+    "robot_action"
+   ],
+   "scale": {
+    "hours": 184,
+    "episodes": 21412,
+    "text": "159 h human + 24.9 h robot; 21,412 valid human demonstrations"
+   },
+   "availability": "announced",
+   "access": "Release planned by the authors.",
+   "license": "not stated",
+   "links": {
+    "project": "https://tacross-touch-project.github.io/",
+    "paper": "https://arxiv.org/abs/2610.11945"
+   },
+   "image": "https://tacross-touch-project.github.io/assets/slide1-animation.jpg",
+   "caveats": [],
+   "thumb": "assets/thumbs/tacross.jpg"
+  },
+  {
+   "id": "dexvitac",
+   "name": "DexViTac",
+   "title": "DexViTac: Collecting Human Visuo-Tactile-Kinematic Demonstrations for Contact-Rich Dexterous Manipulation",
+   "authors": "Xitong Chen et al.",
+   "year": 2026,
+   "venue": "arXiv 2603.17851",
+   "summary": "Human demonstrations with fingertip tactile arrays, Manus hand pose and a fisheye camera, matched by identical sensors on an Inspire hand.",
+   "embodiment": "both",
+   "hand": "Glove with fingertip arrays + Manus Metagloves; Inspire RH56DFTP",
+   "bimanual": false,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 640,
+    "coverage": [
+     "tip"
+    ],
+    "rate_hz": "1000",
+    "note": "Five 8 x 16 fingertip arrays per hand; no palm."
+   },
+   "modalities": [
+    "hand_pose",
+    "rgb",
+    "robot_action"
+   ],
+   "scale": {
+    "episodes": 2400,
+    "tasks": 40,
+    "text": "2,400+ demonstrations, 40+ tasks, 10+ environments"
+   },
+   "availability": "announced",
+   "access": "Hugging Face repository exists but is empty (\"near future\").",
+   "license": "not stated",
+   "caveats": [
+    "Fingertips only."
+   ],
+   "links": {
+    "project": "https://xitong-c.github.io/DexViTac/",
+    "paper": "https://arxiv.org/abs/2603.17851",
+    "data": "https://huggingface.co/datasets/xitong-c/DexViTac_Dataset"
+   }
+  },
+  {
+   "id": "osmo",
+   "name": "OSMO",
+   "title": "OSMO: Open-Source Tactile Glove for Human-to-Robot Skill Transfer",
+   "authors": "Jessica Yin et al.",
+   "year": 2025,
+   "venue": "arXiv 2512.08920",
+   "summary": "Open-source glove with three-axis magnetic taxels on fingertips and palm, worn by both the human demonstrator and the robot hand.",
+   "embodiment": "both",
+   "hand": "OSMO glove (human and robot hand)",
+   "bimanual": false,
+   "sensor": {
+    "type": "magnetic",
+    "taxels_per_hand": 12,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "note": "Twelve three-axis taxels measuring shear and normal force; no mid or proximal phalanges."
+   },
+   "modalities": [
+    "rgb",
+    "hand_pose"
+   ],
+   "scale": {
+    "hours": 2,
+    "episodes": 140,
+    "tasks": 1,
+    "text": "~2 h, 140 wiping demonstrations"
+   },
+   "availability": "not_released",
+   "access": "Hardware, firmware and code are open; no dataset release found.",
+   "license": "hardware/code open",
+   "caveats": [
+    "Hand pose is estimated from video (HaMeR).",
+    "One task."
+   ],
+   "links": {
+    "project": "https://www.jessicayin.com/osmo_tactile_glove/",
+    "paper": "https://arxiv.org/abs/2512.08920",
+    "code": "https://github.com/jessicayin/osmo_tactile_glove"
+   },
+   "image": "https://www.jessicayin.com/osmo_tactile_glove/photos/fig1_v1.png",
+   "thumb": "assets/thumbs/osmo.jpg"
+  },
+  {
+   "id": "humanoid_everyday",
+   "name": "Humanoid Everyday",
+   "title": "Humanoid Everyday: A Comprehensive Robotic Dataset for Open-World Humanoid Manipulation",
+   "authors": "Zhenyu Zhao et al.",
+   "year": 2025,
+   "venue": "arXiv 2510.08807",
+   "summary": "Large humanoid manipulation dataset; the Unitree G1 episodes use Dex3-1 hands with tactile sensors.",
+   "embodiment": "robot",
+   "hand": "Unitree G1 + Dex3-1; H1 + Inspire",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "coverage": [],
+    "note": "Dex3-1 tactile sensors; count, coverage and the size of the tactile subset not confirmed."
+   },
+   "modalities": [
+    "rgb",
+    "depth",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "episodes": 10300,
+    "tasks": 260,
+    "text": "10.3K trajectories, 260 tasks, 3M+ frames"
+   },
+   "availability": "unclear",
+   "access": "The paper says it is released on the project page; no download link found there as of 2026-10-15.",
+   "license": "not stated",
+   "caveats": [
+    "Tactile only on the G1 / Dex3-1 subset."
+   ],
+   "links": {
+    "project": "https://humanoideveryday.github.io/",
+    "paper": "https://arxiv.org/abs/2510.08807"
+   },
+   "image": "https://humanoideveryday.github.io/static/images/block-2.jpg",
+   "thumb": "assets/thumbs/humanoid_everyday.jpg"
+  },
+  {
+   "id": "robotacdex",
+   "name": "RoboTacDex",
+   "title": "RoboTacDex: A Dexterous Visual-Tactile-Action Dataset for Humanoid Manipulation",
+   "authors": "Xinyi Wang et al.",
+   "year": 2026,
+   "venue": "arXiv 2606.31836",
+   "summary": "Visual-tactile-action trajectories on a Unitree G1 with dexterous hands across 19 tasks and 23 skills.",
+   "embodiment": "robot",
+   "hand": "Unitree G1 with dexterous hands",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "coverage": [],
+    "note": "Tactile hardware not confirmed."
+   },
+   "modalities": [
+    "multiview_rgb",
+    "depth",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "episodes": 6000,
+    "tasks": 19,
+    "objects": 22,
+    "text": "~6K trajectories, 19 tasks, 23 skills, 22 objects"
+   },
+   "availability": "announced",
+   "access": "\"Open-sourced soon\" per the authors.",
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.31836"
+   },
+   "caveats": []
+  },
+  {
+   "id": "vicon_glove",
+   "name": "VICON",
+   "title": "VICON: Visual-Inertial-Contact based Hand-Object Tracking for Manipulation Datasets",
+   "authors": "Youbeen Jeon et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.05180",
+   "summary": "Glove with force-sensing resistors and IMUs plus RGB-D for hand-object tracking with calibrated contact force.",
+   "embodiment": "human",
+   "hand": "FSR + IMU glove",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": null,
+    "coverage": [],
+    "note": "Force-sensing resistors calibrated to normal force; count and placement not confirmed."
+   },
+   "modalities": [
+    "imu",
+    "depth",
+    "hand_pose",
+    "object_pose"
+   ],
+   "scale": {
+    "objects": 5,
+    "text": "40 sessions, 5 objects (expansion planned)"
+   },
+   "availability": "announced",
+   "access": "Data \"upon publication\" per the repository.",
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.05180",
+    "code": "https://github.com/VICON-dataset/dataset"
+   },
+   "caveats": []
+  }
+ ]
+}

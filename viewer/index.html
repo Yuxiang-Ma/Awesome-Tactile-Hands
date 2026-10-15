@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glove Data Viewer</title>
+<style>
+:root{
+  --bg:#f3f5f6;--rail:#eaeef0;--panel:#fff;--ink:#14212a;--ink2:#3a4a54;--muted:#5b6c76;--line:#d9e1e5;--line2:#e7ecef;
+  --accent:#0a6c73;--accent-ink:#fff;--accent-soft:#dcecee;--lh:#2563b0;--rh:#c2501f;--cursor:#14212a;--grid:#e9eef1;
+  --warn:#7a4f00;--warn-soft:#fbf1dc;--seg-a:#d7e9eb;--seg-b:#c4dfe2;--pre:#eef1f3;--shadow:0 1px 2px rgba(20,33,42,.06),0 4px 14px rgba(20,33,42,.05);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1316;--rail:#12191c;--panel:#161e22;--ink:#e2e9ed;--ink2:#c3cfd5;--muted:#91a2ab;--line:#283338;--line2:#1f292d;
+  --accent:#4cb1b8;--accent-ink:#06191b;--accent-soft:#18363a;--lh:#6ea6ec;--rh:#ef8d5f;--cursor:#f1f4f5;--grid:#1e272b;
+  --warn:#e9b660;--warn-soft:#2c2412;--seg-a:#1b3a3e;--seg-b:#24494e;--pre:#1a2226;--shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25)}}
+:root[data-theme="dark"]{
+  --bg:#0e1316;--rail:#12191c;--panel:#161e22;--ink:#e2e9ed;--ink2:#c3cfd5;--muted:#91a2ab;--line:#283338;--line2:#1f292d;
+  --accent:#4cb1b8;--accent-ink:#06191b;--accent-soft:#18363a;--lh:#6ea6ec;--rh:#ef8d5f;--cursor:#f1f4f5;--grid:#1e272b;
+  --warn:#e9b660;--warn-soft:#2c2412;--seg-a:#1b3a3e;--seg-b:#24494e;--pre:#1a2226;--shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25)}
+*{box-sizing:border-box}
+html{scrollbar-color:var(--line) transparent;accent-color:var(--accent)}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+::selection{background:var(--accent-soft);color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+button,select{font:inherit;color:var(--ink)}
+.app{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+/* ---------- rail ---------- */
+.rail{background:var(--rail);border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow:auto;padding:18px 12px 24px}
+.brand{padding:0 8px 4px}
+.brand .bname{font-size:15px;font-weight:700;margin:0;letter-spacing:-.01em;color:var(--ink2)}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
+.grp{margin-top:20px}
+.grph{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13.5px;font-weight:700;color:var(--ink);margin:0 8px 2px;letter-spacing:-.005em}
+.grph span{font-size:11.5px;font-weight:500;color:var(--muted)}
+.grpabout{margin:0 8px 8px;font-size:11.5px;line-height:1.4;color:var(--muted)}
+.dsrow .prov{display:none}
+.tk{display:flex;justify-content:space-between;gap:8px;align-items:baseline;padding:8px 6px 2px;font-size:12px}
+.tk b{font-weight:650;color:var(--ink2);line-height:1.3}
+.tk span{font-size:11px;color:var(--muted);white-space:nowrap}
+.eps .tk:first-child{padding-top:2px}
+.dslist{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.ds{border-radius:12px;transition:background .18s,box-shadow .18s}
+.ds[data-sel="true"]{background:var(--panel);box-shadow:var(--shadow)}
+.dsrow{display:grid;grid-template-columns:36px minmax(0,1fr);gap:10px;align-items:center;width:100%;text-align:left;background:none;border:0;
+  border-radius:12px;padding:8px;cursor:pointer;color:var(--ink)}
+.ds:not([data-sel="true"]) .dsrow:hover{background:var(--line2)}
+.dsrow b{display:block;font-size:13px;font-weight:650;line-height:1.3}
+.dsrow .meta{display:flex;flex-wrap:wrap;gap:0 6px;font-size:11.5px;color:var(--muted);margin-top:1px}
+.glyph{display:block;flex:none}
+.glyph .o{fill:none;stroke:var(--muted);stroke-width:1;opacity:.75}
+.glyph .t{fill:var(--accent)}
+.glyph .e{fill:none;stroke:var(--accent);stroke-width:1.1;stroke-dasharray:1.6 1.1}
+.ds:not([data-sel="true"]) .dsrow .glyph .t{fill:var(--muted)}
+.ds:not([data-sel="true"]) .dsrow .glyph .e{stroke:var(--muted)}
+.st{display:inline-flex;align-items:center;gap:5px;font-weight:600}
+.st::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.st.ok{color:var(--accent)}.st.warn{color:var(--warn)}.st.neutral{color:var(--ink2)}
+.tag{display:inline-flex;align-items:center;font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--line2);color:var(--ink2);white-space:nowrap}
+.tag.ok{background:var(--accent-soft);color:var(--accent)}
+.tag.warn{background:var(--warn-soft);color:var(--warn)}
+.eps{padding:0 6px 8px;display:grid;gap:2px}
+.eps .count{font-size:11px;color:var(--muted);padding:2px 4px 4px}
+.item{display:grid;grid-template-columns:60px minmax(0,1fr);gap:9px;align-items:center;width:100%;text-align:left;background:none;border:0;
+  border-radius:8px;padding:4px;cursor:pointer;color:var(--ink);transition:background .15s}
+.item:hover{background:var(--line2)}
+.item[aria-current="true"]{background:var(--accent-soft)}
+.item[aria-current="true"] b{color:var(--accent)}
+.item img{width:60px;aspect-ratio:16/10;object-fit:cover;border-radius:5px;background:var(--line);display:block}
+.item b{font-size:12.5px;font-weight:600;line-height:1.3;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.item span{display:block;font-size:11px;color:var(--muted)}
+/* ---------- dataset header ---------- */
+.dshead{padding:18px 0 14px}
+.dsid{display:flex;gap:14px;align-items:center}
+.dsid .glyph{width:60px;height:60px}
+.dstitle{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px}
+.dstitle h1{font-size:21px;line-height:1.2;margin:0;letter-spacing:-.015em}
+.dsmeta{margin:3px 0 0;color:var(--ink2);font-size:13px}
+.dsmeta a{color:var(--accent);text-underline-offset:2px}
+.hw{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:14px 0 0;padding:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.hw>div{padding:10px 14px 11px;border-right:1px solid var(--line2);min-width:0}
+.hw>div:last-child{border-right:0}
+.hw dt{font-size:11.5px;color:var(--muted);font-weight:600}
+.hw dd{margin:2px 0 0}
+.hw dd b{display:block;font-size:13.5px;font-weight:650;line-height:1.3}
+.hw dd span{display:block;font-size:12px;color:var(--ink2);margin-top:2px;line-height:1.4}
+.dsnote{margin:8px 2px 0;font-size:12px;color:var(--muted);max-width:120ch}
+.dshead .flag{margin-top:10px}
+.dschip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink2);padding:2px 9px 2px 4px;border-radius:999px;background:var(--panel);border:1px solid var(--line);white-space:nowrap}
+.dschip .glyph{width:18px;height:18px}
+/* ---------- main ---------- */
+main{padding:0 20px 40px;min-width:0}
+.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:saturate(1.4) blur(6px);
+  border-bottom:1px solid var(--line);padding:10px 0 8px;margin-bottom:12px}
+.ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 10px;border-radius:8px;
+  background:var(--panel);border:1px solid var(--line);cursor:pointer;transition:background .15s,border-color .15s}
+.btn:hover{border-color:color-mix(in srgb,var(--accent) 45%,var(--line))}
+.btn:active{transform:translateY(1px)}
+.btn svg{width:14px;height:14px;fill:currentColor}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600;min-width:88px}
+.group{display:inline-flex}.group .btn{border-radius:0}.group .btn:first-child{border-radius:8px 0 0 8px}.group .btn:last-child{border-radius:0 8px 8px 0}
+.group .btn+.btn{margin-left:-1px}
+.group .btn[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,var(--line));position:relative;font-weight:600}
+.time{font-size:13px;min-width:118px;color:var(--ink2)}
+.lbl{font-size:12px;color:var(--muted)}
+.check{display:inline-flex;gap:6px;align-items:center;font-size:12.5px;color:var(--ink2);cursor:pointer}
+#scrub{position:relative;margin-top:8px;cursor:pointer;touch-action:none}
+#scrub canvas{width:100%;height:58px;display:block;border-radius:8px;background:var(--panel);border:1px solid var(--line)}
+.caption{display:flex;gap:4px 12px;align-items:center;margin:8px 0 0;min-height:24px;flex-wrap:wrap}
+.capt{display:flex;gap:4px 12px;align-items:baseline;flex-wrap:wrap;min-width:0}
+.caption .task{font-weight:650;font-size:15px;letter-spacing:-.01em}
+.caption .step{color:var(--ink2);font-size:14px}
+.caption .stepno{font-size:11.5px;color:var(--muted);white-space:nowrap}
+.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,1fr);gap:14px}
+@media(max-width:1250px){.layout{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
+.card>h3{font-size:12.5px;font-weight:600;margin:0;padding:8px 12px;border-bottom:1px solid var(--line2);display:flex;justify-content:space-between;gap:8px;align-items:center}
+.card>h3 small{color:var(--muted);font-weight:400;font-size:11.5px;text-align:right}
+.vwrap{position:relative;background:#000}
+.vwrap video{width:100%;display:block}
+.vwrap canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.wrists{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
+.gloves{display:grid;grid-template-columns:1fr;gap:14px}
+@media(max-width:1250px) and (min-width:700px){.gloves{grid-template-columns:1fr 1fr}}
+@media(max-width:620px){.wrists,.gloves{grid-template-columns:1fr}}
+/* heatmaps sit on a dark instrument surface in both themes: the provider's ramp starts near black */
+.hand .hm{background:#0e171c}
+.hand canvas{width:100%;max-width:380px;margin:0 auto;display:block}
+.vals{display:grid;grid-template-columns:repeat(5,1fr);font-size:11px;border-top:1px solid var(--line2)}
+.vals div{padding:5px 2px;text-align:center;border-right:1px solid var(--line2);color:var(--muted)}.vals div:last-child{border-right:0}
+.vals b{display:block;font-size:13px;color:var(--ink);font-weight:600}
+.vals .n{display:block;font-weight:600;font-size:11px}
+.scale{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--muted);padding:9px 12px;flex-wrap:wrap}
+.scale canvas{width:120px;height:8px;border-radius:2px}
+.flag{margin:14px 0 0;padding:9px 12px;border-radius:10px;background:var(--warn-soft);color:var(--warn);font-size:12.5px}
+.plots{margin-top:14px}
+.plot{position:relative}.plot canvas{width:100%;height:112px;display:block;cursor:crosshair}
+.plot+.plot{border-top:1px solid var(--line2)}
+.ph{display:flex;justify-content:space-between;gap:8px;padding:6px 12px 0;font-size:12px;flex-wrap:wrap}.ph b{font-weight:600}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:3px;border-radius:2px;margin-right:4px;vertical-align:middle}
+details.notes{margin-top:14px;color:var(--muted);font-size:12.5px;max-width:110ch}
+details.notes summary{cursor:pointer;color:var(--ink2);font-weight:600}
+details.notes p{margin:6px 0}
+kbd{font:11px ui-monospace,SFMono-Regular,monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 4px;background:var(--panel);color:var(--ink2)}
+.skel{background:linear-gradient(90deg,var(--line2),var(--panel),var(--line2));background-size:200% 100%;animation:sk 1.2s ease-in-out infinite;border-radius:10px}
+@keyframes sk{to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}}
+#epsMobile{display:none;position:relative}
+.err{padding:20px;color:var(--warn);background:var(--warn-soft);border-radius:10px;margin-top:14px}
+/* ---------- rendered-video view (OriginFlow) ---------- */
+.film video{width:100%;display:block;background:#000;max-height:calc(100vh - 120px)}
+.filmhead{display:flex;justify-content:space-between;gap:4px 12px;align-items:baseline;padding:6px 0 10px;flex-wrap:wrap}
+.filmhead h2{margin:0;font-size:18px;letter-spacing:-.01em}
+.filmhead span{color:var(--muted);font-size:12.5px}
+.filmhead .summary{margin:2px 0 0;color:var(--ink2)}
+.report{margin-top:24px;max-width:1200px}
+.report h3{font-size:14px;margin:18px 0 6px}
+.report p{color:var(--ink2);margin:0 0 10px;max-width:92ch}
+table{border-collapse:collapse;font-size:12.5px;margin:6px 0 14px}
+th,td{text-align:left;padding:5px 16px 5px 0;border-bottom:1px solid var(--line2)}th{color:var(--muted);font-weight:600}
+td.num{text-align:right}
+.figs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px}
+.figs figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.figs img{width:100%;display:block}
+.figs figcaption{font-size:11.5px;color:#43535c;padding:6px 10px 8px;background:#fff}
+@media(max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .rail{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:14px 16px}
+  .brand p:not(.bname){display:none}
+  #sources{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,1fr);gap:4px;overflow-x:auto;padding:12px 0 4px;position:relative}
+  .grp,.dslist{display:contents}.grph,.grpabout{display:none}.dsrow .prov{display:inline}
+  .ds .eps{display:none}
+  #epsMobile{display:flex;gap:6px;overflow-x:auto;padding:10px 0 4px;align-items:flex-start}
+  #epsMobile .item{grid-template-columns:1fr;width:112px;flex:0 0 112px}#epsMobile .item img{width:100%}
+  .hw{grid-template-columns:1fr 1fr}.hw>div{border-bottom:1px solid var(--line2)}
+  .dsid .glyph{width:44px;height:44px}.dstitle h1{font-size:18px}
+  main{padding:0 16px 32px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<nav class="rail" aria-label="Datasets and episodes">
+  <div class="brand"><p class="bname">Glove data viewer</p><p>Synchronized cameras, tactile gloves and annotations</p></div>
+  <div id="sources"></div>
+  <div id="epsMobile" aria-label="Episodes"></div>
+</nav>
+<main id="main">
+  <div class="skel" style="height:58px;margin-top:14px"></div>
+  <div class="skel" style="height:420px;margin-top:14px"></div>
+</main>
+</div>
+
+<template id="tplRec">
+<div id="dshead"></div>
+<div class="bar">
+  <div class="ctrl">
+    <button class="btn primary" id="play" aria-label="Play"><svg viewBox="0 0 16 16" id="playIcon"><path d="M4 2.5v11l9-5.5z"/></svg><span id="playTxt">Play</span></button>
+    <div class="group">
+      <button class="btn" id="back" aria-label="Back one frame" title="Back one frame (←)"><svg viewBox="0 0 16 16"><path d="M3 3h2v10H3zM14 3v10L6 8z"/></svg></button>
+      <button class="btn" id="fwd" aria-label="Forward one frame" title="Forward one frame (→)"><svg viewBox="0 0 16 16"><path d="M11 3h2v10h-2zM2 3v10l8-5z"/></svg></button>
+    </div>
+    <span class="time" id="time">0.00 / 0.00 s</span>
+    <span class="lbl">Speed</span><div class="group" id="speeds" role="group" aria-label="Playback speed"></div>
+    <label class="check" id="skelWrap"><input type="checkbox" id="skel" checked> Hand skeleton</label>
+  </div>
+  <div id="scrub" title="Click or drag to seek"><canvas id="scrubC"></canvas></div>
+  <div class="caption"><span class="dschip" id="dschip"></span><div class="capt" id="caption"></div></div>
+</div>
+<div class="layout">
+  <div>
+    <div class="card"><h3><span id="headTitle">Head camera</span><small id="headMeta"></small></h3><div class="vwrap"><video id="v_head" muted playsinline preload="auto"></video><canvas id="poseC"></canvas></div></div>
+    <div class="wrists">
+      <div class="card"><h3>Left wrist <small id="lhMeta"></small></h3><div class="vwrap"><video id="v_wrist_lh" muted playsinline preload="auto"></video></div></div>
+      <div class="card"><h3>Right wrist <small id="rhMeta"></small></h3><div class="vwrap"><video id="v_wrist_rh" muted playsinline preload="auto"></video></div></div>
+    </div>
+  </div>
+  <div class="side">
+    <div class="gloves">
+      <div class="card hand"><h3><span style="color:var(--lh)">Left glove</span><small id="lhRate"></small></h3><div class="hm"><canvas id="hand_lh"></canvas></div><div class="vals" id="vals_lh"></div></div>
+      <div class="card hand"><h3><span style="color:var(--rh)">Right glove</span><small id="rhRate"></small></h3><div class="hm"><canvas id="hand_rh"></canvas></div><div class="vals" id="vals_rh"></div></div>
+    </div>
+    <div class="card" style="margin-top:14px"><div class="scale" id="scale"></div></div>
+  </div>
+</div>
+<div class="card plots"><h3>Signals <small>±6 s around the cursor · click to seek</small></h3><div id="plots"></div></div>
+<details class="notes" id="notes"><summary>How the streams are aligned</summary></details>
+</template>
+
+<script>
+'use strict';
+const $=id=>document.getElementById(id);
+const FINGERS=['thumb','index','middle','ring','little'];
+const FCOL=['#8e44ad','#2e86c1','#17a589','#c99a06','#cb4335'];
+const CAMS=['head','wrist_lh','wrist_rh'];
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// private Space: carry ?__sign=… on every request (browsers that block cross-site cookies drop the auth cookie)
+const SIGN=new URLSearchParams(location.search).get('__sign');
+const U=p=>SIGN&&!/^https?:/.test(p)?`${p}${p.includes('?')?'&':'?'}__sign=${encodeURIComponent(SIGN)}`:p;
+// items too large for the Space (1 GB cap) live in a dataset repo: their files resolve against item.base
+const A=(it,p)=>U((it&&it.base||'')+p);
+const getJSON=async p=>{const r=await fetch(U(p));if(!r.ok)throw new Error(`${p}: HTTP ${r.status}`);return r.json()};
+function dec(b64,Type){const s=atob(b64),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return new Type(u.buffer)}
+
+/* the FusionX panel's heatmap ramp (tactile_display.json), dark end for low pressure */
+const STOPS=[[22,35,51],[20,87,104],[33,169,174],[107,218,162],[241,227,112],[255,130,78]];
+function cmap(x){x=Math.max(0,Math.min(1,x))*(STOPS.length-1);const i=Math.min(STOPS.length-2,Math.floor(x)),f=x-i,a=STOPS[i],b=STOPS[i+1];
+  return `rgb(${a[0]+(b[0]-a[0])*f|0},${a[1]+(b[1]-a[1])*f|0},${a[2]+(b[2]-a[2])*f|0})`}
+// linear from 0 like the provider's panel: low readings stay near the dark end instead of standing out from an empty cell
+const cell=x=>cmap(x);
+
+let M=null,R=null,t=0,playing=false,speed=1,raf=0,PLOTS=[];
+const clk={t:0,at:0};const anchor=()=>{clk.t=t;clk.at=performance.now()};
+
+/* ---------- hardware glyph: where on the hand this dataset senses ---------- */
+// schematic hand, palm side: four fingers above the palm, thumb on the left. Filled cells are tactile taxels in the
+// recorded grid size; dashed rings are force values the provider estimates without naming a sensor.
+function glyphLabel(S){
+  if(!S)return'';if(S.type==='estimate')return'Hardware: per-finger force estimates, no tactile sensor named';
+  return`Tactile layout: ${S.finger[0]}×${S.finger[1]} taxels on each finger, ${S.palm?`${S.palm[0]}×${S.palm[1]} on the palm`:'no palm sensor'}`}
+function glyph(S,cls=''){
+  const F=[[14.5,9],[20.3,6],[26.1,8],[31.9,12]],fw=5,fb=22,o=[];
+  const grid=(x,y,w,rows,cols,gap)=>{const c=(w-(cols-1)*gap)/cols;for(let r=0;r<rows;r++)for(let q=0;q<cols;q++)o.push(`<rect class="t" x="${(x+q*(c+gap)).toFixed(2)}" y="${(y+r*(c+gap)).toFixed(2)}" width="${c.toFixed(2)}" height="${c.toFixed(2)}" rx=".25"/>`)};
+  o.push(`<rect class="o" x="14" y="22.5" width="23.4" height="19" rx="3.5"/>`);
+  F.forEach(([x,y])=>o.push(`<rect class="o" x="${x}" y="${y}" width="${fw}" height="${fb-y+3}" rx="2.4"/>`));
+  const TH='rotate(-24 14.5 40)';o.push(`<rect class="o" x="9.1" y="25.5" width="5.4" height="15" rx="2.6" transform="${TH}"/>`);
+  if(S&&S.type==='taxel'){F.forEach(([x,y])=>grid(x+.55,y+.8,fw-1.1,S.finger[0],S.finger[1],.32));
+    grid(9.65,26.3,4.3,S.finger[0],S.finger[1],.3);
+    // thumb cells follow the thumb's tilt
+    const n=S.finger[0]*S.finger[1],th=o.splice(o.length-n,n);o.push(`<g transform="${TH}">${th.join('')}</g>`);
+    if(S.palm)grid(15.3,24,20.8,S.palm[0],S.palm[1],.35)}
+  else if(S&&S.type==='estimate'){[...F.map(([x,y])=>[x+fw/2,y+2.8]),[9.9,28.4]].forEach(([cx,cy])=>o.push(`<circle class="e" cx="${cx}" cy="${cy}" r="1.9"/>`))}
+  return`<svg class="glyph ${cls}" viewBox="3 3 37 40" role="img" aria-label="${esc(glyphLabel(S))}"><title>${esc(glyphLabel(S))}</title>${o.join('')}</svg>`;
+}
+
+/* ---------- manifest / navigation ---------- */
+const lastEp={};
+const nTasks=s=>new Set(s.items.map(it=>it.task).filter(Boolean)).size;
+const epCount=s=>{const n=s.items.length,k=nTasks(s);return`${n} ${s.kind==='film'?'video':'episode'}${n===1?'':'s'}${k?` · ${k} task${k===1?'':'s'}`:''}`};
+// in a task-grouped list the task is the subheading, so the row names the recording; elsewhere the row carries the title
+const itemBtn=(it,under)=>`<button class="item" data-id="${it.id}"><img src="${A(it,it.poster)}" alt="" loading="lazy"><div><b>${esc(under&&it.label?it.label:it.title)}</b><span>${esc(under||!it.label?it.sub||'':`${it.label} · ${it.sub||''}`)}</span></div></button>`;
+function epList(s){let prev=null;return s.items.map(it=>{let h='';
+  if(it.task&&it.task!==prev){prev=it.task;const n=s.items.filter(x=>x.task===it.task).length;h=`<div class="tk"><b>${esc(it.task)}</b><span>${n} of ${it.taskTotal}</span></div>`}
+  return h+itemBtn(it,!!it.task)}).join('')}
+function renderRail(cur){
+  const f=find(cur),sel=f?f.s.id:null,groups=M.groups||[{id:null,title:'Datasets'}];
+  $('sources').innerHTML=groups.map(g=>{const ss=M.sources.filter(s=>(s.group||null)===g.id);if(!ss.length)return'';
+    return`<section class="grp"><h2 class="grph">${esc(g.title)}<span>${ss.length} collection${ss.length===1?'':'s'}</span></h2>${g.about?`<p class="grpabout">${esc(g.about)}</p>`:''}
+    <ul class="dslist">${ss.map(s=>{const on=s.id===sel;
+    return`<li class="ds" data-sel="${on}"><button class="dsrow" data-ds="${s.id}" aria-expanded="${on}"${on?` aria-controls="eps_${s.id}"`:''}>${glyph(s.sensor)}
+      <span><b>${esc(s.title)}</b><span class="meta"><span class="prov">${esc(g.title)}</span><span class="st ${s.status.tone}">${esc(s.status.label)}</span><span>${epCount(s)}</span></span></span></button>
+      ${on?`<div class="eps" id="eps_${s.id}">${epList(s)}</div>`:''}</li>`}).join('')}</ul></section>`}).join('');
+  $('epsMobile').innerHTML=f?f.s.items.map(it=>itemBtn(it,false)).join(''):'';
+  document.querySelectorAll('.item').forEach(b=>{b.onclick=()=>open(b.dataset.id,0);b.setAttribute('aria-current',String(b.dataset.id===cur))});
+  document.querySelectorAll('.dsrow').forEach(b=>b.onclick=()=>{const s=M.sources.find(x=>x.id===b.dataset.ds);if(s.id!==sel)open(lastEp[s.id]||s.items[0].id,0)});
+  // narrow screens scroll collections and episodes sideways: keep the current ones in view without moving the page
+  const side=(el,host)=>{if(el&&host&&host.scrollWidth>host.clientWidth)host.scrollLeft=el.offsetLeft-12};
+  side(document.querySelector('.ds[data-sel="true"]'),$('sources'));side(document.querySelector('#epsMobile .item[aria-current="true"]'),$('epsMobile'));
+}
+function dsHead(s){
+  return`<header class="dshead"><div class="dsid">${glyph(s.sensor)}<div>
+      <div class="dstitle"><h1>${esc(s.title)}</h1><span class="tag ${s.status.tone}">${esc(s.status.label)}</span></div>
+      <p class="dsmeta">${esc(s.provider)} · ${epCount(s)} · ${esc(s.about)}${s.link?` <a href="${esc(s.link.href)}" target="_blank" rel="noopener">${esc(s.link.label)}</a>`:''}</p></div></div>
+    <dl class="hw" aria-label="Hardware">${s.hardware.map(h=>`<div><dt>${esc(h.k)}</dt><dd><b>${esc(h.v)}</b><span>${esc(h.d)}</span></dd></div>`).join('')}</dl>
+    ${s.notes?`<p class="dsnote">${esc(s.notes)}</p>`:''}${s.flag?`<p class="flag">${esc(s.flag)}</p>`:''}</header>`;
+}
+function find(id){for(const s of M.sources)for(const it of s.items)if(it.id===id)return{s,it};return null}
+async function open(id,t0){
+  stop();const f=find(id)||{s:M.sources[0],it:M.sources[0].items[0]};lastEp[f.s.id]=f.it.id;
+  const ae=document.activeElement,refocus=ae&&ae.closest&&ae.closest('.rail')?(ae.dataset.id||ae.dataset.ds):null;
+  renderRail(f.it.id);
+  if(refocus){const b=document.querySelector(`.rail [data-id="${f.it.id}"]`)||document.querySelector(`.rail [data-ds="${refocus}"]`);if(b)b.focus({preventScroll:true})}
+  try{history.replaceState(null,'',`#rec=${f.it.id}${t0?`&t=${(+t0).toFixed(2)}`:''}`)}catch(e){}
+  if(f.s.kind==='film')return openFilm(f.s,f.it);
+  $('main').innerHTML=dsHead(f.s)+'<div class="skel" style="height:58px"></div><div class="skel" style="height:420px;margin-top:14px"></div>';
+  let j;try{j=await getJSON((f.it.base||'')+`data/${f.it.id}.json`)}catch(e){$('main').innerHTML=`<div class="err">Could not load ${esc(f.it.title)}: ${esc(e.message)}. Reload the page to retry.</div>`;return}
+  R=normalize(j,f);mountRecording();seek(+t0||0);
+}
+
+/* ---------- rendered videos (OriginFlow) ---------- */
+function openFilm(s,it){
+  R=null;
+  $('main').innerHTML=dsHead(s)+`<div class="filmhead"><div><h2>${esc(it.title)}</h2>${it.summary?`<p class="summary">${esc(it.summary)}</p>`:''}</div>
+    <span>${esc(it.sub||'')}${it.episode!=null?` · episode ${it.episode}`:''}</span></div>
+    <div class="card film"><video controls playsinline preload="metadata" poster="${U(it.poster)}" src="${U(it.video)}"></video></div>
+    ${s.report?`<section class="report">${s.report.replace(/src="([^"]+)"/g,(m,p)=>`src="${U(p)}"`)}</section>`:''}`;
+}
+
+/* ---------- data normalisation: early recordings and FusionX demos ---------- */
+function normalize(j,f){
+  const N=j.n,R={id:j.id,kind:j.kind||'early',n:N,fps:j.fps,duration:j.duration,videos:j.videos,hands:{},imu:{},src:f};
+  for(const h of ['lh','rh']){const G=j.glove[h];
+    if(R.kind==='fusionx'){
+      R.hands[h]={rate:G.rate,rows:G.rows,cols:G.cols,tax:dec(G.taxels,Uint16Array),range:G.range[1],palm:null,sum:dec(G.total,Float32Array),sumRange:G.sum_range||null,sumLabel:'finger total (raw ADC, sum of 16 cells)',
+        fmtSum:v=>v>=1000?(v/1000).toFixed(1)+'k':v.toFixed(0),bend:dec(G.angle,Float32Array),bendLabel:'finger bend angle (°)',fmtBend:v=>isFinite(v)?v.toFixed(0)+'°':'–',
+        quat:dec(G.quat,Float32Array)};
+    }else{
+      R.hands[h]={rate:G.rate,rows:4,cols:3,tax:dec(G.fp,Uint8Array),range:0,palm:dec(G.palm,Uint8Array),sum:dec(G.force,Float32Array),sumLabel:'finger force (N, uncalibrated)',
+        fmtSum:v=>v.toFixed(1)+' N',bend:Float32Array.from(dec(G.bend,Uint8Array)),bendLabel:'finger bend (raw)',fmtBend:v=>'bend '+v.toFixed(0),quat:dec(G.quat,Float32Array)};
+    }}
+  if(R.kind==='early'){ // colour scales: p99 of the non-zero readings (raw maxima are rare spikes)
+    const p99=a=>{const nz=[];for(let i=0;i<a.length;i+=7)if(a[i]>0)nz.push(a[i]);nz.sort((x,y)=>x-y);return nz.length?nz[Math.floor(nz.length*.99)]:1};
+    const fm=Math.max(8,p99(R.hands.lh.tax),p99(R.hands.rh.tax)),pm=Math.max(8,p99(R.hands.lh.palm),p99(R.hands.rh.palm));
+    for(const h of ['lh','rh']){R.hands[h].range=fm;R.hands[h].palmMax=pm}}
+  for(const k of Object.keys(j.imu)){const a=dec(j.imu[k].gyro,Float32Array),o=new Float32Array(N);for(let i=0;i<N;i++)o[i]=Math.hypot(a[i*3],a[i*3+1],a[i*3+2]);R.imu[k]=o}
+  R.tot={};for(const h of ['lh','rh']){const s=R.hands[h].sum,o=new Float32Array(N);for(let i=0;i<N;i++){let q=0;for(let k=0;k<5;k++)q+=s[i*5+k];o[i]=q}R.tot[h]=o}
+  if(R.hands.lh.palm){R.palmSum={};for(const h of ['lh','rh']){const p=R.hands[h].palm,o=new Float32Array(N);for(let i=0;i<N;i++){let q=0;for(let k=0;k<60;k++)q+=p[i*60+k];o[i]=q}R.palmSum[h]=o}}
+  if(j.pose)R.pose={size:j.pose.size,chains:j.pose.chains,lh:dec(j.pose.lh,Float32Array),rh:dec(j.pose.rh,Float32Array)};
+  R.task=j.task||null;R.stereo=R.kind==='early';
+  return R;
+}
+
+/* ---------- recording view ---------- */
+function mountRecording(){
+  $('main').innerHTML='';$('main').appendChild($('tplRec').content.cloneNode(true));
+  $('dshead').outerHTML=dsHead(R.src.s);$('dschip').innerHTML=`${glyph(R.src.s.sensor)}${esc(R.src.s.title)}`;
+  const vm=R.videos;
+  $('headTitle').textContent=R.stereo?'Head camera · stereo (left | right)':'Head camera · left view';
+  for(const [k,id] of [['head','headMeta'],['wrist_lh','lhMeta'],['wrist_rh','rhMeta']]){const m=$(id);m.dataset.base=`${vm[k].src_size.join('×')} · ${vm[k].fps_src} fps`;m.textContent=m.dataset.base}
+  for(const h of ['lh','rh'])$(h+'Rate').textContent=`${R.hands[h].rows}×${R.hands[h].cols} per finger · ${R.hands[h].rate} Hz`;
+  for(const k of CAMS){const v=$('v_'+k);v.src=A(R.src.it,vm[k].src);v.playbackRate=speed;wireVideo(v,k)}
+  $('skelWrap').hidden=!R.pose;$('skel').onchange=()=>render();
+  [0.25,0.5,1,2].forEach(s=>{const b=document.createElement('button');b.className='btn';b.textContent=s+'×';b.setAttribute('aria-pressed',String(s===speed));
+    b.onclick=()=>{speed=s;document.querySelectorAll('#speeds .btn').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));for(const k of CAMS)$('v_'+k).playbackRate=s;if(playing)anchor()};$('speeds').appendChild(b)});
+  $('play').onclick=()=>playing?pause():play();
+  $('back').onclick=()=>{pause();seek(t-1/R.fps)};$('fwd').onclick=()=>{pause();seek(t+1/R.fps)};
+  const s=$('scrub');let drag=false;const at=e=>{const r=s.getBoundingClientRect();seek((e.clientX-r.left)/r.width*R.duration)};
+  s.addEventListener('pointerdown',e=>{drag=true;if(playing)pause();s.setPointerCapture(e.pointerId);at(e)});
+  s.addEventListener('pointermove',e=>{if(drag)at(e)});s.addEventListener('pointerup',()=>drag=false);
+  const H=R.hands.lh,cb=document.createElement('canvas');cb.width=120;cb.height=8;const cx=cb.getContext('2d');for(let i=0;i<120;i++){cx.fillStyle=cmap(i/119);cx.fillRect(i,0,1,8)}
+  $('scale').innerHTML=`<span>Taxel pressure, raw ${R.kind==='fusionx'?'ADC':'counts'}</span><span>0</span>`;$('scale').appendChild(cb);
+  $('scale').insertAdjacentHTML('beforeend',`<span>${H.range}${R.kind==='early'?'+':''}</span>${H.palm?`<span>· palm 0–${H.palmMax}</span>`:''}`);
+  $('notes').insertAdjacentHTML('beforeend',R.kind==='fusionx'?`
+    <p>All streams sit on one 30 Hz clock that starts at the first camera frame. Videos are re-timed from the H.264 message timestamps; every other stream shows its latest sample at or before the cursor. The gloves record at about 125 Hz.</p>
+    <p>The head view is the left image of the stereo pair. Each hand skeleton (AnyHand-WiLoR, reviewed by the provider) is drawn on the exact frame it was estimated from; frames whose estimate the provider rejected show none. Skeletons and task steps exist only inside the annotated window. The shaded lead-in, under one second, is decoder pre-roll.</p>
+    <p>Taxels are drawn in the recorded row order, 4 rows × 4 columns per finger, laid out like the provider's FusionX panel. This glove has no palm taxels (80 channels: 5 fingers × 16), so no palm grid or palm plot is shown. Values are raw ADC without force calibration, coloured on the provider's display range for this clip. Bend is the calibrated finger angle. Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>`:`
+    <p>All streams sit on one 30 Hz clock that starts at the first camera frame; the gloves record at about 227 Hz. The taxel grids assume row-major order (4 rows × 3 columns per finger, fingertip row on top) and a 6 × 10 palm; this recording does not store the physical layout. Force is the per-taxel force the glove reports, summed per finger, before calibration. The glove IMUs log orientation only. Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>`);
+  buildPlots();drawScrub();
+}
+function wireVideo(v,k){
+  const m=()=>$({head:'headMeta',wrist_lh:'lhMeta',wrist_rh:'rhMeta'}[k]),say=s=>{const e=m();if(e)e.textContent=s?`${e.dataset.base} · ${s}`:e.dataset.base};
+  v.addEventListener('loadedmetadata',()=>{if(!playing&&R)setVideos(true)});
+  v.addEventListener('error',()=>say('video failed to load'));
+  v.addEventListener('waiting',()=>{if(playing)say('buffering…')});
+  ['playing','seeked','canplay'].forEach(e=>v.addEventListener(e,()=>{if(!v.error)say('')}));
+}
+
+/* ---------- clock ---------- */
+const frame=()=>Math.max(0,Math.min(R.n-1,Math.round(t*R.fps)));
+function setVideos(force){for(const k of CAMS){const v=$('v_'+k);if(!v||(!v.duration&&v.readyState<1))continue;
+  if(force||Math.abs(v.currentTime-t)>0.06)v.currentTime=Math.min(t,(v.duration||t)-0.001)}}
+function seek(x){if(!R)return;t=Math.max(0,Math.min(R.duration,x));setVideos(true);render();
+  try{history.replaceState(null,'',`#rec=${R.id}&t=${t.toFixed(2)}`)}catch(e){}}
+function setPlayUI(p){$('playIcon').innerHTML=p?'<path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/>':'<path d="M4 2.5v11l9-5.5z"/>';$('playTxt').textContent=p?'Pause':'Play';$('play').setAttribute('aria-label',p?'Pause':'Play')}
+function play(){if(!R)return;if(t>=R.duration-0.05)seek(0);playing=true;setPlayUI(true);
+  for(const k of CAMS){const v=$('v_'+k);v.playbackRate=speed;v.play().catch(()=>{})}
+  // wall clock drives t so the signals keep running while a video buffers; videos are pulled back when they drift
+  anchor();const loop=()=>{if(!playing)return;t=Math.min(R.duration,clk.t+(performance.now()-clk.at)/1000*speed);
+    for(const k of CAMS){const v=$('v_'+k);if(v.readyState>=2&&!v.seeking&&Math.abs(v.currentTime-t)>0.25)v.currentTime=t}
+    render();if(t>=R.duration){pause();return}raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop)}
+function pause(){if(!R||!$('play'))return;playing=false;cancelAnimationFrame(raf);setPlayUI(false);for(const k of CAMS)$('v_'+k).pause();setVideos(true);render()}
+function stop(){playing=false;cancelAnimationFrame(raf)}
+
+/* ---------- hands ---------- */
+const CELL=13,GAP=2,FGAP=10;
+function handGeom(h,rows,cols,palm){
+  // schematic as in the provider's panel: four fingers on top, thumb on the outer side, rows in recorded order
+  const fw=cols*CELL+(cols-1)*GAP, fh=rows*CELL+(rows-1)*GAP, pw=4*fw+3*FGAP, pad=12;
+  const PC=(pw-9*GAP)/10, ph=palm?6*PC+5*GAP:0, top=pad, palmY=top+fh+24;
+  const W=pw+fw+pad*3, H=palm?palmY+ph+pad+4:palmY+fh+pad+4;
+  const order=h==='lh'?['little','ring','middle','index']:['index','middle','ring','little'], dy={little:10,ring:2,middle:0,index:6};
+  const x0=h==='lh'?pad:pad*2+fw, g={W,H,PC,fw,fh,fingers:{},palm:palm?{x:x0,y:palmY}:null};
+  order.forEach((f,i)=>g.fingers[f]={x:x0+i*(fw+FGAP),y:top+dy[f]});
+  g.fingers.thumb={x:h==='lh'?x0+pw+pad:pad,y:palmY+(palm?8:0)};
+  return g;
+}
+function drawHand(h,i){
+  const c=$('hand_'+h),H=R.hands[h],G=handGeom(h,H.rows,H.cols,!!H.palm),dpr=devicePixelRatio||1;
+  if(c.width!==Math.round(G.W*dpr)){c.width=G.W*dpr;c.height=G.H*dpr;c.style.aspectRatio=`${G.W}/${G.H}`}
+  const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,G.W,G.H);
+  const per=H.rows*H.cols,base=i*per*5,muted='#8ea2ac';x.font='10px system-ui';x.textAlign='center';
+  FINGERS.forEach((f,k)=>{const p=G.fingers[f];
+    for(let r=0;r<H.rows;r++)for(let q=0;q<H.cols;q++){const v=H.tax[base+k*per+r*H.cols+q];x.fillStyle=cell(v/H.range);x.fillRect(p.x+q*(CELL+GAP),p.y+r*(CELL+GAP),CELL,CELL)}
+    x.fillStyle=muted;x.fillText(f,p.x+G.fw/2,p.y+G.fh+11)});
+  if(H.palm){const P=G.palm,C=G.PC;for(let r=0;r<6;r++)for(let q=0;q<10;q++){const v=H.palm[i*60+r*10+q];x.fillStyle=cell(v/H.palmMax);x.fillRect(P.x+q*(C+GAP),P.y+r*(C+GAP),C,C)}
+    x.fillStyle=muted;x.fillText('palm',P.x+(10*C+9*GAP)/2,P.y+6*C+5*GAP+11)}
+  $('vals_'+h).innerHTML=FINGERS.map((f,k)=>`<div><span class="n" style="color:${FCOL[k]}">${f}</span><b>${H.fmtSum(H.sum[i*5+k])}</b>${H.fmtBend(H.bend[i*5+k])}</div>`).join('');
+}
+
+/* ---------- skeleton overlay ---------- */
+function drawPose(i){
+  const c=$('poseC');if(!c)return;const v=$('v_head'),dpr=devicePixelRatio||1,W=v.clientWidth,H=v.clientHeight;
+  if(c.width!==Math.round(W*dpr)||c.height!==Math.round(H*dpr)){c.width=W*dpr;c.height=H*dpr}
+  const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);
+  if(!R.pose||!$('skel').checked)return;const sx=W/R.pose.size[0],sy=H/R.pose.size[1];x.lineJoin=x.lineCap='round';
+  for(const [h,col] of [['lh',css('--lh')],['rh',css('--rh')]]){const P=R.pose[h],o=i*42;if(!isFinite(P[o]))continue;
+    const pt=j=>[P[o+2*j]*sx,P[o+2*j+1]*sy];
+    for(const pass of [0,1]){x.strokeStyle=pass?col:'rgba(0,0,0,.5)';x.lineWidth=pass?2:4;
+      for(const ch of R.pose.chains){x.beginPath();ch.forEach((j,n)=>{const [a,b]=pt(j);n?x.lineTo(a,b):x.moveTo(a,b)});x.stroke()}}
+    x.fillStyle='#fff';x.strokeStyle=col;x.lineWidth=1.2;for(let j=0;j<21;j++){const [a,b]=pt(j);x.beginPath();x.arc(a,b,j&&j%4===0?2.8:2,0,7);x.fill();x.stroke()}}
+}
+
+/* ---------- caption ---------- */
+function drawCaption(){
+  const c=$('caption');if(!c)return;
+  if(!R.task){const it=R.src.it;c.innerHTML=`<span class="task">${esc(it.title)}</span><span class="stepno">${esc([it.label,it.sub].filter(Boolean).join(' · '))}</span>`;return}
+  const T=R.task,k=T.steps.findIndex(s=>t>=s.start&&t<s.end);
+  c.innerHTML=`<span class="task">${esc(T.task)}</span>`+(k>=0?`<span class="stepno">Step ${k+1} of ${T.steps.length}</span><span class="step">${esc(T.steps[k].text)}</span>`:
+    `<span class="stepno">${t<T.start?'Lead-in, before the annotated window':'After the annotated window'}</span>`);
+}
+
+/* ---------- plots ---------- */
+const WIN=6;
+function buildPlots(){
+  const L=R.hands.lh,Rh=R.hands.rh,cap=s=>s[0].toUpperCase()+s.slice(1),defs=[
+    {title:`Left glove · ${L.sumLabel}`,fixed:L.sumRange,lines:FINGERS.map((f,k)=>({name:f,col:FCOL[k],get:i=>L.sum[i*5+k]}))},
+    {title:`Right glove · ${Rh.sumLabel}`,fixed:Rh.sumRange,lines:FINGERS.map((f,k)=>({name:f,col:FCOL[k],get:i=>Rh.sum[i*5+k]}))},
+    {title:`Left glove · ${L.bendLabel}`,lines:FINGERS.map((f,k)=>({name:f,col:FCOL[k],get:i=>L.bend[i*5+k]}))},
+    {title:`Right glove · ${Rh.bendLabel}`,lines:FINGERS.map((f,k)=>({name:f,col:FCOL[k],get:i=>Rh.bend[i*5+k]}))}];
+  if(R.palmSum)defs.push({title:'Palm pressure (sum of 60 taxels)',lines:[{name:'left',col:css('--lh'),get:i=>R.palmSum.lh[i]},{name:'right',col:css('--rh'),get:i=>R.palmSum.rh[i]}]});
+  const IN={head:['head','#7f8c8d'],wrist_lh:['wrist L',css('--lh')],wrist_rh:['wrist R',css('--rh')]};
+  defs.push({title:'Camera IMU · |gyro| (rad/s)',lines:Object.keys(R.imu).map(k=>({name:IN[k][0],col:IN[k][1],get:i=>R.imu[k][i]}))});
+  defs.push({title:'Glove orientation · quaternion (left solid, right dashed)',lines:['w','x','y','z'].flatMap((a,k)=>[
+      {name:'L '+a,col:FCOL[k],get:i=>L.quat[i*4+k]},{name:'R '+a,col:FCOL[k],dash:true,get:i=>Rh.quat[i*4+k]}]),fixed:[-1,1],legendText:'w, x, y, z: purple, blue, green, yellow'});
+  const host=$('plots');host.innerHTML='';PLOTS=[];
+  for(const d of defs){
+    const w=document.createElement('div');w.className='plot';
+    w.innerHTML=`<div class="ph"><b>${esc(d.title)}</b><span class="legend">${d.legendText?esc(d.legendText):d.lines.map(l=>`<span><i style="background:${l.col}"></i>${l.name}</span>`).join('')}</span></div><canvas></canvas>`;
+    host.appendChild(w);const cv=w.querySelector('canvas');
+    let lo=Infinity,hi=-Infinity;if(d.fixed){[lo,hi]=d.fixed}else{for(const l of d.lines)for(let i=0;i<R.n;i++){const v=l.get(i);if(!isFinite(v))continue;if(v<lo)lo=v;if(v>hi)hi=v}if(!isFinite(lo)){lo=0;hi=1}if(lo>0)lo=0;if(hi<=lo)hi=lo+1}
+    PLOTS.push({...d,cv,lo,hi});
+    cv.addEventListener('click',e=>{if(playing)pause();const r=cv.getBoundingClientRect();seek(t+((e.clientX-r.left)/r.width-0.5)*2*WIN)});
+  }
+}
+function drawPlot(p){
+  const cv=p.cv,dpr=devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;
+  if(cv.width!==Math.round(W*dpr)||cv.height!==Math.round(H*dpr)){cv.width=W*dpr;cv.height=H*dpr}
+  const x=cv.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);
+  const L=44,Rr=10,T=6,B=18,pw=W-L-Rr,ph=H-T-B;
+  const tx=s=>L+(s-(t-WIN))/(2*WIN)*pw, ty=v=>T+ph-(v-p.lo)/(p.hi-p.lo)*ph;
+  if(R.task){x.fillStyle=css('--pre');const a=tx(R.task.start),b=tx(R.task.end);if(a>L)x.fillRect(L,T,Math.min(a,L+pw)-L,ph);if(b<L+pw)x.fillRect(Math.max(b,L),T,L+pw-Math.max(b,L),ph)}
+  x.strokeStyle=css('--grid');x.lineWidth=1;x.fillStyle=css('--muted');x.font='10px system-ui';
+  const fmt=v=>Math.abs(v)>=1000?(v/1000).toFixed(1)+'k':Math.abs(v)<10?v.toFixed(1):v.toFixed(0);
+  for(let k=0;k<=2;k++){const v=p.lo+(p.hi-p.lo)*k/2,y=ty(v);x.beginPath();x.moveTo(L,y);x.lineTo(W-Rr,y);x.stroke();x.textAlign='right';x.fillText(fmt(v),L-5,y+3)}
+  x.textAlign='center';for(let s=Math.ceil(t-WIN);s<=t+WIN;s++){if(s<0||s>R.duration)continue;x.fillText(s+'s',tx(s),H-4)}
+  const i0=Math.max(0,Math.floor((t-WIN)*R.fps)),i1=Math.min(R.n-1,Math.ceil((t+WIN)*R.fps));
+  x.save();x.beginPath();x.rect(L,T,pw,ph);x.clip();
+  for(const l of p.lines){x.strokeStyle=l.col;x.lineWidth=1.4;x.setLineDash(l.dash?[4,3]:[]);x.beginPath();let pen=false;
+    for(let i=i0;i<=i1;i++){const v=l.get(i);if(!isFinite(v)){pen=false;continue}const X=tx(i/R.fps),Y=ty(v);pen?x.lineTo(X,Y):x.moveTo(X,Y);pen=true}x.stroke()}
+  x.setLineDash([]);x.restore();
+  x.strokeStyle=css('--cursor');x.lineWidth=1.2;x.beginPath();x.moveTo(tx(t),T);x.lineTo(tx(t),T+ph);x.stroke();
+}
+/* overview: total finger signal L/R on top, annotated steps underneath */
+function drawScrub(){
+  const cv=$('scrubC'),dpr=devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;
+  const x=cv.getContext('2d',{willReadFrequently:true});x.setTransform(dpr,0,0,dpr,0,0);
+  const band=R.task?16:0,top=H-band,X=s=>s/R.duration*W;
+  if(R.task){x.fillStyle=css('--pre');x.fillRect(0,top,W,band);
+    R.task.steps.forEach((s,k)=>{x.fillStyle=css(k%2?'--seg-b':'--seg-a');x.fillRect(X(s.start)+.5,top+2,X(s.end)-X(s.start)-1,band-4);
+      x.fillStyle=css('--ink2');x.font='600 10px system-ui';x.textAlign='left';if(X(s.end)-X(s.start)>16)x.fillText(String(k+1),X(s.start)+5,top+band-5)})}
+  let hi=1;for(const h of ['lh','rh'])for(const v of R.tot[h])hi=Math.max(hi,v);
+  const cols=Math.floor(W);
+  for(const [h,c] of [['lh',css('--lh')],['rh',css('--rh')]]){x.strokeStyle=c;x.globalAlpha=.85;x.lineWidth=1;x.beginPath();
+    for(let px=0;px<cols;px++){const a=Math.floor(px/cols*R.n),b=Math.max(a+1,Math.floor((px+1)/cols*R.n));let m=0;for(let i=a;i<b&&i<R.n;i++)m=Math.max(m,R.tot[h][i]);
+      const y=top-3-(m/hi)*(top-8);px?x.lineTo(px,y):x.moveTo(px,y)}x.stroke()}
+  x.globalAlpha=1;R.scrubImg=x.getImageData(0,0,cv.width,cv.height);
+}
+function drawScrubCursor(){const cv=$('scrubC');if(!R.scrubImg)return;const x=cv.getContext('2d');x.setTransform(1,0,0,1,0,0);x.putImageData(R.scrubImg,0,0);
+  const dpr=devicePixelRatio||1,X=t/R.duration*cv.width;x.fillStyle=css('--accent');x.globalAlpha=.16;x.fillRect(0,0,X,cv.height);x.globalAlpha=1;x.fillStyle=css('--cursor');x.fillRect(X-dpr,0,2*dpr,cv.height)}
+
+function render(){if(!R||!$('time'))return;const i=frame();
+  $('time').textContent=`${t.toFixed(2)} / ${R.duration.toFixed(2)} s`;
+  drawHand('lh',i);drawHand('rh',i);drawPose(i);drawCaption();for(const p of PLOTS)drawPlot(p);drawScrubCursor()}
+
+document.addEventListener('keydown',e=>{if(!R||!$('play')||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;
+  if(e.code==='Space'){e.preventDefault();playing?pause():play()}
+  else if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();pause();seek(t+(e.key==='ArrowRight'?1:-1)*(e.shiftKey?1:1/R.fps))}});
+addEventListener('resize',()=>{if(R&&$('scrubC')){drawScrub();render()}});
+
+getJSON('data/manifest.json').then(m=>{M=m;
+  const h=location.hash,id=(h.match(/rec=([\w-]+)/)||[])[1],tt=(h.match(/t=([\d.]+)/)||[])[1];
+  const first=id&&find(id)?id:M.sources[0].items[0].id;open(first,tt);
+}).catch(e=>{$('main').innerHTML=`<div class="err">Could not load the recording list: ${esc(e.message)}. Reload the page to retry.</div>`});
+</script>
+</body>
+</html>

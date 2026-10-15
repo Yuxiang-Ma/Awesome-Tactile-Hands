@@ -1,0 +1,21 @@
+name: Add or correct a dataset
+description: Suggest a whole-hand tactile dataset, or fix an entry
+labels: [dataset]
+body:
+  - type: input
+    id: name
+    attributes: {label: Dataset name, placeholder: "e.g. EgoTouch"}
+    validations: {required: true}
+  - type: input
+    id: paper
+    attributes: {label: Paper or project page, placeholder: "https://arxiv.org/abs/..."}
+    validations: {required: true}
+  - type: input
+    id: data
+    attributes: {label: Data download link, description: "Leave empty if not released yet"}
+  - type: textarea
+    id: details
+    attributes:
+      label: Tactile hardware and what else is recorded
+      description: Glove or robot hand, taxels per hand, regions covered (fingertips / finger segments / palm), synced streams, scale, license. Please give the source for each number.
+    validations: {required: true}

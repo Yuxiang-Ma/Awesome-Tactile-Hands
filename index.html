@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taxel Atlas</title>
+<meta name="description" content="A filterable catalog of public datasets that record touch across the hand during dexterous manipulation, from human tactile gloves to tactile robot hands.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a6c73'/%3E%3Cg fill='%23fff'%3E%3Crect x='9' y='5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='13.4' y='3.5' width='3.2' height='13' rx='1.6'/%3E%3Crect x='17.8' y='4.5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='22.2' y='7' width='3.2' height='10' rx='1.6'/%3E%3Crect x='8' y='15' width='17.6' height='12' rx='3'/%3E%3C/g%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#f3f5f6;--rail:#eaeef0;--panel:#fff;--ink:#14212a;--ink2:#3a4a54;--muted:#5b6c76;--line:#d9e1e5;--line2:#e7ecef;
+  --accent:#0a6c73;--accent-ink:#fff;--accent-soft:#dcecee;--warn:#7a4f00;--warn-soft:#fbf1dc;--ok:#1d6b3a;--ok-soft:#dff0e5;
+  --bad:#8a2b1d;--bad-soft:#f7e3df;--pre:#eef1f3;--glyph-off:#cdd6db;--shadow:0 1px 2px rgba(20,33,42,.06),0 4px 14px rgba(20,33,42,.05);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1316;--rail:#12191c;--panel:#161e22;--ink:#e2e9ed;--ink2:#c3cfd5;--muted:#91a2ab;--line:#283338;--line2:#1f292d;
+  --accent:#4cb1b8;--accent-ink:#06191b;--accent-soft:#18363a;--warn:#e9b660;--warn-soft:#2c2412;--ok:#7fcf9b;--ok-soft:#163021;
+  --bad:#f0a08f;--bad-soft:#341b16;--pre:#1a2226;--glyph-off:#33424a;--shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25)}}
+:root[data-theme="dark"]{
+  --bg:#0e1316;--rail:#12191c;--panel:#161e22;--ink:#e2e9ed;--ink2:#c3cfd5;--muted:#91a2ab;--line:#283338;--line2:#1f292d;
+  --accent:#4cb1b8;--accent-ink:#06191b;--accent-soft:#18363a;--warn:#e9b660;--warn-soft:#2c2412;--ok:#7fcf9b;--ok-soft:#163021;
+  --bad:#f0a08f;--bad-soft:#341b16;--pre:#1a2226;--glyph-off:#33424a;--shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25)}
+*{box-sizing:border-box}
+html{scrollbar-color:var(--line) transparent;accent-color:var(--accent)}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+::selection{background:var(--accent-soft);color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+button,select,input{font:inherit;color:var(--ink)}
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:10px 20px;background:color-mix(in srgb,var(--panel) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top h1{margin:0;font-size:16px;letter-spacing:-.01em}
+.top .sum{color:var(--muted);font-size:12.5px}
+.top nav{margin-left:auto;display:flex;gap:6px;align-items:center}
+.top nav a{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:8px;color:var(--ink2);text-decoration:none;font-size:13px;border:1px solid transparent}
+.top nav a:hover{background:var(--bg)}
+.top nav a.pri{border-color:var(--line);background:var(--panel)}
+.top nav svg{width:16px;height:16px;fill:currentColor}
+/* ---------- layout ---------- */
+.app{display:grid;grid-template-columns:260px minmax(0,1fr);align-items:start}
+.facets{position:sticky;top:53px;height:calc(100vh - 53px);overflow:auto;padding:16px 12px 32px 20px;border-right:1px solid var(--line);background:var(--rail)}
+.intro{margin:0 0 14px;font-size:12.5px;color:var(--ink2);line-height:1.45}
+.fs{border:0;margin:0 0 14px;padding:0 0 12px;border-bottom:1px solid var(--line)}
+.fs legend{padding:0;margin-bottom:6px;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fs .hint{font-size:11.5px;color:var(--muted);margin:-2px 0 6px}
+.opt{display:flex;align-items:center;gap:8px;padding:3px 2px;font-size:13px;cursor:pointer;border-radius:6px}
+.opt:hover{color:var(--accent)}
+.opt input{margin:0}
+.opt .n{margin-left:auto;font-size:11.5px;color:var(--muted)}
+.opt[data-zero="true"]{color:var(--muted)}
+.years{display:flex;gap:6px;align-items:center}
+.years input{width:76px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.clear{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:5px 10px;font-size:12.5px;cursor:pointer}
+.main{padding:16px 20px 48px;min-width:0}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.search{flex:1 1 240px;max-width:420px;position:relative}
+.search input{width:100%;padding:8px 10px 8px 32px;border:1px solid var(--line);border-radius:9px;background:var(--panel)}
+.search svg{position:absolute;left:10px;top:50%;width:15px;height:15px;transform:translateY(-50%);fill:none;stroke:var(--muted);stroke-width:2}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;background:var(--panel)}
+.seg button{border:0;background:none;padding:7px 12px;cursor:pointer;font-size:13px;color:var(--ink2)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--panel)}
+.sort{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--muted)}
+.sort select{padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel)}
+.count{font-size:12.5px;color:var(--muted)}
+.filtbtn{display:none}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:-4px 0 12px}
+.chips button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--ink2)}
+.chips button::after{content:" ×";color:var(--muted)}
+/* ---------- cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
+.card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-1px)}
+.thumb{position:relative;aspect-ratio:16/9;background:var(--pre);display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--line2)}
+.thumb img{width:100%;height:100%;object-fit:cover;background:#fff}
+.thumb .glyph{width:38%;height:auto}
+.badge{position:absolute;left:10px;top:10px;font-size:11px;font-weight:650;padding:2px 8px;border-radius:999px;background:var(--panel);box-shadow:var(--shadow)}
+.av-public{color:var(--ok)}.av-gated,.av-partial,.av-announced,.av-unclear{color:var(--warn)}.av-not_released{color:var(--bad)}
+.body{padding:12px 14px 8px;display:flex;flex-direction:column;gap:6px;flex:1}
+.ttl{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.ttl h3{margin:0;font-size:15.5px;letter-spacing:-.01em}
+.ttl span{font-size:12px;color:var(--muted);white-space:nowrap}
+.src{font-size:12px;color:var(--muted);margin-top:-4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.desc{margin:0;font-size:13px;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.spec{display:flex;align-items:center;gap:10px;margin-top:4px;padding:8px 10px;background:var(--bg);border-radius:9px}
+.spec .glyph{width:34px;height:auto;flex:none}
+.spec b{display:block;font-size:13px}
+.spec span{display:block;font-size:12px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
+.tag{font-size:11.5px;padding:1px 7px;border-radius:6px;background:var(--accent-soft);color:var(--ink2)}
+.tag.dim{background:var(--pre);color:var(--muted)}
+.links{display:flex;flex-wrap:wrap;gap:2px 12px;padding:8px 14px 12px;border-top:1px solid var(--line2);font-size:12.5px}
+.links a{text-decoration:none;font-weight:550}
+.links a:hover{text-decoration:underline}
+.links .play{margin-left:auto}
+.empty{padding:40px 0;color:var(--muted);text-align:center}
+/* ---------- glyph ---------- */
+.glyph .o{fill:none;stroke:var(--muted);stroke-width:.7}
+.glyph .r{fill:var(--glyph-off)}
+.glyph .r.on{fill:var(--accent)}
+/* ---------- table ---------- */
+.tablewrap{overflow:auto;background:var(--panel);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow)}
+table{border-collapse:collapse;width:100%;font-size:13px;min-width:980px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line2);vertical-align:top}
+th{position:sticky;top:0;background:var(--panel);font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:650;cursor:pointer;white-space:nowrap}
+th[aria-sort] ::after{content:""}
+tr:hover td{background:var(--bg)}
+td .glyph{width:24px;height:auto;flex:none}
+td .cov{display:flex;gap:8px;align-items:center;min-width:150px}
+td:first-child{min-width:150px}td:nth-child(2){min-width:110px}
+td.num{text-align:right;white-space:nowrap}
+td b{cursor:pointer}
+td .sub{display:block;color:var(--muted);font-size:12px}
+/* ---------- detail ---------- */
+dialog{border:0;padding:0;border-radius:14px;width:min(760px,calc(100vw - 32px));max-height:calc(100vh - 48px);background:var(--panel);color:var(--ink);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(10,18,22,.45)}
+.dl{display:flex;flex-direction:column;max-height:calc(100vh - 48px)}
+.dl header{display:flex;gap:14px;align-items:flex-start;padding:18px 20px 12px;border-bottom:1px solid var(--line2)}
+.dl header h2{margin:0;font-size:19px;letter-spacing:-.01em}
+.dl header p{margin:2px 0 0;color:var(--muted);font-size:13px}
+.dl header .x{margin-left:auto;border:0;background:var(--bg);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:18px;flex:none}
+.dl .scroll{overflow:auto;padding:16px 20px 20px}
+.dl .hero{width:100%;max-height:300px;object-fit:contain;background:#fff;border-radius:10px;border:1px solid var(--line2)}
+.dl h4{margin:16px 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.kv{display:grid;grid-template-columns:150px 1fr;gap:6px 14px;margin:0;font-size:13.5px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0}
+.warn{margin:12px 0 0;padding:10px 12px;border-radius:9px;background:var(--warn-soft);color:var(--warn);font-size:13px}
+.warn ul{margin:0;padding-left:18px}
+.dl .links{border:0;padding:12px 0 0;font-size:13.5px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 12px;border-radius:8px;background:var(--accent);color:var(--accent-ink)!important;text-decoration:none!important;font-weight:600}
+footer{padding:20px;color:var(--muted);font-size:12px;border-top:1px solid var(--line);text-align:center}
+/* ---------- narrow ---------- */
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .facets{position:fixed;inset:0 auto 0 0;top:0;height:100vh;width:min(320px,88vw);z-index:20;transform:translateX(-100%);transition:transform .2s;box-shadow:var(--shadow)}
+  body[data-filters="open"] .facets{transform:none}
+  body[data-filters="open"]::after{content:"";position:fixed;inset:0;background:rgba(10,18,22,.4);z-index:15}
+  .filtbtn{display:inline-flex;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:7px 12px;cursor:pointer}
+  .top{padding:10px 16px}.top .sum{display:none}.top nav a span{display:none}
+  .main{padding:14px 16px 40px}
+  .kv{grid-template-columns:1fr}.kv dt{margin-top:6px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Taxel Atlas</h1><span class="sum" id="sum"></span>
+  <nav>
+    <a href="viewer/" class="pri"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span>Data viewer</span></a>
+    <a id="contrib" href="#"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2zM5 11h14v2H5z"/></svg><span>Suggest a dataset</span></a>
+    <a id="gh" href="#" aria-label="GitHub repository"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+  </nav>
+</header>
+<div class="app">
+  <aside class="facets" id="facets" aria-label="Filters"></aside>
+  <main class="main">
+    <div class="bar">
+      <button class="filtbtn" id="filtbtn" aria-controls="facets">Filters</button>
+      <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search name, author, hand, task…" aria-label="Search"></label>
+      <div class="seg" role="group" aria-label="View"><button data-view="cards" aria-pressed="true">Cards</button><button data-view="table" aria-pressed="false">Compare</button></div>
+      <label class="sort">Sort <select id="sort"><option value="year">Newest</option><option value="taxels">Taxels per hand</option><option value="hours">Hours</option><option value="name">Name</option></select></label>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div id="out"></div>
+  </main>
+</div>
+<footer>Compiled from public papers, project pages and dataset cards. Numbers are as the authors report them; fields we could not confirm are marked. <span id="upd"></span></footer>
+<dialog id="dlg" aria-labelledby="dlgTitle"></dialog>
+<script src="assets/site.js"></script>
+</body>
+</html>

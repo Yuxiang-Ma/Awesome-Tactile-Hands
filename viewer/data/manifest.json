@@ -1,0 +1,761 @@
+{
+ "groups": [
+  {
+   "id": "touchtronix",
+   "title": "Touchtronix",
+   "about": "Recordings shared by Touchtronix, not tied to a dataset release or publication. The collections use different glove formats."
+  },
+  {
+   "id": "originflow",
+   "title": "OriginFlow",
+   "about": "Preview material from the OriginData dataset."
+  }
+ ],
+ "sources": [
+  {
+   "id": "fusionx",
+   "group": "touchtronix",
+   "title": "FusionX demos",
+   "provider": "Touchtronix",
+   "kind": "recording",
+   "status": {
+    "label": "Calibrated",
+    "tone": "ok"
+   },
+   "about": "Processed highlight clips with calibrated bend angles, reviewed hand skeletons and task steps.",
+   "sensor": {
+    "type": "taxel",
+    "finger": [
+     4,
+     4
+    ],
+    "palm": null
+   },
+   "hardware": [
+    {
+     "k": "Gloves",
+     "v": "Touchtronix glove.v3",
+     "d": "5 \u00d7 4\u00d74 taxels per hand, no palm \u00b7 12-bit \u00b7 \u2248125 Hz"
+    },
+    {
+     "k": "Head camera",
+     "v": "Arducam AR0234 stereo",
+     "d": "2 \u00d7 1920\u00d71200 global shutter \u00b7 30 fps \u00b7 IMU"
+    },
+    {
+     "k": "Wrist cameras",
+     "v": "2 \u00d7 OAK-1-Lite-W",
+     "d": "1920\u00d71080 \u00b7 30 fps"
+    },
+    {
+     "k": "Labels",
+     "v": "Hand skeletons, task steps",
+     "d": "AnyHand-WiLoR, reviewed by the provider"
+    }
+   ],
+   "notes": "Glove firmware 1.12. Bend angles are calibrated per participant; taxels are raw ADC without force calibration. The source sessions also recorded three external cameras, which these clips leave out.",
+   "items": [
+    {
+     "id": "fx_arranging_spanner_set",
+     "title": "Arrange the spanner set",
+     "sub": "16 s \u00b7 1 step",
+     "poster": "media/fx_arranging_spanner_set.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "fx_coffee_making",
+     "title": "Close the bottle",
+     "sub": "11 s \u00b7 2 steps",
+     "poster": "media/fx_coffee_making.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "fx_cutting_cardboard_box",
+     "title": "Cut the cardboard box",
+     "sub": "16 s \u00b7 3 steps",
+     "poster": "media/fx_cutting_cardboard_box.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "fx_drilling",
+     "title": "Drive a fastener into the wooden board",
+     "sub": "16 s \u00b7 5 steps",
+     "poster": "media/fx_drilling.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "fx_folding_clothes",
+     "title": "Fold the garment",
+     "sub": "21 s \u00b7 6 steps",
+     "poster": "media/fx_folding_clothes.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "fx_paper_cutting",
+     "title": "Trim a sheet of paper",
+     "sub": "16 s \u00b7 2 steps",
+     "poster": "media/fx_paper_cutting.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "fx_plug_unplug_cables",
+     "title": "Plug and unplug cable connectors",
+     "sub": "16 s \u00b7 3 steps",
+     "poster": "media/fx_plug_unplug_cables.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "fx_pouring_juice",
+     "title": "Pour juice into cups",
+     "sub": "15 s \u00b7 4 steps",
+     "poster": "media/fx_pouring_juice.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "tasks",
+   "group": "touchtronix",
+   "title": "Task sessions, Sep 2026",
+   "provider": "Touchtronix",
+   "kind": "recording",
+   "status": {
+    "label": "Raw tactile",
+    "tone": "neutral"
+   },
+   "about": "Raw sessions recorded on 2026-09-07 and 09-08, up to five minutes each. The source folder holds 207 recordings of 14 tasks; up to two per task are shown.",
+   "sensor": {
+    "type": "taxel",
+    "finger": [
+     4,
+     3
+    ],
+    "palm": [
+     6,
+     10
+    ]
+   },
+   "hardware": [
+    {
+     "k": "Gloves",
+     "v": "Touchtronix 4\u00d73 glove",
+     "d": "5 \u00d7 4\u00d73 taxels + 6\u00d710 palm per hand \u00b7 8-bit \u00b7 \u2248227 Hz"
+    },
+    {
+     "k": "Head camera",
+     "v": "Arducam AR0234 stereo",
+     "d": "2 \u00d7 1920\u00d71200 global shutter \u00b7 \u224829.6 fps \u00b7 IMU"
+    },
+    {
+     "k": "Wrist cameras",
+     "v": "2 \u00d7 UVC cameras",
+     "d": "1920\u00d71080 \u00b7 \u224829.4 fps \u00b7 IMU \u00b7 model not recorded"
+    },
+    {
+     "k": "Labels",
+     "v": "None",
+     "d": "No skeletons or task annotations"
+    }
+   ],
+   "notes": "Recorder software V3.0.6.QSV. The files do not name the glove model; the message format matches the early recordings. Each session stores a per-user glove calibration (taxel zero offsets, bend range), not a force calibration.",
+   "flag": "Raw tactile counts with no force calibration. No hand skeletons or task annotations.",
+   "items": [
+    {
+     "id": "sep_20260907_0753_ep000",
+     "title": "Assemble and disassemble wooden shapes",
+     "task": "Assemble and disassemble wooden shapes",
+     "taskTotal": 8,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/sep_20260907_0753_ep000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "sep_20260907_0813_ep003",
+     "title": "Assemble and disassemble wooden shapes",
+     "task": "Assemble and disassemble wooden shapes",
+     "taskTotal": 8,
+     "label": "Recording 003",
+     "sub": "3.8 min",
+     "poster": "media/sep_20260907_0813_ep003.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_building_blocks_r001",
+     "title": "Building blocks",
+     "task": "Building blocks",
+     "taskTotal": 17,
+     "label": "Recording 001",
+     "sub": "1.3 min",
+     "poster": "media/tx_20260907_building_blocks_r001.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_building_blocks_r009",
+     "title": "Building blocks",
+     "task": "Building blocks",
+     "taskTotal": 17,
+     "label": "Recording 009",
+     "sub": "1.4 min",
+     "poster": "media/tx_20260907_building_blocks_r009.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_check_the_ruler_r001",
+     "title": "Check the ruler",
+     "task": "Check the ruler",
+     "taskTotal": 8,
+     "label": "Recording 001",
+     "sub": "3.2 min",
+     "poster": "media/tx_20260907_check_the_ruler_r001.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_check_the_ruler_r004",
+     "title": "Check the ruler",
+     "task": "Check the ruler",
+     "taskTotal": 8,
+     "label": "Recording 004",
+     "sub": "4.4 min",
+     "poster": "media/tx_20260907_check_the_ruler_r004.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_disassemble_andassemble_toys_r000",
+     "title": "Disassemble and assemble toys",
+     "task": "Disassemble and assemble toys",
+     "taskTotal": 10,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260907_disassemble_andassemble_toys_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_disassemble_andassemble_toys_r004",
+     "title": "Disassemble and assemble toys",
+     "task": "Disassemble and assemble toys",
+     "taskTotal": 10,
+     "label": "Recording 004",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260907_disassemble_andassemble_toys_r004.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_disassembly_andassembly_of_computer_backplane_r000",
+     "title": "Disassemble and assemble a computer backplane",
+     "task": "Disassemble and assemble a computer backplane",
+     "taskTotal": 14,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260907_disassembly_andassembly_of_computer_backplane_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_disassembly_andassembly_of_computer_backplane_r005",
+     "title": "Disassemble and assemble a computer backplane",
+     "task": "Disassemble and assemble a computer backplane",
+     "taskTotal": 14,
+     "label": "Recording 005",
+     "sub": "2.7 min",
+     "poster": "media/tx_20260907_disassembly_andassembly_of_computer_backplane_r005.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_jigsaw_puzzle_r000",
+     "title": "Jigsaw puzzle",
+     "task": "Jigsaw puzzle",
+     "taskTotal": 8,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260907_jigsaw_puzzle_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_jigsaw_puzzle_r004",
+     "title": "Jigsaw puzzle",
+     "task": "Jigsaw puzzle",
+     "taskTotal": 8,
+     "label": "Recording 004",
+     "sub": "3.9 min",
+     "poster": "media/tx_20260907_jigsaw_puzzle_r004.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_number_blocks_set_r000",
+     "title": "Number blocks set",
+     "task": "Number blocks set",
+     "taskTotal": 20,
+     "label": "Recording 000",
+     "sub": "1.8 min",
+     "poster": "media/tx_20260907_number_blocks_set_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_number_blocks_set_r010",
+     "title": "Number blocks set",
+     "task": "Number blocks set",
+     "taskTotal": 20,
+     "label": "Recording 010",
+     "sub": "2.2 min",
+     "poster": "media/tx_20260907_number_blocks_set_r010.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_organize_toolbox_r000",
+     "title": "Organize a toolbox",
+     "task": "Organize a toolbox",
+     "taskTotal": 11,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260907_organize_toolbox_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_organize_toolbox_r006",
+     "title": "Organize a toolbox",
+     "task": "Organize a toolbox",
+     "taskTotal": 11,
+     "label": "Recording 006",
+     "sub": "3.2 min",
+     "poster": "media/tx_20260907_organize_toolbox_r006.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_quality_inspection_of_tableware_r000",
+     "title": "Quality inspection of tableware",
+     "task": "Quality inspection of tableware",
+     "taskTotal": 10,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260907_quality_inspection_of_tableware_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_quality_inspection_of_tableware_r004",
+     "title": "Quality inspection of tableware",
+     "task": "Quality inspection of tableware",
+     "taskTotal": 10,
+     "label": "Recording 004",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260907_quality_inspection_of_tableware_r004.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_small_bead_classification_r000",
+     "title": "Sort small beads",
+     "task": "Sort small beads",
+     "taskTotal": 57,
+     "label": "Recording 000",
+     "sub": "1.6 min",
+     "poster": "media/tx_20260907_small_bead_classification_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_small_bead_classification_r028",
+     "title": "Sort small beads",
+     "task": "Sort small beads",
+     "taskTotal": 57,
+     "label": "Recording 028",
+     "sub": "37 s",
+     "poster": "media/tx_20260907_small_bead_classification_r028.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_store_tableware_r000",
+     "title": "Store tableware",
+     "task": "Store tableware",
+     "taskTotal": 19,
+     "label": "Recording 000",
+     "sub": "1.6 min",
+     "poster": "media/tx_20260907_store_tableware_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260907_store_tableware_r009",
+     "title": "Store tableware",
+     "task": "Store tableware",
+     "taskTotal": 19,
+     "label": "Recording 009",
+     "sub": "41 s",
+     "poster": "media/tx_20260907_store_tableware_r009.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260908_disassembly_andassembly_of_shelves_r000",
+     "title": "Disassemble and assemble shelves",
+     "task": "Disassemble and assemble shelves",
+     "taskTotal": 12,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260908_disassembly_andassembly_of_shelves_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260908_disassembly_andassembly_of_shelves_r005",
+     "title": "Disassemble and assemble shelves",
+     "task": "Disassemble and assemble shelves",
+     "taskTotal": 12,
+     "label": "Recording 005",
+     "sub": "4.1 min",
+     "poster": "media/tx_20260908_disassembly_andassembly_of_shelves_r005.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260908_removing_andinstalling_nuts_r000",
+     "title": "Remove and install nuts",
+     "task": "Remove and install nuts",
+     "taskTotal": 3,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260908_removing_andinstalling_nuts_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260908_removing_andinstalling_nuts_r002",
+     "title": "Remove and install nuts",
+     "task": "Remove and install nuts",
+     "taskTotal": 3,
+     "label": "Recording 002",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260908_removing_andinstalling_nuts_r002.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260908_store_the_beads_r000",
+     "title": "Store the beads",
+     "task": "Store the beads",
+     "taskTotal": 10,
+     "label": "Recording 000",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260908_store_the_beads_r000.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "tx_20260908_store_the_beads_r004",
+     "title": "Store the beads",
+     "task": "Store the beads",
+     "taskTotal": 10,
+     "label": "Recording 004",
+     "sub": "5.1 min",
+     "poster": "media/tx_20260908_store_the_beads_r004.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "early",
+   "group": "touchtronix",
+   "title": "Early recordings, Aug 2026",
+   "provider": "Touchtronix",
+   "kind": "recording",
+   "status": {
+    "label": "Uncalibrated tactile",
+    "tone": "warn"
+   },
+   "about": "The first public sample, recorded on 2026-08-31.",
+   "link": {
+    "label": "zhicao/human-mcap-examples",
+    "href": "https://huggingface.co/datasets/zhicao/human-mcap-examples"
+   },
+   "sensor": {
+    "type": "taxel",
+    "finger": [
+     4,
+     3
+    ],
+    "palm": [
+     6,
+     10
+    ]
+   },
+   "hardware": [
+    {
+     "k": "Gloves",
+     "v": "Touchtronix 4\u00d73 glove",
+     "d": "5 \u00d7 4\u00d73 taxels + 6\u00d710 palm per hand \u00b7 8-bit \u00b7 \u2248227 Hz"
+    },
+    {
+     "k": "Head camera",
+     "v": "Arducam AR0234 stereo",
+     "d": "2 \u00d7 1920\u00d71200 global shutter \u00b7 \u224829.6 fps \u00b7 IMU"
+    },
+    {
+     "k": "Wrist cameras",
+     "v": "2 \u00d7 UVC cameras",
+     "d": "1920\u00d71080 \u00b7 \u224829.4 fps \u00b7 IMU \u00b7 model not recorded"
+    },
+    {
+     "k": "Labels",
+     "v": "None",
+     "d": "No skeletons or task annotations"
+    }
+   ],
+   "notes": "Recorder software V3.0.4.QSV. Same glove and message format as the September task sessions.",
+   "flag": "The glove tactile channels were not calibrated, so pressure and force readings are noisy. Use FusionX for tactile analysis.",
+   "items": [
+    {
+     "id": "01_recording_20260831_173548",
+     "title": "Recording 1",
+     "sub": "2026-08-31 17:35 \u00b7 203 s",
+     "poster": "media/01_recording_20260831_173548.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "02_recording_20260831_161710",
+     "title": "Recording 2",
+     "sub": "2026-08-31 16:17 \u00b7 263 s",
+     "poster": "media/02_recording_20260831_161710.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "03_recording_20260831_170921",
+     "title": "Recording 3",
+     "sub": "2026-08-31 17:09 \u00b7 235 s",
+     "poster": "media/03_recording_20260831_170921.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "originflow",
+   "group": "originflow",
+   "title": "OriginData previews",
+   "provider": "OriginFlow",
+   "kind": "film",
+   "status": {
+    "label": "Rendered previews",
+    "tone": "neutral"
+   },
+   "about": "Preview renders from the OriginData egocentric manipulation dataset: eight domains, 20 clips.",
+   "sensor": {
+    "type": "estimate"
+   },
+   "hardware": [
+    {
+     "k": "Hand force",
+     "v": "Per-finger force estimates",
+     "d": "Both hands \u00b7 sensing method not specified"
+    },
+    {
+     "k": "Cameras",
+     "v": "Stereo egocentric video",
+     "d": "Device not specified by the provider"
+    },
+    {
+     "k": "Tracking",
+     "v": "Hand pose, head trajectory",
+     "d": "As listed in the provider's README"
+    },
+    {
+     "k": "Labels",
+     "v": "Hierarchical language",
+     "d": "Episode, subtask and atomic action"
+    }
+   ],
+   "notes": "This folder holds the provider's rendered previews only (120 fps, shown here at 30 fps). The raw streams are in the gated Hugging Face dataset OriginFlow-AI/origindata-preview-sample.",
+   "items": [
+    {
+     "id": "of_Education-School-and-Training-Center-Organizing-Markers",
+     "title": "Organizing Markers",
+     "sub": "Education \u00b7 School and Training Center",
+     "video": "media/of/Education-School-and-Training-Center-Organizing-Markers.mp4",
+     "poster": "media/of/Education-School-and-Training-Center-Organizing-Markers.jpg",
+     "summary": "Pick up markers one by one and test them on a paper cup.",
+     "episode": 5756,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Education-School-and-Training-Center-Organizing-Miscellaneous-Items",
+     "title": "Organizing Miscellaneous Items",
+     "sub": "Education \u00b7 School and Training Center",
+     "video": "media/of/Education-School-and-Training-Center-Organizing-Miscellaneous-Items.mp4",
+     "poster": "media/of/Education-School-and-Training-Center-Organizing-Miscellaneous-Items.jpg",
+     "summary": "Clear miscellaneous items from the upper shelf.",
+     "episode": 5754,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Food-and-Beverage-Cafe-Frothing-Milk",
+     "title": "Frothing Milk",
+     "sub": "Food and Beverage \u00b7 Caf\u00e9",
+     "video": "media/of/Food-and-Beverage-Cafe-Frothing-Milk.mp4",
+     "poster": "media/of/Food-and-Beverage-Cafe-Frothing-Milk.jpg",
+     "summary": "Prepare a milk pitcher before frothing.",
+     "episode": 6026,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Food-and-Beverage-Cafe-Organizing-Takeout-Bags",
+     "title": "Organizing Takeout Bags",
+     "sub": "Food and Beverage \u00b7 Caf\u00e9",
+     "video": "media/of/Food-and-Beverage-Cafe-Organizing-Takeout-Bags.mp4",
+     "poster": "media/of/Food-and-Beverage-Cafe-Organizing-Takeout-Bags.jpg",
+     "summary": "Sort scattered paper bags into stacks.",
+     "episode": 7053,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Food-and-Beverage-Cafe-Packing-Drinks-for-Pickup",
+     "title": "Packing Drinks for Pickup",
+     "sub": "Food and Beverage \u00b7 Caf\u00e9",
+     "video": "media/of/Food-and-Beverage-Cafe-Packing-Drinks-for-Pickup.mp4",
+     "poster": "media/of/Food-and-Beverage-Cafe-Packing-Drinks-for-Pickup.jpg",
+     "summary": "Pack completed drink orders and apply labels.",
+     "episode": 6047,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Food-and-Beverage-Cafe-Preparing-a-Drink",
+     "title": "Preparing a Drink",
+     "sub": "Food and Beverage \u00b7 Caf\u00e9",
+     "video": "media/of/Food-and-Beverage-Cafe-Preparing-a-Drink.mp4",
+     "poster": "media/of/Food-and-Beverage-Cafe-Preparing-a-Drink.jpg",
+     "summary": "Prepare a drink for a new order.",
+     "episode": 6046,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Food-and-Beverage-Cafeteria-Organizing-Sanitized-Tableware",
+     "title": "Organizing Sanitized Tableware",
+     "sub": "Food and Beverage \u00b7 Cafeteria",
+     "video": "media/of/Food-and-Beverage-Cafeteria-Organizing-Sanitized-Tableware.mp4",
+     "poster": "media/of/Food-and-Beverage-Cafeteria-Organizing-Sanitized-Tableware.jpg",
+     "summary": "Clean and arrange white spoons from a tray onto a red mat.",
+     "episode": 4882,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Manufacturing-Electronics-Assembly-Workshop-Assembling-a-Circuit-Board",
+     "title": "Assembling a Circuit Board",
+     "sub": "Manufacturing \u00b7 Electronics Assembly Workshop",
+     "video": "media/of/Manufacturing-Electronics-Assembly-Workshop-Assembling-a-Circuit-Board.mp4",
+     "poster": "media/of/Manufacturing-Electronics-Assembly-Workshop-Assembling-a-Circuit-Board.jpg",
+     "summary": "Use a screwdriver to secure a blue wire in a terminal block.",
+     "episode": 4339,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Manufacturing-Manufacturing-Workshop-Processing-Fiber-Optic-Components",
+     "title": "Processing Fiber-Optic Components",
+     "sub": "Manufacturing \u00b7 Manufacturing Workshop",
+     "video": "media/of/Manufacturing-Manufacturing-Workshop-Processing-Fiber-Optic-Components.mp4",
+     "poster": "media/of/Manufacturing-Manufacturing-Workshop-Processing-Fiber-Optic-Components.jpg",
+     "summary": "Handle and process small components on a machine fixture.",
+     "episode": 6291,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Manufacturing-Packing-Workshop-Packing-a-Parcel",
+     "title": "Packing a Parcel",
+     "sub": "Manufacturing \u00b7 Packing Workshop",
+     "video": "media/of/Manufacturing-Packing-Workshop-Packing-a-Parcel.mp4",
+     "poster": "media/of/Manufacturing-Packing-Workshop-Packing-a-Parcel.jpg",
+     "summary": "Fold a cardboard box and seal it with tape.",
+     "episode": 2676,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Office-Work-Office-Organizing-Documents",
+     "title": "Organizing Documents",
+     "sub": "Office Work \u00b7 Office",
+     "video": "media/of/Office-Work-Office-Organizing-Documents.mp4",
+     "poster": "media/of/Office-Work-Office-Organizing-Documents.jpg",
+     "summary": "Sort loose documents into a blue archive box.",
+     "episode": 7706,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Personal-Services-Home-Care-Service-Center-Demonstrating-Infant-Massage-Techniques",
+     "title": "Demonstrating Infant Massage Techniques",
+     "sub": "Personal Services \u00b7 Home Care Service Center",
+     "video": "media/of/Personal-Services-Home-Care-Service-Center-Demonstrating-Infant-Massage-Techniques.mp4",
+     "poster": "media/of/Personal-Services-Home-Care-Service-Center-Demonstrating-Infant-Massage-Techniques.jpg",
+     "summary": "Use an infant doll to demonstrate passive limb movements and turning onto the stomach.",
+     "episode": 5583,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Personal-Services-Phone-and-Appliance-Repair-Shop-Repairing-a-Mobile-Phone",
+     "title": "Repairing a Mobile Phone",
+     "sub": "Personal Services \u00b7 Phone and Appliance Repair Shop",
+     "video": "media/of/Personal-Services-Phone-and-Appliance-Repair-Shop-Repairing-a-Mobile-Phone.mp4",
+     "poster": "media/of/Personal-Services-Phone-and-Appliance-Repair-Shop-Repairing-a-Mobile-Phone.jpg",
+     "summary": "Remove screws and an internal bracket from a phone chassis.",
+     "episode": 7071,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Residential-Living-Home-Buttoning-a-Shirt",
+     "title": "Buttoning a Shirt",
+     "sub": "Residential Living \u00b7 Home",
+     "video": "media/of/Residential-Living-Home-Buttoning-a-Shirt.mp4",
+     "poster": "media/of/Residential-Living-Home-Buttoning-a-Shirt.jpg",
+     "summary": "Align the shirt placket and fasten the buttons one by one.",
+     "episode": 1669,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Residential-Living-Home-Wrapping-Plates-and-Food-with-Plastic-Wrap",
+     "title": "Wrapping Plates and Food with Plastic Wrap",
+     "sub": "Residential Living \u00b7 Home",
+     "video": "media/of/Residential-Living-Home-Wrapping-Plates-and-Food-with-Plastic-Wrap.mp4",
+     "poster": "media/of/Residential-Living-Home-Wrapping-Plates-and-Food-with-Plastic-Wrap.jpg",
+     "summary": "Pull out plastic wrap and cover and wrap a plate.",
+     "episode": 1453,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Retail-Supermarket-and-Convenience-Store-Adding-Promotion-Tags-to-Instant-Noodle-Shelves",
+     "title": "Adding Promotion Tags to Instant Noodle Shelves",
+     "sub": "Retail \u00b7 Supermarket and Convenience Store",
+     "video": "media/of/Retail-Supermarket-and-Convenience-Store-Adding-Promotion-Tags-to-Instant-Noodle-Shelves.mp4",
+     "poster": "media/of/Retail-Supermarket-and-Convenience-Store-Adding-Promotion-Tags-to-Instant-Noodle-Shelves.jpg",
+     "summary": "Place yellow labels on the middle and lower instant noodle shelves.",
+     "episode": 6098,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Retail-Supermarket-and-Convenience-Store-Applying-Promotional-Labels",
+     "title": "Applying Promotional Labels",
+     "sub": "Retail \u00b7 Supermarket and Convenience Store",
+     "video": "media/of/Retail-Supermarket-and-Convenience-Store-Applying-Promotional-Labels.mp4",
+     "poster": "media/of/Retail-Supermarket-and-Convenience-Store-Applying-Promotional-Labels.jpg",
+     "summary": "Prepare price labels and apply them to a product list.",
+     "episode": 6103,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Retail-Supermarket-and-Convenience-Store-Organizing-Yogurt-Shelves",
+     "title": "Organizing Yogurt Shelves",
+     "sub": "Retail \u00b7 Supermarket and Convenience Store",
+     "video": "media/of/Retail-Supermarket-and-Convenience-Store-Organizing-Yogurt-Shelves.mp4",
+     "poster": "media/of/Retail-Supermarket-and-Convenience-Store-Organizing-Yogurt-Shelves.jpg",
+     "summary": "Restock and align yogurt drinks on the upper refrigerated shelf.",
+     "episode": 4822,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Retail-Supermarket-and-Convenience-Store-Packing-Oden",
+     "title": "Packing Oden",
+     "sub": "Retail \u00b7 Supermarket and Convenience Store",
+     "video": "media/of/Retail-Supermarket-and-Convenience-Store-Packing-Oden.mp4",
+     "poster": "media/of/Retail-Supermarket-and-Convenience-Store-Packing-Oden.jpg",
+     "summary": "Package prepared oden and hand it to a customer at the counter.",
+     "episode": 6134,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "of_Sports-Gym-and-Sports-Hall-Organizing-Jump-Ropes",
+     "title": "Organizing Jump Ropes",
+     "sub": "Sports \u00b7 Gym and Sports Hall",
+     "video": "media/of/Sports-Gym-and-Sports-Hall-Organizing-Jump-Ropes.mp4",
+     "poster": "media/of/Sports-Gym-and-Sports-Hall-Organizing-Jump-Ropes.jpg",
+     "summary": "Gather, untangle, and coil the rope.",
+     "episode": 7662,
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ],
+   "report": "<h3>About this data</h3>\n<p>These videos are previews rendered by OriginFlow: the egocentric camera with per-finger force traces (left and right hand),\na hand-pose overlay, head and wrist trajectories, and an annotation timeline (episode, subtask, atomic action). The raw\nstreams are not part of this folder, so the viewer shows the renders as delivered, downsampled from 120 to 30 fps.</p>\n<h3>Data quality, as reported by the provider</h3>\n<p>Frame-level validity flags over the OriginData preview dataset (10,867,077 frames). They count valid or detected frames;\nthey do not measure force or pose accuracy.</p>\n<table><thead><tr><th>Field</th><th>Meaning</th><th class=\"num\">Rate</th></tr></thead><tbody>\n<tr><td>left.force_valid</td><td>Left-hand force values valid</td><td class=\"num\">99.84%</td></tr>\n<tr><td>right.force_valid</td><td>Right-hand force values valid</td><td class=\"num\">99.84%</td></tr>\n<tr><td>observation.hand.left.detected</td><td>Left hand detected</td><td class=\"num\">93.24%</td></tr>\n<tr><td>observation.hand.right.detected</td><td>Right hand detected</td><td class=\"num\">96.09%</td></tr>\n<tr><td>observation.head.pose_valid</td><td>Head pose finite and aligned (not tracking quality)</td><td class=\"num\">100.00%</td></tr>\n</tbody></table>\n<h3>Real-robot training results, as reported by the provider</h3>\n<p>Eight tasks trained from scratch (starVLA with a DiT-B head, batch 32; 641 sequences over 10 tasks, 525 train / 116 test):\nafter 20,000 post-training steps the mean success rate was 34.35% with force input and 28.30% without. Squeezing salad\ndressing with 50,000 pretraining and 10,000 post-training steps: 75% (15/20) with force, 55% (11/20) without. Gains vary\nby task; stamping went from 15% without force to 10% with it.</p>\n<div class=\"figs\"><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/post-training-efficiency.png\" alt=\"Overall real-robot success rate across eight tasks at different post-training step counts.\" loading=\"lazy\"><figcaption>Overall real-robot success rate across eight tasks at different post-training step counts.</figcaption></figure><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/pretraining-scale-benefits.png\" alt=\"Squeezing salad dressing: pretraining scale, with post-training fixed at 10,000 steps.\" loading=\"lazy\"><figcaption>Squeezing salad dressing: pretraining scale, with post-training fixed at 10,000 steps.</figcaption></figure><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/pretraining-comparison.png\" alt=\"Squeezing salad dressing with and without pretraining.\" loading=\"lazy\"><figcaption>Squeezing salad dressing with and without pretraining.</figcaption></figure><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/real-robot-task-summary.png\" alt=\"Success rates and confidence intervals for eight tasks after 20,000 post-training steps.\" loading=\"lazy\"><figcaption>Success rates and confidence intervals for eight tasks after 20,000 post-training steps.</figcaption></figure></div>"
+  }
+ ]
+}
