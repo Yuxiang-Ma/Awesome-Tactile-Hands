@@ -287,7 +287,8 @@
     "code": "https://github.com/Russell-Zeng/EgoTactile"
    },
    "image": "https://egotactile.github.io/assets/dataset_overview.png",
-   "thumb": "assets/thumbs/egotactile.jpg"
+   "thumb": "assets/thumbs/egotactile.jpg",
+   "viewer": "et_gloved_p007_screwdriver_r0"
   },
   {
    "id": "hrdexdb",

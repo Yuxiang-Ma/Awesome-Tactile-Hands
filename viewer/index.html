@@ -480,7 +480,7 @@ function drawHand(h,i){
 
 // grid recordings: cells at their published (row, col) position; positions with no taxel stay empty
 function drawGridHand(h,i){
-  const c=$('hand_'+h),H=R.hands[h],CS=H.rows*H.cols>200?11:16,G=2,pad=10,W=H.cols*(CS+G)-G+2*pad,Hh=H.rows*(CS+G)-G+2*pad,dpr=devicePixelRatio||1;
+  const c=$('hand_'+h),H=R.hands[h],CS=Math.max(8,Math.min(18,Math.round(250/H.cols))),G=2,pad=10,W=H.cols*(CS+G)-G+2*pad,Hh=H.rows*(CS+G)-G+2*pad,dpr=devicePixelRatio||1;
   if(c.width!==Math.round(W*dpr)){c.width=W*dpr;c.height=Hh*dpr;c.style.aspectRatio=`${W}/${Hh}`}
   const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,Hh);
   const b=i*H.nc;for(let k=0;k<H.nc;k++){const p=H.cells[k],r=Math.floor(p/H.cols),q=p%H.cols;x.fillStyle=cell(H.tax[b+k]/255);x.fillRect(pad+q*(CS+G),pad+r*(CS+G),CS,CS)}

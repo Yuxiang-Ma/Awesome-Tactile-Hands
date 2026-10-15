@@ -13,7 +13,7 @@
   {
    "id": "public",
    "title": "Public datasets",
-   "about": "Sample episodes from released whole-hand tactile datasets, converted to one format. Videos stream from each dataset's own repository."
+   "about": "Sample episodes from released whole-hand tactile datasets, converted to one format. Videos stream from the dataset's own repository where browsers can play them; otherwise re-encoded copies are hosted here, with the license shown on each collection."
   }
  ],
  "sources": [
@@ -872,6 +872,99 @@
      "label": "Workbench \u00b7 20260319",
      "sub": "12 s",
      "poster": "media/eg_use_scissors_20260319_110954_585.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "egotactile",
+   "group": "public",
+   "title": "EgoTactile",
+   "provider": "Zeng et al. 2026 (ICML 2026)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY-NC 4.0",
+    "tone": "neutral"
+   },
+   "about": "A right-hand pressure glove with a head- or neck-mounted egocentric camera, single grasps of 63 everyday objects by 12 participants, plus a bare-hand subset.",
+   "link": {
+    "label": "HustleHard/EgoTactile",
+    "href": "https://huggingface.co/datasets/HustleHard/EgoTactile"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 162
+   },
+   "hardware": [
+    {
+     "k": "Glove",
+     "v": "162-location pressure glove",
+     "d": "4\u00d73 fingertip pads, one strip per finger, 72-taxel palm \u00b7 0\u2013350 N \u00b7 about 17 Hz, held on a 15 Hz clock"
+    },
+    {
+     "k": "Camera",
+     "v": "DJI Action 5 Pro, egocentric",
+     "d": "Released at 1280\u00d7720 \u00b7 15 fps"
+    },
+    {
+     "k": "Labels",
+     "v": "Object name, category, weight, material",
+     "d": "Plus participant sex and hand length"
+    }
+   ],
+   "notes": "Paper: arXiv 2606.09243 \u00b7 project egotactile.github.io \u00b7 code github.com/Russell-Zeng/EgoTactile. Videos are re-encoded to H.264 and redistributed under CC BY-NC 4.0 with attribution; the release ships MPEG-4 Part 2, which browsers cannot play. The glove model is not named in the paper. In the bare-hand subset the pressure comes from a synchronized off-camera gloved grasp.",
+   "items": [
+    {
+     "id": "et_bare_p002_banana_r0",
+     "title": "Pick up banana",
+     "label": "bare-hand \u00b7 p002",
+     "sub": "27 s \u00b7 Fruits/Veg \u00b7 132 g \u00b7 organic peel",
+     "poster": "media/et_bare_p002_banana_r0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "et_gloved_p001_kidsbasketball_r0",
+     "title": "Pick up kids basketball",
+     "label": "gloved-hand \u00b7 p001",
+     "sub": "26 s \u00b7 Sports/Exercise \u00b7 163 g \u00b7 rubber",
+     "poster": "media/et_gloved_p001_kidsbasketball_r0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "et_gloved_p003_mug_r0",
+     "title": "Pick up mug",
+     "label": "gloved-hand \u00b7 p003",
+     "sub": "24 s \u00b7 Kitchenware \u00b7 350 g \u00b7 ceramic",
+     "poster": "media/et_gloved_p003_mug_r0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "et_gloved_p005_dumbbell_r0",
+     "title": "Pick up dumbbell",
+     "label": "gloved-hand \u00b7 p005",
+     "sub": "31 s \u00b7 Sports/Exercise \u00b7 1082 g \u00b7 metal",
+     "poster": "media/et_gloved_p005_dumbbell_r0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "et_gloved_p007_screwdriver_r0",
+     "title": "Pick up screwdriver",
+     "label": "gloved-hand \u00b7 p007",
+     "sub": "32 s \u00b7 Tools \u00b7 43 g \u00b7 metal plastic",
+     "poster": "media/et_gloved_p007_screwdriver_r0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "et_gloved_p010_powerbank-20000mah_r0",
+     "title": "Pick up power bank (20000mAh)",
+     "label": "gloved-hand \u00b7 p010",
+     "sub": "21 s \u00b7 Electronics \u00b7 429 g \u00b7 metal plastic",
+     "poster": "media/et_gloved_p010_powerbank-20000mah_r0.jpg",
      "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
     }
    ]
