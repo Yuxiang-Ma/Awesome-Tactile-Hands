@@ -1,0 +1,43 @@
+{
+ "id": "hato",
+ "prefix": "ha_",
+ "group": "public",
+ "title": "HATO",
+ "provider": "Lin et al. 2024 (UC Berkeley)",
+ "kind": "recording",
+ "status": {
+  "label": "License not stated",
+  "tone": "neutral"
+ },
+ "about": "Teleoperated bimanual UR5e arms with two Psyonic Ability hands, six touch sites per fingertip; four tasks: banana handover, block stacking, wine pouring, steak serving.",
+ "link": {
+  "label": "toruowo.github.io/hato",
+  "href": "https://toruowo.github.io/hato/"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip"
+  ],
+  "taxels": 30
+ },
+ "hardware": [
+  {
+   "k": "Hands",
+   "v": "2 × Psyonic Ability Hand, 6 DoF",
+   "d": "6 force-sensing sites per fingertip, 30 per hand · 12-bit ADC · logged at ≈10 Hz"
+  },
+  {
+   "k": "Arms",
+   "v": "2 × UR5e",
+   "d": "Teleoperated with Meta Quest 2 controllers"
+  },
+  {
+   "k": "Cameras",
+   "v": "3 × Intel RealSense RGB-D",
+   "d": "One third-view, one on each wrist · 640×480"
+  }
+ ],
+ "notes": "Paper: arXiv 2404.16823; code github.com/toruowo/hato; data on Berkeley Box (linked from the code README). The release states no license; the sample videos are re-hosted here for preview with attribution. Videos are built from the RGB frames stored in each step's pickle; depth is not shown. In the converted episodes the right hand's middle fingertip reads zero throughout, and some steps carry corrupted touch bytes (handled as described in each episode's notes). The wine-pouring task is not shown: every pour episode sampled had the right hand's touch bytes corrupted in most steps.",
+ "order": 5
+}

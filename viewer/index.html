@@ -374,7 +374,11 @@ function normalizeGrid(j,f){
     const regs=(G.regions||[]).map(r=>({name:r.name,idx:r.cells})),rs=new Float32Array(N*regs.length),tot=new Float32Array(N);
     for(let i=0;i<N;i++){const b=i*nc;let s=0;for(let c=0;c<nc;c++)s+=tax[b+c];tot[i]=s*k;
       regs.forEach((r,q)=>{let a=0;for(const c of r.idx)a+=tax[b+c];rs[i*regs.length+q]=a*k})}
-    R.hands[G.key]={...G,cells,nc,tax,regs,rs};R.tot[G.key]=tot}
+    // optional per-region vectors (e.g. fingertip force): drawn at the region's centroid, x right / y up in the grid, z as a ring
+    let vec=null;if(G.vectors){const V=G.vectors;vec={...V,items:V.items.map(it=>{const q=regs.findIndex(r=>r.name===it.region),ix=q<0?[]:regs[q].idx;
+      let r0=1e9,r1=-1,c0=1e9,c1=-1;for(const c of ix){const p=cells[c],r=Math.floor(p/G.cols),cc=p%G.cols;r0=Math.min(r0,r);r1=Math.max(r1,r);c0=Math.min(c0,cc);c1=Math.max(c1,cc)}
+      return{...it,v:dec(it.data,Float32Array),cr:(r0+r1)/2,cc:(c0+c1)/2,half:Math.max(1,Math.min(r1-r0+1,c1-c0+1)/2)}})}}
+    R.hands[G.key]={...G,cells,nc,tax,regs,rs,vec};R.tot[G.key]=tot}
   R.series=(j.series||[]).map(s=>({...s,lines:s.lines.map(l=>({...l,v:dec(l.data,Float32Array)}))}));
   return R;
 }
@@ -416,7 +420,7 @@ function mountGrid(){
   const vs=R.cams.map(k=>R.vid[k]),card=(v,big)=>`<div class="card"><h3>${esc(v.title)} <small id="meta_${v.key}"></small></h3><div class="vwrap"><video id="v_${v.key}" muted playsinline preload="auto"></video>${big?'<canvas id="poseC"></canvas>':''}</div></div>`;
   const rest=vs.slice(1);
   const lay=document.querySelector('.layout');lay.classList.toggle('gl',R.hlist.length===2&&R.hlist.every(h=>R.hands[h].cols<=30));lay.innerHTML=`<div>${vs.length?card(vs[0],true):'<div class="card"><h3>No video in this dataset</h3></div>'}
-    ${rest.length?`<div class="wrists" style="grid-template-columns:repeat(${Math.min(rest.length,3)},minmax(0,1fr))">${rest.map(v=>card(v,false)).join('')}</div>`:''}</div>
+    ${rest.length?`<div class="wrists" style="grid-template-columns:repeat(${Math.max(1,Math.min(rest.filter(v=>!v.wide).length,3))},minmax(0,1fr))">${rest.map(v=>(v.wide?card(v,false).replace('<div class="card">','<div class="card" style="grid-column:1/-1">'):card(v,false))).join('')}</div>`:''}</div>
     <div class="side"><div class="gloves">${R.hlist.map(h=>{const H=R.hands[h];return`<div class="card hand"><h3><span style="color:var(--${h==='lh'?'lh':'rh'})">${esc(H.title)}</span><small>${esc(H.label||`${H.nc} taxels`)} · ${H.rate} Hz</small></h3>
       <div class="hm${H.rows>H.cols?' tall':''}"><canvas id="hand_${h}"></canvas></div><div class="vals" id="vals_${h}" style="--nv:${Math.max(1,H.regs.length)}"></div></div>`}).join('')}</div>
     <div class="card" style="margin-top:14px"><div class="scale" id="scale"></div></div></div>`;
@@ -425,6 +429,8 @@ function mountGrid(){
   mountControls();
   const H=R.hands[R.hlist[0]];$('scale').innerHTML=`<span>Taxel value, ${esc(H.unit||'raw')}</span><span>0</span>`;$('scale').appendChild(colorbar());
   $('scale').insertAdjacentHTML('beforeend',`<span>${H.range}</span>`);
+  const VH=R.hlist.map(h=>R.hands[h]).find(h=>h.vec);if(VH){const V=VH.vec;$('scale').insertAdjacentHTML('beforeend',`<label style="flex-basis:100%;display:flex;gap:6px;align-items:center"><input type="checkbox" id="vecOn" checked>
+    <span><b style="color:#d4a800">→</b> ${esc(V.label||'vector')}: arrow = ${esc(V.axes||'x, y')}, ring = ${esc(V.zname||'z')} (dashed if negative); full block = ${V.range} ${esc(V.unit||'')}</span></label>`);$('vecOn').onchange=()=>render()}
   $('notes').insertAdjacentHTML('beforeend',R.notes+'<p>Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>');
   buildPlots();drawScrub();
 }
@@ -484,6 +490,15 @@ function drawGridHand(h,i){
   if(c.width!==Math.round(W*dpr)){c.width=W*dpr;c.height=Hh*dpr;c.style.aspectRatio=`${W}/${Hh}`}
   const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,Hh);
   const b=i*H.nc;for(let k=0;k<H.nc;k++){const p=H.cells[k],r=Math.floor(p/H.cols),q=p%H.cols;x.fillStyle=cell(H.tax[b+k]/255);x.fillRect(pad+q*(CS+G),pad+r*(CS+G),CS,CS)}
+  if(H.vec&&$('vecOn')?.checked!==false){const V=H.vec,U=CS+G;x.lineCap='round';
+    for(const it of V.items){const cx=pad+it.cc*U+CS/2,cy=pad+it.cr*U+CS/2,L=it.half*U,a=it.v[i*3]/V.range,bb=it.v[i*3+1]/V.range,z=it.v[i*3+2]/V.range;
+      if(!isFinite(a))continue;const rz=Math.min(1.2,Math.abs(z))*L;
+      for(const pass of [0,1]){x.strokeStyle=pass?'#fff':'rgba(0,0,0,.6)';x.lineWidth=pass?1.6:3.6;x.setLineDash(z<0&&pass?[3,3]:[]);
+        if(rz>1){x.beginPath();x.arc(cx,cy,rz,0,7);x.stroke()}x.setLineDash([])}
+      const m=Math.hypot(a,bb),s=Math.min(1.5,m)/(m||1),ex=cx+a*s*L,ey=cy-bb*s*L;
+      if(m*L>2){const ang=Math.atan2(ey-cy,ex-cx),hd=Math.min(7,m*L*.5);
+        for(const pass of [0,1]){x.strokeStyle=pass?'#ffd400':'rgba(0,0,0,.65)';x.lineWidth=pass?2.2:4.4;x.beginPath();x.moveTo(cx,cy);x.lineTo(ex,ey);
+          x.moveTo(ex-hd*Math.cos(ang-.5),ey-hd*Math.sin(ang-.5));x.lineTo(ex,ey);x.lineTo(ex-hd*Math.cos(ang+.5),ey-hd*Math.sin(ang+.5));x.stroke()}}}}
   const n=H.regs.length,fmt=v=>v>=1000?(v/1000).toFixed(1)+'k':v>=10?v.toFixed(0):v.toFixed(1);
   $('vals_'+h).innerHTML=n?H.regs.map((g,q)=>`<div><span class="n" style="color:${q<5?FCOL[q]:'var(--muted)'}">${esc(g.name)}</span><b>${fmt(H.rs[i*n+q])}</b></div>`).join(''):`<div><span class="n">total</span><b>${fmt(R.tot[h][i])}</b></div>`;
 }

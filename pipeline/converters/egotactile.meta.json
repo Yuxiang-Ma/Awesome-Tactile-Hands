@@ -1,0 +1,45 @@
+{
+ "id": "egotactile",
+ "prefix": "et_",
+ "group": "public",
+ "title": "EgoTactile",
+ "provider": "Zeng et al. 2026 (ICML 2026)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY-NC 4.0",
+  "tone": "neutral"
+ },
+ "about": "A right-hand pressure glove with a head- or neck-mounted egocentric camera, single grasps of 63 everyday objects by 12 participants, plus a bare-hand subset.",
+ "link": {
+  "label": "HustleHard/EgoTactile",
+  "href": "https://huggingface.co/datasets/HustleHard/EgoTactile"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 162
+ },
+ "hardware": [
+  {
+   "k": "Glove",
+   "v": "162-location pressure glove",
+   "d": "4×3 fingertip pads, one strip per finger, 72-taxel palm · 0–350 N · about 17 Hz, held on a 15 Hz clock"
+  },
+  {
+   "k": "Camera",
+   "v": "DJI Action 5 Pro, egocentric",
+   "d": "Released at 1280×720 · 15 fps"
+  },
+  {
+   "k": "Labels",
+   "v": "Object name, category, weight, material",
+   "d": "Plus participant sex and hand length"
+  }
+ ],
+ "notes": "Paper: arXiv 2606.09243 · project egotactile.github.io · code github.com/Russell-Zeng/EgoTactile. Videos are re-encoded to H.264 and redistributed under CC BY-NC 4.0 with attribution; the release ships MPEG-4 Part 2, which browsers cannot play. The glove model is not named in the paper. In the bare-hand subset the pressure comes from a synchronized off-camera gloved grasp.",
+ "order": 2
+}

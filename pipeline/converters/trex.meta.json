@@ -1,0 +1,47 @@
+{
+ "id": "trex",
+ "prefix": "tr_",
+ "group": "public",
+ "title": "T-Rex",
+ "provider": "Niu, Liu, Wang et al. 2026 (UC Berkeley)",
+ "kind": "recording",
+ "status": {
+  "label": "MIT",
+  "tone": "ok"
+ },
+ "about": "Teleoperated bimanual robot with two Sharpa Wave hands, five camera-based fingertip tactile sensors per hand; 5,464 episodes over 22 motor primitives and 207 objects.",
+ "link": {
+  "label": "zekaiwang/trex_dataset",
+  "href": "https://huggingface.co/datasets/zekaiwang/trex_dataset"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip"
+  ]
+ },
+ "hardware": [
+  {
+   "k": "Hands",
+   "v": "2 × Sharpa Wave, 22 DoF each",
+   "d": "5 fingertip tactile sensors per hand · raw image, deformation map, 6-axis wrench · 30 Hz"
+  },
+  {
+   "k": "Robot",
+   "v": "Dexmate Vega-1",
+   "d": "2 × 7-DoF arms; wheels, torso and head fixed during collection"
+  },
+  {
+   "k": "Cameras",
+   "v": "Head ZED X Mini + 2 wrist ZED X One S",
+   "d": "640×360 · 30 fps"
+  },
+  {
+   "k": "Teleoperation",
+   "v": "Manus gloves + VIVE trackers",
+   "d": "Language caption, motor primitive and object per episode"
+  }
+ ],
+ "notes": "Paper: arXiv 2606.17055. Released under the MIT license. Each episode is a slice of the release's multi-episode video files, re-encoded and hosted here; all three tactile streams are shown: the fingertip deformation map pooled to 10 × 10 cells, the 6-axis wrench (arrow, ring and plots) and the raw sensor images.",
+ "order": 4
+}

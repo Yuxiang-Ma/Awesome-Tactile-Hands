@@ -1,0 +1,50 @@
+{
+ "id": "egotouch",
+ "prefix": "eg_",
+ "group": "public",
+ "title": "EgoTouch",
+ "provider": "Zhou et al. 2026 (TouchAnything)",
+ "kind": "recording",
+ "status": {
+  "label": "License not stated",
+  "tone": "neutral"
+ },
+ "about": "Bimanual tactile gloves with a chest camera and two fisheye wrist cameras, 213 everyday tasks.",
+ "link": {
+  "label": "zhouzhoujy/EgoTouch",
+  "href": "https://huggingface.co/datasets/zhouzhoujy/EgoTouch"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 256
+ },
+ "hardware": [
+  {
+   "k": "Gloves",
+   "v": "256-channel pressure gloves",
+   "d": "Fingers, thumb and palm · shown on the release's 21×21 grid · 30 Hz"
+  },
+  {
+   "k": "Cameras",
+   "v": "Chest + 2 wrist fisheye",
+   "d": "640×480 · 30 fps"
+  },
+  {
+   "k": "Tracking",
+   "v": "Vive wrist trackers, Rokoko hands",
+   "d": "Plus WiLoR hand estimates in the release"
+  },
+  {
+   "k": "Labels",
+   "v": "Task name",
+   "d": "The release also has a per-hand contact flag (not shown)"
+  }
+ ],
+ "notes": "Paper: arXiv 2605.13083. The dataset card states no license; videos are played from the original repository, not copied.",
+ "order": 1
+}

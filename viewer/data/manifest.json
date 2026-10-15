@@ -1110,7 +1110,7 @@
      "d": "Language caption, motor primitive and object per episode"
     }
    ],
-   "notes": "Paper: arXiv 2606.17055. Released under the MIT license. Each episode is a slice of the release's multi-episode video files, re-encoded and hosted here; the tactile view is the fingertip deformation map pooled to 10 \u00d7 10 cells per fingertip.",
+   "notes": "Paper: arXiv 2606.17055. Released under the MIT license. Each episode is a slice of the release's multi-episode video files, re-encoded and hosted here; all three tactile streams are shown: the fingertip deformation map pooled to 10 \u00d7 10 cells, the 6-axis wrench (arrow, ring and plots) and the raw sensor images.",
    "items": [
     {
      "id": "tr_ep000557",

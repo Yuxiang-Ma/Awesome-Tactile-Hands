@@ -1,0 +1,50 @@
+{
+ "id": "opentouch",
+ "prefix": "ot_",
+ "group": "public",
+ "title": "OpenTouch",
+ "provider": "Song et al. 2025 (MIT)",
+ "kind": "recording",
+ "status": {
+  "label": "License not stated",
+  "tone": "neutral"
+ },
+ "about": "Egocentric in-the-wild recordings with a full-hand tactile glove on the right hand, Aria glasses video and Rokoko hand pose: 5.1 hours, 2,900 annotated clips in 14 environments.",
+ "link": {
+  "label": "OpenTouch-MIT/opentouch",
+  "href": "https://github.com/OpenTouch-MIT/opentouch"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 169
+ },
+ "hardware": [
+  {
+   "k": "Glove",
+   "v": "FPC + piezoresistive film, right hand",
+   "d": "16×16 electrode grid, 169 taxels on fingers, thumb and palm (palmar side) · 30 Hz"
+  },
+  {
+   "k": "Camera",
+   "v": "Meta Project Aria glasses",
+   "d": "RGB; 640×480 JPEG frames in the release · 30 fps · re-encoded here"
+  },
+  {
+   "k": "Pose",
+   "v": "Rokoko Smartglove",
+   "d": "21 hand landmarks + wrist and palm position · 30 Hz"
+  },
+  {
+   "k": "Labels",
+   "v": "Object, action, grip type, description",
+   "d": "Per clip, with contact onset, peak and post-contact frames"
+  }
+ ],
+ "notes": "Paper: arXiv 2512.16842. The code repository's package metadata says MIT; the release states no license for the data, which is shared from Google Drive. The sample videos are re-hosted here for preview with attribution. Raw readings are 3072 at rest and fall with pressure; the viewer shows 3072 − raw, uncalibrated.",
+ "order": 3
+}
