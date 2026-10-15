@@ -1,8 +1,5 @@
 // Taxel Atlas: faceted catalog over data/datasets.json. No build step; the page state lives in the URL hash.
-const REPO = 'https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands';
-const $ = id => document.getElementById(id);
-const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
-const fmt = n => n == null ? '' : n >= 1e6 ? `${+(n / 1e6).toFixed(1)}M` : n >= 1e4 ? `${Math.round(n / 1e3)}K` : n.toLocaleString('en-US');
+// shared helpers (REPO, $, esc, fmt, glyph) are in common.js
 
 const LABEL = {
   embodiment: {human: 'Human glove', robot: 'Robot hand', both: 'Human + robot'},
@@ -90,23 +87,8 @@ const SORTS = {
   name: (a, b) => a.name.localeCompare(b.name),
 };
 
-let D = [], META = {}, S = {q: '', f: {}, y0: null, y1: null, view: 'cards', sort: 'rank', d: null};
+let D = [], HW = [], META = {}, S = {q: '', f: {}, y0: null, y1: null, view: 'cards', sort: 'rank', d: null};
 
-/* ---------- coverage glyph: palm side of a right hand; filled regions carry taxels ---------- */
-function glyph(cov, label) {
-  const on = r => cov.includes(r) ? ' on' : '';
-  const F = [[13.6, 8.5, 12.5], [19.6, 6, 15], [25.6, 7.5, 13.5], [31.4, 11, 10]]; // x, top, length of each finger
-  const o = [];
-  F.forEach(([x, y, l]) => {
-    const tip = l * .3;
-    o.push(`<rect class="r${on('tip')}" x="${x}" y="${y}" width="4.6" height="${tip.toFixed(2)}" rx="2"/>`,
-      `<rect class="r${on('phalanx')}" x="${x}" y="${(y + tip + .6).toFixed(2)}" width="4.6" height="${(l - tip - .6).toFixed(2)}" rx="1"/>`);
-  });
-  const TH = 'rotate(-28 13 33)';
-  o.push(`<g transform="${TH}"><rect class="r${on('tip')}" x="7.6" y="22" width="4.8" height="4.4" rx="2"/><rect class="r${on('phalanx')}" x="7.6" y="27" width="4.8" height="7" rx="1"/></g>`,
-    `<rect class="r${on('palm')}" x="13.6" y="22.6" width="22.4" height="17" rx="3"/>`);
-  return `<svg class="glyph" viewBox="5 4 33 37" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title>${o.join('')}</svg>`;
-}
 const makerModel = s => s.model && s.maker && s.model.toLowerCase().startsWith(s.maker.split(/[ (]/)[0].toLowerCase()) ? s.model : [s.maker, s.model].filter(Boolean).join(' ');
 const makerText = d => {const s = d.sensor, m = shortSys(makerModel(s) || '');
   return [m, principle(d) !== 'unspecified' ? LABEL.principle[principle(d)].toLowerCase() : ''].filter(Boolean).join(', ') || `${LABEL.embodiment[d.embodiment]}${d.bimanual ? ', bimanual' : ''}`};
@@ -136,7 +118,9 @@ function writeHash() {
 
 /* ---------- filtering ---------- */
 const textOf = d => [d.name, d.title, d.authors, d.summary, d.hand, d.venue, d.sensor.maker, d.sensor.model, (d.scale.scene_types || []).join(' '),
-  ...(setup(d).cameras || []).map(c => c.model), ...(setup(d).tracking || []).map(t => t.system)].join(' ').toLowerCase();
+  ...(setup(d).cameras || []).map(c => c.model), ...(setup(d).tracking || []).map(t => t.system), ...hwOf(d).map(([h]) => h.name)].join(' ').toLowerCase();
+// devices in data/hardware.json that list this dataset, with their role
+const hwOf = d => HW.flatMap(h => h.datasets.filter(x => x.id === d.id).map(x => [h, x.role]));
 function passes(d, skip) {
   if (S.q && !S.q.toLowerCase().split(/\s+/).every(w => textOf(d).includes(w))) return false;
   if (S.y0 && d.year < S.y0 || S.y1 && d.year > S.y1) return false;
@@ -298,7 +282,8 @@ function openDetail(id) {
     ${d.caveats.length ? `<div class="warn"><ul>${d.caveats.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
     <h4>Rank and quality</h4>${kvs([['Rank', `${rankBadge(d, 'rk-t')} ${esc(RANK_TEXT[rankOf(d)])}${d.rank ? `<span class="sub">${esc(d.rank.why.join(' · '))}</span>` : ''}`],
       ['Quality', d.quality ? `<b>${d.quality.score} of ${d.quality.of}</b><ul class="ql">${Object.entries(d.quality.flags).map(([k, v]) => `<li class="${v ? 'on' : ''}">${v ? '✓' : '✗'} ${QUAL[k]}</li>`).join('')}</ul>` : '']])}
-    <h4>Data</h4>${scale}<h4>Tactile sensing</h4>${tactile}<h4>Cameras</h4>${cams}<h4>Hand tracking</h4>${track}
+    <h4>Data</h4>${scale}<h4>Tactile sensing</h4>${tactile}${hwOf(d).length ? `<h4>Hardware</h4><div class="dsl">${hwOf(d).map(([h, r]) =>
+      `<a href="hardware.html#h=${esc(h.id)}">${h.thumb ? `<img src="${esc(h.thumb)}" alt="" style="object-fit:contain">` : ''}<div><b>${esc(h.name)}</b><span>${esc(r)} · ${esc(h.maker)}</span></div></a>`).join('')}</div>` : ''}<h4>Cameras</h4>${cams}<h4>Hand tracking</h4>${track}
     <h4>Also recorded</h4><p class="plain">${esc([...new Set(other)].join(', ') || 'Tactile only')}</p>
     <h4>Access</h4>${kvs([['Availability', `${LABEL.availability[d.availability]} · ${esc(d.access)}`], ['License', esc(d.license)]])}
     <div class="links">${d.viewer ? `<a class="btn" href="viewer/#rec=${esc(d.viewer)}">▶ Play samples in the viewer</a>` : ''}${linkRow(d).replace(/<a class="play"[^]*?<\/a>/, '')}</div>
@@ -315,6 +300,7 @@ function update() {writeHash(); renderFacets(); renderChips(); render()}
 async function main() {
   const j = await (await fetch('data/datasets.json')).json();
   D = j.datasets; META = j.metadata;
+  try {HW = (await (await fetch('data/hardware.json')).json()).hardware} catch {HW = []}
   $('sum').textContent = `${D.length} datasets · updated ${META.last_updated}`;
   $('gh').href = REPO; $('contrib').href = `${REPO}/issues/new?template=add_dataset.yml`;
   readHash(); $('q').value = S.q; $('sort').value = S.sort;

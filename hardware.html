@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tactile Hand Hardware</title>
+<meta name="description" content="Tactile gloves, tactile robot hands and add-on touch sensors for dexterous manipulation data, with photos, specs and the datasets recorded with each.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a6c73'/%3E%3Cg fill='%23fff'%3E%3Crect x='9' y='5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='13.4' y='3.5' width='3.2' height='13' rx='1.6'/%3E%3Crect x='17.8' y='4.5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='22.2' y='7' width='3.2' height='10' rx='1.6'/%3E%3Crect x='8' y='15' width='17.6' height='12' rx='3'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* hardware cards: product photo on white, kind + availability badges */
+.hw .thumb{aspect-ratio:4/3;background:#fff}
+.hw .thumb img{object-fit:contain;padding:6px}
+.badge.kind{left:auto;right:10px}
+.av-commercial{color:var(--ok)}.av-open_hardware{color:var(--accent)}.av-research{color:var(--muted)}.av-announced{color:var(--warn)}.av-discontinued{color:var(--bad)}
+.specs{margin:2px 0 0;padding-left:16px;font-size:12.5px;color:var(--ink2)}
+.specs li{margin:1px 0}
+.card .specs{display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.used{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:12px;color:var(--muted)}
+.used a{font-size:11.5px;padding:1px 7px;border-radius:6px;background:var(--accent-soft);color:var(--ink2);text-decoration:none}
+.used a:hover{background:var(--accent);color:var(--accent-ink)}
+.dl .hero.hw{max-height:340px}
+/* links view: hardware (left) to datasets (right) */
+.map .chart text{fill:var(--ink);font-size:12.5px;cursor:pointer}
+.map .chart text.k{fill:var(--muted);font-size:11px;font-weight:700;letter-spacing:.06em;cursor:default}
+.map .chart path{fill:none;stroke-width:1.6;opacity:.55;transition:opacity .12s}
+.map .chart .dim path{opacity:.06}.map .chart .dim text.n{opacity:.3}
+.map .chart path.on{opacity:1;stroke-width:2.4}
+.map .chart circle{stroke:var(--panel);stroke-width:1.5}
+.rl-glove{stroke:var(--accent);fill:var(--accent)}.rl-hand{stroke:var(--c-robot);fill:var(--c-robot)}.rl-sensor{stroke:var(--c-both);fill:var(--c-both)}.rl-track{stroke:var(--muted);fill:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Taxel Atlas</h1><span class="sum" id="sum"></span>
+  <nav>
+    <a href="./"><svg viewBox="0 0 24 24" class="ln"><path d="M4 5h16M4 12h16M4 19h16"/></svg><span>Datasets</span></a>
+    <a href="hardware.html" aria-current="page"><svg viewBox="0 0 24 24" class="ln"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><span>Hardware</span></a>
+    <a href="viewer/" class="pri"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span>Data viewer</span></a>
+    <a id="contrib" href="#"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2zM5 11h14v2H5z"/></svg><span>Suggest hardware</span></a>
+    <a id="gh" href="#" aria-label="GitHub repository"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+  </nav>
+</header>
+<div class="app">
+  <aside class="facets" id="facets" aria-label="Filters"></aside>
+  <main class="main">
+    <div class="bar">
+      <button class="filtbtn" id="filtbtn" aria-controls="facets">Filters</button>
+      <label class="search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Search device, maker, spec, dataset…" aria-label="Search"></label>
+      <div class="seg" role="group" aria-label="View"><button data-view="cards" aria-pressed="true">Cards</button><button data-view="table" aria-pressed="false">Compare</button><button data-view="map" aria-pressed="false">Datasets map</button></div>
+      <label class="sort">Sort <select id="sort"><option value="kind">Kind</option><option value="used">Datasets using it</option><option value="year">Newest</option><option value="taxels">Taxels</option><option value="name">Name</option></select></label>
+      <span class="count" id="count" aria-live="polite"></span>
+    </div>
+    <div class="chips" id="chips"></div>
+    <div id="out"></div>
+  </main>
+</div>
+<footer>Specs are as the makers or authors state them; prices and availability change quickly, so confirm with the vendor. Photos belong to their makers and link to their source. <span id="upd"></span></footer>
+<dialog id="dlg" aria-labelledby="dlgTitle"></dialog>
+<script src="assets/common.js"></script>
+<script src="assets/hardware.js"></script>
+</body>
+</html>

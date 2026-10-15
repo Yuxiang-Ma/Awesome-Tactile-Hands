@@ -1,4 +1,5 @@
-"""Check data/datasets.json, derive each entry's rank and quality, and regenerate the dataset list in README.md.
+"""Check data/datasets.json and data/hardware.json, derive each dataset's rank and quality, and regenerate the dataset
+and hardware lists in README.md.
 
 Usage: python3 scripts/build_readme.py [--check]   (--check exits 1 if README.md or the derived fields are stale; used in CI)
 
@@ -25,6 +26,55 @@ SECTIONS = [("human", "Human tactile gloves"), ("both", "Human-to-robot (paired 
 AVAIL = {"public": "public", "gated": "gated", "partial": "partial", "announced": "release announced", "unclear": "availability unclear",
          "not_released": "not released"}
 COVER = {"tip": "fingertips", "phalanx": "finger segments", "palm": "palm"}
+
+
+HW_REQUIRED = ["id", "name", "maker", "kind", "availability", "region", "principle", "coverage", "specs", "links", "datasets", "sources"]
+HW_ENUMS = {
+    "kind": {"glove", "robot_hand", "sensor", "tracker"},
+    "availability": {"commercial", "open_hardware", "research", "announced", "discontinued"},
+    "region": {"CN", "US", "EU", "JP", "KR", "SG", "other"},
+    "principle": ENUMS["sensor.principle"],
+    "coverage": ENUMS["sensor.coverage"],
+}
+HW_ROLES = {"tactile glove", "robot hand", "tactile sensor", "hand tracking"}
+HW_SECTIONS = [("glove", "Tactile gloves"), ("robot_hand", "Tactile robot hands"), ("sensor", "Add-on tactile sensors"),
+               ("tracker", "Hand-tracking gloves used with tactile gloves")]
+HW_AVAIL = {"commercial": "commercial", "open_hardware": "open hardware", "research": "research only", "announced": "announced",
+            "discontinued": "discontinued"}
+
+
+def validate_hw(hw: list, dataset_ids: set) -> list:
+    errs, seen = [], set()
+    for h in hw:
+        tag = f"hardware {h.get('id', '?')}"
+        errs += [f"{tag}: missing {k}" for k in HW_REQUIRED if k not in h]
+        if h.get("id") in seen:
+            errs.append(f"{tag}: duplicate id")
+        seen.add(h.get("id"))
+        for key, allowed in HW_ENUMS.items():
+            v = h.get(key)
+            for x in v if isinstance(v, list) else [v]:
+                if x is not None and x not in allowed:
+                    errs.append(f"{tag}: {key} = {x!r} not in {sorted(allowed)}")
+        for x in h.get("datasets", []):
+            if x.get("id") not in dataset_ids:
+                errs.append(f"{tag}: unknown dataset {x.get('id')!r}")
+            if x.get("role") not in HW_ROLES:
+                errs.append(f"{tag}: role {x.get('role')!r} not in {sorted(HW_ROLES)}")
+    return errs
+
+
+def hw_line(h: dict, names: dict) -> str:
+    L = h["links"]
+    url = L.get("product") or L.get("project") or L.get("paper") or L.get("code")
+    head = f"[{h['name']}]({url})" if url else h["name"]
+    bits = [h["maker"] + (f", {h['year']}" if h.get("year") else ""), HW_AVAIL[h["availability"]]]
+    if h.get("taxels") is not None:
+        bits.append(f"{h['taxels']:,} taxels" + (f" {h['taxels_note']}" if h.get("taxels_note") else ""))
+    if h["principle"] != "unspecified":
+        bits.append(h["principle"])
+    used = ", ".join(names[x["id"]] for x in h["datasets"])
+    return f"- {head} - {'; '.join(bits)}." + (f" Used in: {used}." if used else "")
 
 
 def validate(ds: list) -> list:
@@ -122,7 +172,10 @@ def line(d: dict) -> str:
 def main() -> None:
     cat = json.loads((ROOT / "data" / "datasets.json").read_text())
     ds = cat["datasets"]
-    errs = validate(ds)
+    hw_path = ROOT / "data" / "hardware.json"
+    hw_cat = json.loads(hw_path.read_text())
+    hw = hw_cat["hardware"]
+    errs = validate(ds) + validate_hw(hw, {d["id"] for d in ds})
     if errs:
         sys.exit("\n".join(errs))
     for d in ds:
@@ -140,17 +193,25 @@ def main() -> None:
         rows = sorted((d for d in ds if d["embodiment"] == emb), key=lambda d: (-d["year"], d["name"].lower()))
         if rows:
             out += [f"## {title}", ""] + [line(d) for d in rows] + [""]
+    names = {d["id"]: d["name"] for d in ds}
+    out += ["## Hardware", "", f"**{len(hw)}** devices, {sum(1 for h in hw if h['datasets'])} of them used by the datasets above. "
+            "Photos, specs and a hardware-to-dataset map are on the [hardware page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/hardware.html).", ""]
+    for kind, title in HW_SECTIONS:
+        rows = sorted((h for h in hw if h["kind"] == kind), key=lambda h: (-len(h["datasets"]), h["name"].lower()))
+        if rows:
+            out += [f"### {title}", ""] + [hw_line(h, names) for h in rows] + [""]
     cat_path = ROOT / "data" / "datasets.json"
     new_cat = json.dumps(cat, indent=1, ensure_ascii=False) + "\n"
     readme = ROOT / "README.md"
     text = readme.read_text()
     new = re.sub(r"(<!-- BEGIN LIST -->\n).*?(<!-- END LIST -->)", lambda m: m[1] + "\n".join(out) + "\n" + m[2], text, flags=re.S)
     if "--check" in sys.argv:
-        stale = new != text or new_cat != cat_path.read_text()
+        stale = new != text or new_cat != cat_path.read_text() or json.dumps(hw_cat, indent=1, ensure_ascii=False) + "\n" != hw_path.read_text()
         sys.exit("README.md or the derived rank/quality fields are stale: run python3 scripts/build_readme.py" if stale else 0)
     readme.write_text(new)
     cat_path.write_text(new_cat)
-    print(f"{len(ds)} datasets")
+    hw_path.write_text(json.dumps(hw_cat, indent=1, ensure_ascii=False) + "\n")
+    print(f"{len(ds)} datasets, {len(hw)} devices")
 
 
 if __name__ == "__main__":

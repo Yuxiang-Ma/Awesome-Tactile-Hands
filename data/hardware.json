@@ -1,0 +1,3256 @@
+{
+ "metadata": {
+  "title": "Taxel Atlas hardware",
+  "scope": "Tactile gloves, tactile robot hands and add-on touch sensors for dexterous manipulation data, and the hand-tracking gloves catalog datasets paired with them. Each device lists the catalog datasets recorded with it.",
+  "last_updated": "2026-10-15",
+  "license": "CC BY 4.0 (text and data); photos belong to their makers"
+ },
+ "hardware": [
+  {
+   "id": "tachin_glove",
+   "name": "TachinGlove",
+   "maker": "Tachin Technology (途见科技, Beijing)",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": 880,
+   "taxels_note": "per glove (TouchScale paper); the quick-release TachinGloveSnap variant has 783",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 100,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "880 taxels of 1.5 x 1.5 mm on the palmar side of the five fingers and palm (15 regions); spatial resolution below 2 mm",
+    "Range 0.2-30 N/cm^2, resolution 0.05 N/cm^2 (TouchScale paper); vendor lists normal and tangential force",
+    "Acquisition module on the back of the hand; 50 Hz over WiFi, 100 Hz over USB Type-C; external battery/power module",
+    "Vendor describes it as an intrinsically stretchable e-skin; 75 g per glove (launch press)",
+    "Snap variant (Sept 2026): detachable acquisition module, 783 sensing points, about 50 g"
+   ],
+   "image": "https://www.tachin.com/images/home/main-glove.png",
+   "image_page": "https://www.tachin.com/en",
+   "links": {
+    "product": "https://www.tachin.com/en/solutions?category=embodied&series=ei-g",
+    "paper": "https://arxiv.org/abs/2610.10288",
+    "project": "https://touch-scale.github.io/"
+   },
+   "datasets": [
+    {
+     "id": "touchscale",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://arxiv.org/html/2610.10288 (Sec. 3.1, Sec. 7 'Tactile Glove Details', Fig. 9)",
+    "https://touch-scale.github.io/",
+    "https://www.tachin.com/en",
+    "https://www.tachin.com/en/solutions?category=embodied&series=ei-g",
+    "https://hirobotmap.com/landing/tujian-technology/",
+    "https://news.qq.com/rain/a/20260625A05H5500",
+    "https://cn.chinadaily.com.cn/a/202608/21/WS6a8802fda3105d3d7a27c414.html",
+    "https://www.sohu.com/a/1080043898_122004016",
+    "https://www.tachin.com/en/downloads",
+    "https://doc.tachintech.com/glove/tachin-glove-datasheet-en.pdf",
+    "https://www.stdaily.com/web/gdxw/2026-08/21/content_567606.html",
+    "https://damodev.csdn.net/6a4c9d71662f9a54cb8a9142.html"
+   ],
+   "unconfirmed": [
+    "The TouchScale paper names only the 'Tachin Glove'; the maker is identified from Chinese press and the vendor site (途见科技 / Tachin Technology Co., Ltd., tachin.com), which sells a 'TachinGlove' flexible tactile data glove under its EI-G series.",
+    "Availability: the vendor home page says 'Now Released, Global Pre-orders Now Open'; the Beijing launch event was 2026-08-20 and Pro/Lite versions were announced for October 2026. No public price. Classed commercial because the glove was already used for the 500 h TouchScale collection (data captured by Noitom).",
+    "Transduction principle not stated by the paper or vendor (paper: normal pressure; vendor: normal + tangential, 'intrinsically stretchable e-skin'; press traces the technology to Zhenan Bao's Stanford lab).",
+    "Battery: paper says >10 h; launch press says up to 6 h per charge (may differ by version).",
+    "Image is the vendor's marketing render from the home-page hero (3840x2160, 3.7 MB), not a plain product photo; a clean schematic is TouchScale Fig. 9 (https://arxiv.org/html/2610.10288v2/tactile_glove_config.png).",
+    "year=2026 from the earliest launch report found (June 2026).",
+    "vendor homepage says 'Now Released' and 'Global Pre-orders Now Open'; international shipping status not confirmed",
+    "press gives other counts (815 units, 'about a thousand'); the 783 here is from the English datasheet",
+    "'Pro'/'Lite' variant names could not be verified; press mentions a quick-release 'TachinGlove Snap'",
+    "TouchScale's 'Tachin glove' (880 taxels, same 1.5 mm cells and 50/100 Hz) is likely an earlier version of this product (catalog notes, not vendor-stated)",
+    "image is a marketing render (handshake) from the vendor homepage"
+   ],
+   "thumb": "assets/hw/tachin_glove.jpg"
+  },
+  {
+   "id": "jq_tactile_glove",
+   "name": "Fabric Tactile Glove",
+   "maker": "JQ Industries (矩侨工业, Weihai)",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2025,
+   "principle": "unspecified",
+   "taxels": 256,
+   "taxels_note": "raw channels per hand as streamed in EgoTouch (16 x 16); the release maps about 123 pressure taxels plus 15-24 finger bend sensors. JQ lists 139 sensing points for the glove in its Unitree G1 skin set.",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Fabric glove with a flexible fiber sensor array, signal-conditioning layer and wear-resistant outer layer (vendor)",
+    "Vendor figures: 0.01 N minimum trigger force, up to 3500 kPa (350 N/cm^2), bend radius < 0.2 mm, washable, no temperature drift",
+    "In EgoTouch: 256-channel 8-bit pressure vector per hand plus an IMU quaternion, over serial at 921600 baud; includes finger bend channels",
+    "Worn over a Rokoko Smartglove in EgoTouch"
+   ],
+   "image": "https://jq-industries.com/images/gloves.png",
+   "image_page": "https://jq-industries.com/precision",
+   "links": {
+    "product": "https://jq-industries.com/precision/glove",
+    "paper": "https://arxiv.org/abs/2605.13083",
+    "project": "https://jianyi2004.github.io/TouchAnything-Website/",
+    "code": "https://github.com/Jianyi2004/TouchAnything"
+   },
+   "datasets": [
+    {
+     "id": "egotouch",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://jianyi2004.github.io/TouchAnything-Website/static/figures/data_collection.png (labels 'Outer: JQ-Industries tactile glove' / 'JQ-Industries Fabric Tactile Glove')",
+    "https://arxiv.org/html/2605.13083 (Sec. 2.1, App. 8.1-8.2)",
+    "https://jq-industries.com/precision/glove (and the site's JS bundle, which holds the page text and specs)",
+    "https://eu.36kr.com/zh/p/3303658591607296",
+    "https://jq-industries.com/precision/glove"
+   ],
+   "unconfirmed": [
+    "Maker comes from the TouchAnything project-page figure, not the paper text (paper: 'custom pressure-sensing gloves'; raw file jq_pressure.json).",
+    "Which JQ glove configuration EgoTouch used, and its native sample rate, are not stated; EgoTouch resamples everything to 30 Hz.",
+    "Sensing principle: JQ calls it 'flexible fiber sensing'; its foot sensor page says resistance change, the glove page does not say.",
+    "Price not published (vendor: contact sales).",
+    "year=2025: the glove is reported as part of JQ's Unitree G1 skin set in May 2025 funding news.",
+    "Image is a vendor product shot (8000x4501 PNG, about 9 MB) of a JQ-branded glove on a robot; it is the glove image the site uses for its glove product, not necessarily the exact EgoTouch configuration.",
+    "image is the page's share banner (rendered hand), not a product photo",
+    "no numeric specs on the page"
+   ],
+   "thumb": "assets/hw/jq_tactile_glove.jpg"
+  },
+  {
+   "id": "tactidex_glove",
+   "name": "TactiDex tactile glove (162-element)",
+   "maker": "ShanghaiTech University (TactiDex authors; base glove vendor not named)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "CN",
+   "year": 2026,
+   "principle": "piezoresistive",
+   "taxels": 162,
+   "taxels_note": "per glove",
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 17,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "162 piezoresistive elements on the fingertips and palm; force resolution up to 0.01 N",
+    "Outputs raw ADC values; the authors calibrate per finger with a force gauge",
+    "Restructured by the authors to be worn over a MANUS Metagloves Pro, with a custom OptiTrack marker backplate",
+    "Left and right gloves; synchronized with 120 Hz OptiTrack/MANUS streams"
+   ],
+   "image": "https://arxiv.org/html/2607.09190v1/dual_gloves.png",
+   "image_page": "https://arxiv.org/html/2607.09190",
+   "links": {
+    "paper": "https://arxiv.org/abs/2607.09190",
+    "project": "https://tactidex.github.io/"
+   },
+   "datasets": [
+    {
+     "id": "tactidex",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://arxiv.org/html/2607.09190 (Sec. 3.1.1 'Tactile Measurement', Fig. 7, App. B)",
+    "https://tactidex.github.io/"
+   ],
+   "unconfirmed": [
+    "The paper does not name the glove's maker; it says the authors 'redesigned the structure of tactile gloves and wearing configuration', which implies an existing glove was modified. Availability 'research' reflects the modified glove; the base product may be commercial.",
+    "Same headline figures as the EgoTactile glove (162 sensors, ~17 Hz) and as the Robotics Center 'RC G1 Tactile Glove' (162 points, 0.01 N, 350 N max; https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove). No source says these are the same product, so they are kept separate.",
+    "Image is a paper figure (Fig. 7) showing the tactile glove, the Metagloves Pro and the combined dual glove."
+   ],
+   "thumb": "assets/hw/tactidex_glove.jpg"
+  },
+  {
+   "id": "egotactile_glove",
+   "name": "EgoTactile pressure glove (162-sensor)",
+   "maker": "not named (EgoTactile authors, Tsinghua SIGS; a co-author is affiliated with JQ Industries)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "CN",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": 162,
+   "taxels_note": "per glove (raw 256-channel vector, 162 used)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 17,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "162 sensors, 0-350 N range, sampled at ~17 Hz",
+    "Layout per the release code: 4 x 3 block on each fingertip, a 6-sensor group on each finger's middle/proximal segments, and a palm grid",
+    "Raw stream is a 256-channel vector; resampled to a 15 Hz timeline with sample-and-hold",
+    "Black textile glove worn on the grasping hand"
+   ],
+   "image": "https://egotactile.github.io/assets/dataset_overview.png",
+   "image_page": "https://egotactile.github.io/",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.09243",
+    "project": "https://egotactile.github.io/",
+    "code": "https://github.com/Russell-Zeng/EgoTactile"
+   },
+   "datasets": [
+    {
+     "id": "egotactile",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://arxiv.org/html/2606.09243 (Sec. 4.1, App. A.1.4, A.2.2, author affiliations)",
+    "https://egotactile.github.io/",
+    "local copy of https://github.com/Russell-Zeng/EgoTactile (scripts/raw_to_training.py) via the catalog entry",
+    "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove",
+    "https://jq-industries.com/precision/glove"
+   ],
+   "unconfirmed": [
+    "Maker not named in the paper. Co-author Yaqi Qin is listed at 'JQ Industries, Qingdao', and JQ Industries sells a fabric tactile glove (EgoTouch's figure names a JQ glove), but no source says the EgoTactile glove is a JQ product; JQ's own pages give 139 points for its glove, not 162.",
+    "Same headline figures as the TactiDex glove (162 elements, ~17 Hz) and as the Robotics Center 'RC G1 Tactile Glove' (brand RCSV; 162 points per hand, 4 x 6 mm resolution, 0.01 N, 350 N max single-point pressure, 30 Hz Bluetooth / 100 Hz serial, USD 3,625). No source states they are the same product, so the entries are kept separate.",
+    "Principle not stated by EgoTactile; TactiDex calls its 162-element glove piezoresistive.",
+    "Image is a paper/project-page collage (Fig. 2); the gloves appear in panel (a) and the sensor layout in the heatmap panels. No standalone glove photo was found."
+   ],
+   "thumb": "assets/hw/egotactile_glove.jpg"
+  },
+  {
+   "id": "opentouch_glove",
+   "name": "OpenTouch Glove",
+   "maker": "MIT CSAIL (Matusik lab)",
+   "kind": "glove",
+   "availability": "open_hardware",
+   "region": "US",
+   "year": 2025,
+   "principle": "piezoresistive",
+   "taxels": 169,
+   "taxels_note": "per hand (16 x 16 electrode grid routed into 169 taxels, palmar side)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Five-layer stack: silicone / top flexible PCB electrodes / piezoresistive film (Velostat per the build docs) / bottom flexible PCB electrodes / silicone",
+    "Normal pressure only; calibrated range 0.02-50 kPa (OpenTouch paper, citing Murphy et al. CHI EA 2025)",
+    "Zero-potential scanning readout on an Adafruit Huzzah ESP32 Feather in an arm-worn enclosure; ESP-NOW wireless (USB serial, WiFi, BLE also listed), LiPo powered",
+    "Published files: readout PCB Gerbers/BOM/placement, flex-PCB Gerbers (small and large hand), laser-cut SVGs, 3D-printed enclosure STLs, design notebook for custom hand outlines; MIT License",
+    "Assembled gloves offered to academic groups through a research-kit request form (no public price)",
+    "Bench-tested to about 10k bending cycles"
+   ],
+   "image": "https://wiresens-gloves.vercel.app/assets/gloveOn.jpg",
+   "image_page": "https://wiresens-gloves.vercel.app/",
+   "links": {
+    "project": "https://wiresens-gloves.vercel.app/",
+    "code": "https://github.com/devinmur29/wiresens-gloves",
+    "paper": "https://arxiv.org/abs/2512.16842"
+   },
+   "datasets": [
+    {
+     "id": "opentouch",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://arxiv.org/html/2512.16842v1",
+    "https://opentouch-tactile.github.io/",
+    "https://github.com/OpenTouch-MIT/opentouch",
+    "https://wiresens-gloves.vercel.app/",
+    "https://wiresens-gloves.vercel.app/docs/",
+    "https://github.com/devinmur29/wiresens-gloves"
+   ],
+   "unconfirmed": [
+    "Identity of the OpenTouch dataset glove with the 'OpenTouch Glove' build site is inferred: the OpenTouch repo README links 'Hardware' to wiresens-gloves.vercel.app, and both describe a five-layer FPC/piezoresistive stack, 16x16 readout, zero-potential circuit and ESP-NOW.",
+    "rate_hz 30 is the synchronized capture rate of the OpenTouch system; the glove's native scan rate is not stated.",
+    "Film: the paper says only 'commercial piezoresistive film'; Velostat comes from the build docs.",
+    "year 2025 from the cited design paper (Murphy et al., 'Fits like a flex-glove', CHI 2025 Extended Abstracts) and the OpenTouch preprint (Dec 2025).",
+    "Paper is ambiguous on whether fingertips/phalanges are fully covered ('uniformly cover the fingers and palmar surface'); App. D.6 says the 16x16 grid limits fingertip resolution."
+   ],
+   "thumb": "assets/hw/opentouch_glove.jpg"
+  },
+  {
+   "id": "actionsense_glove",
+   "name": "ActionSense tactile glove",
+   "maker": "MIT CSAIL (Matusik lab)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "US",
+   "year": 2022,
+   "principle": "piezoresistive",
+   "taxels": 682,
+   "taxels_note": "per hand, computed from the stated grids (23x19 palm + 5x9 thumb + 11x4 little finger + 3 x 13x4 other fingers); raw readout is a 32x32 matrix",
+   "coverage": [
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 6,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "32 conductive threads per direction taped on opposite sides of a pressure-sensitive material; each thread crossing is one sensing point",
+    "Grids: 23x19 palm, 5x9 thumb, 11x4 little finger, 13x4 each other finger",
+    "Built on open-finger gloves, so fingertips are not covered",
+    "Microcontroller and custom PCB for multiplexing and sampling, worn on the hand or arm; USB or wireless streaming",
+    "Raw ADC readings; calibration routines by pressing on a Dymo M25 postal scale and holding 5 objects"
+   ],
+   "image": "https://action-sense.csail.mit.edu/images/wearable_sensors_v0.jpg",
+   "image_page": "https://action-sense.csail.mit.edu/",
+   "links": {
+    "project": "https://action-sense.csail.mit.edu/",
+    "paper": "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Paper-Datasets_and_Benchmarks.pdf"
+   },
+   "datasets": [
+    {
+     "id": "actionsense",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://action-sense.csail.mit.edu/",
+    "https://action-sense.csail.mit.edu/dataset_info.html",
+    "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Paper-Datasets_and_Benchmarks.pdf",
+    "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Supplemental-Datasets_and_Benchmarks.pdf"
+   ],
+   "unconfirmed": [
+    "Image is the project's full-body wearable-sensor photo; the tactile gloves are visible on both hands (worn together with the Manus gloves) but small. No close-up of the tactile glove was found.",
+    "rate_hz 6 is the typical achieved rate in the supplement ('improveable to ~15'); the paper's sensor table lists 15 Hz.",
+    "taxels 682 computed from the stated grids; the paper gives no total.",
+    "Construction is the same thread-crossing piezoresistive principle as STAG, but the paper cites the MIT 'intelligent carpet' (Luo et al. CVPR 2021) as prior work, not STAG; the pressure-sensitive material is not named.",
+    "Maker attribution to the Matusik lab is from the author list (DelPreto, Matusik, Rus, Torralba et al.)."
+   ],
+   "thumb": "assets/hw/actionsense_glove.jpg"
+  },
+  {
+   "id": "stag",
+   "name": "STAG (scalable tactile glove)",
+   "maker": "MIT CSAIL (Matusik lab)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "US",
+   "year": 2019,
+   "principle": "piezoresistive",
+   "taxels": 548,
+   "taxels_note": "per glove (64 electrodes, 32x32 readout, 548 valid crossings)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 7.3,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Force-sensitive film (3M Velostat, 0.1 mm) addressed by orthogonal stainless-steel conductive threads (0.34 mm) on each side, laminated with adhesive and LDPE film onto a custom knit glove",
+    "Normal force, working range 30 mN to 0.5 N per element (responds from ~25 mN, saturates above ~0.8 N)",
+    "Electrical-grounding-based passive-matrix readout: 32 SPDT switches, 32:1 analog switch, Arduino Nano; 10-bit values",
+    "Sensor array materials about US$10; readout circuit about US$100 (paper)",
+    "Readout PCB schematic and Gerber files published on the project page; glove pattern available from the corresponding author"
+   ],
+   "image": "https://news.mit.edu/sites/default/files/images/201905/MIT-Grasp-Signature.jpg",
+   "image_page": "https://news.mit.edu/2019/sensor-glove-human-grasp-robotics-0529",
+   "links": {
+    "project": "http://stag.csail.mit.edu/",
+    "paper": "https://doi.org/10.1038/s41586-019-1234-z",
+    "code": "https://github.com/Erkil1452/touch"
+   },
+   "datasets": [
+    {
+     "id": "stag",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "http://stag.csail.mit.edu/",
+    "https://cdfg.mit.edu/pdf/journal/2019-sundaram-learning-the-signatures-of-the-human-grasp-using-a.pdf",
+    "https://news.mit.edu/2019/sensor-glove-human-grasp-robotics-0529"
+   ],
+   "unconfirmed": [
+    "Image is an MIT News rendering of the glove (the paper's Fig. 1 glove is also a rendering); no clean photo of the physical glove was found.",
+    "availability 'research': only the readout PCB schematic/Gerbers and the Methods description are public; the sensor sleeve pattern is 'available from the corresponding author', so it was not counted as open_hardware."
+   ],
+   "thumb": "assets/hw/stag.jpg"
+  },
+  {
+   "id": "senstextile_glove",
+   "name": "Knitted tactile glove (tactile textiles)",
+   "maker": "MIT CSAIL (Matusik lab)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "US",
+   "year": 2021,
+   "principle": "piezoresistive",
+   "taxels": 722,
+   "taxels_note": "per glove (722 sensors over 160 cm2)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 14,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Coaxial piezoresistive fibres (stainless-steel thread core, piezoresistive nanocomposite coating) inlaid orthogonally into a machine-knitted glove; each crossing is a sensor",
+    "Single sensor about 8 kOhm to 2 kOhm over 0.1-2 N; knit configurations reach 1.75 kPa sensitivity and up to 87.5 kPa range",
+    "Modified electrical-grounding-based passive-matrix readout (32x32), PCB worn on the arm",
+    "Calibrated with a self-supervised network against a digital scale (108,305 paired glove frames)",
+    "Fibre cost about US$0.2 per metre (paper)"
+   ],
+   "image": "https://senstextile.csail.mit.edu/img/teaserv2.png",
+   "image_page": "https://senstextile.csail.mit.edu/",
+   "links": {
+    "project": "https://senstextile.csail.mit.edu/",
+    "paper": "https://doi.org/10.1038/s41928-021-00558-0",
+    "code": "https://github.com/YunzhuLi/senstextile"
+   },
+   "datasets": [
+    {
+     "id": "senstextile",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://senstextile.csail.mit.edu/",
+    "https://cdfg.mit.edu/pdf/journal/2021-luo-learning-human-environment-interactions-using-conformal.pdf",
+    "https://computing.mit.edu/news/tactile-textiles-sense-movement-via-touch"
+   ],
+   "unconfirmed": [
+    "Image is the paper's Fig. 1 composite; the glove is panel b(ii) (yellow knitted glove), next to the vest, sock and robot-arm sleeve. No standalone glove photo was found.",
+    "rate ~14 Hz is stated for the whole dataset (all wearables), not specifically for the glove.",
+    "Arduino Nano readout is from the catalog's dataset entry (supplement), not re-read here."
+   ],
+   "thumb": "assets/hw/senstextile_glove.jpg"
+  },
+  {
+   "id": "vtdexmanip_glove",
+   "name": "VTDexManip tactile glove",
+   "maker": "Zhejiang University (Qi Ye group)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "CN",
+   "year": 2025,
+   "principle": "piezoresistive",
+   "taxels": 20,
+   "taxels_note": "per glove (20 discrete thin-film pressure sensors)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 200,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "20 commercial thin-film piezoresistive pressure sensors: 18.3 mm diameter on the thumb tip and palm (20 g-6 kg), 10 mm elsewhere (20 g-2 kg)",
+    "Resistance-to-voltage conversion module (RKXS4040), AD7606 ADC module, STM32F205RBT6 microcontroller; serial link to a PC at 200 Hz",
+    "Each sensor calibrated against an F/T sensor at 0.5-7.5 N; trimmers set so all sensors give the same voltage for the same force; fitted curve U = 0.7216 F^0.5025 + 0.0398",
+    "Left- and right-hand gloves; worn under an outer green glove during capture with a HoloLens 2"
+   ],
+   "image": "https://lqts.github.io/VTDexManip/resources/dataset.jpg",
+   "image_page": "https://lqts.github.io/VTDexManip/",
+   "links": {
+    "project": "https://lqts.github.io/VTDexManip/",
+    "paper": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+    "code": "https://github.com/LQTS/VTDexManip"
+   },
+   "datasets": [
+    {
+     "id": "vtdexmanip",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://lqts.github.io/VTDexManip/",
+    "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+    "https://api.github.com/repos/LQTS/VTDexManip/git/trees/main?recursive=1"
+   ],
+   "unconfirmed": [
+    "Image is the paper's dataset figure (Fig. 1); the glove photo is in panel (a), small, beside the HoloLens 2 and the outer green glove.",
+    "Coverage includes phalanges based on the sensor-position diagrams in Fig. 1(e) (dots on finger segments); the text only names thumb tip and palm for the large sensors.",
+    "Sensor vendor not named (only 'thin film pressure sensor'); the setup follows the group's earlier work (Liu et al. 2024)."
+   ],
+   "thumb": "assets/hw/vtdexmanip_glove.jpg"
+  },
+  {
+   "id": "tacross_glove",
+   "name": "TACROSS tactile glove",
+   "maker": "The University of Hong Kong / INFIFORCE",
+   "kind": "glove",
+   "availability": "open_hardware",
+   "region": "CN",
+   "year": 2026,
+   "principle": "piezoresistive",
+   "taxels": 285,
+   "taxels_note": "per glove: 285 physical sensing locations (12x15 palm + five 3x7 finger arrays); 256 values streamed per frame",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 150,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Five-layer fabric stack: jersey fabric / Cu-Ni fabric electrodes / pressure-sensitive fabric / Cu-Ni fabric electrodes / jersey fabric",
+    "12-bit ADC; serial or BLE output, about 150 Hz; ~200 cm2 sensing area, >85% palmar coverage",
+    "0-20 N per taxel in the force test; repeatability 1.38% F.S., hysteresis 11.65% F.S.",
+    "Glove component BOM US$10.86 (project page); Vision-IK Ego capture rig US$520, Rokoko Ego rig US$2,150",
+    "Hardware v1 release (BOM, PCB Gerbers, pick-and-place) on GitHub, 2026-10-15; software and dataset announced"
+   ],
+   "image": "https://tacross-touch-project.github.io/assets/paper-glove.webp",
+   "image_page": "https://tacross-touch-project.github.io/",
+   "links": {
+    "project": "https://tacross-touch-project.github.io/",
+    "paper": "https://arxiv.org/abs/2610.11945",
+    "code": "https://github.com/tacross-touch-project/tacross-touch-project.github.io/releases/tag/hardware-v1"
+   },
+   "datasets": [
+    {
+     "id": "tacross",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://tacross-touch-project.github.io/",
+    "https://api.github.com/repos/tacross-touch-project/tacross-touch-project.github.io/releases/tags/hardware-v1",
+    "https://arxiv.org/html/2610.11945",
+    "https://infiforcetechnologygroup.roboind.com/introduce/"
+   ],
+   "unconfirmed": [
+    "Image is paper Fig. 2 (taxel map and exploded five-layer fabric stack, partly rendered); the only photo of the worn glove (assets/human-capture-original.png) shows it small on a subject.",
+    "Hardware release contains PCB/BOM files only; whether fabric-layer patterns are included was not checked (archive not opened).",
+    "No evidence found that INFIFORCE (a Chinese embodied-AI company listed as an author affiliation) sells the glove.",
+    "region 'CN' covers Hong Kong (HKU) and INFIFORCE; the schema has no separate HK value.",
+    "Paper Fig. 3 caption says '256 channels (180 palm + 105 finger sensors)', which sums to 285; the catalog counts 285 physical locations."
+   ],
+   "thumb": "assets/hw/tacross_glove.jpg"
+  },
+  {
+   "id": "osmo_glove",
+   "name": "OSMO tactile glove",
+   "maker": "Meta FAIR",
+   "kind": "glove",
+   "availability": "open_hardware",
+   "region": "US",
+   "year": 2025,
+   "principle": "magnetic",
+   "taxels": 12,
+   "taxels_note": "per glove: 12 three-axis taxels (5 fingertips + 7 on the palm in three sections)",
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": "DIY parts from WowRobo: USD 100 (magnetic skins), USD 700 (MCU board + 12 sensor boards), USD 780 (both); not a complete kit",
+   "specs": [
+    "Soft magnetic elastomer over each sensor PCB with two Bosch BMM350 3-axis magnetometers (differential) and a Bosch BHI360 6-axis IMU; MuMetal shield against crosstalk",
+    "Measures normal and shear force, sensing range 0.3-80 N; raw magnetic flux (uT) used as tactile data",
+    "12 sensor PCBs on I2C to an STM32 MCU; USB-C power and data, optional LiPo + microSD for wireless use; Python and ROS2 interfaces",
+    "Intermediate and proximal phalanges left uncovered; beige outer glove for compatibility with vision hand trackers; fits a Psyonic Ability Hand",
+    "Published: BOM, sensor and glove assembly guides, PCB designs (sensor and MCU boards), firmware"
+   ],
+   "image": "https://www.jessicayin.com/osmo_tactile_glove/photos/glove_layout.png",
+   "image_page": "https://www.jessicayin.com/osmo_tactile_glove/",
+   "links": {
+    "project": "https://www.jessicayin.com/osmo_tactile_glove/",
+    "paper": "https://arxiv.org/abs/2512.08920",
+    "code": "https://github.com/jessicayin/osmo_tactile_glove",
+    "product": "https://shop.wowrobo.com/products/osmo-tactile-glove"
+   },
+   "datasets": [
+    {
+     "id": "osmo",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://www.jessicayin.com/osmo_tactile_glove/",
+    "https://arxiv.org/pdf/2512.08920",
+    "https://github.com/jessicayin/osmo_tactile_glove",
+    "https://shop.wowrobo.com/products/osmo-tactile-glove.json"
+   ],
+   "unconfirmed": [
+    "Sensor sample rate not stated; 25 Hz is the ROS2 logging and policy input rate in the paper.",
+    "WowRobo listing (published 2026-09-14) says lead time 3-4 weeks and that the packages are not complete glove kits; the OSMO project page links it as 'Buy DIY Kit'.",
+    "GitHub API reports no license file for the repository; the paper says complete hardware designs, firmware and assembly instructions are released.",
+    "Image is the project page's taxel-location figure (photo of the glove with sensor positions overlaid on the left half)."
+   ],
+   "thumb": "assets/hw/osmo_glove.jpg"
+  },
+  {
+   "id": "tekscan_grip",
+   "name": "Grip System (sensor 4256E)",
+   "maker": "Tekscan",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "US",
+   "year": null,
+   "principle": "piezoresistive",
+   "taxels": 361,
+   "taxels_note": "sensels per 4256E hand sensor (one hand)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 750,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Thin-film pressure-mapping sensor 4256E: 18 individually positionable regions over the fingers and palm, 361 sensels, 0.158 in (4.0 mm) pitch, 0.004 in thick.",
+    "Rows and columns of conductive material with a pressure-sensitive layer at each crossing; sensel resistance falls with load.",
+    "Scan rate up to 750 Hz with the tethered VersaTek cuff/hub over USB; wireless and datalogger units also offered.",
+    "One size fits all; measures both hands simultaneously; software reports total force, peak pressure, centre of force.",
+    "ADL-21 sewed it on a cotton glove and recorded at 50 Hz with a 75 psi (517 kPa) calibration."
+   ],
+   "image": "https://www.tekscan.com/sites/default/files/images/application/4256_21675.jpg",
+   "image_page": "https://www.tekscan.com/products-solutions/systems/grip-system",
+   "links": {
+    "product": "https://www.tekscan.com/products-solutions/systems/grip-system"
+   },
+   "datasets": [
+    {
+     "id": "adl21",
+     "role": "tactile sensor"
+    }
+   ],
+   "sources": [
+    "https://www.tekscan.com/products-solutions/systems/grip-system",
+    "https://www.tekscan.com/products-solutions/pressure-mapping-sensors/4256e",
+    "https://www.tekscan.com/company/technology",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC8068022/"
+   ],
+   "unconfirmed": [
+    "Tekscan describes the sensing as a resistive pressure-sensitive layer at row/column crossings; 'piezoresistive' is the catalog class, not Tekscan's wording.",
+    "The 4256E page lists max pressure as '50' with no unit; the 75 psi figure is from the ADL-21 paper.",
+    "No price is published (store and quote links only); first release year not found."
+   ],
+   "thumb": "assets/hw/tekscan_grip.jpg"
+  },
+  {
+   "id": "bielefeld_tactile_glove",
+   "name": "Tactile dataglove (fabric-based sensors)",
+   "maker": "Bielefeld University (CITEC, Neuroinformatics group)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "EU",
+   "year": 2012,
+   "principle": "piezoresistive",
+   "taxels": 58,
+   "taxels_note": "per hand, version used in Reach&Grasp (the 2012 paper describes 54 cells)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 100,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Stretchable fabric-based piezoresistive sensor pads on the palm and the inside of the fingers; resistance read through a pull-up resistor and ADC, streamed over USB/ROS.",
+    "Reach&Grasp version: 58 taxels, 17 palm taxels in three groups, index and little finger 9 each, middle and ring 8, thumb 7; sampled at 100 Hz.",
+    "Original paper: 54 tactile cells; force range from below 0.1 N to above 30 N.",
+    "Uncalibrated in Reach&Grasp (raw values only); taxels 9, 11, 14 at the ring fingertip faulty.",
+    "Built in the EU WearHap project (grant 601165); the same glove carried CyberGlove I bend sensors for joint angles."
+   ],
+   "image": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/e032/11805991/fa717536fbb7/41597_2025_4552_Fig2_HTML.jpg",
+   "image_page": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11805991/",
+   "links": {
+    "paper": "https://doi.org/10.1109/HUMANOIDS.2012.6651521"
+   },
+   "datasets": [
+    {
+     "id": "reachgrasp",
+     "role": "tactile glove"
+    }
+   ],
+   "sources": [
+    "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11805991/fullTextXML (Reach&Grasp full text, Sci Data 12:233, 2025)",
+    "https://api.crossref.org/works/10.1109/HUMANOIDS.2012.6651521",
+    "https://pub.uni-bielefeld.de/record/2511391 (abstract via search snippet; page itself blocked by Anubis)"
+   ],
+   "unconfirmed": [
+    "Image is Fig. 2 of the Reach&Grasp paper (taxel map, palm view, back view with electronics), not a product photo.",
+    "The 54-cell count and 0.1-30 N range come from the Humanoids 2012 abstract as returned by search; the full paper was not read. The Reach&Grasp glove has 58 taxels, so it is a later revision or a different layout.",
+    "Reach&Grasp says one sensorized glove gave both the kinematic (CyberGlove I) and tactile data; whether Bielefeld built the tactile layer onto a CyberGlove I is inferred from that wording.",
+    "Year 2012 is the first paper; the Reach&Grasp unit was lent by Bielefeld through the NeuTouch project."
+   ],
+   "thumb": "assets/hw/bielefeld_tactile_glove.jpg"
+  },
+  {
+   "id": "fsr400",
+   "name": "FSR 400 series",
+   "maker": "Interlink Electronics",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "US",
+   "year": null,
+   "principle": "piezoresistive",
+   "taxels": 1,
+   "taxels_note": "single-zone sensor; the VICON glove uses 8",
+   "coverage": [],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Single-zone force sensing resistor: polymer thick film whose resistance falls as force rises.",
+    "FSR 400: 5.08 mm diameter active area, 0.30 mm nominal thickness.",
+    "Actuation about 0.2 N, sensitivity range about 0.2-20 N; repeatability +/-2% single part, +/-6% part to part; hysteresis +10%.",
+    "Seven models in the series (400, 400 Short, 402, 402 Short, 404, 406, 408) with four connection options.",
+    "VICON glove: 8 FSRs (fingertips, thenar, distal palm), sampled at 200 Hz, individually calibrated to 61 N."
+   ],
+   "image": "https://www.interlinkelectronics.com/assets/legacy/images/FSR-400.jpg",
+   "image_page": "https://www.interlinkelectronics.com/fsr-400",
+   "links": {
+    "product": "https://www.interlinkelectronics.com/fsr-400"
+   },
+   "datasets": [
+    {
+     "id": "vicon_glove",
+     "role": "tactile sensor"
+    }
+   ],
+   "sources": [
+    "https://www.interlinkelectronics.com/fsr-400",
+    "https://www.interlinkelectronics.com/downloads/datasheets/fsr-400-series-datasheet.pdf",
+    "https://arxiv.org/html/2610.05180"
+   ],
+   "unconfirmed": [
+    "VICON cites the 'FSR 400 series' datasheet; which model of the series (400, 402, ...) was used is not stated.",
+    "Product page says actuation 'as low as 0.1N', the datasheet says ~0.2 N; datasheet value used.",
+    "Sold through Interlink's online shop; no price visible on the page. Rate is set by the readout electronics, so rate_hz is null.",
+    "'Piezoresistive' is the catalog class; Interlink calls it a force sensing resistor (PTF)."
+   ],
+   "thumb": "assets/hw/fsr400.jpg"
+  },
+  {
+   "id": "manus_metagloves_pro",
+   "name": "Metagloves Pro",
+   "maker": "MANUS",
+   "kind": "tracker",
+   "availability": "commercial",
+   "region": "EU",
+   "year": 2024,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": "hand-tracking glove, no tactile sensing",
+   "coverage": [],
+   "rate_hz": 120,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Electromagnetic-field (EMF) finger tracking: 5 fingertip EMF sensors with 6-DoF tracking each; hand module gives 3-axis wrist rotation.",
+    "Full anatomical hand model, 25 DoF; 120 Hz; latency 30 ms wired / 50 ms wireless.",
+    "USB-C or Bluetooth 5.0 dongle (up to 15 m); swappable battery, up to 3 h.",
+    "Mounting system for external trackers plus optical-marker openings in the textile; 167 g (M, with battery); sizes XS-L."
+   ],
+   "image": "https://cdn.prod.website-files.com/6617b472be5db819f4dbdf45/671277c3cb0e01e6d1f5ecc3_e97857803b728ca18442fc5e336dba73_product-mp-03.png",
+   "image_page": "https://www.manus-meta.com/products/metagloves-pro",
+   "links": {
+    "product": "https://www.manus-meta.com/products/metagloves-pro"
+   },
+   "datasets": [
+    {
+     "id": "tactidex",
+     "role": "hand tracking"
+    },
+    {
+     "id": "trex",
+     "role": "hand tracking"
+    }
+   ],
+   "sources": [
+    "https://www.manus-meta.com/products/metagloves-pro",
+    "https://www.manus-meta.com/products/metagloves-pro-specs",
+    "https://www.manus-meta.com/about-us",
+    "https://arxiv.org/html/2607.09190",
+    "https://github.com/ZhuoyangLiu2005/T-Rex (hardware_code/README.md)"
+   ],
+   "unconfirmed": [
+    "TactiDex describes its mocap glove as 'IMU measurements fused with optical tracking'; MANUS specifies EMF fingertip tracking and does not name IMUs.",
+    "T-Rex: the paper says only 'Manus gloves'; the model 'Manus MetaGloves Pro' comes from the repo's hardware_code/README.md.",
+    "Year 2024 from the MANUS About page product timeline."
+   ],
+   "thumb": "assets/hw/manus_metagloves_pro.jpg"
+  },
+  {
+   "id": "manus_quantum_metagloves",
+   "name": "Quantum Metagloves",
+   "maker": "MANUS",
+   "kind": "tracker",
+   "availability": "discontinued",
+   "region": "EU",
+   "year": 2022,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": "hand-tracking glove, no tactile sensing",
+   "coverage": [],
+   "rate_hz": 120,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Fingertip end-point tracking sensors, 'absolute position, 3 axis rotation', millimetre accuracy.",
+    "120 Hz; signal latency <= 7.5 ms.",
+    "Bluetooth LE 5 (up to 15 m) or USB-C; swappable battery, up to 3 h.",
+    "MANUS lists it as end-of-life, no longer in production; supported through warranty."
+   ],
+   "image": "https://cdn.prod.website-files.com/6617b472be5db819f4dbdf45/66618724809b9da078ae9047_product-qmm-01.png",
+   "image_page": "https://www.manus-meta.com/products/quantum-metagloves",
+   "links": {
+    "product": "https://www.manus-meta.com/products/quantum-metagloves"
+   },
+   "datasets": [
+    {
+     "id": "dexvitac",
+     "role": "hand tracking"
+    }
+   ],
+   "sources": [
+    "https://www.manus-meta.com/products/quantum-metagloves",
+    "https://www.manus-meta.com/about-us",
+    "https://arxiv.org/html/2603.17851"
+   ],
+   "unconfirmed": [
+    "MANUS's Quantum page does not name the tracking principle; DexViTac calls the gloves 'equipped with IMUs', and the catalog's dataset entry files them as magnetic.",
+    "Year 2022 from the MANUS About page timeline."
+   ],
+   "thumb": "assets/hw/manus_quantum_metagloves.jpg"
+  },
+  {
+   "id": "manus_prime_ii_xsens",
+   "name": "Prime II Xsens",
+   "maker": "MANUS",
+   "kind": "tracker",
+   "availability": "discontinued",
+   "region": "EU",
+   "year": 2020,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": "hand-tracking glove, no tactile sensing",
+   "coverage": [],
+   "rate_hz": 90,
+   "dof": null,
+   "price": "USD 4,499 (2020 launch)",
+   "specs": [
+    "Finger bend (flex) sensors fused with IMUs; streams finger data directly into Xsens MVN alongside the Xsens body suit.",
+    "Xsens-glove spec sheet cited by ActionSense: 5 x 2-DoF flexible sensors and 6 x 9-DoF IMUs, 90 Hz, latency < 5 ms, proprietary 2.4 GHz wireless, 5 h swappable battery.",
+    "Open-finger textile glove; electronics module removable for washing.",
+    "ActionSense recorded it at 60 Hz and disabled the IMUs in some sessions (finger curl only, no spread)."
+   ],
+   "image": "https://assets-global.website-files.com/6047794432ce074ec0a24892/607f16a94f7010a7368da093_xsens%20glove%20closeup.png",
+   "image_page": "https://web.archive.org/web/20210917164258/https://www.manus-vr.com/legacy-products/prime-ii",
+   "links": {
+    "product": "https://web.archive.org/web/20201222173437/https://manus-vr.com/prime-2-xsens"
+   },
+   "datasets": [
+    {
+     "id": "actionsense",
+     "role": "hand tracking"
+    }
+   ],
+   "sources": [
+    "https://web.archive.org/web/20201222173437/https://manus-vr.com/prime-2-xsens",
+    "https://web.archive.org/web/20210917164258/https://www.manus-vr.com/legacy-products/prime-ii",
+    "https://web.archive.org/web/20220523044610/https://www.manus-meta.com/products/xsens-gloves",
+    "https://www.manus-meta.com/about-us",
+    "https://www.moguravr.com/prime-ii-new-globe-type-vr-device/",
+    "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Paper-Datasets_and_Benchmarks.pdf",
+    "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Supplemental-Datasets_and_Benchmarks.pdf"
+   ],
+   "unconfirmed": [
+    "The sensor counts, 90 Hz and < 5 ms come from MANUS's 2022 'Xsens Gloves' page (the page ActionSense cites as ref. [22]); that page does not name the glove generation, and Movella lists identical numbers for the later Prime 3 Xsens.",
+    "Price USD 4,499 is the June 2020 launch price reported by Mogura VR (press), not a MANUS page.",
+    "Discontinued: MANUS moved Prime II under 'legacy products' by Sept 2021 (archived page).",
+    "Image is from MANUS's 2021 site (an Xsens-variant glove on a subject in an Xsens suit); that it shows the Prime II Xsens rather than another generation is inferred from the page date."
+   ],
+   "thumb": "assets/hw/manus_prime_ii_xsens.jpg"
+  },
+  {
+   "id": "rokoko_smartgloves",
+   "name": "Smartgloves",
+   "maker": "Rokoko",
+   "kind": "tracker",
+   "availability": "commercial",
+   "region": "EU",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": "hand-tracking glove, no tactile sensing",
+   "coverage": [],
+   "rate_hz": 100,
+   "dof": null,
+   "price": "USD 1,745 (list, 2024)",
+   "specs": [
+    "7 sensors per glove using hybrid IMU + EMF sensor fusion; optional Coil Pro adds absolute (drift-free) finger position.",
+    "100 fps real-time capture; WiFi streaming; swappable batteries.",
+    "Pairs with the Smartsuit Pro for synchronized full-body capture; sizes S-XL.",
+    "Succeeded by Smartgloves II (7 sensors, 250 Hz internal IMU sampling, TCP WiFi streaming)."
+   ],
+   "image": "https://cdn.prod.website-files.com/5e6b63ac3b6e253f11889f39/63ff78f35a93bf0f1e5311ad_gloves.webp",
+   "image_page": "https://web.archive.org/web/20241229130825/https://www.rokoko.com/products/smartgloves",
+   "links": {
+    "product": "https://www.rokoko.com/products/smartgloves"
+   },
+   "datasets": [
+    {
+     "id": "egotouch",
+     "role": "hand tracking"
+    },
+    {
+     "id": "opentouch",
+     "role": "hand tracking"
+    },
+    {
+     "id": "tacross",
+     "role": "hand tracking"
+    }
+   ],
+   "sources": [
+    "https://web.archive.org/web/20241229130825/https://www.rokoko.com/products/smartgloves",
+    "https://www.rokoko.com/products/smartgloves"
+   ],
+   "unconfirmed": [
+    "Specs and price from the December 2024 archived product page; the live page now sells Smartgloves II, and whether the first version is still sold is not stated.",
+    "Which generation each dataset used is not stated; OpenTouch's description (IMU + EMF, seven sensors per glove) matches the first version. TACROSS names only a 'Rokoko' glove.",
+    "First release year not found."
+   ],
+   "thumb": "assets/hw/rokoko_smartgloves.jpg"
+  },
+  {
+   "id": "cyberglove_i",
+   "name": "CyberGlove (wired, 'CyberGlove I')",
+   "maker": "CyberGlove Systems",
+   "kind": "tracker",
+   "availability": "discontinued",
+   "region": "US",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": "hand-tracking glove (joint angles), no tactile sensing",
+   "coverage": [],
+   "rate_hz": 90,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Resistive bend-sensing data glove, 18 or 22 joint-angle sensors (22-sensor: three flexion sensors per finger, four abduction, palm arch, wrist flexion and abduction).",
+    "Resolution < 1 deg, repeatability 3 deg between wearings, max 0.6% nonlinearity.",
+    "90 records/s typical; RS-232 (115.2 kbaud) interface unit with 25 ft cable.",
+    "Reach&Grasp used it unmodified at 100 Hz for MCP/PIP, thumb, abduction and wrist pitch/yaw."
+   ],
+   "image": "https://images.squarespace-cdn.com/content/v1/559c381ee4b0ff7423b6b6a4/1442471091773-ITZSBALG8Y0ZH7E54YAV/cyberglove.jpg",
+   "image_page": "http://www.cyberglovesystems.com/cyberglove-ii",
+   "links": {
+    "product": "http://www.cyberglovesystems.com/"
+   },
+   "datasets": [
+    {
+     "id": "reachgrasp",
+     "role": "hand tracking"
+    }
+   ],
+   "sources": [
+    "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11805991/fullTextXML (Reach&Grasp full text)",
+    "https://immersion.fr/wp-content/uploads/2014/01/CyberGlove_Wired_Brochure_2009.pdf",
+    "http://www.cyberglovesystems.com/",
+    "http://www.cyberglovesystems.com/cyberglove-ii"
+   ],
+   "unconfirmed": [
+    "Reach&Grasp writes 'CyberGlove I'; the vendor never used that name. Specs are from the 2009 brochure for the wired CyberGlove, which is taken to be that model.",
+    "'Discontinued' is inferred: the vendor site (last updated 2017) lists only CyberGlove II/III and CyberTouch; no current page for the wired original.",
+    "The photo is the vendor's image of a CyberGlove II (its wrist unit is labelled CyberGlove II); no clean photo of the wired original was found.",
+    "In Reach&Grasp the same physical glove also carried the Bielefeld tactile sensors.",
+    "Company founding (1990) is in the brochure; the first year of this product is not stated."
+   ],
+   "thumb": "assets/hw/cyberglove_i.jpg"
+  },
+  {
+   "id": "pps_tactileglove_ii",
+   "name": "TactileGlove II",
+   "maker": "Pressure Profile Systems (PPS)",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "US",
+   "year": 2020,
+   "principle": "capacitive",
+   "taxels": 65,
+   "taxels_note": "per glove; elements 5.0 x 6.0 mm",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 100,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "65 capacitive pressure elements per glove over fingers and palm; calibrated in pressure units, force from element area",
+    "Full scale 80 psi (55 N/cm2); max force 70 N thumb/finger tips, 28 N pinky tip; minimum sensitivity 0.04 N",
+    "Scan rate 100 Hz for one glove, 50 Hz for a pair; Bluetooth 5, >2 h battery",
+    "About 2.6 mm thick; sizes S/M/M-L/L; sold as a pair or single; Chameleon 2026 software"
+   ],
+   "image": "https://images.squarespace-cdn.com/content/v1/5b6af56a96d455ed3c06b55a/1747153774441-7FQYC271AHHMBXZ2MEQH/TactileGloves+side+by+side.png",
+   "image_page": "https://pressureprofile.com/tactile-glove",
+   "links": {
+    "product": "https://pressureprofile.com/tactile-glove"
+   },
+   "datasets": [],
+   "sources": [
+    "https://pressureprofile.com/tactile-glove",
+    "https://pressureprofile.com/company"
+   ],
+   "unconfirmed": [
+    "year 2020 is the launch of the original TactileGlove (PPS timeline); the release year of the II revision is not stated",
+    "PPS was founded in the US (1996); the current site footer lists only the UK office in Glasgow",
+    "coverage read from the vendor description 'fingers and palm'; exact element layout not given"
+   ],
+   "thumb": "assets/hw/pps_tactileglove_ii.jpg"
+  },
+  {
+   "id": "pps_fingertps_ii",
+   "name": "FingerTPS II",
+   "maker": "Pressure Profile Systems (PPS)",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "US",
+   "year": null,
+   "principle": "capacitive",
+   "taxels": null,
+   "taxels_note": "one sensor per fingertip; a system ships with 2 sensors (any finger or palm)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 40,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Wearable capacitive fingertip pressure sensors wired to a wrist BLE module",
+    "Force range 2 kg (4.4 lb) per sensor; accuracy error <5%; SNR 500:1; sensor 1.5 mm thick",
+    "Scan rate 25-40 Hz; Bluetooth Low Energy, 5 m range; >2 h battery",
+    "Two wrist assemblies can be used at once for bimanual tasks; calibration load cell included"
+   ],
+   "image": "https://static1.squarespace.com/static/5b6af56a96d455ed3c06b55a/t/6a734a6aee0be167547e9dc2/1785940586544/fingertps+holding+ball.jpg?format=1500w",
+   "image_page": "https://pressureprofile.com/finger-tps",
+   "links": {
+    "product": "https://pressureprofile.com/finger-tps"
+   },
+   "datasets": [],
+   "sources": [
+    "https://pressureprofile.com/finger-tps"
+   ],
+   "unconfirmed": [
+    "whether each fingertip sensor is a single element or a small array is not stated",
+    "a palm sensor option is listed but not counted in coverage"
+   ],
+   "thumb": "assets/hw/pps_fingertps_ii.jpg"
+  },
+  {
+   "id": "tacta_glove",
+   "name": "Tacta Glove",
+   "maker": "Tacta Systems",
+   "kind": "glove",
+   "availability": "announced",
+   "region": "US",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": null,
+   "coverage": [],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Skill-capture glove worn by workers; uses the same tactile sensors as the Tacta Hand robot hand",
+    "Vendor says the Tacta Sensor measures force, texture and temperature",
+    "Part of a system with Tacta Hand and TactaBot; no glove specifications published"
+   ],
+   "image": "https://i.vimeocdn.com/video/2183472743-19adab7bcc539d17a3c6f6d7912e098f5472b178ec8e5d79fc68a6079d49b131-d_1920x1080?region=us",
+   "image_page": "https://www.tactasystems.com/",
+   "links": {
+    "product": "https://www.tactasystems.com/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.tactasystems.com/"
+   ],
+   "unconfirmed": [
+    "image is a video poster frame from the vendor homepage showing a gloved hand; not labelled as the glove",
+    "not offered for sale on the site; availability treated as announced"
+   ],
+   "thumb": "assets/hw/tacta_glove.jpg"
+  },
+  {
+   "id": "touchtronix_fusionx_v3",
+   "name": "FusionX V3 thin-film glove",
+   "maker": "TouchTronix Robotics",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "US",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": 80,
+   "taxels_note": "per glove: five 4x4 patches, one per finger; no palm channels",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Thin-film pressure glove with five 4x4 tactile patches (80 channels, 12-bit ADC) and one bend channel per finger, plus IMU",
+    "USB serial; Python Glove SDK 0.5.0 (CPython 3.13) and FusionX GUI for Windows/Linux",
+    "GUI records gloves with a head stereo camera/IMU and optional wrist video to MCAP; GUI recording needs a TouchTronix license",
+    "Per-pixel calibration files per glove pair; earlier V1/V2 used conductive fabric"
+   ],
+   "image": null,
+   "image_page": null,
+   "links": {
+    "code": "https://github.com/TouchTronix-Robotics/FusionX-DataCollection"
+   },
+   "datasets": [],
+   "sources": [
+    "https://github.com/TouchTronix-Robotics/FusionX-DataCollection",
+    "https://raw.githubusercontent.com/TouchTronix-Robotics/FusionX-DataCollection/v3-thimfilm/docs/sdk/sensors.md",
+    "https://raw.githubusercontent.com/TouchTronix-Robotics/FusionX-DataCollection/v3-thimfilm/docs/glove-map-rh.svg"
+   ],
+   "unconfirmed": [
+    "region US from a third-party company profile (Buffalo, NY); no vendor website found",
+    "patch position on each finger (tip vs pad) is not stated; coverage 'tip' inferred from the per-finger layout",
+    "no product photo found; repo only has a layout diagram and GUI screenshots"
+   ]
+  },
+  {
+   "id": "proception_proglove",
+   "name": "ProGlove Gen 1",
+   "maker": "Proception",
+   "kind": "glove",
+   "availability": "announced",
+   "region": "US",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": null,
+   "coverage": [],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Wearable sensor glove for human data capture and teleoperation of humanoid hands",
+    "Uses the same sensor skin as the company's ProHand robot hand",
+    "No sensing specifications published"
+   ],
+   "image": "https://techcrunch.com/wp-content/uploads/2026/06/proception-prohand-proglove-1.jpg?w=1024",
+   "image_page": "https://techcrunch.com/?p=3136644",
+   "links": {
+    "product": "https://www.proception.ai/product/pro-glove/gen1"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.proception.ai/product/pro-glove/gen1",
+    "https://techcrunch.com/?p=3136644",
+    "https://www.ycombinator.com/launches/R78-proception-the-dexterous-robot-hand-we-wish-existed"
+   ],
+   "unconfirmed": [
+    "product page renders client-side; content taken from its meta tags plus TechCrunch (2026-06-29) and the YC launch post",
+    "whether the glove is sold separately from ProHand is not stated"
+   ],
+   "thumb": "assets/hw/proception_proglove.jpg"
+  },
+  {
+   "id": "rcsv_rc_g1_tactile_glove",
+   "name": "RC G1 Tactile Glove",
+   "maker": "Robotics Center (RCSV)",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "US",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": 162,
+   "taxels_note": "per hand (fingers + palm)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 100,
+   "dof": null,
+   "price": "USD 3,625 (list)",
+   "specs": [
+    "162 sensing points per hand over a 179 x 145 mm area; 4 x 6 mm sensing resolution",
+    "0.01 N recognition accuracy, max single-point pressure 350 N, repeatability +-8%",
+    "100 Hz over serial (USB), 30 Hz over Bluetooth; per-finger bend sensing; 6-axis IMU at 120 Hz",
+    "35.4 g per glove, skin <=2.33 mm; companion app exports CSV"
+   ],
+   "image": "https://hynhxfggrgpuxdvtnvch.supabase.co/storage/v1/object/public/product_media/derived/b1fa146d802a5b7670c8d650/w-128.webp",
+   "image_page": "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove",
+   "links": {
+    "product": "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove"
+   ],
+   "unconfirmed": [
+    "the only product image the store serves is 128 px wide",
+    "original manufacturer not named; the 162-point / 0.01 N / 350 N figures match the 162-sensor glove described for the TactiDex and EgoTactile datasets, so it may be a rebadged OEM glove (inference, not stated)",
+    "coverage from 'fingers + palm'"
+   ],
+   "thumb": "assets/hw/rcsv_rc_g1_tactile_glove.jpg"
+  },
+  {
+   "id": "novel_pliance_glove",
+   "name": "pliance glove system",
+   "maker": "novel GmbH",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "EU",
+   "year": null,
+   "principle": "capacitive",
+   "taxels": null,
+   "taxels_note": "configurable: 5-12 finger sensors plus a 64-element palm matrix",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 20,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Elastic capacitive sensor matrices worn on the hand; each element individually calibrated (trublu air-pressure calibrator)",
+    "Five to twelve finger sensors and one 64-element palm sensor; about two sensors per cm2",
+    "Typically 20 Hz, higher when fewer sensors are active; pliance analyser handles up to 1,024 sensors",
+    "Fibre optic/USB or Bluetooth to a Windows PC; sync with video, EMG and motion capture"
+   ],
+   "image": "https://novel.de/wp-content/uploads/2023/08/pliance-glove-01.png",
+   "image_page": "https://novel.de/products/pliance/glove-force-measurement/",
+   "links": {
+    "product": "https://novel.de/products/pliance/glove-force-measurement/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://novel.de/products/pliance/glove-force-measurement/",
+    "https://novel.de/products/hand-sensor-solutions/"
+   ],
+   "unconfirmed": [
+    "total taxel count depends on the sensor configuration and is not given as one number"
+   ],
+   "thumb": "assets/hw/novel_pliance_glove.jpg"
+  },
+  {
+   "id": "novel_loadglove",
+   "name": "loadglove",
+   "maker": "novel GmbH",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "EU",
+   "year": null,
+   "principle": "capacitive",
+   "taxels": null,
+   "taxels_note": "1 palm loadpad + 1-13 finger buttonsens, each a total-force sensor",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 100,
+   "dof": null,
+   "price": "EUR 5,000 (basic) to EUR 19,900 (full setup)",
+   "specs": [
+    "Calibrated textile capacitive force sensors: one loadpad (90 x 80 mm, 10-4000 N) and 1-13 buttonsens (17 x 17 mm, 2.5-60 N or 10-150 N)",
+    "Total normal force per sensor, no spatial resolution within a sensor; accuracy +-10%",
+    "10-100 Hz; Bluetooth to the loadapp smartphone app, or cable to pliance systems; 48 h battery",
+    "Sync with Xsens (Movella) motion capture; vendor markets it for physical-AI demonstration data"
+   ],
+   "image": "https://novel.de/wp-content/uploads/2023/08/force-glove-2.jpg",
+   "image_page": "https://novel.de/products/buttonsens/loadglove/",
+   "links": {
+    "product": "https://novel.de/products/buttonsens/loadglove/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://novel.de/products/buttonsens/loadglove/",
+    "https://novel.de/products/hand-sensor-solutions/"
+   ],
+   "unconfirmed": [
+    "finger sensor placement is user-selected; coverage reflects the possible positions"
+   ],
+   "thumb": "assets/hw/novel_loadglove.jpg"
+  },
+  {
+   "id": "wuji_glove",
+   "name": "Wuji Glove",
+   "maker": "Wuji Technology",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": 526,
+   "taxels_note": "active points in a 24 x 31 pressure matrix per glove",
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 120,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "24 x 31 pressure sensor matrix with 526 active points, 4 mm spatial resolution; 0-20 N range, 0.1 N resolution, repeatability +-6%",
+    "Five fingertip EMF receivers plus a dorsal module: 6-DoF hand pose at 120 Hz, <=2 mm / <5 deg RMS",
+    "6-axis IMU on the dorsum at 800 Hz",
+    "67.5 g glove; 100BASE-TX via RJ45 adapter; Python SDK and CLI"
+   ],
+   "image": "https://www.wuji.tech/assets/images/glove/glove-hero.webp",
+   "image_page": "https://wuji.tech/en/glove",
+   "links": {
+    "product": "https://wuji.tech/en/glove"
+   },
+   "datasets": [],
+   "sources": [
+    "https://wuji.tech/en/glove"
+   ],
+   "unconfirmed": [
+    "coverage: vendor says 'full palm coverage' and 'fingertip touch'; whether finger segments are covered is not stated",
+    "sale terms not shown (Contact Sales)"
+   ],
+   "thumb": "assets/hw/wuji_glove.jpg"
+  },
+  {
+   "id": "paxini_pxcap_iii",
+   "name": "PXCap III",
+   "maker": "PaXini",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": null,
+   "principle": "magnetic",
+   "taxels": null,
+   "taxels_note": null,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Tri-finger exoskeleton data-collection glove (4 DoF) mirroring the PXDex III gripper",
+    "PaXini 6D Hall-array tactile sensors; resultant force and distributed force array; min detectable force 0.1 N",
+    "Magnetic joint encoders +-0.15 deg; two 170 deg 1080p palm cameras at 30 fps",
+    "650 g glove + 125 g VR controller for wrist tracking (<=5 mm); USB, 12 V DC"
+   ],
+   "image": "https://www.paxini.com/images/pxcap3/banner.png",
+   "image_page": "https://www.paxini.com/en/ax/pxcap3",
+   "links": {
+    "product": "https://www.paxini.com/en/ax/pxcap3"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.paxini.com/en/ax/pxcap3"
+   ],
+   "unconfirmed": [
+    "taxel count not stated"
+   ],
+   "thumb": "assets/hw/paxini_pxcap_iii.jpg"
+  },
+  {
+   "id": "paxini_pxcap_pro",
+   "name": "PXCap Pro",
+   "maker": "PaXini",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": 1743,
+   "taxels_note": "tactile signals per glove (vendor count)",
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Five-finger data-collection glove (17 DoF) with multidimensional array tactile sensors over fingertips and palm",
+    "3-D force plus distributed force; 0.1 N sensitivity, 1% FS repeatability",
+    "17 in-house magnetic angle encoders +-0.15 deg; one 160-165 deg 1080p global-shutter wrist camera",
+    "325 g; wrist pose via VR headset + controllers (<=5 mm); USB, 12 V DC"
+   ],
+   "image": "https://www.paxini.com/images/PxcapPro/section1-product.png",
+   "image_page": "https://www.paxini.com/en/ax/pxcapProp",
+   "links": {
+    "product": "https://www.paxini.com/en/ax/pxcapProp"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.paxini.com/en/ax/pxcapProp"
+   ],
+   "unconfirmed": [
+    "sensing principle not stated on the page (PaXini's core technology is 6D Hall arrays)",
+    "'1,743 tactile signals' may count force components rather than physical taxels"
+   ],
+   "thumb": "assets/hw/paxini_pxcap_pro.jpg"
+  },
+  {
+   "id": "genrobot_das_dex",
+   "name": "DAS Dex",
+   "maker": "GenRobot AI",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": null,
+   "taxels_note": null,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 200,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Hand data-collection glove with 23-DoF joint capture (magnetic encoders, 0.02 deg) and 3-D tactile data of the fingers",
+    "Tactile sensitivity 0.05 N, spatial resolution 1 mm",
+    "150 deg wrist camera, 200 Hz output, 1 ms latency; Wi-Fi/Type-C, 64 GB storage, 3 h battery",
+    "210 g; fits palm length 150-200 mm"
+   ],
+   "image": "https://www.genrobot.ai/images/products/dex/dex1.png",
+   "image_page": "https://www.genrobot.ai/products/dex",
+   "links": {
+    "product": "https://www.genrobot.ai/products/dex"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.genrobot.ai/products/dex",
+    "https://www.roboticscenter.ai/store/product/genrobot-das-dex"
+   ],
+   "unconfirmed": [
+    "region CN from third-party company records (Beijing); vendor page gives no address",
+    "coverage 'tip' inferred from the product render showing fingertip modules",
+    "reseller (Robotics Center) lists it as in stock, price on request"
+   ],
+   "thumb": "assets/hw/genrobot_das_dex.jpg"
+  },
+  {
+   "id": "handx_tactile_glove",
+   "name": "HANDX tactile glove",
+   "maker": "Shouzhi Innovation (HANDX)",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": 45,
+   "taxels_note": "standard per hand (3x3 per fingertip); optional up to 800",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "45 tactile points per hand in the standard build (fingertip 3x3 matrices), configurable up to 800",
+    "Fabric-embedded sensors; 120 g; repeatability 10% FS",
+    "BLE 5.0 and wired; >=8 h battery; -15 to 60 C",
+    "Kit: left/right gloves, wrist host unit; ROS 2, OpenXR, Unity, Unreal, Isaac Sim integrations"
+   ],
+   "image": "https://img.jiemian.com/101/original/20260729/import_1785313150454120250013.jpg",
+   "image_page": "https://www.jiemian.com/article/14844706.html",
+   "links": {},
+   "datasets": [],
+   "sources": [
+    "https://www.jiemian.com/article/14844706.html",
+    "https://cn.chinadaily.com.cn/a/202607/29/WS6a69c936a310d709c2fc06d5.html"
+   ],
+   "unconfirmed": [
+    "all facts from a July 2026 launch release reprinted by several outlets; no vendor product page found",
+    "coverage 'tip' inferred from 45 = 5 x (3x3) fingertip matrices; the 800-point option's layout is not described",
+    "image is a press photo of the gloves in use"
+   ],
+   "thumb": "assets/hw/handx_tactile_glove.jpg"
+  },
+  {
+   "id": "yaole_tacknit_glove_g1",
+   "name": "Tacknit Glove G1",
+   "maker": "Yaole Technology",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": 216,
+   "taxels_note": "per glove",
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Knitted glove: sensing yarn woven with base yarn during knitting, no laminated sensor layers",
+    "216 effective sensing points per glove over fingertips and palm; washable; about 60 g",
+    "Glove body is a replaceable consumable attached magnetically to a wrist control box with an ultra-wide camera",
+    "Factory pre-calibrated; tactile and image streams time-aligned"
+   ],
+   "image": "https://img.36krcdn.com/hsossms/20260821/v2_ff81bf81612a40e39858b9b419a78a18@6022551_oswg797587oswg1600oswg1200_img_png?x-oss-process=image/quality,q_90/format,jpg/interlace,1",
+   "image_page": "https://www.36kr.com/p/3948719097576840",
+   "links": {},
+   "datasets": [],
+   "sources": [
+    "https://eu.36kr.com/en/p/3948719097576840",
+    "https://www.36kr.com/p/3948719097576840",
+    "https://eu.36kr.com/en/p/3915175290901889"
+   ],
+   "unconfirmed": [
+    "facts from 36Kr launch coverage (2026-08-21); no vendor product page found",
+    "the lead's brand spelling 'Yotlive' could not be confirmed; press names the company Yaole Technology",
+    "press says the glove is in deployment testing with dexterous-hand makers; open sales not confirmed"
+   ],
+   "thumb": "assets/hw/yaole_tacknit_glove_g1.jpg"
+  },
+  {
+   "id": "art_glove",
+   "name": "ART-Glove",
+   "maker": "Carnegie Mellon University (Ding Zhao lab)",
+   "kind": "glove",
+   "availability": "research",
+   "region": "US",
+   "year": 2026,
+   "principle": "piezoresistive",
+   "taxels": 2048,
+   "taxels_note": "per glove",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 120,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Articulated glove: 16 rigid 3D-printed functional surfaces over fingers, thumb and palm, joined by 22 anatomically aligned joints",
+    "Dense piezoresistive tactile sensing on the surfaces: 2048 taxels",
+    "Encoder-based 22-DoF joint measurement synchronized with touch at 120 Hz"
+   ],
+   "image": "https://linchangyi1.github.io/ART-Glove/static/images/art-glove.png",
+   "image_page": "https://linchangyi1.github.io/ART-Glove/",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.16370",
+    "project": "https://linchangyi1.github.io/ART-Glove/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://arxiv.org/abs/2606.16370",
+    "https://arxiv.org/html/2606.16370v1",
+    "https://linchangyi1.github.io/ART-Glove/"
+   ],
+   "unconfirmed": [
+    "project page has a GitHub link placeholder; no design files found, so availability is research"
+   ],
+   "thumb": "assets/hw/art_glove.jpg"
+  },
+  {
+   "id": "flex_glove",
+   "name": "Flex-Glove",
+   "maker": "MIT CSAIL (Matusik lab)",
+   "kind": "glove",
+   "availability": "open_hardware",
+   "region": "US",
+   "year": 2025,
+   "principle": "piezoresistive",
+   "taxels": null,
+   "taxels_note": "per-region grids (e.g. 3x2 per finger pad); read out as 16x16 frames",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Personalized resistive tactile glove: FPCB electrode layers around a piezoresistive film, generated automatically from a hand photo",
+    "15 sensing regions over finger pads, thumb and palm",
+    "Under USD 130 per glove in materials, sensor assembly under 15 minutes",
+    "ESP32 readout with the open-source WiReSens Toolkit; design pipeline (KiCad output) on GitHub"
+   ],
+   "image": "https://arxiv.org/html/2503.06349v1/teaserlbwsmall.png",
+   "image_page": "https://arxiv.org/html/2503.06349v1",
+   "links": {
+    "paper": "https://arxiv.org/abs/2503.06349",
+    "code": "https://github.com/devinmur29/fpcb-glove-design"
+   },
+   "datasets": [],
+   "sources": [
+    "https://arxiv.org/abs/2503.06349",
+    "https://arxiv.org/html/2503.06349v1",
+    "https://github.com/devinmur29/fpcb-glove-design"
+   ],
+   "unconfirmed": [
+    "image is the paper's teaser figure",
+    "repo has no license file",
+    "maker credited as MIT CSAIL (Matusik lab) from the author list (Murphy ... Torralba, Matusik)"
+   ],
+   "thumb": "assets/hw/flex_glove.jpg"
+  },
+  {
+   "id": "sixthsense_skin",
+   "name": "Skin",
+   "maker": "6thSense",
+   "kind": "glove",
+   "availability": "announced",
+   "region": "US",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": 464,
+   "taxels_note": "sensing channels per hand",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 200,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Wearable tactile glove/skin with 464 channels over fingertips, finger pads and palm",
+    "12-bit force resolution (~0.1 N); 9-axis IMU; AprilTag markers for optical hand tracking",
+    "200 Hz over USB and Wi-Fi; left and right variants",
+    "Paired with the Eye2 Pro head-worn stereo camera for synced egocentric video"
+   ],
+   "image": "https://6thsense.dev/og-image-v3.png",
+   "image_page": "https://6thsense.dev/products",
+   "links": {
+    "product": "https://6thsense.dev/products"
+   },
+   "datasets": [],
+   "sources": [
+    "https://6thsense.dev/products",
+    "https://6thsense.dev",
+    "https://www.ycombinator.com/companies/6thsense"
+   ],
+   "unconfirmed": [
+    "the company says it sells captured data; whether the Skin hardware is sold is not stated, so listed as announced",
+    "image is the site's share card showing the glove and a robot-hand skin"
+   ],
+   "thumb": "assets/hw/sixthsense_skin.jpg"
+  },
+  {
+   "id": "tactilus_glove",
+   "name": "Tactilus sensor glove",
+   "maker": "Sensor Products Inc.",
+   "kind": "glove",
+   "availability": "commercial",
+   "region": "US",
+   "year": null,
+   "principle": "piezoresistive",
+   "taxels": 24,
+   "taxels_note": "per glove; 7.95 x 7.95 mm sensors",
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 1000,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "24 piezoresistive (resistive ink) sensing points per glove",
+    "0-100 psi (0-7 kg/cm2); accuracy +-10%, repeatability +-4%",
+    "Scan speed up to 1,000 Hz; sensors 1 mm thick; sizes S-XL",
+    "Windows Tactilus software"
+   ],
+   "image": "https://www.sensorprod.com/wp-content/uploads/2023/11/glove_image.jpg",
+   "image_page": "https://www.sensorprod.com/applications/grip-pressure-sensor-glove/",
+   "links": {
+    "product": "https://www.sensorprod.com/applications/grip-pressure-sensor-glove/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.sensorprod.com/applications/grip-pressure-sensor-glove/"
+   ],
+   "unconfirmed": [
+    "sensor placement not listed; coverage read from the product photo"
+   ],
+   "thumb": "assets/hw/tactilus_glove.jpg"
+  },
+  {
+   "id": "sharpa_wave",
+   "name": "SharpaWave (Wave W01)",
+   "maker": "Sharpa",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "SG",
+   "year": 2025,
+   "principle": "optical",
+   "taxels": null,
+   "taxels_note": "Vision-based fingertip sensors (camera per fingertip); vendor gives a tactile image resolution, not a taxel count. A Sharpa press release says 'over 1,000 tactile pixels' per fingertip.",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 180,
+   "dof": 22,
+   "price": "on request",
+   "specs": [
+    "22 active DoF, 22 actuation modules; 1.3 kg; 208 x 90 x 50 mm; fingertip force 20 N, grip force 150 N (W01).",
+    "Dynamic Tactile Array (DTA): camera-based tactile sensor in each fingertip; outputs 6-axis force/torque (Fx..Mz), contact location, slip; 20 ms latency.",
+    "W01: tactile resolution 240x240, 180 fps, 0.02 N force resolution, 1 mm spatial resolution, raw image output, host + on-board inference.",
+    "W01 SE variant: 60x60, 30 fps, 0.05 N, 2 mm, no raw image output, on-board inference only; both 0-30 N range, 50 N max load.",
+    "1000BASE-T Ethernet, 500 Hz communication; ROS 2, MuJoCo / Isaac Sim models, SharpaPilot SDK.",
+    "Sharpa also sells the W02 (21 DoF, full-hand tactile, launched Sept 2026) - a different hand."
+   ],
+   "image": "https://www.sharpa.com/cdn/shop/files/Codex_2026_8_17_17_57_19.jpg?v=1787034361",
+   "image_page": "https://www.sharpa.com/pages/wave",
+   "links": {
+    "product": "https://www.sharpa.com/pages/w01"
+   },
+   "datasets": [
+    {
+     "id": "trex",
+     "role": "robot hand"
+    }
+   ],
+   "sources": [
+    "https://www.sharpa.com/pages/w01",
+    "https://www.sharpa.com/pages/wave",
+    "https://www.sharpa.com/pages/about",
+    "https://www.sharpa.com/blogs/news",
+    "https://www.sharpa.com/blogs/news/ai-robotmaker-sharpa-reaches-key-milestone-of-mass-production",
+    "https://www.sharpa.com/blogs/news/sharpa-launches-three-flagship-products-at-iros-pushing-the-boundaries-of-dexterous-manipulation"
+   ],
+   "unconfirmed": [
+    "Region SG inferred from the site footer 'Sharpa Pte Ltd' (Singapore company form) and the shop's country code SG; no street address seen.",
+    "Year 2025: earliest dated vendor items are the CES 2026 Innovation Award (2025-12-16) and mass-production (2025-12-19) news; an earlier public showing was not checked.",
+    "Which variant (W01 or W01 SE) T-Rex used is not stated in the catalog; its 320x240 raw image at 30 Hz matches neither spec column exactly.",
+    "Third-party listings (humanoid.guide, roboticscenter.ai) quote USD 20k-50k; not vendor-published, so price is left as on request.",
+    "Image is 360x360 px (largest size the vendor CDN serves for this file)."
+   ],
+   "thumb": "assets/hw/sharpa_wave.jpg"
+  },
+  {
+   "id": "psyonic_ability_hand",
+   "name": "Ability Hand",
+   "maker": "PSYONIC",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "US",
+   "year": 2019,
+   "principle": "piezoresistive",
+   "taxels": 30,
+   "taxels_note": "per hand: 30 force-sensing resistors, 6 per digit",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": 6,
+   "price": "on request",
+   "specs": [
+    "6 actuated DoF (1 per finger, 2 for the thumb), BLDC motors; position, velocity, current and duty control; max control frequency 1 kHz.",
+    "30 FSR touch sites (6 per digit), normal force only, 12-bit raw values; vendor has not calibrated the FSRs and gives placeholder force constants.",
+    "Interfaces I2C, BLE, UART, RS485; open API (github.com/psyonicinc/ability-hand-api); Python, C++, ROS 2.",
+    "Large 470 g / small 440 g; power grasp 78 N; IP64.",
+    "Prosthetic version (sold through clinicians) adds vibrotactile feedback to the user's arm and a battery wrist; robotics version is sold for research/industrial integration."
+   ],
+   "image": "https://static1.squarespace.com/static/61229f1b98e6c829c570bace/t/613022ffb5449954bab1a04c/1630544639403/Productherocrop.png?format=1500w",
+   "image_page": "https://www.psyonic.io/ability-hand",
+   "links": {
+    "product": "https://www.psyonic.io/robots",
+    "code": "https://github.com/psyonicinc/ability-hand-api"
+   },
+   "datasets": [
+    {
+     "id": "hato",
+     "role": "robot hand"
+    }
+   ],
+   "sources": [
+    "https://www.psyonic.io/ability-hand",
+    "https://www.psyonic.io/robots",
+    "https://www.psyonic.io/get-yours",
+    "https://www.psyonic.io/s/Robotics-Spec-Sheet_06-000006.pdf",
+    "https://github.com/psyonicinc/ability-hand-api/blob/master/Documentation/ABILITY-HAND-ICD.pdf"
+   ],
+   "unconfirmed": [
+    "Year 2019 from third-party/university reports (limited release announced at AOPA 2019, nationwide launch 2021), not from a PSYONIC page.",
+    "Touch-sensor streaming rate is not stated separately from the 1 kHz max control frequency; HATO logged at 10 Hz.",
+    "Price: PSYONIC publishes no price; robotics sales go through 'Book a call'.",
+    "Image shows the prosthetic configuration (carbon socket); no clean robotics-version product shot found on the vendor site."
+   ],
+   "thumb": "assets/hw/psyonic_ability_hand.jpg"
+  },
+  {
+   "id": "allegro_hand_v5",
+   "name": "Allegro Hand V5 Plus",
+   "maker": "Wonik Robotics",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "KR",
+   "year": null,
+   "principle": "barometric",
+   "taxels": 4,
+   "taxels_note": "per hand: one pneumatic (air-pressure) sensor per fingertip on the 4-finger V5 Plus",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": 16,
+   "price": "on request",
+   "specs": [
+    "4 fingers x 4 = 16 active, current-controlled joints; 1,024 g; payload 15 kg; CAN at 500 Hz.",
+    "360-degree omnidirectional fingertip sensor: silicone finger-shaped chamber, air pressure read by a capacitive pressure sensor; fingertip LED colour changes with pressure.",
+    "Four fingertip types (A default, B, C, D) sold separately.",
+    "Family: V5 is the 3-finger, 9-DoF version with the same fingertip sensor; V5 Sense (16 DoF) has 16 pressure channels (fingertips + finger joints, 0-400 kPa, 0.1 kPa accuracy); V4 has no tactile sensing.",
+    "CE certified (attestation issued 2025-02-24)."
+   ],
+   "image": "https://www.allegrohand.com/upload/prod/V5%20Plus_%E1%84%83%E1%85%A2%E1%84%91%E1%85%AD%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5_1_33756.png",
+   "image_page": "https://www.allegrohand.com/sub/product/p.php?idx=4",
+   "links": {
+    "product": "https://www.allegrohand.com/sub/product/p.php?idx=4"
+   },
+   "datasets": [
+    {
+     "id": "hrdexdb",
+     "role": "robot hand"
+    }
+   ],
+   "sources": [
+    "https://www.allegrohand.com/",
+    "https://www.allegrohand.com/sub/product/p.php?idx=4",
+    "https://www.allegrohand.com/sub/product/p.php?idx=3",
+    "https://www.allegrohand.com/sub/product/p.php?idx=22",
+    "https://www.allegrohand.com/sub/product/p.php?idx=1",
+    "https://www.allegrohand.com/sub/tech/t.php?idx=5"
+   ],
+   "unconfirmed": [
+    "Entry covers the tactile V5 Plus (the hand in HRDexDB); the base V4 has no touch sensing. The T-Dex Allegro with XELA pads is a V4 and belongs to xela_uskin_allegro.",
+    "Fingertip sensor range/resolution for V5 Plus not published on its page (V5 Sense page gives 0-400 kPa); tactile sample rate not stated (HRDexDB logs ~100 Hz).",
+    "Year unknown: CE attestation dated 2025-02-24; a third-party spec site gives 2024, unverified.",
+    "Price: vendor sells via Contact Sales; reseller Knox Labs lists 'price on request' (third party).",
+    "Image URL contains NFD-encoded Korean characters in the vendor filename; it resolves (200, image/png) but may be fragile. Smaller alternative: https://www.allegrohand.com/upload/prod/product_img03_93e54.png"
+   ],
+   "thumb": "assets/hw/allegro_hand_v5.jpg"
+  },
+  {
+   "id": "xela_uskin_allegro",
+   "name": "uSkin for Allegro Hand V4 Curved",
+   "maker": "XELA Robotics",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "JP",
+   "year": null,
+   "principle": "magnetic",
+   "taxels": 368,
+   "taxels_note": "per hand (current kit): 4 fingertips x 30 + 11 phalanges x 16 + 72 palm sensing points, each 3-axis; 1,472 measurements incl. temperature",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 275,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Kit for the Wonik Allegro Hand V4: curved uSCu ALHA fingertips (30 points each) plus flat uSkin Patch pads on phalanges and palm; user picks which parts to cover.",
+    "Each sensing point: 3-axis force (normal + 2 shear) plus internal temperature; Hall-effect based (uSCu spec sheet).",
+    "Max rate 275 Hz (fingertips), up to 450 Hz for phalanges/palm depending on configuration.",
+    "One 4-wire cable per finger, two CAN bus cables for the whole hand; microcontrollers on finger backs and inside the palm; replaceable outer layer on fingertips.",
+    "uSCu fingertip (Oct 2024 sheet, sensitivity H): z 0-7.3 N, x/y +-0.7 N, 0.0004 N/LSB."
+   ],
+   "image": "https://xelarobotics.com/wp-content/uploads/2025/12/img-allegro-hand-v4-curved-1.jpg",
+   "image_page": "https://xelarobotics.com/products/for-allegro-hand-v4-curved/",
+   "links": {
+    "product": "https://xelarobotics.com/products/for-allegro-hand-v4-curved/",
+    "paper": "https://arxiv.org/abs/2303.12076"
+   },
+   "datasets": [
+    {
+     "id": "tdex",
+     "role": "tactile sensor"
+    }
+   ],
+   "sources": [
+    "https://xelarobotics.com/products/for-allegro-hand-v4-curved/",
+    "https://xelarobotics.com/products/uscu-alha/",
+    "https://xelarobotics.com/wp-content/uploads/2025/12/uSCu_Specsheet_Oct_2024.pdf",
+    "https://xelarobotics.com/about/",
+    "https://xelarobotics.com/company-profile/",
+    "https://arxiv.org/pdf/2303.12076"
+   ],
+   "unconfirmed": [
+    "T-Dex (2023) used an earlier configuration: 15 flat 4x4 pads (4 per finger, 3 on the thumb, 240 taxels, no palm) at 100 Hz; the current vendor kit (curved 30-point fingertips + palm) differs.",
+    "Year of the first XELA Allegro integration not found.",
+    "Rates differ between sources: product page 275 Hz; Oct 2024 uSCu spec sheet 71 Hz (older microcontroller presumably).",
+    "Price: vendor sells by quotation ('Request a Quotation')."
+   ],
+   "thumb": "assets/hw/xela_uskin_allegro.jpg"
+  },
+  {
+   "id": "xela_uskin",
+   "name": "uSkin",
+   "maker": "XELA Robotics",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "JP",
+   "year": 2018,
+   "principle": "magnetic",
+   "taxels": 16,
+   "taxels_note": "per module, for the uSPa 44 reference patch (4x4); modules range from 1 (uSPa 11) to 30 (uSCu fingertip), up to 64 per module",
+   "coverage": [],
+   "rate_hz": 450,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "Soft skin with distributed 3-axis taxels (normal + 2 shear) about 4x4 mm each, plus a temperature sensor per point; Hall-effect based; patented magnetic-interference compensation.",
+    "Patches (uSPa): 11 (1 point, 7x7x4 mm), 21 (2), 22 (4), 44 (16, 23x25x5 mm), 46 (24, 31x46x5 mm); uSPa 44 up to 450 Hz.",
+    "Curved fingertips (uSCu): ALHA for Allegro and LEAP Hand (30 points), ALHA-N, TEHA for the Tesollo hand, and an iCub fingertip (with IIT).",
+    "Protected gripper sensors (uSPr): Robotiq Hand-E (HE35), 2F-85/2F-140 (2F), Weiss WSG 50, DS; uSPa 44 kit for the UMI gripper.",
+    "uSPa 44 (Oct 2024 sheet, sensitivity H): z 0-11.4 N, x/y +-1.55 N, 0.0007-0.001 N/LSB; two sensitivity settings; uAi software for visualization and calibration."
+   ],
+   "image": "https://xelarobotics.com/wp-content/uploads/2025/12/thumbnail-uspa-44.jpg",
+   "image_page": "https://xelarobotics.com/products/uspa-44/",
+   "links": {
+    "product": "https://xelarobotics.com/products/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://xelarobotics.com/",
+    "https://xelarobotics.com/products/",
+    "https://xelarobotics.com/products/uspa-44/",
+    "https://xelarobotics.com/products/uscu-alha/",
+    "https://xelarobotics.com/technology/",
+    "https://xelarobotics.com/wp-content/uploads/2025/12/uSPa44_Specsheet_Oct_2024.pdf",
+    "https://xelarobotics.com/about/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC4851005"
+   ],
+   "unconfirmed": [
+    "Year 2018 is XELA's founding (Aug 2018, Waseda spin-out); the first uSkin product release date was not found (the Waseda Hall-effect skin research dates to 2016).",
+    "Rates differ: uSPa 44 product page 'up to 450 Hz'; Oct 2024 spec sheet 133 Hz.",
+    "Price: vendor sells by quotation."
+   ],
+   "thumb": "assets/hw/xela_uskin.jpg"
+  },
+  {
+   "id": "hit_longlin_96",
+   "name": "LongLin-96 (龙鳞96)",
+   "maker": "Wuhan Huaweike Intelligent Technology (HIT 华威科)",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "CN",
+   "year": null,
+   "principle": "piezoresistive",
+   "taxels": 96,
+   "taxels_note": "per module (vendor: 12 x 8 array, 1.2 mm pitch); DexViTac paper reports 8 x 16",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 1000,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Model EBX_DCT_00_R10_1317, LongLin (龙鳞) series of the 'data-collection professional' tactile sensors; flat PCBA module 13.01 x 17.72 x 3.2 mm for finger pads, fingertips and grippers.",
+    "Piezoresistive array, normal force only; 0-20 N range, 0.05 N trigger force and resolution (website table).",
+    "Sampling >= 1 kHz, latency <= 10 ms (2026 catalog); website lists output frequency > 100 Hz; UART (catalog: UART/I2C/SPI).",
+    "Series siblings: LongLin-72 (12x6), -40 (10x4), -18 (6x3), flexible FPC LongLin-112S (8x14) and -1024S (32x32).",
+    "DexViTac fits five modules in finger sleeves on a Manus glove and identical modules on an Inspire RH56DFTP hand."
+   ],
+   "image": "https://www.whhit.cn/bocupload/2026/09/24/17902166959372zfuef.png",
+   "image_page": "https://www.whhit.cn/product/info/11.html",
+   "links": {
+    "product": "https://www.whhit.cn/product/info/11.html",
+    "paper": "https://arxiv.org/abs/2603.17851",
+    "project": "https://xitong-c.github.io/DexViTac/"
+   },
+   "datasets": [
+    {
+     "id": "dexvitac",
+     "role": "tactile sensor"
+    }
+   ],
+   "sources": [
+    "https://arxiv.org/pdf/2603.17851",
+    "https://xitong-c.github.io/DexViTac/",
+    "https://www.whhit.cn/",
+    "https://www.whhit.cn/product/info/11.html",
+    "https://www.whhit.cn/bocupload/2026/10/08/179142530182rjv7j.png",
+    "https://www.worldrobotconference.com/profile/robot/download/2026/07/21/20260721161130000873_20260721161130A221.pdf",
+    "https://arxiv.org/html/2603.17851",
+    "https://www.hbwhhit.com/flexible-sensors/standard-pressure-sensor-for-agile-hand.html",
+    "https://www.huxiu.com/article/4882951.html",
+    "https://www.shifair.com/informationDetails/384343.html"
+   ],
+   "unconfirmed": [
+    "Maker identified from the vendor brand 'HIT华威科' (Huaweike) and its LongLin/龙鳞96 product; DexViTac's fourth author is from Wuhan Huaweike, consistent with 'HIT LongLin-96'.",
+    "Spec conflicts: paper says 8x16 taxels, ~140 mm2, 0.01 N sensitivity, <5% FS, 1000 Hz; vendor website says 12x8 = 96 points, 13.01 x 17.72 mm, 0.05 N; 2026 catalog says 0.01 N trigger, <1% FS, >= 1 kHz, ranges 0-5/0-20/0-50 N. The DexViTac unit may be a custom or earlier version.",
+    "Product-image mapping (first image on the series page = LongLin-96) inferred from page order and module shape.",
+    "No public price; first release year not found (vendor launched its EmbosenX sub-brand in Dec 2025 per press).",
+    "Maker identity is inferred: the paper writes only 'HIT LongLin-96'. HIT is the brand of Wuhan Huaweike Intelligent Technology (hbwhhit.com, flexible tactile sensors for dexterous hands); trade-show press says Huaweike shows a '龙鳞' (LongLin) product series and that it supplies Inspire Robots. No Huaweike page lists a 'LongLin-96' model.",
+    "Availability 'commercial' assumes a catalogue product of that vendor; no public listing or price found.",
+    "Principle not stated by the paper ('flexible pressure-sensitive'); Huaweike's published dexterous-hand fingertip arrays (HIT-DHS-T1017/T1317, 6x12 / 8x12) are piezoresistive, but that is a different model.",
+    "The name says 96 but the paper gives an 8 x 16 (128) array; not explained.",
+    "Image is the DexViTac system-design figure (glove, exploded module labelled LongLin-96, Inspire hand), not a vendor photo."
+   ],
+   "thumb": "assets/hw/hit_longlin_96.jpg"
+  },
+  {
+   "id": "inspire_rh56dftp",
+   "name": "RH56DFTP (now listed as RH56E2)",
+   "maker": "Inspire Robots (Beijing Inspire-Robots Technology Co., Ltd.)",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2024,
+   "principle": "piezoresistive",
+   "taxels": 1062,
+   "taxels_note": "per hand, piezoresistive version (RH56DFTP-0L/0R, -2L/2R): 17 regions; each finger 3x3 tip + 12x8 nail + 10x8 pad, thumb 3x3 tip + 12x8 nail + 3x3 middle + 12x8 pad, palm 8x14",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": 6,
+   "price": "USD 20,599.99 (list)",
+   "specs": [
+    "6 actuated DoF, 12 joints; six linear servo actuators each with a force sensor (0.1 N resolution); 30 N fingertip force",
+    "Piezoresistive version: 1,062 taxels in 17 regions, each a 16-bit register with range 0-4095",
+    "Capacitive -C1 version (RH56DFTP-0L/0R-C1, -2L/2R-C1): five fingertip sensors reporting normal force, tangential force, tangential direction (0-359 deg) and proximity",
+    "Interfaces: Modbus TCP over Ethernet plus CAN 2.0 or RS485; 24 V",
+    "Inspire's RH56DFTP product URLs now show the RH56E2 series (tactile sensor count 5-17 by configuration); the RH56E2 manual (June 2025) documents the RH56DFTP tactile formats. The plain RH56DFX lists 6 force sensors and no tactile array"
+   ],
+   "image": "https://en.inspire-robots.com/wp-content/uploads/2026/09/Products_E2-1024x1024.jpg",
+   "image_page": "https://en.inspire-robots.com/product-category/the-dexterous-hands/rh56e2/",
+   "links": {
+    "product": "https://en.inspire-robots.com/product-category/the-dexterous-hands/rh56e2/"
+   },
+   "datasets": [
+    {
+     "id": "hrdexdb",
+     "role": "robot hand"
+    },
+    {
+     "id": "dexvitac",
+     "role": "robot hand"
+    },
+    {
+     "id": "gist_vta",
+     "role": "robot hand"
+    }
+   ],
+   "sources": [
+    "https://en.inspire-robots.com/wp-content/uploads/2026/09/Dexterous-Hands-User-Manual-for-RH56E2_V1.0.0.pdf",
+    "https://www.inspire-robots.com/dexterous%20hands/rh56dftp-series/",
+    "https://web.archive.org/web/20250625053610/https://www.inspire-robots.com/dexterous%20hands/rh56dftp-series/",
+    "https://inspire-robots.store/products/the-dexterous-hands-rh56dftp",
+    "https://web.archive.org/web/20241111050908/https://inspire-robots.store/products/the-dexterous-hands-rh56dftp",
+    "https://en.inspire-robots.com/product-category/the-dexterous-hands/rh56e2/",
+    "https://www.inspire-robots.com/dexterous%20hands/rh56dfx-series/",
+    "https://inspire-robots.store/products/the-dexterous-hands-rh56dfx-series",
+    "https://en.inspire-robots.com/wp-content/uploads/2026/09/INSPIRE-ROBOTS-THE-DEXTEROUS-HAND-RH56-SERIES-USER-MANUAL.pdf",
+    "https://news.pedaily.cn/20241023/95818.shtml",
+    "https://arxiv.org/html/2510.25725",
+    "https://arxiv.org/html/2604.14944",
+    "https://arxiv.org/html/2603.17851",
+    "https://arxiv.org/html/2510.08807",
+    "https://arxiv.org/html/2607.09190"
+   ],
+   "unconfirmed": [
+    "gist_vta: the paper names an 'Inspire Hand (RH56-DFX)' with 1,062 sensors per hand over fingers and palm. Inspire's RH56DFX spec lists no tactile sensors, while 1,062 is exactly the RH56DFTP piezoresistive layout, so gist_vta is listed here as the same tactile hardware (inferred, not stated by the authors).",
+    "RH56DFTP -> RH56E2 rename is inferred: the vendor's rh56dftp URLs (Chinese site and store) now show RH56E2 with the same parameter table that the June 2025 archived page showed under the title RH56DFTP系列.",
+    "Price is the current inspire-robots.store listing reached via the RH56DFTP URL (titled RH56E2, USD 20,599.99); that listing does not say which tactile configuration is included. The November 2024 archived listing titled RH56DFTP showed USD 24,399.99 and '17 tactile sensors'.",
+    "Year 2024 from a press report that Inspire showed the FTP series tactile hand at WRC 2024 (Aug 21-25, Beijing) and the November 2024 archived store listing; no dated vendor announcement found.",
+    "Tactile sampling rate not stated by the vendor.",
+    "dexvitac: the hand was fitted with HIT LongLin-96 fingertip modules (8x16 taxels each); the dataset's tactile comes from those modules, not from Inspire's built-in arrays (DexViTac paper).",
+    "Not listed: humanoid_everyday (H1 with '6-DoF INSPIRE hands', model not stated, no tactile recorded) and tactidex (real-robot deployment on Franka + Inspire hands 'equipped with tactile sensors', model not stated, tactile unused; the dataset itself is glove data).",
+    "Image is Inspire's RH56E2 product render."
+   ],
+   "thumb": "assets/hw/inspire_rh56dftp.jpg"
+  },
+  {
+   "id": "inspire_rh56f1",
+   "name": "RH56F1",
+   "maker": "Inspire Robots (Beijing Inspire-Robots Technology Co., Ltd.)",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2025,
+   "principle": "capacitive",
+   "taxels": 8,
+   "taxels_note": "per hand: 8 force-sensing sites (5 fingertips + 3 palm regions), each reporting normal force, tangential force and tangential direction; fingertips also report a 24-bit proximity value",
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": 6,
+   "price": "USD 20,599.99 (list)",
+   "specs": [
+    "6 actuated DoF, 12 joints; six linear servo actuators with force sensors (0.1 N resolution); thumb >15 N, four fingers >10 N grip force",
+    "Capacitive fingertip sensors: normal and tangential force at 0.01 N per count, tangential direction 0-359 deg, proximity; three palm regions (right, middle, left) with normal, tangential force and direction",
+    "Tactile sensor range 30 N, accuracy 5% FS (vendor table, -T1 variants)",
+    "Interfaces: RS485 + EtherCAT or CAN FD + EtherCAT; 24-48 V",
+    "Chinese vendor site now lists the line as RH56F2; tactile models carry the -T1 suffix (8 tactile sensors), non-T1 models have none"
+   ],
+   "image": "https://en.inspire-robots.com/wp-content/uploads/2026/09/Products_F1-1024x1024.jpg",
+   "image_page": "https://en.inspire-robots.com/product-category/the-dexterous-hands/rh56f1/",
+   "links": {
+    "product": "https://en.inspire-robots.com/product-category/the-dexterous-hands/rh56f1/"
+   },
+   "datasets": [
+    {
+     "id": "hrdexdb",
+     "role": "robot hand"
+    }
+   ],
+   "sources": [
+    "https://en.inspire-robots.com/wp-content/uploads/2026/09/RH56F1-User-ManualV1.2.pdf",
+    "https://en.inspire-robots.com/product-category/the-dexterous-hands/rh56f1/",
+    "https://www.inspire-robots.com/dexterous%20hands/RH56F1-series/",
+    "https://inspire-robots.store/products/the-dexterous-hands-rh56f1",
+    "https://arxiv.org/html/2604.14944"
+   ],
+   "unconfirmed": [
+    "Year 2025 is inferred from the manual's revision table (V1.0 first release 2025-06); no dated launch announcement found.",
+    "The manual says the fingers carry capacitive sensors; the principle of the three palm sensing regions is not stated.",
+    "Price is the inspire-robots.store listing for RH56F1; the listing does not say whether the tactile (-T1) configuration is included.",
+    "Tactile sampling rate not stated (the store text mentions 1 kHz real-time communication for the hand).",
+    "Count 8 counts force-sensing sites, not array taxels; the vendor calls them 8 tactile sensors."
+   ],
+   "thumb": "assets/hw/inspire_rh56f1.jpg"
+  },
+  {
+   "id": "unitree_dex3_1",
+   "name": "Dex3-1",
+   "maker": "Unitree Robotics",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2024,
+   "principle": "unspecified",
+   "taxels": 33,
+   "taxels_note": "per hand: 9 array sensors - 3 palm arrays 2x2, 3 finger-pad arrays 2x2, 3 fingertip arrays 3x1",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": 7,
+   "price": null,
+   "specs": [
+    "Three fingers, 7 actuated DoF (thumb 3, index 2, middle 2): 6 direct-drive and 1 geared micro brushless force-controlled joints",
+    "33 pressure points, range 10 g-2500 g, 20 kg maximum without damage; feedback includes sensor pressure and sensor temperature",
+    "USB 2.0, 1000 Hz communication rate for the full hand packet",
+    "710 g, 175 x 88 x 77 mm; pairs with the Unitree G1 humanoid; tactile arrays were an option on the 2024 G1 configuration"
+   ],
+   "image": "https://www.unitree.com/images/4eff56e5733d4fdbb8276bf6c65daa74_1920x1080.png",
+   "image_page": "https://www.unitree.com/Dex3-1/",
+   "links": {
+    "product": "https://www.unitree.com/Dex3-1/"
+   },
+   "datasets": [
+    {
+     "id": "humanoid_everyday",
+     "role": "robot hand"
+    }
+   ],
+   "sources": [
+    "https://www.unitree.com/Dex3-1/",
+    "https://www.unitree.com/cn/Dex3-1/",
+    "https://web.archive.org/web/20240514125401/https://www.unitree.com/g1/",
+    "https://arxiv.org/html/2510.08807"
+   ],
+   "unconfirmed": [
+    "Year 2024 from the archived May 2024 Unitree G1 page, which lists Dex3-1 with optional tactile sensor arrays; the dedicated Dex3-1 page is archived from January 2025.",
+    "Sensing principle not stated by Unitree.",
+    "Per-sensor sampling rate not stated; 1000 Hz is the vendor's whole-hand communication rate.",
+    "Price not published on Unitree's own store.",
+    "Image is a Unitree dimension render (with a human-hand outline), not a plain product photo."
+   ],
+   "thumb": "assets/hw/unitree_dex3_1.jpg"
+  },
+  {
+   "id": "unitree_dex5_1",
+   "name": "Dex5-1P (tactile version of Dex5-1)",
+   "maker": "Unitree Robotics",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2025,
+   "principle": "unspecified",
+   "taxels": 94,
+   "taxels_note": "per hand: palm 2x5, fingertip 2x3 x5, finger pad 2x3 x5, finger root 2x3 x4 (no thumb root)",
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "dof": 16,
+   "price": null,
+   "specs": [
+    "Five fingers, 20 DoF (16 active + 4 passive); 12 composite-transmission and 4 geared force-controlled joints",
+    "Dex5-1P: 94 pressure sensors in 12 arrays, range 10 g-2500 g, 20 kg maximum without damage; reports sensor pressure and temperature. Base Dex5-1 has no tactile",
+    "USB 2.0, 1000 Hz communication rate; 24-60 V",
+    "1100 g, 217.3 x 127.5 x 72.1 mm; fingertip force 10 N"
+   ],
+   "image": "https://www.unitree.com/images/aee66a4bc16c4eb68d8bc705da172761_2000x859.png",
+   "image_page": "https://www.unitree.com/Dex5-1/",
+   "links": {
+    "product": "https://www.unitree.com/Dex5-1/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.unitree.com/Dex5-1/",
+    "https://www.robotics247.com/article/unitree-releases-new-dex5-1-humanoid-robot-hand/news"
+   ],
+   "unconfirmed": [
+    "Year 2025 from the Robotics 24/7 release report (May 28, 2025).",
+    "Availability: Unitree's page says the final shipped version may vary and the hand is not on Unitree's online store; sold-by-inquiry status assumed.",
+    "Sensing principle and per-sensor sampling rate not stated.",
+    "Image is Unitree's dimension render of the hand."
+   ],
+   "thumb": "assets/hw/unitree_dex5_1.jpg"
+  },
+  {
+   "id": "brainco_revo2_tactile",
+   "name": "Revo2 TOUCH (tactile version, XTL/XTR)",
+   "maker": "BrainCo (Zhejiang Qiangnao Technology Co., Ltd.)",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2025,
+   "principle": "capacitive",
+   "taxels": 5,
+   "taxels_note": "per hand, capacitive version: one 3D force + proximity reading per fingertip, each derived from 6 capacitive channels",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": 6,
+   "price": null,
+   "specs": [
+    "11 DoF (6 active); 383 g; whole-hand grip >=50 N, pinch >=15 N",
+    "Capacitive fingertip module: normal and tangential force 0-25 N at 0.01 N per count, tangential direction 0-359 deg, 32-bit proximity value, per-finger status",
+    "Firmware also defines a piezoresistive tactile type: 9 points per finger plus per-finger combined force",
+    "Interfaces: RS485, CAN FD, EtherCAT; 12-64 V; Python/C SDK and ROS 2"
+   ],
+   "image": "https://www.brainco-hz.com/docs/revolimb-hand/images/legacy/docs-sdk/MFkRNSPsdvDjgmyV.webp",
+   "image_page": "https://www.brainco-hz.com/docs/revolimb-hand/revo2/parameters.html",
+   "links": {
+    "product": "https://www.brainco-hz.com/docs/revolimb-hand/en/revo2/parameters.html",
+    "code": "https://github.com/BrainCoTech/brainco-hand-sdk"
+   },
+   "datasets": [
+    {
+     "id": "tacross",
+     "role": "robot hand"
+    },
+    {
+     "id": "robotacdex",
+     "role": "robot hand"
+    }
+   ],
+   "sources": [
+    "https://www.brainco-hz.com/docs/revolimb-hand/revo2/parameters.html",
+    "https://www.brainco-hz.com/docs/revolimb-hand/en/revo2/parameters.html",
+    "https://www.brainco-hz.com/docs/revolimb-hand/en/revo2/modbus_touch.html",
+    "https://github.com/BrainCoTech/revo-hand-firmware",
+    "https://github.com/BrainCoTech/brainco-hand-sdk",
+    "https://www.red-dot.org/project/brainco-intelligent-bionic-hand-revo2-88277",
+    "https://pr.enewspf.com/article/BrainCo-Launches-Revo2-Hand-for-Humanoid-Robotics/68c95ca6b83f4e9fe2c52880",
+    "https://arxiv.org/html/2610.11945"
+   ],
+   "unconfirmed": [
+    "Region: the Revo2 docs are on brainco-hz.com (Hangzhou) with copyright 'BrainCo Inc.', press releases are datelined Boston, and the Red Dot entry (submitted by the maker) names Zhejiang Qiangnao Technology Co., Ltd., Hangzhou, China as manufacturer -> CN.",
+    "Year 2025 from press (Chinese reports May 2025; PR Newswire release Sept 16, 2025); no dated vendor page.",
+    "Which shipping SKUs carry the piezoresistive tactile type is not stated; the 'touch' docs describe the capacitive fingertip module as the tactile version.",
+    "Tactile sampling rate not stated by the vendor (RoboTacDex reports 100 Hz over Unitree DDS).",
+    "Price not published by BrainCo.",
+    "Image is a render from BrainCo's Revo2 docs; it is not labelled as the tactile version."
+   ],
+   "thumb": "assets/hw/brainco_revo2_tactile.jpg"
+  },
+  {
+   "id": "linker_hand",
+   "name": "Linker Hand (tactile models: L20, L20 Lite, L30 Pro, L6, O6)",
+   "maker": "LinkerBot",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": null,
+   "principle": "piezoresistive",
+   "taxels": 360,
+   "taxels_note": "per hand: one 6x12 piezoresistive array per fingertip x 5 (L20 and L20 Lite manuals)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 200,
+   "dof": 16,
+   "price": null,
+   "specs": [
+    "Fingertip array: 6x12 piezoresistive, 9.6 x 14.4 mm, 5 g trigger force, 20 N range, 200 frames/s (L20, L20 Lite)",
+    "Optional capacitive fingertip sensor (L20 Lite manual): 3D force 0-30 N, 0.1 N sensitivity, 45 deg direction resolution, 1 cm proximity, >=50 Hz; optional vision-based tactile",
+    "Models: L20 16 active + 5 passive DoF (dof field); L20 Lite 10 + 10; L30 Pro 18 + 4 (tendon); L6 and O6 6 + 5 (O6 tactile optional)",
+    "SDK returns a 12x6 uint8 matrix per finger for L6, L20 and L30; older SDK also reads per-finger normal/tangential force, direction and proximity",
+    "Interfaces: CAN / RS485 (L20), CAN FD (L30 Pro), CAN / CAN FD / RS485 / EtherCAT (O6)"
+   ],
+   "image": "https://botdata.oss-cn-beijing.aliyuncs.com/afterSales/linkerbot_img/products/linkerhand-l20/detail-4.png",
+   "image_page": "https://www.linkerbot.cn/details/LinkerHandL20",
+   "links": {
+    "product": "https://www.linkerbot.cn/details/LinkerHandL20",
+    "code": "https://github.com/linker-bot/linkerbot-python-sdk"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.linkerbot.cn/details/LinkerHandL20",
+    "https://www.linkerbot.cn/details/LinkerHandL20Lite",
+    "https://www.linkerbot.cn/details/LinkerHandL30",
+    "https://www.linkerbot.cn/details/LinkerHandL6",
+    "https://www.linkerbot.cn/details/LinkerHandO6",
+    "https://a.storyblok.com/f/298593/x/50a0fc9e84/linker-hand-l20-v10-20260324.pdf",
+    "https://a.storyblok.com/f/298593/x/bd1fd20344/linker-hand-l20-lite-20260402.pdf",
+    "https://github.com/linker-bot/linkerbot-python-sdk",
+    "https://github.com/linker-bot/linkerhand-python-sdk",
+    "https://runtimewire.com/article/linkerbot-vision-tactile-linkerhand-fingertips"
+   ],
+   "unconfirmed": [
+    "The two manuals were found via search on a storyblok CDN; they carry LinkerBot's manual layout and revision tables but are not linked from the pages read.",
+    "Tactile on L6, L30 Pro and O6 is from the SDK (12x6 matrix per finger) and the vendor pages ('fingertip tactile array' on L30 Pro, 'tactile sensor optional' on O6); their sensor specs are not in a manual read here.",
+    "Year unknown: the L20 manual's first revision is dated 2025-09-11; the site footer reads 2024.",
+    "A September 2026 press report says LinkerBot added vision-based fingertip tactile (320x240 per fingertip); not included in the counts above.",
+    "Price not published by LinkerBot (resellers list prices)."
+   ],
+   "thumb": "assets/hw/linker_hand.jpg"
+  },
+  {
+   "id": "robotera_xhand1",
+   "name": "XHAND 1",
+   "maker": "ROBOTERA (Beijing Xingdong Jiyuan)",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2024,
+   "principle": "unspecified",
+   "taxels": 600,
+   "taxels_note": "per hand: 5 fingertip arrays x 120 points (12x10), each wrapping 270 deg around the fingertip",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": 12,
+   "price": null,
+   "specs": [
+    "12 active DoF (thumb 3, index 3, middle/ring/little 2 each), no passive joints; gear direct drive in every joint",
+    "Each tactile point reports 3D force (tangential X/Y, normal Z), plus temperature; vendor accuracy 0.05 N",
+    "EtherCAT or RS485 (USB); whole-hand control frequency 83 Hz",
+    "1100 g; 15 N fingertip and 80 N whole-hand grip; 25 kg payload",
+    "Sibling XHAND 1 PRO: 21 active DoF with 18 tactile sensors (vendor summary)"
+   ],
+   "image": "https://www.robotera.com/img/XHAND.mWJ16AIa.png",
+   "image_page": "https://www.robotera.com/en/product/XHAND",
+   "links": {
+    "product": "https://www.robotera.com/en/product/XHAND"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.robotera.com/en/product/XHAND",
+    "https://www.robotera.com/js/index.yhtspOBE.js",
+    "https://cdn.robotshop.com/media/E/ERA/RB-Era-01/pdf/robotera-xhand1-brochure.pdf"
+   ],
+   "unconfirmed": [
+    "The robotera.com site renders client-side; specs were read from the site's own JavaScript bundle (product table and company timeline 'Released dexterous hand XHAND 1', Aug 2024).",
+    "The brochure is ROBOTERA's (contact xhand@robotera.com) but hosted on RobotShop's CDN.",
+    "Sensing principle not stated; the vendor contrasts it with 'planar piezoresistive' sensors.",
+    "Tactile sampling rate not stated; 83 Hz is the whole-hand control frequency.",
+    "Image URL contains a build hash and may change when the site is rebuilt."
+   ],
+   "thumb": "assets/hw/robotera_xhand1.jpg"
+  },
+  {
+   "id": "shadow_dexterous_hand",
+   "name": "Shadow Dexterous Hand (Series E)",
+   "maker": "Shadow Robot Company",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "EU",
+   "year": null,
+   "principle": "magnetic",
+   "taxels": 85,
+   "taxels_note": "per hand with all 5 Shadow Tactile Fingertips (17 taxels each, 3-axis Hall); standard build has 2 STFs (thumb, index) = 34",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 100,
+   "dof": 24,
+   "price": "on request",
+   "specs": [
+    "24 joints: 20 actuated by 20 tendon-driven DC motors + 4 under-actuated; 2 wrist joints; 4.3 kg",
+    "Shadow Tactile Fingertip (STF): 17 taxels, each a magnet + 3-axis Hall sensor; normal and tangential force ~0.2-20 N; 17x3 12-bit readings",
+    "2 STFs fitted as standard, max 5 (all-finger tactile option); 40 tendon load sensors, 1 IMU",
+    "EtherCAT to host, 1 kHz control loop; ROS integrated",
+    "Earlier fingertip options documented by Shadow: PST (air pressure in a fingertip bubble, one value per tip) and SynTouch BioTac SP (24 electrodes + DC/AC pressure + temperature)",
+    "Lite / Extra Lite / Super Lite variants (4/3/2 fingers) take up to 4/3/2 STFs"
+   ],
+   "image": "https://shadowrobot.com/wp-content/uploads/2022/04/Shadow-Robot-Co3721HR-copy-2-e1650536420490.png",
+   "image_page": "https://www.shadowrobot.com/dexterous-hand-series/",
+   "links": {
+    "product": "https://www.shadowrobot.com/dexterous-hand-series/",
+    "project": "https://shadow-robot-company-dexterous-hand.readthedocs-hosted.com/en/latest/user_guide/sd_fingertips.html"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.shadowrobot.com/dexterous-hand-series/",
+    "https://shadowrobot.com/wp-content/uploads/2025/09/shadow_dexterous_hand_e_technical_specification.pdf",
+    "https://shadowrobot.com/sensors/",
+    "https://shadow-robot-company-dexterous-hand.readthedocs-hosted.com/en/latest/user_guide/sd_fingertips.html",
+    "https://shadowrobot.com/our-story/"
+   ],
+   "unconfirmed": [
+    "rate_hz: Shadow's sensors page gives STF data speed 100 Hz; the 2025 technical specification lists a typical tactile update rate of 1000 Hz (12-bit). 100 Hz used.",
+    "year: no first-release year found on Shadow's site (company cites 20+ years of R&D); left null.",
+    "PST and BioTac are described in Shadow's user guide but are no longer listed on the product page; SynTouch BioTac is believed discontinued (general knowledge, not verified on a vendor page).",
+    "dof: Shadow states both '24 degrees of freedom' and '20 actuated DOF ... total of 24 joints'; 24 used for total, 20 actuated stated in specs."
+   ],
+   "thumb": "assets/hw/shadow_dexterous_hand.jpg"
+  },
+  {
+   "id": "shadow_dex_ee",
+   "name": "DEX-EE / DEX-EE Chiral",
+   "maker": "Shadow Robot Company (developed with Google DeepMind)",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "EU",
+   "year": 2024,
+   "principle": "optical",
+   "taxels": 108,
+   "taxels_note": "per 3-finger hand: magnetic phalanx cells only (22 proximal + 14 middle per finger); the 3 optical fingertips (stereo cameras tracking 525 internal markers each) are not counted",
+   "coverage": [
+    "tip",
+    "phalanx"
+   ],
+   "rate_hz": 100,
+   "dof": 12,
+   "price": "on request",
+   "specs": [
+    "3 fingers x 4 joints = 12 DoF, driven by 5 motors per finger (N+1 tendons) with 10 kHz force loop; 4.1 kg; symmetric (DEX-EE) or thumb-offset (Chiral) layout",
+    "Distal sensor: stereo camera pair viewing 525 white markers inside a silicone skin; 1280x480 video at 50 FPS per tip, all three over one USB 3.0 link; ~0.01-80 N",
+    "Optional middle/proximal phalanx modules: 14 / 22 cells, each a magnet + 3-axis Hall sensor (normal + 2 shear axes + temperature, 12-bit, 100 Hz)",
+    "Per finger 155 sensor channels (joint, IMU, tendon force, tactile) plus distal video; EtherCAT to host, ROS integrated",
+    "Tactile modules are user-replaceable and auto-detected by the finger network"
+   ],
+   "image": "https://shadowrobot.com/wp-content/uploads/2024/04/SHADOW-ROBOT-APRIL-245511.png",
+   "image_page": "https://shadowrobot.com/dex-ee/",
+   "links": {
+    "product": "https://shadowrobot.com/dex-ee/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://shadowrobot.com/dex-ee/",
+    "https://shadowrobot.com/wp-content/uploads/2026/05/Shadow-DEX-EE-Series-Technical-Specifications.pdf",
+    "https://shadowrobot.com/sensors/",
+    "https://shadowrobot.com/shadow-robot-unveils-the-worlds-most-robust-dexterous-robot-hand-developed-in-partnership-with-google-deepmind/"
+   ],
+   "unconfirmed": [
+    "year: 2024 is the date of Shadow's 'available for purchase as a standard build' announcement (9 May 2024); earlier DeepMind use is not dated here.",
+    "principle: hand mixes optical fingertips with magnetic (Hall) phalanx cells; 'optical' chosen for the fingertip sensor.",
+    "rate_hz 100 refers to the magnetic phalanx cells; the optical fingertips stream at 50 FPS.",
+    "taxels: vendor says the fingertip sensors have 'hundreds of taxels each' without a number, so only the 108 Hall cells are counted."
+   ],
+   "thumb": "assets/hw/shadow_dex_ee.jpg"
+  },
+  {
+   "id": "wuji_hand",
+   "name": "Wuji Hand 2 (fingertip tactile version, Beta 2.2)",
+   "maker": "Wuji Technology",
+   "kind": "robot_hand",
+   "availability": "announced",
+   "region": "CN",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": 176,
+   "taxels_note": "per hand: 40 contact points on the thumb tip + 34 on each of the other four fingertips; each point reports 3-axis force",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 100,
+   "dof": 20,
+   "price": "on request",
+   "specs": [
+    "20 active DoF (4 per finger), fully direct-drive, back-drivable; 1 kHz x 20 axes MIT force-position control; Ethernet 100BASE-T",
+    "Fingertip tactile modules (Beta 2.2 hardware, firmware >= v2.1.0): per-point normal + 2 tangential forces, plus 3-axis resultant force (N) and temperature",
+    "Native tactile output 100 Hz per finger; from firmware v2.4.0 per-point forces are normalized to sensor full scale",
+    "Vendor highlight: 'Multi-Axis Force/Torque Fingertip Sensing'; SDK supports zero-baseline tactile calibration",
+    "Original Wuji Hand (2025, 20 DoF, USB 2.0) has no tactile sensing"
+   ],
+   "image": "https://www.wuji.tech/assets/images/hand2/p6-front.webp",
+   "image_page": "https://www.wuji.tech/en/hand2",
+   "links": {
+    "product": "https://www.wuji.tech/en/hand2",
+    "code": "https://github.com/wuji-technology",
+    "project": "https://docs.wuji.tech/docs/wuji-hand/beta1/sdk-reference"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.wuji.tech/en/hand2",
+    "https://www.wuji.tech/en/hand",
+    "https://www.wuji.tech/assets/app-BaBRX2l_.js",
+    "https://docs.wuji.tech/docs/wuji-hand/beta1/sdk-reference.md",
+    "https://docs.wuji.tech/docs/wuji-hand/latest/product-introduction.md",
+    "https://docs.wuji.tech/docs/wuji-hand/latest/version-identification-and-compatibility.md",
+    "https://docs.wuji.tech/llms-full.txt"
+   ],
+   "unconfirmed": [
+    "availability: Wuji Hand 2 is documented as Beta hardware (2.1 / 2.2) with specs 'continuing to iterate'; the product manual covers the non-tactile prototype, tactile only appears in the SDK reference. Marked announced.",
+    "year: 2026 from the Hand 2 trailer uploadDate (2026-06-08) and SDK v2026.7.21 required for tactile.",
+    "principle: sensing technology of the fingertip modules is not stated by Wuji.",
+    "image: front render of Wuji Hand 2; not confirmed to show the tactile fingertip version.",
+    "Third-party listings (roboticscenter.ai, seen only in search snippets) attribute a 24x32 / 768-taxel map to the Wuji Hand; that matches the Wuji Glove (24x31, 526 points), not the hand, and was not used."
+   ],
+   "thumb": "assets/hw/wuji_hand.jpg"
+  },
+  {
+   "id": "paxini_dexh13",
+   "name": "DexH13 (GEN2)",
+   "maker": "PaXini Tech",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2024,
+   "principle": "magnetic",
+   "taxels": 1140,
+   "taxels_note": "per hand: ITPU multidimensional tactile sensing units, 3 axes each (3,420 signal channels)",
+   "coverage": [
+    "tip",
+    "phalanx"
+   ],
+   "rate_hz": null,
+   "dof": 16,
+   "price": null,
+   "specs": [
+    "4 fingers; 16 DoF (13 active + 3 passive); coreless motors; 15 N fingertip force, 5 kg payload",
+    "1,140 ITPU tactile units, 3,420 channels; vendor claims 15 tactile sensing capabilities and 1 mm press localization",
+    "Built on PaXini's 6D Hall-array tactile technology (PX-6AX GEN2 units)",
+    "8 MP RGB eye-in-hand camera; EtherCAT / Modbus"
+   ],
+   "image": "https://cdn-cn.paxini.com/official/images/dex/dex-h13-6.png",
+   "image_page": "https://www.paxini.com/en/dex/gen2",
+   "links": {
+    "product": "https://www.paxini.com/en/dex/gen2",
+    "paper": "https://arxiv.org/abs/2505.16289"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.paxini.com/en/dex/gen2",
+    "https://www.paxini.com/cn/dex/gen2",
+    "https://www.paxini.com/en",
+    "https://arxiv.org/pdf/2505.16289",
+    "https://eu.36kr.com/zh/p/3006232413757953"
+   ],
+   "unconfirmed": [
+    "coverage: from the TacCompress paper (PaXini co-authors): 11 sensor arrays on four fingers, 120 units per distal and proximal sensor and 60 per intermediate sensor; no palm array is described. Vendor page does not state placement.",
+    "year: 2024 from 36Kr (Oct 2024) reporting DexH13 GEN2 launched at WRC 2024.",
+    "principle: 'magnetic' from PaXini's site description of its core '6D Hall array' technology; the DexH13 page itself does not name the principle.",
+    "rate_hz: not stated by vendor; the TacCompress paper uses 100 Hz as an example rate.",
+    "price: retailers list USD 14,377 (roboticscenter.ai) to USD 29,700 (aifitlab.com); no vendor list price found. No GEN3 DexH13 was found on the vendor site (GEN3/GEN4 naming applies to the PX-6AX sensors)."
+   ],
+   "thumb": "assets/hw/paxini_dexh13.jpg"
+  },
+  {
+   "id": "paxini_px6ax",
+   "name": "PX-6AX tactile sensors (GEN3 / GEN4)",
+   "maker": "PaXini Tech",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "CN",
+   "year": null,
+   "principle": "magnetic",
+   "taxels": null,
+   "taxels_note": "varies by model; GEN3 arrays output up to 717 force signals, GEN4 specifies 30 taxels/cm2",
+   "coverage": [],
+   "rate_hz": 1000,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Output: 3-axis force array, 3-axis resultant force and 3-axis resultant torque; 1 MHz internal sampling, up to 1000 Hz output",
+    "Range 0-25 N normal, +/-10 N tangential (GEN4: customizable to 300 N+); min. force 0.01 N (GEN3) / 0.005 N (GEN4); 0.1 mm spatial resolution; IP68",
+    "GEN3: 12 models in Elite / Core / Omega tiers - fingertip (DP, e.g. 18x13x10 mm), finger pad (IP/CP), integrated tip+pad, palm (MC 20x20x8 mm)",
+    "GEN4 (FUSE 6D chip): adds 15x10x7 mm fingertip, U-shaped tip-pad, 2 mm-thick palm, 10x10x3 mm skin and gripper pads; compatible with GEN3",
+    "Chip-level stray magnetic field immunity, factory calibrated, 3-5 V supply"
+   ],
+   "image": "https://www.paxini.com/images/Gen3/PX6AX-GEN3-DP-S1813-Elite/1.png",
+   "image_page": "https://www.paxini.com/en/ax/gen3",
+   "links": {
+    "product": "https://www.paxini.com/en/ax/gen3"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.paxini.com/en/ax/gen3",
+    "https://www.paxini.com/en/ax/gen4",
+    "https://www.paxini.com/en/itpu",
+    "https://www.paxini.com/en",
+    "https://eu.36kr.com/zh/p/3006232413757953"
+   ],
+   "unconfirmed": [
+    "year: GEN1 was already on sale and GEN2 was shown at WRC 2024 per 36Kr (Oct 2024); first public year of the line not found, left null.",
+    "principle: 'magnetic' from PaXini's site description ('6D Hall array technology'); product pages say 'stray magnetic field immunity' but do not name the transduction.",
+    "taxels: '717 force signals' (GEN3) may count channels rather than taxels; left null.",
+    "price: sold via PaXini Official Store and an AliExpress store; a CES 2026 press release mentions sensors 'from USD 49'; no list price verified for PX-6AX.",
+    "GEN2 variants are no longer listed on the vendor site."
+   ],
+   "thumb": "assets/hw/paxini_px6ax.jpg"
+  },
+  {
+   "id": "daimon_dm_tac",
+   "name": "DM-Tac F (fingertip) and DM-Tac series vision-based tactile sensors",
+   "maker": "Daimon Robotics",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2025,
+   "principle": "optical",
+   "taxels": null,
+   "taxels_note": "not stated for DM-Tac F; DM-Tac W2 and X list 110,592 effective sensing points (384x288)",
+   "coverage": [],
+   "rate_hz": 180,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "DM-Tac F (fingertip, for dexterous hands): FM 23x18x18 mm, FS 40x14x14 mm; sensing surface covers tip, side and pad; 640x480 camera, 320x240 sensing resolution, 180 Hz, USB 2.0",
+    "Outputs: contact shape, 3D deformation field, 3D force distribution, 6-axis resultant force/moment",
+    "DM-Tac W2 (W2L 36x27 mm / W2M 24x18 mm area) and DM-Tac X (28-degree blade, 20x15 mm): 640x480 camera, 384x288 = 110,592 points, 120 Hz, USB 2.0, W2 IP67",
+    "Vendor durability claim: 5 million presses, 200,000 friction cycles (W2/X); DM-Tac G is a 2-finger gripper with built-in sensor"
+   ],
+   "image": "https://www.dmrobot.com/template/index/pc/images/product3/product3-6-1.png",
+   "image_page": "https://www.dmrobot.com/en/devices/dm-tac-f.html",
+   "links": {
+    "product": "https://www.dmrobot.com/en/devices/dm-tac-f.html"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.dmrobot.com/en/devices/dm-tac-f.html",
+    "https://www.dmrobot.com/en/devices/dm-tac-w2.html",
+    "https://www.dmrobot.com/en/devices/dm-tac-x.html",
+    "https://www.dmrobot.com/en/devices/dm-tac-g.html",
+    "https://www.dmrobot.com",
+    "https://en.prnasia.com/releases/global/daimon-robotics-product-line-offically-launched-accelerating-the-industrialization-of-embodied-intelligence-485634.shtml"
+   ],
+   "unconfirmed": [
+    "year: 2025 from Daimon's PR Newswire release (16 Apr 2025) launching DM-Tac W; first DM-Tac F date not found.",
+    "price: vendor links a JD.com mall and a contact form; no list price checked. RobotShop lists DM-Tac W variants (distributor).",
+    "The 2025 launch release quotes '40,000 sensing units per cm2' for the earlier DM-Tac W; current pages give 110,592 points per W2/X unit instead."
+   ],
+   "thumb": "assets/hw/daimon_dm_tac.jpg"
+  },
+  {
+   "id": "tesollo_dg5f",
+   "name": "DG-5F-M / DG-5F-S with fingertip tactile sensors",
+   "maker": "Tesollo",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "KR",
+   "year": 2025,
+   "principle": "unspecified",
+   "taxels": 75,
+   "taxels_note": "per hand with tactile fingertips on all 5 fingers: 3x5 nodes per tip (DG-5F-M); DG-5F-S tips have 3x6 nodes = 90",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": 20,
+   "price": "on request",
+   "specs": [
+    "20 DoF, 4 per finger, each joint with its own actuator; DG-5F-M 1,763 g, DG-5F-S under 1 kg",
+    "Optional fingertip sensors: tactile array, 6-axis F/T, or 3-axis force",
+    "Tactile tip: DG-5F-M 3x5 nodes, 8-bit (0-255) per node; DG-5F-S 3x6 nodes, 12-bit (0-4095)",
+    "Modbus RTU/TCP and Ethernet TCP/IP, 250 Hz hand control frequency; ROS 2 driver and Isaac Lab tactile-sensor simulation package"
+   ],
+   "image": "https://cdn.tesollo.com/site/content/2026/08/19fa66ae-51e0-4164-b4ac-e78caaf2b07c.webp",
+   "image_page": "https://www.tesollo.com/products/grippers/dg-5f-m",
+   "links": {
+    "product": "https://www.tesollo.com/products/grippers/dg-5f-m",
+    "code": "https://github.com/tesollodelto/tesollo_sensor_lab"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.tesollo.com/products/grippers/dg-5f-m",
+    "https://www.tesollo.com/products/grippers/dg-5f-s",
+    "https://cdn.tesollo.com/site/docs/2026/08/0cfb04ab-398d-4958-a9c8-77967e058014.pdf",
+    "https://cdn.tesollo.com/site/docs/2026/08/b8a776fb-37d9-4e51-a132-83f4cc566570.pdf",
+    "https://cdn.tesollo.com/site/docs/2026/08/738c9abb-7714-4abf-bd38-4e6734cd544b.pdf",
+    "https://raw.githubusercontent.com/tesollodelto/tesollo_sensor_lab/main/README.md"
+   ],
+   "unconfirmed": [
+    "year: 2025 from trade press (DG-5F shown at CES 2025, sales from March 2025); DG-5F-S launched January 2026 per The Robot Report.",
+    "principle and tactile sampling rate of the tactile fingertip are not stated in the manuals.",
+    "taxels assumes a tactile tip on every finger; the manuals give per-tip node counts only.",
+    "XELA Robotics separately announced uSkin coverage (tips, phalanges, palm; 12 points per fingertip) for the DG-5F at CES 2026 (press coverage); that is a XELA integration, not counted here.",
+    "image: vendor og:image of DG-5F-M; not confirmed to show the tactile fingertip option."
+   ],
+   "thumb": "assets/hw/tesollo_dg5f.jpg"
+  },
+  {
+   "id": "seed_robotics_rh8d",
+   "name": "RH8D with FTS fingertip sensors",
+   "maker": "Seed Robotics",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "EU",
+   "year": null,
+   "principle": "unspecified",
+   "taxels": 5,
+   "taxels_note": "per hand: one single-point FTS force sensor per fingertip (FTS-3: 3-axis; FTS-1: normal only)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 50,
+   "dof": 19,
+   "price": "EUR 5,599 (list, hand only, from)",
+   "specs": [
+    "19 DoF driven by 8 smart actuators (under-actuated tendon fingers, spherical wrist); 620 g; Dynamixel-protocol RS485/TTL",
+    "FTS-3: 3-axis contact force (normal + shear) at one point, 12 mm contact area; 0-10 N at 1 mN resolution or 10-30 N extended at 10 mN; overload 50 N",
+    "50 Hz output in mN or raw counts (~200 counts/mN); all sensors of a hand share one acquisition board, RS422 to PC",
+    "Temperature compensated, immune to magnetic interference; SINGLEX-1/-3 are the same sensors packaged for third-party hands",
+    "Other options: capacitive touch pads on the back of the palm, palm ToF distance sensor",
+    "FTS fingertip sensors priced separately: FTS-3 from EUR 1,000, FTS-1 from EUR 500 (vendor list)."
+   ],
+   "image": "https://images.squarespace-cdn.com/content/v1/5db846da1bb60d0407fed0ac/1622566124315-KCDAAJ1TDXA4K4KPV6W1/Slice-RH8D_PhotoSensors.png",
+   "image_page": "https://www.seedrobotics.com/rh8d-adult-robot-hand",
+   "links": {
+    "product": "https://www.seedrobotics.com/rh8d-adult-robot-hand"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.seedrobotics.com/rh8d-adult-robot-hand",
+    "https://www.seedrobotics.com/fts-tactile-pressure-sensors",
+    "https://www.seedrobotics.com/ordering",
+    "http://storage.seedrobotics.com/fts_sensors/FTS3%20Three%20Axis%20Pressure%20Sensor_RevD.pdf"
+   ],
+   "unconfirmed": [
+    "taxels: 5 assumes FTS on all five fingertips, as shown in the vendor's datasheet photo of an RH8D; the sensors are optional.",
+    "principle: Seed Robotics does not name the FTS transduction method; left unspecified.",
+    "year: RH8D release year not found on vendor pages; left null.",
+    "image: served as image/webp despite the .png name."
+   ],
+   "thumb": "assets/hw/seed_robotics_rh8d.jpg"
+  },
+  {
+   "id": "robotis_hx5_d20",
+   "name": "ROBOTIS Hand HX5-D20",
+   "maker": "ROBOTIS",
+   "kind": "robot_hand",
+   "availability": "commercial",
+   "region": "KR",
+   "year": 2026,
+   "principle": "unspecified",
+   "taxels": 45,
+   "taxels_note": "per hand: 3x3 pressure array (TIP sensor) on each of 5 fingertips, 8-bit values",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": 20,
+   "price": "USD 7,703.85 (list, ROBOTIS America, per hand)",
+   "specs": [
+    "5 fingers, 20 DoF (4 per finger), each joint a direct-drive DYNAMIXEL XM335-T323-T; ~1,000 g; 14 N max fingertip force",
+    "TIP sensor: 9-element array per fingertip, 0-255 per value, published per finger as a 3x3 pressure array in ROS 2",
+    "RS485 multidrop, DYNAMIXEL Protocol 2.0 / Modbus-RTU, 1 kHz control frequency; ROS 2 + ros2_control",
+    "Open-source tactile grasping demo (force-based and center-of-pressure controllers)"
+   ],
+   "image": "https://ai.robotis.com/hx5_d20_rev2.png",
+   "image_page": "https://ai.robotis.com/hands/hardware_hands.html",
+   "links": {
+    "product": "https://ai.robotis.com/hands/introduction_hands.html",
+    "code": "https://github.com/ROBOTIS-GIT/robotis_hand"
+   },
+   "datasets": [],
+   "sources": [
+    "https://ai.robotis.com/hands/introduction_hands.html",
+    "https://ai.robotis.com/hands/hardware_hands.html",
+    "https://ai.robotis.com/hands/technical_story_hands_tactile_grasp.html",
+    "https://robotis.us/products/hx5-d20-mrt-right-hand/",
+    "https://discourse.openrobotics.org/t/new-5-finger-20-dof-hx5-d20-hand-with-ros-2/53705"
+   ],
+   "unconfirmed": [
+    "year: 2026 from the ROS Discourse announcement (1 Apr 2026) by a ROBOTIS staff account; earlier showings not checked.",
+    "principle and tactile update rate are not stated by ROBOTIS.",
+    "availability: ROBOTIS America lists the right hand as backordered with ~3-month lead time."
+   ],
+   "thumb": "assets/hw/robotis_hx5_d20.jpg"
+  },
+  {
+   "id": "gelsight_mini",
+   "name": "GelSight Mini",
+   "maker": "GelSight Inc.",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "US",
+   "year": 2022,
+   "principle": "optical",
+   "taxels": null,
+   "taxels_note": "vision-based; no taxel count stated by vendor (camera resolution in specs)",
+   "coverage": [],
+   "rate_hz": 25,
+   "dof": null,
+   "price": "USD 510 (list)",
+   "specs": [
+    "Vision-based elastomer sensor: 8 MP camera at 25 FPS, RGB LED illumination, field of view 18.6 x 14.3 mm",
+    "Gel 4.25 mm Lambertian silicone in a tool-less replaceable cartridge; standard and tracking-marker replacement gels sold (USD 57 / USD 70)",
+    "USB (Micro-B to USB-C cable), streams like a webcam; ROS/ROS2 and PyTouch support",
+    "GelSight store: 'GelSight Mini System' USD 510, 'Mini Robotics Package' USD 560, lead time 4 weeks; launch price in Sept 2022 was USD 499"
+   ],
+   "image": "https://www.gelsight.com/wp-content/uploads/2026/05/gelsight-mini-header.webp",
+   "image_page": "https://www.gelsight.com/gelsightmini/",
+   "links": {
+    "product": "https://www.gelsight.com/gelsightmini/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.gelsight.com/gelsightmini/",
+    "https://www.gelsight.com/wp-content/uploads/productsheet/Mini/GS_Mini_4.3.24.pdf",
+    "https://www.gelsight.com/product/gelsight-mini-system/",
+    "https://www.gelsight.com/online-store/",
+    "https://investor.wedbush.com/wedbush/article/bizwire-2022-9-21-introducing-the-gelsight-mini-a-human-resolution-tactile-sensor-for-engineers-and-scientists"
+   ],
+   "unconfirmed": [
+    "Launch date/price (2022-09-21, USD 499) taken from GelSight's Business Wire release as mirrored on investor.wedbush.com",
+    "Contents of the USD 560 'Robotics Package' not checked"
+   ],
+   "thumb": "assets/hw/gelsight_mini.jpg"
+  },
+  {
+   "id": "digit",
+   "name": "DIGIT",
+   "maker": "Meta AI (FAIR); manufactured and sold by GelSight Inc.",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "US",
+   "year": 2020,
+   "principle": "optical",
+   "taxels": null,
+   "taxels_note": "vision-based; no taxel count stated (camera resolution in specs)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 60,
+   "dof": null,
+   "price": "USD 355 (list)",
+   "specs": [
+    "Vision-based fingertip: OmniVision OVM7692 camera, VGA 640x480 at 30/15 fps or QVGA 320x240 at 60/30 fps; three RGB LEDs",
+    "20 x 27 x 18 mm, about 20 g, sensing field 19 x 16 mm; elastomer replaceable with one screw (reflective, marker or transparent gels)",
+    "USB connection, Python interface (digit-interface); PyTouch support",
+    "Open design: enclosure, elastomer, PCB manufacturing files and firmware published under CC BY-NC 4.0 (facebookresearch/digit-design)",
+    "Sold assembled by GelSight: USD 355 (SKU DG-01, lead time 4-6 weeks); replacement gel cartridge USD 42"
+   ],
+   "image": "https://www.gelsight.com/wp-content/uploads/2022/09/GelSight_Online-Store_Image_DIGIT.png",
+   "image_page": "https://www.gelsight.com/product/digit-tactile-sensor/",
+   "links": {
+    "product": "https://www.gelsight.com/product/digit-tactile-sensor/",
+    "paper": "https://arxiv.org/abs/2005.14679",
+    "code": "https://github.com/facebookresearch/digit-design",
+    "project": "https://digit.ml/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.gelsight.com/product/digit-tactile-sensor/",
+    "https://www.gelsight.com/online-store/",
+    "https://github.com/facebookresearch/digit-design",
+    "https://github.com/facebookresearch/digit-interface",
+    "https://arxiv.org/abs/2005.14679",
+    "https://arxiv.org/pdf/2005.14679",
+    "https://digit.ml/"
+   ],
+   "unconfirmed": [
+    "Both open hardware (published design files) and sold assembled by GelSight; availability set to commercial because a vendor sells it with a list price today",
+    "Paper Table I gives 640x480 at 60 FPS; the official digit-interface exposes 60 fps only at QVGA (VGA max 30 fps); rate_hz uses 60 (QVGA)"
+   ],
+   "thumb": "assets/hw/digit.jpg"
+  },
+  {
+   "id": "digit_360",
+   "name": "Digit 360",
+   "maker": "Meta FAIR, with GelSight Inc.",
+   "kind": "sensor",
+   "availability": "announced",
+   "region": "US",
+   "year": 2024,
+   "principle": "optical",
+   "taxels": 8300000,
+   "taxels_note": "~8.3 million taxels per fingertip as stated by Meta (camera-based, hemispherical)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 240,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Hemispherical fingertip; visuotactile camera with custom hyperfisheye lens at 240 Hz; spatial features down to 7 um",
+    "Other modalities: static and dynamic pressure, surface audio/vibration up to 10 kHz, inertial measurement, temperature/heat, gas sensing",
+    "Normal and shear force resolution 1.01 mN and 1.27 mN (paper); on-device AI accelerator",
+    "USB 3.1 Type-C; Python interface and ROS2 package",
+    "Design files (STEP, PCB schematics, lens, fingertip molds) and firmware on GitHub under CC BY-NC 4.0",
+    "GelSight to manufacture and commercialize (announced Oct 2024, 'wide availability next year'); units so far via Meta call for proposals, free to selected researchers"
+   ],
+   "image": "https://raw.githubusercontent.com/facebookresearch/digit360/main/.assets/digit360_overview.png",
+   "image_page": "https://github.com/facebookresearch/digit360",
+   "links": {
+    "paper": "https://arxiv.org/abs/2411.02479",
+    "code": "https://github.com/facebookresearch/digit360",
+    "project": "https://digit.ml/digit360"
+   },
+   "datasets": [],
+   "sources": [
+    "https://digit.ml/digit360",
+    "https://digit.ml/cfp",
+    "https://github.com/facebookresearch/digit360",
+    "https://raw.githubusercontent.com/facebookresearch/digit360/main/design/README.md",
+    "https://arxiv.org/pdf/2411.02479",
+    "https://www.anzupartners.com/?p=9866",
+    "https://www.gelsight.com/online-store/",
+    "https://www.gelsight.com/?s=digit+360"
+   ],
+   "unconfirmed": [
+    "As of 2026-10-15 no GelSight store listing or price found (store lists DIGIT and Mini only; GelSight site search returns only the Oct 2024 press release); digit.ml CFP still says acceptance 'in progress', delivery 'to be confirmed'",
+    "Design files are public, so it could also be classed open_hardware; set to announced because commercial units are not shipping",
+    "Press release text read via the Anzu Partners mirror (businesswire.com returned 403)",
+    "Image is an exploded-view render from the GitHub README, not a product photo"
+   ],
+   "thumb": "assets/hw/digit_360.jpg"
+  },
+  {
+   "id": "anyskin",
+   "name": "AnySkin",
+   "maker": "New York University (Lerrel Pinto lab), with CMU, Columbia and Meta AI",
+   "kind": "sensor",
+   "availability": "open_hardware",
+   "region": "US",
+   "year": 2024,
+   "principle": "magnetic",
+   "taxels": 5,
+   "taxels_note": "magnetometers per skin board (3-axis each, 15 channels)",
+   "coverage": [],
+   "rate_hz": 100,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Magnetized elastomer skin (Dragon Skin 10 Slow + MQFP-15-7 particles, 2 mm) over a 5-magnetometer board, same circuitry as ReSkin",
+    "Skin physically separate from the electronics so it can be replaced without re-wiring",
+    "Readout through an Adafruit QT Py microcontroller over USB-C serial; Python library `anyskin` (MIT)",
+    "Tactile data recorded at 100 Hz in the paper; fitted to Franka gripper tips, a LEAP Hand and a Dobb-E stick",
+    "Fingertip CAD files published; project page links a sample request form and a third-party kit (WowRobo 'Enhanced AnySkin', USD 128, sold out on 2026-10-15)"
+   ],
+   "image": "https://any-skin.github.io/static/images/preview.jpg",
+   "image_page": "https://any-skin.github.io/",
+   "links": {
+    "paper": "https://arxiv.org/abs/2409.08276",
+    "code": "https://github.com/raunaqbhirangi/anyskin",
+    "project": "https://any-skin.github.io/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://any-skin.github.io/",
+    "https://github.com/raunaqbhirangi/anyskin",
+    "https://arxiv.org/pdf/2409.08276",
+    "https://shop.wowrobo.com/products/enhanced-anyskin-premium-crafted-editionwowskin"
+   ],
+   "unconfirmed": [
+    "Kit is sold by a third party (WowRobo) that builds on the open-source design; store page lists no contents or specs and does not claim to be official; price left null",
+    "100 Hz is the rate used in the paper's experiments, not a stated hardware maximum (ReSkin reports ~400 Hz on the same circuitry)",
+    "Image is the project page preview frame (skin + board, with a timer overlay)"
+   ],
+   "thumb": "assets/hw/anyskin.jpg"
+  },
+  {
+   "id": "reskin",
+   "name": "ReSkin",
+   "maker": "Meta AI (FAIR) / Carnegie Mellon University",
+   "kind": "sensor",
+   "availability": "open_hardware",
+   "region": "US",
+   "year": 2021,
+   "principle": "magnetic",
+   "taxels": 5,
+   "taxels_note": "MLX90393 magnetometers per 20 x 20 mm board (Bx, By, Bz + temperature each)",
+   "coverage": [],
+   "rate_hz": 400,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Replaceable magnetized elastomer skin (Dragon Skin 10 NV + MQP-15-7 particles), 2-3 mm thick, over a flexible magnetometer board",
+    "5 Melexis MLX90393 magnetometers, four spaced 7 mm around a central one; 20 x 20 mm sensing area",
+    "20 values (T, Bx, By, Bz x 5) to an Adafruit Trinket M0 / QT Py at ~400 Hz; Python library reskin_sensor (MIT)",
+    "Published: 5X board Gerbers and BOM, STL molds, Arduino code",
+    "Paper reports <USD 30 per sensor and 1 mm contact localization at 90% accuracy"
+   ],
+   "image": "https://reskin.dev/resources/teaser.png",
+   "image_page": "https://reskin.dev/",
+   "links": {
+    "paper": "https://arxiv.org/abs/2111.00071",
+    "code": "https://github.com/raunaqbhirangi/reskin_sensor",
+    "project": "https://reskin.dev/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://reskin.dev/",
+    "https://github.com/raunaqbhirangi/reskin_sensor",
+    "https://raw.githubusercontent.com/raunaqbhirangi/reskin_sensor/main/circuits/README.md",
+    "https://arxiv.org/pdf/2111.00071"
+   ],
+   "unconfirmed": [
+    "Image is the paper teaser collage (panel A shows skins and boards), not a clean product shot",
+    "No official kit or vendor found"
+   ],
+   "thumb": "assets/hw/reskin.jpg"
+  },
+  {
+   "id": "syntouch_biotac",
+   "name": "BioTac",
+   "maker": "SynTouch",
+   "kind": "sensor",
+   "availability": "discontinued",
+   "region": "US",
+   "year": 2008,
+   "principle": "resistive",
+   "taxels": 19,
+   "taxels_note": "impedance-sensing electrodes per fingertip (plus one fluid-pressure transducer and a thermistor)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 100,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Fingertip-shaped: rigid core with 19 sensing + 4 reference electrodes, conductive fluid and replaceable elastomer skin; senses force, vibration and temperature",
+    "Impedance 0-3.3 V (3.2 mV) at 100 Hz; fluid pressure 0-100 kPa (100 Pa) at 100 Hz; microvibration 0-2 kPa AC at 2000 Hz (20-1000 Hz band)",
+    "Temperature 0-60 C (0.1 C) and thermal flux at 100 Hz via heater and thermistor",
+    "SPI cable to evaluation/integration kits for Shadow, Barrett, PR2, Allegro, JACO and other hands; BioTac SP was a later variant",
+    "NumaTac (same maker): spongy core under an elastic skin, sensitive to contact events, intended for low-cost large-area coverage"
+   ],
+   "image": "https://web.archive.org/web/20131017071759id_/http://www.syntouchllc.com/Products/BioTac/_media/BioTac_485.jpg",
+   "image_page": "https://web.archive.org/web/20130910131757/http://www.syntouchllc.com/Products/BioTac/",
+   "links": {
+    "product": "https://syntouchinc.com/robotics/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://web.archive.org/web/20251210150326/https://syntouchinc.com/robotics/",
+    "https://web.archive.org/web/20130910131757/http://www.syntouchllc.com/Products/BioTac/",
+    "https://web.archive.org/web/20131102063522id_/http://www.syntouchllc.com/Products/BioTac/_media/BioTac_Brochure.pdf",
+    "https://web.archive.org/web/20151216061156id_/http://www.syntouchllc.com/Products/BioTac/_media/BioTac_QuickStart_Guide.pdf",
+    "https://arxiv.org/pdf/2410.14310"
+   ],
+   "unconfirmed": [
+    "Discontinued status rests on secondary sources: Zai El Amri et al. 2024 (arXiv 2410.14310) call the BioTac 'deprecated'; a 2026 buyer guide (roboticscenter.ai) says SynTouch stopped production in 2021. No SynTouch statement found",
+    "SynTouch's robotics page (Wayback, 2025-12-10) still describes BioTac and NumaTac in the present tense with no price or order option; live syntouchinc.com returns 403 to automated access",
+    "Specs from the archived 2013 SynTouch brochure; electrode count (E1-E19, X1-X4) from the archived SynTouch QuickStart Guide",
+    "Principle set to resistive for electrode impedance through conductive fluid; the device also has a pressure transducer and thermistor",
+    "Image and pages served from the Internet Archive"
+   ],
+   "thumb": "assets/hw/syntouch_biotac.jpg"
+  },
+  {
+   "id": "contactile_papillarray",
+   "name": "PapillArray Tactile Sensor (v2.0)",
+   "maker": "Contactile",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "other",
+   "year": 2019,
+   "principle": "optical",
+   "taxels": 9,
+   "taxels_note": "silicone pillars per 3x3 array, each with 3D displacement and 3D force",
+   "coverage": [],
+   "rate_hz": 1000,
+   "dof": null,
+   "price": "on request",
+   "specs": [
+    "3x3 silicone pillars (6 mm dia, 7 mm pitch, Shore A40); each pillar's tip displacement measured optically (LED + 4 photodiodes), force from factory calibration",
+    "Per pillar: Fx, Fy +/-4 N, Fz 15 N, resolution <0.05 N; displacement +/-1 mm (x, y), 2.5 mm (z), resolution <0.01 mm",
+    "Also global 3D force and torque, slip onset, friction and vibration",
+    "1000 Hz per pillar at 16 bit; controller serves 2 arrays over micro-USB (virtual COM port); visualisation software, C++ library, ROS node",
+    "Casing 24.0 x 30.6 x 8.6 mm anodised aluminium, 4x M3 mounting; sold as Development Kit v2.0 (2 arrays + controller) by quote"
+   ],
+   "image": "https://contactile.com/wp-content/uploads/2021/12/PTSDK_v2.0Kit_DEC21.png",
+   "image_page": "https://contactile.com/products/",
+   "links": {
+    "product": "https://contactile.com/products/#development-kit",
+    "paper": "https://www.sciencedirect.com/science/article/pii/S0924424718319794"
+   },
+   "datasets": [],
+   "sources": [
+    "https://contactile.com/",
+    "https://contactile.com/products/",
+    "https://contactile.com/about/",
+    "https://contactile.com/wp-content/uploads/2021/12/PTS_2.0_SPEC_DEC21.pdf",
+    "https://contactile.com/wp-content/uploads/2021/12/PTSCTR_2.0_SPEC_DEC21.pdf"
+   ],
+   "unconfirmed": [
+    "Region: Sydney, Australia (no AU code in schema, so 'other')",
+    "Year 2019 = Contactile founding and the PapillArray paper cited in the spec (Khamis et al. 2019); first sale date not found",
+    "Image shows the whole dev kit with a laptop; the sensor arrays are small in frame"
+   ],
+   "thumb": "assets/hw/contactile_papillarray.jpg"
+  },
+  {
+   "id": "tactip",
+   "name": "TacTip (TacTip family)",
+   "maker": "Bristol Robotics Laboratory (Nathan Lepora lab, University of Bristol)",
+   "kind": "sensor",
+   "availability": "open_hardware",
+   "region": "other",
+   "year": 2009,
+   "principle": "optical",
+   "taxels": null,
+   "taxels_note": "camera tracks internal pins; pin count varies by version (19-532; 127 in the standard 40 mm 3D-printed TacTip)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Biomimetic optical sensor: soft skin with internal pins (papillae analogues) whose motion a camera tracks; gel-filled 3D-printed tip on a bayonet mount",
+    "Family includes TacTip, TacTip-GR2, TacTip-M2 and TacCylinder plus later fingertips for robot hands; standard tip 40 mm diameter with 127 pins",
+    "Cameras vary by version, e.g. 640x480 or 720p at 30 fps, ELP modules up to 120 fps",
+    "Open: STL/CAD files, BOM and fabrication guide on the Soft Robotics Toolkit; ready-made units offered by quote by email"
+   ],
+   "image": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/49b1/5905869/1e2427596772/fig-1.jpg",
+   "image_page": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5905869/",
+   "links": {
+    "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC5905869/",
+    "project": "https://softroboticstoolkit.com/tactip"
+   },
+   "datasets": [],
+   "sources": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC5905869/",
+    "https://arxiv.org/pdf/2105.14455",
+    "https://web.archive.org/web/20260312002557/https://softroboticstoolkit.com/tactip/design",
+    "https://web.archive.org/web/20260305165636/https://softroboticstoolkit.com/tactip/fabrication"
+   ],
+   "unconfirmed": [
+    "Region: UK (no UK code in schema, so 'other')",
+    "Image is Fig. 1 of Ward-Cherrier et al. 2018 (photos of six TacTip-family sensors), not a vendor product shot",
+    "Soft Robotics Toolkit pages read via the Internet Archive (live site returns 403 to automated access)",
+    "rate_hz null because frame rate depends on the camera fitted (30-120 fps listed in Lepora 2021 review)"
+   ],
+   "thumb": "assets/hw/tactip.jpg"
+  },
+  {
+   "id": "tashan",
+   "name": "Tashan TS-F / TS-E tactile sensors",
+   "maker": "Tashan Technology (他山科技), Beijing",
+   "kind": "sensor",
+   "availability": "commercial",
+   "region": "CN",
+   "year": 2025,
+   "principle": "capacitive",
+   "taxels": 7,
+   "taxels_note": "raw capacitance channels per TS-F-A fingertip module (vendor simulation repo)",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Fingertip modules TS-F-A/B/C/L (single, dual or multi sensing units; TS-F-L adds a sensing fingernail) and gripper pads TS-E-A/TS-E-B (TS-E-B is a dot-matrix array)",
+    "3D force: normal force resolution 0.01 N, tangential 0.25 N; tangential direction 0-359 deg; proximity sensing >=1 to >=2 cm depending on model",
+    "Interface IIC (TS-E models also UART, customizable); 1000 N overload rating; 3 million cycle life test (vendor home page)",
+    "Vendor's own mixed-signal tactile chip '红宝石' (Ruby, SNN-based, R-SpiNNaker architecture) is listed for dexterous hands and robot skin; TS-F-A outputs proximity, normal/tangential force, direction and 7 raw capacitances",
+    "MuJoCo (TactiSim) and Isaac Sim models of TS-F-A published on GitHub (Apache-2.0)"
+   ],
+   "image": "https://raw.githubusercontent.com/TashanTec/Tashan-Isaac-Sim/main/ts.sensor.tactile/data/ts-f-a_real.png",
+   "image_page": "https://github.com/TashanTec/Tashan-Isaac-Sim",
+   "links": {
+    "product": "https://www.tashantec.com/robot",
+    "code": "https://github.com/TashanTec/TactiSim"
+   },
+   "datasets": [],
+   "sources": [
+    "https://www.tashantec.com/",
+    "https://www.tashantec.com/tsapi/robot/page-two-wall-img",
+    "https://www.tashantec.com/tsapi/robot/page-four-new-all",
+    "https://www.tashantec.com/tsapi/technology/page-two-list",
+    "https://www.tashantec.com/tsapi/about/page-two",
+    "https://www.tashantec.com/tsapi/about/page-four-list",
+    "https://github.com/TashanTec/Tashan-Isaac-Sim",
+    "https://github.com/TashanTec/TactiSim"
+   ],
+   "unconfirmed": [
+    "Vendor site is a JavaScript app; spec rows were read from its own JSON API (tsapi) that feeds the /robot page",
+    "Capacitive principle inferred from the vendor's simulation repos ('raw capacitance values'); the website itself does not name the principle",
+    "That the TS-F/TS-E modules use the Ruby chip is inferred from the vendor's chip page (application list), not stated per product",
+    "Year 2025 = earliest dated vendor reference to the TS-F-A found (TactiSim repo, May 2025); company founded Dec 2017 and earlier products likely exist",
+    "No sampling rate or price published; market-share and customer claims (80%+, 200+ partners) only from vendor/press, not used",
+    "Vendor lists BrainCo (强脑科技) and Inspire (因时机器人) as partners; whether the catalog's BrainCo Revo2 tactile hands use Tashan sensors is not confirmed, so no dataset is linked",
+    "Image is a vendor render of TS-F-A from its GitHub repo"
+   ],
+   "thumb": "assets/hw/tashan.jpg"
+  },
+  {
+   "id": "9dtact",
+   "name": "9DTact",
+   "maker": "Tsinghua University IIIS / Shanghai Qi Zhi Institute (Huazhe Xu lab)",
+   "kind": "sensor",
+   "availability": "open_hardware",
+   "region": "CN",
+   "year": 2023,
+   "principle": "optical",
+   "taxels": null,
+   "taxels_note": "vision-based; no taxel count stated",
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 90,
+   "dof": null,
+   "price": null,
+   "specs": [
+    "Compact vision-based sensor: 32.5 x 25.5 x 25.5 mm, 20 g, sensing area 24 x 18 mm; OV5647 camera over CSI",
+    "3D shape reconstruction and 6D force estimation from the same image (no markers), trained on ~100k image-force pairs",
+    "90 FPS and ~USD 15 parts cost at 1000 pieces (paper Table I)",
+    "Open: design files, BOM (Chinese), code, datasets and models released (MIT); shown on Allegro Hand, DoraHand, Robotiq and Franka grippers"
+   ],
+   "image": "https://linchangyi1.github.io/9DTact/static/images/compactness_installation.png",
+   "image_page": "https://linchangyi1.github.io/9DTact/",
+   "links": {
+    "paper": "https://arxiv.org/abs/2308.14277",
+    "code": "https://github.com/linchangyi1/9DTact",
+    "project": "https://linchangyi1.github.io/9DTact/"
+   },
+   "datasets": [],
+   "sources": [
+    "https://github.com/linchangyi1/9DTact",
+    "https://arxiv.org/pdf/2308.14277",
+    "https://linchangyi1.github.io/9DTact/"
+   ],
+   "unconfirmed": [
+    "README links a Taobao 'Production' listing; not checked, so price left null",
+    "Image is a project-page figure (sensor next to DTact/DIGIT/GelSight Mini and mounted on hands/grippers)"
+   ],
+   "thumb": "assets/hw/9dtact.jpg"
+  }
+ ]
+}
