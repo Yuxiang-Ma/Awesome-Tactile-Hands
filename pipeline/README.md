@@ -4,13 +4,15 @@ Every dataset in the catalog goes through the same steps. Their output is a surv
 (`pipeline/surveys/<id>.json`, spec in [SCHEMA.md](SCHEMA.md)), a converter (`pipeline/converters/<name>.py` +
 `<name>.meta.json`, format in [FORMAT.md](FORMAT.md)), and converted sample episodes for the viewer.
 
-Steps 1-4 run as a Claude Code workflow (one dataset per pipeline lane):
+Steps 1-4 run as a Claude Code workflow, `.claude/workflows/add-dataset.js`, with one pipeline lane per dataset. From a
+Claude Code session started in this repository, ask for the `add-dataset` workflow with arguments like:
 
 ```
-Workflow({scriptPath: "~/src/awesome-tactile-hands/.claude/workflows/add-dataset.js",
-          args: {datasets: [{id: "humanoid_everyday", hint: "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday"}],
-                 today: "2026-10-15"}})
+{datasets: [{id: "humanoid_everyday", hint: "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday"}],
+ today: "2026-10-15"}
 ```
+
+From a session in another directory, pass the file's contents as an inline script.
 
 Step 5 (catalog merge and publishing) is run by hand after reviewing the workflow's report.
 

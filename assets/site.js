@@ -21,7 +21,18 @@ const LABEL = {
     other: 'Other', none: 'None'},
   wrist: {yes: 'Wrist camera(s)', no: 'No wrist camera', u: 'Not stated'},
   scenes: {multi: 'Several environments', single: 'One setting', u: 'Not stated'},
+  rank: {1: 'R1 · Open + checked', 2: 'R2 · Open', 3: 'R3 · Restricted', 4: 'R4 · Paper only'},
 };
+// rank and quality are derived by scripts/build_readme.py (evidence ranking after the MIT CDFG survey)
+const RANK_TEXT = {1: 'Public download, license stated, sample episodes converted and checked in the viewer.',
+  2: 'Public download, but the license is not stated or the files have not been checked yet.',
+  3: 'Gated, on request, or only a partial sample released.', 4: 'Announced or described in a paper; no data released.'};
+const QUAL = {calibrated: 'Touch in physical units (N, kPa)', video: 'Synchronized camera video', hand_pose: 'Finger pose or joint tracking',
+  scale: '10 h or 1,000 episodes or more', diversity: '10 tasks or 5 environments or more'};
+const rankOf = d => d.rank ? d.rank.n : 4;
+const qbar = d => {const q = d.quality; if (!q) return ''; return `<span class="qbar" title="Quality ${q.score} of ${q.of}: ${Object.entries(q.flags).map(([k, v]) => `${v ? '✓' : '✗'} ${QUAL[k]}`).join('; ')}">${
+  Object.values(q.flags).map(v => `<i class="${v ? 'on' : ''}"></i>`).join('')}<b>Q${q.score}</b></span>`};
+const rankBadge = (d, cls = 'badge') => `<span class="${cls} rk rk${rankOf(d)}" title="${esc(RANK_TEXT[rankOf(d)])}">${LABEL.rank[rankOf(d)]}</span>`;
 // short names for compact cells
 const TRACK_SHORT = {vision_estimate: 'Vision', optical_mocap: 'Optical mocap', optical_tracker: 'Vive tracker', imu: 'IMU', magnetic: 'Magnetic',
   bend_sensor: 'Bend sensors', exoskeleton: 'Exoskeleton', robot_proprioception: 'Joint encoders', teleop_glove: 'Teleop glove', other: 'Other'};
@@ -56,6 +67,7 @@ const sceneText = d => {const c = d.scale, n = c.scenes ?? (c.scene_types || [])
 const taxBucket = d => {const n = d.sensor.taxels_per_hand; return n == null ? 'u' : n < 100 ? 'a' : n < 300 ? 'b' : n < 1000 ? 'c' : 'd'};
 // each facet: values of a dataset, and whether several ticks must all match (all) or any (default)
 const FACETS = [
+  {key: 'rank', title: 'Rank', hint: 'How open and verified the data is', get: d => [String(rankOf(d))]},
   {key: 'embodiment', title: 'Hand', get: d => [d.embodiment]},
   {key: 'coverage', title: 'Tactile coverage', all: true, hint: 'Ticked regions must all be sensed', get: d => d.sensor.coverage},
   {key: 'taxels', title: 'Taxels per hand', get: d => [taxBucket(d)]},
@@ -70,6 +82,7 @@ const FACETS = [
 // arXiv ids carry the month (YYMM.xxxxx); entries without one sort by year
 const when = d => {const m = /arxiv\.org\/abs\/(\d{2})(\d{2})\./.exec(d.links.paper || ''); return m ? (2000 + +m[1]) * 100 + +m[2] : d.year * 100};
 const SORTS = {
+  rank: (a, b) => rankOf(a) - rankOf(b) || (b.quality?.score ?? 0) - (a.quality?.score ?? 0) || when(b) - when(a),
   year: (a, b) => when(b) - when(a) || a.name.localeCompare(b.name),
   taxels: (a, b) => (b.sensor.taxels_per_hand ?? -1) - (a.sensor.taxels_per_hand ?? -1),
   hours: (a, b) => (b.scale.hours ?? -1) - (a.scale.hours ?? -1),
@@ -77,7 +90,7 @@ const SORTS = {
   name: (a, b) => a.name.localeCompare(b.name),
 };
 
-let D = [], META = {}, S = {q: '', f: {}, y0: null, y1: null, view: 'cards', sort: 'year', d: null};
+let D = [], META = {}, S = {q: '', f: {}, y0: null, y1: null, view: 'cards', sort: 'rank', d: null};
 
 /* ---------- coverage glyph: palm side of a right hand; filled regions carry taxels ---------- */
 function glyph(cov, label) {
@@ -106,7 +119,7 @@ const sensorLine = d => {
 /* ---------- state <-> hash ---------- */
 function readHash() {
   const p = new URLSearchParams(location.hash.slice(1));
-  S.q = p.get('q') || ''; S.view = ['table', 'chart'].includes(p.get('view')) ? p.get('view') : 'cards'; S.sort = SORTS[p.get('sort')] ? p.get('sort') : 'year';
+  S.q = p.get('q') || ''; S.view = ['table', 'chart'].includes(p.get('view')) ? p.get('view') : 'cards'; S.sort = SORTS[p.get('sort')] ? p.get('sort') : 'rank';
   S.d = p.get('d'); S.y0 = +p.get('from') || null; S.y1 = +p.get('to') || null; S.f = {};
   for (const F of FACETS) {const v = p.get(F.key); if (v) S.f[F.key] = new Set(v.split(','))}
 }
@@ -115,7 +128,7 @@ function writeHash() {
   if (S.q) p.set('q', S.q);
   for (const [k, v] of Object.entries(S.f)) if (v.size) p.set(k, [...v].join(','));
   if (S.y0) p.set('from', S.y0); if (S.y1) p.set('to', S.y1);
-  if (S.view !== 'cards') p.set('view', S.view); if (S.sort !== 'year') p.set('sort', S.sort);
+  if (S.view !== 'cards') p.set('view', S.view); if (S.sort !== 'rank') p.set('sort', S.sort);
   if (S.d) p.set('d', S.d);
   const h = p.toString().replace(/%2C/g, ',');
   history.replaceState(null, '', h ? `#${h}` : location.pathname + location.search);
@@ -182,10 +195,15 @@ function facts(d) {
     ['Hand tracking', esc(d.setup ? trackSummary(d, true) || 'none' : '')]];
 }
 function cards(list) {
+  if (S.sort === 'rank') return [1, 2, 3, 4].map(n => list.filter(d => rankOf(d) === n)).map((g, k) => g.length ? `<section class="rgroup"><h2>${rankBadge(g[0], 'rh')}
+    <span>${esc(RANK_TEXT[k + 1])}</span><small>${g.length}</small></h2>${cardGrid(g)}</section>` : '').join('');
+  return cardGrid(list);
+}
+function cardGrid(list) {
   return `<div class="grid">${list.map(d => `<article class="card" data-id="${d.id}" tabindex="0" aria-label="${esc(d.name)}">
-    <div class="thumb">${thumb(d)}<span class="badge av-${d.availability}">${LABEL.availability[d.availability]}</span></div>
+    <div class="thumb">${thumb(d)}${rankBadge(d)}</div>
     <div class="body">
-      <div class="ttl"><h3>${esc(d.name)}</h3><span>${d.year}</span></div>
+      <div class="ttl"><h3>${esc(d.name)}</h3>${qbar(d)}<span>${d.year}</span></div>
       <div class="src">${esc(d.venue)} · ${esc(d.authors)}</div>
       <p class="desc">${esc(d.summary)}</p>
       <div class="spec">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}<div><b>${sensorLine(d)}</b><span>${covText(d.sensor.coverage)} · ${esc(makerText(d))}</span></div></div>
@@ -198,6 +216,7 @@ function table(list) {
   const num = (v, u = '') => v != null ? `${u === ' h' ? hrs(v) : fmt(v)}${u}` : '–', c = d => d.scale;
   const row = d => `<tr data-id="${d.id}">
     <td><b>${esc(d.name)}</b><span class="sub">${esc(d.venue)}</span></td>
+    <td>${rankBadge(d, 'rk-t')}<span class="sub">${qbar(d)}</span></td>
     <td>${LABEL.embodiment[d.embodiment]}<span class="sub">${d.bimanual ? 'Bimanual' : 'Single hand'}</span></td>
     <td><span class="cov">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}${covText(d.sensor.coverage)}</span></td>
     <td class="num">${d.sensor.taxels_per_hand != null ? d.sensor.taxels_per_hand.toLocaleString('en-US') : d.sensor.sensors_per_hand ? `${d.sensor.sensors_per_hand} sensors` : '–'}</td>
@@ -210,7 +229,7 @@ function table(list) {
     <td>${esc(sceneText(d) || '–')}<span class="sub">${esc((c(d).scene_types || []).slice(0, 4).join(', '))}</span></td>
     <td class="num">${num(c(d).subjects)}</td>
     <td><span class="av-${d.availability}">${LABEL.availability[d.availability]}</span><span class="sub">${esc(d.license)}</span></td></tr>`;
-  return `<div class="tablewrap"><table><thead><tr><th data-s="name">Dataset</th><th>Hand</th><th>Coverage</th><th data-s="taxels">Taxels / hand</th><th>Tactile sensor</th>
+  return `<div class="tablewrap"><table><thead><tr><th data-s="name">Dataset</th><th data-s="rank">Rank · quality</th><th>Hand</th><th>Coverage</th><th data-s="taxels">Taxels / hand</th><th>Tactile sensor</th>
     <th>Cameras</th><th>Hand tracking</th><th data-s="hours">Hours</th><th>Episodes</th><th data-s="tasks">Tasks</th><th>Environments</th><th>People</th><th>Access</th></tr></thead>
     <tbody>${list.map(row).join('')}</tbody></table></div>`;
 }
@@ -277,6 +296,8 @@ function openDetail(id) {
     <div class="scroll">${d.thumb ? `<img class="hero" src="${esc(d.thumb)}" alt="${esc(d.name)} overview figure">` : ''}
     <p>${esc(d.summary)}</p>
     ${d.caveats.length ? `<div class="warn"><ul>${d.caveats.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
+    <h4>Rank and quality</h4>${kvs([['Rank', `${rankBadge(d, 'rk-t')} ${esc(RANK_TEXT[rankOf(d)])}${d.rank ? `<span class="sub">${esc(d.rank.why.join(' · '))}</span>` : ''}`],
+      ['Quality', d.quality ? `<b>${d.quality.score} of ${d.quality.of}</b><ul class="ql">${Object.entries(d.quality.flags).map(([k, v]) => `<li class="${v ? 'on' : ''}">${v ? '✓' : '✗'} ${QUAL[k]}</li>`).join('')}</ul>` : '']])}
     <h4>Data</h4>${scale}<h4>Tactile sensing</h4>${tactile}<h4>Cameras</h4>${cams}<h4>Hand tracking</h4>${track}
     <h4>Also recorded</h4><p class="plain">${esc([...new Set(other)].join(', ') || 'Tactile only')}</p>
     <h4>Access</h4>${kvs([['Availability', `${LABEL.availability[d.availability]} · ${esc(d.access)}`], ['License', esc(d.license)]])}

@@ -1,6 +1,8 @@
-"""Check data/datasets.json and regenerate the dataset list in README.md (between the LIST markers).
+"""Check data/datasets.json, derive each entry's rank and quality, and regenerate the dataset list in README.md.
 
-Usage: python3 scripts/build_readme.py [--check]   (--check exits 1 if README.md is stale; used in CI)
+Usage: python3 scripts/build_readme.py [--check]   (--check exits 1 if README.md or the derived fields are stale; used in CI)
+
+"rank" and "quality" in datasets.json are derived here from the other fields; do not edit them by hand.
 """
 import json
 import re
@@ -42,6 +44,45 @@ def validate(ds: list) -> list:
     return errs
 
 
+# Ranks follow the evidence ranking of the MIT CDFG survey (code > interactive > demo only), applied to data: can you get
+# the data, may you reuse it, and has someone opened the files and checked them against the paper.
+RANKS = {1: "Open + checked", 2: "Open", 3: "Restricted", 4: "Paper only"}
+RANK_TEXT = {
+    1: "public download, license stated, and sample episodes converted and checked in the viewer",
+    2: "public download, but the license is not stated or the files have not been checked yet",
+    3: "gated, on request, or only a partial sample released",
+    4: "announced or described in a paper, no data released",
+}
+QUALITY = [  # (key, label, test)
+    ("calibrated", "touch in physical units (N, kPa)", lambda d: d["sensor"].get("calibrated") is True),
+    ("video", "synchronized camera video", lambda d: bool((d.get("setup") or {}).get("cameras"))),
+    ("hand_pose", "finger pose or joint tracking", lambda d: any(t["target"] == "fingers" for t in (d.get("setup") or {}).get("tracking") or [])),
+    ("scale", "10 h or 1,000 episodes or more", lambda d: (d["scale"].get("hours") or 0) >= 10 or (d["scale"].get("episodes") or 0) >= 1000),
+    ("diversity", "10 tasks or 5 environments or more", lambda d: (d["scale"].get("tasks") or 0) >= 10 or (d["scale"].get("scenes") or 0) >= 5),
+]
+UNCLEAR_LICENSE = ("not stated", "unconfirmed", "unclear")
+
+
+def rank(d: dict) -> dict:
+    av, lic = d["availability"], d["license"].lower()
+    clear = not any(u in lic for u in UNCLEAR_LICENSE)
+    if av in ("announced", "not_released", "unclear"):
+        n, why = 4, [AVAIL[av]]
+    elif av in ("gated", "partial"):
+        n, why = 3, [AVAIL[av]]
+    else:
+        why = ["public download"] + ([] if clear else ["license not stated"]) + ([] if d.get("viewer") else ["samples not checked yet"])
+        n = 1 if clear and d.get("viewer") else 2
+        if n == 1:
+            why = ["public download", f"license: {d['license']}", "samples checked in the viewer"]
+    return {"n": n, "label": RANKS[n], "why": why}
+
+
+def quality(d: dict) -> dict:
+    flags = {k: f(d) for k, _, f in QUALITY}
+    return {"score": sum(flags.values()), "of": len(QUALITY), "flags": flags}
+
+
 TRACK = {"vision_estimate": "vision", "optical_mocap": "optical mocap", "optical_tracker": "Vive tracker", "imu": "IMU",
          "magnetic": "magnetic", "bend_sensor": "bend sensors", "exoskeleton": "exoskeleton", "robot_proprioception": "joint encoders",
          "teleop_glove": "teleop glove", "other": "other"}
@@ -74,7 +115,8 @@ def line(d: dict) -> str:
     links = ", ".join(f"[{k}]({L[k]})" for k in ("paper", "project", "data", "code") if L.get(k))
     head = f"[{d['name']}]({L.get('project') or L.get('paper')})"
     f = facts(d)
-    return f"- {head} - {d['summary']} {dens}; {cov}{'; ' + f if f else ''}; {AVAIL[d['availability']]}. {d['venue']} ({links})."
+    r, q = d["rank"], d["quality"]
+    return f"- `R{r['n']}` `Q{q['score']}/{q['of']}` {head} - {d['summary']} {dens}; {cov}{'; ' + f if f else ''}; {AVAIL[d['availability']]}. {d['venue']} ({links})."
 
 
 def main() -> None:
@@ -83,17 +125,31 @@ def main() -> None:
     errs = validate(ds)
     if errs:
         sys.exit("\n".join(errs))
-    out = [f"**{len(ds)}** datasets · updated {cat['metadata']['last_updated']}", ""]
+    for d in ds:
+        d["rank"], d["quality"] = rank(d), quality(d)
+    out = [f"**{len(ds)}** datasets · updated {cat['metadata']['last_updated']}", "", "## Ranks", "",
+           "Each entry carries a rank for how open and verified its data is, after the evidence ranking of the "
+           "[MIT CDFG survey](https://mit-cdfg.github.io/Survey-AI-for-3D-modeling-Robotics/#sub-manipulation-evaluations), "
+           "and a quality score counting " + ", ".join(lbl for _, lbl, _ in QUALITY) + ".", "",
+           "| rank | meaning | datasets |", "|---|---|---|"]
+    for n, name in RANKS.items():
+        ids = sorted((d for d in ds if d["rank"]["n"] == n), key=lambda d: (-d["quality"]["score"], d["name"].lower()))
+        out.append(f"| `R{n}` {name} | {RANK_TEXT[n]} | {', '.join(d['name'] for d in ids) or '-'} |")
+    out.append("")
     for emb, title in SECTIONS:
         rows = sorted((d for d in ds if d["embodiment"] == emb), key=lambda d: (-d["year"], d["name"].lower()))
         if rows:
             out += [f"## {title}", ""] + [line(d) for d in rows] + [""]
+    cat_path = ROOT / "data" / "datasets.json"
+    new_cat = json.dumps(cat, indent=1, ensure_ascii=False) + "\n"
     readme = ROOT / "README.md"
     text = readme.read_text()
     new = re.sub(r"(<!-- BEGIN LIST -->\n).*?(<!-- END LIST -->)", lambda m: m[1] + "\n".join(out) + "\n" + m[2], text, flags=re.S)
     if "--check" in sys.argv:
-        sys.exit(0 if new == text else "README.md is stale: run python3 scripts/build_readme.py")
+        stale = new != text or new_cat != cat_path.read_text()
+        sys.exit("README.md or the derived rank/quality fields are stale: run python3 scripts/build_readme.py" if stale else 0)
     readme.write_text(new)
+    cat_path.write_text(new_cat)
     print(f"{len(ds)} datasets")
 
 

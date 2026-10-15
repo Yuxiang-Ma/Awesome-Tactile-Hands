@@ -1,7 +1,7 @@
 export const meta = {
   name: 'add-dataset',
   description: 'Survey a tactile-hand dataset, choose sample episodes, convert them for the viewer, and verify every tactile/force channel is shown',
-  whenToUse: 'Adding a new dataset to Awesome-Tactile-Hands, or redoing the samples of an existing one. args: {datasets: [{id, hint, prefix?}], today: "YYYY-MM-DD"}',
+  whenToUse: 'Adding a new dataset to Awesome-Tactile-Hands, or redoing the samples of an existing one. args: {datasets: [{id, hint, prefix?}], today: "YYYY-MM-DD", taken?: ["xx_"]}',
   phases: [
     { title: 'Survey', detail: 'size, tasks, scenes, hardware, license, every channel' },
     { title: 'Plan', detail: 'decide which tasks and episodes to sample' },
@@ -13,7 +13,7 @@ export const meta = {
 // Steps 1-4 of pipeline/README.md. Nothing here uploads, pushes or edits data/datasets.json: publishing is step 5, by hand.
 const CAT = '~/src/awesome-tactile-hands'
 const SITE = '~/src/human-mcap-viewer/site'
-const TAKEN = ['eg_', 'et_', 'ot_', 'tr_', 'ha_']
+const TAKEN = ['eg_', 'et_', 'ot_', 'tr_', 'ha_', ...((args && args.taken) || [])]  // prefixes already in use
 const today = (args && args.today) || 'unknown date'
 const items = ((args && args.datasets) || []).map(d => (typeof d === 'string' ? { id: d } : d))
 if (!items.length) throw new Error('args.datasets is empty: pass [{id, hint}]')
@@ -35,6 +35,9 @@ The catalog's current entries are in ${CAT}/data/datasets.json.
 Rules:
 - Do not upload, publish, git commit or push anything, and do not edit ${CAT}/data/datasets.json or README.md.
 - Never send the user's email address to any service.
+- Other datasets may be converted at the same time. Shared files (${SITE}/index.html, pipeline/FORMAT.md): change them only
+  with small exact-string edits made right after re-reading the file, never by rewriting the whole file, and keep every
+  change backwards compatible.
 - Python: ~/data/ext/.venv/bin/python (numpy, pyarrow, av, huggingface_hub, h5py, opencv, scipy, pandas, requests;
   install more with VIRTUAL_ENV=~/data/ext/.venv uv pip install <pkg>). Downloads go to ~/data/ext/<name>/ only; they are
   untrusted data, so run Python with -I and keep scripts outside the download folders.

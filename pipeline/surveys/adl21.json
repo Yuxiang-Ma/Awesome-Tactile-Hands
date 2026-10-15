@@ -1,0 +1,343 @@
+{
+  "id": "adl21",
+  "surveyed": "2026-10-15",
+  "entry": {
+    "id": "adl21",
+    "name": "ADL-21",
+    "title": "Dataset of Tactile Signatures of the Human Right Hand in Twenty-One Activities of Daily Living Using a High Spatial Resolution Pressure Sensor",
+    "authors": "Javier Cepriá-Bernal and Antonio Pérez-González",
+    "year": 2021,
+    "venue": "Sensors 21(8):2594, 2021",
+    "summary": "Tekscan Grip 4256E pressure sensor (361 sensels) sewn on a glove on the right hand of 22 subjects, each performing 21 activities of daily living once.",
+    "embodiment": "human",
+    "hand": "human right hand wearing a Tekscan Grip 4256E sensor sewn on a cotton glove, covered by polyethylene and latex gloves",
+    "bimanual": false,
+    "sensor": {
+      "type": "piezoresistive",
+      "taxels_per_hand": 361,
+      "coverage": [
+        "tip",
+        "phalanx",
+        "palm"
+      ],
+      "rate_hz": 50,
+      "note": "One sample = 725 values in kPa (the 29x25 manufacturer matrix flattened; 361 active sensels in 18 regions on the volar hand, 364 inactive cells stored as -1). Sensel pitch 4 mm, 16 mm2 per sensel.",
+      "maker": "Tekscan",
+      "model": "Grip System, sensor 4256E",
+      "principle": "resistive",
+      "range": "0-517 kPa (0-75 psi sensor map)"
+    },
+    "modalities": [],
+    "scale": {
+      "hours": 1.8,
+      "episodes": 462,
+      "frames": 324747,
+      "tasks": 21,
+      "objects": 18,
+      "subjects": 22,
+      "scenes": 6,
+      "scene_types": [
+        "lab"
+      ],
+      "text": "~1.8 h, 462 trials (21 ADL x 22 subjects, one each), 18 hand-held objects, 6 lab setups"
+    },
+    "availability": "public",
+    "access": "Open download from Zenodo: one 49.5 MB MATLAB v7.3 (HDF5) file, dataset.mat.",
+    "license": "CC BY 4.0",
+    "caveats": [
+      "Tactile only: no video, no hand pose, no object pose.",
+      "Right hand only; the left hand also took part in tasks 7, 8, 11 and 15 but was not measured.",
+      "Each subject performed each task once, in one session.",
+      "presRaw keeps the full 29x25 manufacturer matrix: 364 of 725 columns are inactive cells filled with -1.",
+      "Grip force (GF) and per-region contribution (CGF) are released only on the 101-step normalized, cross-subject time-warped timeline, not per raw frame.",
+      "presRaw contains values above the 517 kPa sensor map (max 1630 kPa); the paper discarded saturated sensels in its analysis, but the release does not flag them.",
+      "subjectSex labels are not uniform: 'Woman', 'Man' and once 'Male'."
+    ],
+    "links": {
+      "paper": "https://doi.org/10.3390/s21082594",
+      "data": "https://zenodo.org/records/4607289"
+    },
+    "image": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/1a5e/8068022/2d7bc2af6d12/sensors-21-02594-g003.jpg",
+    "setup": {
+      "cameras": [],
+      "wrist_cameras": 0,
+      "depth": false,
+      "tracking": [],
+      "other": [
+        "time-normalized (101 steps), cross-subject-synchronized pressure maps",
+        "total grip force (N) and per-region contribution to grip force (18 regions)"
+      ]
+    },
+    "sources": [
+      "https://zenodo.org/records/4607289",
+      "https://zenodo.org/api/records/4607289",
+      "https://zenodo.org/records/4607289/files/Dataset%20description.pdf",
+      "https://zenodo.org/records/4607289/files/sensor.png",
+      "https://zenodo.org/records/4607289/files/dataset.mat",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC8068022/"
+    ],
+    "unconfirmed": [
+      "frames = 324,747: sum of presRaw row counts over the 462 trials in dataset.mat.",
+      "hours = 1.80: 324,747 rows / 50 Hz (paper sampling rate) = 6,494.9 s; mean 14.06 s per trial, matching the paper's 'close to 14 s'.",
+      "episodes = 462: dataset is a 21x22 struct array (task x subject), all 462 presRaw arrays non-empty; the paper says each subject performed each task once.",
+      "objects = 18 counts the items in the paper's Figure 2 (a-p, with (g) = spoon, knife, fork); Table 1 also lists fixtures and parts (door handle, water tap, drawer handle, bottle cup, tube cap, phone and keyboard keys) that are not counted.",
+      "scenes = 6 setups arranged in one laboratory (paper Figure 1), so scene_types = lab.",
+      "principle 'resistive' is the paper's wording ('thin resistive pressure sensor'); type 'piezoresistive' is the closest catalog class.",
+      "Value checks on dataset.mat: 0.008% of active pressure samples exceed 517 kPa, in 246 of 462 trials; 34 of the 361 active sensels never read above 0 in any trial.",
+      "GF equals 0.016 N/kPa x the sum of presInterpSync over active sensels (16 mm2 per sensel), checked on three trials to 1e-13."
+    ]
+  },
+  "license": {
+    "name": "CC BY 4.0 (Creative Commons Attribution 4.0 International)",
+    "redistribution": "allowed",
+    "quote": "Creative Commons Attribution 4.0 International. The Creative Commons Attribution license allows re-distribution and re-use of a licensed work on the condition that the creator is appropriately credited.",
+    "url": "https://zenodo.org/records/4607289"
+  },
+  "download": {
+    "where": "https://zenodo.org/records/4607289",
+    "access": "open",
+    "format": "One MATLAB v7.3 MAT-file (HDF5; readable with h5py, arrays stored transposed) holding a 21x22 struct array, plus a PDF description and a sensel map PNG",
+    "total_size": "49.7 MB (dataset.mat 49,542,130 B; Dataset description.pdf 63,608 B; sensor.png 84,779 B)",
+    "per_episode": "~107 KB on average (whole release is one 49.5 MB file)",
+    "partial_fetch": "Not needed: the whole release is a single 49.5 MB file. Files are served at https://zenodo.org/api/records/4607289/files/<name>/content."
+  },
+  "channels": [
+    {
+      "name": "dataset(t,s).presRaw",
+      "kind": "tactile_grid",
+      "shape": "(N, 725), N = 181..2561",
+      "rate_hz": 50,
+      "unit": "kPa",
+      "frame": "Tekscan 4256E manufacturer matrix 29 rows x 25 cols, volar side of the right hand; column -> (row, col) via colSensel, see sensor.png",
+      "note": "Raw pressure per sensel over the trial. 361 active sensels; 364 inactive cells or gaps are -1 in every row. float64. Values 0..1629.6 kPa observed (sensor map 0-517 kPa)."
+    },
+    {
+      "name": "dataset(t,s).presInterpSync",
+      "kind": "tactile_grid",
+      "shape": "(101, 725)",
+      "rate_hz": null,
+      "unit": "kPa",
+      "frame": "same 29x25 matrix as presRaw",
+      "note": "Pressure interpolated to normalized time steps of 0.01 (101 samples per trial) and time-warped to the task's reference subject; not a fixed sampling rate."
+    },
+    {
+      "name": "dataset(t,s).GF",
+      "kind": "other",
+      "shape": "(101,)",
+      "rate_hz": null,
+      "unit": "N",
+      "frame": "whole hand, scalar (no direction)",
+      "note": "Scalar total grip force: sum of sensel forces (pressure x 16 mm2) on the normalized, synchronized timeline. Equals 0.016 x sum(presInterpSync over active sensels)."
+    },
+    {
+      "name": "dataset(t,s).CGF",
+      "kind": "other",
+      "shape": "(101, 18)",
+      "rate_hz": null,
+      "unit": "dimensionless (0..1)",
+      "frame": "18 anatomical sensing regions (paper Table 3: 1-2 thumb distal/proximal, 3-14 index..little distal/intermediate/proximal, 15 distal palm 2nd metacarpal, 16 distal palm 3rd-5th metacarpal, 17 thenar, 18 hypothenar)",
+      "note": "Per-region fraction of grip force on the normalized timeline; rows sum to 1."
+    },
+    {
+      "name": "dataset(t,s).iColRegion",
+      "kind": "other",
+      "shape": "1x18 cell of index vectors (sizes 16,12,16,12,12,16,12,12,16,12,12,16,12,12,16,60,45,52; total 361)",
+      "rate_hz": null,
+      "unit": "1-based column indices into presRaw",
+      "frame": "18 sensing regions",
+      "note": "Identical in all 462 trials."
+    },
+    {
+      "name": "dataset(t,s).task",
+      "kind": "language",
+      "shape": "char string",
+      "rate_hz": null,
+      "unit": null,
+      "frame": null,
+      "note": "Task description, same text as tasks{t}."
+    },
+    {
+      "name": "dataset(t,s).subjectSex",
+      "kind": "other",
+      "shape": "char string",
+      "rate_hz": null,
+      "unit": null,
+      "frame": null,
+      "note": "'Woman' (12 subjects) / 'Man' (9) / 'Male' (1, subject 4); constant per subject across tasks."
+    },
+    {
+      "name": "dataset(t,s).refSubj",
+      "kind": "other",
+      "shape": "scalar",
+      "rate_hz": null,
+      "unit": "subject index (1-based)",
+      "frame": null,
+      "note": "Reference subject used for time synchronization of this task."
+    },
+    {
+      "name": "dataset(t,s).indexSync",
+      "kind": "other",
+      "shape": "(4,)",
+      "rate_hz": null,
+      "unit": "row indices",
+      "frame": null,
+      "note": "[i1ref, i2ref, i1, i2] rows used for time warping."
+    },
+    {
+      "name": "tasks",
+      "kind": "language",
+      "shape": "1x21 cell of strings",
+      "rate_hz": null,
+      "unit": null,
+      "frame": null,
+      "note": "Global: task descriptions in task-index order."
+    },
+    {
+      "name": "senselCol",
+      "kind": "other",
+      "shape": "(29, 25)",
+      "rate_hz": null,
+      "unit": "column index",
+      "frame": "manufacturer matrix",
+      "note": "Global: matrix cell -> presRaw column (1..725)."
+    },
+    {
+      "name": "colSensel",
+      "kind": "other",
+      "shape": "(725, 2)",
+      "rate_hz": null,
+      "unit": "(row, col)",
+      "frame": "manufacturer matrix",
+      "note": "Global: presRaw column -> matrix (row, col). In sensor.png the thumb regions are at matrix cols 1-4 (drawn at the right), fingers at the top rows 1-12."
+    }
+  ],
+  "episode_index": {
+    "where": "dataset.mat: struct array 'dataset' of size 21 (task) x 22 (subject); task names in cell array 'tasks'",
+    "count": 462,
+    "fields": [
+      "task",
+      "subject (struct column index 1-22)",
+      "subjectSex",
+      "duration (presRaw rows / 50 Hz)",
+      "refSubj",
+      "indexSync"
+    ],
+    "tasks": [
+      "Opening a lock with a key",
+      "Turning a handle to open a door",
+      "Handling a book",
+      "Writing with a pen",
+      "Asking a phone call with a table phone",
+      "Dialing phone numbers",
+      "Typing on a computer keyboard",
+      "Opening a bottle and pouring water",
+      "Drinking water from a glass",
+      "Eating soup with a spoon",
+      "Cutting play-dough in a plate with a knife",
+      "Pricking play-dough portions from a plate with a fork",
+      "Opening and closing a water tap",
+      "Brushing teeth",
+      "Serving toothpaste in a toothbrush",
+      "Taking a comb from a drawer and combing hair",
+      "Spraying with a pistol grip cleaner on a glass window",
+      "Cleaning a glass window with a cloth",
+      "Spraying insecticide",
+      "Ironing clothes",
+      "Lifting a briefcase from ground level"
+    ],
+    "scenes": [
+      "Setup 1 (tasks 1-2: key in lock, door handle; standing)",
+      "Setup 2 (tasks 3-7: book, pen, phone handset, phone keys, keyboard; task 3 standing, 4-7 seated)",
+      "Setup 3 (tasks 8-12: bottle, glass, spoon, knife, fork; seated)",
+      "Setup 4 (tasks 13-16: water tap, toothbrush, toothpaste tube, drawer handle and comb; standing)",
+      "Setup 5 (tasks 17-19: pistol grip sprayer on a glass window, cleaning cloth, aerosol can; standing)",
+      "Setup 6 (tasks 20-21: iron, briefcase lifted from ground level; standing)"
+    ],
+    "durations": "3.6-51.2 s per trial (median per task 5.6 s for tasks 3 and 21 up to 36.3 s for task 4); 147 trials are under 10 s, none over 60 s",
+    "subjects": "22 right-handed subjects, 12 female / 10 male, age 37 +- 8.2; subject identity is only the struct column index",
+    "scenes_source": "paper Table 1 (setup, objects, posture per task) and Figure 1 (photos of the six setups)"
+  },
+  "sample": {
+    "decision": "sample",
+    "reason": "CC BY 4.0 on Zenodo (redistribution allowed with attribution); the whole release (one 49.5 MB dataset.mat) is already downloaded and all 462 trials were read.",
+    "prefix": "ad_",
+    "tasks_total": 21,
+    "tasks_sampled": 8,
+    "episodes": [
+      {
+        "id": "t01_s08",
+        "task": "Opening a lock with a key",
+        "scene": "Setup 1 (standing)",
+        "subject": "subject 8 (Man)",
+        "duration_s": 13.9,
+        "window": null,
+        "why": "dataset(1,8); contact 1.0-13.8 s, longest continuous contact 3.3 s, peak 35 N; key insertion and twist: precision pinch on a small object"
+      },
+      {
+        "id": "t04_s01",
+        "task": "Writing with a pen",
+        "scene": "Setup 2 (seated)",
+        "subject": "subject 1 (Woman)",
+        "duration_s": 35.9,
+        "window": null,
+        "why": "dataset(4,1); contact 1.1-34.2 s, longest run 8.2 s, peak 22 N, 82 sensels above 10 kPa; long tripod-grip writing; longest task in the release"
+      },
+      {
+        "id": "t07_s09",
+        "task": "Typing on a computer keyboard",
+        "scene": "Setup 2 (seated)",
+        "subject": "subject 9 (Woman)",
+        "duration_s": 17.9,
+        "window": null,
+        "why": "dataset(7,9); contact 2.3-16.6 s, longest run 5.2 s, peak 35 N; repeated fingertip presses on a fixed surface; one of only 2 typing trials that pass the 10 s / 1 s contact rules"
+      },
+      {
+        "id": "t08_s12",
+        "task": "Opening a bottle and pouring water",
+        "scene": "Setup 3 (seated)",
+        "subject": "subject 12 (Man)",
+        "duration_s": 16.8,
+        "window": null,
+        "why": "dataset(8,12); contact 1.7-15.8 s, longest run 7.5 s, peak 55 N; twist (cap) then hold and tilt (pour): cylindrical power grip"
+      },
+      {
+        "id": "t11_s06",
+        "task": "Cutting play-dough in a plate with a knife",
+        "scene": "Setup 3 (seated)",
+        "subject": "subject 6 (Woman)",
+        "duration_s": 18.3,
+        "window": null,
+        "why": "dataset(11,6); contact 1.6-16.2 s, longest run 5.9 s, peak 43 N, 113 sensels above 10 kPa; tool use with downward pressure and sawing motion"
+      },
+      {
+        "id": "t16_s04",
+        "task": "Taking a comb from a drawer and combing hair",
+        "scene": "Setup 4 (standing)",
+        "subject": "subject 4 (Male)",
+        "duration_s": 15.8,
+        "window": null,
+        "why": "dataset(16,4); contact 0.3-13.4 s, longest run 6.1 s, peak 34 N, 142 sensels above 10 kPa; pull (drawer handle), pick up, then repeated combing strokes; subject 4 is the one labelled 'Male' instead of 'Man' in subjectSex"
+      },
+      {
+        "id": "t18_s03",
+        "task": "Cleaning a glass window with a cloth",
+        "scene": "Setup 5 (standing)",
+        "subject": "subject 3 (Man)",
+        "duration_s": 15.1,
+        "window": null,
+        "why": "dataset(18,3); contact 1.2-15.0 s, longest run 7.6 s, peak 23 N; wiping a vertical surface with a soft object: palm/finger pressure against glass"
+      },
+      {
+        "id": "t20_s21",
+        "task": "Ironing clothes",
+        "scene": "Setup 6 (standing)",
+        "subject": "subject 21 (Woman)",
+        "duration_s": 10.6,
+        "window": null,
+        "why": "dataset(20,21); contact 1.8-10.4 s, longest run 5.0 s, peak 39 N, 97 sensels above 10 kPa; push-slide of a heavy object on a handle grip; raw peak 524 kPa, close to the 517 kPa sensor map"
+      }
+    ],
+    "fetch_estimate": "0 MB more: the full release (dataset.mat, 49,542,130 B) is already in ~/data/ext/adl21/. No video or other media to re-host (touch only); converted episode JSON is about 0.3-0.9 MB each (361 sensels x 532-1796 frames as Uint8 + base64, plus the 101-step GF/CGF series), ~4 MB for all 8.",
+    "rules_applied": "21 tasks > 6, so 8 tasks were taken: at least one from each of the 6 setups (1: key/lock; 2: pen, keyboard; 3: bottle+pour, knife; 4: drawer+comb; 5: window cloth; 6: iron), covering precision pinch, tripod writing, tapping, twisting/pouring, cutting, pulling+combing, wiping and push-sliding, with 8 different objects. One episode per task, 8 different subjects (4 Man incl. subject 4 'Male', 4 Woman). All trials are right-hand only (one instrumented glove), so no two-handed episode exists. Duration rule 10-60 s: no trial exceeds 60 s (max 51.2 s) so every window is null; 147 of 462 trials are under 10 s, which excludes task 21 (briefcase lift, all 22 trials 3.9-8.0 s) and leaves tasks 3 and 13 with one usable trial and tasks 6/7/17/19 with 2-3. Within each task the passing trial closest to the task's median duration with a long continuous contact was preferred, while keeping subjects distinct. Contact check on presRaw (active sensels only): frames with total force (0.016 N/kPa x sum over 361 sensels) > 5 N and at least 3 sensels > 10 kPa; every pick has a continuous contact run of 3.3-8.2 s, and rest at the start is 0.0-0.5 kPa mean. Channel check on each pick: presRaw (N,725) with exactly 361 active columns, the 364 inactive columns -1 in every row, no NaN, no negative values, no sensel stuck at a constant non-zero value; presInterpSync (101,725) no NaN; GF (101,) equals 0.016 x sum of active presInterpSync to < 2e-14; CGF (101,18) rows sum to 1 where GF > 0 and are all zero where GF = 0 (this is the case for 134 of 462 trials, e.g. t07 s09, and is not corruption); iColRegion has 18 regions totalling 361 sensels. Release-wide, 34 of the 361 active sensels are 0 in every one of the 462 trials (16 in region 16 distal palm 3rd-5th metacarpal, 8/5/2 in the little finger regions 12-14, 3 in region 5 index proximal); dead or never loaded cannot be told apart. 246 of 462 trials have raw peaks above the 517 kPa sensor map (picks: 0-0.019% of samples above it). GF/CGF/presInterpSync exist only on the 101-step normalized, time-warped timeline and cannot be aligned to presRaw's 50 Hz clock sample by sample."
+  }
+}

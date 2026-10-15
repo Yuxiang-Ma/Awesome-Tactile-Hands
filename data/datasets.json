@@ -28,7 +28,8 @@
     "note": "Normal pressure, 1.5 x 1.5 mm cells, 15 pads over five fingers and palm (palmar side), spatial resolution below 2 mm. Hardware spec 50 Hz WiFi / 100 Hz USB; released data is 35-90 Hz, timestamped per sample. Release NPZ also carries tangential (shear) components per pad.",
     "model": "Tachin Glove",
     "principle": "unspecified",
-    "range": "0.2-30 N/cm^2, resolution 0.05 N/cm^2"
+    "range": "0.2-30 N/cm^2, resolution 0.05 N/cm^2",
+    "calibrated": null
    },
    "modalities": [
     "egocentric",
@@ -121,7 +122,25 @@
     "Release status: 100 h / 15,324 episodes / 929 tasks / 905+ objects on HF; 500 h planned before Nov 2026.",
     "Paper says the glove records normal pressure only, but the release NPZ includes tf_tactile_x/y 'tangential components'.",
     "Depth resolution: paper 640x480; card says depth_head.mkv is 1280x720 registered to head RGB."
-   ]
+   ],
+   "rank": {
+    "n": 3,
+    "label": "Restricted",
+    "why": [
+     "gated"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "egotouch",
@@ -145,7 +164,8 @@
     "rate_hz": "30",
     "note": "256 raw channels per hand; the release code maps 138 (left) / 147 (right) of them, of which 15 / 24 are finger bend sensors, leaving about 123 pressure taxels per hand. Remapped to a hand-shaped 21 x 21 grid; the glove also streams an IMU quaternion.",
     "maker": "custom",
-    "principle": "unspecified"
+    "principle": "unspecified",
+    "calibrated": false
    },
    "modalities": [
     "egocentric",
@@ -251,7 +271,26 @@
     "Number of participants not stated.",
     "scenes/scene_types from the paper's five environment categories, confirmed by the release's top-level folders (Home/Office/Outdoor/Retail/Workbench).",
     "taxels per hand (123) derived from the release's channel mapping, not stated in the paper"
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "license not stated"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "tactidex",
@@ -274,7 +313,8 @@
     "rate_hz": "17",
     "note": "162 elements per glove on fingertips and palm, worn over a MANUS mocap glove; force resolution up to 0.01 N.",
     "principle": "piezoresistive",
-    "range": "resolution 0.01 N"
+    "range": "resolution 0.01 N",
+    "calibrated": null
    },
    "modalities": [
     "hand_pose",
@@ -347,7 +387,25 @@
     "Tactile glove maker/model not named.",
     "scenes=1: all capture is in one OptiTrack workspace (lab).",
     "Project page shows Code/Data as 'Coming Soon'."
-   ]
+   ],
+   "rank": {
+    "n": 4,
+    "label": "Paper only",
+    "why": [
+     "not released"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": false,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "trex",
@@ -361,7 +419,7 @@
    "hand": "Sharpa Wave (22 DoF) x 2 on Dexmate Vega-1",
    "bimanual": true,
    "sensor": {
-    "type": "unspecified",
+    "type": "vision",
     "taxels_per_hand": null,
     "sensors_per_hand": 5,
     "coverage": [
@@ -370,8 +428,9 @@
     "note": "Five fingertip sensors per hand (Sharpa Wave built-in). Per sensor: raw sensor image (320x240 grayscale), estimated deformation map (240x240 grayscale), estimated 6-axis net wrench. Recorded at 30 Hz with the teleop loop. No palm sensing.",
     "maker": "Sharpa",
     "model": "Sharpa Wave fingertip tactile sensor",
-    "principle": "unspecified",
-    "rate_hz": 30
+    "principle": "optical",
+    "rate_hz": 30,
+    "calibrated": false
    },
    "modalities": [
     "egocentric",
@@ -466,13 +525,33 @@
     "https://github.com/ZhuoyangLiu2005/T-Rex (hardware_code/README.md, teleop/data_writer.py, config/default.yaml)"
    ],
    "unconfirmed": [
-    "Tactile sensing principle is not stated in the paper, card or code; the released 'raw sensor image' (320x240 grayscale) suggests a camera-based sensor but this is not confirmed -> principle left 'unspecified'.",
+    "Sensing principle set to optical (camera-based) from the released raw sensor images, which show a camera view of a patterned elastomer; the paper, card and code do not name the principle.",
     "hours=50 is the dataset card's figure (5,473,459 frames / 30 fps = 50.7 h); paper Appendix G says 100 h and 7,755 episodes - the public release is about half of the paper's dataset.",
     "tasks=22 counts motor primitives; the card's total_tasks=5,370 counts unique language captions.",
     "scenes=6 = 'six distinct tabletop backdrops' (App. G); collected in a controlled lab, so scene_types left empty.",
     "Head ZED X Mini is a stereo camera but only its left monocular RGB stream is recorded."
    ],
-   "viewer": "tr_ep001061"
+   "viewer": "tr_ep001061",
+   "rank": {
+    "n": 1,
+    "label": "Open + checked",
+    "why": [
+     "public download",
+     "license: MIT",
+     "samples checked in the viewer"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "opentouch",
@@ -497,7 +576,8 @@
     "note": "FPC-routed 16 x 16 electrode grid around a commercial piezoresistive film, 169 taxels on the palmar side; normal pressure only; ESP-NOW wireless.",
     "maker": "custom (MIT, open-source FPC glove)",
     "principle": "piezoresistive",
-    "range": "0.02-50 kPa (calibrated)"
+    "range": "0.02-50 kPa (calibrated)",
+    "calibrated": false
    },
    "modalities": [
     "egocentric",
@@ -578,7 +658,26 @@
     "Local annotation CSVs contain 2,958 clips totalling 3.0 h (paper: 2,900 clips, 3 h).",
     "Aria SLAM cameras and IMU were recorded (profile 28) but only RGB appears in the release HDF5.",
     "Paper is ambiguous on finger coverage: 'uniformly cover the fingers and palmar surface'."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "license not stated"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "egotactile",
@@ -602,7 +701,8 @@
     "rate_hz": "17",
     "note": "162-sensor glove (raw 256-channel vector), 0-350 N; resampled with sample-and-hold to a 15 Hz synchronized timeline. Layout per the code: 4x3 block per fingertip, a 6-sensor group on each finger's middle/proximal segments (averaged), and the palm.",
     "principle": "unspecified",
-    "range": "0-350 N"
+    "range": "0-350 N",
+    "calibrated": true
    },
    "modalities": [
     "egocentric"
@@ -670,7 +770,27 @@
     "frames=319k from paper Table 1.",
     "Segmentation masks are used as model conditions in the paper but are not listed in the release card.",
     "scenes=1: controlled green-screen lab."
-   ]
+   ],
+   "rank": {
+    "n": 1,
+    "label": "Open + checked",
+    "why": [
+     "public download",
+     "license: CC BY-NC 4.0",
+     "samples checked in the viewer"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": true,
+     "video": true,
+     "hand_pose": false,
+     "scale": false,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "hrdexdb",
@@ -693,7 +813,8 @@
     "note": "Robot hands only. Allegro V5 Plus: 4 fingertip channels (int, ~100 Hz). Inspire RH56F1: normal force, tangential force and tangential direction for 5 fingertips + 3 palm regions. Inspire RH56DFTP: tactile.npy is empty in sampled episodes (a per-finger force.npy is present). Robotiq 2F-85: none. Paper: readings too noisy/sparse to use as contact labels.",
     "maker": "Wonik Robotics (Allegro); Inspire Robots (RH56F1/RH56DFTP)",
     "model": "Allegro Hand V5 Plus fingertip sensors; Inspire RH56F1 / RH56DFTP built-in tactile",
-    "principle": "unspecified"
+    "principle": "unspecified",
+    "calibrated": null
    },
    "modalities": [
     "multiview_rgb",
@@ -819,7 +940,26 @@
     "subjects=1: paper text says 'a human subject' / 'A human participant'; not stated as a count.",
     "tasks=1: single task type (grasp and lift); not a stated count.",
     "Tactile principle not stated for any hand; rates/channel layouts above read from sampled raw files (allegro_v5/apple/3, inspire_f1/apple/0, inspire_dftp/apple/0,1,3, banana/0). Inspire F1 tactile is right hand only, stored as a pickled object array (keys inspected without unpickling)."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "actionsense",
@@ -842,7 +982,8 @@
     "note": "32 x 32 conductive-thread matrix on a pressure-sensitive film, routed to a 23x19 palm grid, 5x9 thumb, 11x4 little finger and 13x4 on each other finger; open-finger gloves, so no fingertips.",
     "maker": "custom (MIT CSAIL)",
     "principle": "piezoresistive",
-    "rate_hz": "15 nominal (~6 typical)"
+    "rate_hz": "15 nominal (~6 typical)",
+    "calibrated": null
    },
    "modalities": [
     "egocentric",
@@ -956,7 +1097,26 @@
     "Pupil Core world-camera resolution is not stated; 30 Hz is the world-video frame timestamp rate.",
     "Which subjects have tactile/finger data: supplement says the last 5 of the 9 wearable-data subjects had no gloves; data page says S06-S09 (4 subjects), and S01 lost its wearable data after the first activity.",
     "taxels_per_hand 682 = 23x19 + 5x9 + 11x4 + 3x(13x4), computed from the stated grids."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "stag",
@@ -982,7 +1142,8 @@
     "model": "STAG",
     "principle": "piezoresistive",
     "range": "working range 30 mN-0.5 N per element (responds from ~25 mN, saturates above 0.8 N)",
-    "rate_hz": "7.3"
+    "rate_hz": "7.3",
+    "calibrated": false
    },
    "modalities": [
     "rgb"
@@ -1049,7 +1210,26 @@
     "episodes = 26 objects x 3 recordings (each object sequence recorded three times on different days) for the classification set; empty-hand recordings, the weight set (multiple sessions per object) and the 7 hand-pose sessions are extra and not counted.",
     "Camera images were recorded 'for illustration' synchronized to the tactile frames (~7.3 fps); resolution and mount are not stated.",
     "All recordings were made by one person (author S.S.) wearing the glove on the right hand."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 1,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": false,
+     "scale": false,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "senstextile",
@@ -1074,7 +1254,8 @@
     "maker": "custom (MIT CSAIL)",
     "principle": "piezoresistive",
     "range": "single sensor ~8 kOhm to 2 kOhm over 0.1-2 N; knit configurations up to 87.5 kPa",
-    "rate_hz": "~14"
+    "rate_hz": "~14",
+    "calibrated": false
    },
    "modalities": [],
    "scale": {
@@ -1131,7 +1312,27 @@
     "rate ~14 Hz is stated for the whole dataset (socks 13-14 Hz); no glove-specific rate given.",
     "Xsens is described only as a worn 'MOCAP' system; 'imu' is inferred from the product.",
     "Reporting summary: one female subject from the research group."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "license not stated",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 0,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": false,
+     "hand_pose": false,
+     "scale": false,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "vtdexmanip",
@@ -1154,7 +1355,8 @@
     "rate_hz": "200",
     "note": "20 commercial thin-film pressure sensors per glove (18.3 mm on the thumb tip and palm, 10 mm elsewhere), STM32 + AD7606 readout; each pad calibrated with an F/T sensor at 0.5-7.5 N; left and right gloves exist.",
     "principle": "piezoresistive",
-    "range": "10 mm pads 20 g-2 kg, 18 mm pads 20 g-6 kg"
+    "range": "10 mm pads 20 g-2 kg, 18 mm pads 20 g-6 kg",
+    "calibrated": true
    },
    "modalities": [
     "egocentric"
@@ -1213,7 +1415,27 @@
     "Sensor maker not named; the conversion module is labelled RKXS4040 and the sensors only as 'thin film pressure sensor'.",
     "The paper mentions calibration for both left- and right-hand gloves, but does not say whether any sequences are bimanual (the per-task table lists single-hand tasks).",
     "Per-task trajectories (Table 8) sum to 2,032: PickUp 250, BottleCap 300, In-hand Reorientation 205, Bowl Unstacking 269, Articulated 168, Peg-in-hole 153, Pouring 196, Table-top 196, Scissors 106, Pressing 189."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "license not stated",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": true,
+     "video": true,
+     "hand_pose": false,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "adl21",
@@ -1239,7 +1461,8 @@
     "maker": "Tekscan",
     "model": "Grip System, sensor 4256E",
     "principle": "piezoresistive",
-    "range": "0-517 kPa (75 psi sensor map)"
+    "range": "0-517 kPa (75 psi sensor map)",
+    "calibrated": true
    },
    "modalities": [],
    "scale": {
@@ -1284,7 +1507,26 @@
     "objects = 18 counts the items in the paper's Figure 2 (a-p, with (g) = spoon, knife, fork); fixtures such as the door handle, water tap and drawer are excluded.",
     "scenes = 6 lab setups (Figure 1), all in one laboratory, so scene_types is empty.",
     "The paper calls the sensor a 'thin resistive pressure sensor'; piezoresistive follows the Tekscan product class."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": true,
+     "video": false,
+     "hand_pose": false,
+     "scale": false,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "reachgrasp",
@@ -1309,7 +1551,8 @@
     "maker": "custom (Bielefeld University, WearHap project)",
     "principle": "piezoresistive",
     "range": "uncalibrated (raw ADC, no N or Pa conversion)",
-    "rate_hz": "100"
+    "rate_hz": "100",
+    "calibrated": false
    },
    "modalities": [
     "hand_pose",
@@ -1377,7 +1620,26 @@
     "episodes = 158 tactile recordings (one per subject-task; FroRea and ReaCyl have 9 subjects each); each recording holds 10 repetitions, so ~1,580 repetitions.",
     "objects = 4 (glass, bottle cap, table tennis ball, tennis ball), from paper Fig. 3B.",
     "Sessions were video-recorded but the video is not released (available on request)."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": false,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "hato",
@@ -1401,7 +1663,8 @@
     "maker": "PSYONIC",
     "model": "Ability Hand fingertip touch sensors (FSR)",
     "principle": "piezoresistive",
-    "range": "raw ADC; ~200-400 no contact, >1000 on contact (paper)"
+    "range": "raw ADC; ~200-400 no contact, >1000 on contact (paper)",
+    "calibrated": false
    },
    "modalities": [
     "rgb",
@@ -1502,7 +1765,26 @@
     "RealSense model not named in paper or code; camera driver streams 640x480 RGB + depth, logged at 10 Hz (paper: 'streamed at a resolution of 480x640').",
     "The stationary third camera is a 'head-view' camera on a fixed mount, not robot- or operator-mounted, so it is listed as third_person."
    ],
-   "viewer": "ha_stack_0309_235138"
+   "viewer": "ha_stack_0309_235138",
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "license not stated"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "tdex",
@@ -1526,7 +1808,8 @@
     "maker": "XELA Robotics",
     "model": "uSkin (Allegro integration)",
     "principle": "magnetic",
-    "rate_hz": 100
+    "rate_hz": 100,
+    "calibrated": null
    },
    "modalities": [
     "rgb",
@@ -1612,7 +1895,27 @@
     "Cameras: play recordings carry only cam_0 (RGB .avi + depth .h5); task demos carry cam_0 and cam_1. 1280x720 @30 fps read from AVI headers. Camera roles inferred as static third-person from the paper figure; RealSense model not named.",
     "Holo-Dex teleop is a VR-headset hand-tracking system per its own paper; T-Dex's text describing it is truncated in the arXiv PDF.",
     "XELA uSkin principle (magnetic/Hall) is the manufacturer's known technology, not restated in the T-Dex paper."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "license not stated",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "gist_vta",
@@ -1637,7 +1940,8 @@
     "maker": "Inspire Robots",
     "model": "Inspire RH56DFX tactile",
     "principle": "unspecified",
-    "range": "raw 0-4095 (12-bit ADC)"
+    "range": "raw 0-4095 (12-bit ADC)",
+    "calibrated": false
    },
    "modalities": [
     "egocentric",
@@ -1726,7 +2030,25 @@
     "Third-person D435 is an RGB-D camera, but the paper does not say whether depth is recorded or at what resolution -> type/depth null.",
     "Tactile principle of the Inspire hand sensors is not stated in the paper (only the carpet is called piezoresistive).",
     "No public release found (no link in paper/arXiv; HF search for the dataset found nothing)."
-   ]
+   ],
+   "rank": {
+    "n": 4,
+    "label": "Paper only",
+    "why": [
+     "not released"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "tacross",
@@ -1752,7 +2074,8 @@
     "maker": "custom (TACROSS / INFIFORCE, HKU); robot: BrainCo",
     "model": "TACROSS glove (5-layer Cu-Ni fabric electrodes + pressure-sensitive layer); robot: Revo2 tactile hand",
     "principle": "piezoresistive",
-    "range": "0-20 N per taxel (force test, max 83.91/255 ADC, no saturation); repeatability 1.38% F.S., hysteresis 11.65% F.S."
+    "range": "0-20 N per taxel (force test, max 83.91/255 ADC, no saturation); repeatability 1.38% F.S., hysteresis 11.65% F.S.",
+    "calibrated": null
    },
    "modalities": [
     "rgb",
@@ -1851,7 +2174,25 @@
     "Coverage 'fingers' = five 3x7 finger arrays; exact phalanx extent not stated in text.",
     "Robot camera models and mounts not given (Fig. 6 shows 'RGB cameras').",
     "Rokoko glove model / sensing principle not named in paper, so method left null."
-   ]
+   ],
+   "rank": {
+    "n": 4,
+    "label": "Paper only",
+    "why": [
+     "release announced"
+    ]
+   },
+   "quality": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "dexvitac",
@@ -1874,7 +2215,8 @@
     "note": "Five HIT LongLin-96 fingertip modules, each 8x16 taxels over ~140 mm2, in finger sleeves on a Manus glove; identical modules on the Inspire RH56DFTP robot hand. Sampled at 1000 Hz but the stored, synchronized stream uses tactile at 60 Hz as the anchor timeline.",
     "model": "HIT LongLin-96",
     "principle": "unspecified",
-    "range": "0-20 N, 0.01 N sensitivity, <5% FS accuracy"
+    "range": "0-20 N, 0.01 N sensitivity, <5% FS accuracy",
+    "calibrated": null
    },
    "modalities": [
     "wrist_rgb",
@@ -1975,7 +2317,25 @@
     "Camera role: paper says first-person, but the hardware figure shows it hand/wrist-mounted; recorded as wrist.",
     "Whether robot-side recordings are part of the released dataset is not stated; the dataset is described as human demonstrations.",
     "wrist_cameras = 1 for each side (human and robot)."
-   ]
+   ],
+   "rank": {
+    "n": 4,
+    "label": "Paper only",
+    "why": [
+     "release announced"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "osmo",
@@ -1999,7 +2359,8 @@
     "maker": "custom (Meta FAIR); DIY kit sold by WowRobo",
     "model": "OSMO tactile glove",
     "principle": "magnetic",
-    "range": "0.3-80 N"
+    "range": "0.3-80 N",
+    "calibrated": null
    },
    "modalities": [
     "rgb",
@@ -2096,7 +2457,25 @@
     "scenes=1 derived from 'policies deployed in the same environment used to collect the human demonstrations'.",
     "'magnetic (Hall)' is the catalog category; the paper only says magnetometers (BMM350).",
     "Whether palm taxel data was recorded in the 140 demos is not stated; paper omits palm for this task."
-   ]
+   ],
+   "rank": {
+    "n": 3,
+    "label": "Restricted",
+    "why": [
+     "partial"
+    ]
+   },
+   "quality": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
   },
   {
    "id": "humanoid_everyday",
@@ -2118,7 +2497,8 @@
     "model": "Dex3-1 hand pressure sensors",
     "principle": "unspecified",
     "rate_hz": 30,
-    "sensors_per_hand": 9
+    "sensors_per_hand": 9,
+    "calibrated": null
    },
    "modalities": [
     "rgb",
@@ -2216,7 +2596,26 @@
     "taxels_per_hand left null: README says 9 sensors per hand with up to 4 values each (3 'usable' in the schema), so the per-hand value count is 27-36.",
     "Camera model D435 is from the GitHub README calibration section; the paper says only 'Intel RealSense RGB-D'. Binocular IR feeds are streamed to the headset but not recorded.",
     "scene count not stated; paper says 'indoor and outdoor environments'."
-   ]
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open",
+    "why": [
+     "public download",
+     "samples not checked yet"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "robotacdex",
@@ -2239,7 +2638,8 @@
     "maker": "BrainCo",
     "model": "Revo2 (tactile version)",
     "principle": "capacitive",
-    "rate_hz": "100"
+    "rate_hz": "100",
+    "calibrated": null
    },
    "modalities": [
     "multiview_rgb",
@@ -2333,7 +2733,25 @@
     "Third-person camera mount assumed static (described as 'third-person perspective overview').",
     "VR teleop: exact headset/hand-tracking mode not detailed beyond 'Meta Horizon VR'; method set to other.",
     "scenes left null: the 4 configurations are table distance x background variants of one lab setup. 23 skills are not a schema field (in text)."
-   ]
+   ],
+   "rank": {
+    "n": 4,
+    "label": "Paper only",
+    "why": [
+     "release announced"
+    ]
+   },
+   "quality": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "vicon_glove",
@@ -2358,7 +2776,8 @@
     "model": "FSR 400 series",
     "principle": "piezoresistive",
     "range": "calibrated to 61 N; MAE 0.74-2.87 N",
-    "rate_hz": "200"
+    "rate_hz": "200",
+    "calibrated": true
    },
    "modalities": [
     "rgb",
@@ -2442,7 +2861,25 @@
     "tasks=1: each session follows one protocol (approach, grasp, slow transport, placement).",
     "FSRs listed as piezoresistive (force-sensing resistors; the paper says only 'FSR').",
     "Release: the repository README says the data will be released upon publication; the paper promises an expanded dataset covering 10 object categories."
-   ]
+   ],
+   "rank": {
+    "n": 4,
+    "label": "Paper only",
+    "why": [
+     "release announced"
+    ]
+   },
+   "quality": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": true,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
   }
  ]
 }
