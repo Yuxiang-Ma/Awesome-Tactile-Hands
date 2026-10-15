@@ -15,6 +15,7 @@ ENUMS = {
     "availability": {"public", "gated", "partial", "announced", "unclear", "not_released"},
     "sensor.type": {"piezoresistive", "capacitive", "vision", "magnetic", "unspecified", "estimated"},
     "sensor.coverage": {"tip", "phalanx", "palm"},
+    "sensor.principle": {"piezoresistive", "capacitive", "piezoelectric", "magnetic", "optical", "barometric", "resistive", "unspecified"},
     "modalities": {"hand_pose", "egocentric", "wrist_rgb", "multiview_rgb", "rgb", "depth", "object_pose", "mocap", "robot_action",
                    "language", "emg", "imu", "eye_tracking", "audio", "segmentation"},
 }
@@ -41,6 +42,30 @@ def validate(ds: list) -> list:
     return errs
 
 
+TRACK = {"vision_estimate": "estimated from video", "optical_mocap": "optical mocap", "optical_tracker": "Vive tracker", "imu": "IMU",
+         "magnetic": "magnetic", "bend_sensor": "bend sensors", "exoskeleton": "exoskeleton", "robot_proprioception": "joint encoders",
+         "teleop_glove": "teleop glove", "other": "other"}
+ROLE = {"egocentric": "egocentric", "wrist": "wrist", "third_person": "third-person", "robot_head": "robot head", "other": "other"}
+
+
+def facts(d: dict) -> str:
+    """'20 h, 208 tasks; cameras: egocentric + 2 wrist; tracking: IMU (Rokoko Smartgloves)' from the structured fields."""
+    c, u, out = d["scale"], d.get("setup"), []
+    size = ", ".join(x for x in (f"{c['hours']:g} h" if c.get("hours") else "", f"{c['tasks']:,} tasks" if c.get("tasks") else "",
+                                  f"{c['scenes']} environments" if (c.get("scenes") or 0) > 1 else "") if x)
+    if size:
+        out.append(size)
+    if u:
+        n = {}
+        for cam in u.get("cameras") or []:
+            n[cam["role"]] = n.get(cam["role"], 0) + (cam.get("count") or 1)
+        out.append("cameras: " + (" + ".join(f"{k} {ROLE[r]}" if (k > 1 or r != "egocentric") else ROLE[r] for r, k in n.items()) or "none"))
+        tr = [f"{TRACK[t['method']]}" + (f" ({t['system'].split(' (')[0]})" if t.get("system") else "")
+              for t in u.get("tracking") or [] if t["target"] != "object"]
+        out.append("hand tracking: " + ("; ".join(dict.fromkeys(tr)) or "none"))
+    return "; ".join(out)
+
+
 def line(d: dict) -> str:
     s, L = d["sensor"], d["links"]
     n = s.get("taxels_per_hand")
@@ -48,7 +73,8 @@ def line(d: dict) -> str:
     cov = ", ".join(COVER[c] for c in s["coverage"]) or "coverage not stated"
     links = ", ".join(f"[{k}]({L[k]})" for k in ("paper", "project", "data", "code") if L.get(k))
     head = f"[{d['name']}]({L.get('project') or L.get('paper')})"
-    return f"- {head} - {d['summary']} {dens}; {cov}; {AVAIL[d['availability']]}. {d['venue']} ({links})."
+    f = facts(d)
+    return f"- {head} - {d['summary']} {dens}; {cov}{'; ' + f if f else ''}; {AVAIL[d['availability']]}. {d['venue']} ({links})."
 
 
 def main() -> None:

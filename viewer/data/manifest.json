@@ -968,6 +968,104 @@
      "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
     }
    ]
+  },
+  {
+   "id": "opentouch",
+   "group": "public",
+   "title": "OpenTouch",
+   "provider": "Song et al. 2025 (MIT)",
+   "kind": "recording",
+   "status": {
+    "label": "License not stated",
+    "tone": "neutral"
+   },
+   "about": "Egocentric in-the-wild recordings with a full-hand tactile glove on the right hand, Aria glasses video and Rokoko hand pose: 5.1 hours, 2,900 annotated clips in 14 environments.",
+   "link": {
+    "label": "OpenTouch-MIT/opentouch",
+    "href": "https://github.com/OpenTouch-MIT/opentouch"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 169
+   },
+   "hardware": [
+    {
+     "k": "Glove",
+     "v": "FPC + piezoresistive film, right hand",
+     "d": "16\u00d716 electrode grid, 169 taxels on fingers, thumb and palm (palmar side) \u00b7 30 Hz"
+    },
+    {
+     "k": "Camera",
+     "v": "Meta Project Aria glasses",
+     "d": "RGB; 640\u00d7480 JPEG frames in the release \u00b7 30 fps \u00b7 re-encoded here"
+    },
+    {
+     "k": "Pose",
+     "v": "Rokoko Smartglove",
+     "d": "21 hand landmarks + wrist and palm position \u00b7 30 Hz"
+    },
+    {
+     "k": "Labels",
+     "v": "Object, action, grip type, description",
+     "d": "Per clip, with contact onset, peak and post-contact frames"
+    }
+   ],
+   "notes": "Paper: arXiv 2512.16842. The code repository's package metadata says MIT; the release states no license for the data, which is shared from Google Drive. The sample videos are re-hosted here for preview with attribution. Raw readings are 3072 at rest and fall with pressure; the viewer shows 3072 \u2212 raw, uncalibrated.",
+   "items": [
+    {
+     "id": "ot_eat_mcdonalds_demo_00",
+     "title": "Holding (soft-serve ice cream cone)",
+     "label": "Restaurant \u00b7 eat_mcdonalds",
+     "sub": "9.9 s \u00b7 Small Diameter",
+     "poster": "media/ot_eat_mcdonalds_demo_00.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ot_eat_ygf_p1_demo_12",
+     "title": "Serving (metal serving tongs)",
+     "label": "Restaurant \u00b7 eat_ygf_p1",
+     "sub": "11.4 s \u00b7 Prismatic 3 Finger",
+     "poster": "media/ot_eat_ygf_p1_demo_12.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ot_fablab_ml_p3_demo_34",
+     "title": "Picking up (wooden mallet)",
+     "label": "Workshop \u00b7 fablab_ml_p3",
+     "sub": "8.8 s \u00b7 Small Diameter",
+     "poster": "media/ot_fablab_ml_p3_demo_34.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ot_hardware_homedepot_p1_demo_05",
+     "title": "Pressing (small electronic sensor device with LEDs)",
+     "label": "Store \u00b7 hardware_homedepot_p1",
+     "sub": "9.9 s \u00b7 Index Finger Extension",
+     "poster": "media/ot_hardware_homedepot_p1_demo_05.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ot_hardware_homedepot_p1_demo_17",
+     "title": "Pushing (shopping cart handlebar)",
+     "label": "Store \u00b7 hardware_homedepot_p1",
+     "sub": "8.0 s \u00b7 Medium Wrap",
+     "poster": "media/ot_hardware_homedepot_p1_demo_17.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ot_home_kitchen_p3_demo_22",
+     "title": "Pouring (milk carton)",
+     "label": "Kitchen \u00b7 home_kitchen_p3",
+     "sub": "5.1 s \u00b7 Prismatic 3 Finger",
+     "poster": "media/ot_home_kitchen_p3_demo_22.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
   }
  ]
 }
