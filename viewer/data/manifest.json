@@ -9,6 +9,11 @@
    "id": "originflow",
    "title": "OriginFlow",
    "about": "Preview material from the OriginData dataset."
+  },
+  {
+   "id": "public",
+   "title": "Public datasets",
+   "about": "Sample episodes from released whole-hand tactile datasets, converted to one format. Videos stream from each dataset's own repository."
   }
  ],
  "sources": [
@@ -756,6 +761,120 @@
     }
    ],
    "report": "<h3>About this data</h3>\n<p>These videos are previews rendered by OriginFlow: the egocentric camera with per-finger force traces (left and right hand),\na hand-pose overlay, head and wrist trajectories, and an annotation timeline (episode, subtask, atomic action). The raw\nstreams are not part of this folder, so the viewer shows the renders as delivered, downsampled from 120 to 30 fps.</p>\n<h3>Data quality, as reported by the provider</h3>\n<p>Frame-level validity flags over the OriginData preview dataset (10,867,077 frames). They count valid or detected frames;\nthey do not measure force or pose accuracy.</p>\n<table><thead><tr><th>Field</th><th>Meaning</th><th class=\"num\">Rate</th></tr></thead><tbody>\n<tr><td>left.force_valid</td><td>Left-hand force values valid</td><td class=\"num\">99.84%</td></tr>\n<tr><td>right.force_valid</td><td>Right-hand force values valid</td><td class=\"num\">99.84%</td></tr>\n<tr><td>observation.hand.left.detected</td><td>Left hand detected</td><td class=\"num\">93.24%</td></tr>\n<tr><td>observation.hand.right.detected</td><td>Right hand detected</td><td class=\"num\">96.09%</td></tr>\n<tr><td>observation.head.pose_valid</td><td>Head pose finite and aligned (not tracking quality)</td><td class=\"num\">100.00%</td></tr>\n</tbody></table>\n<h3>Real-robot training results, as reported by the provider</h3>\n<p>Eight tasks trained from scratch (starVLA with a DiT-B head, batch 32; 641 sequences over 10 tasks, 525 train / 116 test):\nafter 20,000 post-training steps the mean success rate was 34.35% with force input and 28.30% without. Squeezing salad\ndressing with 50,000 pretraining and 10,000 post-training steps: 75% (15/20) with force, 55% (11/20) without. Gains vary\nby task; stamping went from 15% without force to 10% with it.</p>\n<div class=\"figs\"><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/post-training-efficiency.png\" alt=\"Overall real-robot success rate across eight tasks at different post-training step counts.\" loading=\"lazy\"><figcaption>Overall real-robot success rate across eight tasks at different post-training step counts.</figcaption></figure><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/pretraining-scale-benefits.png\" alt=\"Squeezing salad dressing: pretraining scale, with post-training fixed at 10,000 steps.\" loading=\"lazy\"><figcaption>Squeezing salad dressing: pretraining scale, with post-training fixed at 10,000 steps.</figcaption></figure><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/pretraining-comparison.png\" alt=\"Squeezing salad dressing with and without pretraining.\" loading=\"lazy\"><figcaption>Squeezing salad dressing with and without pretraining.</figcaption></figure><figure><img src=\"https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/media/of/fig/real-robot-task-summary.png\" alt=\"Success rates and confidence intervals for eight tasks after 20,000 post-training steps.\" loading=\"lazy\"><figcaption>Success rates and confidence intervals for eight tasks after 20,000 post-training steps.</figcaption></figure></div>"
+  },
+  {
+   "id": "egotouch",
+   "group": "public",
+   "title": "EgoTouch",
+   "provider": "Zhou et al. 2026 (TouchAnything)",
+   "kind": "recording",
+   "status": {
+    "label": "License not stated",
+    "tone": "neutral"
+   },
+   "about": "Bimanual tactile gloves with a chest camera and two fisheye wrist cameras, 213 everyday tasks.",
+   "link": {
+    "label": "zhouzhoujy/EgoTouch",
+    "href": "https://huggingface.co/datasets/zhouzhoujy/EgoTouch"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 256
+   },
+   "hardware": [
+    {
+     "k": "Gloves",
+     "v": "256-channel pressure gloves",
+     "d": "Fingers, thumb and palm \u00b7 shown on the release's 21\u00d721 grid \u00b7 30 Hz"
+    },
+    {
+     "k": "Cameras",
+     "v": "Chest + 2 wrist fisheye",
+     "d": "640\u00d7480 \u00b7 30 fps"
+    },
+    {
+     "k": "Tracking",
+     "v": "Vive wrist trackers, Rokoko hands",
+     "d": "Plus WiLoR hand estimates in the release"
+    },
+    {
+     "k": "Labels",
+     "v": "Task name",
+     "d": "The release also has a per-hand contact flag (not shown)"
+    }
+   ],
+   "notes": "Paper: arXiv 2605.13083. The dataset card states no license; videos are played from the original repository, not copied.",
+   "items": [
+    {
+     "id": "eg_bounce_ping_pong_ball_20260320_170841_748",
+     "title": "Bounce ping pong ball",
+     "label": "Outdoor \u00b7 20260320",
+     "sub": "48 s",
+     "poster": "media/eg_bounce_ping_pong_ball_20260320_170841_748.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "eg_fold_t_shirt_20260320_152013_279",
+     "title": "Fold T-shirt",
+     "label": "Home \u00b7 20260320",
+     "sub": "27 s",
+     "poster": "media/eg_fold_t_shirt_20260320_152013_279.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "eg_pick_up_fruit_20260313_232341_667",
+     "title": "Pick up fruit",
+     "label": "Retail \u00b7 20260313",
+     "sub": "5 s",
+     "poster": "media/eg_pick_up_fruit_20260313_232341_667.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "eg_squeeze_pliers_20260319_155559_745",
+     "title": "Squeeze pliers",
+     "label": "Workbench \u00b7 20260319",
+     "sub": "16 s",
+     "poster": "media/eg_squeeze_pliers_20260319_155559_745.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "eg_twist_bottle_cap_20260320_140403_874",
+     "title": "Twist bottle cap",
+     "label": "Home \u00b7 20260320",
+     "sub": "24 s",
+     "poster": "media/eg_twist_bottle_cap_20260320_140403_874.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "eg_use_correction_tape_20260320_163258_676",
+     "title": "Use correction tape",
+     "label": "Office \u00b7 20260320",
+     "sub": "27 s",
+     "poster": "media/eg_use_correction_tape_20260320_163258_676.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "eg_use_hex_key_20260319_113829_213",
+     "title": "Use hex key",
+     "label": "Workbench \u00b7 20260319",
+     "sub": "6 s",
+     "poster": "media/eg_use_hex_key_20260319_113829_213.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "eg_use_scissors_20260319_110954_585",
+     "title": "Use scissors",
+     "label": "Workbench \u00b7 20260319",
+     "sub": "12 s",
+     "poster": "media/eg_use_scissors_20260319_110954_585.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
   }
  ]
 }

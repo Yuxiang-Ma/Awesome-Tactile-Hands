@@ -19,6 +19,7 @@
   --accent:#4cb1b8;--accent-ink:#06191b;--accent-soft:#18363a;--lh:#6ea6ec;--rh:#ef8d5f;--cursor:#f1f4f5;--grid:#1e272b;
   --warn:#e9b660;--warn-soft:#2c2412;--seg-a:#1b3a3e;--seg-b:#24494e;--pre:#1a2226;--shadow:0 1px 2px rgba(0,0,0,.3),0 4px 14px rgba(0,0,0,.25)}
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scrollbar-color:var(--line) transparent;accent-color:var(--accent)}
 body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-variant-numeric:tabular-nums}
 ::selection{background:var(--accent-soft);color:var(--ink)}
@@ -51,6 +52,8 @@ button,select{font:inherit;color:var(--ink)}
 .glyph .o{fill:none;stroke:var(--muted);stroke-width:1;opacity:.75}
 .glyph .t{fill:var(--accent)}
 .glyph .e{fill:none;stroke:var(--accent);stroke-width:1.1;stroke-dasharray:1.6 1.1}
+.glyph .c{fill:var(--accent);opacity:.85}
+.ds:not([data-sel="true"]) .dsrow .glyph .c{fill:var(--muted)}
 .ds:not([data-sel="true"]) .dsrow .glyph .t{fill:var(--muted)}
 .ds:not([data-sel="true"]) .dsrow .glyph .e{stroke:var(--muted)}
 .st{display:inline-flex;align-items:center;gap:5px;font-weight:600}
@@ -113,7 +116,8 @@ main{padding:0 20px 40px;min-width:0}
 .caption .step{color:var(--ink2);font-size:14px}
 .caption .stepno{font-size:11.5px;color:var(--muted);white-space:nowrap}
 .layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,1fr);gap:14px}
-@media(max-width:1250px){.layout{grid-template-columns:1fr}}
+.layout.gl{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.layout.gl .gloves{grid-template-columns:1fr 1fr}
+@media(max-width:1250px){.layout,.layout.gl{grid-template-columns:1fr}}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
 .card>h3{font-size:12.5px;font-weight:600;margin:0;padding:8px 12px;border-bottom:1px solid var(--line2);display:flex;justify-content:space-between;gap:8px;align-items:center}
 .card>h3 small{color:var(--muted);font-weight:400;font-size:11.5px;text-align:right}
@@ -123,11 +127,12 @@ main{padding:0 20px 40px;min-width:0}
 .wrists{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
 .gloves{display:grid;grid-template-columns:1fr;gap:14px}
 @media(max-width:1250px) and (min-width:700px){.gloves{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.wrists,.gloves{grid-template-columns:1fr}}
+@media(max-width:620px){.wrists,.gloves,.layout.gl .gloves{grid-template-columns:1fr}}
 /* heatmaps sit on a dark instrument surface in both themes: the provider's ramp starts near black */
 .hand .hm{background:#0e171c}
 .hand canvas{width:100%;max-width:380px;margin:0 auto;display:block}
-.vals{display:grid;grid-template-columns:repeat(5,1fr);font-size:11px;border-top:1px solid var(--line2)}
+.hand .hm.tall canvas{max-width:300px}
+.vals{display:grid;grid-template-columns:repeat(var(--nv,5),1fr);font-size:11px;border-top:1px solid var(--line2)}
 .vals div{padding:5px 2px;text-align:center;border-right:1px solid var(--line2);color:var(--muted)}.vals div:last-child{border-right:0}
 .vals b{display:block;font-size:13px;color:var(--ink);font-weight:600}
 .vals .n{display:block;font-weight:600;font-size:11px}
@@ -241,7 +246,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const SIGN=new URLSearchParams(location.search).get('__sign');
 const U=p=>SIGN&&!/^https?:/.test(p)?`${p}${p.includes('?')?'&':'?'}__sign=${encodeURIComponent(SIGN)}`:p;
 // items too large for the Space (1 GB cap) live in a dataset repo: their files resolve against item.base
-const A=(it,p)=>U((it&&it.base||'')+p);
+const A=(it,p)=>U(/^https?:/.test(p)?p:(it&&it.base||'')+p);
 const getJSON=async p=>{const r=await fetch(U(p));if(!r.ok)throw new Error(`${p}: HTTP ${r.status}`);return r.json()};
 function dec(b64,Type){const s=atob(b64),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return new Type(u.buffer)}
 
@@ -260,6 +265,7 @@ const clk={t:0,at:0};const anchor=()=>{clk.t=t;clk.at=performance.now()};
 // recorded grid size; dashed rings are force values the provider estimates without naming a sensor.
 function glyphLabel(S){
   if(!S)return'';if(S.type==='estimate')return'Hardware: per-finger force estimates, no tactile sensor named';
+  if(S.type==='coverage')return`Tactile coverage: ${(S.coverage||[]).map(c=>({tip:'fingertips',phalanx:'finger segments',palm:'palm'}[c])).join(', ')||'not stated'}${S.taxels?` · ${S.taxels} taxels per hand`:''}`;
   return`Tactile layout: ${S.finger[0]}×${S.finger[1]} taxels on each finger, ${S.palm?`${S.palm[0]}×${S.palm[1]} on the palm`:'no palm sensor'}`}
 function glyph(S,cls=''){
   const F=[[14.5,9],[20.3,6],[26.1,8],[31.9,12]],fw=5,fb=22,o=[];
@@ -272,6 +278,11 @@ function glyph(S,cls=''){
     // thumb cells follow the thumb's tilt
     const n=S.finger[0]*S.finger[1],th=o.splice(o.length-n,n);o.push(`<g transform="${TH}">${th.join('')}</g>`);
     if(S.palm)grid(15.3,24,20.8,S.palm[0],S.palm[1],.35)}
+  else if(S&&S.type==='coverage'){const C=new Set(S.coverage||[]),r=(x,y,w,h)=>`<rect class="c" x="${x.toFixed(2)}" y="${y.toFixed(2)}" width="${w.toFixed(2)}" height="${h.toFixed(2)}" rx="1.2"/>`,th=[];
+    // regions the dataset covers with taxels: fingertip, the other finger segments, palm (no per-taxel layout)
+    F.forEach(([x,y])=>{if(C.has('tip'))o.push(r(x+.6,y+.6,fw-1.2,3.4));if(C.has('phalanx'))o.push(r(x+.6,y+4.6,fw-1.2,21.6-y-4.6))});
+    if(C.has('tip'))th.push(r(9.7,26.1,4.2,3.4));if(C.has('phalanx'))th.push(r(9.7,30.1,4.2,8.6));if(th.length)o.push(`<g transform="${TH}">${th.join('')}</g>`);
+    if(C.has('palm'))o.push(r(15.1,23.6,21.2,16.8))}
   else if(S&&S.type==='estimate'){[...F.map(([x,y])=>[x+fw/2,y+2.8]),[9.9,28.4]].forEach(([cx,cy])=>o.push(`<circle class="e" cx="${cx}" cy="${cy}" r="1.9"/>`))}
   return`<svg class="glyph ${cls}" viewBox="3 3 37 40" role="img" aria-label="${esc(glyphLabel(S))}"><title>${esc(glyphLabel(S))}</title>${o.join('')}</svg>`;
 }
@@ -325,13 +336,14 @@ function openFilm(s,it){
   R=null;
   $('main').innerHTML=dsHead(s)+`<div class="filmhead"><div><h2>${esc(it.title)}</h2>${it.summary?`<p class="summary">${esc(it.summary)}</p>`:''}</div>
     <span>${esc(it.sub||'')}${it.episode!=null?` · episode ${it.episode}`:''}</span></div>
-    <div class="card film"><video controls playsinline preload="metadata" poster="${U(it.poster)}" src="${U(it.video)}"></video></div>
+    <div class="card film"><video controls playsinline preload="metadata" poster="${A(it,it.poster)}" src="${A(it,it.video)}"></video></div>
     ${s.report?`<section class="report">${s.report.replace(/src="([^"]+)"/g,(m,p)=>`src="${U(p)}"`)}</section>`:''}`;
 }
 
 /* ---------- data normalisation: early recordings and FusionX demos ---------- */
 function normalize(j,f){
-  const N=j.n,R={id:j.id,kind:j.kind||'early',n:N,fps:j.fps,duration:j.duration,videos:j.videos,hands:{},imu:{},src:f};
+  if(j.kind==='grid')return normalizeGrid(j,f);
+  const N=j.n,R={id:j.id,kind:j.kind||'early',n:N,fps:j.fps,duration:j.duration,videos:j.videos,hands:{},imu:{},src:f,cams:CAMS,hlist:['lh','rh']};
   for(const h of ['lh','rh']){const G=j.glove[h];
     if(R.kind==='fusionx'){
       R.hands[h]={rate:G.rate,rows:G.rows,cols:G.cols,tax:dec(G.taxels,Uint16Array),range:G.range[1],palm:null,sum:dec(G.total,Float32Array),sumRange:G.sum_range||null,sumLabel:'finger total (raw ADC, sum of 16 cells)',
@@ -352,25 +364,33 @@ function normalize(j,f){
   R.task=j.task||null;R.stereo=R.kind==='early';
   return R;
 }
+/* ---------- data normalisation: public datasets converted to a common grid format ----------
+   videos: [{key,title,src,src_size,fps_src}] on the episode clock; hands: [{key,title,rate,rows,cols,cells (Uint16 r*cols+c),
+   tax (Uint8 n x cells, 255 = range),range,unit,regions:[{name,cells:[indices into cells]}]}]; series: extra plots. */
+function normalizeGrid(j,f){
+  const N=j.n,R={id:j.id,kind:'grid',n:N,fps:j.fps,duration:j.duration,hands:{},imu:{},src:f,vid:{},tot:{},task:j.task||null,pose:null,stereo:false,notes:j.notes||''};
+  R.cams=j.videos.map(v=>{R.vid[v.key]=v;return v.key});R.hlist=j.hands.map(H=>H.key);
+  for(const G of j.hands){const cells=dec(G.cells,Uint16Array),nc=cells.length,tax=dec(G.tax,Uint8Array),k=G.range/255;
+    const regs=(G.regions||[]).map(r=>({name:r.name,idx:r.cells})),rs=new Float32Array(N*regs.length),tot=new Float32Array(N);
+    for(let i=0;i<N;i++){const b=i*nc;let s=0;for(let c=0;c<nc;c++)s+=tax[b+c];tot[i]=s*k;
+      regs.forEach((r,q)=>{let a=0;for(const c of r.idx)a+=tax[b+c];rs[i*regs.length+q]=a*k})}
+    R.hands[G.key]={...G,cells,nc,tax,regs,rs};R.tot[G.key]=tot}
+  R.series=(j.series||[]).map(s=>({...s,lines:s.lines.map(l=>({...l,v:dec(l.data,Float32Array)}))}));
+  return R;
+}
 
 /* ---------- recording view ---------- */
 function mountRecording(){
   $('main').innerHTML='';$('main').appendChild($('tplRec').content.cloneNode(true));
   $('dshead').outerHTML=dsHead(R.src.s);$('dschip').innerHTML=`${glyph(R.src.s.sensor)}${esc(R.src.s.title)}`;
+  if(R.kind==='grid')return mountGrid();
   const vm=R.videos;
   $('headTitle').textContent=R.stereo?'Head camera · stereo (left | right)':'Head camera · left view';
   for(const [k,id] of [['head','headMeta'],['wrist_lh','lhMeta'],['wrist_rh','rhMeta']]){const m=$(id);m.dataset.base=`${vm[k].src_size.join('×')} · ${vm[k].fps_src} fps`;m.textContent=m.dataset.base}
   for(const h of ['lh','rh'])$(h+'Rate').textContent=`${R.hands[h].rows}×${R.hands[h].cols} per finger · ${R.hands[h].rate} Hz`;
   for(const k of CAMS){const v=$('v_'+k);v.src=A(R.src.it,vm[k].src);v.playbackRate=speed;wireVideo(v,k)}
-  $('skelWrap').hidden=!R.pose;$('skel').onchange=()=>render();
-  [0.25,0.5,1,2].forEach(s=>{const b=document.createElement('button');b.className='btn';b.textContent=s+'×';b.setAttribute('aria-pressed',String(s===speed));
-    b.onclick=()=>{speed=s;document.querySelectorAll('#speeds .btn').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));for(const k of CAMS)$('v_'+k).playbackRate=s;if(playing)anchor()};$('speeds').appendChild(b)});
-  $('play').onclick=()=>playing?pause():play();
-  $('back').onclick=()=>{pause();seek(t-1/R.fps)};$('fwd').onclick=()=>{pause();seek(t+1/R.fps)};
-  const s=$('scrub');let drag=false;const at=e=>{const r=s.getBoundingClientRect();seek((e.clientX-r.left)/r.width*R.duration)};
-  s.addEventListener('pointerdown',e=>{drag=true;if(playing)pause();s.setPointerCapture(e.pointerId);at(e)});
-  s.addEventListener('pointermove',e=>{if(drag)at(e)});s.addEventListener('pointerup',()=>drag=false);
-  const H=R.hands.lh,cb=document.createElement('canvas');cb.width=120;cb.height=8;const cx=cb.getContext('2d');for(let i=0;i<120;i++){cx.fillStyle=cmap(i/119);cx.fillRect(i,0,1,8)}
+  mountControls();
+  const H=R.hands.lh,cb=colorbar();
   $('scale').innerHTML=`<span>Taxel pressure, raw ${R.kind==='fusionx'?'ADC':'counts'}</span><span>0</span>`;$('scale').appendChild(cb);
   $('scale').insertAdjacentHTML('beforeend',`<span>${H.range}${R.kind==='early'?'+':''}</span>${H.palm?`<span>· palm 0–${H.palmMax}</span>`:''}`);
   $('notes').insertAdjacentHTML('beforeend',R.kind==='fusionx'?`
@@ -380,8 +400,36 @@ function mountRecording(){
     <p>All streams sit on one 30 Hz clock that starts at the first camera frame; the gloves record at about 227 Hz. The taxel grids assume row-major order (4 rows × 3 columns per finger, fingertip row on top) and a 6 × 10 palm; this recording does not store the physical layout. Force is the per-taxel force the glove reports, summed per finger, before calibration. The glove IMUs log orientation only. Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>`);
   buildPlots();drawScrub();
 }
+function colorbar(){const cb=document.createElement('canvas');cb.width=120;cb.height=8;const cx=cb.getContext('2d');for(let i=0;i<120;i++){cx.fillStyle=cmap(i/119);cx.fillRect(i,0,1,8)}return cb}
+function mountControls(){
+  $('skelWrap').hidden=!R.pose;$('skel').onchange=()=>render();
+  [0.25,0.5,1,2].forEach(s=>{const b=document.createElement('button');b.className='btn';b.textContent=s+'×';b.setAttribute('aria-pressed',String(s===speed));
+    b.onclick=()=>{speed=s;document.querySelectorAll('#speeds .btn').forEach(o=>o.setAttribute('aria-pressed',String(o===b)));for(const k of R.cams)$('v_'+k).playbackRate=s;if(playing)anchor()};$('speeds').appendChild(b)});
+  $('play').onclick=()=>playing?pause():play();
+  $('back').onclick=()=>{pause();seek(t-1/R.fps)};$('fwd').onclick=()=>{pause();seek(t+1/R.fps)};
+  const s=$('scrub');let drag=false;const at=e=>{const r=s.getBoundingClientRect();seek((e.clientX-r.left)/r.width*R.duration)};
+  s.addEventListener('pointerdown',e=>{drag=true;if(playing)pause();s.setPointerCapture(e.pointerId);at(e)});
+  s.addEventListener('pointermove',e=>{if(drag)at(e)});s.addEventListener('pointerup',()=>drag=false);
+}
+// grid recordings: the first video is the large one, the rest sit underneath; one panel per hand, as many as the data has
+function mountGrid(){
+  const vs=R.cams.map(k=>R.vid[k]),card=(v,big)=>`<div class="card"><h3>${esc(v.title)} <small id="meta_${v.key}"></small></h3><div class="vwrap"><video id="v_${v.key}" muted playsinline preload="auto"></video>${big?'<canvas id="poseC"></canvas>':''}</div></div>`;
+  const rest=vs.slice(1);
+  const lay=document.querySelector('.layout');lay.classList.toggle('gl',R.hlist.length===2);lay.innerHTML=`<div>${vs.length?card(vs[0],true):'<div class="card"><h3>No video in this dataset</h3></div>'}
+    ${rest.length?`<div class="wrists" style="grid-template-columns:repeat(${Math.min(rest.length,3)},minmax(0,1fr))">${rest.map(v=>card(v,false)).join('')}</div>`:''}</div>
+    <div class="side"><div class="gloves">${R.hlist.map(h=>{const H=R.hands[h];return`<div class="card hand"><h3><span style="color:var(--${h==='lh'?'lh':'rh'})">${esc(H.title)}</span><small>${H.nc} taxels · ${H.rate} Hz</small></h3>
+      <div class="hm${H.rows>H.cols?' tall':''}"><canvas id="hand_${h}"></canvas></div><div class="vals" id="vals_${h}" style="--nv:${Math.max(1,H.regs.length)}"></div></div>`}).join('')}</div>
+    <div class="card" style="margin-top:14px"><div class="scale" id="scale"></div></div></div>`;
+  for(const v of vs){const m=$('meta_'+v.key);m.dataset.base=[v.src_size&&v.src_size.join('×'),v.fps_src&&`${v.fps_src} fps`].filter(Boolean).join(' · ');m.textContent=m.dataset.base;
+    const e=$('v_'+v.key);e.src=A(R.src.it,v.src);e.playbackRate=speed;wireVideo(e,v.key)}
+  mountControls();
+  const H=R.hands[R.hlist[0]];$('scale').innerHTML=`<span>Taxel value, ${esc(H.unit||'raw')}</span><span>0</span>`;$('scale').appendChild(colorbar());
+  $('scale').insertAdjacentHTML('beforeend',`<span>${H.range}</span>`);
+  $('notes').insertAdjacentHTML('beforeend',R.notes+'<p>Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>');
+  buildPlots();drawScrub();
+}
 function wireVideo(v,k){
-  const m=()=>$({head:'headMeta',wrist_lh:'lhMeta',wrist_rh:'rhMeta'}[k]),say=s=>{const e=m();if(e)e.textContent=s?`${e.dataset.base} · ${s}`:e.dataset.base};
+  const m=()=>$('meta_'+k)||$({head:'headMeta',wrist_lh:'lhMeta',wrist_rh:'rhMeta'}[k]),say=s=>{const e=m();if(e)e.textContent=s?`${e.dataset.base} · ${s}`:e.dataset.base};
   v.addEventListener('loadedmetadata',()=>{if(!playing&&R)setVideos(true)});
   v.addEventListener('error',()=>say('video failed to load'));
   v.addEventListener('waiting',()=>{if(playing)say('buffering…')});
@@ -390,18 +438,18 @@ function wireVideo(v,k){
 
 /* ---------- clock ---------- */
 const frame=()=>Math.max(0,Math.min(R.n-1,Math.round(t*R.fps)));
-function setVideos(force){for(const k of CAMS){const v=$('v_'+k);if(!v||(!v.duration&&v.readyState<1))continue;
+function setVideos(force){for(const k of R.cams){const v=$('v_'+k);if(!v||(!v.duration&&v.readyState<1))continue;
   if(force||Math.abs(v.currentTime-t)>0.06)v.currentTime=Math.min(t,(v.duration||t)-0.001)}}
 function seek(x){if(!R)return;t=Math.max(0,Math.min(R.duration,x));setVideos(true);render();
   try{history.replaceState(null,'',`#rec=${R.id}&t=${t.toFixed(2)}`)}catch(e){}}
 function setPlayUI(p){$('playIcon').innerHTML=p?'<path d="M4 2.5h3v11H4zM9 2.5h3v11H9z"/>':'<path d="M4 2.5v11l9-5.5z"/>';$('playTxt').textContent=p?'Pause':'Play';$('play').setAttribute('aria-label',p?'Pause':'Play')}
 function play(){if(!R)return;if(t>=R.duration-0.05)seek(0);playing=true;setPlayUI(true);
-  for(const k of CAMS){const v=$('v_'+k);v.playbackRate=speed;v.play().catch(()=>{})}
+  for(const k of R.cams){const v=$('v_'+k);v.playbackRate=speed;v.play().catch(()=>{})}
   // wall clock drives t so the signals keep running while a video buffers; videos are pulled back when they drift
   anchor();const loop=()=>{if(!playing)return;t=Math.min(R.duration,clk.t+(performance.now()-clk.at)/1000*speed);
-    for(const k of CAMS){const v=$('v_'+k);if(v.readyState>=2&&!v.seeking&&Math.abs(v.currentTime-t)>0.25)v.currentTime=t}
+    for(const k of R.cams){const v=$('v_'+k);if(v.readyState>=2&&!v.seeking&&Math.abs(v.currentTime-t)>0.25)v.currentTime=t}
     render();if(t>=R.duration){pause();return}raf=requestAnimationFrame(loop)};raf=requestAnimationFrame(loop)}
-function pause(){if(!R||!$('play'))return;playing=false;cancelAnimationFrame(raf);setPlayUI(false);for(const k of CAMS)$('v_'+k).pause();setVideos(true);render()}
+function pause(){if(!R||!$('play'))return;playing=false;cancelAnimationFrame(raf);setPlayUI(false);for(const k of R.cams)$('v_'+k).pause();setVideos(true);render()}
 function stop(){playing=false;cancelAnimationFrame(raf)}
 
 /* ---------- hands ---------- */
@@ -430,9 +478,19 @@ function drawHand(h,i){
   $('vals_'+h).innerHTML=FINGERS.map((f,k)=>`<div><span class="n" style="color:${FCOL[k]}">${f}</span><b>${H.fmtSum(H.sum[i*5+k])}</b>${H.fmtBend(H.bend[i*5+k])}</div>`).join('');
 }
 
+// grid recordings: cells at their published (row, col) position; positions with no taxel stay empty
+function drawGridHand(h,i){
+  const c=$('hand_'+h),H=R.hands[h],CS=H.rows*H.cols>200?11:16,G=2,pad=10,W=H.cols*(CS+G)-G+2*pad,Hh=H.rows*(CS+G)-G+2*pad,dpr=devicePixelRatio||1;
+  if(c.width!==Math.round(W*dpr)){c.width=W*dpr;c.height=Hh*dpr;c.style.aspectRatio=`${W}/${Hh}`}
+  const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,Hh);
+  const b=i*H.nc;for(let k=0;k<H.nc;k++){const p=H.cells[k],r=Math.floor(p/H.cols),q=p%H.cols;x.fillStyle=cell(H.tax[b+k]/255);x.fillRect(pad+q*(CS+G),pad+r*(CS+G),CS,CS)}
+  const n=H.regs.length,fmt=v=>v>=1000?(v/1000).toFixed(1)+'k':v>=10?v.toFixed(0):v.toFixed(1);
+  $('vals_'+h).innerHTML=n?H.regs.map((g,q)=>`<div><span class="n" style="color:${q<5?FCOL[q]:'var(--muted)'}">${esc(g.name)}</span><b>${fmt(H.rs[i*n+q])}</b></div>`).join(''):`<div><span class="n">total</span><b>${fmt(R.tot[h][i])}</b></div>`;
+}
+
 /* ---------- skeleton overlay ---------- */
 function drawPose(i){
-  const c=$('poseC');if(!c)return;const v=$('v_head'),dpr=devicePixelRatio||1,W=v.clientWidth,H=v.clientHeight;
+  const c=$('poseC'),v=$('v_head');if(!c||!v)return;const dpr=devicePixelRatio||1,W=v.clientWidth,H=v.clientHeight;
   if(c.width!==Math.round(W*dpr)||c.height!==Math.round(H*dpr)){c.width=W*dpr;c.height=H*dpr}
   const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,H);
   if(!R.pose||!$('skel').checked)return;const sx=W/R.pose.size[0],sy=H/R.pose.size[1];x.lineJoin=x.lineCap='round';
@@ -454,7 +512,17 @@ function drawCaption(){
 
 /* ---------- plots ---------- */
 const WIN=6;
+function gridPlots(){
+  const defs=[];
+  for(const h of R.hlist){const H=R.hands[h],n=H.regs.length;
+    defs.push(n?{title:`${H.title} · sum per region (${H.unit||'raw'})`,lines:H.regs.map((g,q)=>({name:g.name,col:q<5?FCOL[q]:css('--muted'),get:i=>H.rs[i*n+q]}))}:
+      {title:`${H.title} · sum of all taxels (${H.unit||'raw'})`,lines:[{name:'total',col:css(h==='lh'?'--lh':'--rh'),get:i=>R.tot[h][i]}]})}
+  const pal=[...FCOL,'#7f8c8d'];
+  for(const s of R.series)defs.push({title:s.title,fixed:s.fixed||null,legendText:s.legendText,lines:s.lines.map((l,k)=>({name:l.name,col:l.col||pal[k%pal.length],dash:!!l.dash,get:i=>l.v[i]}))});
+  return defs;
+}
 function buildPlots(){
+  if(R.kind==='grid')return mountPlots(gridPlots());
   const L=R.hands.lh,Rh=R.hands.rh,cap=s=>s[0].toUpperCase()+s.slice(1),defs=[
     {title:`Left glove · ${L.sumLabel}`,fixed:L.sumRange,lines:FINGERS.map((f,k)=>({name:f,col:FCOL[k],get:i=>L.sum[i*5+k]}))},
     {title:`Right glove · ${Rh.sumLabel}`,fixed:Rh.sumRange,lines:FINGERS.map((f,k)=>({name:f,col:FCOL[k],get:i=>Rh.sum[i*5+k]}))},
@@ -465,6 +533,9 @@ function buildPlots(){
   defs.push({title:'Camera IMU · |gyro| (rad/s)',lines:Object.keys(R.imu).map(k=>({name:IN[k][0],col:IN[k][1],get:i=>R.imu[k][i]}))});
   defs.push({title:'Glove orientation · quaternion (left solid, right dashed)',lines:['w','x','y','z'].flatMap((a,k)=>[
       {name:'L '+a,col:FCOL[k],get:i=>L.quat[i*4+k]},{name:'R '+a,col:FCOL[k],dash:true,get:i=>Rh.quat[i*4+k]}]),fixed:[-1,1],legendText:'w, x, y, z: purple, blue, green, yellow'});
+  mountPlots(defs);
+}
+function mountPlots(defs){
   const host=$('plots');host.innerHTML='';PLOTS=[];
   for(const d of defs){
     const w=document.createElement('div');w.className='plot';
@@ -501,9 +572,9 @@ function drawScrub(){
   if(R.task){x.fillStyle=css('--pre');x.fillRect(0,top,W,band);
     R.task.steps.forEach((s,k)=>{x.fillStyle=css(k%2?'--seg-b':'--seg-a');x.fillRect(X(s.start)+.5,top+2,X(s.end)-X(s.start)-1,band-4);
       x.fillStyle=css('--ink2');x.font='600 10px system-ui';x.textAlign='left';if(X(s.end)-X(s.start)>16)x.fillText(String(k+1),X(s.start)+5,top+band-5)})}
-  let hi=1;for(const h of ['lh','rh'])for(const v of R.tot[h])hi=Math.max(hi,v);
+  let hi=1;for(const h of R.hlist)for(const v of R.tot[h])hi=Math.max(hi,v);
   const cols=Math.floor(W);
-  for(const [h,c] of [['lh',css('--lh')],['rh',css('--rh')]]){x.strokeStyle=c;x.globalAlpha=.85;x.lineWidth=1;x.beginPath();
+  for(const [h,c] of R.hlist.map(h=>[h,css(h==='lh'?'--lh':'--rh')])){x.strokeStyle=c;x.globalAlpha=.85;x.lineWidth=1;x.beginPath();
     for(let px=0;px<cols;px++){const a=Math.floor(px/cols*R.n),b=Math.max(a+1,Math.floor((px+1)/cols*R.n));let m=0;for(let i=a;i<b&&i<R.n;i++)m=Math.max(m,R.tot[h][i]);
       const y=top-3-(m/hi)*(top-8);px?x.lineTo(px,y):x.moveTo(px,y)}x.stroke()}
   x.globalAlpha=1;R.scrubImg=x.getImageData(0,0,cv.width,cv.height);
@@ -513,7 +584,7 @@ function drawScrubCursor(){const cv=$('scrubC');if(!R.scrubImg)return;const x=cv
 
 function render(){if(!R||!$('time'))return;const i=frame();
   $('time').textContent=`${t.toFixed(2)} / ${R.duration.toFixed(2)} s`;
-  drawHand('lh',i);drawHand('rh',i);drawPose(i);drawCaption();for(const p of PLOTS)drawPlot(p);drawScrubCursor()}
+  if(R.kind==='grid')R.hlist.forEach(h=>drawGridHand(h,i));else{drawHand('lh',i);drawHand('rh',i)}drawPose(i);drawCaption();for(const p of PLOTS)drawPlot(p);drawScrubCursor()}
 
 document.addEventListener('keydown',e=>{if(!R||!$('play')||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName))return;
   if(e.code==='Space'){e.preventDefault();playing?pause():play()}
