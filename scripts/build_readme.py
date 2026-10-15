@@ -42,7 +42,7 @@ def validate(ds: list) -> list:
     return errs
 
 
-TRACK = {"vision_estimate": "estimated from video", "optical_mocap": "optical mocap", "optical_tracker": "Vive tracker", "imu": "IMU",
+TRACK = {"vision_estimate": "vision", "optical_mocap": "optical mocap", "optical_tracker": "Vive tracker", "imu": "IMU",
          "magnetic": "magnetic", "bend_sensor": "bend sensors", "exoskeleton": "exoskeleton", "robot_proprioception": "joint encoders",
          "teleop_glove": "teleop glove", "other": "other"}
 ROLE = {"egocentric": "egocentric", "wrist": "wrist", "third_person": "third-person", "robot_head": "robot head", "other": "other"}

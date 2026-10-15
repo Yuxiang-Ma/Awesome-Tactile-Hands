@@ -16,14 +16,14 @@ const LABEL = {
   taxels: {a: 'Under 100', b: '100 to 299', c: '300 to 999', d: '1,000 or more', u: 'Not stated'},
   principle: {piezoresistive: 'Piezoresistive', capacitive: 'Capacitive', piezoelectric: 'Piezoelectric', magnetic: 'Magnetic (Hall)', optical: 'Optical (camera-based)',
     barometric: 'Barometric', resistive: 'Resistive (FSR)', unspecified: 'Not specified'},
-  tracking: {vision_estimate: 'Estimated from video', optical_mocap: 'Optical mocap (markers)', optical_tracker: 'Optical tracker (Vive)', imu: 'IMU glove / suit',
+  tracking: {vision_estimate: 'Vision (cameras)', optical_mocap: 'Optical mocap (markers)', optical_tracker: 'Optical tracker (Vive)', imu: 'IMU glove / suit',
     magnetic: 'Magnetic (EMF)', bend_sensor: 'Bend sensors', exoskeleton: 'Exoskeleton', robot_proprioception: 'Robot joint encoders', teleop_glove: 'Teleop glove',
     other: 'Other', none: 'None'},
   wrist: {yes: 'Wrist camera(s)', no: 'No wrist camera', u: 'Not stated'},
   scenes: {multi: 'Several environments', single: 'One setting', u: 'Not stated'},
 };
 // short names for compact cells
-const TRACK_SHORT = {vision_estimate: 'Video estimate', optical_mocap: 'Optical mocap', optical_tracker: 'Vive tracker', imu: 'IMU', magnetic: 'Magnetic',
+const TRACK_SHORT = {vision_estimate: 'Vision', optical_mocap: 'Optical mocap', optical_tracker: 'Vive tracker', imu: 'IMU', magnetic: 'Magnetic',
   bend_sensor: 'Bend sensors', exoskeleton: 'Exoskeleton', robot_proprioception: 'Joint encoders', teleop_glove: 'Teleop glove', other: 'Other'};
 const ROLE = {egocentric: 'egocentric', wrist: 'wrist', third_person: 'third-person', robot_head: 'robot head', other: 'other'};
 const setup = d => d.setup || {cameras: [], tracking: [], other: []};
@@ -94,7 +94,8 @@ function glyph(cov, label) {
     `<rect class="r${on('palm')}" x="13.6" y="22.6" width="22.4" height="17" rx="3"/>`);
   return `<svg class="glyph" viewBox="5 4 33 37" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title>${o.join('')}</svg>`;
 }
-const makerText = d => {const s = d.sensor, m = shortSys([s.maker, s.model].filter(Boolean).join(' ') || '');
+const makerModel = s => s.model && s.maker && s.model.toLowerCase().startsWith(s.maker.split(/[ (]/)[0].toLowerCase()) ? s.model : [s.maker, s.model].filter(Boolean).join(' ');
+const makerText = d => {const s = d.sensor, m = shortSys(makerModel(s) || '');
   return [m, principle(d) !== 'unspecified' ? LABEL.principle[principle(d)].toLowerCase() : ''].filter(Boolean).join(', ') || `${LABEL.embodiment[d.embodiment]}${d.bimanual ? ', bimanual' : ''}`};
 const covText = c => c.length === 3 ? 'Fingers and palm' : c.map(r => LABEL.coverage[r]).join(' + ') || 'Coverage not stated';
 const sensorLine = d => {
@@ -200,7 +201,7 @@ function table(list) {
     <td>${LABEL.embodiment[d.embodiment]}<span class="sub">${d.bimanual ? 'Bimanual' : 'Single hand'}</span></td>
     <td><span class="cov">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}${covText(d.sensor.coverage)}</span></td>
     <td class="num">${d.sensor.taxels_per_hand != null ? d.sensor.taxels_per_hand.toLocaleString('en-US') : d.sensor.sensors_per_hand ? `${d.sensor.sensors_per_hand} sensors` : '–'}</td>
-    <td>${esc(shortSys([d.sensor.maker, d.sensor.model].filter(Boolean).join(' ') || '–'))}<span class="sub">${LABEL.principle[principle(d)]}</span></td>
+    <td>${esc(shortSys(makerModel(d.sensor) || '–'))}<span class="sub">${LABEL.principle[principle(d)]}</span></td>
     <td>${esc(d.setup ? camSummary(d) || 'none' : '–')}<span class="sub">${wristOf(d) === 'no' && (setup(d).cameras || []).length ? 'no wrist camera' : ''}</span></td>
     <td>${esc(d.setup ? trackSummary(d, true) || 'none' : '–')}</td>
     <td class="num">${num(c(d).hours, ' h')}</td>
@@ -263,7 +264,7 @@ function openDetail(id) {
     ['Tasks', c.tasks ? fmt(c.tasks) : ''], ['Objects', c.objects ? fmt(c.objects) : ''], ['Participants', c.subjects ? fmt(c.subjects) : ''],
     ['Environments', esc([sceneText(d), (c.scene_types || []).join(', ')].filter(Boolean).join(': '))], ['Summary', esc(c.text)]]);
   const tactile = kvs([['Hand', `${LABEL.embodiment[d.embodiment]} · ${esc(d.hand)} · ${d.bimanual ? 'bimanual' : 'single hand'}`],
-    ['Sensor', esc([s.maker, s.model].filter(Boolean).join(' ') || 'not stated')], ['Principle', LABEL.principle[principle(d)]],
+    ['Sensor', esc(makerModel(s) || 'not stated')], ['Principle', LABEL.principle[principle(d)]],
     ['Coverage', covText(s.coverage)], ['Density', sensorLine(d)], ['Rate', s.rate_hz ? `${esc(s.rate_hz)} Hz` : ''], ['Range', esc(s.range || '')], ['Notes', esc(s.note || '')]]);
   const cams = (u.cameras || []).length ? `<table class="mini"><thead><tr><th>Camera</th><th>Model</th><th>Type</th><th>Resolution</th><th>FPS</th></tr></thead><tbody>${u.cameras.map(k =>
     `<tr><td>${(k.count || 1) > 1 ? `${k.count} × ` : ''}${ROLE[k.role] || esc(k.role)}${k.mount ? `<span class="sub">${esc(k.mount)}</span>` : ''}</td><td>${esc(k.model || '–')}</td><td>${esc(k.type || '–')}</td><td>${esc(k.resolution || '–')}</td><td>${k.fps ?? '–'}</td></tr>`).join('')}</tbody></table>`
