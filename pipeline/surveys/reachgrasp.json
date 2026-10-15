@@ -1,0 +1,426 @@
+{
+  "id": "reachgrasp",
+  "surveyed": "2026-10-15",
+  "entry": {
+    "id": "reachgrasp",
+    "name": "Reach&Grasp",
+    "title": "Reach&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements",
+    "authors": "Dario Di Domenico et al.",
+    "year": 2025,
+    "venue": "Scientific Data 12:233, 2025",
+    "summary": "10 subjects perform 16 right-arm tasks (hand and wrist movements, grasps, reach-grasp-manipulate) wearing a Bielefeld sensorized glove (58 piezoresistive taxels plus CyberGlove I bend sensors), with Vicon joint angles and bipolar and high-density EMG.",
+    "embodiment": "human",
+    "hand": "human right hand wearing the Bielefeld University sensorized glove: CyberGlove I bend sensors with a 58-taxel piezoresistive fabric lining on the palm side",
+    "bimanual": false,
+    "sensor": {
+      "type": "piezoresistive",
+      "taxels_per_hand": 58,
+      "coverage": [
+        "tip",
+        "phalanx",
+        "palm"
+      ],
+      "rate_hz": 100,
+      "note": "One sample = 58 float values, one per taxel: 17 palm taxels in three groups, index and pinky 9 each, middle and ring 8 each, thumb 7. Uncalibrated (the paper says the readings cannot be related to N or Pa), although the channel files label them N. Ring-fingertip taxels rdd, rdo, rdm (hardware 9, 11, 14) malfunction.",
+      "maker": "custom (Bielefeld University, WearHap EU project)",
+      "model": null,
+      "principle": "piezoresistive",
+      "range": "uncalibrated (released values -338 to 4,906, no N or Pa conversion)"
+    },
+    "modalities": [
+      "hand_pose",
+      "mocap",
+      "emg"
+    ],
+    "scale": {
+      "hours": 2.76,
+      "episodes": 158,
+      "frames": 995088,
+      "tasks": 16,
+      "objects": 4,
+      "subjects": 10,
+      "scenes": 1,
+      "scene_types": [
+        "lab"
+      ],
+      "text": "~2.8 h of tactile, 158 recordings (10 subjects x 16 tasks, minus 2), each with ~10 repetitions (1,603 segmented repetitions), 4 objects, one lab"
+    },
+    "availability": "public",
+    "access": "Open download without login from IIT Dataverse (DOI 10.48557/L6OWMM), file by file through the web UI, the Dataverse API or the code repository's download_dataset.sh; 2,389 files, 30.7 GB, of which the tactile CSVs are 306 MB.",
+    "license": "CC BY 4.0",
+    "caveats": [
+      "Simple reach-and-grasp and single-DoF movements with 4 objects, not dexterous manipulation; right hand only.",
+      "No video released: sessions were video-recorded, but the video is only available on request.",
+      "Tactile values are uncalibrated, although the channels.tsv files and Supplementary Table 6 label them N.",
+      "Ring-fingertip taxels rdd, rdo and rdm (hardware IDs 9, 11, 14) malfunction (paper); taxel lmo reads 0 in all 158 tactile files.",
+      "Many taxels read exactly 0 for a whole recording, and 10 tactile files (non-contact tasks: wrist movements, hand opening, frontal reach) are entirely 0.",
+      "sub-03 FroRea and ReaCyl have no tactile or CyberGlove files (EMG and Vicon only).",
+      "sub-01 Trid tactile channels.tsv has 116 rows: 58 junk names (numbers from the first data row), then the 58 real names.",
+      "Each file is one continuous recording of ~10 repetitions; repetition boundaries are in code/Events_Reach&Grasp.mat in the code repository, not in the dataset.",
+      "Vicon data is released as joint angles only (no marker trajectories).",
+      "CSV files have no header; time is column 0 and channel names are in the matching channels.tsv."
+    ],
+    "links": {
+      "paper": "https://doi.org/10.1038/s41597-025-04552-5",
+      "data": "https://doi.org/10.48557/L6OWMM",
+      "code": "https://github.com/DarioDiDomenico/SData_ReachGrasp"
+    },
+    "image": "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41597-025-04552-5/MediaObjects/41597_2025_4552_Fig2_HTML.png",
+    "setup": {
+      "cameras": [],
+      "wrist_cameras": 0,
+      "depth": false,
+      "tracking": [
+        {
+          "target": "fingers",
+          "method": "optical_mocap",
+          "system": "Vicon (10 infrared cameras, Lock+ sync; 23 reflective markers in total), RHand Bodybuilder model in Vicon Nexus 2.12.1",
+          "note": "100 Hz joint angles only: MCP of each finger (Abs flexion + Proj flexion/abduction) and thumb STT and MCP; no marker trajectories released"
+        },
+        {
+          "target": "body",
+          "method": "optical_mocap",
+          "system": "Vicon Plug-in Gait model",
+          "note": "100 Hz X/Y/Z joint angles of left and right thorax, right shoulder, elbow and wrist"
+        },
+        {
+          "target": "fingers",
+          "method": "bend_sensor",
+          "system": "CyberGlove I (Version 1.1) inside the Bielefeld glove, recorded over ROS",
+          "note": "100 Hz, 18 angles in degrees: thumb rotation/MCP/IP/abduction, MCP and PIP of index..pinkie, three inter-finger abductions, palm arch, wrist pitch and yaw; sensor-to-angle scaling tuned per subject"
+        }
+      ],
+      "other": [
+        "HD-sEMG 64 ch (OT Bioelettronica Sessantaquattro, two 32-electrode GR10MM0804 grids on forearm flexors and extensors, monopolar, 2 kHz)",
+        "bipolar EMG 10 ch (Cometa Wave Plus, arm and shoulder muscles, 2 kHz)",
+        "session video recorded but not released (on request)"
+      ]
+    },
+    "sources": [
+      "https://www.nature.com/articles/s41597-025-04552-5",
+      "https://www.nature.com/articles/s41597-025-04552-5/tables/1",
+      "https://www.nature.com/articles/s41597-025-04552-5/tables/2",
+      "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41597-025-04552-5/MediaObjects/41597_2025_4552_MOESM1_ESM.pdf",
+      "https://dataverse.iit.it/api/datasets/:persistentId/?persistentId=doi:10.48557/L6OWMM",
+      "https://dataverse.iit.it/api/access/datafile/26576",
+      "https://dataverse.iit.it/api/access/datafile/14101",
+      "https://dataverse.iit.it/api/access/datafile/14102",
+      "https://dataverse.iit.it/api/access/datafile/14103",
+      "https://github.com/DarioDiDomenico/SData_ReachGrasp",
+      "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/Figure_9.m",
+      "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/Events_Reach%26Grasp.mat",
+      "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/Curser_Reach%26Grasp.mat",
+      "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/glove_mapping.JPG"
+    ],
+    "unconfirmed": [
+      "hours = 2.76: sum of RecordingDuration over the 158 tactile JSON sidecars (9,949.3 s), equal to the 995,088 tactile CSV rows / 100 Hz. Over all 160 recordings (EMG and Vicon) it is 10,056.9 s = 2.79 h.",
+      "frames = 995,088: total rows of the 158 released tactile CSVs (100 Hz).",
+      "episodes = 158 tactile recordings (one per subject-task); 160 recordings exist for EMG and Vicon. Events_Reach&Grasp.mat holds 1,603 start/end pairs (151 recordings with 10, 6 with 11, 3 with 9), versus the paper's '10 repetitions each'.",
+      "objects = 4 from Table 2 and Fig. 3B: glass (78 mm), bottle with a 28 mm screw cap, ping-pong ball (38 mm), tennis ball (67 mm); the table and the water are not counted.",
+      "scenes = 1: all tasks in one Vicon volume (5.1 x 4.2 x 2.5 m), subject seated at a table (Fig. 3A).",
+      "Recording durations 27.9-124.7 s (median 62.8 s) from the tactile JSON sidecars; all modalities of one subject-task share the same RecordingDuration.",
+      "CSV column i (1-58) maps to hardware taxel IDs 1-48 for i <= 48, and columns 49-58 to IDs 51, 54, 55, 57, 58, 59, 60, 61, 62, 63 (Supplementary Table 5 numbers IDs 1-65 with 49, 50, 52, 53, 56, 64, 65 unused; Fig. 2A uses the hardware IDs). Checked by matching the channels.tsv order to Supplementary Table 5 and by overlaying the 58 positions of Curser_Reach&Grasp.mat (reversed order, as in Figure_9.m) on glove_mapping.JPG.",
+      "All-zero taxels: in the 158 tactile files, the number of taxels that are exactly 0 for the whole file ranges 3-58 (median 43); lmo is 0 in 158/158, ldo 156, lpo 155. Entirely zero files: sub-07 WE, WS; sub-08 WE, WP, WS; sub-09 FroRea, HO, WF, WP; sub-10 WS.",
+      "Value range over all tactile files: -337.8 to 4,906.4; on average 7.1% of samples are negative. In sub-01 Cyl the malfunctioning rdd and rdo never read 0 (58-94 and 5-73).",
+      "The paper says the glove PC ran ROS Melodic on Ubuntu 20.04; the tactile and CyberGlove JSON sidecars say 'ROS Noetic'.",
+      "Paper Fig. 2 counts are 17 palm, 9 index, 8 middle, 8 ring, 9 pinky, 7 thumb; Supplementary Table 5 names give the same split (palm: 5 PalmWrist, 6 PalmThumb, 6 PalmFinger)."
+    ]
+  },
+  "license": {
+    "name": "CC BY 4.0 (Creative Commons Attribution 4.0 International)",
+    "redistribution": "allowed",
+    "quote": "Dataverse dataset license: \"CC BY 4.0\" (http://creativecommons.org/licenses/by/4.0); dataset_description.json: \"License\": \"CC BY 4.0\". No custom terms of use. The analysis code repository is MIT-licensed.",
+    "url": "https://doi.org/10.48557/L6OWMM"
+  },
+  "download": {
+    "where": "https://doi.org/10.48557/L6OWMM (IIT Dataverse, dataset id 4219, version 1.0 released 2025-01-22)",
+    "access": "open",
+    "format": "BIDS-like tree: sub-XX/{emg,motion,tactile}/sub-XX_task-YY_acq-ZZ_{emg,motion,tactile}.csv (headerless, column 0 = time in s) + _channels.tsv (names, type, units, rate) + .json sidecar (device, rate, duration, task description); dataset_description.json at the root",
+    "total_size": "30.7 GB (30,683,095,772 B in 2,389 files): HD-EMG CSVs 25.45 GB, bipolar EMG 4.33 GB, CyberGlove 0.32 GB, tactile 0.31 GB, Vicon 0.28 GB",
+    "per_episode": "tactile CSV ~1.9 MB, CyberGlove ~2.0 MB, Vicon ~1.7 MB on average; with EMG ~190 MB on average (HD-EMG 150-250 MB)",
+    "partial_fetch": "Every file is separately downloadable at https://dataverse.iit.it/api/access/datafile/<id>; ids from the dataset API's file listing. Tactile, CyberGlove and Vicon of one recording are ~6 MB."
+  },
+  "channels": [
+    {
+      "name": "tactile/*_acq-tactileglove_tactile.csv column 0",
+      "kind": "other",
+      "shape": "(N,), N = 2,791..12,469",
+      "rate_hz": 100,
+      "unit": "s",
+      "frame": null,
+      "note": "Timestamp from 0, step 0.01 s; the same layout as column 0 of every other CSV."
+    },
+    {
+      "name": "tactile/*_acq-tactileglove_tactile.csv columns 1-58",
+      "kind": "tactile_grid",
+      "shape": "(N, 58)",
+      "rate_hz": 100,
+      "unit": "uncalibrated (channels.tsv says N; the paper says no N or Pa conversion is possible)",
+      "frame": "palm side of the right glove; column order and names in channels.tsv (rmo, mdo, rmi, ...); column -> hardware ID and region in Supplementary Table 5 and Fig. 2A; 2-D positions on glove_mapping.JPG in the code repo's Curser_Reach&Grasp.mat (reversed order)",
+      "note": "One float per taxel, 58 taxels: palm 17 (PalmWrist, PalmThumb, PalmFinger), index 9, middle 8, ring 8, pinky 9, thumb 7. Observed -337.8..4,906.4, many taxels exactly 0 for the whole file. rdd/rdo/rdm malfunction; lmo always 0."
+    },
+    {
+      "name": "motion/*_acq-cyberglove_motion.csv columns 1-18",
+      "kind": "hand_pose",
+      "shape": "(N, 18)",
+      "rate_hz": 100,
+      "unit": "deg",
+      "frame": "anatomical joint angles of the right hand (CyberGlove I)",
+      "note": "ThumbRotate, ThumbMPJ, ThumbIJ, ThumbAb, IndexMPJ, IndexPIJ, MiddleMPJ, MiddlePIJ, MiddleIndexAb, RingMIJ, RingPIJ, RingMiddleAb, PinkieMPJ, PinkiePIJ, PinkieRingAb, PalmArch, WristPitch, WristYaw. Per-subject scaling. sub-01 Cyl: -62.4..93.3 deg, no NaN. Missing for sub-03 FroRea and ReaCyl."
+    },
+    {
+      "name": "motion/*_acq-vicon_motion.csv columns 1-15",
+      "kind": "body_pose",
+      "shape": "(N, 15)",
+      "rate_hz": 100,
+      "unit": "deg",
+      "frame": "X/Y/Z rotations about axes fixed to each joint (Vicon Plug-in Gait)",
+      "note": "LThorax, RElbow, RShoulder, RThorax, RWrist, each _X/_Y/_Z. Hinge joints have near-zero Y/Z (e.g. RElbow_Y ~ 1e-16)."
+    },
+    {
+      "name": "motion/*_acq-vicon_motion.csv columns 16-31",
+      "kind": "hand_pose",
+      "shape": "(N, 16)",
+      "rate_hz": 100,
+      "unit": "deg",
+      "frame": "finger joint angles from the Vicon RHand Bodybuilder model",
+      "note": "RIndexJ1, RPinkieJ1, RRingJ1, RThirdJ1, RThumbJ1, each as Abs_X, Proj_Y, Proj_Z, plus RThumbJ2Abs_X: MCP of each finger and thumb STT/MCP. Joint angles only; no marker trajectories released. sub-01 Cyl: -50.4..119.8 deg over all 31 Vicon channels."
+    },
+    {
+      "name": "emg/*_acq-sessantaquattro_emg.csv columns 1-64",
+      "kind": "emg",
+      "shape": "(N*20, 64)",
+      "rate_hz": 2000,
+      "unit": "mV",
+      "frame": "two 8x4 monopolar grids (10 mm pitch) on the forearm: flexion_01-32 over finger/wrist flexors, extension_01-32 over extensors; reference on the ulnar styloid",
+      "note": "OT Bioelettronica Sessantaquattro, 16 bit, 18.75 mV p-p, hardware HPF ~10 Hz. 150-250 MB per file."
+    },
+    {
+      "name": "emg/*_acq-cometa_emg.csv columns 1-10",
+      "kind": "emg",
+      "shape": "(N*20, 10)",
+      "rate_hz": 2000,
+      "unit": "mV",
+      "frame": "bipolar electrodes per SENIAM on Lat_Tric, Med_Tric, Long_Bic, Short_Bic, Ant_Delt, Midd_Delt, Post_Delt, Upper_Trap, Brachiorad, W_pronator",
+      "note": "Cometa Wave Plus, 16 bit, 5 mV p-p, hardware HPF 10 Hz; recorded through Vicon Nexus."
+    },
+    {
+      "name": "*.json TaskName / TaskDescription",
+      "kind": "language",
+      "shape": "two strings per file",
+      "rate_hz": null,
+      "unit": null,
+      "frame": null,
+      "note": "e.g. 'Cyl' / 'Subject is grasping cylindrical object'; sidecars also hold device, SamplingFrequency, RecordingDuration, channel count."
+    },
+    {
+      "name": "code repo: Events_Reach&Grasp.mat time2cut",
+      "kind": "other",
+      "shape": "(2R,) per subject-task, R = 9..11",
+      "rate_hz": null,
+      "unit": "sample index at 100 Hz",
+      "frame": null,
+      "note": "Start/end of each repetition, segmented from Vicon kinematics (HD-EMG for sub-10 Cyl). 160 subject-task entries, 1,603 repetitions. Not part of the Dataverse release."
+    }
+  ],
+  "episode_index": {
+    "where": "Dataverse file listing (dataset API); subject and task in the file name, TaskDescription and RecordingDuration in each JSON sidecar; repetitions in the code repo's Events_Reach&Grasp.mat",
+    "count": 158,
+    "fields": [
+      "subject (sub-01..sub-10)",
+      "task (abbreviation)",
+      "task description",
+      "duration (RecordingDuration)",
+      "repetition boundaries (code repo)"
+    ],
+    "note": "158 tactile recordings out of 160 (sub-03 FroRea and ReaCyl lack tactile and CyberGlove). Durations 27.9-124.7 s, median 62.8 s. No participants.tsv; demographics only as group statistics in the paper (4 F / 6 M, 24-36 years, all right-handed).",
+    "tasks": [
+      "HO: hand opening (extend the fingers)",
+      "HC: hand closing (flex the fingers)",
+      "WP: wrist pronation",
+      "WS: wrist supination",
+      "WF: wrist flexion",
+      "WE: wrist extension",
+      "Cyl: cylindrical grasp of a glass",
+      "Sph: spherical grasp of a tennis ball",
+      "Trid: tri-digital grasp of a ping-pong ball",
+      "Thumb: thumb opposition",
+      "FroRea: frontal reaching to the centre of a table",
+      "ReaCyl: reach and grasp the cylindrical glass",
+      "ReaSph: reach and grasp the tennis ball",
+      "Pour: reach, grasp and pour (water) with the glass",
+      "Screw: reach, grasp with three fingers and screw a bottle cap",
+      "EatFruit: reach, grasp and move the tennis ball toward the mouth"
+    ],
+    "scenes": [
+      "one lab: subject seated at a table inside a 10-camera Vicon volume"
+    ]
+  },
+  "sample": {
+    "decision": "sample",
+    "reason": "CC BY 4.0 (Dataverse license field and dataset_description.json), no custom terms, so redistribution with attribution is allowed; open download, every file fetchable on its own by id. Label the collection 'CC BY 4.0'. The release has no video, so episodes are touch-only (videos: []), with CyberGlove and Vicon joint angles as optional series.",
+    "prefix": "re_",
+    "tasks_total": 16,
+    "tasks_sampled": 8,
+    "episodes": [
+      {
+        "id": "sub-05_task-HC",
+        "task": "HC: hand closing (flex the fingers), no object",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-05",
+        "duration_s": 43.7,
+        "window": null,
+        "why": "Self-contact (fist) loads the palm and finger taxels: 55 of 58 taxels live (dead: pdii, lmo, ldo), the most of any file; 10 contact runs >= 1 s, 23.4 s in contact, longest 2.7 s, peak 4,505 on imm. 10 repetitions (Events). File ids: tactile 15059, CyberGlove 14972, Vicon 14975."
+      },
+      {
+        "id": "sub-03_task-Sph",
+        "task": "Sph: spherical grasp of a tennis ball",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-03",
+        "duration_s": 34.8,
+        "window": null,
+        "why": "Whole-hand power grasp on a sphere; 46 taxels live (12 dead), the fewest dead among Sph files; 10 contact runs >= 1 s, 16.6 s in contact, peak 4,411 on pdm. 10 repetitions. File ids: tactile 14597, CyberGlove 14534, Vicon 14537."
+      },
+      {
+        "id": "sub-04_task-Cyl",
+        "task": "Cyl: cylindrical grasp of a glass",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-04",
+        "duration_s": 53.0,
+        "window": null,
+        "why": "Cylindrical power grasp (glass, 78 mm); 31 taxels live (27 dead); 10 contact runs >= 1 s, 24.3 s in contact, longest 2.8 s, peak 4,417 on ip. 10 repetitions. File ids: tactile 14810, CyberGlove 14714, Vicon 14717."
+      },
+      {
+        "id": "sub-06_task-Trid",
+        "task": "Trid: tri-digital grasp of a ping-pong ball",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-06",
+        "duration_s": 27.9,
+        "window": null,
+        "why": "Precision grasp with thumb, index and middle on a small ball; 20 taxels live (38 dead, expected for a three-finger grasp); 11 contact runs >= 1 s, 19.1 s in contact, peak 4,542 on pdm. 10 repetitions. sub-01 Trid avoided because its channels.tsv has 58 junk rows. File ids: tactile 15323, CyberGlove 15260, Vicon 15263."
+      },
+      {
+        "id": "sub-01_task-Screw",
+        "task": "Screw: reach, grasp with three fingers and screw a bottle cap",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-01",
+        "duration_s": 86.0,
+        "window": [
+          0,
+          60
+        ],
+        "why": "Twist on a 28 mm cap; 43 taxels live in the window (15 dead), the fewest dead among Screw files; window holds repetitions 1-7 (last ends 58.5 s): 7 contact runs >= 1 s, 35.0 s in contact, longest 6.2 s, peak 4,236 on imm. File ids: tactile 14126, CyberGlove 14054, Vicon 14057."
+      },
+      {
+        "id": "sub-02_task-Pour",
+        "task": "Pour: reach, grasp and pour (water) with the glass",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-02",
+        "duration_s": 65.9,
+        "window": [
+          0,
+          60
+        ],
+        "why": "Grasp, tilt and return a filled glass; 25 taxels live (33 dead); window holds repetitions 1-9 (repetition 9 ends 57.3 s, 10 starts 61.0 s): 9 contact runs >= 1 s, 32.0 s in contact, longest 4.2 s, peak 2,821 on tdo. File ids: tactile 14357, CyberGlove 14276, Vicon 14279."
+      },
+      {
+        "id": "sub-07_task-EatFruit",
+        "task": "EatFruit: reach, grasp and move the tennis ball toward the mouth",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-07",
+        "duration_s": 82.0,
+        "window": [
+          0,
+          59
+        ],
+        "why": "Grasp plus transport to the mouth (longest holds in the release); 30 taxels live in the window (28 dead); window holds repetitions 1-7 (repetition 7 ends 56.6 s, 8 starts 59.7 s): 7 contact runs >= 1 s, 27.0 s in contact, longest 4.4 s, peak 3,129 on pdi. File ids: tactile 15533, CyberGlove 15440, Vicon 15443."
+      },
+      {
+        "id": "sub-04_task-Thumb",
+        "task": "Thumb: thumb opposition, no object",
+        "scene": "IIT Vicon lab, subject seated at a table (the only scene)",
+        "subject": "sub-04",
+        "duration_s": 47.3,
+        "window": null,
+        "why": "Thumb-to-finger opposition without an object; 23 taxels live (35 dead), the fewest dead among Thumb files (sub-08's best alternative has 17 live), so sub-04 appears twice; 10 contact runs >= 1 s, 22.1 s in contact, peak 2,643 on pdr. 10 repetitions. File ids: tactile 14840, CyberGlove 14774, Vicon 14777."
+      }
+    ],
+    "fetch_estimate": "~48 MB: tactile CSVs 21.9 MB (all 158 tactile CSVs, 306 MB, were already downloaded during the survey to ~/data/ext/reachgrasp/tactile), CyberGlove CSVs 14.1 MB, Vicon CSVs 12.1 MB, plus channels.tsv/json sidecars (<0.1 MB). Not planned: bipolar EMG 190 MB and HD-EMG 1.11 GB for these 8 recordings.",
+    "rules_applied": "16 tasks > 6, so 8 were taken, one episode each (8 total). All tasks happen in one lab and are right-hand only, so the spread is over action types and objects: whole-hand self-contact (HC), power grasp on a sphere (Sph, tennis ball) and a cylinder (Cyl, glass), precision grasp (Trid, ping-pong ball), twist (Screw, bottle cap), pour (Pour, glass with water), transport (EatFruit, tennis ball) and no-object fingertip contact (Thumb). Left out: WP, WS, WF, WE, HO and FroRea (no object; 10 of their files are entirely 0 and most others show no sustained contact) and ReaCyl/ReaSph (same grasps as Cyl/Sph after a reach, already covered by Pour/Screw/EatFruit). Within a task the file with the fewest whole-file-zero taxels and clear repetitions was chosen, spreading subjects (7 subjects; sub-04 twice). Channel check on every pick: 58 tactile columns plus time, no NaN, time step exactly 0.01 s, channels.tsv names identical to sub-01 Cyl (58 rows); CyberGlove and Vicon rows equal tactile rows (checked on sub-01 Cyl: 5,936 each). Dead taxels are a property of the glove (lmo 0 in every file; rdd/rdo/rdm malfunction per paper) and are listed per episode in the converter notes, not treated as corruption. Contact test: rest = per-taxel median of the first 1 s (before the first repetition), activation = sum over taxels of max(0, x - rest), contact = activation > max(500, mean + 10 sd of the first second); every pick has >= 7 contact runs of >= 1 s. Duration 10-60 s: four files fit whole; Screw, Pour and EatFruit (66-86 s) are cut to [0, 59-60] s at a repetition boundary from the code repo's Events_Reach&Grasp.mat (sample indices at 100 Hz). Budget: 58 taxels x <= 6,000 frames as uint8 is ~0.46 MB base64 per episode, under 2 MB; no media to re-host."
+  },
+  "visualization": [
+    {
+      "channel": "tactile/*_acq-tactileglove_tactile.csv columns 1-58",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "All 58 taxels painted over their own pads of glove_mapping.JPG (the paper's Fig. 2A, palmar view of the right hand; pads segmented from the image, column -> pad from the authors' Curser_Reach&Grasp.mat) on a 97 x 91 grid via the new 'paint' field; colour 0..4000 uncalibrated units, negatives drawn as 0; sums per finger and palm (Supplementary Table 5 split 7/9/8/8/9/17) plus a plot of the three palm groups (PalmFinger, PalmThumb, PalmWrist)",
+      "reason": null
+    },
+    {
+      "channel": "tactile/*_acq-tactileglove_tactile.csv column 0",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": "used as the 100 Hz clock (row index; identical time column in the tactile, CyberGlove and Vicon CSVs, checked)",
+      "reason": "time base, not a signal"
+    },
+    {
+      "channel": "motion/*_acq-cyberglove_motion.csv columns 1-18",
+      "shown_as": [
+        "series"
+      ],
+      "detail": "all 18 angles in two plots: MCP and PIP/IP flexion per finger; thumb rotation/abduction, three inter-finger abductions, palm arch, wrist pitch/yaw",
+      "reason": null
+    },
+    {
+      "channel": "motion/*_acq-vicon_motion.csv columns 1-15",
+      "shown_as": [
+        "series"
+      ],
+      "detail": "RShoulder_X/Y/Z, RElbow_X, RWrist_X/Y/Z plotted; LThorax/RThorax and the near-zero RElbow_Y/Z not shown",
+      "reason": "thorax angles and hinge-joint Y/Z omitted to keep the plot readable (non-tactile)"
+    },
+    {
+      "channel": "motion/*_acq-vicon_motion.csv columns 16-31",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "finger MCP angles from Vicon duplicate the CyberGlove finger angles that are shown (non-tactile)"
+    },
+    {
+      "channel": "emg/*_acq-sessantaquattro_emg.csv columns 1-64",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "64-channel HD-sEMG at 2 kHz, 150-250 MB per recording; not fetched (non-tactile)"
+    },
+    {
+      "channel": "emg/*_acq-cometa_emg.csv columns 1-10",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "10-channel bipolar EMG at 2 kHz, ~19 MB per recording; not fetched (non-tactile)"
+    },
+    {
+      "channel": "*.json TaskName / TaskDescription",
+      "shown_as": [
+        "task"
+      ],
+      "detail": "TaskName gives the episode title (task abbreviation + description); TaskDescription is quoted in notes",
+      "reason": null
+    },
+    {
+      "channel": "code repo: Events_Reach&Grasp.mat time2cut",
+      "shown_as": [
+        "task"
+      ],
+      "detail": "each repetition is a task step (sample index read as 1-based at 100 Hz), with 'pause between repetitions' steps filling the gaps; windows cut at repetition boundaries",
+      "reason": null
+    }
+  ]
+}

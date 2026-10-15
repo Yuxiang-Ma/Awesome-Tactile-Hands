@@ -1,0 +1,50 @@
+{
+ "id": "humanoid_everyday",
+ "prefix": "hu_",
+ "group": "public",
+ "title": "Humanoid Everyday",
+ "provider": "Zhao et al. 2025 (USC PSI Lab)",
+ "kind": "recording",
+ "status": {
+  "label": "Apache-2.0",
+  "tone": "ok"
+ },
+ "about": "Teleoperated Unitree G1 and H1 humanoids on 246 everyday tasks; the G1 episodes carry the Dex3-1 hands' pressure sensors (9 per hand).",
+ "link": {
+  "label": "USC-PSI-Lab/humanoid-everyday",
+  "href": "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 33
+ },
+ "hardware": [
+  {
+   "k": "Hands",
+   "v": "2 × Unitree Dex3-1, 7 DoF, 3 fingers",
+   "d": "9 pressure sensors per hand (3 fingertip, 3 finger pad, 3 palm; 33 readings) · 30 Hz in the release · G1 episodes only"
+  },
+  {
+   "k": "Robot",
+   "v": "Unitree G1 (29 DoF)",
+   "d": "Also H1 with Inspire hands in the release, without tactile data; only G1 episodes are shown"
+  },
+  {
+   "k": "Cameras",
+   "v": "Head Intel RealSense D435 (RGB-D)",
+   "d": "640×480 · 30 fps; depth and Livox LiDAR in the release (not shown)"
+  },
+  {
+   "k": "Teleoperation",
+   "v": "Apple Vision Pro hand tracking",
+   "d": "Dex-retargeting to the hands, IK for the arms · task name, category and description per episode"
+  }
+ ],
+ "notes": "Paper: arXiv 2510.08807. The dataset card says Apache-2.0, the GitHub README says MIT. The release's tactile array is shifted by 13 values (the recording read the pressure block from the start of the odometry), so only 22 of the 66 Dex3-1 readings survive, most of them on fingertips and pads; the viewer undoes the shift and draws the missing readings as hollow squares. Videos stream from the dataset repository.",
+ "order": 8
+}

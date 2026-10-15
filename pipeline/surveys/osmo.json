@@ -1,0 +1,299 @@
+{
+  "id": "osmo",
+  "surveyed": "2026-10-15",
+  "entry": {
+    "id": "osmo",
+    "name": "OSMO",
+    "title": "OSMO: Open-Source Tactile Glove for Human-to-Robot Skill Transfer",
+    "authors": "Jessica Yin et al.",
+    "year": 2025,
+    "venue": "arXiv 2512.08920",
+    "summary": "Open-source glove with 12 three-axis magnetic taxels on fingertips and palm; ~2 h of right-hand whiteboard-wiping demonstrations with a static RealSense D435 (RGB + IR stereo), of which one 8.4 s sample is released.",
+    "embodiment": "human",
+    "hand": "human right hand wearing the OSMO glove (the same glove is worn by a Psyonic Ability Hand at robot deployment)",
+    "bimanual": false,
+    "sensor": {
+      "type": "magnetic",
+      "taxels_per_hand": 12,
+      "coverage": [
+        "tip",
+        "palm"
+      ],
+      "rate_hz": 25,
+      "note": "12 three-axis taxels: one per fingertip plus palm sensors in three sections. Each sensor PCB has two Bosch BMM350 3-axis magnetometers and one Bosch BHI360 6-axis IMU, under a soft magnetic elastomer (Ecoflex 00-30 + Magnequench MQFP-15-7) with a MuMetal shield; the two readings per taxel are used differentially. Raw magnetic flux (stated as uT) is the tactile signal. The paper policy and the released sample use only the 5 fingertip taxels: one sample = 30 values (5 fingertips x 2 magnetometers x XYZ).",
+      "maker": "custom (Meta FAIR); DIY kit sold by WowRobo",
+      "model": "OSMO tactile glove",
+      "principle": "magnetic",
+      "range": "0.3-80 N"
+    },
+    "modalities": [
+      "rgb"
+    ],
+    "scale": {
+      "hours": 2,
+      "episodes": 140,
+      "frames": null,
+      "tasks": 1,
+      "objects": null,
+      "subjects": null,
+      "scenes": 1,
+      "scene_types": [
+        "lab"
+      ],
+      "text": "~2 h, 140 human wiping demonstrations (paper); released: 1 sample demonstration, 211 frames, 8.4 s"
+    },
+    "availability": "partial",
+    "access": "One sample demonstration (folder \"00\", four Python pickles, 972 MB) on a public Google Drive folder linked from the repository's data/README.md (2025-12-21); the 140-demonstration set is not released, and data/download_data.sh is still empty. Hardware, firmware and code are in the GitHub repository.",
+    "license": "not stated",
+    "caveats": [
+      "Only one 8.4 s sample demonstration is released; the paper's 140 demonstrations (~2 h) are not.",
+      "No license for the data or the repository: no LICENSE file, and the ROS package metadata says 'TODO: License declaration'.",
+      "Released tactile data covers the 5 fingertip taxels only (30 values per frame); palm taxels and the per-sensor IMU quaternions are not in the release.",
+      "No hand pose, depth or retargeted robot joints are released; they are produced by the repository's pipeline (SAM2 + HaMeR, FoundationStereo on the IR pair, mink IK).",
+      "The IR images are masked to a region of interest with white pixels (about 62-65% of each frame) for demonstrator privacy; the RGB images are not masked.",
+      "Data are Python pickles; the image files need numpy to unpickle, so load them with a restricted unpickler.",
+      "RGB frames are stored in BGR channel order (OpenCV bgr8).",
+      "Hand-tracking compatibility demos (Aria Gen 2, Quest 3, Apple Vision Pro, RGB video, Manus Quantum) appear on the project page but are not released as data.",
+      "No robot data is recorded; the robot (Franka + Psyonic Ability Hand wearing the glove) is used only for policy deployment."
+    ],
+    "links": {
+      "paper": "https://arxiv.org/abs/2512.08920",
+      "project": "https://www.jessicayin.com/osmo_tactile_glove/",
+      "data": "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf",
+      "code": "https://github.com/jessicayin/osmo_tactile_glove"
+    },
+    "image": "https://www.jessicayin.com/osmo_tactile_glove/photos/fig1_v1.png",
+    "thumb": "assets/thumbs/osmo.jpg",
+    "setup": {
+      "cameras": [
+        {
+          "role": "third_person",
+          "count": 1,
+          "model": "Intel RealSense D435 (color)",
+          "type": "RGB",
+          "resolution": "1280x720",
+          "fps": 25,
+          "mount": "static",
+          "note": "single scene camera, extrinsically calibrated to the robot base; same placement used at robot deployment. Stream configured at 1280x720 bgr8 30 fps and published to ROS2 every 0.04 s (25 Hz)."
+        },
+        {
+          "role": "third_person",
+          "count": 1,
+          "model": "Intel RealSense D435 (IR pair, same unit)",
+          "type": "stereo",
+          "resolution": "1280x720",
+          "fps": 25,
+          "mount": "static",
+          "note": "left/right IR images (mono8), IR emitter disabled in the capture node; masked to a region of interest with white fill in the release; used offline for FoundationStereo depth"
+        }
+      ],
+      "wrist_cameras": 0,
+      "depth": false,
+      "tracking": [
+        {
+          "target": "fingers",
+          "method": "vision_estimate",
+          "system": "SAM2 mask + HaMeR",
+          "note": "3-D keypoints and hand mesh estimated from the RGB images after recording; not in the release"
+        },
+        {
+          "target": "wrist",
+          "method": "vision_estimate",
+          "system": "HaMeR wrist refined with FoundationStereo depth from the IR pair",
+          "note": "Savitzky-Golay smoothed, then IK-retargeted (mink/MuJoCo) to Franka + Psyonic Ability Hand joint targets (13-D: 7 arm + 6 hand); not in the release"
+        }
+      ],
+      "other": [
+        "per-taxel 6-axis IMU (BHI360) on each sensor PCB; quaternions logged by the ROS2 node but not released",
+        "retargeted robot joint positions (7 Franka + 6 Ability Hand) in the paper's training set, not released"
+      ]
+    },
+    "sources": [
+      "https://arxiv.org/abs/2512.08920",
+      "https://arxiv.org/html/2512.08920",
+      "https://www.jessicayin.com/osmo_tactile_glove/",
+      "https://github.com/jessicayin/osmo_tactile_glove",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/README.md",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/data/README.md",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/hardware/ros2/bowie_ros2_ws/bowie_ros/bowie_ros/bowie_node_synced.py",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/hardware/ros2/realsense_ros2_ws/realsense/realsense/realsense_node.py",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/scripts/bowie/convert_bag_to_pkl.py",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/firmware/BowieGlove/Core/Src/glove/glove.c",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/firmware/BowieGlove/Core/Src/glove/bhi360.c",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/main/hardware/ros2/bowie_ros2_ws/bowie_ros/package.xml",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/website/hardware_guides/sensor_assembly.md",
+      "https://github.com/jessicayin/osmo_tactile_glove/blob/website/hardware_guides/bom.md",
+      "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf",
+      "https://drive.google.com/drive/folders/1-tTdTRFNsCrTGjS2buRs-TcOSad3Dbmo",
+      "Google Drive files mags_public.pkl, rgbs_public.pkl, left_ir_public.pkl, right_ir_public.pkl (downloaded and read)"
+    ],
+    "unconfirmed": [
+      "hours = 2 and episodes = 140 are the paper's 'approximately two hours' and the project page's '140 demos'; the full set is not released, so neither was checked.",
+      "Released sample: 211 frames per stream (counted in all four pickles); 8.41 s from the first to last mags timestamp; mean step 40.07 ms (24.3-55.7 ms).",
+      "Sample recorded 2025-09-11 (UTC), derived from the mags timestamps (ns since Unix epoch).",
+      "fps 25 for the cameras is the ROS2 publish/logging rate (timer 0.04 s in realsense_node.py, paper 'logged as ROS2 bag files at 25 Hz'); the sensor stream itself is configured at 30 fps.",
+      "sensor rate_hz 25: firmware sets the BHI360 magnetometer virtual sensors to 25 Hz (glove.c) and the ROS2 node publishes synced packets every 0.04 s.",
+      "Unit: the paper and project page say raw magnetic flux in uT; the firmware forwards the BHI360 virtual-sensor int16 values without scaling. All released values are integers (z about -4,900 to -5,260).",
+      "mag0/mag1 per fingertip are the BHI360 'MAG_ID' stream and the 'MAG_PASS_META' stream of the same sensor board (sensor ids n and n+20 in bowie_node_synced.py); the paper describes two BMM350 magnetometers per PCB.",
+      "depth=false: the capture node also publishes aligned depth (16UC1), but it is not in the release; the paper computes depth offline from the IR pair.",
+      "scenes=1 derived from 'policies deployed in the same environment used to collect the human demonstrations'; scene_types 'lab' derived from the demonstrations being inside the robot's reachable workspace (Franka base visible in the RGB frames).",
+      "Task label 'wiping a stencilled marker pattern off a whiteboard with a sponge' combines the paper's task description with the RGB frames of the sample.",
+      "Whether palm taxels were recorded in the 140 demonstrations is not stated; the paper omits the palm for this task.",
+      "subjects and objects are not stated (the sample shows one gloved right hand, a sponge and a whiteboard).",
+      "'principle: magnetic' is the catalog category; the paper says magnetometers (BMM350) under a magnetized elastomer.",
+      "The project page's JSON-LD metadata carries \"license\": \"https://opensource.org/licenses/MIT\" for the page (ScholarlyArticle record) and the arXiv paper is CC BY 4.0; neither is stated for the data."
+    ]
+  },
+  "license": {
+    "name": "not stated",
+    "redistribution": "not_stated",
+    "quote": null,
+    "url": "https://github.com/jessicayin/osmo_tactile_glove/blob/main/data/README.md",
+    "note": "No sentence about data licensing or redistribution exists in data/README.md, the repository README, the project page text or the paper. The repository has no LICENSE file (GitHub API license: null); hardware/ros2/bowie_ros2_ws/bowie_ros/package.xml has '<license>TODO: License declaration</license>'. The project page's JSON-LD block lists \"license\": \"https://opensource.org/licenses/MIT\" as page metadata only; the arXiv paper is CC BY 4.0. Third-party firmware drivers in the repo carry their own licenses (ST, Bosch BHY2, FreeRTOS), not relevant to the data."
+  },
+  "download": {
+    "where": "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf (subfolder \"00\", id 1-tTdTRFNsCrTGjS2buRs-TcOSad3Dbmo)",
+    "access": "open",
+    "format": "Four Python pickle files, each a list of 211 time-aligned items (aligned by list index): rgbs_public.pkl (protocol 4, numpy uint8 arrays via numpy.core.multiarray._reconstruct), left_ir_public.pkl and right_ir_public.pkl (protocol 5, numpy._core.numeric._frombuffer), mags_public.pkl (protocol 4, plain Python tuples (int timestamp_ns, list of 30 floats), no globals)",
+    "total_size": "972,374,859 B (rgbs_public.pkl 583,383,049; left_ir_public.pkl 194,465,724; right_ir_public.pkl 194,465,724; mags_public.pkl 60,362)",
+    "per_episode": "972 MB (the release is one episode)",
+    "partial_fetch": "Files download from https://drive.usercontent.google.com/download?id=<file id>&export=download&confirm=t (no login; the three large files show a virus-scan page without confirm=t). HTTP Range requests return 206, and the IR pickles have a fixed 921,638 B stride per frame, so single frames can be range-read; mags_public.pkl is 60 KB. File ids: mags 1HbItKCHGw7IqF3jaMSK06-K0zLcfMJ14, rgbs 1OONLF0aPixpwPJWMrTNXMabtYz2lyoFI, left_ir 1Ha09vxpKm_h4Qi-iM1D9DuGEJiGB6sBE, right_ir 1-IB4oDPBPhcsN0WuQIBRgY8uFRBdHzuj.",
+    "local_copy": "~/data/ext/osmo/00/ (all four files; sha256 mags f134a72c..., rgbs 8c407c19..., left_ir e741d65a..., right_ir 88b6e9bc...)"
+  },
+  "channels": [
+    {
+      "name": "mags_public[i][1]",
+      "kind": "tactile_grid",
+      "shape": "(211, 30) -> (211, 5, 2, 3)",
+      "rate_hz": 25,
+      "unit": "uT as stated by the paper (raw magnetic flux); firmware forwards BHI360 int16 values unscaled; all values are integers",
+      "frame": "each magnetometer's own sensor axes (x, y, z); orientation on the fingertip not documented",
+      "note": "Order per data/README.md and bowie_node_synced.py: index, middle, ring, pinky, thumb; per finger mag0 then mag1; per magnetometer x, y, z. Fingertip taxels only. Not calibrated force: the paper subtracts mag0 - mag1 per taxel (differential sensing) before the policy encoder. Observed: z about -4,900 to -5,260 on every magnetometer; x/y vary by up to ~1,100 within the clip. Differential |mag0 - mag1| deviates from the first-10-frame rest by 320-970 on all five fingertips between about 2 s and 7 s (contact with the sponge). Rest values differ per magnetometer (offsets not removed). 1-9% of consecutive samples repeat exactly (25 Hz sync of the latest buffered reading). Shown in the viewer as 3-axis vectors per fingertip."
+    },
+    {
+      "name": "mags_public[i][0]",
+      "kind": "other",
+      "shape": "(211,) int",
+      "rate_hz": 25,
+      "unit": "ns since Unix epoch",
+      "frame": null,
+      "note": "ROS2 bag receive time of the /bowie/synced message (convert_bag_to_pkl.py). The only timestamps in the release; the image lists carry none and are aligned to it by index. Per-sensor firmware timestamps were dropped."
+    },
+    {
+      "name": "rgbs_public[i]",
+      "kind": "camera",
+      "shape": "(211, 720, 1280, 3) uint8",
+      "rate_hz": 25,
+      "unit": "8-bit BGR",
+      "frame": "static RealSense D435 color camera, calibrated to the robot base (extrinsics not released)",
+      "note": "Third-person view of the whiteboard, sponge and the gloved right hand; not masked. Channel order BGR (cv_bridge bgr8)."
+    },
+    {
+      "name": "left_ir_public[i]",
+      "kind": "camera",
+      "shape": "(211, 720, 1280) uint8",
+      "rate_hz": 25,
+      "unit": "8-bit IR intensity",
+      "frame": "RealSense D435 left IR imager (intrinsics not released)",
+      "note": "Masked: pixels outside a region of interest set to 255 (64.6% of pixels white in every frame; unmasked box x 281-901, y 119-644). Image size kept at 1280x720 so the camera intrinsics stay valid."
+    },
+    {
+      "name": "right_ir_public[i]",
+      "kind": "camera",
+      "shape": "(211, 720, 1280) uint8",
+      "rate_hz": 25,
+      "unit": "8-bit IR intensity",
+      "frame": "RealSense D435 right IR imager (intrinsics not released)",
+      "note": "Masked like the left IR image (61.8% white in every frame; unmasked box x 236-924, y 115-625)."
+    }
+  ],
+  "episode_index": {
+    "where": "Google Drive folder listing: one subfolder \"00\" (modified 2025-12-21) holding the four pickles; no metadata file",
+    "count": 1,
+    "fields": [
+      "folder name only"
+    ],
+    "tasks": [
+      "wiping a stencilled marker pattern off a whiteboard with a sponge (right hand)"
+    ],
+    "scenes": [
+      "robot workspace table with a whiteboard, seen by one static RealSense D435"
+    ],
+    "durations": "8.41 s (211 frames at ~25 Hz)",
+    "not_released": "the other demonstrations of the 140, depth, IMU quaternions, palm taxels, per-sensor timestamps, camera intrinsics/extrinsics, HaMeR hand poses, retargeted robot joints"
+  },
+  "sample": {
+    "decision": "sample",
+    "reason": "Data are downloadable without login (public Google Drive folder, HTTP range requests work). No license or terms for the data exist (data/README.md, repository README, project page text and paper are silent; no LICENSE file; package.xml says 'TODO: License declaration'), so redistribution is not forbidden: re-host and label the collection \"License not stated\". The project page's MIT JSON-LD tag and the paper's CC BY 4.0 do not cover the data and must not be shown as the data license.",
+    "prefix": "os_",
+    "tasks_total": 1,
+    "tasks_sampled": 1,
+    "episodes": [
+      {
+        "id": "00",
+        "task": "wiping a stencilled marker pattern off a whiteboard with a sponge (right hand)",
+        "scene": "robot workspace table with a whiteboard, one static RealSense D435",
+        "subject": null,
+        "duration_s": 8.41,
+        "window": null,
+        "why": "The only released episode. All 30 fingertip channels present (211 x 30, no NaN, no all-zero or constant channel; every channel takes 6-157 distinct integer values). Contact on all 5 fingertips: |(mag0 - mag1) - rest| (rest = mean of the first 10 frames, noise <= 6 counts) exceeds 100 counts for 2.0-6.3 s on index, middle and pinky, 2.0-6.8 s on ring and 2.3-6.2 s on thumb (75-113 frames each, peaks 967/623/798/388/322 for index/middle/ring/pinky/thumb). Whole clip kept: it is shorter than 10 s, so no window applies."
+      }
+    ],
+    "fetch_estimate": "0 MB more: the whole release (972,374,859 B, four pickles) is already in ~/data/ext/osmo/00/. Re-hosted media estimated at a few MB: one 8.4 s RGB video (H.264, downscaled from 1280x720) and optionally the masked left IR video; episode JSON well under 2 MB (211 frames x 30 values).",
+    "rules_applied": "Tasks: 1 task in the release (<= 6), so all taken. Episodes: the release holds exactly 1 episode, so the minimum of 3 episodes and the 2-3 per task rule cannot be met; 1 sampled. Length: 8.41 s is below the 10 s minimum and cannot be lengthened; kept whole (window null) because it is the only data released. Channels: all 30 released tactile values checked (palm taxels are not released, not missing from the episode). Contact: > 1 s above rest on all 5 fingertips. Budget: far below 2 MB JSON / ~30 MB media / ~20 GB download.",
+    "deviations": [
+      "1 episode instead of at least 3: the release contains a single demonstration.",
+      "8.41 s instead of 10-60 s: the only released demonstration is that long."
+    ],
+    "checks": {
+      "method": "mags_public.pkl read with a restricted unpickler (find_class blocked; the file holds only ints, floats, tuples and lists)",
+      "frames": 211,
+      "duration_s_from_timestamps": 8.414,
+      "nan_values": 0,
+      "z_channels_note": "the z axis of each magnetometer varies only 5-111 counts over the clip (mag0 z: 5-10 counts); x/y carry the contact signal. Not stuck: 6-37 distinct values per z channel."
+    }
+  },
+  "visualization": [
+    {
+      "channel": "mags_public[i][1]",
+      "shown_as": [
+        "grid",
+        "vectors",
+        "series"
+      ],
+      "detail": "Per fingertip taxel the differential signal (mag0 - mag1, as the paper's policy input) minus its rest value (mean of the first 10 frames): one cell per fingertip coloured by |deviation| (scale 0-1000), (x, y) arrow + z ring (full block 500), plots of the differential x, y, z per finger; all 30 raw channels as 5 per-finger plots (mag0 solid, mag1 dashed, x/y/z, each minus its own rest value). Cells placed after the paper's Fig. 5A taxel map (right hand, palm side, thumb on the right).",
+      "reason": null
+    },
+    {
+      "channel": "mags_public[i][0]",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "ROS2 receive timestamps, not touch; used to check the uniform 25 Hz clock (max deviation 17 ms, spacing 24-56 ms) and stated in notes"
+    },
+    {
+      "channel": "rgbs_public[i]",
+      "shown_as": [
+        "video"
+      ],
+      "detail": "BGR converted to RGB, H.264 960x540, 25 fps, one frame per list index; re-hosted (license not stated)",
+      "reason": null
+    },
+    {
+      "channel": "left_ir_public[i]",
+      "shown_as": [
+        "video"
+      ],
+      "detail": "H.264 640x360 gray, 25 fps; white areas are the authors' privacy mask",
+      "reason": null
+    },
+    {
+      "channel": "right_ir_public[i]",
+      "shown_as": [
+        "video"
+      ],
+      "detail": "H.264 640x360 gray, 25 fps; white areas are the authors' privacy mask",
+      "reason": null
+    }
+  ]
+}

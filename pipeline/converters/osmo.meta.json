@@ -1,0 +1,43 @@
+{
+ "id": "osmo",
+ "prefix": "os_",
+ "group": "public",
+ "title": "OSMO",
+ "provider": "Yin et al. 2025 (Meta FAIR)",
+ "kind": "recording",
+ "status": {
+  "label": "License not stated",
+  "tone": "neutral"
+ },
+ "about": "Open-source tactile glove with 12 three-axis magnetic taxels on fingertips and palm, worn on the right hand; one sample whiteboard-wiping demonstration of the paper's ~140 is released.",
+ "link": {
+  "label": "jessicayin/osmo_tactile_glove",
+  "href": "https://github.com/jessicayin/osmo_tactile_glove"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip"
+  ],
+  "taxels": 5
+ },
+ "hardware": [
+  {
+   "k": "Glove",
+   "v": "OSMO, 12 three-axis magnetic taxels",
+   "d": "Fingertips + palm; the release has the 5 fingertip taxels only · 2 magnetometers per taxel · 25 Hz"
+  },
+  {
+   "k": "Camera",
+   "v": "Static RealSense D435",
+   "d": "RGB + IR stereo pair · 1280×720 · logged at 25 Hz; IR masked by the authors"
+  },
+  {
+   "k": "Release",
+   "v": "1 sample demonstration",
+   "d": "Wiping a whiteboard with a sponge · 8.4 s · Python pickles on Google Drive; the ~140 demonstrations are not released"
+  }
+ ],
+ "notes": "Paper: arXiv 2512.08920. No license is stated for the data (the repository has no LICENSE file); the colour and IR images are re-encoded and hosted here. Tactile is shown as each fingertip's differential signal (mag0 − mag1) minus rest, as arrows, rings and plots, plus all 30 raw magnetometer channels as plots.",
+ "order": 8
+}

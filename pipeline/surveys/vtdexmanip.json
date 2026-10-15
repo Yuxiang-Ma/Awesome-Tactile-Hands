@@ -1,0 +1,294 @@
+{
+ "id": "vtdexmanip",
+ "surveyed": "2026-10-15",
+ "entry": {
+  "id": "vtdexmanip",
+  "name": "VTDexManip",
+  "title": "VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning",
+  "authors": "Qingtao Liu et al.",
+  "year": 2025,
+  "venue": "ICLR 2025",
+  "summary": "Human right-hand manipulation with a 20-pad piezoresistive tactile glove, recorded as egocentric HoloLens 2 frames paired one-to-one with pad voltages: 2,032 sequences, 10 tasks, 182 objects, 5 subjects.",
+  "embodiment": "human",
+  "hand": "Custom glove with 20 piezoresistive thin-film pressure sensors (right hand in the inspected frames)",
+  "bimanual": false,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 20,
+   "sensors_per_hand": 20,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 200,
+   "note": "Released per sequence as a (T, 4, 5) float64 array of pad voltages (V), one 4x5 frame per video frame (resampled from the 200 Hz glove stream; release rate not stated). Rest ~0.1 V, ADC rail ~3.3 V. Calibrated U = 0.7216 F^0.5025 + 0.0398 (0.5-7.5 N); the authors binarise at 0.2 V.",
+   "maker": "custom (Zhejiang University)",
+   "model": "thin-film pressure sensors (unnamed) + RKXS4040 resistance-voltage module + AD7606 ADC + STM32F205RBT6",
+   "principle": "piezoresistive",
+   "range": "10 mm pads 20 g-2 kg, 18 mm pads 20 g-6 kg"
+  },
+  "modalities": [
+   "egocentric"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 2032,
+   "frames": 565328,
+   "tasks": 10,
+   "objects": 182,
+   "subjects": 5,
+   "scenes": null,
+   "scene_types": [],
+   "text": "2,032 sequences, 565,328 visual-tactile frame pairs, 10 tasks, 182 objects, 5 subjects; 66-1,507 frames per sequence (median 231)"
+  },
+  "availability": "public",
+  "access": "Password-protected OneDrive folder (password 'vtdexmanip', given in the GitHub README): five per-subject PNG archives sub1-5.tar.gz (57.7 GB) plus tactile.tar.gz (37 MB) and info.tar.gz.",
+  "license": "CC BY-NC-SA 4.0 (data); MIT (code)",
+  "caveats": [
+   "Tactile is 20 discrete pads (4x5 array), stored as voltages, not forces; convert with the paper's calibration U = 0.7216 F^0.5025 + 0.0398.",
+   "No timestamps and no frame rate in the release; the glove streams at 200 Hz but the files hold one tactile frame per video frame.",
+   "Video is only per-frame 424x240 PNGs inside 10-16 GB per-subject tar.gz archives.",
+   "1,605 of 2,032 sequences reach the ~3.3 V rail on at least one pad; 54 sequences contain negative values (min -5.07 V).",
+   "No hand pose, no per-sequence object label (task class only), no depth.",
+   "Data license is non-commercial share-alike (CC BY-NC-SA 4.0)."
+  ],
+  "links": {
+   "paper": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+   "project": "https://lqts.github.io/VTDexManip/",
+   "data": "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA",
+   "code": "https://github.com/LQTS/VTDexManip"
+  },
+  "image": "https://raw.githubusercontent.com/LQTS/VTDexManip/main/asset/scr/benchmark.png",
+  "thumb": "assets/thumbs/vtdexmanip.jpg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Microsoft HoloLens 2",
+     "type": "RGB",
+     "resolution": "424x240",
+     "fps": null,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [],
+   "other": []
+  },
+  "sources": [
+   "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+   "https://openreview.net/forum?id=jf7C7EGw21",
+   "https://lqts.github.io/VTDexManip/",
+   "https://github.com/LQTS/VTDexManip",
+   "https://github.com/LQTS/VTDexManipPretraining",
+   "https://github.com/LQTS/VTDexManipPretraining/blob/master/vitac_pretrain/visualize.py",
+   "https://github.com/LQTS/VTDexManipPretraining/blob/master/vitac_core/preprocessing/core.py",
+   "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA (License.txt, info.tar.gz, tactile.tar.gz, first 54 MB of sub4.tar.gz)"
+  ],
+  "unconfirmed": [
+   "frames: 565,328 = sum of the lengths of the 2,032 tactile arrays in tactile.tar.gz (paper: '565k'); each checked sequence has exactly as many PNG frames as tactile frames.",
+   "hours: not derivable, since no frame rate or timestamps are released; if the HoloLens 2 camera ran at 30 fps (not stated) the 565,328 frames would be ~5.2 h.",
+   "Pad layout from the authors' visualize.py dot positions over hand.png (a right-hand outline): columns 0-3 = little, ring, middle, index finger with 4 pads each from tip (row 0) towards the base (row 3); column 4 rows 0-2 = thumb, row 3 col 4 = palm. The paper only says the 18.3 mm pads sit on the thumb tip and palm.",
+   "Right hand: the gloved hand is the right hand in the frames inspected (subject 4, PickUp); the paper says both left and right gloves were calibrated but does not say which hand each sequence used.",
+   "Subject = first digit of the sequence id (1-5), matching the sub1-5 archive that holds its frames; task = digits 2-3 (01-10). Per subject: 408 / 413 / 410 / 396 / 405 sequences.",
+   "Scene: the inspected frames show one lab tabletop; the number of scenes is not stated.",
+   "Release image size is 424x240 (paper text says 420x240).",
+   "Contact: 59.7% of frames have at least one pad >= 0.2 V (the authors' binarisation threshold)."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC-SA 4.0 (data, License.txt in the OneDrive folder); MIT (GitHub code)",
+  "redistribution": "allowed",
+  "quote": "All of the VTDexManip Dataset are published under the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 License (https://creativecommons.org/licenses/by-nc-sa/4.0/). This means that you must attribute the work in the manner specified by the authors, you may not use this work for commercial purposes and if you alter, transform, or build upon this work, you may distribute the resulting work only under the same license.",
+  "url": "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA (VTDexManip_dataset/License.txt)",
+  "note": "License.txt also opens with: 'The VTDexManip dataset is available for the academic purpose only.' Redistribution is allowed non-commercially, with attribution, under CC BY-NC-SA 4.0."
+ },
+ "download": {
+  "where": "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA",
+  "access": "open",
+  "access_note": "OneDrive share protected by a password published in the GitHub README ('vtdexmanip'); no account needed. Scripted access: POST the password to the share's guestaccess.aspx form, then use the FedAuth cookie with the SharePoint REST API (/_api/web/GetFolderByServerRelativePath) or /_layouts/15/download.aspx?UniqueId=<id>.",
+  "format": "VTDexManip_dataset/: sub1..sub5.tar.gz (one per subject; <id>/<id>_idx=<i>.png, 424x240 RGB PNG per frame), tactile.tar.gz (tactile/<id>.pkl numpy float64 (T,4,5) + identical tactile/<id>.json), info.tar.gz (info/<subject><task>_labels.json: [{id, class, class_id}]), License.txt",
+  "total_size": "57.7 GB (sub1 15.95 GB, sub2 10.03 GB, sub3 10.24 GB, sub4 9.48 GB, sub5 11.96 GB, tactile 37.4 MB, info 9 KB)",
+  "per_episode": "~28 MB of PNGs on average (~100 KB per frame x median 231 frames); tactile for all 2,032 sequences is 37 MB",
+  "partial_fetch": "download.aspx honours HTTP Range (206 verified), but each subject archive is one gzip stream, so an episode can only be reached by streaming its archive from byte 0. The first ~54 MB of sub4.tar.gz held 401000 and 401002 complete (task 01 PickUp); order of later entries not checked. Tactile and labels for all sequences come in 37 MB."
+ },
+ "channels": [
+  {
+   "name": "tactile/<id>.json (= tactile/<id>.pkl)",
+   "kind": "pressure_scalar",
+   "shape": "(T, 4, 5)",
+   "rate_hz": null,
+   "unit": "V (pad voltage; force via U = 0.7216 F^0.5025 + 0.0398, F in N)",
+   "frame": "one value per pad; 4x5 layout per the authors' visualize.py (cols little, ring, middle, index, thumb; rows tip to base; [3,4] = palm)",
+   "note": "float64; one frame per video frame (glove sampled at 200 Hz, resampled/aligned, rate not stated). Rest ~0.1 V, rail ~3.3 V; 54 sequences contain negative values down to -5.07 V. pkl and json identical on 41 checked sequences."
+  },
+  {
+   "name": "videos/<id>/<id>_idx=<i>.png",
+   "kind": "camera",
+   "shape": "(240, 424, 3)",
+   "rate_hz": null,
+   "unit": "RGB uint8 PNG",
+   "frame": "egocentric, HoloLens 2 photo/video camera on the subject's head",
+   "note": "one PNG per tactile frame (209 and 302 frames for 401000 / 401002, equal to their tactile T); idx starts at 0; no timestamps"
+  },
+  {
+   "name": "info/<subject><task>_labels.json: class, class_id",
+   "kind": "language",
+   "shape": "per sequence",
+   "rate_hz": null,
+   "unit": "task class string + int 0-9",
+   "frame": null,
+   "note": "task label only; no object, subject or scene field (subject and task are encoded in the 6-digit id)"
+  }
+ ],
+ "episode_index": {
+  "where": "info.tar.gz: info/<s><tt>_labels.json (50 files, one per subject x task), each a list of {id, class, class_id}",
+  "count": 2032,
+  "fields": [
+   "task"
+  ],
+  "note": "id = <subject 1-5><task 01-10><index 000-...>; ids are not contiguous (e.g. 401000, 401002, 401004, 401006, 401007). Sequence lengths 66-1,507 frames, median 231. Per task: PickUp 250, ScrewBottles 300, InHandOrientation 205, Unstacking 269, Articulated 168, Peg-in-hole 153, Pouring 196, TableTopManipulation 196, Scissors 106, Pressing 189 (equal to the paper's Table 8). The 2,032 label ids equal the 2,032 tactile file ids.",
+  "tasks": [
+   "PickUp",
+   "ScrewBottles",
+   "InHandOrientation",
+   "Unstacking",
+   "Articulated",
+   "Peg-in-hole",
+   "Pouring",
+   "TableTopManipulation",
+   "Scissors",
+   "Pressing"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC-SA 4.0 (License.txt in the OneDrive folder) allows non-commercial redistribution with attribution under the same license; the data is downloadable with the password published in the GitHub README. Label the collection 'CC BY-NC-SA 4.0'.",
+  "prefix": "vt_",
+  "tasks_total": 10,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "501084",
+    "task": "PickUp",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 374,
+    "duration_at_30fps_s": 12.5,
+    "window": null,
+    "why": "374 frames; contact (any pad >= 0.2 V) frames 41-136, longest run 61 frames; 12 of 20 pads above 0.2 V incl. all five tips and palm (max 2.44 V); whole-hand grasp; no negative values"
+   },
+   {
+    "id": "502047",
+    "task": "ScrewBottles (BottleCap Turning)",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 331,
+    "duration_at_30fps_s": 11.0,
+    "window": null,
+    "why": "331 frames; contact frames 0-293 (48.6% of frames), longest run 32; 14 pads active (thumb 3.3 V, index 3.27 V, lower phalanges up to 1.32 V); twist; longest ScrewBottles sequence of subject 5 with >10 pads active"
+   },
+   {
+    "id": "503070",
+    "task": "InHandOrientation",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 672,
+    "duration_at_30fps_s": 22.4,
+    "window": null,
+    "why": "672 frames; contact on 97% of frames (0-671), longest run 250; 17 of 20 pads active (thumb base 2.29 V, palm 0.54 V); in-hand rotation with palm up"
+   },
+   {
+    "id": "504009",
+    "task": "Unstacking (Bowl Unstacking)",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 302,
+    "duration_at_30fps_s": 10.1,
+    "window": null,
+    "why": "302 frames, the only Unstacking sequence of subject 5 with >= 300 frames; contact frames 90-269, longest run 55; 4 pads active (middle/index/thumb tips 1.93/3.3/3.3 V); unstack a bowl"
+   },
+   {
+    "id": "507037",
+    "task": "Pouring (Water Pouring)",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 350,
+    "duration_at_30fps_s": 11.7,
+    "window": null,
+    "why": "350 frames; contact frames 57-308, longest run 249; 16 pads active, all five tips up to 3.3 V; pour; 7.4% of pad-frames at the ~3.3 V rail"
+   },
+   {
+    "id": "508039",
+    "task": "TableTopManipulation",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 348,
+    "duration_at_30fps_s": 11.6,
+    "window": null,
+    "why": "348 frames; contact frames 43-296, longest run 38 (the only TableTopManipulation sequence of subject 5 with >= 300 frames and a run >= 30); 3 pads active (middle/index/thumb tips, 0.78/3.3/3.3 V); non-prehensile push/rotate/flip/roll"
+   },
+   {
+    "id": "509007",
+    "task": "Scissors (Scissors Manipulation)",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 515,
+    "duration_at_30fps_s": 17.2,
+    "window": null,
+    "why": "515 frames; contact frames 53-465, longest run 222; 15 pads active, only 0.15% of pad-frames at the rail; lever tool (scissors/pliers/clamps)"
+   },
+   {
+    "id": "510026",
+    "task": "Pressing",
+    "scene": "lab tabletop (only scene seen; scenes not stated)",
+    "subject": "subject 5 (sub5.tar.gz)",
+    "duration_s": null,
+    "frames": 356,
+    "duration_at_30fps_s": 11.9,
+    "window": null,
+    "why": "356 frames; contact frames 47-351, longest run 283 (82% of frames); 10 pads active (index tip 3.3 V, middle/index phalanges up to 2.09 V); button pressing (e.g. remote control)"
+   }
+  ],
+  "fetch_estimate": "~11.7 GB streamed, 11.96 GB worst case (the whole sub5.tar.gz from byte 0, filtering the 8 episode directories out of the stream); ~330 MB of PNGs kept (3,248 frames x ~100 KB); tactile and labels for all sequences (37 MB) are already downloaded. Under the 20 GB budget.",
+  "rules_applied": "10 tasks > 6, so 8 taken, one episode each (8 total). Tasks dropped: Articulated and Peg-in-hole, because no sequence in the whole release has >= 300 frames (max 299 and 293), i.e. none reaches 10 s at the 30 fps the authors' visualize.py uses; all 8 kept tasks are distinct actions (grasp, twist, in-hand rotation, unstack, pour, non-prehensile push/flip, lever tool, button press). Duration: the release has no fps or timestamps, so duration_s is null; every chosen sequence has >= 300 frames (10.1-22.4 s at an assumed 30 fps) and <= 672 frames, so no window is cut. Fetch: each subject archive is one gzip stream (no random access), so all episodes come from one subject: subject 5 is the only archive under 20 GB in which all 8 tasks have a sequence with >= 300 frames and contact for >= 30 frames (sub4, the smallest, has none for Pouring, Scissors, Pressing, Unstacking; sub1 has them but is 15.95 GB). Subject diversity is not required with > 3 tasks. The 11.7 GB estimate assumes the archive lists sequence directories in id order (the first 54 MB of sub4.tar.gz held 401000, 401002, 401004 in that order while the PNGs inside each directory are unordered); if the order differs, the stream must run to the end (11.96 GB). Checks on tactile.tar.gz (all 2,032 sequences read): every file is (T,4,5) with no NaN and no constant pad; every pad exceeds 0.2 V somewhere in each subject (no dead pads); the 8 chosen sequences have no negative values (54 sequences in the release do), rest ~0.099 V, and a contiguous run of >= 32 frames with some pad >= 0.2 V (the authors' contact threshold). PNG count = tactile T was confirmed only for 401000/401002 (survey); it is to be re-checked on each fetched episode. duration not stated: no fps or timestamps are released; '~s at 30 fps' uses the 30 fps the authors' visualize.py writes videos at, an assumption."
+ },
+ "visualization": [
+  {
+   "channel": "tactile/<id>.json (= tactile/<id>.pkl)",
+   "shown_as": [
+    "grid",
+    "series"
+   ],
+   "detail": "20 pads as one cell each on a right-hand layout from the authors' visualize.py dot positions over hand.png (10 px grid, palm view, thumb right), colour 0-3.3 V; regions thumb/index/middle/ring/little/palm with per-region voltage sums; plots of the five fingertip pads and the palm pad (V) and of the number of pads >= 0.2 V per region (the authors' binarisation threshold)",
+   "reason": null
+  },
+  {
+   "channel": "videos/<id>/<id>_idx=<i>.png",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "egocentric HoloLens 2 frames encoded to H.264 at an assumed 30 fps (the rate of the authors' visualize.py; the release states none), 424x240, re-hosted under CC BY-NC-SA 4.0",
+   "reason": null
+  },
+  {
+   "channel": "info/<subject><task>_labels.json: class, class_id",
+   "shown_as": [
+    "task"
+   ],
+   "detail": "task class as the episode title and rail label (no phase annotations in the release, so no task band)",
+   "reason": null
+  }
+ ]
+}

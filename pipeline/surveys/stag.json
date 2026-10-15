@@ -1,0 +1,332 @@
+{
+  "id": "stag",
+  "surveyed": "2026-10-15",
+  "entry": {
+    "id": "stag",
+    "name": "STAG",
+    "title": "Learning the signatures of the human grasp using a scalable tactile glove",
+    "authors": "Subramanian Sundaram et al.",
+    "year": 2019,
+    "venue": "Nature 569(7758), 2019",
+    "summary": "Knitted glove with 548 piezoresistive sensors over the palmar side of the right hand, read as a 32x32 grid at ~7.3 Hz; one subject grasping 26 objects, plus blindfolded, weight and hand-pose sets with synchronized RGB frames.",
+    "embodiment": "human",
+    "hand": "human right hand wearing the STAG knitted tactile glove",
+    "bimanual": false,
+    "sensor": {
+      "type": "piezoresistive",
+      "taxels_per_hand": 548,
+      "coverage": [
+        "tip",
+        "phalanx",
+        "palm"
+      ],
+      "rate_hz": 7.3,
+      "note": "One sample = a 32x32 int16 map of raw 10-bit ADC counts (0-1023 = 0-5 V amplifier output) from the 32 row x 32 column conductive-thread electrodes; 548 cells are physical sensors, the other 476 are constant. Rest ~510-516, useful signal 500-650, readings over 950 are shorted electrodes. Normal force only.",
+      "maker": "custom (MIT CSAIL)",
+      "model": "STAG (scalable tactile glove)",
+      "principle": "piezoresistive",
+      "range": "30 mN-0.5 N working range per element (responds from ~25 mN, saturates beyond 0.8 N); ~150 quantization levels, ~17.5% peak hysteresis"
+    },
+    "modalities": [
+      "rgb"
+    ],
+    "scale": {
+      "hours": 6.9,
+      "episodes": 221,
+      "frames": 177592,
+      "tasks": 4,
+      "objects": 26,
+      "subjects": 1,
+      "scenes": null,
+      "scene_types": [],
+      "text": "~6.9 h, 221 recordings, 177,592 tactile frames (135,187 object interaction + 6,686 blindfolded + 11,682 weights + 24,037 hand poses), 26 objects, 1 subject, right hand"
+    },
+    "availability": "public",
+    "access": "Open download (no login) of four zip archives from stag.csail.mit.edu/datasets/, each also as a pressure-only 'lite' zip (49 MB in total).",
+    "license": "STAG Research License (research use only, non-commercial, no redistribution)",
+    "caveats": [
+      "License forbids copying or distributing the data other than for your own backup.",
+      "Grasping, object identification, weighing and hand-pose articulation, not task-level manipulation.",
+      "All recordings are from one person (an author) wearing the glove on the right hand.",
+      "Tactile values are raw ADC counts, not calibrated force; the release has no force calibration.",
+      "No hand or object tracking; hand-pose classes G1-G7 are labels of articulated poses.",
+      "Tactile maps are stored on the 32x32 electrode grid; the sensor-to-hand layout is only embedded in the project's demo pages (sensorIndices/sensorLayout), not in the dataset files.",
+      "Camera images were recorded for illustration only and are not used by the authors' code."
+    ],
+    "links": {
+      "paper": "https://doi.org/10.1038/s41586-019-1234-z",
+      "project": "http://stag.csail.mit.edu/",
+      "data": "http://stag.csail.mit.edu/#data",
+      "code": "https://github.com/Erkil1452/touch"
+    },
+    "image": "http://stag.csail.mit.edu/assets/teaser3_800.png",
+    "thumb": "assets/thumbs/stag.jpg",
+    "setup": {
+      "cameras": [
+        {
+          "role": "third_person",
+          "count": 1,
+          "model": "FLIR GS2-GE-20S4C-C",
+          "type": "RGB",
+          "resolution": "682x512",
+          "fps": 7.3,
+          "mount": null
+        }
+      ],
+      "wrist_cameras": 0,
+      "depth": false,
+      "tracking": [],
+      "other": [
+        "object labels (26 objects + empty hand)",
+        "object weights in grams (weights subset)",
+        "hand-pose class labels (empty hand + G1-G7)",
+        "blindfolded identification start/end timestamps",
+        "per-frame preprocessing flags (valid label, balanced, grasp, transition) and train/test split"
+      ]
+    },
+    "sources": [
+      "http://stag.csail.mit.edu/",
+      "http://stag.csail.mit.edu/license.html",
+      "http://stag.csail.mit.edu/datasets/readme_classification.html",
+      "http://stag.csail.mit.edu/datasets/readme_weights.html",
+      "http://stag.csail.mit.edu/datasets/readme_handposes.html",
+      "http://stag.csail.mit.edu/datasets/readme_blindfolded.html",
+      "http://stag.csail.mit.edu/demos/correlations/sensor-level.html",
+      "https://stag.csail.mit.edu/datasets/classification.zip (central directory listing via range requests)",
+      "https://stag.csail.mit.edu/datasets/blindfolded.zip (listing; 005-mug pressuredata.mat and frame 10 fetched)",
+      "https://stag.csail.mit.edu/datasets/weights.zip (listing; weights.xlsx fetched)",
+      "https://stag.csail.mit.edu/datasets/handposes.zip (listing; note.txt fetched)",
+      "http://stag.csail.mit.edu/datasets/classification_lite.zip, blindfolded_lite.zip, weights_lite.zip, handposes_lite.zip (downloaded and read)",
+      "https://cdfg.mit.edu/pdf/journal/2019-sundaram-learning-the-signatures-of-the-human-grasp-using-a.pdf",
+      "https://github.com/Erkil1452/touch",
+      "https://github.com/Erkil1452/touch/blob/master/LICENSE"
+    ],
+    "unconfirmed": [
+      "hours = 6.9: sum over the 221 recordings of (last ts - first ts) in the four lite metadata.mat files: classification 5.28 h, blindfolded 0.26 h, weights 0.45 h, hand poses 0.92 h. The paper says recordings exceed 5 hours (object set).",
+      "episodes = 221 recordings counted in the metadata.mat files: classification 82 (26 objects x 3 days + 4 empty-hand, batches 000/001/002 with 27/27/28), blindfolded 105 (104 identification attempts + 1 empty-hand control), weights 27 (26 objects + empty hand, ~60 s each), hand poses 7 sessions (~452-480 s each, several pose classes per recording).",
+      "frames = 177,592: 135,187 + 6,686 + 11,682 + 24,037 frames in the four metadata.mat files; the first and last two match the paper.",
+      "tasks = 4 counts the recording protocols (visually aware object interaction, blindfolded identification, weight lift-hold-drop, hand-pose articulation); the paper does not define tasks.",
+      "rate_hz = 7.3 is the paper's average frame rate; ts in the files gives a median interval of 0.136 s (7.35 Hz) and a mean of 7.12-7.28 Hz per subset (intervals up to ~0.176 s at p95).",
+      "Camera resolution 682x512 is that of the released JPEG frames (fetched from all four archives); the native camera resolution and the camera mount are not stated. The frames show a close view of the gloved hand over a table.",
+      "548 valid sensors: exactly 548 of the 1024 grid cells vary in every subset; the other cells are constant 510. The demo page's sensorIndices (32x32, 548 non-negative) matches this mask exactly and sensorLayout gives 2-D hand coordinates per sensor.",
+      "Classification values span 446-1000; 51 frames contain a reading above 950 (the paper's shorted-electrode criterion).",
+      "scenes not stated; all recordings appear to be on one table surface (from the camera frames)."
+    ]
+  },
+  "license": {
+    "name": "License Agreement for Use of Scalable Tactile Glove (STAG) Data and Models (\"Research License\"); research use only, non-commercial",
+    "redistribution": "forbidden",
+    "quote": "The Licensed Material will not be copied nor distributed in any form other than for Your backup.",
+    "url": "http://stag.csail.mit.edu/license.html"
+  },
+  "download": {
+    "where": "http://stag.csail.mit.edu/#data (files at https://stag.csail.mit.edu/datasets/<name>.zip)",
+    "access": "open",
+    "format": "Four zip archives (classification, blindfolded, weights, handposes), stored uncompressed. Each holds metadata.mat (MATLAB v5, all frames of the subset with labels) and <batch>/<recording>/{000000..N.jpg, viz/000000..N.jpg, pressuredata.mat}. Lite zips hold only metadata.mat + readme.",
+    "total_size": "19.15 GB full (classification 14,692,607,623 B; blindfolded 433,316,009 B; weights 1,147,984,210 B; handposes 2,876,309,121 B); lite 48,971,024 B (38.4 MB + 1.7 MB + 3.0 MB + 5.9 MB)",
+    "per_episode": "Pressure of every recording is in the lite metadata.mat (39 MB for all 82 object recordings). With video: one classification recording ~1,357 frames x (73 KB jpg + 32 KB viz) + ~3.4 MB pressuredata.mat, about 140 MB.",
+    "partial_fetch": "Server accepts HTTP range requests and the zips are stored (no compression), so single members (one recording's JPEGs or pressuredata.mat) can be read after fetching the central directory from the zip64 end record."
+  },
+  "channels": [
+    {
+      "name": "metadata.mat:pressure",
+      "kind": "tactile_grid",
+      "shape": "(N, 32, 32) int16, N = all frames of the subset",
+      "rate_hz": 7.3,
+      "unit": "raw 10-bit ADC counts (0-1023 = 0-5 V amplifier output), not calibrated force",
+      "frame": "32x32 grid of row x column conductive-thread electrodes on the right-hand glove (palmar side); 548 cells are sensors, 476 are constant 510. Sensor -> hand position only in the demo pages (sensorIndices, sensorLayout)",
+      "note": "Normal force per sensor. Rest ~510-516; useful 500-650 (paper normalizes 500-650 to 0-1); >950 = shorted electrode. Observed ranges: classification 446-1000, blindfolded 509-991, weights 510-654, hand poses 510-992."
+    },
+    {
+      "name": "<batch>/<recording>/pressuredata.mat:data",
+      "kind": "tactile_grid",
+      "shape": "(N, 32, 32) int16, N = frames in the recording",
+      "rate_hz": 7.3,
+      "unit": "raw 10-bit ADC counts",
+      "frame": "same 32x32 electrode grid",
+      "note": "Per-recording raw pressure, same values as metadata.mat; only in the full zips. Checked on blindfolded/000/005-mug (32 frames, 510-562)."
+    },
+    {
+      "name": "<batch>/<recording>/pressuredata.mat:tStamp / frame",
+      "kind": "other",
+      "shape": "(N,) float64 / (N,) int32",
+      "rate_hz": 7.3,
+      "unit": "Unix time in s / frame index",
+      "frame": "recording",
+      "note": "Absolute capture timestamps (e.g. 2019-01-12 for the blindfolded set) and zero-based frame numbers matching the JPEG names."
+    },
+    {
+      "name": "metadata.mat:ts / frame / batchId / recordingId",
+      "kind": "other",
+      "shape": "(N,) each",
+      "rate_hz": 7.3,
+      "unit": "s since the recording's first frame / index",
+      "frame": "recording",
+      "note": "Per-frame time and indices into batches/recordings; frame selects <batch>/<recording>/<frame:06d>.jpg."
+    },
+    {
+      "name": "<batch>/<recording>/<frame>.jpg",
+      "kind": "camera",
+      "shape": "682x512x3 JPEG per tactile frame",
+      "rate_hz": 7.3,
+      "unit": "8-bit RGB",
+      "frame": "third-person view of the gloved hand (FLIR GS2-GE-20S4C-C), mount not stated",
+      "note": "Recorded 'for illustration', one image per tactile frame (135,191 JPEGs for 135,187 frames in classification). Only in the full zips."
+    },
+    {
+      "name": "<batch>/<recording>/viz/<frame>.jpg",
+      "kind": "other",
+      "shape": "512x264x3 JPEG",
+      "rate_hz": 7.3,
+      "unit": "8-bit RGB",
+      "frame": "side-by-side: downsized camera image + 32x32 pressure map without spatial layout",
+      "note": "Pressure mapped from 500-650 to 0-1 in log space; bar below is green when hasValidLabel. Only in the full zips."
+    },
+    {
+      "name": "metadata.mat:objects / objectId",
+      "kind": "other",
+      "shape": "(27,) names / (N,) uint8",
+      "rate_hz": 7.3,
+      "unit": "class index",
+      "frame": "per frame",
+      "note": "26 objects + empty_hand; in handposes the classes are empty_hand, G1-G7 and several classes occur in one recording."
+    },
+    {
+      "name": "metadata.mat:weights (weights subset) and weights/000/weights.xlsx",
+      "kind": "other",
+      "shape": "(27,) uint16",
+      "rate_hz": null,
+      "unit": "g",
+      "frame": "per object",
+      "note": "Ground-truth object weight, 0 (empty hand) to 679 (cat sculpture)."
+    },
+    {
+      "name": "metadata.mat:graspIndex / graspValid (weights subset)",
+      "kind": "other",
+      "shape": "(N,) uint8",
+      "rate_hz": 7.3,
+      "unit": "index / flag",
+      "frame": "per frame",
+      "note": "Index of the 10 s grasp interval in the 1 min recording (0-6); graspValid marks the 4-6 s hold window used by the paper."
+    },
+    {
+      "name": "metadata.mat:splits / splitId / hasValidLabel / isBalanced / isGrasp / isTransition / transitionDir",
+      "kind": "other",
+      "shape": "(N,) uint8 or int32",
+      "rate_hz": 7.3,
+      "unit": "flags",
+      "frame": "per frame",
+      "note": "Paper preprocessing: train/test split, object-held flag (88,269 frames in classification), balanced subset, reliable contact, last empty frame before contact. transitionDir (int32 0-74) is in the file but not documented; the readme names 'isGrap' while the file has isGrasp."
+    },
+    {
+      "name": "metadata.mat:actionStartTS / actionEndTS (blindfolded subset)",
+      "kind": "other",
+      "shape": "(105,) float64",
+      "rate_hz": null,
+      "unit": "s (relative ts; -1 when absent)",
+      "frame": "per recording",
+      "note": "Start of unaware manipulation and moment the object was identified."
+    }
+  ],
+  "episode_index": {
+    "where": "metadata.mat in each lite or full zip: recordings (names '<nnn>-<object>'), batches, and per-frame recordingId/batchId/objectId/ts; full-zip directory listing <subset>/<batch>/<recording>/",
+    "count": 221,
+    "fields": [
+      "subset",
+      "batch (recording day/session)",
+      "recording",
+      "object or hand-pose class (per frame)",
+      "split",
+      "ts"
+    ],
+    "tasks": [
+      "visually aware object interaction (classification, 3-5 min per object, 3 days)",
+      "blindfolded object identification (stop when identified)",
+      "weight estimation: grasp from above, lift, hold, drop every 10 s for 1 min",
+      "hand-pose articulation: empty hand and G1-G7 from a grasp taxonomy"
+    ],
+    "objects": [
+      "allen_key_set",
+      "ball",
+      "battery",
+      "board_eraser",
+      "bracket",
+      "brain",
+      "cat",
+      "chain",
+      "clip",
+      "coin",
+      "empty_can",
+      "full_can",
+      "gel",
+      "kiwano",
+      "lotion",
+      "mug",
+      "multimeter",
+      "pen",
+      "safety_glasses",
+      "scissors",
+      "screw_driver",
+      "spoon",
+      "spray_can",
+      "stapler",
+      "tape",
+      "tea_box"
+    ],
+    "scenes": []
+  },
+  "sample": {
+    "decision": "skip_forbidden",
+    "reason": "The STAG Research License forbids redistribution: \"The Licensed Material will not be copied nor distributed in any form other than for Your backup.\" (http://stag.csail.mit.edu/license.html, identical in https://github.com/Erkil1452/touch/blob/master/LICENSE). Licensed Material covers the data, models and related source, so no sample is re-hosted. The data itself is open (no login) and would otherwise qualify; candidates for a sample if permission is granted are listed under candidates_if_permitted.",
+    "prefix": "st_",
+    "tasks_total": 4,
+    "tasks_sampled": 0,
+    "episodes": [],
+    "fetch_estimate": "0 (nothing fetched for the sample). If permitted: ~160 MB by range requests (JPEG + viz frames of the four windows, ~105 KB per frame x ~1,440 frames, plus four pressuredata.mat of ~3.4 MB); pressure alone is already in the 49 MB lite zips.",
+    "rules_applied": "README step 2: license explicitly forbids redistribution -> skip_forbidden, row added to SKIPPED.md. Candidates follow the 'how many' rules anyway (4 protocols <= 6 -> all; one episode each, 4 total; 10-60 s windows holding contact), checked only against the already-downloaded lite metadata.mat (all 548 sensor cells present, no shorted cells >950 in these recordings, max(sensor) > 540 counts for >= 5 s).",
+    "candidates_if_permitted": [
+      {
+        "id": "classification/000/002-mug",
+        "task": "visually aware object interaction (classification)",
+        "scene": "single tabletop",
+        "subject": "author (single subject)",
+        "duration_s": 60,
+        "window": [
+          117.5,
+          177.5
+        ],
+        "why": "Everyday object with handle; 1,342 frames / 182.9 s total; window chosen for the highest contact fraction (0.76 of 440 frames with a sensor > 540 counts, peak 680)."
+      },
+      {
+        "id": "blindfolded/0/003-allen_key_set",
+        "task": "blindfolded object identification",
+        "scene": "single tabletop",
+        "subject": "author (single subject)",
+        "duration_s": 16.5,
+        "window": null,
+        "why": "Longest clean identification attempt (122 frames / 16.5 s in metadata.mat), peak 629 counts, ~37 contact frames (~5 s); most attempts are 3-10 s."
+      },
+      {
+        "id": "weights/0/001-multimeter",
+        "task": "weight estimation (lift, hold, drop every 10 s)",
+        "scene": "single tabletop",
+        "subject": "author (single subject)",
+        "duration_s": 60.8,
+        "window": null,
+        "why": "Whole ~60 s lift-hold-drop recording; strongest weights recording (contact in 0.72 of 446 frames, peak 624); object weight label in grams."
+      },
+      {
+        "id": "handposes/0/001",
+        "task": "hand-pose articulation (empty hand, G1-G7)",
+        "scene": "single tabletop",
+        "subject": "author (single subject)",
+        "duration_s": 60,
+        "window": [
+          173.0,
+          233.1
+        ],
+        "why": "Session of 451.7 s cut to the 60 s window with most contact (0.54 of 441 frames), covering pose classes G6 and G7."
+      }
+    ]
+  }
+}

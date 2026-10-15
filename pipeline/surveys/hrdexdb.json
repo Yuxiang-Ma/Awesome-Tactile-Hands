@@ -1,0 +1,597 @@
+{
+ "id": "hrdexdb",
+ "surveyed": "2026-10-15",
+ "entry": {
+  "id": "hrdexdb",
+  "name": "HRDexDB",
+  "title": "HRDexDB: A 4D Dexterous Grasping Dataset Across Human and Multiple Robot Embodiments",
+  "authors": "Jongbin Lim et al.",
+  "year": 2026,
+  "venue": "arXiv 2604.14944",
+  "summary": "Paired human and teleoperated robot grasps (Allegro V5 Plus, Inspire RH56F1 and RH56DFTP, Robotiq 2F-85 on an xArm6) over 100 objects, filmed by a 23-camera rig with MANO hands and object 6D poses; built-in tactile only on the Allegro and Inspire F1 hands.",
+  "embodiment": "both",
+  "hand": "Human hand (no tactile); Allegro Hand V5 Plus (16 DoF), Inspire RH56F1, Inspire RH56DFTP, Robotiq 2F-85, each on an xArm6",
+  "bimanual": false,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": null,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": null,
+   "note": "Robot hands only. Allegro V5 Plus: raw/hand/tactile.npy (T, 4) int32, one value per fingertip sensor, ~99 Hz, 0 to ~1,800 counts. Inspire RH56F1 (right hand): raw/hand/right_tactile.npy, one dict per sample with normal_force, tangential_force and tangential_direction for 8 regions (little, ring, middle, index, thumb, palm_right, palm_middle, palm_left) = 24 scalars at 50 Hz. Inspire RH56DFTP: tactile.npy is empty in all 618 episodes; a per-actuator force.npy (T, 6) at ~50 Hz is present. Robotiq 2F-85: none. Units are not stated. Paper: readings too noisy or sparse to serve as contact labels.",
+   "maker": "Wonik Robotics (Allegro); Inspire Robots (RH56F1, RH56DFTP)",
+   "model": "Allegro Hand V5 Plus fingertip tactile sensors; Inspire RH56F1 built-in tactile; Inspire RH56DFTP finger force sensors",
+   "principle": "unspecified",
+   "range": null
+  },
+  "modalities": [
+   "multiview_rgb",
+   "egocentric",
+   "hand_pose",
+   "object_pose",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 14.9,
+   "episodes": 2703,
+   "frames": 43500000,
+   "tasks": 1,
+   "objects": 100,
+   "subjects": 1,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Release: 2,703 sequences (441 human, 453 Allegro, 592 Inspire F1, 618 Inspire DFTP, 599 Robotiq) over 100 objects, ~14.9 h of synchronized 30 fps capture, 23 views; paper: 3,215 trials (541 human), 43.5M frames (all views)"
+  },
+  "availability": "public",
+  "access": "Hugging Face HRDexDB/HRDexDB, ungated, ~1.56 TB of per-sequence folders (per-camera mp4, raw .npy robot streams, MANO, object pose npz); single files can be fetched; Google Drive ZIP mirror also offered.",
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "Grasping only: one grasp-and-lift task per sequence; robot trials teleoperated to reproduce a reference human grasp (no frame-level alignment between paired human and robot sequences).",
+   "No human tactile; the human hand is a MANO fit from multi-view video.",
+   "Inspire RH56DFTP tactile.npy is empty (0 elements) in all 618 released episodes; only a 6-channel force.npy with undocumented units is present, stored as unsigned 16-bit wrap-around (65,535 = -1).",
+   "Tactile units, sensor-to-channel mapping and calibration are not documented for any hand; the paper calls the Allegro and Inspire readings too noisy or sparse for contact labels.",
+   "Many raw .npy files (arm streams, Inspire F1 hand and tactile, Robotiq hand, teleop) are pickled object arrays and need allow_pickle to load.",
+   "Release (2,703 sequences) is smaller than the paper's 3,215 trials; all 453 released Allegro sequences are labelled successful, while the paper reports 52 Allegro failures.",
+   "The metadata catalog (metadata/episodes.parquet, 2,104 rows) does not cover the Robotiq sequences; 33 Robotiq folders lack raw/ and 36 lack calibration files.",
+   "Videos are 2048x1536 MPEG-4 Part 2 (not H.264), ~230-840 MB per sequence (median, by embodiment) across 22-23 views."
+  ],
+  "links": {
+   "project": "https://snuvclab.github.io/HRDexDB/",
+   "paper": "https://arxiv.org/abs/2604.14944",
+   "data": "https://huggingface.co/datasets/HRDexDB/HRDexDB",
+   "code": "https://github.com/snuvclab/HRDexDB"
+  },
+  "image": "https://snuvclab.github.io/HRDexDB/static/image/teaser_icra.png",
+  "thumb": "assets/thumbs/hrdexdb.jpg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 21,
+     "model": null,
+     "type": "RGB",
+     "resolution": "2048x1536",
+     "fps": 30,
+     "mount": "static"
+    },
+    {
+     "role": "egocentric",
+     "count": 2,
+     "model": null,
+     "type": "stereo",
+     "resolution": "2048x1536",
+     "fps": 30,
+     "mount": "head"
+    },
+    {
+     "role": "egocentric",
+     "count": 2,
+     "model": null,
+     "type": "stereo",
+     "resolution": "2048x1536",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "HaMeR 2D keypoints in calibrated views -> triangulation -> MANO fit (shape calibrated by SAM3 silhouettes)",
+     "note": "human sequences; per-frame MANO mesh (.obj) and params (.json, incl. 21 joints)"
+    },
+    {
+     "target": "object",
+     "method": "vision_estimate",
+     "system": "SAM3 masks + FoundPose init + GoTrack multi-view 6D tracking",
+     "note": "all embodiments; object_6d_pose_v1/v2 npz, one 4x4 per video frame"
+    },
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "robot hand joint states and commands",
+     "note": "Allegro, Inspire F1/DFTP, Robotiq"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "xArm6 joint position/velocity/torque + 4x4 pose action",
+     "note": "every robot hand is mounted on an xArm6"
+    },
+    {
+     "target": "fingers",
+     "method": "teleop_glove",
+     "system": "MANUS gloves",
+     "note": "teleoperation of robot fingers; raw glove skeletons released only for Inspire DFTP and Robotiq sequences"
+    },
+    {
+     "target": "wrist",
+     "method": "optical_tracker",
+     "system": "HTC Vive wrist tracker (libsurvive)",
+     "note": "teleoperation of the arm"
+    }
+   ],
+   "other": [
+    "object meshes (100, v1 and v2)",
+    "camera intrinsics/extrinsics (+ per-frame ego extrinsics for the helmet)",
+    "grasp success labels",
+    "verified human-robot pairing table (1,335 links)",
+    "xArm6 joint torque/velocity"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2604.14944 (HTML v3)",
+   "https://snuvclab.github.io/HRDexDB/",
+   "https://huggingface.co/datasets/HRDexDB/HRDexDB (README.md, metadata/*.parquet, full repo tree)",
+   "https://huggingface.co/datasets/HRDexDB/HRDexDB raw files of human/apple/0, allegro_v5/apple/3, inspire_f1/apple/0, inspire_dftp/apple/0, robotiq_2f85/apple/0 and tactile/force files of 9 more robot sequences",
+   "https://github.com/snuvclab/HRDexDB (README.md, hrdexdb/common.py, hrdexdb_contact_heatmaps/hrdexdb_io.py)"
+  ],
+  "unconfirmed": [
+   "episodes=2,703 counted from sequence folders in the HF tree (human 441, allegro_v5 453, inspire_f1 592, inspire_dftp 618, robotiq_2f85 599); metadata/episodes.parquet lists 2,104 (no Robotiq); paper: 3,215 trials (541 human, 539 Allegro, 743 Inspire F1, 791 Inspire DFTP, 601 Robotiq); GitHub README: 2.1K; HF card: 3.2K.",
+   "hours=14.9 derived: catalog num_frames for 2,104 sequences sum to 1,275,339 and Robotiq raw/timestamps/frame_id.npy lengths (568 of 599 sequences) sum to 334,860; 1,610,199 frames / 30 fps = 14.9 h. Excludes ~31 Robotiq sequences without timestamps.",
+   "frames=43.5M is the paper's figure and counts images over all camera views.",
+   "subjects=1: paper says 'a human subject' / 'A human participant'; not stated as a count. Number of teleoperators not stated.",
+   "tasks=1: single grasp-and-lift task type; not a stated count. Paper: 23 of 33 GRASP-taxonomy grasp types.",
+   "scene_types=['lab']: one capture platform (21-camera rig around a workspace); no scene count is stated.",
+   "Cameras: paper says 21-camera exocentric rig + stereo helmet (human) or static stereo egocentric cameras (robot). In the files the helmet pair is 25452062/25452066 (ego_calib.json has per-frame extrinsics); human and Inspire F1 sequences carry 23 streams, Allegro and Inspire DFTP 22 (no 22684210), Robotiq 22-23 (adds 26256735/26256742, lacks 23029839). Camera models not stated. All streams 2048x1536 mpeg4 tagged 30 fps (metadata/cameras.parquet, one human mp4 probed).",
+   "raw/timestamps/timestamp.npy steps median 0.030 s (~33 Hz) in the sampled Allegro, Inspire F1 and DFTP sequences while the mp4 files are tagged 30 fps; Robotiq steps are 0.0333 s.",
+   "Tactile and force rates are medians of the time stamps in the sampled files (Allegro hand ~99 Hz, Inspire F1 tactile 50.0 Hz, Inspire DFTP hand ~49.7 Hz). Inspire F1 tangential_direction ranges 0-359 with -1 when unloaded, i.e. likely degrees (not stated). F1 thumb_normal_force reached exactly 3000 in cactus/3 (possible clip).",
+   "Inspire DFTP force.npy: values above 32,767 occur and read as small negatives when reinterpreted as int16 (e.g. 65,525 = -11); the channel order (6 actuators) is not documented.",
+   "Object pose translations are ~0.3-0.6 in magnitude (consistent with meters; unit not stated). C2R.npy is a 4x4 the official code inverts to get robot_from_world.",
+   "Human success labels are null in the catalog (paper: all human trials succeed). Release success counts: Allegro 453/453, Inspire F1 423 true / 164 false / 5 null, Inspire DFTP 387 / 231, Robotiq grasp_result.json 474 / 81 (555 files)."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "license: cc-by-nc-4.0",
+  "url": "https://huggingface.co/datasets/HRDexDB/HRDexDB/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/HRDexDB/HRDexDB",
+  "access": "open",
+  "format": "per-sequence folders <embodiment>/<object>/<seq>/: vid/<camera>.mp4 (MPEG-4 Part 2, 2048x1536), raw/{arm,hand,teleop,state,timestamps}/*.npy (many pickled object arrays), cam_param/*.json, hand/mano/*.obj + mano_params/*.json (human), object_6d_pose_v{1,2}/*.npz, metadata/*.parquet",
+  "total_size": "1.56 TB (HF usedStorage 1,564,118,409,675 B)",
+  "per_episode": "raw + calibration < 10 MB; videos ~230 MB (human) to ~840 MB (Inspire DFTP) median per sequence, up to 2.8 GB",
+  "partial_fetch": "single files via https://huggingface.co/datasets/HRDexDB/HRDexDB/resolve/main/<path>; fetch raw/*.npy, object pose npz and one or two camera mp4s per sequence"
+ },
+ "channels": [
+  {
+   "name": "vid/<camera_id>.mp4",
+   "kind": "camera",
+   "shape": "(T, 1536, 2048, 3)",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "calibrated per camera (cam_param/intrinsics.json, extrinsics.json)",
+   "note": "all embodiments; 21 exocentric rig cameras + 2 stereo egocentric (helmet for human, static for robots); 22-23 files per sequence; MPEG-4 Part 2"
+  },
+  {
+   "name": "cam_param/intrinsics.json, extrinsics.json, ego_calib.json",
+   "kind": "other",
+   "shape": "per camera: K 3x3, distortion, 4x4 extrinsic; ego_calib: per-frame 4x4 for 25452062/25452066",
+   "rate_hz": null,
+   "unit": "pixels / not stated",
+   "frame": "world (calibrated rig)",
+   "note": "ego_calib.json only in human sequences"
+  },
+  {
+   "name": "C2R.npy",
+   "kind": "other",
+   "shape": "(4, 4)",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "rig world <-> robot base",
+   "note": "the official code uses inv(C2R) as robot_from_world"
+  },
+  {
+   "name": "object_6d_pose_v2/<embodiment>/<object>_<seq>.npz",
+   "kind": "object_pose",
+   "shape": "frame_<i>: (4, 4) float32 per video frame",
+   "rate_hz": 30,
+   "unit": "not stated (translations ~0.3-0.6)",
+   "frame": "world",
+   "note": "v1 also released for all but Robotiq; Robotiq v2 for 504 of 599"
+  },
+  {
+   "name": "hand/mano_params/<frame>.json",
+   "kind": "hand_pose",
+   "shape": "global_orient (1,1,3,3), hand_pose (1,15,3,3), betas (1,10), transl (1,3), joints (21,3), loss",
+   "rate_hz": 30,
+   "unit": "rotation matrices; not stated for transl/joints",
+   "frame": "world",
+   "note": "human only; one hand (single MANO per frame)"
+  },
+  {
+   "name": "hand/mano/<frame>.obj",
+   "kind": "hand_pose",
+   "shape": "MANO mesh per frame",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "world",
+   "note": "human only"
+  },
+  {
+   "name": "raw/timestamps/timestamp.npy, frame_id.npy",
+   "kind": "other",
+   "shape": "(T,)",
+   "rate_hz": 30,
+   "unit": "unix s / 1-based frame index",
+   "frame": null,
+   "note": "robot sequences; maps video frames to robot clock"
+  },
+  {
+   "name": "raw/arm/position.npy, velocity.npy, torque.npy",
+   "kind": "joint_state",
+   "shape": "(T, 6)",
+   "rate_hz": 137,
+   "unit": "not stated (rad, rad/s, Nm by range)",
+   "frame": "xArm6 joints",
+   "note": "~137 Hz for Allegro/DFTP/Robotiq, ~99 Hz for Inspire F1; pickled object arrays except Inspire F1"
+  },
+  {
+   "name": "raw/arm/action.npy (+ action_qpos.npy)",
+   "kind": "action",
+   "shape": "(T, 4, 4) pose target; action_qpos (T, 6)",
+   "rate_hz": 137,
+   "unit": "not stated",
+   "frame": "robot base",
+   "note": "action_qpos only in DFTP and Robotiq; raw/arm/time.npy holds unix s"
+  },
+  {
+   "name": "raw/hand/tactile.npy (Allegro V5 Plus)",
+   "kind": "pressure_scalar",
+   "shape": "(T, 4) int32",
+   "rate_hz": 99,
+   "unit": "not stated (raw counts, 0 to ~1,800 seen)",
+   "frame": "one value per fingertip sensor; channel-to-finger order not documented",
+   "note": "shares raw/hand/time.npy (unix s); rest values ~0-40; contact peaks of several hundred to ~1,800 in 4 sampled sequences"
+  },
+  {
+   "name": "raw/hand/position.npy, action.npy (Allegro V5 Plus)",
+   "kind": "joint_state",
+   "shape": "(T, 16) float64",
+   "rate_hz": 99,
+   "unit": "not stated (rad by range)",
+   "frame": "Allegro joints",
+   "note": "action = joint command"
+  },
+  {
+   "name": "raw/hand/right_tactile.npy (Inspire RH56F1)",
+   "kind": "force_vector",
+   "shape": "(T,) dicts of 24 scalars = 8 regions x (normal_force, tangential_force, tangential_direction)",
+   "rate_hz": 50,
+   "unit": "not stated (raw values up to ~3,300; direction 0-359, -1 = none)",
+   "frame": "per region: little, ring, middle, index, thumb, palm_right, palm_middle, palm_left",
+   "note": "right hand only; time in right_tactile_time.npy (unix s); pickled object array; many regions stay 0 or at a constant offset"
+  },
+  {
+   "name": "raw/hand/right_joint_states.npy, right_commands.npy (Inspire RH56F1)",
+   "kind": "joint_state",
+   "shape": "(T, 6)",
+   "rate_hz": 50,
+   "unit": "raw actuator units (~780-1,700)",
+   "frame": "6 actuators",
+   "note": "commands at ~97 Hz with their own time file"
+  },
+  {
+   "name": "raw/hand/tactile.npy (Inspire RH56DFTP)",
+   "kind": "pressure_scalar",
+   "shape": "(0,)",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "empty in all 618 released DFTP sequences (128-byte files)"
+  },
+  {
+   "name": "raw/hand/force.npy (Inspire RH56DFTP)",
+   "kind": "pressure_scalar",
+   "shape": "(T, 6) int64",
+   "rate_hz": 50,
+   "unit": "not stated (raw, up to ~3,000; negatives stored as 65,536 - x)",
+   "frame": "per actuator, order not documented",
+   "note": "shares raw/hand/time.npy; the only touch-related signal for DFTP"
+  },
+  {
+   "name": "raw/hand/position.npy, action.npy (Inspire RH56DFTP)",
+   "kind": "joint_state",
+   "shape": "(T, 6) int",
+   "rate_hz": 50,
+   "unit": "raw actuator units (0-1,000 range)",
+   "frame": "6 actuators",
+   "note": null
+  },
+  {
+   "name": "raw/hand/position.npy, command.npy, action.npy (Robotiq 2F-85)",
+   "kind": "joint_state",
+   "shape": "(T, 1)",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "gripper opening",
+   "note": "pickled object arrays"
+  },
+  {
+   "name": "raw/teleop/left.npy, right.npy (DFTP, Robotiq)",
+   "kind": "hand_pose",
+   "shape": "per sample: dict of 20-25 named joints (wrist, thumb..pinky metacarpal..tip) -> (4, 4)",
+   "rate_hz": 65,
+   "unit": "not stated",
+   "frame": "MANUS glove skeleton; Vive frame 'libsurvive_world' per metadata.json",
+   "note": "teleoperator's MANUS gloves (+ Vive wrist tracker); Robotiq ~65 Hz; DFTP teleop/time.npy holds a constant 63 (no usable time)"
+  },
+  {
+   "name": "raw/state/state_hist.npy",
+   "kind": "other",
+   "shape": "(T,) int 0/1",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "DFTP and Robotiq; meaning not documented"
+  },
+  {
+   "name": "grasp_result.json",
+   "kind": "other",
+   "shape": "{grasp_success, human_paired_episode}",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "robot sequences"
+  }
+ ],
+ "episode_index": {
+  "where": "metadata/episodes.parquet (2,104 rows; human, allegro_v5, inspire_f1, inspire_dftp) + repo tree for robotiq_2f85; metadata/pairings.parquet (1,335 verified robot->human links); metadata/cameras.parquet (47,320 streams)",
+  "count": 2703,
+  "fields": [
+   "embodiment",
+   "object_id",
+   "sequence_id",
+   "success",
+   "paired_episode_id",
+   "has_tactile",
+   "num_frames",
+   "fps",
+   "has_raw",
+   "has_object_pose_v2"
+  ],
+  "tasks": [
+   "grasp and lift (one object per sequence)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC 4.0 (HF card YAML 'license: cc-by-nc-4.0') allows non-commercial redistribution with attribution; the repo is public and ungated and single files download through resolve URLs. Label the collection 'CC BY-NC 4.0'.",
+  "prefix": "hr_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "allegro_v5/yellow_wash_tub/0",
+    "task": "grasp and lift",
+    "scene": "lab capture rig (the only scene)",
+    "subject": "robot: Allegro V5 Plus on xArm6, teleoperated (MANUS + Vive)",
+    "embodiment": "allegro_v5",
+    "object": "yellow_wash_tub",
+    "duration_s": 13.37,
+    "video_frames": 442,
+    "window": null,
+    "paired_human_episode": "human/yellow_wash_tub/0",
+    "why": "Contact on all 4 fingertip channels, each more than 100 counts above rest (rest 0) for over 1 s: ch0 2.3 s (peak 421), ch1 2.5 s (604), ch2 2.7 s (589), ch3 3.8 s (1,133). Contact is at 2.1-9.0 s on the video clock. Of 40 scanned Allegro sequences (one per object, successful, 10-60 s), only this one and orange/0 have all 4 channels in contact for at least 1 s. Grasp succeeded. Video timestamps have 442 rows with frame_id 1-442 and no gaps, matching the 442 video frames. Tactile is 1,461 rows (~97 Hz), monotonic, no NaN, and starts 2.5 s before the first video frame."
+   },
+   {
+    "id": "inspire_f1/brown_ramen/10",
+    "task": "grasp and lift",
+    "scene": "lab capture rig (the only scene)",
+    "subject": "robot: Inspire RH56F1 (right) on xArm6, teleoperated (MANUS + Vive)",
+    "embodiment": "inspire_f1",
+    "object": "brown_ramen",
+    "duration_s": 20.04,
+    "video_frames": 659,
+    "window": null,
+    "paired_human_episode": "human/brown_ramen/3",
+    "why": "Strongest multi-finger F1 contact among 44 checked F1 sequences. Normal force exceeds rest + 100 for 4.3 s on middle (peak 513), 4.6 s on index (1,391) and 4.6 s on thumb (574), at 10.5-16.1 s on the video clock. Tangential force and direction move on the same regions (direction 0-359). Ring stays below 30 and little stays at 0 / -1. The three palm regions read 0 / -1 for the whole clip; this matches the release, where palm normal force never exceeded 17 in the 44 checked F1 sequences. All 24 values are present in every sample: 1,110 rows at 50 Hz, monotonic, no NaN. Grasp succeeded. cactus/3 has more regions touched (ring, middle, index, thumb), but only ring and thumb stay in contact for at least 1 s."
+   },
+   {
+    "id": "inspire_dftp/apple/0",
+    "task": "grasp and lift",
+    "scene": "lab capture rig (the only scene)",
+    "subject": "robot: Inspire RH56DFTP on xArm6, teleoperated (MANUS gloves + Vive tracker)",
+    "embodiment": "inspire_dftp",
+    "object": "apple",
+    "duration_s": 22.74,
+    "video_frames": 755,
+    "window": null,
+    "paired_human_episode": "human/apple/0",
+    "why": "All 6 force channels rise above rest + 100 for 5.4-6.8 s at 10.1-16.8 s on the video clock (peaks 1,030 / 2,722 / 2,372 / 1,352 / 1,436 / 398, after undoing the uint16 wrap of negatives). Ch4 also rises at 5.1 s, before contact. Of the 4 DFTP sequences checked, this is the only one with all 6 channels active. Grasp succeeded. force.npy has 1,159 rows (~49.5 Hz), monotonic, no NaN. tactile.npy is (0,) here, as in all 618 DFTP sequences, so it cannot be shown."
+   }
+  ],
+  "fetch_estimate": "~190 MB. Needed per episode: raw/ + cam_param/ + C2R.npy + grasp_result.json (allegro_v5/yellow_wash_tub/0 1.1 MB, inspire_f1/brown_ramen/10 2.0 MB, inspire_dftp/apple/0 10.4 MB, from the HF tree API), object_6d_pose_v2 npz (~0.1 MB each) and two camera MP4s per episode (median sizes 19 / 28 / 35 MB, so ~165 MB in total; cameras.parquet byte_size). All 22-23 views would cost 413 + 617 + 751 MB = ~1.8 GB. Already local: inspire_dftp/apple/0 raw (raw_sample/), plus the 43 MB tactile scan of 80 sequences (scan/). Re-hosted media: the 2048x1536 MPEG-4 Part 2 views must be re-encoded to H.264 at a lower resolution, estimated at a few MB per view per clip. Episode JSON: full-rate touch is 1,461x4 + 1,110x24 + 1,159x6 values, far below 2 MB.",
+  "rules_applied": "Tasks: the release has 1 task (grasp and lift), at most 6, so it is taken. Episodes: with 3 tasks or fewer the rule is 2-3 per task and at least 3 in total, so 3 episodes. They come from different embodiments and different objects (wash tub, ramen pack, apple), which stand in for the different subjects and scenes the release does not have. Only embodiments with a touch channel were eligible: Allegro V5 Plus (tactile), Inspire RH56F1 (tactile) and Inspire RH56DFTP (force). Human sequences (MANO fit from video) and Robotiq 2F-85 (gripper position only) have no tactile or force channel, so they cannot show contact. Candidates: successful sequences of 10-60 s from metadata/episodes.parquet, one per object, 40 random per hand (random_state=0). Contact means more than 100 counts above the median of the first 5% of samples, for 1 s or longer. Length: the three timestamp spans are 13.4 / 20.0 / 22.7 s, all within 10-60 s, so no window is cut. Budget: within 2 MB JSON, ~30 MB media per episode and 20 GB download.",
+  "deviations": [
+   "No human or Robotiq 2F-85 episode: they have no touch channel. Each robot episode names its paired human sequence (metadata/pairings.parquet) for a possible later side-by-side.",
+   "inspire_dftp/apple/0: tactile.npy is empty, as in the whole DFTP release, so only force.npy is shown. inspire_f1/brown_ramen/10: little finger and the three palm regions are flat (0, direction -1) for the whole clip, as palm regions are across the scanned release."
+  ],
+  "checks": {
+   "method": "Pickled .npy files (F1 right_tactile) read with a restricted unpickler that allows only numpy _reconstruct/ndarray/dtype/scalar. Other arrays read with allow_pickle=False. Episode list from metadata/episodes.parquet (success == True, 300-1800 frames).",
+   "scan": "Fetched raw/hand tactile + time for 40 Allegro and 40 F1 sequences (43 MB, ~/data/ext/hrdexdb/scan/), plus the 4 Allegro, 4 F1 and 4 DFTP sequences already in raw_sample/. Allegro: 2 of 40 scanned have all 4 channels in contact for at least 1 s; 7 have 3. F1 (40 scanned + 4 in raw_sample/): 35 of 44 have at most one region in contact for at least 1 s; 28 have none. Two have 3 regions: brown_ramen/10, and yellow_wash_tub/0 with peaks below 180. This matches the paper's statement that the tactile readings are noisy or sparse.",
+   "video_timeline": "Official code (hrdexdb_io.py load_video_timeline / common.py load_video_frame) maps raw/timestamps row i to video frame frame_id[i]-1. Allegro yellow_wash_tub/0: 442 rows = 442 video frames. F1 brown_ramen/10: 669 rows with frame_id 1-669 (a few local reorderings such as 2,4,6,3,7), while the videos have 659 frames, so the last ~10 ids have no frame. All 9 F1 sequences checked show such an excess (10-24 rows). DFTP apple/0: 754 rows vs 755 frames. The timestamp step is 30 ms (~33 Hz), although the MP4s are tagged 30 fps.",
+   "dftp_force_wrap": "inspire_dftp/apple/0 force.npy raw min/max 0 / 65,535; values > 32,767 converted as x - 65,536 (min -26 after the conversion)."
+  }
+ },
+ "visualization": [
+  {
+   "channel": "raw/hand/tactile.npy (Allegro V5 Plus)",
+   "shown_as": [
+    "grid",
+    "series"
+   ],
+   "detail": "4 fingertip readings as 4 painted 4x4 pads on a schematic right hand (back view, thumb lower left); column order assumed index, middle, ring, thumb from the Allegro URDF joint order (not documented, not confirmable from the data). Latest sample at or before each video-frame time; raw counts, not tared; colour range = episode max rounded up. Plot: per-region values.",
+   "reason": null
+  },
+  {
+   "channel": "raw/hand/right_tactile.npy (Inspire RH56F1)",
+   "shown_as": [
+    "grid",
+    "vectors",
+    "series"
+   ],
+   "detail": "8 named regions (thumb, index, middle, ring, little fingertips; palm_left/middle/right as palm L/M/R) as painted pads; pad colour = normal_force; arrow = tangential_force at tangential_direction read as degrees CCW from the panel x axis (unit and zero direction not documented), ring = normal_force. Plots: normal force per region (region sums), tangential force per region, tangential direction per region (gaps where -1). Palm L/M/R left-right placement in name order (side not documented).",
+   "reason": null
+  },
+  {
+   "channel": "raw/hand/force.npy (Inspire RH56DFTP)",
+   "shown_as": [
+    "grid",
+    "series"
+   ],
+   "detail": "6 per-actuator readings, uint16 wrap-around undone (x - 65536 for x > 32767), as one pad per actuator on a schematic right hand (thumb bend at the thumb, thumb rotation at the thumb base); order little, ring, middle, index, thumb bend, thumb rotation assumed from the official loader's position/action order. Pads clipped at 0; plots: signed force per actuator, plus actuator positions.",
+   "reason": null
+  },
+  {
+   "channel": "raw/hand/tactile.npy (Inspire RH56DFTP)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "empty (shape (0,)) in all 618 DFTP sequences of the release; stated in the episode notes"
+  },
+  {
+   "channel": "vid/<camera_id>.mp4",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "2 of the 22-23 views (rig cameras 23022632 and 22684755), cut to the ticks, re-timed to the raw/timestamps clock (~33.3 ticks/s) and re-encoded to H.264 960x720 (CC BY-NC 4.0)",
+   "reason": null
+  },
+  {
+   "channel": "raw/timestamps/timestamp.npy, frame_id.npy",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "used as the episode clock (row i -> video frame frame_id[i]-1, as in the official loader); described in notes"
+  },
+  {
+   "channel": "raw/hand/position.npy, action.npy (Inspire RH56DFTP)",
+   "shown_as": [
+    "series"
+   ],
+   "detail": "actuator positions (raw 0-1000) plotted next to the force; action not shown",
+   "reason": null
+  },
+  {
+   "channel": "raw/hand/position.npy, action.npy (Allegro V5 Plus)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "joint states/commands, not touch"
+  },
+  {
+   "channel": "raw/hand/right_joint_states.npy, right_commands.npy (Inspire RH56F1)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "joint states/commands, not touch"
+  },
+  {
+   "channel": "raw/arm/position.npy, velocity.npy, torque.npy",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "arm joint streams, not touch"
+  },
+  {
+   "channel": "raw/arm/action.npy (+ action_qpos.npy)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "arm commands, not touch"
+  },
+  {
+   "channel": "raw/teleop/left.npy, right.npy (DFTP, Robotiq)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "teleoperator glove skeletons, not touch"
+  },
+  {
+   "channel": "raw/state/state_hist.npy",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "meaning not documented"
+  },
+  {
+   "channel": "object_6d_pose_v2/<embodiment>/<object>_<seq>.npz",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "object pose, not touch"
+  },
+  {
+   "channel": "hand/mano_params/<frame>.json",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "human sequences only; no human episode sampled (no touch channel)"
+  },
+  {
+   "channel": "hand/mano/<frame>.obj",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "human sequences only; no human episode sampled (no touch channel)"
+  },
+  {
+   "channel": "cam_param/intrinsics.json, extrinsics.json, ego_calib.json",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "calibration, not a signal"
+  },
+  {
+   "channel": "C2R.npy",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "calibration, not a signal"
+  },
+  {
+   "channel": "raw/hand/position.npy, command.npy, action.npy (Robotiq 2F-85)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "Robotiq has no touch channel; not sampled"
+  },
+  {
+   "channel": "grasp_result.json",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "grasp outcome and paired human sequence are stated in the episode notes"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+{
+ "id": "adl21",
+ "prefix": "ad_",
+ "group": "public",
+ "title": "ADL-21",
+ "provider": "Cepriá-Bernal and Pérez-González 2021 (Universitat Jaume I)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY 4.0",
+  "tone": "ok"
+ },
+ "about": "Tactile signatures of the right hand in 21 activities of daily living: a 361-sensel Tekscan Grip pressure sensor on a glove, 22 subjects performing each task once (462 trials). Touch only, no video.",
+ "link": {
+  "label": "Zenodo 4607289",
+  "href": "https://zenodo.org/records/4607289"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 361
+ },
+ "hardware": [
+  {
+   "k": "Sensor",
+   "v": "Tekscan Grip System, sensor 4256E",
+   "d": "Thin resistive pressure sensor, 361 sensels in 18 regions on the volar right hand · 4 mm pitch · 0–517 kPa map · 50 Hz"
+  },
+  {
+   "k": "Glove",
+   "v": "Sensor sewn on a cotton glove",
+   "d": "Covered by a polyethylene and a latex glove during the tasks"
+  },
+  {
+   "k": "Processed",
+   "v": "Grip force and per-region share",
+   "d": "GF, CGF and pressure on a 101-step time-warped timeline, per trial"
+  },
+  {
+   "k": "Labels",
+   "v": "Task per trial",
+   "d": "No video, hand pose or object pose"
+  }
+ ],
+ "notes": "Paper: Sensors 21(8):2594, 2021, doi:10.3390/s21082594 (CC BY). Data: one MATLAB file on Zenodo, CC BY 4.0. Pressure maps are drawn on the release's own sensor map (a palmar view of the right hand), shown as force per sensel (kPa × 16 mm²). The release's grip force (GF), per-region share (CGF) and synchronized pressure exist only on the authors' time-warped 101-step timeline; they are mapped back to each trial's 50 Hz clock here by inverting the documented warp (derived, approximate).",
+ "order": 6
+}

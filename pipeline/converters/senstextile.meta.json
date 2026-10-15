@@ -1,0 +1,50 @@
+{
+ "id": "senstextile",
+ "prefix": "se_",
+ "group": "public",
+ "title": "Tactile textiles",
+ "provider": "Luo et al. 2021 (MIT CSAIL)",
+ "kind": "recording",
+ "status": {
+  "label": "License not stated",
+  "tone": "neutral"
+ },
+ "about": "A machine-knitted piezoresistive glove (722 sensors on a 32×32 readout) worn by one person: raw pressure maps while holding 27 objects or the bare hand, and while pressing on a digital scale, a tactile vest and a KUKA arm sleeve for calibration. Touch only, no video.",
+ "link": {
+  "label": "senstextile.csail.mit.edu",
+  "href": "https://senstextile.csail.mit.edu/"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 722
+ },
+ "hardware": [
+  {
+   "k": "Glove",
+   "v": "Knitted tactile glove, 722 sensors",
+   "d": "Coaxial piezoresistive fibres inlaid orthogonally in a machine-knitted glove · 32×32 grounding-based readout (Arduino Nano) · ~14 Hz · raw 10-bit counts, uncalibrated"
+  },
+  {
+   "k": "Layout",
+   "v": "Release's right-glove drawing",
+   "d": "20 patches on fingers, thumb and palm map readout cells to a palm-side hand outline (visualization/glove)"
+  },
+  {
+   "k": "References",
+   "v": "Digital scale, tactile vest, KUKA sleeve",
+   "d": "Recorded with the glove for the authors' self-supervised calibration · vest: 32×32 grid, one quad in visualization/vest (back view, all 1,024 cells) · sleeve: 630 of the 1,024 cells, 3-D positions on the arm-link mesh in visualization/kuka/Sensor_info.txt, drawn unrolled"
+  },
+  {
+   "k": "Labels",
+   "v": "Object name per recording",
+   "d": "No video, hand pose or task description"
+  }
+ ],
+ "notes": "Paper: Nature Electronics 4, 193–201 (2021), doi:10.1038/s41928-021-00558-0. Data: two zip archives in the project page's open Dropbox folder; no license or terms are given for the data (the code repository has no LICENSE), so the collection is labelled \"License not stated\". Readings are raw ADC counts shown above each cell's rest level; readings above 1,000 are replaced as in the authors' code. The glove layout is the release's own drawing, documented for the calibration glove and inferred to fit the object recordings; the vest and KUKA sleeve layouts are the release's own files too (the sleeve's 3-D positions are unrolled onto a plane by the converter).",
+ "order": 11
+}

@@ -1,0 +1,48 @@
+{
+ "id": "hrdexdb",
+ "prefix": "hr_",
+ "order": 10,
+ "group": "public",
+ "title": "HRDexDB",
+ "provider": "Lim, Ha et al. 2026 (Seoul National University)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY-NC 4.0",
+  "tone": "ok"
+ },
+ "about": "Paired human and teleoperated robot grasps of 100 objects on a 21-camera rig; the Allegro V5 Plus and Inspire RH56F1 hands carry tactile sensors, the Inspire RH56DFTP only actuator force readings.",
+ "link": {
+  "label": "HRDexDB/HRDexDB",
+  "href": "https://huggingface.co/datasets/HRDexDB/HRDexDB"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "palm"
+  ]
+ },
+ "hardware": [
+  {
+   "k": "Hands",
+   "v": "Allegro V5 Plus, Inspire RH56F1, Inspire RH56DFTP, Robotiq 2F-85",
+   "d": "Each on an xArm6 · plus a human hand (MANO fit from video, no touch) · touch shown for the three dexterous hands"
+  },
+  {
+   "k": "Touch",
+   "v": "Allegro: 4 fingertip readings · F1: 8 regions",
+   "d": "F1: normal force, tangential force and direction per fingertip and 3 palm pads · DFTP: 6 actuator forces (tactile file empty) · units not stated"
+  },
+  {
+   "k": "Cameras",
+   "v": "21-camera rig + 2 stereo egocentric",
+   "d": "2048×1536 · tagged 30 fps (frame times step 30 ms) · 2 views shown"
+  },
+  {
+   "k": "Teleoperation",
+   "v": "MANUS gloves + Vive wrist tracker",
+   "d": "Each robot grasp reproduces a reference human grasp of the same object; success label per sequence"
+  }
+ ],
+ "notes": "Paper: arXiv 2604.14944. Released under CC BY-NC 4.0 (dataset card); two camera views per sequence are re-encoded to H.264 and hosted here. The paper calls the Allegro and Inspire tactile readings too noisy or sparse to serve as contact labels. Units and the Allegro channel-to-finger order are not documented; the pads are drawn on schematic hands."
+}

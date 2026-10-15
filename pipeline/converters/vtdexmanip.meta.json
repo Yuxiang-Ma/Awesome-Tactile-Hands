@@ -1,0 +1,45 @@
+{
+ "id": "vtdexmanip",
+ "prefix": "vt_",
+ "group": "public",
+ "title": "VTDexManip",
+ "provider": "Liu et al. 2025 (ICLR, Zhejiang University)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY-NC-SA 4.0",
+  "tone": "neutral"
+ },
+ "about": "Human right-hand manipulation with a 20-pad piezoresistive tactile glove and an egocentric HoloLens 2 camera, one glove frame per video frame: 2,032 sequences, 10 tasks, 182 objects, 5 subjects.",
+ "link": {
+  "label": "VTDexManip project page",
+  "href": "https://lqts.github.io/VTDexManip/"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 20
+ },
+ "hardware": [
+  {
+   "k": "Glove",
+   "v": "20 piezoresistive thin-film pads",
+   "d": "4 per finger, 3 on the thumb, 1 on the palm · released as pad voltages (V), one frame per video frame · the glove transmits at 200 Hz (paper)"
+  },
+  {
+   "k": "Camera",
+   "v": "Microsoft HoloLens 2, egocentric",
+   "d": "424×240 RGB PNG frames · frame rate not stated in the release"
+  },
+  {
+   "k": "Labels",
+   "v": "Task class",
+   "d": "10 tasks; no object label, hand pose or depth"
+  }
+ ],
+ "notes": "Data: password-protected OneDrive folder (password in the GitHub README), CC BY-NC-SA 4.0 for academic use per its License.txt; the code (github.com/LQTS/VTDexManip) is MIT. The release has no frame rate or timestamps; the viewer assumes 30 fps, the rate of the authors' own visualization script. Videos are the release's PNG frames re-encoded to H.264 and re-hosted under the same license.",
+ "order": 7
+}

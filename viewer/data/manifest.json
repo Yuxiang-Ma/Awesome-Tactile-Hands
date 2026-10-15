@@ -1220,6 +1220,896 @@
      "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
     }
    ]
+  },
+  {
+   "id": "adl21",
+   "group": "public",
+   "title": "ADL-21",
+   "provider": "Cepri\u00e1-Bernal and P\u00e9rez-Gonz\u00e1lez 2021 (Universitat Jaume I)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY 4.0",
+    "tone": "ok"
+   },
+   "about": "Tactile signatures of the right hand in 21 activities of daily living: a 361-sensel Tekscan Grip pressure sensor on a glove, 22 subjects performing each task once (462 trials). Touch only, no video.",
+   "link": {
+    "label": "Zenodo 4607289",
+    "href": "https://zenodo.org/records/4607289"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 361
+   },
+   "hardware": [
+    {
+     "k": "Sensor",
+     "v": "Tekscan Grip System, sensor 4256E",
+     "d": "Thin resistive pressure sensor, 361 sensels in 18 regions on the volar right hand \u00b7 4 mm pitch \u00b7 0\u2013517 kPa map \u00b7 50 Hz"
+    },
+    {
+     "k": "Glove",
+     "v": "Sensor sewn on a cotton glove",
+     "d": "Covered by a polyethylene and a latex glove during the tasks"
+    },
+    {
+     "k": "Processed",
+     "v": "Grip force and per-region share",
+     "d": "GF, CGF and pressure on a 101-step time-warped timeline, per trial"
+    },
+    {
+     "k": "Labels",
+     "v": "Task per trial",
+     "d": "No video, hand pose or object pose"
+    }
+   ],
+   "notes": "Paper: Sensors 21(8):2594, 2021, doi:10.3390/s21082594 (CC BY). Data: one MATLAB file on Zenodo, CC BY 4.0. Pressure maps are drawn on the release's own sensor map (a palmar view of the right hand), shown as force per sensel (kPa \u00d7 16 mm\u00b2). The release's grip force (GF), per-region share (CGF) and synchronized pressure exist only on the authors' time-warped 101-step timeline; they are mapped back to each trial's 50 Hz clock here by inverting the documented warp (derived, approximate).",
+   "items": [
+    {
+     "id": "ad_t01_s08",
+     "title": "Opening a lock with a key",
+     "label": "Setup 1 \u00b7 subject 8",
+     "sub": "13.9 s \u00b7 standing",
+     "poster": "media/ad_t01_s08.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ad_t04_s01",
+     "title": "Writing with a pen",
+     "label": "Setup 2 \u00b7 subject 1",
+     "sub": "35.9 s \u00b7 seated",
+     "poster": "media/ad_t04_s01.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ad_t07_s09",
+     "title": "Typing on a computer keyboard",
+     "label": "Setup 2 \u00b7 subject 9",
+     "sub": "17.9 s \u00b7 seated",
+     "poster": "media/ad_t07_s09.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ad_t08_s12",
+     "title": "Opening a bottle and pouring water",
+     "label": "Setup 3 \u00b7 subject 12",
+     "sub": "16.8 s \u00b7 seated",
+     "poster": "media/ad_t08_s12.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ad_t11_s06",
+     "title": "Cutting play-dough in a plate with a knife",
+     "label": "Setup 3 \u00b7 subject 6",
+     "sub": "18.3 s \u00b7 seated",
+     "poster": "media/ad_t11_s06.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ad_t16_s04",
+     "title": "Taking a comb from a drawer and combing hair",
+     "label": "Setup 4 \u00b7 subject 4",
+     "sub": "15.8 s \u00b7 standing",
+     "poster": "media/ad_t16_s04.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ad_t18_s03",
+     "title": "Cleaning a glass window with a cloth",
+     "label": "Setup 5 \u00b7 subject 3",
+     "sub": "15.1 s \u00b7 standing",
+     "poster": "media/ad_t18_s03.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ad_t20_s21",
+     "title": "Ironing clothes",
+     "label": "Setup 6 \u00b7 subject 21",
+     "sub": "10.6 s \u00b7 standing",
+     "poster": "media/ad_t20_s21.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "vtdexmanip",
+   "group": "public",
+   "title": "VTDexManip",
+   "provider": "Liu et al. 2025 (ICLR, Zhejiang University)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY-NC-SA 4.0",
+    "tone": "neutral"
+   },
+   "about": "Human right-hand manipulation with a 20-pad piezoresistive tactile glove and an egocentric HoloLens 2 camera, one glove frame per video frame: 2,032 sequences, 10 tasks, 182 objects, 5 subjects.",
+   "link": {
+    "label": "VTDexManip project page",
+    "href": "https://lqts.github.io/VTDexManip/"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 20
+   },
+   "hardware": [
+    {
+     "k": "Glove",
+     "v": "20 piezoresistive thin-film pads",
+     "d": "4 per finger, 3 on the thumb, 1 on the palm \u00b7 released as pad voltages (V), one frame per video frame \u00b7 the glove transmits at 200 Hz (paper)"
+    },
+    {
+     "k": "Camera",
+     "v": "Microsoft HoloLens 2, egocentric",
+     "d": "424\u00d7240 RGB PNG frames \u00b7 frame rate not stated in the release"
+    },
+    {
+     "k": "Labels",
+     "v": "Task class",
+     "d": "10 tasks; no object label, hand pose or depth"
+    }
+   ],
+   "notes": "Data: password-protected OneDrive folder (password in the GitHub README), CC BY-NC-SA 4.0 for academic use per its License.txt; the code (github.com/LQTS/VTDexManip) is MIT. The release has no frame rate or timestamps; the viewer assumes 30 fps, the rate of the authors' own visualization script. Videos are the release's PNG frames re-encoded to H.264 and re-hosted under the same license.",
+   "items": [
+    {
+     "id": "vt_501084",
+     "title": "Pick up an object",
+     "label": "PickUp \u00b7 subject 5",
+     "sub": "374 frames (~12 s) \u00b7 sequence 501084",
+     "poster": "media/vt_501084.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "vt_502047",
+     "title": "Screw a bottle cap",
+     "label": "ScrewBottles \u00b7 subject 5",
+     "sub": "331 frames (~11 s) \u00b7 sequence 502047",
+     "poster": "media/vt_502047.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "vt_503070",
+     "title": "In-hand orientation",
+     "label": "InHandOrientation \u00b7 subject 5",
+     "sub": "672 frames (~22 s) \u00b7 sequence 503070",
+     "poster": "media/vt_503070.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "vt_504009",
+     "title": "Unstack bowls",
+     "label": "Unstacking \u00b7 subject 5",
+     "sub": "302 frames (~10 s) \u00b7 sequence 504009",
+     "poster": "media/vt_504009.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "vt_507037",
+     "title": "Pour water",
+     "label": "Pouring \u00b7 subject 5",
+     "sub": "350 frames (~12 s) \u00b7 sequence 507037",
+     "poster": "media/vt_507037.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "vt_508039",
+     "title": "Tabletop manipulation",
+     "label": "TableTopManipulation \u00b7 subject 5",
+     "sub": "348 frames (~12 s) \u00b7 sequence 508039",
+     "poster": "media/vt_508039.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "vt_509007",
+     "title": "Use scissors",
+     "label": "Scissors \u00b7 subject 5",
+     "sub": "515 frames (~17 s) \u00b7 sequence 509007",
+     "poster": "media/vt_509007.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "vt_510026",
+     "title": "Press buttons",
+     "label": "Pressing \u00b7 subject 5",
+     "sub": "356 frames (~12 s) \u00b7 sequence 510026",
+     "poster": "media/vt_510026.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "humanoid_everyday",
+   "group": "public",
+   "title": "Humanoid Everyday",
+   "provider": "Zhao et al. 2025 (USC PSI Lab)",
+   "kind": "recording",
+   "status": {
+    "label": "Apache-2.0",
+    "tone": "ok"
+   },
+   "about": "Teleoperated Unitree G1 and H1 humanoids on 246 everyday tasks; the G1 episodes carry the Dex3-1 hands' pressure sensors (9 per hand).",
+   "link": {
+    "label": "USC-PSI-Lab/humanoid-everyday",
+    "href": "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 33
+   },
+   "hardware": [
+    {
+     "k": "Hands",
+     "v": "2 \u00d7 Unitree Dex3-1, 7 DoF, 3 fingers",
+     "d": "9 pressure sensors per hand (3 fingertip, 3 finger pad, 3 palm; 33 readings) \u00b7 30 Hz in the release \u00b7 G1 episodes only"
+    },
+    {
+     "k": "Robot",
+     "v": "Unitree G1 (29 DoF)",
+     "d": "Also H1 with Inspire hands in the release, without tactile data; only G1 episodes are shown"
+    },
+    {
+     "k": "Cameras",
+     "v": "Head Intel RealSense D435 (RGB-D)",
+     "d": "640\u00d7480 \u00b7 30 fps; depth and Livox LiDAR in the release (not shown)"
+    },
+    {
+     "k": "Teleoperation",
+     "v": "Apple Vision Pro hand tracking",
+     "d": "Dex-retargeting to the hands, IK for the arms \u00b7 task name, category and description per episode"
+    }
+   ],
+   "notes": "Paper: arXiv 2510.08807. The dataset card says Apache-2.0, the GitHub README says MIT. The release's tactile array is shifted by 13 values (the recording read the pressure block from the start of the odometry), so only 22 of the 66 Dex3-1 readings survive, most of them on fingertips and pads; the viewer undoes the shift and draws the missing readings as hollow squares. Videos stream from the dataset repository.",
+   "items": [
+    {
+     "id": "hu_3422",
+     "title": "Pour water from a kettle into a cup",
+     "label": "Basic",
+     "sub": "19 s \u00b7 episode 3422",
+     "poster": "media/hu_3422.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hu_4943",
+     "title": "Open a lunchbag",
+     "label": "Deformable",
+     "sub": "12 s \u00b7 episode 4943",
+     "poster": "media/hu_4943.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hu_6171",
+     "title": "Pick up a football and hand it",
+     "label": "HRI",
+     "sub": "15 s \u00b7 episode 6171",
+     "poster": "media/hu_6171.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hu_7791",
+     "title": "Walk towards outside chair and pull it out",
+     "label": "Locomanip",
+     "sub": "14 s \u00b7 episode 7791",
+     "poster": "media/hu_7791.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hu_7997",
+     "title": "Open a bottle",
+     "label": "Precision",
+     "sub": "27 s \u00b7 episode 7997",
+     "poster": "media/hu_7997.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hu_8174",
+     "title": "Unplug a charger",
+     "label": "Precision",
+     "sub": "13 s \u00b7 episode 8174",
+     "poster": "media/hu_8174.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hu_8208",
+     "title": "Clean a table with duster",
+     "label": "Tool use",
+     "sub": "18 s \u00b7 episode 8208",
+     "poster": "media/hu_8208.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hu_826",
+     "title": "Extend a phone stand",
+     "label": "Articulated",
+     "sub": "20 s \u00b7 episode 826",
+     "poster": "media/hu_826.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "osmo",
+   "group": "public",
+   "title": "OSMO",
+   "provider": "Yin et al. 2025 (Meta FAIR)",
+   "kind": "recording",
+   "status": {
+    "label": "License not stated",
+    "tone": "neutral"
+   },
+   "about": "Open-source tactile glove with 12 three-axis magnetic taxels on fingertips and palm, worn on the right hand; one sample whiteboard-wiping demonstration of the paper's ~140 is released.",
+   "link": {
+    "label": "jessicayin/osmo_tactile_glove",
+    "href": "https://github.com/jessicayin/osmo_tactile_glove"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip"
+    ],
+    "taxels": 5
+   },
+   "hardware": [
+    {
+     "k": "Glove",
+     "v": "OSMO, 12 three-axis magnetic taxels",
+     "d": "Fingertips + palm; the release has the 5 fingertip taxels only \u00b7 2 magnetometers per taxel \u00b7 25 Hz"
+    },
+    {
+     "k": "Camera",
+     "v": "Static RealSense D435",
+     "d": "RGB + IR stereo pair \u00b7 1280\u00d7720 \u00b7 logged at 25 Hz; IR masked by the authors"
+    },
+    {
+     "k": "Release",
+     "v": "1 sample demonstration",
+     "d": "Wiping a whiteboard with a sponge \u00b7 8.4 s \u00b7 Python pickles on Google Drive; the ~140 demonstrations are not released"
+    }
+   ],
+   "notes": "Paper: arXiv 2512.08920. No license is stated for the data (the repository has no LICENSE file); the colour and IR images are re-encoded and hosted here. Tactile is shown as each fingertip's differential signal (mag0 \u2212 mag1) minus rest, as arrows, rings and plots, plus all 30 raw magnetometer channels as plots.",
+   "items": [
+    {
+     "id": "os_00",
+     "title": "Wiping a marker pattern off a whiteboard with a sponge",
+     "label": "right hand \u00b7 sample demonstration 00",
+     "sub": "8 s \u00b7 the only released episode",
+     "poster": "media/os_00.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "reachgrasp",
+   "group": "public",
+   "title": "Reach&Grasp",
+   "provider": "Di Domenico et al. 2025 (IIT, Bielefeld University)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY 4.0",
+    "tone": "ok"
+   },
+   "about": "10 subjects, 16 right-arm tasks (hand and wrist movements, grasps, reach-grasp-manipulate) with a 58-taxel piezoresistive glove over a CyberGlove, Vicon joint angles and EMG. Touch only, no video.",
+   "link": {
+    "label": "IIT Dataverse 10.48557/L6OWMM",
+    "href": "https://doi.org/10.48557/L6OWMM"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 58
+   },
+   "hardware": [
+    {
+     "k": "Glove",
+     "v": "Bielefeld tactile glove, 58 taxels",
+     "d": "Piezoresistive fabric lining on the palm side of the right hand: palm 17, index 9, middle 8, ring 8, little 9, thumb 7 \u00b7 uncalibrated \u00b7 100 Hz"
+    },
+    {
+     "k": "Hand pose",
+     "v": "CyberGlove I inside the tactile glove",
+     "d": "18 joint angles (deg) \u00b7 100 Hz"
+    },
+    {
+     "k": "Mocap",
+     "v": "Vicon, 10 cameras",
+     "d": "Arm, thorax and finger MCP joint angles only, no marker trajectories \u00b7 100 Hz"
+    },
+    {
+     "k": "EMG",
+     "v": "64-ch HD-sEMG + 10-ch bipolar",
+     "d": "OT Bioelettronica Sessantaquattro and Cometa Wave Plus \u00b7 2 kHz (not shown)"
+    }
+   ],
+   "notes": "Paper: Scientific Data 12:233, 2025, doi:10.1038/s41597-025-04552-5. Data: IIT Dataverse version 1.0, CC BY 4.0; layout files and repetition events from the authors' code repository (github.com/DarioDiDomenico/SData_ReachGrasp, MIT). Taxels are painted onto the pads of the paper's Fig. 2A drawing. The glove is not calibrated (the paper says readings cannot be related to N or Pa); ring-fingertip taxels rdd, rdo, rdm malfunction (paper).",
+   "items": [
+    {
+     "id": "re_sub-01_task-Screw",
+     "title": "Reach, grasp and screw a bottle cap",
+     "label": "sub-01 \u00b7 Screw",
+     "sub": "60 s \u00b7 7 repetitions",
+     "poster": "media/re_sub-01_task-Screw.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "re_sub-02_task-Pour",
+     "title": "Reach, grasp and pour with the glass",
+     "label": "sub-02 \u00b7 Pour",
+     "sub": "60 s \u00b7 9 repetitions",
+     "poster": "media/re_sub-02_task-Pour.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "re_sub-03_task-Sph",
+     "title": "Spherical grasp (tennis ball)",
+     "label": "sub-03 \u00b7 Sph",
+     "sub": "35 s \u00b7 10 repetitions",
+     "poster": "media/re_sub-03_task-Sph.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "re_sub-04_task-Cyl",
+     "title": "Cylindrical grasp (glass)",
+     "label": "sub-04 \u00b7 Cyl",
+     "sub": "53 s \u00b7 10 repetitions",
+     "poster": "media/re_sub-04_task-Cyl.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "re_sub-04_task-Thumb",
+     "title": "Thumb opposition",
+     "label": "sub-04 \u00b7 Thumb",
+     "sub": "47 s \u00b7 10 repetitions",
+     "poster": "media/re_sub-04_task-Thumb.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "re_sub-05_task-HC",
+     "title": "Hand closing",
+     "label": "sub-05 \u00b7 HC",
+     "sub": "44 s \u00b7 10 repetitions",
+     "poster": "media/re_sub-05_task-HC.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "re_sub-06_task-Trid",
+     "title": "Tri-digital grasp (ping-pong ball)",
+     "label": "sub-06 \u00b7 Trid",
+     "sub": "28 s \u00b7 10 repetitions",
+     "poster": "media/re_sub-06_task-Trid.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "re_sub-07_task-EatFruit",
+     "title": "Reach, grasp and bring the ball to the mouth",
+     "label": "sub-07 \u00b7 EatFruit",
+     "sub": "59 s \u00b7 7 repetitions",
+     "poster": "media/re_sub-07_task-EatFruit.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "hrdexdb",
+   "group": "public",
+   "title": "HRDexDB",
+   "provider": "Lim, Ha et al. 2026 (Seoul National University)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY-NC 4.0",
+    "tone": "ok"
+   },
+   "about": "Paired human and teleoperated robot grasps of 100 objects on a 21-camera rig; the Allegro V5 Plus and Inspire RH56F1 hands carry tactile sensors, the Inspire RH56DFTP only actuator force readings.",
+   "link": {
+    "label": "HRDexDB/HRDexDB",
+    "href": "https://huggingface.co/datasets/HRDexDB/HRDexDB"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "palm"
+    ]
+   },
+   "hardware": [
+    {
+     "k": "Hands",
+     "v": "Allegro V5 Plus, Inspire RH56F1, Inspire RH56DFTP, Robotiq 2F-85",
+     "d": "Each on an xArm6 \u00b7 plus a human hand (MANO fit from video, no touch) \u00b7 touch shown for the three dexterous hands"
+    },
+    {
+     "k": "Touch",
+     "v": "Allegro: 4 fingertip readings \u00b7 F1: 8 regions",
+     "d": "F1: normal force, tangential force and direction per fingertip and 3 palm pads \u00b7 DFTP: 6 actuator forces (tactile file empty) \u00b7 units not stated"
+    },
+    {
+     "k": "Cameras",
+     "v": "21-camera rig + 2 stereo egocentric",
+     "d": "2048\u00d71536 \u00b7 tagged 30 fps (frame times step 30 ms) \u00b7 2 views shown"
+    },
+    {
+     "k": "Teleoperation",
+     "v": "MANUS gloves + Vive wrist tracker",
+     "d": "Each robot grasp reproduces a reference human grasp of the same object; success label per sequence"
+    }
+   ],
+   "notes": "Paper: arXiv 2604.14944. Released under CC BY-NC 4.0 (dataset card); two camera views per sequence are re-encoded to H.264 and hosted here. The paper calls the Allegro and Inspire tactile readings too noisy or sparse to serve as contact labels. Units and the Allegro channel-to-finger order are not documented; the pads are drawn on schematic hands.",
+   "items": [
+    {
+     "id": "hr_allegro_v5_yellow_wash_tub_0",
+     "title": "Grasp and lift the yellow wash tub",
+     "label": "Allegro Hand V5 Plus \u00b7 yellow wash tub",
+     "sub": "13 s \u00b7 allegro_v5/yellow_wash_tub/0",
+     "poster": "media/hr_allegro_v5_yellow_wash_tub_0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hr_inspire_dftp_apple_0",
+     "title": "Grasp and lift the apple",
+     "label": "Inspire RH56DFTP \u00b7 apple",
+     "sub": "23 s \u00b7 inspire_dftp/apple/0",
+     "poster": "media/hr_inspire_dftp_apple_0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "hr_inspire_f1_brown_ramen_10",
+     "title": "Grasp and lift the brown ramen",
+     "label": "Inspire RH56F1 \u00b7 brown ramen",
+     "sub": "20 s \u00b7 inspire_f1/brown_ramen/10",
+     "poster": "media/hr_inspire_f1_brown_ramen_10.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "tdex",
+   "group": "public",
+   "title": "T-Dex",
+   "provider": "Guzey et al. 2023 (CoRL, New York University)",
+   "kind": "recording",
+   "status": {
+    "label": "License not stated",
+    "tone": "neutral"
+   },
+   "about": "Teleoperated Allegro hand on a Kinova Jaco arm with 15 XELA uSkin 4\u00d74 three-axis pads, recorded as task-agnostic play plus demonstrations of five contact-rich tasks: 38 play recordings and 32 task demonstrations in the release.",
+   "link": {
+    "label": "T-Dex project page",
+    "href": "https://tactile-dexterity.github.io/"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx"
+    ],
+    "taxels": 240
+   },
+   "hardware": [
+    {
+     "k": "Hand",
+     "v": "Allegro (16 DoF, 4 fingers) + 15 XELA uSkin pads",
+     "d": "4 pads per finger, 3 on the thumb \u00b7 4\u00d74 taxels, (x, y, z) each, uncalibrated \u00b7 ~98.5 Hz in the files (paper: 100 Hz)"
+    },
+    {
+     "k": "Arm",
+     "v": "Kinova Jaco, 6 DoF",
+     "d": "Joint states and end-effector pose at 50 Hz; Allegro joint states and PD efforts at ~300 Hz"
+    },
+    {
+     "k": "Cameras",
+     "v": "Intel RealSense RGB-D (model not stated)",
+     "d": "1280\u00d7720 \u00b7 ~30 fps \u00b7 one static camera in play, two in task demonstrations"
+    },
+    {
+     "k": "Teleoperation",
+     "v": "Holo-Dex (Oculus headset hand pose) + Kinova joystick",
+     "d": "Folder name gives the task; no object, scene or operator labels"
+    }
+   ],
+   "notes": "Paper: arXiv 2303.12076 (CoRL 2023). No license or terms of use were found for the data (project page, GitHub README and repository, Drive folder); the arXiv licence covers only the paper. The release is two zips on a public Google Drive folder; each sampled recording is read from them by byte range. Camera videos are the release's AVIs re-timed by their frame timestamps, re-encoded to H.264 and re-hosted. All tactile pads are shown in the release's own pad layout (one column per finger), with per-pad (x, y, z) sums as arrows; which Allegro finger each of columns 1-3 is, and which slot is the fingertip, is not documented. The Allegro PD efforts and Kinova joint efforts are plotted.",
+   "items": [
+    {
+     "id": "td_book_opening_8",
+     "title": "Book opening",
+     "label": "task demonstration 8",
+     "sub": "57 s \u00b7 2 cameras",
+     "poster": "media/td_book_opening_8.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "td_bottle_cap_opening_8",
+     "title": "Bottle cap opening",
+     "label": "task demonstration 8",
+     "sub": "33 s \u00b7 2 cameras",
+     "poster": "media/td_bottle_cap_opening_8.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "td_bowl_unstacking_2",
+     "title": "Bowl unstacking",
+     "label": "task demonstration 2",
+     "sub": "29 s \u00b7 2 cameras",
+     "poster": "media/td_bowl_unstacking_2.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "td_cup_unstacking_2",
+     "title": "Cup unstacking",
+     "label": "task demonstration 2",
+     "sub": "48 s \u00b7 2 cameras",
+     "poster": "media/td_cup_unstacking_2.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "td_joystick_movement_1",
+     "title": "Joystick movement",
+     "label": "task demonstration 1",
+     "sub": "26 s \u00b7 2 cameras",
+     "poster": "media/td_joystick_movement_1.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "td_play_10",
+     "title": "Teleoperated play",
+     "label": "play recording 10",
+     "sub": "39 s \u00b7 1 camera",
+     "poster": "media/td_play_10.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "senstextile",
+   "group": "public",
+   "title": "Tactile textiles",
+   "provider": "Luo et al. 2021 (MIT CSAIL)",
+   "kind": "recording",
+   "status": {
+    "label": "License not stated",
+    "tone": "neutral"
+   },
+   "about": "A machine-knitted piezoresistive glove (722 sensors on a 32\u00d732 readout) worn by one person: raw pressure maps while holding 27 objects or the bare hand, and while pressing on a digital scale, a tactile vest and a KUKA arm sleeve for calibration. Touch only, no video.",
+   "link": {
+    "label": "senstextile.csail.mit.edu",
+    "href": "https://senstextile.csail.mit.edu/"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 722
+   },
+   "hardware": [
+    {
+     "k": "Glove",
+     "v": "Knitted tactile glove, 722 sensors",
+     "d": "Coaxial piezoresistive fibres inlaid orthogonally in a machine-knitted glove \u00b7 32\u00d732 grounding-based readout (Arduino Nano) \u00b7 ~14 Hz \u00b7 raw 10-bit counts, uncalibrated"
+    },
+    {
+     "k": "Layout",
+     "v": "Release's right-glove drawing",
+     "d": "20 patches on fingers, thumb and palm map readout cells to a palm-side hand outline (visualization/glove)"
+    },
+    {
+     "k": "References",
+     "v": "Digital scale, tactile vest, KUKA sleeve",
+     "d": "Recorded with the glove for the authors' self-supervised calibration \u00b7 vest: 32\u00d732 grid, one quad in visualization/vest (back view, all 1,024 cells) \u00b7 sleeve: 630 of the 1,024 cells, 3-D positions on the arm-link mesh in visualization/kuka/Sensor_info.txt, drawn unrolled"
+    },
+    {
+     "k": "Labels",
+     "v": "Object name per recording",
+     "d": "No video, hand pose or task description"
+    }
+   ],
+   "notes": "Paper: Nature Electronics 4, 193\u2013201 (2021), doi:10.1038/s41928-021-00558-0. Data: two zip archives in the project page's open Dropbox folder; no license or terms are given for the data (the code repository has no LICENSE), so the collection is labelled \"License not stated\". Readings are raw ADC counts shown above each cell's rest level; readings above 1,000 are replaced as in the authors' code. The glove layout is the release's own drawing, documented for the calibration glove and inferred to fit the object recordings; the vest and KUKA sleeve layouts are the release's own files too (the sleeve's 3-D positions are unrolled onto a plane by the converter).",
+   "items": [
+    {
+     "id": "se_ball_4",
+     "title": "Ball",
+     "label": "Object set \u00b7 round 4",
+     "sub": "45 s of 219 s",
+     "poster": "media/se_ball_4.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "se_chain_2",
+     "title": "Chain",
+     "label": "Object set \u00b7 round 2",
+     "sub": "45 s of 214 s",
+     "poster": "media/se_chain_2.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "se_kuka_2019-12-12_17-17-46",
+     "title": "Pressing on the KUKA arm sleeve",
+     "label": "Sleeve calibration",
+     "sub": "45 s of 2650 s",
+     "poster": "media/se_kuka_2019-12-12_17-17-46.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "se_mug_1",
+     "title": "Mug",
+     "label": "Object set \u00b7 round 1",
+     "sub": "45 s of 89 s",
+     "poster": "media/se_mug_1.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "se_pen_4",
+     "title": "Pen",
+     "label": "Object set \u00b7 round 4",
+     "sub": "45 s of 236 s",
+     "poster": "media/se_pen_4.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "se_scale_2019-12-17_18-40-25",
+     "title": "Pressing on a digital scale",
+     "label": "Glove calibration",
+     "sub": "45 s of 1348 s",
+     "poster": "media/se_scale_2019-12-17_18-40-25.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "se_scissors_3",
+     "title": "Scissors",
+     "label": "Object set \u00b7 round 3",
+     "sub": "45 s of 208 s",
+     "poster": "media/se_scissors_3.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "se_vest_2019-12-14_15-17-58",
+     "title": "Pressing on the tactile vest",
+     "label": "Vest calibration",
+     "sub": "45 s of 3782 s",
+     "poster": "media/se_vest_2019-12-14_15-17-58.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "actionsense",
+   "group": "public",
+   "title": "ActionSense",
+   "provider": "DelPreto et al. 2022 (MIT CSAIL)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY-NC-SA 4.0",
+    "tone": "neutral"
+   },
+   "about": "Kitchen activities recorded with wearable sensors: bimanual 32\u00d732 conductive-thread tactile gloves, finger and body tracking, forearm EMG, eye tracking with a first-person camera, plus 5 static cameras; 20 activities, 10 subjects (tactile for S00\u2013S05).",
+   "link": {
+    "label": "action-sense.csail.mit.edu",
+    "href": "https://action-sense.csail.mit.edu/"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 682
+   },
+   "hardware": [
+    {
+     "k": "Gloves",
+     "v": "Custom tactile gloves (32\u00d732 thread matrix)",
+     "d": "Palm 23\u00d719, thumb 5\u00d79, little 11\u00d74, other fingers 13\u00d74 \u00b7 raw ADC counts \u00b7 ~6 Hz \u00b7 open fingertips"
+    },
+    {
+     "k": "Cameras",
+     "v": "Pupil Core world camera + 5 FLIR",
+     "d": "1280\u00d7720 ~30 fps head-mounted \u00b7 1600\u00d71200 22 fps static (one above the table)"
+    },
+    {
+     "k": "Body",
+     "v": "Xsens MTw Awinda + Manus Prime II gloves",
+     "d": "17 IMUs, body and finger segments at 60 Hz \u00b7 Myo EMG 8 ch per forearm"
+    },
+    {
+     "k": "Labels",
+     "v": "Activity Start/Stop with rating",
+     "d": "Plus calibration periods (scale presses, held objects) and experimenter notes"
+    }
+   ],
+   "notes": "Paper: NeurIPS 2022 Datasets & Benchmarks (openreview olvz0gAdGOX). Data CC BY-NC-SA 4.0 (non-commercial, credit, same license); code MIT. Each episode is one labelled activity instance cut out of the release's continuous per-split files and re-encoded here. The matrix-to-hand placement of the taxels is derived from the data (non-crossing matrix entries barely respond), not from a published map; see each episode's notes. Up to six right-glove crossings toggle between rest and ~1018 (an intermittent read-out fault, not contact); they are flagged per episode from the data, drawn hollow and left out of the plots and sums.",
+   "items": [
+    {
+     "id": "ac_S00_2022-06-07_18-11-37_act028",
+     "title": "Pour water from a pitcher into a glass",
+     "label": "S00 \u00b7 split 18-11-37",
+     "sub": "10 s",
+     "poster": "media/ac_S00_2022-06-07_18-11-37_act028.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ac_S02_2022-06-13_22-35-11_act016",
+     "title": "Clean a pan with a sponge",
+     "label": "S02 \u00b7 split 22-35-11",
+     "sub": "11 s",
+     "poster": "media/ac_S02_2022-06-13_22-35-11_act016.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ac_S03_2022-06-14_13-52-57_act002",
+     "title": "Spread almond butter on a bread slice",
+     "label": "S03 \u00b7 split 13-52-57",
+     "sub": "28 s",
+     "poster": "media/ac_S03_2022-06-14_13-52-57_act002.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ac_S04_2022-06-14_16-38-43_act007",
+     "title": "Slice a cucumber",
+     "label": "S04 \u00b7 split 16-38-43",
+     "sub": "39 s",
+     "poster": "media/ac_S04_2022-06-14_16-38-43_act007.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ac_S04_2022-06-14_16-38-43_act032",
+     "title": "Open/close a jar of almond butter",
+     "label": "S04 \u00b7 split 16-38-43",
+     "sub": "8 s",
+     "poster": "media/ac_S04_2022-06-14_16-38-43_act032.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ac_S05_2022-06-14_20-46-12_act012",
+     "title": "Peel a potato",
+     "label": "S05 \u00b7 split 20-46-12",
+     "sub": "53 s",
+     "poster": "media/ac_S05_2022-06-14_20-46-12_act012.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ac_S05_2022-06-14_20-46-12_act058",
+     "title": "Load dishwasher",
+     "label": "S05 \u00b7 split 20-46-12",
+     "sub": "45 s of 156 s",
+     "poster": "media/ac_S05_2022-06-14_20-46-12_act058.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
   }
  ]
 }

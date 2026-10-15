@@ -1,0 +1,49 @@
+{
+ "id": "actionsense",
+ "prefix": "ac_",
+ "group": "public",
+ "title": "ActionSense",
+ "provider": "DelPreto et al. 2022 (MIT CSAIL)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY-NC-SA 4.0",
+  "tone": "neutral"
+ },
+ "about": "Kitchen activities recorded with wearable sensors: bimanual 32×32 conductive-thread tactile gloves, finger and body tracking, forearm EMG, eye tracking with a first-person camera, plus 5 static cameras; 20 activities, 10 subjects (tactile for S00–S05).",
+ "link": {
+  "label": "action-sense.csail.mit.edu",
+  "href": "https://action-sense.csail.mit.edu/"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 682
+ },
+ "hardware": [
+  {
+   "k": "Gloves",
+   "v": "Custom tactile gloves (32×32 thread matrix)",
+   "d": "Palm 23×19, thumb 5×9, little 11×4, other fingers 13×4 · raw ADC counts · ~6 Hz · open fingertips"
+  },
+  {
+   "k": "Cameras",
+   "v": "Pupil Core world camera + 5 FLIR",
+   "d": "1280×720 ~30 fps head-mounted · 1600×1200 22 fps static (one above the table)"
+  },
+  {
+   "k": "Body",
+   "v": "Xsens MTw Awinda + Manus Prime II gloves",
+   "d": "17 IMUs, body and finger segments at 60 Hz · Myo EMG 8 ch per forearm"
+  },
+  {
+   "k": "Labels",
+   "v": "Activity Start/Stop with rating",
+   "d": "Plus calibration periods (scale presses, held objects) and experimenter notes"
+  }
+ ],
+ "notes": "Paper: NeurIPS 2022 Datasets & Benchmarks (openreview olvz0gAdGOX). Data CC BY-NC-SA 4.0 (non-commercial, credit, same license); code MIT. Each episode is one labelled activity instance cut out of the release's continuous per-split files and re-encoded here. The matrix-to-hand placement of the taxels is derived from the data (non-crossing matrix entries barely respond), not from a published map; see each episode's notes. Up to six right-glove crossings toggle between rest and ~1018 (an intermittent read-out fault, not contact); they are flagged per episode from the data, drawn hollow and left out of the plots and sums.",
+ "order": 12
+}

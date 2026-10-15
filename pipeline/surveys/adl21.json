@@ -339,5 +339,99 @@
     ],
     "fetch_estimate": "0 MB more: the full release (dataset.mat, 49,542,130 B) is already in ~/data/ext/adl21/. No video or other media to re-host (touch only); converted episode JSON is about 0.3-0.9 MB each (361 sensels x 532-1796 frames as Uint8 + base64, plus the 101-step GF/CGF series), ~4 MB for all 8.",
     "rules_applied": "21 tasks > 6, so 8 tasks were taken: at least one from each of the 6 setups (1: key/lock; 2: pen, keyboard; 3: bottle+pour, knife; 4: drawer+comb; 5: window cloth; 6: iron), covering precision pinch, tripod writing, tapping, twisting/pouring, cutting, pulling+combing, wiping and push-sliding, with 8 different objects. One episode per task, 8 different subjects (4 Man incl. subject 4 'Male', 4 Woman). All trials are right-hand only (one instrumented glove), so no two-handed episode exists. Duration rule 10-60 s: no trial exceeds 60 s (max 51.2 s) so every window is null; 147 of 462 trials are under 10 s, which excludes task 21 (briefcase lift, all 22 trials 3.9-8.0 s) and leaves tasks 3 and 13 with one usable trial and tasks 6/7/17/19 with 2-3. Within each task the passing trial closest to the task's median duration with a long continuous contact was preferred, while keeping subjects distinct. Contact check on presRaw (active sensels only): frames with total force (0.016 N/kPa x sum over 361 sensels) > 5 N and at least 3 sensels > 10 kPa; every pick has a continuous contact run of 3.3-8.2 s, and rest at the start is 0.0-0.5 kPa mean. Channel check on each pick: presRaw (N,725) with exactly 361 active columns, the 364 inactive columns -1 in every row, no NaN, no negative values, no sensel stuck at a constant non-zero value; presInterpSync (101,725) no NaN; GF (101,) equals 0.016 x sum of active presInterpSync to < 2e-14; CGF (101,18) rows sum to 1 where GF > 0 and are all zero where GF = 0 (this is the case for 134 of 462 trials, e.g. t07 s09, and is not corruption); iColRegion has 18 regions totalling 361 sensels. Release-wide, 34 of the 361 active sensels are 0 in every one of the 462 trials (16 in region 16 distal palm 3rd-5th metacarpal, 8/5/2 in the little finger regions 12-14, 3 in region 5 index proximal); dead or never loaded cannot be told apart. 246 of 462 trials have raw peaks above the 517 kPa sensor map (picks: 0-0.019% of samples above it). GF/CGF/presInterpSync exist only on the 101-step normalized, time-warped timeline and cannot be aligned to presRaw's 50 Hz clock sample by sample."
-  }
+  },
+  "visualization": [
+    {
+      "channel": "dataset(t,s).presRaw",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "Panel 'Right hand · presRaw': 361 active sensels at their cell of the 29x25 manufacturer matrix as drawn in the release's sensor.png (palmar view of the right hand, matches paper Fig. 5), one row per 50 Hz sample, shown as N per sensel (kPa x 16 mm2), colour scale 0-250 kPa (4 N) for every trial; per-region sums (thumb, index, middle, ring, little = iColRegion phalanx regions; palm = regions 15-18) plotted; total grip force 0.016 x sum plotted unclipped next to GF",
+      "reason": null
+    },
+    {
+      "channel": "dataset(t,s).presInterpSync",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "Second panel 'Right hand · presInterpSync' on the same layout; its 101 time-warped steps are put on the 50 Hz clock by inverting the indexSync three-segment warp (derived; latest step at or before each tick, stored once with a per-tick row index); per-region sums plotted",
+      "reason": null
+    },
+    {
+      "channel": "dataset(t,s).GF",
+      "shown_as": [
+        "series"
+      ],
+      "detail": "'Grip force (N)' plot: release GF on the warped-back steps, next to 0.016 x sum(presRaw) at 50 Hz",
+      "reason": null
+    },
+    {
+      "channel": "dataset(t,s).CGF",
+      "shown_as": [
+        "series"
+      ],
+      "detail": "'CGF' plot on the warped-back steps: the five fingers (phalanx regions summed) solid, the four palm regions (2nd MC, 3rd-5th MC, thenar, hypothenar) dashed; 0..1",
+      "reason": null
+    },
+    {
+      "channel": "dataset(t,s).iColRegion",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "region index metadata; used to build the panels' regions and the CGF grouping"
+    },
+    {
+      "channel": "dataset(t,s).task",
+      "shown_as": [
+        "task"
+      ],
+      "detail": "episode title; the paper's Table 2 action sequence is in the notes",
+      "reason": null
+    },
+    {
+      "channel": "dataset(t,s).subjectSex",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "subject metadata, not touch"
+    },
+    {
+      "channel": "dataset(t,s).refSubj",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "synchronization metadata; stated in the episode notes"
+    },
+    {
+      "channel": "dataset(t,s).indexSync",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "warp parameters; used to map the 101-step products to the clock and stated in the notes"
+    },
+    {
+      "channel": "tasks",
+      "shown_as": [
+        "task"
+      ],
+      "detail": "same text as dataset(t,s).task, used as the title",
+      "reason": null
+    },
+    {
+      "channel": "senselCol",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "layout index; used (with colSensel) to place the sensels"
+    },
+    {
+      "channel": "colSensel",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "layout index; used to place the sensels"
+    }
+  ]
 }

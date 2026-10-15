@@ -163,9 +163,10 @@
     ],
     "rate_hz": "30",
     "note": "256 raw channels per hand; the release code maps 138 (left) / 147 (right) of them, of which 15 / 24 are finger bend sensors, leaving about 123 pressure taxels per hand. Remapped to a hand-shaped 21 x 21 grid; the glove also streams an IMU quaternion.",
-    "maker": "custom",
+    "maker": "JQ Industries (矩侨工业)",
     "principle": "unspecified",
-    "calibrated": false
+    "calibrated": false,
+    "model": "Fabric Tactile Glove"
    },
    "modalities": [
     "egocentric",
@@ -270,7 +271,8 @@
     "Release counts differ from the paper: HF lists 1,933 episode folders / 213 tasks; local split.json lists 2,228 episodes / 228 tasks; paper and README say 1,891 / 208.",
     "Number of participants not stated.",
     "scenes/scene_types from the paper's five environment categories, confirmed by the release's top-level folders (Home/Office/Outdoor/Retail/Workbench).",
-    "taxels per hand (123) derived from the release's channel mapping, not stated in the paper"
+    "taxels per hand (123) derived from the release's channel mapping, not stated in the paper",
+    "Glove maker from a figure on the TouchAnything project page labelled 'JQ-Industries Fabric Tactile Glove'; the paper text says custom pressure gloves."
    ],
    "rank": {
     "n": 2,
@@ -799,9 +801,9 @@
    "authors": "Jongbin Lim et al.",
    "year": 2026,
    "venue": "arXiv 2604.14944",
-   "summary": "Paired human and robot grasps (Allegro, two Inspire hands, Robotiq) with 21 exocentric cameras plus egocentric stereo and object 6D pose; tactile only on the robot hands.",
+   "summary": "Paired human and teleoperated robot grasps (Allegro V5 Plus, Inspire RH56F1 and RH56DFTP, Robotiq 2F-85 on an xArm6) over 100 objects, filmed by a 23-camera rig with MANO hands and object 6D poses; built-in tactile only on the Allegro and Inspire F1 hands.",
    "embodiment": "both",
-   "hand": "Human (no tactile); Allegro V5 Plus, Inspire RH56DFTP, Inspire RH56F1, Robotiq 2F-85",
+   "hand": "Human hand (no tactile); Allegro Hand V5 Plus (16 DoF), Inspire RH56F1, Inspire RH56DFTP, Robotiq 2F-85, each on an xArm6",
    "bimanual": false,
    "sensor": {
     "type": "unspecified",
@@ -810,9 +812,9 @@
      "tip",
      "palm"
     ],
-    "note": "Robot hands only. Allegro V5 Plus: 4 fingertip channels (int, ~100 Hz). Inspire RH56F1: normal force, tangential force and tangential direction for 5 fingertips + 3 palm regions. Inspire RH56DFTP: tactile.npy is empty in sampled episodes (a per-finger force.npy is present). Robotiq 2F-85: none. Paper: readings too noisy/sparse to use as contact labels.",
-    "maker": "Wonik Robotics (Allegro); Inspire Robots (RH56F1/RH56DFTP)",
-    "model": "Allegro Hand V5 Plus fingertip sensors; Inspire RH56F1 / RH56DFTP built-in tactile",
+    "note": "Robot hands only. Allegro V5 Plus: raw/hand/tactile.npy (T, 4) int32, one value per fingertip sensor, ~99 Hz, 0 to ~1,800 counts. Inspire RH56F1 (right hand): raw/hand/right_tactile.npy, one dict per sample with normal_force, tangential_force and tangential_direction for 8 regions (little, ring, middle, index, thumb, palm_right, palm_middle, palm_left) = 24 scalars at 50 Hz. Inspire RH56DFTP: tactile.npy is empty in all 618 episodes; a per-actuator force.npy (T, 6) at ~50 Hz is present. Robotiq 2F-85: none. Units are not stated. Paper: readings too noisy or sparse to serve as contact labels.",
+    "maker": "Wonik Robotics (Allegro); Inspire Robots (RH56F1, RH56DFTP)",
+    "model": "Allegro Hand V5 Plus fingertip tactile sensors; Inspire RH56F1 built-in tactile; Inspire RH56DFTP finger force sensors",
     "principle": "unspecified",
     "calibrated": null
    },
@@ -826,26 +828,34 @@
    "scale": {
     "episodes": 2703,
     "objects": 100,
-    "text": "Released: 2,703 grasp sequences (441 human, 453 Allegro, 592 Inspire F1, 618 Inspire DFTP, 599 Robotiq) over 100 objects, 30 fps; paper: 3,215 trials (541 human), 43.5M frames",
-    "hours": null,
+    "text": "Release: 2,703 sequences (441 human, 453 Allegro, 592 Inspire F1, 618 Inspire DFTP, 599 Robotiq) over 100 objects, ~14.9 h of synchronized 30 fps capture, 23 views; paper: 3,215 trials (541 human), 43.5M frames (all views)",
+    "hours": 14.9,
     "frames": 43500000,
     "tasks": 1,
     "subjects": 1,
     "scenes": null,
-    "scene_types": []
+    "scene_types": [
+     "lab"
+    ]
    },
    "availability": "public",
-   "access": "Hugging Face, 1.57 TB.",
+   "access": "Hugging Face HRDexDB/HRDexDB, ungated, ~1.56 TB of per-sequence folders (per-camera mp4, raw .npy robot streams, MANO, object pose npz); single files can be fetched; Google Drive ZIP mirror also offered.",
    "license": "CC BY-NC 4.0",
    "caveats": [
-    "Grasping only.",
-    "No human tactile; the human hand pose is estimated from multi-view video.",
-    "Released 2,703 sequences against 3,215 in the paper; tactile.npy is empty in the sampled Inspire DFTP episodes."
+    "Grasping only: one grasp-and-lift task per sequence; robot trials teleoperated to reproduce a reference human grasp (no frame-level alignment between paired human and robot sequences).",
+    "No human tactile; the human hand is a MANO fit from multi-view video.",
+    "Inspire RH56DFTP tactile.npy is empty (0 elements) in all 618 released episodes; only a 6-channel force.npy with undocumented units is present, stored as unsigned 16-bit wrap-around (65,535 = -1).",
+    "Tactile units, sensor-to-channel mapping and calibration are not documented for any hand; the paper calls the Allegro and Inspire readings too noisy or sparse for contact labels.",
+    "Many raw .npy files (arm streams, Inspire F1 hand and tactile, Robotiq hand, teleop) are pickled object arrays and need allow_pickle to load.",
+    "Release (2,703 sequences) is smaller than the paper's 3,215 trials; all 453 released Allegro sequences are labelled successful, while the paper reports 52 Allegro failures.",
+    "The metadata catalog (metadata/episodes.parquet, 2,104 rows) does not cover the Robotiq sequences; 33 Robotiq folders lack raw/ and 36 lack calibration files.",
+    "Videos are 2048x1536 MPEG-4 Part 2 (not H.264), ~230-840 MB per sequence (median, by embodiment) across 22-23 views."
    ],
    "links": {
     "project": "https://snuvclab.github.io/HRDexDB/",
     "paper": "https://arxiv.org/abs/2604.14944",
-    "data": "https://huggingface.co/datasets/HRDexDB/HRDexDB"
+    "data": "https://huggingface.co/datasets/HRDexDB/HRDexDB",
+    "code": "https://github.com/snuvclab/HRDexDB"
    },
    "image": "https://snuvclab.github.io/HRDexDB/static/image/teaser_icra.png",
    "thumb": "assets/thumbs/hrdexdb.jpg",
@@ -870,7 +880,7 @@
       "mount": "head"
      },
      {
-      "role": "other",
+      "role": "egocentric",
       "count": 2,
       "model": null,
       "type": "stereo",
@@ -885,68 +895,76 @@
      {
       "target": "fingers",
       "method": "vision_estimate",
-      "system": "HaMeR 2D keypoints in 21 views -> triangulation -> MANO fit (silhouette-refined with SAM3)",
-      "note": "human sequences"
+      "system": "HaMeR 2D keypoints in calibrated views -> triangulation -> MANO fit (shape calibrated by SAM3 silhouettes)",
+      "note": "human sequences; per-frame MANO mesh (.obj) and params (.json, incl. 21 joints)"
      },
      {
       "target": "object",
       "method": "vision_estimate",
-      "system": "SAM3 + FoundPose init + GoTrack multi-view 6D tracking",
-      "note": "all sequences; v2 poses released"
+      "system": "SAM3 masks + FoundPose init + GoTrack multi-view 6D tracking",
+      "note": "all embodiments; object_6d_pose_v1/v2 npz, one 4x4 per video frame"
      },
      {
       "target": "fingers",
       "method": "robot_proprioception",
-      "system": "robot hand joint states + commands",
+      "system": "robot hand joint states and commands",
       "note": "Allegro, Inspire F1/DFTP, Robotiq"
      },
      {
       "target": "wrist",
       "method": "robot_proprioception",
-      "system": "xArm6 joint states",
-      "note": "each robot hand mounted on an xArm6"
+      "system": "xArm6 joint position/velocity/torque + 4x4 pose action",
+      "note": "every robot hand is mounted on an xArm6"
      },
      {
       "target": "fingers",
       "method": "teleop_glove",
       "system": "MANUS gloves",
-      "note": "teleoperator reproduces a reference human grasp"
+      "note": "teleoperation of robot fingers; raw glove skeletons released only for Inspire DFTP and Robotiq sequences"
      },
      {
       "target": "wrist",
       "method": "optical_tracker",
-      "system": "HTC Vive wrist tracker",
-      "note": null
+      "system": "HTC Vive wrist tracker (libsurvive)",
+      "note": "teleoperation of the arm"
      }
     ],
     "other": [
-     "object meshes (100)",
-     "camera intrinsics/extrinsics",
+     "object meshes (100, v1 and v2)",
+     "camera intrinsics/extrinsics (+ per-frame ego extrinsics for the helmet)",
      "grasp success labels",
-     "human-robot pairing metadata",
-     "arm torque/velocity"
+     "verified human-robot pairing table (1,335 links)",
+     "xArm6 joint torque/velocity"
     ]
    },
    "sources": [
-    "https://arxiv.org/abs/2604.14944",
+    "https://arxiv.org/abs/2604.14944 (HTML v3)",
     "https://snuvclab.github.io/HRDexDB/",
-    "https://huggingface.co/datasets/HRDexDB/HRDexDB (README.md, metadata/*.parquet, repo tree, sample raw/hand/*.npy)",
-    "https://github.com/snuvclab/HRDexDB (README.md)"
+    "https://huggingface.co/datasets/HRDexDB/HRDexDB (README.md, metadata/*.parquet, full repo tree)",
+    "https://huggingface.co/datasets/HRDexDB/HRDexDB raw files of human/apple/0, allegro_v5/apple/3, inspire_f1/apple/0, inspire_dftp/apple/0, robotiq_2f85/apple/0 and tactile/force files of 9 more robot sequences",
+    "https://github.com/snuvclab/HRDexDB (README.md, hrdexdb/common.py, hrdexdb_contact_heatmaps/hrdexdb_io.py)"
    ],
    "unconfirmed": [
-    "episodes=2,703 counted from the HF repo tree (sequence folders per embodiment); the HF metadata catalog lists only 2,104 (no Robotiq); paper says 3,215 trials (541 human, 539 Allegro, 743 Inspire F1, 791 Inspire DFTP, 601 Robotiq); GitHub README says 2.1K.",
-    "frames=43.5M is the paper's figure and counts images over all camera views. Per-episode frame counts in the catalog (30 fps) sum to 1,275,339 for the 2,104 cataloged episodes = ~11.8 h; Robotiq (599 seqs) is not cataloged, so total hours left null.",
-    "Cameras: paper says a 21-camera exocentric rig + stereo helmet (human) or static stereo 'egocentric' cameras (robot), 23 views total; the catalog has 23 streams for human and Inspire F1 episodes and 22 for Allegro and Inspire DFTP. Camera models not stated. All streams 2048x1536 @30 fps (catalog).",
-    "subjects=1: paper text says 'a human subject' / 'A human participant'; not stated as a count.",
-    "tasks=1: single task type (grasp and lift); not a stated count.",
-    "Tactile principle not stated for any hand; rates/channel layouts above read from sampled raw files (allegro_v5/apple/3, inspire_f1/apple/0, inspire_dftp/apple/0,1,3, banana/0). Inspire F1 tactile is right hand only, stored as a pickled object array (keys inspected without unpickling)."
+    "episodes=2,703 counted from sequence folders in the HF tree (human 441, allegro_v5 453, inspire_f1 592, inspire_dftp 618, robotiq_2f85 599); metadata/episodes.parquet lists 2,104 (no Robotiq); paper: 3,215 trials (541 human, 539 Allegro, 743 Inspire F1, 791 Inspire DFTP, 601 Robotiq); GitHub README: 2.1K; HF card: 3.2K.",
+    "hours=14.9 derived: catalog num_frames for 2,104 sequences sum to 1,275,339 and Robotiq raw/timestamps/frame_id.npy lengths (568 of 599 sequences) sum to 334,860; 1,610,199 frames / 30 fps = 14.9 h. Excludes ~31 Robotiq sequences without timestamps.",
+    "frames=43.5M is the paper's figure and counts images over all camera views.",
+    "subjects=1: paper says 'a human subject' / 'A human participant'; not stated as a count. Number of teleoperators not stated.",
+    "tasks=1: single grasp-and-lift task type; not a stated count. Paper: 23 of 33 GRASP-taxonomy grasp types.",
+    "scene_types=['lab']: one capture platform (21-camera rig around a workspace); no scene count is stated.",
+    "Cameras: paper says 21-camera exocentric rig + stereo helmet (human) or static stereo egocentric cameras (robot). In the files the helmet pair is 25452062/25452066 (ego_calib.json has per-frame extrinsics); human and Inspire F1 sequences carry 23 streams, Allegro and Inspire DFTP 22 (no 22684210), Robotiq 22-23 (adds 26256735/26256742, lacks 23029839). Camera models not stated. All streams 2048x1536 mpeg4 tagged 30 fps (metadata/cameras.parquet, one human mp4 probed).",
+    "raw/timestamps/timestamp.npy steps median 0.030 s (~33 Hz) in the sampled Allegro, Inspire F1 and DFTP sequences while the mp4 files are tagged 30 fps; Robotiq steps are 0.0333 s.",
+    "Tactile and force rates are medians of the time stamps in the sampled files (Allegro hand ~99 Hz, Inspire F1 tactile 50.0 Hz, Inspire DFTP hand ~49.7 Hz). Inspire F1 tangential_direction ranges 0-359 with -1 when unloaded, i.e. likely degrees (not stated). F1 thumb_normal_force reached exactly 3000 in cactus/3 (possible clip).",
+    "Inspire DFTP force.npy: values above 32,767 occur and read as small negatives when reinterpreted as int16 (e.g. 65,525 = -11); the channel order (6 actuators) is not documented.",
+    "Object pose translations are ~0.3-0.6 in magnitude (consistent with meters; unit not stated). C2R.npy is a 4x4 the official code inverts to get robot_from_world.",
+    "Human success labels are null in the catalog (paper: all human trials succeed). Release success counts: Allegro 453/453, Inspire F1 423 true / 164 false / 5 null, Inspire DFTP 387 / 231, Robotiq grasp_result.json 474 / 81 (555 files)."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open + checked",
     "why": [
      "public download",
-     "samples not checked yet"
+     "license: CC BY-NC 4.0",
+     "samples checked in the viewer"
     ]
    },
    "quality": {
@@ -959,7 +977,8 @@
      "scale": true,
      "diversity": false
     }
-   }
+   },
+   "viewer": "hr_inspire_f1_brown_ramen_10"
   },
   {
    "id": "actionsense",
@@ -968,9 +987,9 @@
    "authors": "Joseph DelPreto et al.",
    "year": 2022,
    "venue": "NeurIPS 2022 Datasets & Benchmarks",
-   "summary": "Kitchen activities with bimanual tactile gloves, finger bend sensors, EMG, body IMUs, eye tracking and multi-view video.",
+   "summary": "Kitchen activities in a mock kitchen with bimanual 32x32 conductive-thread tactile gloves, Manus bend-sensor finger tracking, Xsens body IMUs, Myo forearm EMG, Pupil Core eye tracking, 5 static RGB cameras and 2 microphones.",
    "embodiment": "human",
-   "hand": "Conductive-thread tactile gloves (open finger) + Manus Prime II",
+   "hand": "human hands wearing custom open-finger tactile gloves (conductive threads on a piezoresistive film) under Manus Prime II Xsens finger-tracking gloves",
    "bimanual": true,
    "sensor": {
     "type": "piezoresistive",
@@ -979,10 +998,10 @@
      "phalanx",
      "palm"
     ],
-    "note": "32 x 32 conductive-thread matrix on a pressure-sensitive film, routed to a 23x19 palm grid, 5x9 thumb, 11x4 little finger and 13x4 on each other finger; open-finger gloves, so no fingertips.",
+    "note": "One sample per hand = 32x32 matrix of raw ADC readings (float32, 1,024 thread intersections); threads routed to a 23x19 palm grid, 5x9 thumb, 11x4 little finger and 13x4 on each other finger. Open-finger gloves: no fingertips. No matrix-to-hand-location map in the released files.",
     "maker": "custom (MIT CSAIL)",
     "principle": "piezoresistive",
-    "rate_hz": "15 nominal (~6 typical)",
+    "rate_hz": 6,
     "calibrated": null
    },
    "modalities": [
@@ -999,7 +1018,7 @@
     "hours": 13,
     "subjects": 10,
     "tasks": 20,
-    "text": "~13 h (778 min, 543.5 min of activities), 574 labeled activity instances, 20 activities, 10 subjects, 1 mock kitchen",
+    "text": "~13 h recorded (778 min; 543.5 min of activities), 574 labeled activity instances (9 subjects), 20 activities, 10 subjects, 1 mock kitchen; tactile on 6 subjects (S00-S05)",
     "episodes": 574,
     "frames": null,
     "objects": null,
@@ -1009,16 +1028,25 @@
     ]
    },
    "availability": "public",
-   "access": "HDF5 files at data.csail.mit.edu/ActionNet.",
+   "access": "Open HTTP download, no login: per-subject HDF5 (wearables), MP4/AVI (eye-tracking world video), AVI + timestamp TXT (5 RGB cameras) and WAV (microphones) linked from action-sense.csail.mit.edu/data.html; HTTP range requests supported.",
    "license": "CC BY-NC-SA 4.0",
    "caveats": [
-    "Subjects S06-S09 have no tactile or finger tracking.",
-    "Tactile rate is about 6 Hz in practice (the sensor table says 15 Hz)."
+    "Tactile and finger tracking only for S00-S05; S06-S09 wore no tactile or finger-tracking gloves (their HDF5 files have no tactile-glove groups and only 23 Xsens segments).",
+    "S01: wearable data was lost after calibration and peeling cucumbers; its HDF5 holds only calibration plus 3 labeled activities.",
+    "Tactile is about 6 Hz in practice (the sensor table on the website lists 15 Hz).",
+    "Tactile is raw ADC counts with no conversion to force; the scale calibration periods (Dymo M25 weight_g) are provided for that. Metadata says range [0, 4095], but released values lie in 23..1023 with a ~560 resting baseline.",
+    "Tactile response during activities is small: the 20 most-loaded cells typically sit 10-150 counts above baseline.",
+    "The HDF5 tactile streams carry no map from the 32x32 matrix to palm/finger regions.",
+    "Finger tracking: the data page warns the Manus gloves may not have worked reliably; the Manus IMUs were disabled, so there is no lateral finger spread.",
+    "Depth camera data and the external RGB/audio for S06-S09 are listed as 'coming soon' on the data page; raw FLIR frames are not linked (only AVI videos).",
+    "Recordings are continuous per subject (1-4 splits); activities are Start/Stop label rows in experiment-activities, not separate files.",
+    "Label names vary across subjects (e.g. 'Get items from refrigerator/cabinets/drawers' vs 'Get/replace items ...')."
    ],
    "links": {
     "project": "https://action-sense.csail.mit.edu/",
-    "paper": "https://neurips.cc/virtual/2022/poster/55638",
-    "data": "https://action-sense.csail.mit.edu/data.html"
+    "paper": "https://openreview.net/forum?id=olvz0gAdGOX",
+    "data": "https://action-sense.csail.mit.edu/data.html",
+    "code": "https://github.com/delpreto/ActionNet"
    },
    "image": "https://action-sense.csail.mit.edu/images/wearable_sensors_v0.jpg",
    "thumb": "assets/thumbs/actionsense.jpg",
@@ -1029,7 +1057,7 @@
       "count": 1,
       "model": "Pupil Labs Pupil Core (world camera)",
       "type": "RGB",
-      "resolution": null,
+      "resolution": "1280x720",
       "fps": 30,
       "mount": "head"
      },
@@ -1059,51 +1087,67 @@
       "target": "body",
       "method": "imu",
       "system": "Xsens MTw Awinda (17 IMUs)",
-      "note": "60 Hz; body segment poses and joint angles, re-processed in MVN Analyze"
+      "note": "60 Hz; segment poses, joint angles, CoM, foot contacts; streamed live from MVN, with scripts to merge re-processed MVN estimates"
      },
      {
       "target": "fingers",
       "method": "bend_sensor",
       "system": "Manus Prime II Xsens gloves",
-      "note": "bend sensors + optional IMUs, 60 Hz; IMUs disabled in some experiments (no lateral finger spread); site warns finger data may be unreliable"
+      "note": "bend sensors, glove IMUs disabled (finger curl only); finger segments arrive through the Xsens stream at 60 Hz (63 segments / 60 joints instead of 23 / 22); site warns finger data may be unreliable"
      },
      {
       "target": "wrist",
       "method": "imu",
       "system": "Xsens MTw Awinda",
-      "note": "hand segment pose from the body suit; Myo armbands also give forearm orientation"
+      "note": "hand segment pose from the body suit; Myo armbands also give forearm orientation (arbitrary reference frame)"
      }
     ],
     "other": [
-     "forearm EMG (Myo, 8 ch per arm)",
-     "forearm IMU (Myo)",
-     "eye tracking / gaze (Pupil Core)",
-     "audio (2 microphones)",
-     "scale weight readings for tactile calibration",
-     "activity labels",
-     "post-session surveys"
+     "forearm EMG (Myo armband, 8 ch per arm, ~200 Hz)",
+     "forearm IMU (Myo, ~50 Hz)",
+     "eye tracking / gaze and pupil geometry (Pupil Core, ~115 Hz)",
+     "audio (2 microphones, 48 kHz)",
+     "Dymo M25 scale weight readings for tactile calibration",
+     "activity labels with Good/Bad/Maybe ratings",
+     "calibration labels (body, tactile, third-party)",
+     "experimenter notes",
+     "post-session surveys and body measurements"
     ]
    },
    "sources": [
     "https://action-sense.csail.mit.edu/",
     "https://action-sense.csail.mit.edu/data.html",
+    "https://action-sense.csail.mit.edu/dataset_info.html",
+    "https://action-sense.csail.mit.edu/images/activity_stats.jpg",
+    "https://action-sense.csail.mit.edu/images/wearable_sensors_table.jpg",
+    "https://action-sense.csail.mit.edu/images/environment_sensors_table.jpg",
     "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Paper-Datasets_and_Benchmarks.pdf",
-    "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Supplemental-Datasets_and_Benchmarks.pdf"
+    "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Supplemental-Datasets_and_Benchmarks.pdf",
+    "https://github.com/delpreto/ActionNet",
+    "https://github.com/delpreto/ActionNet/blob/master/recording_data/sensor_streamers/TouchStreamer.py",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/ (all 19 wearable HDF5 files: tree, attributes, rates and tactile values read with HTTP range requests)",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S05/2022-06-14_20-36-27_actionNet-wearables_S05/2022-06-14_20-36-54_S05_eye-tracking-video-world_frame.mp4 (ffprobe)",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-14_experiment_S05/PG1_2022-06-14-20-35-06.avi (ffprobe) and .txt"
    ],
    "unconfirmed": [
-    "hours = 778.0 min total (includes calibration routines) / 60; activity time alone is 543.5 min (~9.1 h).",
-    "episodes = 574 labeled activity instances over 9 subjects (supplement Table 1, 324.26 min labeled); the continuous recordings themselves are one or a few splits per subject.",
-    "Tactile rate: paper Table 2 lists 15 Hz, supplement HDF5 table lists a typical achieved rate of 6 Hz ('improveable to ~15').",
-    "Pupil Core world-camera resolution is not stated; 30 Hz is the world-video frame timestamp rate.",
-    "Which subjects have tactile/finger data: supplement says the last 5 of the 9 wearable-data subjects had no gloves; data page says S06-S09 (4 subjects), and S01 lost its wearable data after the first activity.",
-    "taxels_per_hand 682 = 23x19 + 5x9 + 11x4 + 3x(13x4), computed from the stated grids."
+    "hours = 778.0 min total (includes calibration routines) / 60; activity time alone is 543.5 min (~9.1 h). Tactile streams in the release add up to ~24,570 s (~6.8 h) over the 12 HDF5 files of S00-S05 (left glove time_s spans).",
+    "episodes = 574 labeled activity instances over 9 subjects (website activity_stats table, 324.26 min). Pairing Start/Stop rows in the released files gives 586 instances (306 in S00-S05 incl. 3 for S01, 280 in S06-S09) and ~329 min.",
+    "frames: tactile frames in the release = 144,404 (left) + 142,048 (right) over S00-S05, counted from the HDF5 tactile_data shapes.",
+    "Tactile rate: website sensor table 15 Hz; supplement HDF5 table '6 [improveable to ~15]'; measured 4.5-6.2 Hz per file (time_s), 6.0-6.1 Hz in activity splits.",
+    "Egocentric world camera resolution 1280x720 MJPEG, ~29.6 fps: ffprobe of S05 world_frame.mp4 / worldGaze_frame.avi; not stated in the paper.",
+    "FLIR AVI videos are MPEG-4 Part 2, 1600x1200, 22 fps (ffprobe of S05 PG1); one timestamp line per frame in the PG*.txt files.",
+    "Subjects with tactile: data page says S06-S09 had no gloves; supplement says 'the last 5 subjects'; S01 has tactile only for calibration and 3 activities. The files confirm tactile groups in S00-S05 and none in S06-S09.",
+    "taxels_per_hand 682 = 23x19 + 5x9 + 11x4 + 3x(13x4), computed from the stated grids; the file stores all 1,024 matrix intersections.",
+    "Released tactile values never exceed 1023 in any of the 12 files although the stream metadata says [0, 4095] (TouchStreamer.py hard-codes that range); how the 32 thread rows/cols map to the hand regions is not documented.",
+    "subjects = 10 (data page and supplement); 70% male, 90% right-handed, 27.3 +- 3.7 years."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open + checked",
     "why": [
      "public download",
-     "samples not checked yet"
+     "license: CC BY-NC-SA 4.0",
+     "samples checked in the viewer"
     ]
    },
    "quality": {
@@ -1116,7 +1160,8 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "viewer": "ac_S04_2022-06-14_16-38-43_act007"
   },
   {
    "id": "stag",
@@ -1124,10 +1169,10 @@
    "title": "Learning the signatures of the human grasp using a scalable tactile glove",
    "authors": "Subramanian Sundaram et al.",
    "year": 2019,
-   "venue": "Nature 569",
-   "summary": "Knitted glove with 548 piezoresistive sensors over the whole hand; 135K frames of single-hand grasps on 26 objects.",
+   "venue": "Nature 569(7758), 2019",
+   "summary": "Knitted glove with 548 piezoresistive sensors over the palmar side of the right hand, read as a 32x32 grid at ~7.3 Hz; one subject grasping 26 objects, plus blindfolded, weight and hand-pose sets with synchronized RGB frames.",
    "embodiment": "human",
-   "hand": "STAG knitted glove",
+   "hand": "human right hand wearing the STAG knitted tactile glove",
    "bimanual": false,
    "sensor": {
     "type": "piezoresistive",
@@ -1137,12 +1182,12 @@
      "phalanx",
      "palm"
     ],
-    "note": "Force-sensitive film addressed by 64 orthogonal conductive-thread electrodes (32x32 readout, 548 valid elements) on a knitted glove; raw values stored as Nx32x32 int16 (500-1024).",
+    "note": "One sample = a 32x32 int16 map of raw 10-bit ADC counts (0-1023 = 0-5 V amplifier output) from the 32 row x 32 column conductive-thread electrodes; 548 cells are physical sensors, the other 476 are constant. Rest ~510-516, useful signal 500-650, readings over 950 are shorted electrodes. Normal force only.",
     "maker": "custom (MIT CSAIL)",
-    "model": "STAG",
+    "model": "STAG (scalable tactile glove)",
     "principle": "piezoresistive",
-    "range": "working range 30 mN-0.5 N per element (responds from ~25 mN, saturates above 0.8 N)",
-    "rate_hz": "7.3",
+    "range": "30 mN-0.5 N working range per element (responds from ~25 mN, saturates beyond 0.8 N); ~150 quantization levels, ~17.5% peak hysteresis",
+    "rate_hz": 7.3,
     "calibrated": false
    },
    "modalities": [
@@ -1150,28 +1195,32 @@
    ],
    "scale": {
     "objects": 26,
-    "text": ">5 h, 135,187 tactile frames (object set) + 11,682 (weights) + 24,037 (hand poses), 26 objects, 1 subject, right hand",
-    "hours": 5,
-    "episodes": 78,
-    "frames": 135187,
-    "tasks": null,
+    "text": "~6.9 h, 221 recordings, 177,592 tactile frames (135,187 object interaction + 6,686 blindfolded + 11,682 weights + 24,037 hand poses), 26 objects, 1 subject, right hand",
+    "hours": 6.9,
+    "episodes": 221,
+    "frames": 177592,
+    "tasks": 4,
     "subjects": 1,
     "scenes": null,
     "scene_types": []
    },
    "availability": "public",
-   "access": "Zip archives on stag.csail.mit.edu, with pressure-only lite versions.",
-   "license": "research only",
+   "access": "Open download (no login) of four zip archives from stag.csail.mit.edu/datasets/, each also as a pressure-only 'lite' zip (49 MB in total).",
+   "license": "STAG Research License (research use only, non-commercial, no redistribution)",
    "caveats": [
-    "Grasping and object identification rather than dexterous manipulation.",
-    "All recordings are from one person (right hand).",
-    "No hand tracking; grasp-type labels are inferred from the tactile maps."
+    "License forbids copying or distributing the data other than for your own backup.",
+    "Grasping, object identification, weighing and hand-pose articulation, not task-level manipulation.",
+    "All recordings are from one person (an author) wearing the glove on the right hand.",
+    "Tactile values are raw ADC counts, not calibrated force; the release has no force calibration.",
+    "No hand or object tracking; hand-pose classes G1-G7 are labels of articulated poses.",
+    "Tactile maps are stored on the 32x32 electrode grid; the sensor-to-hand layout is only embedded in the project's demo pages (sensorIndices/sensorLayout), not in the dataset files.",
+    "Camera images were recorded for illustration only and are not used by the authors' code."
    ],
    "links": {
     "project": "http://stag.csail.mit.edu/",
     "paper": "https://doi.org/10.1038/s41586-019-1234-z",
     "code": "https://github.com/Erkil1452/touch",
-    "data": "http://stag.csail.mit.edu/"
+    "data": "http://stag.csail.mit.edu/#data"
    },
    "image": "http://stag.csail.mit.edu/assets/teaser3_800.png",
    "thumb": "assets/thumbs/stag.jpg",
@@ -1182,7 +1231,7 @@
       "count": 1,
       "model": "FLIR GS2-GE-20S4C-C",
       "type": "RGB",
-      "resolution": null,
+      "resolution": "682x512",
       "fps": 7.3,
       "mount": null
      }
@@ -1191,25 +1240,40 @@
     "depth": false,
     "tracking": [],
     "other": [
-     "object weight labels (weight-estimation subset)",
-     "grasp-pose class labels (empty hand + G1-G7)",
-     "blindfolded identification subset"
+     "object labels (26 objects + empty hand)",
+     "object weights in grams (weights subset)",
+     "hand-pose class labels (empty hand + G1-G7)",
+     "blindfolded identification start/end timestamps",
+     "per-frame preprocessing flags (valid label, balanced, grasp, transition) and train/test split"
     ]
    },
    "sources": [
     "http://stag.csail.mit.edu/",
+    "http://stag.csail.mit.edu/license.html",
     "http://stag.csail.mit.edu/datasets/readme_classification.html",
     "http://stag.csail.mit.edu/datasets/readme_weights.html",
     "http://stag.csail.mit.edu/datasets/readme_handposes.html",
     "http://stag.csail.mit.edu/datasets/readme_blindfolded.html",
+    "http://stag.csail.mit.edu/demos/correlations/sensor-level.html",
+    "https://stag.csail.mit.edu/datasets/classification.zip (central directory listing via range requests)",
+    "https://stag.csail.mit.edu/datasets/blindfolded.zip (listing; 005-mug pressuredata.mat and frame 10 fetched)",
+    "https://stag.csail.mit.edu/datasets/weights.zip (listing; weights.xlsx fetched)",
+    "https://stag.csail.mit.edu/datasets/handposes.zip (listing; note.txt fetched)",
+    "http://stag.csail.mit.edu/datasets/classification_lite.zip, blindfolded_lite.zip, weights_lite.zip, handposes_lite.zip (downloaded and read)",
     "https://cdfg.mit.edu/pdf/journal/2019-sundaram-learning-the-signatures-of-the-human-grasp-using-a.pdf",
-    "https://github.com/Erkil1452/touch"
+    "https://github.com/Erkil1452/touch",
+    "https://github.com/Erkil1452/touch/blob/master/LICENSE"
    ],
    "unconfirmed": [
-    "hours: paper says total recordings 'exceeding 5 hours'; 135,187 frames / 7.3 fps = 5.1 h.",
-    "episodes = 26 objects x 3 recordings (each object sequence recorded three times on different days) for the classification set; empty-hand recordings, the weight set (multiple sessions per object) and the 7 hand-pose sessions are extra and not counted.",
-    "Camera images were recorded 'for illustration' synchronized to the tactile frames (~7.3 fps); resolution and mount are not stated.",
-    "All recordings were made by one person (author S.S.) wearing the glove on the right hand."
+    "hours = 6.9: sum over the 221 recordings of (last ts - first ts) in the four lite metadata.mat files: classification 5.28 h, blindfolded 0.26 h, weights 0.45 h, hand poses 0.92 h. The paper says recordings exceed 5 hours (object set).",
+    "episodes = 221 recordings counted in the metadata.mat files: classification 82 (26 objects x 3 days + 4 empty-hand, batches 000/001/002 with 27/27/28), blindfolded 105 (104 identification attempts + 1 empty-hand control), weights 27 (26 objects + empty hand, ~60 s each), hand poses 7 sessions (~452-480 s each, several pose classes per recording).",
+    "frames = 177,592: 135,187 + 6,686 + 11,682 + 24,037 frames in the four metadata.mat files; the first and last two match the paper.",
+    "tasks = 4 counts the recording protocols (visually aware object interaction, blindfolded identification, weight lift-hold-drop, hand-pose articulation); the paper does not define tasks.",
+    "rate_hz = 7.3 is the paper's average frame rate; ts in the files gives a median interval of 0.136 s (7.35 Hz) and a mean of 7.12-7.28 Hz per subset (intervals up to ~0.176 s at p95).",
+    "Camera resolution 682x512 is that of the released JPEG frames (fetched from all four archives); the native camera resolution and the camera mount are not stated. The frames show a close view of the gloved hand over a table.",
+    "548 valid sensors: exactly 548 of the 1024 grid cells vary in every subset; the other cells are constant 510. The demo page's sensorIndices (32x32, 548 non-negative) matches this mask exactly and sensorLayout gives 2-D hand coordinates per sensor.",
+    "Classification values span 446-1000; 51 frames contain a reading above 950 (the paper's shorted-electrode criterion).",
+    "scenes not stated; all recordings appear to be on one table surface (from the camera frames)."
    ],
    "rank": {
     "n": 2,
@@ -1238,9 +1302,9 @@
    "authors": "Yiyue Luo et al.",
    "year": 2021,
    "venue": "Nature Electronics 4",
-   "summary": "Machine-knitted piezoresistive wearables including a full-hand glove; the glove data covers calibration and 26-object classification.",
+   "summary": "Machine-knitted piezoresistive glove (722 sensors, 32x32 readout) worn by one person; released glove data is raw pressure maps while holding 27 objects or the bare hand, plus pressing on a digital scale, a tactile vest and a robot-arm sleeve for calibration.",
    "embodiment": "human",
-   "hand": "Knitted tactile glove",
+   "hand": "Knitted tactile glove, one hand (the released calibration code uses the right-glove sensor layout)",
    "bimanual": false,
    "sensor": {
     "type": "piezoresistive",
@@ -1250,36 +1314,41 @@
      "phalanx",
      "palm"
     ],
-    "note": "722 sensors over 160 cm2; coaxial piezoresistive fibres inlaid orthogonally in a machine-knitted glove, read by a 32x32 grounding-based circuit (10-bit, Arduino Nano).",
+    "note": "One sample = 32x32 uint16 raw 10-bit ADC counts (0-1023, rest ~520-570, rising with pressure); 722 of the 1,024 cells lie on the glove (layout CSVs in the release). Coaxial piezoresistive fibres inlaid orthogonally in a machine-knitted glove, read by a grounding-based 32x32 circuit (5 kOhm feedback resistor for gloves, Arduino Nano).",
     "maker": "custom (MIT CSAIL)",
     "principle": "piezoresistive",
-    "range": "single sensor ~8 kOhm to 2 kOhm over 0.1-2 N; knit configurations up to 87.5 kPa",
-    "rate_hz": "~14",
+    "range": "single sensor ~8 kOhm to 2 kOhm over 0.1-2 N; knit configurations up to 87.5 kPa (not glove-specific)",
+    "rate_hz": 14,
     "calibrated": false
    },
    "modalities": [],
    "scale": {
-    "text": "glove: 108,305 scale-paired calibration frames + 26-object classification set; >1M tactile frames across all wearables at ~14 Hz; 1 subject",
-    "hours": null,
-    "episodes": null,
-    "frames": 108305,
+    "text": "glove only: ~10.8 h, 118 recordings, 566k tactile frames at ~14 Hz: 111 object recordings (27 objects + bare hand, ~5.7 h), 4 scale-pressing calibration recordings (~3.1 h), 3 recordings pressing a vest / robot-arm sleeve (~2.0 h); 1 subject",
+    "hours": 10.75,
+    "episodes": 118,
+    "frames": 566403,
     "tasks": null,
-    "objects": 26,
+    "objects": 27,
     "subjects": 1,
     "scenes": null,
     "scene_types": []
    },
    "availability": "public",
-   "access": "Dropbox links in the code repository.",
+   "access": "Open Dropbox shared folder linked as 'Dataset' on the project page (data_classification.zip 451 MB, data_sensing_correction.zip 222 MB); the per-zip Dropbox links in the GitHub README are disabled.",
    "license": "not stated",
    "caveats": [
-    "Glove data is object classification, not manipulation."
+    "Glove data is object classification (labelled only by object name) and sensor calibration, not annotated manipulation: no task descriptions, no video, no hand pose.",
+    "Touch values are raw 10-bit ADC counts, not N or kPa; the scale readings are raw counts too.",
+    "Many frames contain isolated cells at 1023; the authors' code treats readings above 1000 as artifacts and replaces them from neighbours.",
+    "The 32x32-to-glove layout files in the release are for the calibration glove (right-hand layout used in code); the layout for the October 2019 object recordings is not documented.",
+    "HDF5 arrays are preallocated: only the first frame_count rows are valid, the rest are zero.",
+    "The README's Dropbox links for the two data zips return 'shared link disabled' (checked 2026-10-15); use the project page's dataset folder."
    ],
    "links": {
     "project": "https://senstextile.csail.mit.edu/",
     "paper": "https://doi.org/10.1038/s41928-021-00558-0",
     "code": "https://github.com/YunzhuLi/senstextile",
-    "data": "https://github.com/YunzhuLi/senstextile"
+    "data": "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0"
    },
    "image": "https://senstextile.csail.mit.edu/img/teaserv2.png",
    "thumb": "assets/thumbs/senstextile.jpg",
@@ -1291,48 +1360,56 @@
      {
       "target": "body",
       "method": "imu",
-      "system": "Xsens MOCAP",
-      "note": "50 Hz, 19 joints; only for the sock pose dataset, not the glove"
+      "system": "Xsens MVN",
+      "note": "50 Hz, only for the separate sock pose dataset (tactile2pose folder); no hand or finger tracking for the glove"
      }
     ],
     "other": [
-     "digital scale readings (glove/sock calibration)",
-     "tactile socks, vest and KUKA arm sleeve recordings"
+     "digital scale readings (Lansheng) synchronized with the glove for calibration",
+     "tactile socks, vest and KUKA arm sleeve recordings in the same release"
     ]
    },
    "sources": [
     "https://senstextile.csail.mit.edu/",
-    "https://cdfg.mit.edu/pdf/journal/2021-luo-learning-human-environment-interactions-using-conformal.pdf",
+    "https://senstextile.csail.mit.edu/file/NE2021.pdf",
     "https://static-content.springer.com/esm/art%3A10.1038%2Fs41928-021-00558-0/MediaObjects/41928_2021_558_MOESM1_ESM.pdf",
-    "https://github.com/YunzhuLi/senstextile"
+    "https://github.com/YunzhuLi/senstextile",
+    "https://github.com/YunzhuLi/senstextile/tree/master/sensing_correction (data.py, utils.py, visualizer.py)",
+    "https://github.com/YunzhuLi/senstextile/tree/master/classification/object_classification (config.py, data.py)",
+    "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0",
+    "data_classification.zip and data_sensing_correction.zip (central directories read; all glove HDF5 files opened)"
    ],
    "unconfirmed": [
-    "objects = 26 comes only from the released data folder name 'glove_objclaassification_26obj' and the train_26obj script in the code repo; the paper text does not describe the glove object set.",
-    "frames = 108,305 counts only the glove calibration pairs; the size of the glove object-classification set is not stated.",
-    "rate ~14 Hz is stated for the whole dataset (socks 13-14 Hz); no glove-specific rate given.",
-    "Xsens is described only as a worn 'MOCAP' system; 'imu' is inferred from the product.",
-    "Reporting summary: one female subject from the research group."
+    "episodes = 118 counts glove HDF5 files: 111 in glove_objclaassification_26obj (28 folders x 4 rounds, emptycan has 3), 3 glove_calibration rec_* touch.hdf5 + 1 glove_calibration/test/calculator.hdf5, and 3 touch_1.hdf5 files in vest_calibration / kuka_calibration that the code loads as the glove.",
+    "frames = 566,403: sum of frame_count over those files (object set 313,476; scale calibration 151,206; calculator test 1,017; vest/KUKA glove 100,704). The paper's 108,305 'paired frames for glove calibration' matches the scale side (108,600 scale frames in the three rec_* None.hdf5).",
+    "hours = 10.75: sum of (last ts - first ts) over the same files = 38,711 s (object set 20,678 s; scale calibration 10,921 s; test 79 s; vest/KUKA 7,034 s).",
+    "objects = 27: object folder names in the release (26 in the code's 26-object list, plus 'emptycan'); 'barehand' is a 28th class with no object. The paper text does not describe the glove object set or what the wearer did with each object.",
+    "rate 14 Hz is the paper's figure for the whole dataset; frame timestamps give 14.1-15.6 Hz for the object set, 13.8-13.9 Hz for scale calibration, 13.6-14.8 Hz for the vest/KUKA glove files.",
+    "coverage tip/phalanx/palm: from glove_right_vis_sensor.csv, which defines 20 rectangular patches (14 finger patches: 2 + 4x3, and 6 palm patches) totalling 722 cells; the paper only says 'full-sized gloves (722 sensors over 160 cm2)'.",
+    "Higher ADC = more pressure: the masked cell sum correlates positively with the scale reading (r = 0.64 on rec_2019-12-17_18-40-25, frames without cells > 1000).",
+    "subjects = 1 from the Reporting Summary ('One consenting female subject with multiple recordings'); not stated per recording.",
+    "Xsens MVN is named in the Reporting Summary; 'imu' is inferred from the product."
    ],
    "rank": {
     "n": 2,
     "label": "Open",
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "license not stated"
     ]
    },
    "quality": {
-    "score": 0,
+    "score": 1,
     "of": 5,
     "flags": {
      "calibrated": false,
      "video": false,
      "hand_pose": false,
-     "scale": false,
+     "scale": true,
      "diversity": false
     }
-   }
+   },
+   "viewer": "se_mug_1"
   },
   {
    "id": "vtdexmanip",
@@ -1341,22 +1418,26 @@
    "authors": "Qingtao Liu et al.",
    "year": 2025,
    "venue": "ICLR 2025",
-   "summary": "Piezoresistive tactile gloves with egocentric HoloLens 2 video across 10 manipulation tasks and 182 objects, for visual-tactile pretraining.",
+   "summary": "Human right-hand manipulation with a 20-pad piezoresistive tactile glove, recorded as egocentric HoloLens 2 frames paired one-to-one with pad voltages: 2,032 sequences, 10 tasks, 182 objects, 5 subjects.",
    "embodiment": "human",
-   "hand": "Glove with 20 piezoresistive pads",
+   "hand": "Custom glove with 20 piezoresistive thin-film pressure sensors (right hand in the inspected frames)",
    "bimanual": false,
    "sensor": {
     "type": "piezoresistive",
     "taxels_per_hand": 20,
     "coverage": [
      "tip",
+     "phalanx",
      "palm"
     ],
-    "rate_hz": "200",
-    "note": "20 commercial thin-film pressure sensors per glove (18.3 mm on the thumb tip and palm, 10 mm elsewhere), STM32 + AD7606 readout; each pad calibrated with an F/T sensor at 0.5-7.5 N; left and right gloves exist.",
+    "rate_hz": 200,
+    "note": "Released per sequence as a (T, 4, 5) float64 array of pad voltages (V), one 4x5 frame per video frame (resampled from the 200 Hz glove stream; release rate not stated). Rest ~0.1 V, ADC rail ~3.3 V. Calibrated U = 0.7216 F^0.5025 + 0.0398 (0.5-7.5 N); the authors binarise at 0.2 V.",
     "principle": "piezoresistive",
     "range": "10 mm pads 20 g-2 kg, 18 mm pads 20 g-6 kg",
-    "calibrated": true
+    "calibrated": true,
+    "sensors_per_hand": 20,
+    "maker": "custom (Zhejiang University)",
+    "model": "thin-film pressure sensors (unnamed) + RKXS4040 resistance-voltage module + AD7606 ADC + STM32F205RBT6"
    },
    "modalities": [
     "egocentric"
@@ -1366,23 +1447,28 @@
     "tasks": 10,
     "objects": 182,
     "subjects": 5,
-    "text": "2,032 sequences, ~565K visual-tactile frame pairs, 10 tasks, 182 objects, 5 subjects",
+    "text": "2,032 sequences, 565,328 visual-tactile frame pairs, 10 tasks, 182 objects, 5 subjects; 66-1,507 frames per sequence (median 231)",
     "hours": null,
-    "frames": 565000,
+    "frames": 565328,
     "scenes": null,
     "scene_types": []
    },
    "availability": "public",
-   "access": "OneDrive (password vtdexmanip, given in the repository).",
-   "license": "code MIT; data not stated",
+   "access": "Password-protected OneDrive folder (password 'vtdexmanip', given in the GitHub README): five per-subject PNG archives sub1-5.tar.gz (57.7 GB) plus tactile.tar.gz (37 MB) and info.tar.gz.",
+   "license": "CC BY-NC-SA 4.0 (data); MIT (code)",
    "caveats": [
-    "Sparse pads rather than a dense array.",
-    "No hand pose."
+    "Tactile is 20 discrete pads (4x5 array), stored as voltages, not forces; convert with the paper's calibration U = 0.7216 F^0.5025 + 0.0398.",
+    "No timestamps and no frame rate in the release; the glove streams at 200 Hz but the files hold one tactile frame per video frame.",
+    "Video is only per-frame 424x240 PNGs inside 10-16 GB per-subject tar.gz archives.",
+    "1,605 of 2,032 sequences reach the ~3.3 V rail on at least one pad; 54 sequences contain negative values (min -5.07 V).",
+    "No hand pose, no per-sequence object label (task class only), no depth.",
+    "Data license is non-commercial share-alike (CC BY-NC-SA 4.0)."
    ],
    "links": {
     "paper": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
     "code": "https://github.com/LQTS/VTDexManip",
-    "data": "https://github.com/LQTS/VTDexManip"
+    "data": "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA",
+    "project": "https://lqts.github.io/VTDexManip/"
    },
    "image": "https://raw.githubusercontent.com/LQTS/VTDexManip/main/asset/scr/benchmark.png",
    "thumb": "assets/thumbs/vtdexmanip.jpg",
@@ -1393,7 +1479,7 @@
       "count": 1,
       "model": "Microsoft HoloLens 2",
       "type": "RGB",
-      "resolution": null,
+      "resolution": "424x240",
       "fps": null,
       "mount": "head"
      }
@@ -1405,24 +1491,31 @@
    },
    "sources": [
     "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+    "https://openreview.net/forum?id=jf7C7EGw21",
     "https://lqts.github.io/VTDexManip/",
     "https://github.com/LQTS/VTDexManip",
-    "https://github.com/LQTS/VTDexManipPretraining"
+    "https://github.com/LQTS/VTDexManipPretraining",
+    "https://github.com/LQTS/VTDexManipPretraining/blob/master/vitac_pretrain/visualize.py",
+    "https://github.com/LQTS/VTDexManipPretraining/blob/master/vitac_core/preprocessing/core.py",
+    "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA (License.txt, info.tar.gz, tactile.tar.gz, first 54 MB of sub4.tar.gz)"
    ],
    "unconfirmed": [
-    "frames: paper states '565k' visual-tactile frame pairs (rounded).",
-    "HoloLens 2 video resolution and frame rate are not stated, so hours cannot be derived.",
-    "Sensor maker not named; the conversion module is labelled RKXS4040 and the sensors only as 'thin film pressure sensor'.",
-    "The paper mentions calibration for both left- and right-hand gloves, but does not say whether any sequences are bimanual (the per-task table lists single-hand tasks).",
-    "Per-task trajectories (Table 8) sum to 2,032: PickUp 250, BottleCap 300, In-hand Reorientation 205, Bowl Unstacking 269, Articulated 168, Peg-in-hole 153, Pouring 196, Table-top 196, Scissors 106, Pressing 189."
+    "frames: 565,328 = sum of the lengths of the 2,032 tactile arrays in tactile.tar.gz (paper: '565k'); each checked sequence has exactly as many PNG frames as tactile frames.",
+    "hours: not derivable, since no frame rate or timestamps are released; if the HoloLens 2 camera ran at 30 fps (not stated) the 565,328 frames would be ~5.2 h.",
+    "Pad layout from the authors' visualize.py dot positions over hand.png (a right-hand outline): columns 0-3 = little, ring, middle, index finger with 4 pads each from tip (row 0) towards the base (row 3); column 4 rows 0-2 = thumb, row 3 col 4 = palm. The paper only says the 18.3 mm pads sit on the thumb tip and palm.",
+    "Right hand: the gloved hand is the right hand in the frames inspected (subject 4, PickUp); the paper says both left and right gloves were calibrated but does not say which hand each sequence used.",
+    "Subject = first digit of the sequence id (1-5), matching the sub1-5 archive that holds its frames; task = digits 2-3 (01-10). Per subject: 408 / 413 / 410 / 396 / 405 sequences.",
+    "Scene: the inspected frames show one lab tabletop; the number of scenes is not stated.",
+    "Release image size is 424x240 (paper text says 420x240).",
+    "Contact: 59.7% of frames have at least one pad >= 0.2 V (the authors' binarisation threshold)."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open + checked",
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "license: CC BY-NC-SA 4.0 (data); MIT (code)",
+     "samples checked in the viewer"
     ]
    },
    "quality": {
@@ -1435,18 +1528,19 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "viewer": "vt_502047"
   },
   {
    "id": "adl21",
    "name": "ADL-21",
-   "title": "Dataset of Tactile Signatures of the Human Right Hand in Twenty-One Activities of Daily Living",
-   "authors": "Rafael Cepriá-Bernal et al.",
+   "title": "Dataset of Tactile Signatures of the Human Right Hand in Twenty-One Activities of Daily Living Using a High Spatial Resolution Pressure Sensor",
+   "authors": "Javier Cepriá-Bernal and Antonio Pérez-González",
    "year": 2021,
-   "venue": "Sensors 2021",
-   "summary": "Tekscan Grip pressure system on the right hand of 22 subjects performing 21 activities of daily living.",
+   "venue": "Sensors 21(8):2594, 2021",
+   "summary": "Tekscan Grip 4256E pressure sensor (361 sensels) sewn on a glove on the right hand of 22 subjects, each performing 21 activities of daily living once.",
    "embodiment": "human",
-   "hand": "Tekscan Grip 4256E sewn on a glove",
+   "hand": "human right hand wearing a Tekscan Grip 4256E sensor sewn on a cotton glove, covered by polyethylene and latex gloves",
    "bimanual": false,
    "sensor": {
     "type": "piezoresistive",
@@ -1456,12 +1550,12 @@
      "phalanx",
      "palm"
     ],
-    "rate_hz": "50",
-    "note": "361 sensels in 18 regions on the volar hand, 4 mm pitch (16 mm2 per sensel), on a 29x25 manufacturer matrix; sewn on a cotton glove under polyethylene and latex gloves.",
+    "rate_hz": 50,
+    "note": "One sample = 725 values in kPa (the 29x25 manufacturer matrix flattened; 361 active sensels in 18 regions on the volar hand, 364 inactive cells stored as -1). Sensel pitch 4 mm, 16 mm2 per sensel.",
     "maker": "Tekscan",
     "model": "Grip System, sensor 4256E",
-    "principle": "piezoresistive",
-    "range": "0-517 kPa (75 psi sensor map)",
+    "principle": "resistive",
+    "range": "0-517 kPa (0-75 psi sensor map)",
     "calibrated": true
    },
    "modalities": [],
@@ -1474,16 +1568,24 @@
     "frames": 324747,
     "objects": 18,
     "scenes": 6,
-    "scene_types": []
+    "scene_types": [
+     "lab"
+    ]
    },
    "availability": "public",
-   "access": "Zenodo, about 50 MB.",
+   "access": "Open download from Zenodo: one 49.5 MB MATLAB v7.3 (HDF5) file, dataset.mat.",
    "license": "CC BY 4.0",
    "caveats": [
-    "Tactile only: no video or hand pose."
+    "Tactile only: no video, no hand pose, no object pose.",
+    "Right hand only; the left hand also took part in tasks 7, 8, 11 and 15 but was not measured.",
+    "Each subject performed each task once, in one session.",
+    "presRaw keeps the full 29x25 manufacturer matrix: 364 of 725 columns are inactive cells filled with -1.",
+    "Grip force (GF) and per-region contribution (CGF) are released only on the 101-step normalized, cross-subject time-warped timeline, not per raw frame.",
+    "presRaw contains values above the 517 kPa sensor map (max 1630 kPa); the paper discarded saturated sensels in its analysis, but the release does not flag them.",
+    "subjectSex labels are not uniform: 'Woman', 'Man' and once 'Male'."
    ],
    "links": {
-    "paper": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8068022/",
+    "paper": "https://doi.org/10.3390/s21082594",
     "data": "https://zenodo.org/records/4607289"
    },
    "setup": {
@@ -1492,28 +1594,35 @@
     "depth": false,
     "tracking": [],
     "other": [
-     "time-normalized, cross-subject-synchronized pressure",
-     "total grip force and per-region contribution"
+     "time-normalized (101 steps), cross-subject-synchronized pressure maps",
+     "total grip force (N) and per-region contribution to grip force (18 regions)"
     ]
    },
    "sources": [
-    "https://pmc.ncbi.nlm.nih.gov/articles/PMC8068022/",
     "https://zenodo.org/records/4607289",
-    "https://zenodo.org/records/4607289/files/Dataset%20description.pdf"
+    "https://zenodo.org/api/records/4607289",
+    "https://zenodo.org/records/4607289/files/Dataset%20description.pdf",
+    "https://zenodo.org/records/4607289/files/sensor.png",
+    "https://zenodo.org/records/4607289/files/dataset.mat",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC8068022/"
    ],
    "unconfirmed": [
-    "hours and frames computed from the released dataset.mat: 462 presRaw arrays totaling 324,747 rows at 50 Hz = 1.80 h (mean 14.06 s per trial, matching the paper's 'close to 14 s').",
-    "episodes = 462: the dataset is a 21x22 struct array and each subject performed each task once.",
-    "objects = 18 counts the items in the paper's Figure 2 (a-p, with (g) = spoon, knife, fork); fixtures such as the door handle, water tap and drawer are excluded.",
-    "scenes = 6 lab setups (Figure 1), all in one laboratory, so scene_types is empty.",
-    "The paper calls the sensor a 'thin resistive pressure sensor'; piezoresistive follows the Tekscan product class."
+    "frames = 324,747: sum of presRaw row counts over the 462 trials in dataset.mat.",
+    "hours = 1.80: 324,747 rows / 50 Hz (paper sampling rate) = 6,494.9 s; mean 14.06 s per trial, matching the paper's 'close to 14 s'.",
+    "episodes = 462: dataset is a 21x22 struct array (task x subject), all 462 presRaw arrays non-empty; the paper says each subject performed each task once.",
+    "objects = 18 counts the items in the paper's Figure 2 (a-p, with (g) = spoon, knife, fork); Table 1 also lists fixtures and parts (door handle, water tap, drawer handle, bottle cup, tube cap, phone and keyboard keys) that are not counted.",
+    "scenes = 6 setups arranged in one laboratory (paper Figure 1), so scene_types = lab.",
+    "principle 'resistive' is the paper's wording ('thin resistive pressure sensor'); type 'piezoresistive' is the closest catalog class.",
+    "Value checks on dataset.mat: 0.008% of active pressure samples exceed 517 kPa, in 246 of 462 trials; 34 of the 361 active sensels never read above 0 in any trial.",
+    "GF equals 0.016 N/kPa x the sum of presInterpSync over active sensels (16 mm2 per sensel), checked on three trials to 1e-13."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open + checked",
     "why": [
      "public download",
-     "samples not checked yet"
+     "license: CC BY 4.0",
+     "samples checked in the viewer"
     ]
    },
    "quality": {
@@ -1526,7 +1635,10 @@
      "scale": false,
      "diversity": true
     }
-   }
+   },
+   "image": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/1a5e/8068022/2d7bc2af6d12/sensors-21-02594-g003.jpg",
+   "viewer": "ad_t04_s01",
+   "thumb": "assets/thumbs/adl21.jpg"
   },
   {
    "id": "reachgrasp",
@@ -1534,10 +1646,10 @@
    "title": "Reach&Grasp: a multimodal dataset of the whole upper-limb during simple and complex movements",
    "authors": "Dario Di Domenico et al.",
    "year": 2025,
-   "venue": "Scientific Data 2025",
-   "summary": "Upper-limb reaching and grasping with a tactile glove, CyberGlove joint angles, Vicon motion capture and high-density EMG.",
+   "venue": "Scientific Data 12:233, 2025",
+   "summary": "10 subjects perform 16 right-arm tasks (hand and wrist movements, grasps, reach-grasp-manipulate) wearing a Bielefeld sensorized glove (58 piezoresistive taxels plus CyberGlove I bend sensors), with Vicon joint angles and bipolar and high-density EMG.",
    "embodiment": "human",
-   "hand": "Bielefeld tactile glove + CyberGlove",
+   "hand": "human right hand wearing the Bielefeld University sensorized glove: CyberGlove I bend sensors with a 58-taxel piezoresistive fabric lining on the palm side",
    "bimanual": false,
    "sensor": {
     "type": "piezoresistive",
@@ -1547,11 +1659,11 @@
      "phalanx",
      "palm"
     ],
-    "note": "17 palm taxels in three groups plus 41 on the fingers (index/pinky 9, middle/ring 8, thumb 7); uncalibrated; taxels 9, 11 and 14 (ring fingertip) are faulty.",
-    "maker": "custom (Bielefeld University, WearHap project)",
+    "note": "One sample = 58 float values, one per taxel: 17 palm taxels in three groups, index and pinky 9 each, middle and ring 8 each, thumb 7. Uncalibrated (the paper says the readings cannot be related to N or Pa), although the channel files label them N. Ring-fingertip taxels rdd, rdo, rdm (hardware 9, 11, 14) malfunction.",
+    "maker": "custom (Bielefeld University, WearHap EU project)",
     "principle": "piezoresistive",
-    "range": "uncalibrated (raw ADC, no N or Pa conversion)",
-    "rate_hz": "100",
+    "range": "uncalibrated (released values -338 to 4,906, no N or Pa conversion)",
+    "rate_hz": 100,
     "calibrated": false
    },
    "modalities": [
@@ -1562,24 +1674,35 @@
    "scale": {
     "tasks": 16,
     "subjects": 10,
-    "text": "~2.8 h of tactile, 158 recordings (10 subjects x 16 tasks, 10 repetitions each), 4 objects",
+    "text": "~2.8 h of tactile, 158 recordings (10 subjects x 16 tasks, minus 2), each with ~10 repetitions (1,603 segmented repetitions), 4 objects, one lab",
     "hours": 2.76,
     "episodes": 158,
-    "frames": null,
+    "frames": 995088,
     "objects": 4,
-    "scenes": null,
-    "scene_types": []
+    "scenes": 1,
+    "scene_types": [
+     "lab"
+    ]
    },
    "availability": "public",
-   "access": "IIT Dataverse (DOI 10.48557/L6OWMM), BIDS format.",
+   "access": "Open download without login from IIT Dataverse (DOI 10.48557/L6OWMM), file by file through the web UI, the Dataverse API or the code repository's download_dataset.sh; 2,389 files, 30.7 GB, of which the tactile CSVs are 306 MB.",
    "license": "CC BY 4.0",
    "caveats": [
-    "Reach-and-grasp movements rather than dexterous manipulation.",
-    "No video."
+    "Simple reach-and-grasp and single-DoF movements with 4 objects, not dexterous manipulation; right hand only.",
+    "No video released: sessions were video-recorded, but the video is only available on request.",
+    "Tactile values are uncalibrated, although the channels.tsv files and Supplementary Table 6 label them N.",
+    "Ring-fingertip taxels rdd, rdo and rdm (hardware IDs 9, 11, 14) malfunction (paper); taxel lmo reads 0 in all 158 tactile files.",
+    "Many taxels read exactly 0 for a whole recording, and 10 tactile files (non-contact tasks: wrist movements, hand opening, frontal reach) are entirely 0.",
+    "sub-03 FroRea and ReaCyl have no tactile or CyberGlove files (EMG and Vicon only).",
+    "sub-01 Trid tactile channels.tsv has 116 rows: 58 junk names (numbers from the first data row), then the 58 real names.",
+    "Each file is one continuous recording of ~10 repetitions; repetition boundaries are in code/Events_Reach&Grasp.mat in the code repository, not in the dataset.",
+    "Vicon data is released as joint angles only (no marker trajectories).",
+    "CSV files have no header; time is column 0 and channel names are in the matching channels.tsv."
    ],
    "links": {
     "paper": "https://doi.org/10.1038/s41597-025-04552-5",
-    "code": "https://github.com/DarioDiDomenico/SData_ReachGrasp"
+    "code": "https://github.com/DarioDiDomenico/SData_ReachGrasp",
+    "data": "https://doi.org/10.48557/L6OWMM"
    },
    "setup": {
     "cameras": [],
@@ -1589,44 +1712,64 @@
      {
       "target": "fingers",
       "method": "optical_mocap",
-      "system": "Vicon (10 IR cameras, 23 markers, RHand Bodybuilder model)",
-      "note": "100 Hz finger MCP/thumb joint angles"
+      "system": "Vicon (10 infrared cameras, Lock+ sync; 23 reflective markers in total), RHand Bodybuilder model in Vicon Nexus 2.12.1",
+      "note": "100 Hz joint angles only: MCP of each finger (Abs flexion + Proj flexion/abduction) and thumb STT and MCP; no marker trajectories released"
+     },
+     {
+      "target": "body",
+      "method": "optical_mocap",
+      "system": "Vicon Plug-in Gait model",
+      "note": "100 Hz X/Y/Z joint angles of left and right thorax, right shoulder, elbow and wrist"
      },
      {
       "target": "fingers",
       "method": "bend_sensor",
-      "system": "CyberGlove I",
-      "note": "100 Hz MCP/PIP, thumb, abduction, wrist pitch/yaw; per-subject scaling"
-     },
-     {
-      "target": "wrist",
-      "method": "optical_mocap",
-      "system": "Vicon Plug-in Gait",
-      "note": "wrist, elbow and shoulder joint angles, 100 Hz"
+      "system": "CyberGlove I (Version 1.1) inside the Bielefeld glove, recorded over ROS",
+      "note": "100 Hz, 18 angles in degrees: thumb rotation/MCP/IP/abduction, MCP and PIP of index..pinkie, three inter-finger abductions, palm arch, wrist pitch and yaw; sensor-to-angle scaling tuned per subject"
      }
     ],
     "other": [
-     "HD-sEMG 64 ch (OT Bioelettronica Sessantaquattro, 2 kHz)",
-     "bipolar EMG 10 ch (Cometa Wave Plus, 2 kHz)"
+     "HD-sEMG 64 ch (OT Bioelettronica Sessantaquattro, two 32-electrode GR10MM0804 grids on forearm flexors and extensors, monopolar, 2 kHz)",
+     "bipolar EMG 10 ch (Cometa Wave Plus, arm and shoulder muscles, 2 kHz)",
+     "session video recorded but not released (on request)"
     ]
    },
    "sources": [
     "https://www.nature.com/articles/s41597-025-04552-5",
+    "https://www.nature.com/articles/s41597-025-04552-5/tables/1",
+    "https://www.nature.com/articles/s41597-025-04552-5/tables/2",
+    "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41597-025-04552-5/MediaObjects/41597_2025_4552_MOESM1_ESM.pdf",
     "https://dataverse.iit.it/api/datasets/:persistentId/?persistentId=doi:10.48557/L6OWMM",
-    "https://dataverse.iit.it/api/access/datafile/14103"
+    "https://dataverse.iit.it/api/access/datafile/26576",
+    "https://dataverse.iit.it/api/access/datafile/14101",
+    "https://dataverse.iit.it/api/access/datafile/14102",
+    "https://dataverse.iit.it/api/access/datafile/14103",
+    "https://github.com/DarioDiDomenico/SData_ReachGrasp",
+    "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/Figure_9.m",
+    "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/Events_Reach%26Grasp.mat",
+    "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/Curser_Reach%26Grasp.mat",
+    "https://github.com/DarioDiDomenico/SData_ReachGrasp/blob/main/code/glove_mapping.JPG"
    ],
    "unconfirmed": [
-    "hours = sum of RecordingDuration in the 158 released tactile JSON sidecars (9,949 s); the paper only says each session lasted ~1 h including rests.",
-    "episodes = 158 tactile recordings (one per subject-task; FroRea and ReaCyl have 9 subjects each); each recording holds 10 repetitions, so ~1,580 repetitions.",
-    "objects = 4 (glass, bottle cap, table tennis ball, tennis ball), from paper Fig. 3B.",
-    "Sessions were video-recorded but the video is not released (available on request)."
+    "hours = 2.76: sum of RecordingDuration over the 158 tactile JSON sidecars (9,949.3 s), equal to the 995,088 tactile CSV rows / 100 Hz. Over all 160 recordings (EMG and Vicon) it is 10,056.9 s = 2.79 h.",
+    "frames = 995,088: total rows of the 158 released tactile CSVs (100 Hz).",
+    "episodes = 158 tactile recordings (one per subject-task); 160 recordings exist for EMG and Vicon. Events_Reach&Grasp.mat holds 1,603 start/end pairs (151 recordings with 10, 6 with 11, 3 with 9), versus the paper's '10 repetitions each'.",
+    "objects = 4 from Table 2 and Fig. 3B: glass (78 mm), bottle with a 28 mm screw cap, ping-pong ball (38 mm), tennis ball (67 mm); the table and the water are not counted.",
+    "scenes = 1: all tasks in one Vicon volume (5.1 x 4.2 x 2.5 m), subject seated at a table (Fig. 3A).",
+    "Recording durations 27.9-124.7 s (median 62.8 s) from the tactile JSON sidecars; all modalities of one subject-task share the same RecordingDuration.",
+    "CSV column i (1-58) maps to hardware taxel IDs 1-48 for i <= 48, and columns 49-58 to IDs 51, 54, 55, 57, 58, 59, 60, 61, 62, 63 (Supplementary Table 5 numbers IDs 1-65 with 49, 50, 52, 53, 56, 64, 65 unused; Fig. 2A uses the hardware IDs). Checked by matching the channels.tsv order to Supplementary Table 5 and by overlaying the 58 positions of Curser_Reach&Grasp.mat (reversed order, as in Figure_9.m) on glove_mapping.JPG.",
+    "All-zero taxels: in the 158 tactile files, the number of taxels that are exactly 0 for the whole file ranges 3-58 (median 43); lmo is 0 in 158/158, ldo 156, lpo 155. Entirely zero files: sub-07 WE, WS; sub-08 WE, WP, WS; sub-09 FroRea, HO, WF, WP; sub-10 WS.",
+    "Value range over all tactile files: -337.8 to 4,906.4; on average 7.1% of samples are negative. In sub-01 Cyl the malfunctioning rdd and rdo never read 0 (58-94 and 5-73).",
+    "The paper says the glove PC ran ROS Melodic on Ubuntu 20.04; the tactile and CyberGlove JSON sidecars say 'ROS Noetic'.",
+    "Paper Fig. 2 counts are 17 palm, 9 index, 8 middle, 8 ring, 9 pinky, 7 thumb; Supplementary Table 5 names give the same split (palm: 5 PalmWrist, 6 PalmThumb, 6 PalmFinger)."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open + checked",
     "why": [
      "public download",
-     "samples not checked yet"
+     "license: CC BY 4.0",
+     "samples checked in the viewer"
     ]
    },
    "quality": {
@@ -1639,7 +1782,10 @@
      "scale": false,
      "diversity": true
     }
-   }
+   },
+   "image": "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41597-025-04552-5/MediaObjects/41597_2025_4552_Fig2_HTML.png",
+   "viewer": "re_sub-03_task-Sph",
+   "thumb": "assets/thumbs/reachgrasp.jpg"
   },
   {
    "id": "hato",
@@ -1792,10 +1938,10 @@
    "title": "Dexterity from Touch: Self-Supervised Pre-Training of Tactile Representations with Robotic Play",
    "authors": "Irmak Guzey et al.",
    "year": 2023,
-   "venue": "CoRL 2023",
-   "summary": "Allegro hand covered with XELA uSkin pads, recorded during 2.5 hours of teleoperated play plus task demonstrations.",
+   "venue": "CoRL 2023 (PMLR 229)",
+   "summary": "Teleoperated Allegro hand on a Kinova Jaco arm with 15 XELA uSkin 4x4 three-axis pads, recorded as task-agnostic play plus demonstrations of 5 contact-rich tasks.",
    "embodiment": "robot",
-   "hand": "Allegro on a Kinova arm",
+   "hand": "Allegro (16 DoF, 4 fingers) on Kinova Jaco (6 DoF)",
    "bimanual": false,
    "sensor": {
     "type": "magnetic",
@@ -1804,40 +1950,51 @@
      "tip",
      "phalanx"
     ],
-    "note": "15 XELA uSkin pads (4 per finger, 3 on the thumb), each 4 x 4 three-axis taxels. Tactile stream at 100 Hz, images at 30 Hz (paper subsamples to ~10 Hz for training).",
+    "note": "touch_sensor_values.h5 'sensor_values' (N, 15, 16, 3) float32 at ~98.5 Hz: 15 pads (4 per finger, 3 on the thumb) x 4x4 taxels x (x, y, z). Uncalibrated readings; each recording starts near 0 (mean |value| ~2 in frame 0) and contacts reach about 1,000-3,700.",
     "maker": "XELA Robotics",
-    "model": "uSkin (Allegro integration)",
+    "model": "uSkin (Allegro hand integration, 4x4 pads)",
     "principle": "magnetic",
     "rate_hz": 100,
-    "calibrated": null
+    "calibrated": false,
+    "sensors_per_hand": 15
    },
    "modalities": [
     "rgb",
+    "multiview_rgb",
     "depth",
     "robot_action"
    ],
    "scale": {
-    "hours": 2.5,
+    "hours": 1.71,
     "tasks": 5,
-    "text": "~2.5 h teleoperated play (paper; release: 38 play recordings, 1.3 h of camera time) + 32 task demos over 5 tasks (5-8 per task)",
+    "text": "Paper: 2.5 h of teleoperated play (450k frames) + 6 demos per task over 5 tasks. Release: 38 play recordings (1.29 h) + 32 task demos (0.42 h; 5-8 per task).",
     "episodes": 70,
-    "frames": 450000,
+    "frames": 183176,
     "objects": null,
     "subjects": null,
     "scenes": null,
-    "scene_types": []
+    "scene_types": [
+     "lab tabletop"
+    ]
    },
    "availability": "public",
-   "access": "Google Drive (play_data.zip 31 GB, evaluation.zip 19 GB), linked from the project page.",
+   "access": "Public Google Drive folder linked from the project page and README: play_data.zip (31.4 GB) and evaluation.zip (18.9 GB), plus tactile_encoder.zip (1.3 GB of trained models).",
    "license": "not stated",
    "caveats": [
-    "No palm sensing reported.",
-    "Released play data is about 1.3 h (38 recordings) against 2.5 h in the paper."
+    "The release has 1.29 h of play data in 38 recordings, while the paper reports 2.5 h. The 449,188 tactile samples in the release do match the paper's '450k frames'.",
+    "The paper says 640x480 RGB cameras, but the released AVIs and depth arrays are 1280x720.",
+    "The tactile values are uncalibrated. The paper calls them 'susceptible to hysterisis' and says they 'can change when strong magnets or metals are in the vicinity'. Each recording starts near zero, so the values are offsets from the state at the start of the recording.",
+    "Depth files are empty (800-byte HDF5 with no datasets) in play demonstrations 16, 19 and 21 and in book_opening demonstrations 7 and 8 (both cameras).",
+    "Play recordings have one camera (cam_0). Task demos have two (cam_0, cam_1).",
+    "Depth is 41.6 of the 50.3 GB compressed release. All other files of a recording total 17-487 MB, mostly the MPEG-4 Part 2 AVI.",
+    "Pad-to-finger mapping is not documented. The code pads one empty slot before pad 0 and the tactile image gives pads 0-2 their own column, so pads 0-2 are probably the thumb.",
+    "Most of a play recording is idle or failed motion. The paper subsamples to frames where the fingertips and end effector moved more than 1 cm (play) or 2 cm (demos), and the released *_indices.pkl files hold those subsampled indices."
    ],
    "links": {
     "project": "https://tactile-dexterity.github.io/",
     "paper": "https://arxiv.org/abs/2303.12076",
-    "code": "https://github.com/irmakguzey/tactile-dexterity"
+    "code": "https://github.com/irmakguzey/tactile-dexterity",
+    "data": "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL"
    },
    "image": "https://tactile-dexterity.github.io/mfiles/tdex_algo.png",
    "thumb": "assets/thumbs/tdex.jpg",
@@ -1859,50 +2016,64 @@
      {
       "target": "fingers",
       "method": "robot_proprioception",
-      "system": "Allegro hand joint states (+ commanded joints, FK fingertip positions)",
-      "note": "16-DoF Allegro"
+      "system": "Allegro hand joint states (16 positions, velocities, efforts at ~300 Hz) + commanded joint positions + 12-D fingertip positions",
+      "note": "fingertip positions (4 tips x xyz) were written later than the recordings (file dates 2023-02-07 vs 2023-01), presumably by forward kinematics"
      },
      {
       "target": "wrist",
       "method": "robot_proprioception",
-      "system": "Kinova Jaco joint + Cartesian states",
-      "note": "6-DoF arm"
+      "system": "Kinova Jaco joint states (6) + Cartesian end-effector pose (position + quaternion) at 50 Hz",
+      "note": null
      },
      {
       "target": "fingers",
       "method": "vision_estimate",
-      "system": "Holo-Dex (VR headset hand tracking)",
-      "note": "live headset hand-pose tracking retargeted to the Allegro hand; T-Dex cites Holo-Dex but does not describe the headset"
+      "system": "Holo-Dex with an Oculus headset",
+      "note": "Teleoperation. 'The headset returns a pose estimate for each finger of the hand which is re-targeted to the Allegro Hand', followed by IK and a PD joint controller."
      },
      {
       "target": "wrist",
       "method": "other",
       "system": "Kinova built-in joystick",
-      "note": "arm teleoperated with the joystick, not hand tracking"
+      "note": "the arm is teleoperated with the joystick, not by hand tracking"
      }
     ],
-    "other": []
+    "other": [
+     "Allegro PD controller torque outputs ('efforts')",
+     "derived preview videos (camera + tactile dot plots) in 44 recordings"
+    ]
    },
    "sources": [
-    "https://arxiv.org/abs/2303.12076",
+    "https://arxiv.org/abs/2303.12076 (PDF v1 and HTML: Sec. III System Details, IV-A, IV-B, V-A, Appendix, Fig. 2 caption)",
+    "https://proceedings.mlr.press/v229/guzey23a.html (CoRL 2023 / PMLR 229)",
     "https://tactile-dexterity.github.io/",
-    "https://github.com/irmakguzey/tactile-dexterity (README.md, configs/preprocess.yaml, datasets/utils/preprocess.py)",
-    "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL (zip central directories of play_data.zip and evaluation.zip, AVI headers and camera .metadata read via range requests)"
+    "https://github.com/irmakguzey/tactile-dexterity (README.md, tactile_dexterity/tactile_data/tactile_image.py, utils/constants.py, utils/data.py; GitHub API license: null)",
+    "https://github.com/SridharPandian/Holo-Dex (configs/robot_camera.yaml, holodex/camera/realsense_camera.py)",
+    "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL (folder listing; zip central directories of play_data.zip and evaluation.zip read via byte ranges)",
+    "play_data.zip: all 15 files of demonstration_19 (incl. AVI and the empty depth h5); touch_sensor_values.h5, kinova_cartesian_states.h5, cam_*_rgb_video.metadata of all 38 recordings",
+    "evaluation.zip: all 17 files of joystick_movement/demonstration_6 (incl. both AVIs and depth h5); all non-depth/non-AVI files of bowl_unstacking/demonstration_2; touch, kinova cartesian and camera metadata of all 32 demos",
+    "https://xelarobotics.com/en/technology (uSkin: 3-axis sensing points, ~4x4 mm each, 'interference from nearby magnetic fields')"
    ],
    "unconfirmed": [
-    "hours=2.5 and frames=450k are the paper's play-data figures; the released play_data.zip holds 38 recordings whose camera metadata sums to 4,652 s (~1.3 h). The 32 released task demos add 1,497 s (~0.42 h).",
-    "episodes=70 = 38 released play recordings + 32 released task demos (joystick 8, cup unstacking 7, bowl unstacking 6, bottle cap 6, book opening 5); paper says 6 demos per task.",
-    "Cameras: play recordings carry only cam_0 (RGB .avi + depth .h5); task demos carry cam_0 and cam_1. 1280x720 @30 fps read from AVI headers. Camera roles inferred as static third-person from the paper figure; RealSense model not named.",
-    "Holo-Dex teleop is a VR-headset hand-tracking system per its own paper; T-Dex's text describing it is truncated in the arXiv PDF.",
-    "XELA uSkin principle (magnetic/Hall) is the manufacturer's known technology, not restated in the T-Dex paper."
+    "hours=1.71 is the sum of cam_0 record_duration over the released recordings: 4,651.5 s for 38 play recordings and 1,496.6 s for 32 task demos. The tactile streams total 4,563 s and 1,416 s. The paper's 2.5 h is not in the release.",
+    "frames=183,176 is the sum of cam_0 num_datapoints over all 70 recordings (138,652 play + 44,524 demos). The tactile sample count is 588,680 (449,188 play + 139,492 demos).",
+    "episodes=70 counts the 38 play_data/demonstration_* folders and the 32 evaluation/<task>/demonstration_* folders. Per task: joystick 8, cup unstacking 7, bowl unstacking 6, bottle cap 6, book opening 5. The paper says 6 per task.",
+    "rate_hz=100 is the paper's figure. The record_frequency attributes in the files read 98.2-99.3 Hz for tactile, 299 Hz for Allegro, 50 Hz for Kinova and 29-30 Hz for the cameras.",
+    "principle=magnetic is inferred from two statements: the paper's 'can change when strong magnets or metals are in the vicinity' and XELA's 'Our sensors can have interference from nearby magnetic fields'. Neither source names the transducer.",
+    "Coverage tip+phalanx is inferred from '4 on each finger and 3 on the thumb' and the camera images. Palm sensing is not reported.",
+    "The tactile axis meaning comes from the paper ('tri-axial force reading (forces in translational x, y, z)'). Which axis is normal is not documented. In the data, z is mostly positive under load (max ~2,000), while x and y take both signs.",
+    "Camera model: the paper says only 'Realsense'. Depth is uint16 z16 aligned to color according to Holo-Dex realsense_camera.py, which T-Dex uses for recording. The depth unit is not stated (the RealSense default is 1 mm); the median non-zero depth in joystick demo 6 is ~400-500.",
+    "Camera role 'third_person, static' is inferred from the frames: play cam_0 and task cam_0/cam_1 view the hand and table from fixed positions.",
+    "Units of Allegro/Kinova positions (rad), Kinova Cartesian position (m) and fingertip position (m) are inferred from magnitudes. Kinova joint angles reach ~7.1, so they are unwrapped. Effort units and the quaternion order are not stated.",
+    "scene_types 'lab tabletop' is inferred from the camera frames. The number of scenes, play objects and teleoperators is not stated.",
+    "The tracking method vision_estimate for Holo-Dex follows from the paper's 'The headset returns a pose estimate for each finger' and the Fig. 2 'Oculus Headset'. The headset model is not named."
    ],
    "rank": {
     "n": 2,
     "label": "Open",
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "license not stated"
     ]
    },
    "quality": {
@@ -1915,7 +2086,8 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "viewer": "td_bottle_cap_opening_8"
   },
   {
    "id": "gist_vta",
@@ -2344,9 +2516,9 @@
    "authors": "Jessica Yin et al.",
    "year": 2025,
    "venue": "arXiv 2512.08920",
-   "summary": "Open-source glove with three-axis magnetic taxels on fingertips and palm; human wiping demonstrations, with the same glove worn by the robot hand at deployment.",
+   "summary": "Open-source glove with 12 three-axis magnetic taxels on fingertips and palm; ~2 h of right-hand whiteboard-wiping demonstrations with a static RealSense D435 (RGB + IR stereo), of which one 8.4 s sample is released.",
    "embodiment": "human",
-   "hand": "OSMO glove (human and robot hand)",
+   "hand": "human right hand wearing the OSMO glove (the same glove is worn by a Psyonic Ability Hand at robot deployment)",
    "bimanual": false,
    "sensor": {
     "type": "magnetic",
@@ -2355,40 +2527,49 @@
      "tip",
      "palm"
     ],
-    "note": "12 three-axis taxels (5 fingertips + palm in three sections); each sensor PCB has two Bosch BMM350 3-axis magnetometers (differential, MuMetal-shielded) and a BHI360 6-axis IMU; raw flux in uT is used as tactile data. Paper policy and the public sample use only the 5 fingertips (30 values = 5 x 2 mags x 3 axes). Streams logged at 25 Hz.",
+    "note": "12 three-axis taxels: one per fingertip plus palm sensors in three sections. Each sensor PCB has two Bosch BMM350 3-axis magnetometers and one Bosch BHI360 6-axis IMU, under a soft magnetic elastomer (Ecoflex 00-30 + Magnequench MQFP-15-7) with a MuMetal shield; the two readings per taxel are used differentially. Raw magnetic flux (stated as uT) is the tactile signal. The paper policy and the released sample use only the 5 fingertip taxels: one sample = 30 values (5 fingertips x 2 magnetometers x XYZ).",
     "maker": "custom (Meta FAIR); DIY kit sold by WowRobo",
     "model": "OSMO tactile glove",
     "principle": "magnetic",
     "range": "0.3-80 N",
-    "calibrated": null
+    "calibrated": null,
+    "rate_hz": 25
    },
    "modalities": [
-    "rgb",
-    "hand_pose"
+    "rgb"
    ],
    "scale": {
     "hours": 2,
     "episodes": 140,
     "tasks": 1,
-    "text": "~2 h, 140 human wiping demonstrations in the robot workspace; no robot demonstrations",
+    "text": "~2 h, 140 human wiping demonstrations (paper); released: 1 sample demonstration, 211 frames, 8.4 s",
     "frames": null,
     "objects": null,
     "subjects": null,
     "scenes": 1,
-    "scene_types": []
+    "scene_types": [
+     "lab"
+    ]
    },
    "availability": "partial",
-   "access": "One sample demonstration on Google Drive, linked from the repository's data/README.md (2025-12-21); the full 140-demo set is not released yet. Hardware, firmware and code are open.",
-   "license": "hardware/code open",
+   "access": "One sample demonstration (folder \"00\", four Python pickles, 972 MB) on a public Google Drive folder linked from the repository's data/README.md (2025-12-21); the 140-demonstration set is not released, and data/download_data.sh is still empty. Hardware, firmware and code are in the GitHub repository.",
+   "license": "not stated",
    "caveats": [
-    "Hand pose is estimated from video (HaMeR, refined with stereo IR depth).",
-    "One task (wiping); the released sample uses the fingertip taxels only.",
-    "No robot data is recorded; the robot is used only for deployment."
+    "Only one 8.4 s sample demonstration is released; the paper's 140 demonstrations (~2 h) are not.",
+    "No license for the data or the repository: no LICENSE file, and the ROS package metadata says 'TODO: License declaration'.",
+    "Released tactile data covers the 5 fingertip taxels only (30 values per frame); palm taxels and the per-sensor IMU quaternions are not in the release.",
+    "No hand pose, depth or retargeted robot joints are released; they are produced by the repository's pipeline (SAM2 + HaMeR, FoundationStereo on the IR pair, mink IK).",
+    "The IR images are masked to a region of interest with white pixels (about 62-65% of each frame) for demonstrator privacy; the RGB images are not masked.",
+    "Data are Python pickles; the image files need numpy to unpickle, so load them with a restricted unpickler.",
+    "RGB frames are stored in BGR channel order (OpenCV bgr8).",
+    "Hand-tracking compatibility demos (Aria Gen 2, Quest 3, Apple Vision Pro, RGB video, Manus Quantum) appear on the project page but are not released as data.",
+    "No robot data is recorded; the robot (Franka + Psyonic Ability Hand wearing the glove) is used only for policy deployment."
    ],
    "links": {
     "project": "https://www.jessicayin.com/osmo_tactile_glove/",
     "paper": "https://arxiv.org/abs/2512.08920",
-    "code": "https://github.com/jessicayin/osmo_tactile_glove"
+    "code": "https://github.com/jessicayin/osmo_tactile_glove",
+    "data": "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf"
    },
    "image": "https://www.jessicayin.com/osmo_tactile_glove/photos/fig1_v1.png",
    "thumb": "assets/thumbs/osmo.jpg",
@@ -2397,22 +2578,22 @@
      {
       "role": "third_person",
       "count": 1,
-      "model": "Intel RealSense D435",
+      "model": "Intel RealSense D435 (color)",
       "type": "RGB",
-      "resolution": null,
+      "resolution": "1280x720",
       "fps": 25,
       "mount": "static",
-      "note": "human capture; single scene camera, extrinsically calibrated to the robot base; same placement used at robot deployment"
+      "note": "single scene camera, extrinsically calibrated to the robot base; same placement used at robot deployment. Stream configured at 1280x720 bgr8 30 fps and published to ROS2 every 0.04 s (25 Hz)."
      },
      {
       "role": "third_person",
       "count": 1,
-      "model": "Intel RealSense D435 (IR pair)",
+      "model": "Intel RealSense D435 (IR pair, same unit)",
       "type": "stereo",
       "resolution": "1280x720",
       "fps": 25,
       "mount": "static",
-      "note": "left/right IR images, cropped to ROI with white fill in the public sample; used offline for FoundationStereo depth"
+      "note": "left/right IR images (mono8), IR emitter disabled in the capture node; masked to a region of interest with white fill in the release; used offline for FoundationStereo depth"
      }
     ],
     "wrist_cameras": 0,
@@ -2422,41 +2603,54 @@
       "target": "fingers",
       "method": "vision_estimate",
       "system": "SAM2 mask + HaMeR",
-      "note": "human; 3-D keypoints and hand mesh from RGB"
+      "note": "3-D keypoints and hand mesh estimated from the RGB images after recording; not in the release"
      },
      {
       "target": "wrist",
       "method": "vision_estimate",
       "system": "HaMeR wrist refined with FoundationStereo depth from the IR pair",
-      "note": "human; Savitzky-Golay smoothed, then IK-retargeted (mink/MuJoCo) to Franka + Psyonic Ability Hand; 13-D robot joint labels stored"
-     },
-     {
-      "target": "fingers",
-      "method": "robot_proprioception",
-      "system": "Franka arm + Psyonic Ability Hand wearing the OSMO glove",
-      "note": "robot side used only for policy deployment; no robot data recorded for training"
+      "note": "Savitzky-Golay smoothed, then IK-retargeted (mink/MuJoCo) to Franka + Psyonic Ability Hand joint targets (13-D: 7 arm + 6 hand); not in the release"
      }
     ],
     "other": [
-     "per-taxel IMU on sensor PCB (unused in paper)",
-     "retargeted robot joint positions (7 Franka + 6 Ability)"
+     "per-taxel 6-axis IMU (BHI360) on each sensor PCB; quaternions logged by the ROS2 node but not released",
+     "retargeted robot joint positions (7 Franka + 6 Ability Hand) in the paper's training set, not released"
     ]
    },
    "sources": [
     "https://arxiv.org/abs/2512.08920",
-    "https://arxiv.org/pdf/2512.08920",
+    "https://arxiv.org/html/2512.08920",
     "https://www.jessicayin.com/osmo_tactile_glove/",
     "https://github.com/jessicayin/osmo_tactile_glove",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/main/README.md",
     "https://github.com/jessicayin/osmo_tactile_glove/blob/main/data/README.md",
-    "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf"
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/main/hardware/ros2/bowie_ros2_ws/bowie_ros/bowie_ros/bowie_node_synced.py",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/main/hardware/ros2/realsense_ros2_ws/realsense/realsense/realsense_node.py",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/main/scripts/bowie/convert_bag_to_pkl.py",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/main/firmware/BowieGlove/Core/Src/glove/glove.c",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/main/firmware/BowieGlove/Core/Src/glove/bhi360.c",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/main/hardware/ros2/bowie_ros2_ws/bowie_ros/package.xml",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/website/hardware_guides/sensor_assembly.md",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/website/hardware_guides/bom.md",
+    "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf",
+    "https://drive.google.com/drive/folders/1-tTdTRFNsCrTGjS2buRs-TcOSad3Dbmo",
+    "Google Drive files mags_public.pkl, rgbs_public.pkl, left_ir_public.pkl, right_ir_public.pkl (downloaded and read)"
    ],
    "unconfirmed": [
-    "Glove sensor sample rate not stated; 25 Hz is the ROS2 logging rate of all streams.",
-    "RGB resolution not stated; 1280x720 is stated for the IR images in the data README.",
-    "depth=false: no native depth stream is described; depth is computed offline from the IR stereo pair.",
-    "scenes=1 derived from 'policies deployed in the same environment used to collect the human demonstrations'.",
-    "'magnetic (Hall)' is the catalog category; the paper only says magnetometers (BMM350).",
-    "Whether palm taxel data was recorded in the 140 demos is not stated; paper omits palm for this task."
+    "hours = 2 and episodes = 140 are the paper's 'approximately two hours' and the project page's '140 demos'; the full set is not released, so neither was checked.",
+    "Released sample: 211 frames per stream (counted in all four pickles); 8.41 s from the first to last mags timestamp; mean step 40.07 ms (24.3-55.7 ms).",
+    "Sample recorded 2025-09-11 (UTC), derived from the mags timestamps (ns since Unix epoch).",
+    "fps 25 for the cameras is the ROS2 publish/logging rate (timer 0.04 s in realsense_node.py, paper 'logged as ROS2 bag files at 25 Hz'); the sensor stream itself is configured at 30 fps.",
+    "sensor rate_hz 25: firmware sets the BHI360 magnetometer virtual sensors to 25 Hz (glove.c) and the ROS2 node publishes synced packets every 0.04 s.",
+    "Unit: the paper and project page say raw magnetic flux in uT; the firmware forwards the BHI360 virtual-sensor int16 values without scaling. All released values are integers (z about -4,900 to -5,260).",
+    "mag0/mag1 per fingertip are the BHI360 'MAG_ID' stream and the 'MAG_PASS_META' stream of the same sensor board (sensor ids n and n+20 in bowie_node_synced.py); the paper describes two BMM350 magnetometers per PCB.",
+    "depth=false: the capture node also publishes aligned depth (16UC1), but it is not in the release; the paper computes depth offline from the IR pair.",
+    "scenes=1 derived from 'policies deployed in the same environment used to collect the human demonstrations'; scene_types 'lab' derived from the demonstrations being inside the robot's reachable workspace (Franka base visible in the RGB frames).",
+    "Task label 'wiping a stencilled marker pattern off a whiteboard with a sponge' combines the paper's task description with the RGB frames of the sample.",
+    "Whether palm taxels were recorded in the 140 demonstrations is not stated; the paper omits the palm for this task.",
+    "subjects and objects are not stated (the sample shows one gloved right hand, a sponge and a whiteboard).",
+    "'principle: magnetic' is the catalog category; the paper says magnetometers (BMM350) under a magnetized elastomer.",
+    "The project page's JSON-LD metadata carries \"license\": \"https://opensource.org/licenses/MIT\" for the page (ScholarlyArticle record) and the arXiv paper is CC BY 4.0; neither is stated for the data."
    ],
    "rank": {
     "n": 3,
@@ -2475,7 +2669,8 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "viewer": "os_00"
   },
   {
    "id": "humanoid_everyday",
@@ -2484,21 +2679,26 @@
    "authors": "Zhenyu Zhao et al.",
    "year": 2025,
    "venue": "arXiv 2510.08807",
-   "summary": "Large humanoid manipulation dataset on Unitree G1 and H1 robots; the G1 episodes use Dex3-1 hands with 9 pressure sensors per hand.",
+   "summary": "Teleoperated Unitree G1 and H1 humanoids on 246 everyday tasks; the G1 episodes carry Unitree Dex3-1 hand pressure sensors (9 per hand).",
    "embodiment": "robot",
-   "hand": "Unitree G1 + Dex3-1; H1 + Inspire",
+   "hand": "Unitree Dex3-1 (7 DoF) x 2 on G1; Inspire (6 DoF) x 2 on H1",
    "bimanual": true,
    "sensor": {
     "type": "unspecified",
-    "taxels_per_hand": null,
-    "coverage": [],
-    "note": "Unitree Dex3-1 hand pressure sensors, G1 episodes only (H1/Inspire episodes have none): 9 sensors per hand, type 'A' or 'B', up to 4 pressure values each (3 usable). Placement on the hand not documented.",
+    "taxels_per_hand": 33,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "note": "G1 episodes only: observation.tactile.values (18, 4) float32 + sensor_id 1-18, NaN-padded to 4. The release's observation.tactile.values (18, 4) is shifted by 13 values: the recording code (GitHub teleop/master.py + worker.py, commit 9611546) writes 13 odometry values and then 216 pressure values (left 9 x 12, then right 9 x 12) but reads the pressure block from where the odometry starts, reshapes to 18 x 12 and keeps indices [0, 2, 9, 11] or [3, 6, 8] per row. Release row k, kept index i is true value p = 12(k-1) + i - 13 (hand p // 108, sensor (p % 108) // 12, element p % 12; p < 0 = odometry), so a release row is not a sensor. After undoing the shift only 22 of the 66 Dex3-1 readings survive (12 left, 10 right); the right hand's palm 2 and 3 fall off the end, the other kept values are 30000 (no reading) or odometry (release row 1 and row 2 col 0). H1/Inspire episodes have empty tactile arrays.",
     "maker": "Unitree",
     "model": "Dex3-1 hand pressure sensors",
     "principle": "unspecified",
     "rate_hz": 30,
     "sensors_per_hand": 9,
-    "calibrated": null
+    "calibrated": null,
+    "range": "10 g - 2500 g (maker spec, 1 cm cylinder)"
    },
    "modalities": [
     "rgb",
@@ -2510,7 +2710,7 @@
    "scale": {
     "episodes": 8949,
     "tasks": 246,
-    "text": "Paper: 10.3K trajectories, 260 tasks in 7 categories, 3M+ frames @30 Hz; HF release: 8,949 episodes, 246 tasks, 3.44M frames (~31.8 h); tactile G1 subset: 4,064 episodes, ~16.5 h",
+    "text": "Paper: 10.3k trajectories, 260 tasks in 7 categories, 3M+ frames @30 Hz. HF release: 8,949 episodes, 246 tasks, 3,436,171 frames (~31.8 h); tactile G1 part: 4,064 episodes, 124 tasks, ~16.5 h",
     "hours": 31.8,
     "frames": 3436171,
     "objects": null,
@@ -2522,16 +2722,22 @@
     ]
    },
    "availability": "public",
-   "access": "Hugging Face USC-PSI-Lab/humanoid-everyday, ungated, LeRobot v2.1: 8,949 episodes, 246 tasks. The G1 episodes (about 4,064, ~16.5 h) are the tactile subset.",
+   "access": "Hugging Face USC-PSI-Lab/humanoid-everyday, ungated, LeRobot v2.1, one parquet per episode (~935 GB, depth and LiDAR inside the parquet); tactile only in the G1 episodes of this full release, not in the lite G1/H1 repos.",
    "license": "Apache-2.0",
    "caveats": [
-    "Tactile only on the G1 / Dex3-1 episodes; placement of the 9 sensors on the hand is not documented.",
-    "Release (8,949 episodes, 246 tasks) is smaller than the paper's 10.3K / 260."
+    "Tactile only on G1 / Dex3-1 episodes (4,064); H1 / Inspire episodes have empty tactile arrays.",
+    "observation.tactile.values is shifted by 13 values relative to the Dex3-1 pressure array (recording-code bug): release row 1 and the first value of row 2 hold odometry, every other kept value belongs to a different sensor than its sensor_id, and only 22 of 66 readings survive (12 left, 10 right; right palm 2-3 lost). The viewer undoes the shift.",
+    "Units are not documented, and Unitree's sensor-to-finger map could not be read (the order used comes from third-party G1 code); values sit near 101 kPa and rise by at most a few hundred units during manipulation.",
+    "The lite repos Humanoid-Everyday-G1/-H1 carry only joints, actions and video: no tactile, depth, LiDAR, IMU or odometry.",
+    "meta/episodes.jsonl 'instruction' is the same string for all 8,949 episodes; use meta/tasks.jsonl via task_index.",
+    "License differs between sources: HF card says Apache-2.0, GitHub README says MIT.",
+    "Release (8,949 episodes, 246 tasks) is smaller than the paper's 10.3k / 260; 5 episodes were dropped for zero valid frames."
    ],
    "links": {
     "project": "https://humanoideveryday.github.io/",
     "paper": "https://arxiv.org/abs/2510.08807",
-    "data": "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday"
+    "data": "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday",
+    "code": "https://github.com/physical-superintelligence-lab/Humanoid-Everyday"
    },
    "image": "https://humanoideveryday.github.io/static/images/block-2.jpg",
    "thumb": "assets/thumbs/humanoid_everyday.jpg",
@@ -2553,56 +2759,66 @@
      {
       "target": "fingers",
       "method": "robot_proprioception",
-      "system": "Dex3-1 (G1, 7 DoF) / Inspire (H1, 6 DoF) hand joint states",
+      "system": "Dex3-1 (G1, 14 hand joints) / Inspire (H1, 12 hand joints) joint states",
       "note": null
      },
      {
       "target": "body",
       "method": "robot_proprioception",
-      "system": "Unitree G1 (29 DoF) / H1 (27 DoF) arm + leg joint states, IMU, odometry",
+      "system": "Unitree G1 (29 DoF) / H1 (27 DoF): 14 arm + 15/13 leg-waist joints, IMU, odometry",
       "note": null
      },
      {
       "target": "fingers",
       "method": "vision_estimate",
       "system": "Apple Vision Pro hand tracking",
-      "note": "live finger keypoints -> dex-retargeting; raw teleoperator hand/head poses are released"
+      "note": "teleoperation: finger keypoints from the headset's cameras -> dex-retargeting to the robot hands"
      },
      {
       "target": "wrist",
       "method": "vision_estimate",
       "system": "Apple Vision Pro hand tracking",
-      "note": "wrist pose -> Pinocchio IK for the arms"
+      "note": "teleoperation: wrist poses -> Pinocchio IK for the arms; head/wrist poses are in the raw data.json schema, not in the HF LeRobot release"
      }
     ],
     "other": [
-     "Livox LiDAR point clouds (~6k points/step)",
+     "Livox LiDAR point cloud (~3.4k-5.2k points/frame in the release)",
      "IMU",
      "odometry",
      "language task descriptions"
     ]
    },
    "sources": [
-    "https://arxiv.org/abs/2510.08807",
+    "https://arxiv.org/abs/2510.08807 (HTML v3, Sec. III)",
     "https://humanoideveryday.github.io/",
-    "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday (README.md, meta/info.json)",
-    "https://huggingface.co/datasets/USC-PSI-Lab/Humanoid-Everyday-G1 (meta/info.json)",
-    "https://huggingface.co/datasets/USC-PSI-Lab/Humanoid-Everyday-H1 (meta/info.json)",
-    "https://github.com/physical-superintelligence-lab/Humanoid-Everyday (README.md)"
+    "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday (README.md, meta/info.json, meta/episodes.jsonl, meta/tasks.jsonl, meta/errors.jsonl, resume_meta/, file listing)",
+    "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday data/chunk-000/episode_000000.parquet (G1, all columns except depth) and episode_000040.parquet (H1)",
+    "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday data/*/episode_*.parquet tactile columns of 20 random G1 episodes",
+    "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday videos/chunk-000/egocentric/episode_000000.mp4",
+    "https://huggingface.co/datasets/USC-PSI-Lab/Humanoid-Everyday-G1 (meta/info.json, file listing)",
+    "https://huggingface.co/datasets/USC-PSI-Lab/Humanoid-Everyday-H1 (meta/info.json, file listing)",
+    "https://github.com/physical-superintelligence-lab/Humanoid-Everyday (README.md, scripts/he2lerobot.py)",
+    "https://www.unitree.com/Dex3-1 (sensing parameters)"
    ],
    "unconfirmed": [
-    "hours=31.8 derived from the HF LeRobot release (3,436,171 frames / 30 fps); the paper's 10.3K trajectories / 260 tasks are larger than the HF release (8,949 episodes / 246 tasks).",
-    "Tactile subset size derived from the G1 lite release: 4,064 episodes, 1,779,287 frames (~16.5 h); H1 release has 4,885 episodes.",
-    "taxels_per_hand left null: README says 9 sensors per hand with up to 4 values each (3 'usable' in the schema), so the per-hand value count is 27-36.",
-    "Camera model D435 is from the GitHub README calibration section; the paper says only 'Intel RealSense RGB-D'. Binocular IR feeds are streamed to the headset but not recorded.",
-    "scene count not stated; paper says 'indoor and outdoor environments'."
+    "hours=31.8 derived from the HF release: 3,436,171 frames / 30 fps. G1 part: 1,779,287 frames (16.5 h), H1 part: 1,656,884 frames (15.3 h), from meta/episodes.jsonl lengths.",
+    "Tactile task count 124 = distinct task_index over robot_type 'g1' episodes in meta/episodes.jsonl; tasks are split 124 G1 / 122 H1 with no task on both robots.",
+    "taxels_per_hand=33, coverage and range are Unitree's Dex3-1 product spec (9 sensors: 2x2 palm x3, 2x2 finger pad x3, 3x1 fingertip x3); the paper only says the Dex3-1 hands 'possess tactile sensors'. Release-to-sensor mapping: the 13-value shift is derived from the release's recording code (teleop/master.py + worker.py at 9611546) and checked on all frames of the 8 sampled episodes: release row 1 and row 2 col 0 equal odometry position x, z and quat w, y, z (max |diff| 0), and every recovered non-30000 value lands on its true sensor's element set (A = 0, 2, 9, 11 on pads and palm, B = 3, 6, 8 on fingertips; 0 violations). Surviving readings per hand (sensor, element): thumb pad 11, thumb tip 8, middle pad 2 and 11, middle tip 8, index pad 2 and 11, index tip 8, palm 1 2 and 11, plus left palm 2 and palm 3 element 11. Sensor order per hand (thumb pad, thumb tip, middle pad, middle tip, index pad, index tip, palm 1-3) is from third-party G1 code (i2ca/prometheus-vla g1_utils.py), not a Unitree document; the data agree (only sensors 2, 4, 6 carry type-B readings). Left-first order is from the recording code and agrees with joints and video in one-handed episodes 3422, 8208, 8174.",
+    "Unit not stated; readings near 1.01e5 suggest absolute pressure in Pa (inferred from magnitude). Rises above the episode's 5th percentile were 32-720 units in 10 sampled G1 episodes, and <=50 in episode 0 while the left hand holds a phone stand, so contact visibility is unverified.",
+    "22 live release cells (column 0 of rows 3-18, column 2 of rows 3, 5, 7, 12, 14, 16) and the odometry in rows 1-2 were observed in 20 of 20 random G1 episodes, not all 4,064; after the shift these are the 22 readings listed above.",
+    "Camera model D435 is from the GitHub README calibration section; the paper says only 'Intel RealSense RGB-D'. Head mount not stated; inferred from the egocentric view.",
+    "LiDAR unit not stated; point norms of ~4,000 suggest millimetres. Depth stored as float32 converted from uint16 (he2lerobot.py); depth unit not stated.",
+    "Accelerometer magnitude ~9.87 in episode 0 suggests m/s^2; IMU/odometry units not stated. Odometry is all zeros in the H1 episode checked (40).",
+    "Number of scenes, objects and operators not stated; paper says 'indoor and outdoor environments'.",
+    "Raw per-task zips (with AVP head/wrist poses, tau_ff, sensor_type) are linked from a Google spreadsheet in the README; that sheet was not opened."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open + checked",
     "why": [
      "public download",
-     "samples not checked yet"
+     "license: Apache-2.0",
+     "samples checked in the viewer"
     ]
    },
    "quality": {
@@ -2615,7 +2831,8 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "viewer": "hu_7997"
   },
   {
    "id": "robotacdex",

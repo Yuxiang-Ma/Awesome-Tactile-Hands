@@ -1,0 +1,766 @@
+{
+  "id": "actionsense",
+  "surveyed": "2026-10-15",
+  "entry": {
+    "id": "actionsense",
+    "name": "ActionSense",
+    "title": "ActionSense: A Multimodal Dataset and Recording Framework for Human Activities Using Wearable Sensors in a Kitchen Environment",
+    "authors": "Joseph DelPreto et al.",
+    "year": 2022,
+    "venue": "NeurIPS 2022 Datasets & Benchmarks",
+    "summary": "Kitchen activities in a mock kitchen with bimanual 32x32 conductive-thread tactile gloves, Manus bend-sensor finger tracking, Xsens body IMUs, Myo forearm EMG, Pupil Core eye tracking, 5 static RGB cameras and 2 microphones.",
+    "embodiment": "human",
+    "hand": "human hands wearing custom open-finger tactile gloves (conductive threads on a piezoresistive film) under Manus Prime II Xsens finger-tracking gloves",
+    "bimanual": true,
+    "sensor": {
+      "type": "piezoresistive",
+      "taxels_per_hand": 682,
+      "coverage": [
+        "phalanx",
+        "palm"
+      ],
+      "rate_hz": 6,
+      "note": "One sample per hand = 32x32 matrix of raw ADC readings (float32, 1,024 thread intersections); threads routed to a 23x19 palm grid, 5x9 thumb, 11x4 little finger and 13x4 on each other finger. Open-finger gloves: no fingertips. No matrix-to-hand-location map in the released files.",
+      "maker": "custom (MIT CSAIL)",
+      "model": null,
+      "principle": "piezoresistive",
+      "range": null
+    },
+    "modalities": [
+      "egocentric",
+      "multiview_rgb",
+      "depth",
+      "hand_pose",
+      "emg",
+      "imu",
+      "eye_tracking",
+      "audio"
+    ],
+    "scale": {
+      "hours": 13,
+      "episodes": 574,
+      "frames": null,
+      "tasks": 20,
+      "objects": null,
+      "subjects": 10,
+      "scenes": 1,
+      "scene_types": [
+        "kitchen"
+      ],
+      "text": "~13 h recorded (778 min; 543.5 min of activities), 574 labeled activity instances (9 subjects), 20 activities, 10 subjects, 1 mock kitchen; tactile on 6 subjects (S00-S05)"
+    },
+    "availability": "public",
+    "access": "Open HTTP download, no login: per-subject HDF5 (wearables), MP4/AVI (eye-tracking world video), AVI + timestamp TXT (5 RGB cameras) and WAV (microphones) linked from action-sense.csail.mit.edu/data.html; HTTP range requests supported.",
+    "license": "CC BY-NC-SA 4.0",
+    "caveats": [
+      "Tactile and finger tracking only for S00-S05; S06-S09 wore no tactile or finger-tracking gloves (their HDF5 files have no tactile-glove groups and only 23 Xsens segments).",
+      "S01: wearable data was lost after calibration and peeling cucumbers; its HDF5 holds only calibration plus 3 labeled activities.",
+      "Tactile is about 6 Hz in practice (the sensor table on the website lists 15 Hz).",
+      "Tactile is raw ADC counts with no conversion to force; the scale calibration periods (Dymo M25 weight_g) are provided for that. Metadata says range [0, 4095], but released values lie in 23..1023 with a ~560 resting baseline.",
+      "Tactile response during activities is small: the 20 most-loaded cells typically sit 10-150 counts above baseline.",
+      "The HDF5 tactile streams carry no map from the 32x32 matrix to palm/finger regions.",
+      "Finger tracking: the data page warns the Manus gloves may not have worked reliably; the Manus IMUs were disabled, so there is no lateral finger spread.",
+      "Depth camera data and the external RGB/audio for S06-S09 are listed as 'coming soon' on the data page; raw FLIR frames are not linked (only AVI videos).",
+      "Recordings are continuous per subject (1-4 splits); activities are Start/Stop label rows in experiment-activities, not separate files.",
+      "Label names vary across subjects (e.g. 'Get items from refrigerator/cabinets/drawers' vs 'Get/replace items ...')."
+    ],
+    "links": {
+      "project": "https://action-sense.csail.mit.edu/",
+      "paper": "https://openreview.net/forum?id=olvz0gAdGOX",
+      "data": "https://action-sense.csail.mit.edu/data.html",
+      "code": "https://github.com/delpreto/ActionNet"
+    },
+    "image": "https://action-sense.csail.mit.edu/images/wearable_sensors_v0.jpg",
+    "thumb": "assets/thumbs/actionsense.jpg",
+    "setup": {
+      "cameras": [
+        {
+          "role": "egocentric",
+          "count": 1,
+          "model": "Pupil Labs Pupil Core (world camera)",
+          "type": "RGB",
+          "resolution": "1280x720",
+          "fps": 30,
+          "mount": "head"
+        },
+        {
+          "role": "third_person",
+          "count": 5,
+          "model": "FLIR GS2-GE-20S4C-C",
+          "type": "RGB",
+          "resolution": "1600x1200",
+          "fps": 22,
+          "mount": "static"
+        },
+        {
+          "role": "third_person",
+          "count": 1,
+          "model": "Intel RealSense D415",
+          "type": "RGB-D",
+          "resolution": "640x480",
+          "fps": 15,
+          "mount": "static"
+        }
+      ],
+      "wrist_cameras": 0,
+      "depth": true,
+      "tracking": [
+        {
+          "target": "body",
+          "method": "imu",
+          "system": "Xsens MTw Awinda (17 IMUs)",
+          "note": "60 Hz; segment poses, joint angles, CoM, foot contacts; streamed live from MVN, with scripts to merge re-processed MVN estimates"
+        },
+        {
+          "target": "fingers",
+          "method": "bend_sensor",
+          "system": "Manus Prime II Xsens gloves",
+          "note": "bend sensors, glove IMUs disabled (finger curl only); finger segments arrive through the Xsens stream at 60 Hz (63 segments / 60 joints instead of 23 / 22); site warns finger data may be unreliable"
+        },
+        {
+          "target": "wrist",
+          "method": "imu",
+          "system": "Xsens MTw Awinda",
+          "note": "hand segment pose from the body suit; Myo armbands also give forearm orientation (arbitrary reference frame)"
+        }
+      ],
+      "other": [
+        "forearm EMG (Myo armband, 8 ch per arm, ~200 Hz)",
+        "forearm IMU (Myo, ~50 Hz)",
+        "eye tracking / gaze and pupil geometry (Pupil Core, ~115 Hz)",
+        "audio (2 microphones, 48 kHz)",
+        "Dymo M25 scale weight readings for tactile calibration",
+        "activity labels with Good/Bad/Maybe ratings",
+        "calibration labels (body, tactile, third-party)",
+        "experimenter notes",
+        "post-session surveys and body measurements"
+      ]
+    },
+    "sources": [
+      "https://action-sense.csail.mit.edu/",
+      "https://action-sense.csail.mit.edu/data.html",
+      "https://action-sense.csail.mit.edu/dataset_info.html",
+      "https://action-sense.csail.mit.edu/images/activity_stats.jpg",
+      "https://action-sense.csail.mit.edu/images/wearable_sensors_table.jpg",
+      "https://action-sense.csail.mit.edu/images/environment_sensors_table.jpg",
+      "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Paper-Datasets_and_Benchmarks.pdf",
+      "https://papers.nips.cc/paper_files/paper/2022/file/5985e81d65605827ac35401999aea22a-Supplemental-Datasets_and_Benchmarks.pdf",
+      "https://github.com/delpreto/ActionNet",
+      "https://github.com/delpreto/ActionNet/blob/master/recording_data/sensor_streamers/TouchStreamer.py",
+      "https://data.csail.mit.edu/ActionNet/wearable_data/ (all 19 wearable HDF5 files: tree, attributes, rates and tactile values read with HTTP range requests)",
+      "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S05/2022-06-14_20-36-27_actionNet-wearables_S05/2022-06-14_20-36-54_S05_eye-tracking-video-world_frame.mp4 (ffprobe)",
+      "https://data.csail.mit.edu/ActionNet/external_data/2022-06-14_experiment_S05/PG1_2022-06-14-20-35-06.avi (ffprobe) and .txt"
+    ],
+    "unconfirmed": [
+      "hours = 778.0 min total (includes calibration routines) / 60; activity time alone is 543.5 min (~9.1 h). Tactile streams in the release add up to ~24,570 s (~6.8 h) over the 12 HDF5 files of S00-S05 (left glove time_s spans).",
+      "episodes = 574 labeled activity instances over 9 subjects (website activity_stats table, 324.26 min). Pairing Start/Stop rows in the released files gives 586 instances (306 in S00-S05 incl. 3 for S01, 280 in S06-S09) and ~329 min.",
+      "frames: tactile frames in the release = 144,404 (left) + 142,048 (right) over S00-S05, counted from the HDF5 tactile_data shapes.",
+      "Tactile rate: website sensor table 15 Hz; supplement HDF5 table '6 [improveable to ~15]'; measured 4.5-6.2 Hz per file (time_s), 6.0-6.1 Hz in activity splits.",
+      "Egocentric world camera resolution 1280x720 MJPEG, ~29.6 fps: ffprobe of S05 world_frame.mp4 / worldGaze_frame.avi; not stated in the paper.",
+      "FLIR AVI videos are MPEG-4 Part 2, 1600x1200, 22 fps (ffprobe of S05 PG1); one timestamp line per frame in the PG*.txt files.",
+      "Subjects with tactile: data page says S06-S09 had no gloves; supplement says 'the last 5 subjects'; S01 has tactile only for calibration and 3 activities. The files confirm tactile groups in S00-S05 and none in S06-S09.",
+      "taxels_per_hand 682 = 23x19 + 5x9 + 11x4 + 3x(13x4), computed from the stated grids; the file stores all 1,024 matrix intersections.",
+      "Released tactile values never exceed 1023 in any of the 12 files although the stream metadata says [0, 4095] (TouchStreamer.py hard-codes that range); how the 32 thread rows/cols map to the hand regions is not documented.",
+      "subjects = 10 (data page and supplement); 70% male, 90% right-handed, 27.3 +- 3.7 years."
+    ]
+  },
+  "license": {
+    "name": "CC BY-NC-SA 4.0 (dataset); MIT License (code)",
+    "redistribution": "allowed",
+    "quote": "ActionSense is offered under a CC BY-NC-SA 4.0 license. You are free to use, copy, and redistribute the material for non-commercial purposes provided you give appropriate credit, provide a link to the license, and indicate if changes were made. If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original. You may not use the material for commercial purposes.",
+    "url": "https://action-sense.csail.mit.edu/#usage",
+    "note": "Re-hosted samples must stay non-commercial, credited, and under CC BY-NC-SA 4.0. The usage section also asks that no attempt be made to identify subjects and that data not be modified to further expose their identities. Site footer reads 'Copyright (c) MIT. All rights reserved.' (website)."
+  },
+  "download": {
+    "where": "https://action-sense.csail.mit.edu/data.html (files under https://data.csail.mit.edu/ActionNet/{wearable_data,external_data,survey_data}/)",
+    "access": "open",
+    "format": "Per subject and recording split: one HDF5 file of all wearable streams (device group > stream group > data, time_s, time_str), eye-tracking world video as MJPEG .mp4 (no overlay) and .avi (gaze overlay), 5 FLIR camera .avi (MPEG-4) + per-frame timestamp .txt, 2 microphone .wav + an HDF5 of chunk timestamps; XLSX/PDF surveys.",
+    "total_size": "~465 GB for the 182 linked files (sum of Content-Length): wearable HDF5 0.17-4.3 GB each (19 files, 39.1 GB), eye-tracking videos 0.75-24 GB each, FLIR AVIs 0.5-3.0 GB each, WAVs 0.2-0.7 GB each",
+    "per_episode": "Tactile for one 30 s activity (both hands, float32) is ~1.5 MB of the HDF5; the whole split's HDF5 is 0.25-4.3 GB, egocentric video for the split 2-24 GB, each FLIR camera 0.5-3 GB.",
+    "partial_fetch": "data.csail.mit.edu serves Accept-Ranges: bytes; h5py over an HTTP range-reading file object reads metadata, labels and the tactile arrays of one split for ~20-270 MB of transfer. MP4/AVI can be cut by byte range only roughly (no index for AVI); ffprobe/ffmpeg read them over HTTP."
+  },
+  "channels": [
+    {
+      "name": "tactile-glove-left/tactile_data",
+      "kind": "tactile_grid",
+      "shape": "(N, 32, 32)",
+      "rate_hz": 6,
+      "unit": "raw ADC counts (higher = more pressure); metadata range [0, 4095], observed 23..1023, rest ~558",
+      "frame": "32x32 conductive-thread matrix on the left glove (palm 23x19, thumb 5x9, little 11x4, other fingers 13x4); row/col to hand-location map not in the file",
+      "note": "float32 integers; own time_s per frame (4.5-6.2 Hz, irregular, dt ~0.15-0.21 s). Present only for S00-S05. No NaN, no stuck cells in the files checked; 0.0002% of samples at 1023."
+    },
+    {
+      "name": "tactile-glove-right/tactile_data",
+      "kind": "tactile_grid",
+      "shape": "(N, 32, 32)",
+      "rate_hz": 6,
+      "unit": "raw ADC counts; metadata range [0, 4095], observed 364..1023, rest ~565",
+      "frame": "32x32 matrix on the right glove, same layout as left",
+      "note": "Same as left. S01 right glove stream is shorter (1,265 s vs 1,790 s left)."
+    },
+    {
+      "name": "tactile-calibration-scale/weight_g",
+      "kind": "other",
+      "shape": "(N, 1)",
+      "rate_hz": 1,
+      "unit": "g",
+      "frame": "Dymo M25 postal scale",
+      "note": "Weight readings for tactile calibration (~0.9-5 Hz, asynchronous); siblings raw_data (N,6) int32 and accuracy_plusMinus_g (N,1). Present in all subjects' files."
+    },
+    {
+      "name": "experiment-calibration/tactile_gloves",
+      "kind": "other",
+      "shape": "(N, 5) |S80",
+      "rate_hz": null,
+      "unit": null,
+      "frame": null,
+      "note": "Start/Stop rows: ['Start/Stop', 'Valid', 'Notes', 'Left hand pose/object', 'Right hand pose/object']; scenarios: flat hand on scale, flat hand on bumps, single fingers on scale, mug, pan, plate, knife, jar."
+    },
+    {
+      "name": "xsens-segments/{position_cm, orientation_quaternion, orientation_euler_deg}",
+      "kind": "hand_pose",
+      "shape": "(N, 63, 3|4) with gloves; (N, 23, 3|4) without",
+      "rate_hz": 60,
+      "unit": "cm / quaternion / deg",
+      "frame": "Xsens global frame, Z-up right-handed (orientation_euler_deg says Y-up)",
+      "note": "23 body segments + 40 finger segments (left and right carpus, metacarpals, phalanges) from the Manus gloves; velocity/acceleration/angular velocity/angular acceleration (N, 23, 3) cover body segments only."
+    },
+    {
+      "name": "xsens-joints/{rotation_zxy_deg, rotation_xzy_deg, parent, child}",
+      "kind": "body_pose",
+      "shape": "(N, 60, 3) with gloves; (N, 22, 3) without; parent/child (N, 28)",
+      "rate_hz": 60,
+      "unit": "deg",
+      "frame": "Z-up right-handed",
+      "note": "22 body joints + finger joints when gloves are worn."
+    },
+    {
+      "name": "xsens-ergonomic-joints/{rotation_zxy_deg, rotation_xzy_deg}",
+      "kind": "body_pose",
+      "shape": "(N, 6, 3)",
+      "rate_hz": 60,
+      "unit": "deg",
+      "frame": "Z-up right-handed",
+      "note": "6 virtual posture joints."
+    },
+    {
+      "name": "xsens-CoM/{position_cm, velocity_cm_s, acceleration_cm_ss}",
+      "kind": "body_pose",
+      "shape": "(N, 3)",
+      "rate_hz": 60,
+      "unit": "cm, cm/s, cm/s^2",
+      "frame": "Z-up right-handed",
+      "note": "Body centre of mass."
+    },
+    {
+      "name": "xsens-sensors/{free_acceleration_cm_ss, magnetic_field, orientation_quaternion, orientation_euler_deg}",
+      "kind": "imu",
+      "shape": "(N, 17, 3|4)",
+      "rate_hz": 60,
+      "unit": "cm/s^2, magnetometer units, quaternion, deg",
+      "frame": "per IMU",
+      "note": "17 Xsens MTw IMUs (incl. right/left hand)."
+    },
+    {
+      "name": "xsens-foot-contacts/foot_contact_points",
+      "kind": "contact_flag",
+      "shape": "(N, 4)",
+      "rate_hz": 60,
+      "unit": "estimated contact (0/1)",
+      "frame": "left/right heel and toe",
+      "note": "Foot-ground contact estimated by Xsens, not hand touch."
+    },
+    {
+      "name": "xsens-time/stream_receive_time_s",
+      "kind": "other",
+      "shape": "(N, 1)",
+      "rate_hz": 60,
+      "unit": "s (epoch)",
+      "frame": null,
+      "note": "Receive time; each Xsens stream also has xsens_sample_number and xsens_time_since_start_s."
+    },
+    {
+      "name": "myo-left|right/emg",
+      "kind": "emg",
+      "shape": "(N, 8)",
+      "rate_hz": 200,
+      "unit": "normalized, int32 in [-128, 127]",
+      "frame": "8 electrode pairs around the forearm",
+      "note": "Measured ~160-200 Hz; also time_s_original."
+    },
+    {
+      "name": "myo-left|right/{acceleration_g, angular_velocity_deg_s, orientation_quaternion}",
+      "kind": "imu",
+      "shape": "(N, 3|3|4)",
+      "rate_hz": 50,
+      "unit": "g, deg/s, quaternion",
+      "frame": "Myo frame, x along the forearm (x_direction attribute); quaternion relative to an arbitrary fixed frame",
+      "note": "Measured ~41-50 Hz. Also gesture (|S25), battery, rssi, synced (asynchronous)."
+    },
+    {
+      "name": "eye-tracking-gaze/{position, point_3d, normal_3d, eye_center_3d, confidence, timestamp}",
+      "kind": "eye_tracking",
+      "shape": "(N, 2|3|3|3|1|1)",
+      "rate_hz": 115,
+      "unit": "normalized image coords (origin bottom-left) / mm",
+      "frame": "world camera image / world camera coordinate system",
+      "note": "Pupil Core; measured ~117 Hz."
+    },
+    {
+      "name": "eye-tracking-pupil/* (14 streams)",
+      "kind": "eye_tracking",
+      "shape": "(N, 1..3)",
+      "rate_hz": 115,
+      "unit": "mm, pixels, deg",
+      "frame": "eye camera",
+      "note": "Pupil geometry and confidence; eye-tracking-time/pupilCore_time_s (~145 Hz) for clock alignment."
+    },
+    {
+      "name": "eye-tracking-video-world / worldGaze / eye frame_timestamp",
+      "kind": "other",
+      "shape": "(N, 1)",
+      "rate_hz": 30,
+      "unit": "s (Pupil time)",
+      "frame": null,
+      "note": "Frame timestamps for the world video (~29.6 Hz) and eye camera (~117 Hz); eye-camera video itself is not released."
+    },
+    {
+      "name": "<split>_eye-tracking-video-world_frame.mp4 / worldGaze_frame.avi",
+      "kind": "camera",
+      "shape": "1280x720 MJPEG",
+      "rate_hz": 30,
+      "unit": null,
+      "frame": "head-mounted Pupil Core world camera",
+      "note": "Separate files; the .avi has the gaze estimate drawn on it. One S03 split has only the gaze-overlay version linked."
+    },
+    {
+      "name": "external_data/PG1..PG5_<time>.avi + .txt",
+      "kind": "camera",
+      "shape": "1600x1200 MPEG-4",
+      "rate_hz": 22,
+      "unit": null,
+      "frame": "5 static FLIR cameras (4 around the kitchen perimeter, 1 above the main table)",
+      "note": "Separate per-split videos with epoch timestamp per frame (s ns); released for S00-S05 only."
+    },
+    {
+      "name": "external_data/..._microphone_{overhead,sink}_chunked_data.wav + HDF5 chunk times",
+      "kind": "audio",
+      "shape": "mono 48 kHz, 16-bit, 2,048-sample chunks",
+      "rate_hz": 48000,
+      "unit": null,
+      "frame": "overhead omnidirectional / sink cardioid",
+      "note": "Released for S00-S05 only."
+    },
+    {
+      "name": "experiment-activities/activities",
+      "kind": "language",
+      "shape": "(N, 4) |S500",
+      "rate_hz": null,
+      "unit": null,
+      "frame": null,
+      "note": "['Activity', 'Start/Stop', 'Valid' (Good/Bad/Maybe), 'Notes'] rows with time_s; the group's 'Activities' attribute lists the 20 activity names."
+    },
+    {
+      "name": "experiment-calibration/{body, arms, gaze, hand_poses, third_party}",
+      "kind": "other",
+      "shape": "(N, 5..8) |S80",
+      "rate_hz": null,
+      "unit": null,
+      "frame": "kitchen floor coordinates (cm) in 'Target Locations' attribute",
+      "note": "Calibration period labels."
+    },
+    {
+      "name": "experiment-notes/notes",
+      "kind": "language",
+      "shape": "(N, 1) |S500",
+      "rate_hz": null,
+      "unit": null,
+      "frame": null,
+      "note": "Timestamped experimenter notes."
+    }
+  ],
+  "episode_index": {
+    "where": "data.html lists per-subject splits; inside each wearable HDF5, experiment-activities/activities holds timestamped Start/Stop rows",
+    "count": 574,
+    "fields": [
+      "subject (S00-S09, from file name)",
+      "recording split",
+      "activity",
+      "start/stop time_s",
+      "valid (Good/Bad/Maybe)",
+      "notes"
+    ],
+    "tasks": [
+      "Get/replace items from refrigerator/cabinets/drawers",
+      "Clear cutting board",
+      "Peel a cucumber",
+      "Slice a cucumber",
+      "Peel a potato",
+      "Slice a potato",
+      "Slice bread",
+      "Spread almond butter on a bread slice",
+      "Spread jelly on a bread slice",
+      "Open/close a jar of almond butter",
+      "Pour water from a pitcher into a glass",
+      "Clean a plate with a sponge",
+      "Clean a plate with a towel",
+      "Clean a pan with a sponge",
+      "Clean a pan with a towel",
+      "Get items from cabinets: 3 each large/small plates, bowls, mugs, glasses, sets of utensils",
+      "Set table: 3 each large/small plates, bowls, mugs, glasses, sets of utensils",
+      "Stack on table: 3 each large/small plates, bowls",
+      "Load dishwasher: 3 each large/small plates, bowls, mugs, glasses, sets of utensils",
+      "Unload dishwasher: 3 each large/small plates, bowls, mugs, glasses, sets of utensils"
+    ],
+    "scenes": [
+      "one mock kitchen at MIT CSAIL (refrigerator, island table, cabinets, sink, dishwasher, stove)"
+    ],
+    "subjects": "S00-S09; tactile + finger tracking for S00-S05 (S01 only calibration + 3 activities), none for S06-S09",
+    "splits": {
+      "S00": 2,
+      "S01": 1,
+      "S02": 4,
+      "S03": 2,
+      "S04": 1,
+      "S05": 2,
+      "S06": 2,
+      "S07": 1,
+      "S08": 1,
+      "S09": 3
+    },
+    "durations": "labeled instances run ~3-180 s (pour water 4-8 s; peeling 35-70 s; set table / load / unload dishwasher 90-180 s), counted for S04"
+  },
+  "sample": {
+    "decision": "sample",
+    "reason": "CC BY-NC-SA 4.0 allows non-commercial redistribution with credit and the same license; files are an open HTTP download with range requests, so single activity instances can be cut out of the per-split HDF5 and video files. Label the collection 'CC BY-NC-SA 4.0' and keep the samples non-commercial and credited.",
+    "prefix": "ac_",
+    "tasks_total": 20,
+    "tasks_sampled": 7,
+    "episodes": [
+      {
+        "id": "S00_2022-06-07_18-11-37_act028",
+        "task": "Pour water from a pitcher into a glass",
+        "scene": "MIT CSAIL mock kitchen (the only scene)",
+        "subject": "S00",
+        "duration_s": 10.1,
+        "window": null,
+        "why": "Pour, one hand: the right hand holds the pitcher. Figures are the converter's: mean of the 20 most raised thread crossings above rest on the 30 Hz episode clock, suspected faulty crossings left out (see checks.faulty_cells). Right glove +94 on average (peak +135), above +30 for 9.3 s of 10.1 s (longest run 9.3 s); left glove at rest (+9, peak +15). The longest pour instance in the release; all others are 4-10 s. With the faulty right-glove crossings (21, 31), (22, 31) included the right glove would read +129 (peak +172).",
+        "file": "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-07_experiment_S00/2022-06-07_18-10-55_actionNet-wearables_S00/2022-06-07_18-11-37_streamLog_actionNet-wearables_S00.hdf5",
+        "label": "Pour water from a pitcher into a glass",
+        "activity_index": 28,
+        "label_epoch_s": [
+          1654641882.591,
+          1654641892.693
+        ],
+        "object": "pitcher, glass",
+        "hands": "one (right)"
+      },
+      {
+        "id": "S04_2022-06-14_16-38-43_act032",
+        "task": "Open/close a jar of almond butter",
+        "scene": "MIT CSAIL mock kitchen (the only scene)",
+        "subject": "S04",
+        "duration_s": 8.5,
+        "window": null,
+        "why": "Twist, two hands (jar and lid). Weak contact: Figures are the converter's: mean of the 20 most raised thread crossings above rest on the 30 Hz episode clock, suspected faulty crossings left out (see checks.faulty_cells). Left glove +27 on average (peak +35), above +30 for 3.6 s of 8.5 s (longest run 3.1 s, palm and middle-finger crossings); right glove +11 (peak +87, above +30 for 0.5 s, longest run 0.2 s). All 15 jar instances of the tactile subjects (S00 act025-027, S02 22-35-11 act000-002, S03 13-52-57 act007-009, S04 act031-033, S05 20-46-12 act031-033) were rescanned with the faulty crossings left out: this is the only one above +30 for a continuous second or more (longest run in the other 14: 0.97 s, S03 act008; peaks reach +85 but for under a second). It replaces S00 act026, which met the rule only through the faulty right-glove crossings (21, 31), (22, 31): without them its right glove is above +30 for 0.2 s, left 0.0 s.",
+        "file": "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S04/2022-06-14_16-38-18_actionNet-wearables_S04/2022-06-14_16-38-43_streamLog_actionNet-wearables_S04.hdf5",
+        "label": "Open/close a jar of almond butter",
+        "activity_index": 32,
+        "label_epoch_s": [
+          1655241417.676,
+          1655241426.13
+        ],
+        "object": "jar of almond butter",
+        "hands": "two"
+      },
+      {
+        "id": "S02_2022-06-13_22-35-11_act016",
+        "task": "Clean a pan with a sponge",
+        "scene": "MIT CSAIL mock kitchen (the only scene)",
+        "subject": "S02",
+        "duration_s": 10.6,
+        "window": null,
+        "why": "Wipe, two hands: the left hand holds the pan, the right the sponge. Figures are the converter's: mean of the 20 most raised thread crossings above rest on the 30 Hz episode clock, suspected faulty crossings left out (see checks.faulty_cells). Left glove +60 on average (peak +71), above +30 for 10.6 s of 10.6 s (longest run 10.6 s); right glove +15 (peak +19). Chosen because in the S00 and S03 pan instances the left glove's top cells saturate at 1023 throughout (top-20 +360..+462, computed over all 1,024 matrix entries) and the S04 ones last only 4-6 s.",
+        "file": "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-13_experiment_S02/2022-06-13_22-34-45_actionNet-wearables_S02/2022-06-13_22-35-11_streamLog_actionNet-wearables_S02.hdf5",
+        "label": "Clean a pan with a sponge",
+        "activity_index": 16,
+        "label_epoch_s": [
+          1655174703.729,
+          1655174714.36
+        ],
+        "object": "pan, sponge",
+        "hands": "two"
+      },
+      {
+        "id": "S03_2022-06-14_13-52-57_act002",
+        "task": "Spread almond butter on a bread slice",
+        "scene": "MIT CSAIL mock kitchen (the only scene)",
+        "subject": "S03",
+        "duration_s": 28.0,
+        "window": null,
+        "why": "Spread with a knife, right hand. Figures are the converter's: mean of the 20 most raised thread crossings above rest on the 30 Hz episode clock, suspected faulty crossings left out (see checks.faulty_cells). Right glove +31 on average (peak +117), above +30 for 12.9 s of 28.0 s (longest run 2.1 s); 5 samples at 1023 on working right-glove crossings. Left glove at rest (+8, peak +17). With the six faulty right-glove crossings included the right glove would read +81 (peak +182).",
+        "file": "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S03/2022-06-14_13-52-21_actionNet-wearables_S03/2022-06-14_13-52-57_streamLog_actionNet-wearables_S03.hdf5",
+        "label": "Spread almond butter on a bread slice",
+        "activity_index": 2,
+        "label_epoch_s": [
+          1655229400.062,
+          1655229428.062
+        ],
+        "object": "bread slice, knife, almond butter",
+        "hands": "two (right active)"
+      },
+      {
+        "id": "S04_2022-06-14_16-38-43_act007",
+        "task": "Slice a cucumber",
+        "scene": "MIT CSAIL mock kitchen (the only scene)",
+        "subject": "S04",
+        "duration_s": 38.5,
+        "window": null,
+        "why": "Slice, two hands (knife right, cucumber left). Figures are the converter's: mean of the 20 most raised thread crossings above rest on the 30 Hz episode clock, suspected faulty crossings left out (see checks.faulty_cells). Right glove +66 on average (peak +93), above +30 for 36.8 s of 38.5 s (longest run 35.0 s); left glove +23 (peak +31, 0.5 s above +30). With the faulty right-glove crossings (21, 31), (22, 31) included the right glove would read +100 (peak +133).",
+        "file": "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S04/2022-06-14_16-38-18_actionNet-wearables_S04/2022-06-14_16-38-43_streamLog_actionNet-wearables_S04.hdf5",
+        "label": "Slice a cucumber",
+        "activity_index": 7,
+        "label_epoch_s": [
+          1655240415.361,
+          1655240453.91
+        ],
+        "object": "cucumber, knife, cutting board",
+        "hands": "two"
+      },
+      {
+        "id": "S05_2022-06-14_20-46-12_act012",
+        "task": "Peel a potato",
+        "scene": "MIT CSAIL mock kitchen (the only scene)",
+        "subject": "S05",
+        "duration_s": 53.3,
+        "window": null,
+        "why": "Peel with a peeler, two hands. Figures are the converter's: mean of the 20 most raised thread crossings above rest on the 30 Hz episode clock, suspected faulty crossings left out (see checks.faulty_cells). Right glove +42 on average (peak +101), above +30 for 35.0 s of 53.3 s, longest run 8.2 s (repeated strokes); left glove +16 (peak +29, below the threshold). No faulty crossing is flagged in this episode.",
+        "file": "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S05/2022-06-14_20-45-43_actionNet-wearables_S05/2022-06-14_20-46-12_streamLog_actionNet-wearables_S05.hdf5",
+        "label": "Peel a potato",
+        "activity_index": 12,
+        "label_epoch_s": [
+          1655255126.971,
+          1655255180.239
+        ],
+        "object": "potato, peeler",
+        "hands": "two"
+      },
+      {
+        "id": "S05_2022-06-14_20-46-12_act058",
+        "task": "Load dishwasher: 3 each large/small plates, bowls, mugs, glasses, sets of utensils",
+        "scene": "MIT CSAIL mock kitchen (the only scene)",
+        "subject": "S05",
+        "duration_s": 155.8,
+        "window": [
+          10.0,
+          55.0
+        ],
+        "why": "Pick and place of dishes. The label lasts 155.8 s, so it is cut to the 45 s window [10, 55] s after the label start (epoch 1655256878.238-1655256923.238): the 45 s span, scanned in 5 s steps, with the most right-glove frames above +30 (scan made with the faulty crossings included). Figures are the converter's: mean of the 20 most raised thread crossings above rest on the 30 Hz episode clock, suspected faulty crossings left out (see checks.faulty_cells). In the window: right glove +22 on average (peak +61), above +30 for 12.1 s, longest run 4.6 s; left glove at rest (+7, peak +17). With the faulty crossings included the right glove would read +30 (peak +103).",
+        "file": "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S05/2022-06-14_20-45-43_actionNet-wearables_S05/2022-06-14_20-46-12_streamLog_actionNet-wearables_S05.hdf5",
+        "label": "Load dishwasher: 3 each large/small plates, bowls, mugs, glasses, sets of utensils",
+        "activity_index": 58,
+        "label_epoch_s": [
+          1655256868.238,
+          1655257024.025
+        ],
+        "object": "plates, bowls, mugs, glasses, utensils, dishwasher",
+        "hands": "two"
+      }
+    ],
+    "fetch_estimate": "~2.5 GB of range reads, nothing near a whole file: wearable HDF5 ~50-100 MB per split for metadata, labels and the window's arrays (5 splits, ~0.5 GB); egocentric world MP4 (MJPEG, ~5.6 MB/s from file size / split duration) for 207 s of windows, ~1.2 GB; 5 FLIR AVIs at ~0.4-0.65 MB/s each for 207 s, ~0.6 GB plus index reads; WAV 48 kHz 16-bit mono ~0.1 MB/s x 2 mics, ~40 MB. Whole files would be 0.5-21 GB each (the 5 splits' world MP4s alone are ~80 GB).",
+    "rules_applied": "Tasks: 20 activities (> 6), so 7 taken, spanning action types (pour, twist, wipe, spread, slice, peel, pick and place), objects (pitcher, jar, pan, bread, cucumber, potato, dishes) and one- vs two-handed use; there is one kitchen, so scenes cannot vary. Fetching items, clearing the cutting board and stacking/setting the table were left out as near-duplicates of the dishwasher pick and place. Episodes: one per task, 7 in total, from 5 subjects (S00, S02, S03, S04 x2, S05 x2); only S00-S05 have tactile, and S01 was excluded because its wearable data stops after 3 activities. Episode = one labelled activity instance: id = <subject>_<split file time>_act<NNN>, where NNN is the 0-based index of the instance in the list built by pairing Start/Stop rows of experiment-activities/activities in file order; label_epoch_s holds the paired time_s values. All 7 are rated 'Good' with empty notes. Length: 6 instances are 8.5-53.3 s and kept whole (window null); the dishwasher instance (155.8 s) is cut to a 45 s window, given in seconds after the label start. Contact rule: 'rest' = per-cell median over the instance +-150 s; a frame is in contact when the mean of the 20 most-raised cells exceeds rest by 30 counts (its median over each whole split is 5-22 counts). Applied with the suspected faulty crossings (checks.faulty_cells) left out, every episode has a run of at least 2.1 s above it on at least one glove (S03 spread 2.1 s, S04 jar 3.1 s on the left glove at only +27 on average: weak contact, see its why; all others 4.6-35 s). Channels: both gloves present in every window, no NaN, no constant cells, 63-329 frames per glove at 5.8-6.3 Hz, max frame gap 0.22 s. Budget: tactile for the longest window is ~2.7 MB as float32 and must be quantised (counts are integers 0-1023, so uint16 or offsets from rest) to keep the episode JSON under 2 MB; video must be re-encoded (1280x720 MJPEG at ~5.6 MB/s and 1600x1200 MPEG-4) to stay under ~30 MB per episode.",
+    "checks": {
+      "method": "HDF5 read over HTTP range requests with h5py (scripts: scratchpad/scripts/ac/check_eps.py); FLIR coverage from the first and last lines of each split's PG1 timestamp .txt",
+      "tactile_channels": "tactile-glove-left/tactile_data and tactile-glove-right/tactile_data present in all 5 files and covering every window (see each episode's why).",
+      "tactile_calibration_scale": "tactile-calibration-scale/weight_g present in all 5 files (758-3,388 readings per file) but with 0 readings inside any sampled window: the scale is used only during the calibration periods, not during activities.",
+      "experiment_calibration_tactile_gloves": "Present in all 5 files; 2-46 label rows, except S02 split 22-35-11, whose tactile_gloves dataset has 0 rows (S02's glove calibration is in its 21-48-24 and 23-22-44 splits).",
+      "xsens_foot_contacts": "foot_contact_points present for every window (60 Hz, e.g. 607 frames for the 10.1 s pour); foot-ground, not hand touch.",
+      "finger_tracking": "xsens-segments/position_cm has 63 segments (23 body + 40 finger) in all 5 files, no NaN inside the windows.",
+      "hot_cells": "Superseded by faulty_cells. An earlier version of this check said that right-glove (21, 31) and (22, 31) sit at ~1016-1018 throughout the S00 pour and S04 slice windows and are part of the rest level; that was wrong. Their rest (median over the episode +-150 s) is 564-567 in S00 act026, S00 act028, S04 act007 and S05 act058, and they read ~+450 whenever they toggle high; only in S02 act016 and S03 act002 is their median ~1016-1018.",
+      "saturation": "No sampled window has working crossings pinned at 1023 except 5 samples in the S03 spread window (right glove). Left-glove pan cleaning in S00 and S03 saturates (top-20 cells ~+460 = 1023), which is why S02 was used.",
+      "external_coverage": "FLIR PG1 timestamps cover every window: S00 1654639864-1654643524, S02 1655174091-1655175101, S03 1655229133-1655231218, S04 1655239017-1655242784, S05 (single external split from 20:35:06) 1655253318-1655257573. Egocentric world_frame.mp4 exists for all 5 splits.",
+      "faulty_cells": "Right-glove crossings (21, 31), (22, 31) [distal end of the band assumed to be the index finger] and (21, 11), (21, 12), (22, 11), (22, 12) [palm] are two-state: over each episode +-150 s their samples sit either at rest (~565) or at ~1000-1023 (mostly ~1018), with almost none between 700 and 950, while the neighbouring crossings rise by at most ~+15 counts when they are high (e.g. S04 act007 (21, 31): 37 samples < 700, 0 in 700-950, 187 > 950 in the 38.5 s window). Pressure on the film would pass through the middle range and raise the neighbours, so they are taken as intermittent read-out faults. Rule (converter faulty_cells, per episode over the +-150 s span): >= max(10, 0.5 %) of samples above 950, at most 1/5 as many in 700-950, the largest median rise of non-flagged neighbouring crossings while high < 20 counts, and not high together with more than 3 crossings of its own matrix row. Flagged per episode: S00 act028 and S04 act007 / act032: (21, 31), (22, 31); S02 act016 and S05 act058: (21, 12), (22, 12), (21, 31), (22, 31) (in S02 the two col-31 cells sit at ~1018 for 69 % / 99.5 % of the span); S03 act002: all six ((22, 31) is at ~1018 throughout, (21, 31) 69 %); S05 act012: none. Over the whole S04 session (both gloves, 22,000 frames each) the rule flags only right (21, 31), (22, 31); the left glove has none in any sampled episode. Flagged crossings are drawn hollow ('inactive') and left out of the region sums, the top-20 contact metric and the colour range; each episode's notes name them with their share of high samples. The faulty cells inflated the earlier top-20 figures: e.g. S00 pour right 130 -> 94, S04 slice 101 -> 66, S03 spread 81 -> 31, S05 dishwasher 30 -> 22, and the old S00 jar episode from 34 (13.3 s above +30) to 12 (0.2 s).",
+      "line_bursts": "Left glove S02 22-35-11 (and S03 13-52-57 outside the crossings): single frames in which a run of 6-7 entries of one matrix row reads ~1018 (rows 0, 3, 28, 29, cols 22-28; 46 frames over the S02 episode +-150 s), a read-out fault; none falls inside a sampled episode. The non-crossing entries (28, 24)-(28, 28) and (29, 25) toggle the same way inside the S02 episode; they are not drawn and the notes say so."
+    }
+  },
+  "visualization": [
+    {
+      "channel": "tactile-glove-left/tactile_data",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "682 thread crossings on a 33x33 hand layout (palm 23x19, thumb 9x5 drawn sideways at the lower palm, index/middle/ring 4x13, little 4x11), counts above per-cell rest (median over the instance +-150 s), stored at the native ~6 Hz with a clock index; per-region sums and the mean of the 20 most raised cells plotted. Placement derived from the data (non-crossing entries barely respond), finger order and distal end assumed; 342 non-crossing matrix entries not drawn. Crossings flagged as faulty by the converter's faulty_cells rule (bimodal rest/~1018 with quiet neighbours) are drawn as hollow 'inactive' squares and left out of the sums, the top-20 plot and the colour range; none on the left glove in the sampled episodes",
+      "reason": null
+    },
+    {
+      "channel": "tactile-glove-right/tactile_data",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "same as left, mirrored (thumb on the left); suspected faulty crossings (21, 31), (22, 31), (21, 11), (21, 12), (22, 11), (22, 12), as flagged per episode, drawn hollow and left out of the sums, the top-20 plot and the colour range",
+      "reason": null
+    },
+    {
+      "channel": "tactile-calibration-scale/weight_g",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "0 readings inside every sampled episode (the scale is used only in calibration periods); stated in each episode's notes"
+    },
+    {
+      "channel": "experiment-calibration/tactile_gloves",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "calibration period labels; no calibration period falls inside a sampled activity"
+    },
+    {
+      "channel": "xsens-segments/{position_cm, orientation_quaternion, orientation_euler_deg}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "body and Manus finger segment poses, not touch; named in notes"
+    },
+    {
+      "channel": "xsens-joints/{rotation_zxy_deg, rotation_xzy_deg, parent, child}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "joint angles, not touch; named in notes"
+    },
+    {
+      "channel": "xsens-ergonomic-joints/{rotation_zxy_deg, rotation_xzy_deg}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "posture angles, not touch"
+    },
+    {
+      "channel": "xsens-CoM/{position_cm, velocity_cm_s, acceleration_cm_ss}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "body centre of mass, not touch"
+    },
+    {
+      "channel": "xsens-sensors/{free_acceleration_cm_ss, magnetic_field, orientation_quaternion, orientation_euler_deg}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "raw IMU, not touch"
+    },
+    {
+      "channel": "xsens-foot-contacts/foot_contact_points",
+      "shown_as": [
+        "series"
+      ],
+      "detail": "4 stacked 0/1 lines (left heel/toe, right heel/toe) on the 30 Hz clock; foot-ground, not hand touch",
+      "reason": null
+    },
+    {
+      "channel": "xsens-time/stream_receive_time_s",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "clock bookkeeping"
+    },
+    {
+      "channel": "myo-left|right/emg",
+      "shown_as": [
+        "series"
+      ],
+      "detail": "envelope: RMS over the 8 channels and a trailing 100 ms window, left and right arm",
+      "reason": null
+    },
+    {
+      "channel": "myo-left|right/{acceleration_g, angular_velocity_deg_s, orientation_quaternion}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "forearm IMU, not touch; named in notes"
+    },
+    {
+      "channel": "eye-tracking-gaze/{position, point_3d, normal_3d, eye_center_3d, confidence, timestamp}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "gaze, not touch; named in notes"
+    },
+    {
+      "channel": "eye-tracking-pupil/* (14 streams)",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "pupil geometry, not touch"
+    },
+    {
+      "channel": "eye-tracking-video-world / worldGaze / eye frame_timestamp",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "used to place each world-video frame on the episode clock"
+    },
+    {
+      "channel": "<split>_eye-tracking-video-world_frame.mp4 / worldGaze_frame.avi",
+      "shown_as": [
+        "video"
+      ],
+      "detail": "world_frame.mp4 cut to the episode, frames re-timed from the HDF5 frame times (each decoded frame identified by its own container pts, which equal frame time - first frame time + stream start; the source is variable-rate MJPEG, so counting decoded frames drifted up to 0.33 s), H.264 960x540 30 fps; end-of-episode frame comparison: offset 0 at the first, middle and last tick of all 7 episodes; the gaze-overlay avi is not used",
+      "reason": null
+    },
+    {
+      "channel": "external_data/PG1..PG5_<time>.avi + .txt",
+      "shown_as": [
+        "video"
+      ],
+      "detail": "PG3 (above the table) and PG4 (side view) cut to the episode, frames re-timed from the PG*.txt timestamps (frame i at pts i/22 s, identified by pts), H.264 640x480 30 fps; PG1, PG2, PG5 not shown",
+      "reason": null
+    },
+    {
+      "channel": "external_data/..._microphone_{overhead,sink}_chunked_data.wav + HDF5 chunk times",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "audio, not touch; named in notes"
+    },
+    {
+      "channel": "experiment-activities/activities",
+      "shown_as": [
+        "task"
+      ],
+      "detail": "activity label (and window) as the task band and caption",
+      "reason": null
+    },
+    {
+      "channel": "experiment-calibration/{body, arms, gaze, hand_poses, third_party}",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "calibration labels outside the sampled activities"
+    },
+    {
+      "channel": "experiment-notes/notes",
+      "shown_as": [
+        "not_shown"
+      ],
+      "detail": null,
+      "reason": "no experimenter note within 5 s of any sampled episode (the converter appends any it finds to the notes)"
+    }
+  ]
+}

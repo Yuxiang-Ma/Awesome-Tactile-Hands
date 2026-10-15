@@ -22,7 +22,7 @@
     "palm"
    ],
    "rate_hz": 30,
-   "note": "G1 episodes only: observation.tactile.values (18, 4) float32 + sensor_id 1-18; up to 4 readings per sensor, NaN-padded. In the release only 22 of 72 cells change (the rest are a constant 30000), and sensor 1 plus the first cell of sensor 2 hold odometry values. H1/Inspire episodes have empty tactile arrays.",
+   "note": "G1 episodes only: observation.tactile.values (18, 4) float32 + sensor_id 1-18, NaN-padded to 4. The release's observation.tactile.values (18, 4) is shifted by 13 values: the recording code (GitHub teleop/master.py + worker.py, commit 9611546) writes 13 odometry values and then 216 pressure values (left 9 x 12, then right 9 x 12) but reads the pressure block from where the odometry starts, reshapes to 18 x 12 and keeps indices [0, 2, 9, 11] or [3, 6, 8] per row. Release row k, kept index i is true value p = 12(k-1) + i - 13 (hand p // 108, sensor (p % 108) // 12, element p % 12; p < 0 = odometry), so a release row is not a sensor. After undoing the shift only 22 of the 66 Dex3-1 readings survive (12 left, 10 right); the right hand's palm 2 and 3 fall off the end, the other kept values are 30000 (no reading) or odometry (release row 1 and row 2 col 0). H1/Inspire episodes have empty tactile arrays.",
    "maker": "Unitree",
    "model": "Dex3-1 hand pressure sensors",
    "principle": "unspecified",
@@ -54,8 +54,8 @@
   "license": "Apache-2.0",
   "caveats": [
    "Tactile only on G1 / Dex3-1 episodes (4,064); H1 / Inspire episodes have empty tactile arrays.",
-   "In every sampled G1 episode only 22 of the 72 tactile cells vary; the others are a constant 30000 or NaN, and sensor 1 and the first value of sensor 2 contain odometry values (converter bug).",
-   "Sensor-to-location mapping and units are not documented; values sit near 101 kPa and rise by at most a few hundred units during manipulation.",
+   "observation.tactile.values is shifted by 13 values relative to the Dex3-1 pressure array (recording-code bug): release row 1 and the first value of row 2 hold odometry, every other kept value belongs to a different sensor than its sensor_id, and only 22 of 66 readings survive (12 left, 10 right; right palm 2-3 lost). The viewer undoes the shift.",
+   "Units are not documented, and Unitree's sensor-to-finger map could not be read (the order used comes from third-party G1 code); values sit near 101 kPa and rise by at most a few hundred units during manipulation.",
    "The lite repos Humanoid-Everyday-G1/-H1 carry only joints, actions and video: no tactile, depth, LiDAR, IMU or odometry.",
    "meta/episodes.jsonl 'instruction' is the same string for all 8,949 episodes; use meta/tasks.jsonl via task_index.",
    "License differs between sources: HF card says Apache-2.0, GitHub README says MIT.",
@@ -131,9 +131,9 @@
   "unconfirmed": [
    "hours=31.8 derived from the HF release: 3,436,171 frames / 30 fps. G1 part: 1,779,287 frames (16.5 h), H1 part: 1,656,884 frames (15.3 h), from meta/episodes.jsonl lengths.",
    "Tactile task count 124 = distinct task_index over robot_type 'g1' episodes in meta/episodes.jsonl; tasks are split 124 G1 / 122 H1 with no task on both robots.",
-   "taxels_per_hand=33, coverage and range are Unitree's Dex3-1 product spec (9 sensors: 2x2 palm x3, 2x2 finger pad x3, 3x1 fingertip x3); the paper only says the Dex3-1 hands 'possess tactile sensors'. The release's 6 sensors with NaN in the 4th column (ids 4,6,8,13,15,17) match the six 3x1 fingertip sensors; ids 1-9 = left and 10-18 = right hand is inferred, not documented.",
+   "taxels_per_hand=33, coverage and range are Unitree's Dex3-1 product spec (9 sensors: 2x2 palm x3, 2x2 finger pad x3, 3x1 fingertip x3); the paper only says the Dex3-1 hands 'possess tactile sensors'. Release-to-sensor mapping: the 13-value shift is derived from the release's recording code (teleop/master.py + worker.py at 9611546) and checked on all frames of the 8 sampled episodes: release row 1 and row 2 col 0 equal odometry position x, z and quat w, y, z (max |diff| 0), and every recovered non-30000 value lands on its true sensor's element set (A = 0, 2, 9, 11 on pads and palm, B = 3, 6, 8 on fingertips; 0 violations). Surviving readings per hand (sensor, element): thumb pad 11, thumb tip 8, middle pad 2 and 11, middle tip 8, index pad 2 and 11, index tip 8, palm 1 2 and 11, plus left palm 2 and palm 3 element 11. Sensor order per hand (thumb pad, thumb tip, middle pad, middle tip, index pad, index tip, palm 1-3) is from third-party G1 code (i2ca/prometheus-vla g1_utils.py), not a Unitree document; the data agree (only sensors 2, 4, 6 carry type-B readings). Left-first order is from the recording code and agrees with joints and video in one-handed episodes 3422, 8208, 8174.",
    "Unit not stated; readings near 1.01e5 suggest absolute pressure in Pa (inferred from magnitude). Rises above the episode's 5th percentile were 32-720 units in 10 sampled G1 episodes, and <=50 in episode 0 while the left hand holds a phone stand, so contact visibility is unverified.",
-   "22 live cells (sensors 3-18, column 0 on all, column 2 on ids 3,5,7,12,14,16) and the odometry overlap in sensors 1-2 were observed in 20 of 20 random G1 episodes, not all 4,064.",
+   "22 live release cells (column 0 of rows 3-18, column 2 of rows 3, 5, 7, 12, 14, 16) and the odometry in rows 1-2 were observed in 20 of 20 random G1 episodes, not all 4,064; after the shift these are the 22 readings listed above.",
    "Camera model D435 is from the GitHub README calibration section; the paper says only 'Intel RealSense RGB-D'. Head mount not stated; inferred from the egocentric view.",
    "LiDAR unit not stated; point norms of ~4,000 suggest millimetres. Depth stored as float32 converted from uint16 (he2lerobot.py); depth unit not stated.",
    "Accelerometer magnitude ~9.87 in episode 0 suggests m/s^2; IMU/odometry units not stated. Odometry is all zeros in the H1 episode checked (40).",
@@ -289,7 +289,7 @@
    "rate_hz": 30,
    "unit": "id",
    "frame": null,
-   "note": "ids 1-18 in every G1 frame checked"
+   "note": "release row ids 1-18 in every G1 frame checked; not the true sensor (see tactile.values shift)"
   },
   {
    "name": "observation.tactile.values",
@@ -297,8 +297,8 @@
    "shape": "(18, 4) G1 / (0,) H1",
    "rate_hz": 30,
    "unit": "not stated (values ~1.0e5, likely Pa absolute)",
-   "frame": "per Dex3-1 pressure sensor (palm, finger pad, fingertip); id-to-location mapping not documented",
-   "note": "Unitree 'usable_readings', NaN-padded to 4. Live: column 0 of ids 3-18 and column 2 of ids 3,5,7,12,14,16 (22 cells). Constant 30000: column 1 always, columns 2-3 elsewhere. Id 1 (all 4) and id 2 column 0 equal odometry position x, z and quat w, y, z. 4th column NaN on ids 4,6,8,13,15,17 (3-reading fingertip sensors). Id 15 column 0 has a ~2 kPa higher baseline."
+   "frame": "Dex3-1 pressure array shifted by 13 values; release row k, kept index i = true value p = 12(k-1)+i-13 (hand p//108, sensor (p%108)//12, element p%12)",
+   "note": "Kept indices per row [0, 2, 9, 11] or [3, 6, 8] (NaN-padded to 4), chosen by the recording code per release row, not per true sensor. Live: column 0 of rows 3-18 and column 2 of rows 3, 5, 7, 12, 14, 16 (22 cells) = 12 left and 10 right true readings (right palm 2-3 lost). Constant 30000 elsewhere. Row 1 (all 4) and row 2 column 0 equal odometry position x, z and quat w, y, z. Row 15 column 0 (= right index pad element 2) has a ~2 kPa higher baseline."
   },
   {
    "name": "action",
@@ -713,5 +713,228 @@
    "deformable/unfold_a_toolkit_g1"
   ],
   "scenes": null
- }
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Public, ungated HF release under Apache-2.0 (dataset card; the GitHub README says MIT); both allow redistribution with attribution. Tactile exists only in the G1 / Dex3-1 episodes, so only G1 episodes are sampled. Each episode is one single-row-group parquet, so the tactile, joint, IMU, odometry and action columns can be range-read without the depth column.",
+  "prefix": "hu_",
+  "tasks_total": 246,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "3422",
+    "task": "Basic/pour_water_from_a_kettle_into_a_cup_g1",
+    "scene": "indoor desk (kettle, red cup)",
+    "subject": null,
+    "duration_s": 19.2,
+    "window": null,
+    "why": "G1, task_index 85. Pour, one hand. Contact 4.0-6.2 s (kettle grasp; the hand is just right of the frame) and 14.5-14.9 s (release), 2.9 s total; peak +17.9 kPa on id 15 col 0; ids 16 col 0/2 and 12 col 2 also rise. Task 84 (pour_water_from_a_kettle_into_a_cup) holds the same 40 recordings as task 85: same file sizes for all 40 pairs, identical tactile/joint/action columns in ep 3382 vs 3422."
+   },
+   {
+    "id": "8208",
+    "task": "Tool_use/clean_a_table_with_duster",
+    "scene": "indoor desk (duster)",
+    "subject": null,
+    "duration_s": 17.7,
+    "window": null,
+    "why": "G1, task_index 227. Wipe, one hand with a tool. One continuous contact 9.8-13.0 s (3.2 s) while the duster is pressed on the table; peak +22.8 kPa on id 16 col 2."
+   },
+   {
+    "id": "7997",
+    "task": "Precision/open_a_bottle_g1",
+    "scene": "indoor desk (plastic bottle)",
+    "subject": null,
+    "duration_s": 27.5,
+    "window": null,
+    "why": "G1, task_index 221. Twist, two hands (left holds the bottle, right turns the cap). Contact 21.2-22.6 s (1.4 s, cap twist); peak +15.3 kPa on id 16 col 2. Only 2 of 40 episodes in this task have a contiguous >= 1 s contact."
+   },
+   {
+    "id": "8174",
+    "task": "Precision/unplug_a_charger",
+    "scene": "indoor desk (power strip, plug)",
+    "subject": null,
+    "duration_s": 13.4,
+    "window": null,
+    "why": "G1, task_index 226. Pull out a plug, one hand. Contact 4.5-8.8 s (3.9 s continuous from 4.9 s) while gripping and pulling the plug; peak +32.4 kPa on id 16 col 2, the largest rise among the picks."
+   },
+   {
+    "id": "6171",
+    "task": "HRI/pick_up_a_football_and_hand_it",
+    "scene": "indoor desk + a person (football)",
+    "subject": null,
+    "duration_s": 15.0,
+    "window": null,
+    "why": "G1, task_index 151. Two-handed lift and handover to a person. Contact 5.9-9.3 s (3.3 s) while both hands hold the ball; peak +1.8 kPa on id 15 col 0, smaller rise on id 16 col 0."
+   },
+   {
+    "id": "4943",
+    "task": "deformable/open_a_lunchbag",
+    "scene": "indoor desk (lunch bag)",
+    "subject": null,
+    "duration_s": 12.5,
+    "window": null,
+    "why": "G1, task_index 120. Deformable object, two hands spreading the opening. Contact 5.9-9.2 s (2.7 s continuous); peak +2.3 kPa on id 15 col 0, id 16 col 0/2 also rise. The best of 31 episodes >= 10 s in this task; 8 of the other 9 G1 deformable tasks show no >= 1 s contact in any episode checked."
+   },
+   {
+    "id": "7791",
+    "task": "Locomanip/walk_towards_outside_chair_and_pull_it_out",
+    "scene": "outdoor (brick paving, chair)",
+    "subject": null,
+    "duration_s": 14.2,
+    "window": null,
+    "why": "G1, task_index 214. Outdoor scene (task text: 'A chair is kept outside'; brick paving in the video), walk then pull. Contact 6.1-9.0 s (1.9 s longest run); peak +13.5 kPa on id 15 col 0. Only 1 of the task's 3 episodes shows contact."
+   },
+   {
+    "id": "826",
+    "task": "Articulated/extend_a_phone_stand",
+    "scene": "indoor floor (phone stand / tripod)",
+    "subject": null,
+    "duration_s": 20.4,
+    "window": null,
+    "why": "G1, task_index 20. Articulated object on the floor, two hands, pull upwards to extend. Contact 11.5-13.9 s (2.4 s); peak +9.3 kPa on id 16 col 2, also id 9 col 0 (+0.6 kPa)."
+   }
+  ],
+  "fetch_estimate": "~120 MB for the conversion: per episode the non-depth, non-LiDAR columns (0.20-0.43 MB, by parquet column-chunk sizes) plus the LiDAR column (9.7-20.5 MB) and the mp4 (0.55-1.13 MB); ~10 MB without LiDAR. The full 8 parquets would be 1.12 GB (depth 88-197 MB each). Already downloaded in this step: the 8 mp4s (6.6 MB) and tactile/sensor_id/timestamp/index column chunks of 1,421 G1 episodes (~35-55 KB each).",
+  "rules_applied": "8 of 246 release tasks, all from the 124 G1 tasks (H1 episodes have empty tactile arrays). Chosen to cover 7 categories (Basic, Tool_use, Precision x2, HRI, deformable, Locomanip, Articulated), actions pour / wipe / twist / pull-out / handover / spread / walk+pull / extend, desk, floor and outdoor scenes, and one- and two-handed tasks. One episode per task, 8 in total. Durations 12.5-27.5 s, so no window is needed. Tactile check: observation.tactile.values and observation.tactile.sensor_id were range-read for 1,421 G1 episodes of 10-60 s (up to 8 per task for all 124 tasks, then all in-range episodes of 24 candidate tasks). Every picked episode has (18,4) values and sensor ids 1-18 in every frame and no NaN in the 22 live cells. The release-wide faults are present in all of them and cannot be avoided: id 1 cols 0-3 equal odometry position x, z and quat w, y, and id 2 col 0 equals odometry quat z (verified per frame); 39 cells are a constant 30000 and 6 are NaN. One episode checked (7073, door handle) has a frame with only 17 sensors and was not picked. Contact = any live cell above its first-second median + 100 Pa (noise MAD 0-12 Pa, values come in 8 Pa steps), for a contiguous run of at least 1 s; picked episodes have runs of 1.4-3.9 s. Contact is sparse in this release: of the 1,229 episodes in the broad pass, 122 have >= 1 s in total above that threshold and 55 a contiguous >= 1 s run; 67 of 119 tasks had no episode with >= 1 s of contact, among them both eraser-wiping tasks, fold_towel, insert_flower_into_vase and open_a_drawer_g1. In each picked episode only 1-4 live cells rise above 100 Pa (mostly id 15 col 0 and id 16 col 2); the others stay within the noise. Each mp4 was decoded: H.264 yuv420p 640x480 with as many frames as parquet rows, and frames at contact onset and peak show the described task. subject is null: operators are not labelled. scene is taken from the task description and the video, since the release has no scene labels."
+ },
+ "visualization": [
+  {
+   "channel": "observation.tactile.values",
+   "shown_as": [
+    "grid",
+    "series"
+   ],
+   "detail": "Un-shifted to the true Dex3-1 sensors (the release's array starts 13 values early, inside the odometry; index arithmetic from the release's recording code, teleop/master.py + worker.py at 9611546). 22 recorded readings (12 left, 10 right) as cells on a schematic hand per side: fingertip 3x1 and pad 2x2 blocks for thumb, index, middle, three 2x2 palm pads; the 44 readings the release does not contain are hollow 'inactive' squares. Values = raw minus first-second median, fixed per-episode range. Plots: per-region sums and per-sensor sums per hand.",
+   "reason": null
+  },
+  {
+   "channel": "observation.tactile.sensor_id",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "release row ids 1-18; used for the un-shift arithmetic, not a measurement"
+  },
+  {
+   "channel": "observation.images.egocentric",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "release mp4 streamed from the HF repo at revision 71f6210",
+   "reason": null
+  },
+  {
+   "channel": "observation.hand_joints",
+   "shown_as": [
+    "series"
+   ],
+   "detail": "7 Dex3-1 joint angles per hand (rad), one plot per hand",
+   "reason": null
+  },
+  {
+   "channel": "task_index",
+   "shown_as": [
+    "task"
+   ],
+   "detail": "task name as title, category as label, task description in notes",
+   "reason": null
+  },
+  {
+   "channel": "observation.depth.egocentric",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch; ~100 MB per episode, not fetched"
+  },
+  {
+   "channel": "observation.lidar",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch; 10-20 MB per episode, not fetched"
+  },
+  {
+   "channel": "observation.imu.quaternion",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.imu.accelerometer",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.imu.gyroscope",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.imu.rpy",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.odometry.position",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.odometry.velocity",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.odometry.rpy",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.odometry.quat",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.arm_joints",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "observation.leg_joints",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch"
+  },
+  {
+   "channel": "action",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "not touch (hand + arm joint targets)"
+  },
+  {
+   "channel": "timestamp / frame_index / episode_index / index / next.done",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "bookkeeping; timestamp checked to be frame_index / 30"
+  }
+ ]
 }

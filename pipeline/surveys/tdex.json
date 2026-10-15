@@ -1,0 +1,497 @@
+{
+ "id": "tdex",
+ "surveyed": "2026-10-15",
+ "entry": {
+  "id": "tdex",
+  "name": "T-Dex",
+  "title": "Dexterity from Touch: Self-Supervised Pre-Training of Tactile Representations with Robotic Play",
+  "authors": "Irmak Guzey et al.",
+  "year": 2023,
+  "venue": "CoRL 2023 (PMLR 229)",
+  "summary": "Teleoperated Allegro hand on a Kinova Jaco arm with 15 XELA uSkin 4x4 three-axis pads, recorded as task-agnostic play plus demonstrations of 5 contact-rich tasks.",
+  "embodiment": "robot",
+  "hand": "Allegro (16 DoF, 4 fingers) on Kinova Jaco (6 DoF)",
+  "bimanual": false,
+  "sensor": {
+   "type": "magnetic",
+   "taxels_per_hand": 240,
+   "sensors_per_hand": 15,
+   "coverage": [
+    "tip",
+    "phalanx"
+   ],
+   "rate_hz": 100,
+   "note": "touch_sensor_values.h5 'sensor_values' (N, 15, 16, 3) float32 at ~98.5 Hz: 15 pads (4 per finger, 3 on the thumb) x 4x4 taxels x (x, y, z). Uncalibrated readings; each recording starts near 0 (mean |value| ~2 in frame 0) and contacts reach about 1,000-3,700.",
+   "maker": "XELA Robotics",
+   "model": "uSkin (Allegro hand integration, 4x4 pads)",
+   "principle": "magnetic",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "multiview_rgb",
+   "depth",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 1.71,
+   "episodes": 70,
+   "frames": 183176,
+   "tasks": 5,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab tabletop"
+   ],
+   "text": "Paper: 2.5 h of teleoperated play (450k frames) + 6 demos per task over 5 tasks. Release: 38 play recordings (1.29 h) + 32 task demos (0.42 h; 5-8 per task)."
+  },
+  "availability": "public",
+  "access": "Public Google Drive folder linked from the project page and README: play_data.zip (31.4 GB) and evaluation.zip (18.9 GB), plus tactile_encoder.zip (1.3 GB of trained models).",
+  "license": "not stated",
+  "caveats": [
+   "The release has 1.29 h of play data in 38 recordings, while the paper reports 2.5 h. The 449,188 tactile samples in the release do match the paper's '450k frames'.",
+   "The paper says 640x480 RGB cameras, but the released AVIs and depth arrays are 1280x720.",
+   "The tactile values are uncalibrated. The paper calls them 'susceptible to hysterisis' and says they 'can change when strong magnets or metals are in the vicinity'. Each recording starts near zero, so the values are offsets from the state at the start of the recording.",
+   "Depth files are empty (800-byte HDF5 with no datasets) in play demonstrations 16, 19 and 21 and in book_opening demonstrations 7 and 8 (both cameras).",
+   "Play recordings have one camera (cam_0). Task demos have two (cam_0, cam_1).",
+   "Depth is 41.6 of the 50.3 GB compressed release. All other files of a recording total 17-487 MB, mostly the MPEG-4 Part 2 AVI.",
+   "Pad-to-finger mapping is not documented. The code pads one empty slot before pad 0 and the tactile image gives pads 0-2 their own column, so pads 0-2 are probably the thumb.",
+   "Most of a play recording is idle or failed motion. The paper subsamples to frames where the fingertips and end effector moved more than 1 cm (play) or 2 cm (demos), and the released *_indices.pkl files hold those subsampled indices."
+  ],
+  "links": {
+   "project": "https://tactile-dexterity.github.io/",
+   "paper": "https://arxiv.org/abs/2303.12076",
+   "code": "https://github.com/irmakguzey/tactile-dexterity",
+   "data": "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL"
+  },
+  "image": "https://tactile-dexterity.github.io/mfiles/tdex_algo.png",
+  "thumb": "assets/thumbs/tdex.jpg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 2,
+     "model": "Intel RealSense (model not stated)",
+     "type": "RGB-D",
+     "resolution": "1280x720",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Allegro hand joint states (16 positions, velocities, efforts at ~300 Hz) + commanded joint positions + 12-D fingertip positions",
+     "note": "fingertip positions (4 tips x xyz) were written later than the recordings (file dates 2023-02-07 vs 2023-01), presumably by forward kinematics"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "Kinova Jaco joint states (6) + Cartesian end-effector pose (position + quaternion) at 50 Hz",
+     "note": null
+    },
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "Holo-Dex with an Oculus headset",
+     "note": "Teleoperation. 'The headset returns a pose estimate for each finger of the hand which is re-targeted to the Allegro Hand', followed by IK and a PD joint controller."
+    },
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "Kinova built-in joystick",
+     "note": "the arm is teleoperated with the joystick, not by hand tracking"
+    }
+   ],
+   "other": [
+    "Allegro PD controller torque outputs ('efforts')",
+    "derived preview videos (camera + tactile dot plots) in 44 recordings"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2303.12076 (PDF v1 and HTML: Sec. III System Details, IV-A, IV-B, V-A, Appendix, Fig. 2 caption)",
+   "https://proceedings.mlr.press/v229/guzey23a.html (CoRL 2023 / PMLR 229)",
+   "https://tactile-dexterity.github.io/",
+   "https://github.com/irmakguzey/tactile-dexterity (README.md, tactile_dexterity/tactile_data/tactile_image.py, utils/constants.py, utils/data.py; GitHub API license: null)",
+   "https://github.com/SridharPandian/Holo-Dex (configs/robot_camera.yaml, holodex/camera/realsense_camera.py)",
+   "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL (folder listing; zip central directories of play_data.zip and evaluation.zip read via byte ranges)",
+   "play_data.zip: all 15 files of demonstration_19 (incl. AVI and the empty depth h5); touch_sensor_values.h5, kinova_cartesian_states.h5, cam_*_rgb_video.metadata of all 38 recordings",
+   "evaluation.zip: all 17 files of joystick_movement/demonstration_6 (incl. both AVIs and depth h5); all non-depth/non-AVI files of bowl_unstacking/demonstration_2; touch, kinova cartesian and camera metadata of all 32 demos",
+   "https://xelarobotics.com/en/technology (uSkin: 3-axis sensing points, ~4x4 mm each, 'interference from nearby magnetic fields')"
+  ],
+  "unconfirmed": [
+   "hours=1.71 is the sum of cam_0 record_duration over the released recordings: 4,651.5 s for 38 play recordings and 1,496.6 s for 32 task demos. The tactile streams total 4,563 s and 1,416 s. The paper's 2.5 h is not in the release.",
+   "frames=183,176 is the sum of cam_0 num_datapoints over all 70 recordings (138,652 play + 44,524 demos). The tactile sample count is 588,680 (449,188 play + 139,492 demos).",
+   "episodes=70 counts the 38 play_data/demonstration_* folders and the 32 evaluation/<task>/demonstration_* folders. Per task: joystick 8, cup unstacking 7, bowl unstacking 6, bottle cap 6, book opening 5. The paper says 6 per task.",
+   "rate_hz=100 is the paper's figure. The record_frequency attributes in the files read 98.2-99.3 Hz for tactile, 299 Hz for Allegro, 50 Hz for Kinova and 29-30 Hz for the cameras.",
+   "principle=magnetic is inferred from two statements: the paper's 'can change when strong magnets or metals are in the vicinity' and XELA's 'Our sensors can have interference from nearby magnetic fields'. Neither source names the transducer.",
+   "Coverage tip+phalanx is inferred from '4 on each finger and 3 on the thumb' and the camera images. Palm sensing is not reported.",
+   "The tactile axis meaning comes from the paper ('tri-axial force reading (forces in translational x, y, z)'). Which axis is normal is not documented. In the data, z is mostly positive under load (max ~2,000), while x and y take both signs.",
+   "Camera model: the paper says only 'Realsense'. Depth is uint16 z16 aligned to color according to Holo-Dex realsense_camera.py, which T-Dex uses for recording. The depth unit is not stated (the RealSense default is 1 mm); the median non-zero depth in joystick demo 6 is ~400-500.",
+   "Camera role 'third_person, static' is inferred from the frames: play cam_0 and task cam_0/cam_1 view the hand and table from fixed positions.",
+   "Units of Allegro/Kinova positions (rad), Kinova Cartesian position (m) and fingertip position (m) are inferred from magnitudes. Kinova joint angles reach ~7.1, so they are unwrapped. Effort units and the quaternion order are not stated.",
+   "scene_types 'lab tabletop' is inferred from the camera frames. The number of scenes, play objects and teleoperators is not stated.",
+   "The tracking method vision_estimate for Holo-Dex follows from the paper's 'The headset returns a pose estimate for each finger' and the Fig. 2 'Oculus Headset'. The headset model is not named."
+  ],
+  "rank": {
+   "n": 2,
+   "label": "Open",
+   "why": [
+    "public download",
+    "license not stated",
+    "samples not checked yet"
+   ]
+  },
+  "quality": {
+   "score": 2,
+   "of": 5,
+   "flags": {
+    "calibrated": false,
+    "video": true,
+    "hand_pose": true,
+    "scale": false,
+    "diversity": false
+   }
+  }
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://github.com/irmakguzey/tactile-dexterity",
+  "note": "No license or terms of use were found on the project page, in the GitHub README, or in the repository (no LICENSE file; the GitHub API reports license null). The Drive folder holds only the three zips. The arXiv license (nonexclusive-distrib 1.0) covers the paper only."
+ },
+ "download": {
+  "where": "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL",
+  "access": "open",
+  "format": "Two zips (deflate, ZIP64), one folder per recording: HDF5 per stream (touch_sensor_values, allegro_joint_states, allegro_commanded_joint_states, allegro_fingertip_states, kinova_joint_states, kinova_cartesian_states, cam_N_depth), MPEG-4 Part 2 AVI per camera + pickled timestamp metadata, pickled subsample index lists, optional visualization.mp4",
+  "total_size": "50.3 GB compressed (play_data.zip 31.44 GB, evaluation.zip 18.89 GB); depth 41.6 GB, AVI 7.9 GB, everything else 0.85 GB",
+  "per_episode": "without depth: 17-487 MB per play recording (median 86 MB) and 29-268 MB per task demo (median 97 MB); tactile file 0.2-4.7 MB",
+  "partial_fetch": "Every zip member can be read on its own. Read the central directory from the zip tail, then byte-range the member's local header and deflate data (rclone cat --drive-root-folder-id <folder> --offset/--count). The folder listing and the downloads work without login."
+ },
+ "channels": [
+  {
+   "name": "touch_sensor_values.h5:sensor_values",
+   "kind": "tactile_grid",
+   "shape": "(N, 15, 16, 3)",
+   "rate_hz": 98.5,
+   "unit": "uncalibrated XELA readings (no unit). Each recording starts near 0; contact peaks 1,000-3,700.",
+   "frame": "per pad, (x, y, z) per taxel in the pad's own frame (axes not documented)",
+   "note": "15 pads x 4x4 taxels x 3 axes. Pad order: 0-2 = thumb (inferred from code and preview layout); 3-6, 7-10 and 11-14 = the three fingers (which finger is which is not documented). Pads 5, 9 and 13 respond most. No dead pads: every pad/axis has std >= 1.7 in all 70 recordings. The file also has timestamps (N,) in unix seconds, plus num_datapoints, record_start/end_time, record_duration and record_frequency attributes."
+  },
+  {
+   "name": "allegro_joint_states.h5:positions",
+   "kind": "joint_state",
+   "shape": "(N, 16)",
+   "rate_hz": 299,
+   "unit": "rad (inferred)",
+   "frame": "Allegro joint space",
+   "note": "plus timestamps (N,)"
+  },
+  {
+   "name": "allegro_joint_states.h5:velocitys",
+   "kind": "joint_state",
+   "shape": "(N, 16)",
+   "rate_hz": 299,
+   "unit": "not stated (rad/s likely)",
+   "frame": "Allegro joint space",
+   "note": "the 's' spelling is in the file"
+  },
+  {
+   "name": "allegro_joint_states.h5:efforts",
+   "kind": "joint_state",
+   "shape": "(N, 16)",
+   "rate_hz": 299,
+   "unit": "not stated (range about +-0.5)",
+   "frame": "Allegro joint space",
+   "note": "The paper says the hand has no torque sensors; the NN-Torque baseline uses 'torque targets from a low-level PD position controller'."
+  },
+  {
+   "name": "allegro_commanded_joint_states.h5:positions / efforts / velocitys",
+   "kind": "action",
+   "shape": "(N, 16) each",
+   "rate_hz": 299,
+   "unit": "rad (positions); efforts not stated; velocitys all zero",
+   "frame": "Allegro joint space",
+   "note": "commanded joint targets; code uses positions as the hand action"
+  },
+  {
+   "name": "allegro_fingertip_states.h5:positions",
+   "kind": "hand_pose",
+   "shape": "(N, 12)",
+   "rate_hz": 299,
+   "unit": "m (inferred, values -0.09..0.13)",
+   "frame": "not documented (likely hand base)",
+   "note": "4 fingertips x (x, y, z); written in Feb 2023 after recording, presumably FK from joint states"
+  },
+  {
+   "name": "kinova_joint_states.h5:positions / velocitys / efforts",
+   "kind": "joint_state",
+   "shape": "(N, 6) each",
+   "rate_hz": 50,
+   "unit": "positions rad (unwrapped, up to ~7.1); efforts not stated (-15..25)",
+   "frame": "Kinova Jaco joint space",
+   "note": "6 joints, although the code's constants say KINOVA_JOINT_NUM = 7"
+  },
+  {
+   "name": "kinova_cartesian_states.h5:positions + orientations",
+   "kind": "action",
+   "shape": "(N, 3) + (N, 4)",
+   "rate_hz": 50,
+   "unit": "m (inferred) + quaternion (order not stated)",
+   "frame": "Kinova base frame (not documented)",
+   "note": "End-effector pose. The paper's action space is arm position (3) + quaternion (4) + 16 hand joints = 23-D, and the code concatenates these into the Kinova state."
+  },
+  {
+   "name": "cam_0_rgb_video.avi (+ cam_0_rgb_video.metadata)",
+   "kind": "camera",
+   "shape": "(720, 1280, 3)",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "static third-person RealSense",
+   "note": "MPEG-4 Part 2, yuv420p, frame count matches the metadata. The .metadata pickle holds per-frame timestamps (ms), num_datapoints, record_frequency, recorder IP and port."
+  },
+  {
+   "name": "cam_1_rgb_video.avi (+ metadata)",
+   "kind": "camera",
+   "shape": "(720, 1280, 3)",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "second static third-person RealSense",
+   "note": "task demos only, not play"
+  },
+  {
+   "name": "cam_0_depth.h5:depth_images (+ timestamps)",
+   "kind": "depth",
+   "shape": "(N, 720, 1280)",
+   "rate_hz": 30,
+   "unit": "uint16, not stated (RealSense z16)",
+   "frame": "aligned to cam_0 color (Holo-Dex recorder code)",
+   "note": "gzip HDF5, ~64 MB for a 12.6 s demo; empty in play 16, 19 and 21 and in book_opening 7 and 8"
+  },
+  {
+   "name": "cam_1_depth.h5:depth_images",
+   "kind": "depth",
+   "shape": "(N, 720, 1280)",
+   "rate_hz": 30,
+   "unit": "uint16, not stated",
+   "frame": "aligned to cam_1 color",
+   "note": "task demos only"
+  },
+  {
+   "name": "tactile/allegro/allegro_action/kinova/image_indices.pkl",
+   "kind": "other",
+   "shape": "list of [recording_idx, frame_idx]",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "Subsampled indices from preprocess.py (spatial threshold), e.g. 150 entries for play demo 19 and 50 for bowl demo 2. bowl_unstacking/demonstration_23 also has *_pre_crop.pkl."
+  },
+  {
+   "name": "visualization.mp4 / visualization/*.png",
+   "kind": "other",
+   "shape": "(720, 2000, 3)",
+   "rate_hz": 10,
+   "unit": "RGB",
+   "frame": null,
+   "note": "derived preview: camera frame + matplotlib dot plot of the 15 pads; in 27 play and 17 demo folders; PNG state dumps in 5 demo folders"
+  }
+ ],
+ "episode_index": {
+  "where": "zip central directories (folder names); no separate index file",
+  "count": 70,
+  "fields": [
+   "split (play_data / evaluation)",
+   "task (evaluation folder name)",
+   "duration (record_duration in each HDF5 / metadata)"
+  ],
+  "note": "Play: demonstration_2-14, 16-30 and 32-39, plus demonstration_hand_touching_itself_record_15 and _31 (38 total). Durations 16.4-373.5 s, median 84.3 s. Task demos last 12.7-108.3 s (median 46.6 s). No object, scene or operator labels.",
+  "tasks": [
+   "play (task-agnostic teleoperated play: picking up objects, grasping a steering wheel, in-hand manipulation; 2 recordings of the hand touching itself)",
+   "joystick_movement",
+   "bottle_cap_opening",
+   "cup_unstacking",
+   "bowl_unstacking",
+   "book_opening"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Public Google Drive folder, downloadable without login, and every zip member can be fetched on its own by byte range. No license or terms exist for the data (project page, GitHub README and repository, Drive folder; GitHub API license null), so redistribution is not forbidden: re-host and label the collection \"License not stated\". The arXiv licence covers only the paper.",
+  "prefix": "td_",
+  "tasks_total": 6,
+  "tasks_sampled": 6,
+  "episodes": [
+   {
+    "id": "play_data/demonstration_10",
+    "task": "play (task-agnostic teleoperated play)",
+    "scene": "lab tabletop, play setup (wooden box with bowls and toy cubes; seen in the release's visualization.mp4)",
+    "subject": null,
+    "duration_s": 39.2,
+    "window": null,
+    "why": "Picks up a soft toy cube and puts it into a green bowl (preview video). Contact 5.8-35.0 s: 23.8 s above rest, longest run 12.2 s, 13 pads with runs >= 1 s, peak 4,808 on pad 13 (pads 5, 9, 7, 14 above 1,400). Returns to rest at the end (max pad deviation 52 in the last 1 s). No constant taxel. All four tactile/force channels present and clean: touch_sensor_values sensor_values (3864,15,16,3), allegro_joint_states efforts (12078,16), allegro_commanded_joint_states efforts (12067,16), kinova_joint_states efforts (2042,6); no NaN, no constant effort column. cam_0 only (play has one camera): 41.5 s, starts 2.3 s before the touch stream. Of the play recordings of 10-60 s, this one has the clearest single grasp-and-place in its preview."
+   },
+   {
+    "id": "evaluation/joystick_movement/demonstration_1",
+    "task": "joystick_movement",
+    "scene": "lab tabletop, task-demo setup (not checked in frames for this demo)",
+    "subject": null,
+    "duration_s": 25.7,
+    "window": null,
+    "why": "Contact 11.5-25.7 s, one continuous 14.3 s run until the end of the recording; 8 pads with runs >= 1 s, peak 5,482 on pad 13 and 4,498 on pad 5. Pad 9 taxel 14 is constant 0 on all three axes; this dead taxel is in all 8 joystick demos, so it cannot be avoided and goes into notes. All four tactile/force channels present and clean: touch_sensor_values sensor_values (2530,15,16,3), allegro_joint_states efforts (7981,16), allegro_commanded_joint_states efforts (8094,16), kinova_joint_states efforts (1368,6); no NaN, no constant effort column. cam_0 and cam_1: 28.6 s each, starting 2.9 s before touch. Chosen over demo 6 (already fully fetched during the survey) because demo 6 is only 10.0 s with 6 pads in contact."
+   },
+   {
+    "id": "evaluation/bottle_cap_opening/demonstration_8",
+    "task": "bottle_cap_opening",
+    "scene": "lab tabletop, task-demo setup (purple flip-top bottle by a white panel; seen in the release's visualization.mp4)",
+    "subject": null,
+    "duration_s": 32.8,
+    "window": null,
+    "why": "The fingers push the flip-top cap open (preview video). Contact 12.2-32.8 s: 20.4 s above rest, longest run 14.8 s, 11 pads with runs >= 1 s, peak 5,411 on pad 13 and 3,809 on pad 9. Pad 1 taxel 3 is constant 0 on all three axes (also in demos 9 and 11), which goes into notes. Demos 1, 4 and 5 have no dead taxel but contact on only 3-5 pads (demo 1 checked: 4 pads with runs >= 1 s). All four tactile/force channels present and clean: touch_sensor_values sensor_values (3233,15,16,3), allegro_joint_states efforts (10156,16), allegro_commanded_joint_states efforts (10164,16), kinova_joint_states efforts (1726,6); no NaN, no constant effort column. cam_0 and cam_1: 35.4 s each, starting 2.6 s before touch."
+   },
+   {
+    "id": "evaluation/cup_unstacking/demonstration_2",
+    "task": "cup_unstacking",
+    "scene": "lab tabletop, task-demo setup (blue cups; seen in the release's visualization.mp4)",
+    "subject": null,
+    "duration_s": 48.3,
+    "window": null,
+    "why": "Lifts the top cup out of the stack (preview video). Contact 15.6-48.3 s: 27.7 s above rest, longest run 19.0 s, 11 pads with runs >= 1 s, peak 2,944 on pad 5 (pads 1 and 13 about 2,000). No constant taxel. All four tactile/force channels present and clean: touch_sensor_values sensor_values (4750,15,16,3), allegro_joint_states efforts (14762,16), allegro_commanded_joint_states efforts (14781,16), kinova_joint_states efforts (2497,6); no NaN, no constant effort column. cam_0 and cam_1: 50.6 s each, starting 2.3 s before touch. The shortest cup demo (others 51.8-67.3 s)."
+   },
+   {
+    "id": "evaluation/bowl_unstacking/demonstration_2",
+    "task": "bowl_unstacking",
+    "scene": "lab tabletop, task-demo setup (yellow bowl stacked in a green bowl; seen in the release's visualization.mp4)",
+    "subject": null,
+    "duration_s": 29.5,
+    "window": null,
+    "why": "Lifts the yellow bowl off the green one (preview video). Contact 16.1-29.5 s, one continuous 13.5 s run; 13 pads with runs >= 1 s, peak 3,948 on pad 13 and 3,285 on pad 9. No constant taxel. All four tactile/force channels present and clean: touch_sensor_values sensor_values (2909,15,16,3), allegro_joint_states efforts (9067,16), allegro_commanded_joint_states efforts (9079,16), kinova_joint_states efforts (1533,6); no NaN, no constant effort column. cam_0 and cam_1: 32.1 s each, starting 2.6 s before touch. All non-video files were already read during the survey."
+   },
+   {
+    "id": "evaluation/book_opening/demonstration_8",
+    "task": "book_opening",
+    "scene": "lab tabletop, task-demo setup (no preview video in the release; not checked in frames)",
+    "subject": null,
+    "duration_s": 56.9,
+    "window": null,
+    "why": "The only book demo under 60 s (the others are 71-106 s and would need a window). Contact 17.7-56.9 s, one continuous 39.3 s run; all 15 pads have runs >= 1 s, peak 6,862 on pad 2 (pads 1, 3, 4, 7 above 4,600). No constant taxel. All four tactile/force channels present and clean: touch_sensor_values sensor_values (5601,15,16,3), allegro_joint_states efforts (17355,16), allegro_commanded_joint_states efforts (17341,16), kinova_joint_states efforts (2928,6); no NaN, no constant effort column. cam_0 and cam_1: 59.3 s each, starting 2.3 s before touch. Both depth files are empty (800-byte HDF5), but depth is not shown in the viewer, so nothing is lost."
+   }
+  ],
+  "fetch_estimate": "~490 MB more: the AVIs of the six episodes (478 MB; 41 MB play_10, 61 MB joystick_1, 68 MB bottle_8, 102 MB cup_2, 64 MB bowl_2, 143 MB book_8; MPEG-4 Part 2, so they must be transcoded to H.264). Each AVI is one zip member, fetched by byte range. All HDF5 and camera metadata of the six episodes are already in ~/data/ext/tdex/raw (277 MB in total there, including the survey's files). Depth (1.93 GB for these six) is not fetched because the viewer has no depth element. Re-hosted media: one camera for play and two for each demo, about 25-60 s each; downscale to stay under ~30 MB per episode.",
+  "rules_applied": "README step 2. Decision: no license or terms -> sample, label 'License not stated'. How many: 5 tasks + play = 6 <= 6 -> all tasks, one episode each = 6 episodes (within 3-10). Contact test on every one of the 70 local touch files: rest = per-taxel median of the first 50 samples (~0.5 s; rest noise std <= 12 counts in all chosen episodes); a sample is in contact when any taxel's |(x,y,z) - rest| > 100; runs of >= 1 s are counted per pad. Channel check on each chosen episode: shapes, NaN, constant columns, and record rates (tactile 98.3-98.5 Hz, Allegro 297-300 Hz, Kinova 50 Hz). All chosen episodes are 10-60 s whole, so no windows. Of the 70 recordings, 11 have one dead taxel (pad 9 taxel 14 in all 8 joystick demos; pad 1 taxel 3 in bottle-cap demos 8, 9 and 11). The 2 'hand touching itself' play recordings (67-69 s) were not sampled because play gets one episode. Play recordings 36 and 37 were avoided: their first 0.5 s is already noisy (std 69 and 151). Observations for the converter: (1) allegro_commanded_joint_states efforts match allegro_joint_states efforts to a median |diff| of 0.0005 at the nearest timestamp in all six episodes, so the commanded torque is the PD torque already logged; plot both, but expect them to overlap. (2) The touch stream starts 2.3-2.9 s after the cameras, so cut the video at the first touch timestamp. (3) In the task demos the readings stay well above rest at the end of the recording (max pad deviation 495-5,367 in the last 1 s; play_10 goes back to 52). The recording ends during the grasp, or the sensor shows hysteresis; this is not settled, so note it. (4) The full (N,15,16,3) grid at 98.5 Hz is about 4M numbers for 57 s, so the episode JSON needs decimation and rounding (e.g. 15-20 Hz, integers) to stay under 2 MB."
+ },
+ "visualization": [
+  {
+   "channel": "touch_sensor_values.h5:sensor_values",
+   "shown_as": [
+    "grid",
+    "vectors",
+    "series"
+   ],
+   "detail": "240 cells (15 pads x 4x4) coloured by each taxel's |(x, y, z)| (scale = episode 99.5th percentile, 1000-3000), in the release's own pad layout (4x4 grid of pad slots, one column per finger, thumb pads 0-2 under an empty slot, from utils/visualization.py dump_tactile_state and tactile_image.py; taxels row-major from the pad's top left); per pad the sum of (x, -y, z) over its 16 taxels as arrow (x, y) + ring (z), y negated to match the release's image-coordinate dot plot; plots of summed z and summed per-pad |(sum x, sum y)| per finger column, plus region sums of |(x, y, z)|. Dead taxels (constant zero for the whole recording: pad 9 taxel 14 in joystick 1, pad 1 taxel 3 in bottle cap 8) drawn hollow via 'inactive'. Resampled from ~98.5 Hz to the 30 Hz clock (latest sample at or before each tick).",
+   "reason": null
+  },
+  {
+   "channel": "allegro_joint_states.h5:efforts",
+   "shown_as": [
+    "series"
+   ],
+   "detail": "PD controller torque output (the paper: the hand has no torque sensors; NN-Torque uses these as a force proxy), one plot per finger (index 0-3, middle 4-7, ring 8-11, thumb 12-15 from Holo-Dex holodex/constants.py), solid lines; units not stated.",
+   "reason": null
+  },
+  {
+   "channel": "allegro_commanded_joint_states.h5:positions / efforts / velocitys",
+   "shown_as": [
+    "series"
+   ],
+   "detail": "efforts only, dashed in the same per-finger plots as the joint-state efforts (they nearly coincide); commanded positions and the all-zero velocitys are not shown (actions, not touch).",
+   "reason": null
+  },
+  {
+   "channel": "kinova_joint_states.h5:positions / velocitys / efforts",
+   "shown_as": [
+    "series"
+   ],
+   "detail": "efforts only: one plot of the 6 Kinova joint efforts (units not stated); positions and velocities not shown.",
+   "reason": null
+  },
+  {
+   "channel": "allegro_joint_states.h5:positions",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "joint states, not touch"
+  },
+  {
+   "channel": "allegro_joint_states.h5:velocitys",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "joint states, not touch"
+  },
+  {
+   "channel": "allegro_fingertip_states.h5:positions",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "fingertip positions (derived from joint states), not touch"
+  },
+  {
+   "channel": "kinova_cartesian_states.h5:positions + orientations",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "end-effector pose (action space), not touch"
+  },
+  {
+   "channel": "cam_0_rgb_video.avi (+ cam_0_rgb_video.metadata)",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "MPEG-4 Part 2 AVI decoded, re-timed to the 30 Hz clock by the per-frame timestamps in the .metadata pickle (nearest frame per tick; the 2.3-2.9 s before the first touch sample cut), H.264 960x540 CRF 28, 1 s GOP; re-hosted (license not stated)",
+   "reason": null
+  },
+  {
+   "channel": "cam_1_rgb_video.avi (+ metadata)",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "as cam_0 (task demos only). In joystick 1 and bottle cap 8 the AVI has one frame more than its timestamp list; frames are matched to timestamps from the first frame, the extra last frame dropped (stated in notes)",
+   "reason": null
+  },
+  {
+   "channel": "cam_0_depth.h5:depth_images (+ timestamps)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "depth, not touch; not fetched (83% of the release; empty in book_opening 8)"
+  },
+  {
+   "channel": "cam_1_depth.h5:depth_images",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "depth, not touch; not fetched"
+  },
+  {
+   "channel": "tactile/allegro/allegro_action/kinova/image_indices.pkl",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "subsampling index lists used for training, not a signal"
+  },
+  {
+   "channel": "visualization.mp4 / visualization/*.png",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "derived preview of camera + tactile already shown from the raw streams; used to confirm the pad layout"
+  }
+ ]
+}

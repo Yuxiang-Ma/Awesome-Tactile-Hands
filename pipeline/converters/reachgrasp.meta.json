@@ -1,0 +1,50 @@
+{
+ "id": "reachgrasp",
+ "prefix": "re_",
+ "group": "public",
+ "title": "Reach&Grasp",
+ "provider": "Di Domenico et al. 2025 (IIT, Bielefeld University)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY 4.0",
+  "tone": "ok"
+ },
+ "about": "10 subjects, 16 right-arm tasks (hand and wrist movements, grasps, reach-grasp-manipulate) with a 58-taxel piezoresistive glove over a CyberGlove, Vicon joint angles and EMG. Touch only, no video.",
+ "link": {
+  "label": "IIT Dataverse 10.48557/L6OWMM",
+  "href": "https://doi.org/10.48557/L6OWMM"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 58
+ },
+ "hardware": [
+  {
+   "k": "Glove",
+   "v": "Bielefeld tactile glove, 58 taxels",
+   "d": "Piezoresistive fabric lining on the palm side of the right hand: palm 17, index 9, middle 8, ring 8, little 9, thumb 7 · uncalibrated · 100 Hz"
+  },
+  {
+   "k": "Hand pose",
+   "v": "CyberGlove I inside the tactile glove",
+   "d": "18 joint angles (deg) · 100 Hz"
+  },
+  {
+   "k": "Mocap",
+   "v": "Vicon, 10 cameras",
+   "d": "Arm, thorax and finger MCP joint angles only, no marker trajectories · 100 Hz"
+  },
+  {
+   "k": "EMG",
+   "v": "64-ch HD-sEMG + 10-ch bipolar",
+   "d": "OT Bioelettronica Sessantaquattro and Cometa Wave Plus · 2 kHz (not shown)"
+  }
+ ],
+ "notes": "Paper: Scientific Data 12:233, 2025, doi:10.1038/s41597-025-04552-5. Data: IIT Dataverse version 1.0, CC BY 4.0; layout files and repetition events from the authors' code repository (github.com/DarioDiDomenico/SData_ReachGrasp, MIT). Taxels are painted onto the pads of the paper's Fig. 2A drawing. The glove is not calibrated (the paper says readings cannot be related to N or Pa); ring-fingertip taxels rdd, rdo, rdm malfunction (paper).",
+ "order": 9
+}

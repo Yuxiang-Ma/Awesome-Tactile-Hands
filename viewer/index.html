@@ -118,6 +118,8 @@ main{padding:0 20px 40px;min-width:0}
 .layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(320px,1fr);gap:14px}
 .layout.gl{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}.layout.gl .gloves{grid-template-columns:1fr 1fr}
 @media(max-width:1250px){.layout,.layout.gl{grid-template-columns:1fr}}
+.layout.nv{grid-template-columns:minmax(0,1fr)}.layout.nv .gloves{grid-template-columns:repeat(var(--nh,1),minmax(0,1fr))}
+.layout.nv .hand canvas,.layout.nv .hand .hm.tall canvas{max-width:440px}
 .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;min-width:0}
 .card>h3{font-size:12.5px;font-weight:600;margin:0;padding:8px 12px;border-bottom:1px solid var(--line2);display:flex;justify-content:space-between;gap:8px;align-items:center}
 .card>h3 small{color:var(--muted);font-weight:400;font-size:11.5px;text-align:right}
@@ -127,7 +129,7 @@ main{padding:0 20px 40px;min-width:0}
 .wrists{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
 .gloves{display:grid;grid-template-columns:1fr;gap:14px}
 @media(max-width:1250px) and (min-width:700px){.gloves{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.wrists,.gloves,.layout.gl .gloves{grid-template-columns:1fr}}
+@media(max-width:620px){.wrists,.gloves,.layout.gl .gloves,.layout.nv .gloves{grid-template-columns:1fr}}
 /* heatmaps sit on a dark instrument surface in both themes: the provider's ramp starts near black */
 .hand .hm{background:#0e171c}
 .hand canvas{width:100%;max-width:380px;margin:0 auto;display:block}
@@ -371,14 +373,18 @@ function normalizeGrid(j,f){
   const N=j.n,R={id:j.id,kind:'grid',n:N,fps:j.fps,duration:j.duration,hands:{},imu:{},src:f,vid:{},tot:{},task:j.task||null,pose:null,stereo:false,notes:j.notes||''};
   R.cams=j.videos.map(v=>{R.vid[v.key]=v;return v.key});R.hlist=j.hands.map(H=>H.key);
   for(const G of j.hands){const cells=dec(G.cells,Uint16Array),nc=cells.length,tax=dec(G.tax,Uint8Array),k=G.range/255;
+    // optional "index" (Uint16, n): the row of tax shown at each clock tick, for a panel stored at fewer rows than the clock
+    const row=G.index?dec(G.index,Uint16Array):null;
     const regs=(G.regions||[]).map(r=>({name:r.name,idx:r.cells})),rs=new Float32Array(N*regs.length),tot=new Float32Array(N);
-    for(let i=0;i<N;i++){const b=i*nc;let s=0;for(let c=0;c<nc;c++)s+=tax[b+c];tot[i]=s*k;
+    for(let i=0;i<N;i++){const b=(row?row[i]:i)*nc;let s=0;for(let c=0;c<nc;c++)s+=tax[b+c];tot[i]=s*k;
       regs.forEach((r,q)=>{let a=0;for(const c of r.idx)a+=tax[b+c];rs[i*regs.length+q]=a*k})}
     // optional per-region vectors (e.g. fingertip force): drawn at the region's centroid, x right / y up in the grid, z as a ring
-    let vec=null;if(G.vectors){const V=G.vectors;vec={...V,items:V.items.map(it=>{const q=regs.findIndex(r=>r.name===it.region),ix=q<0?[]:regs[q].idx;
+    let vec=null;if(G.vectors){const V=G.vectors;vec={...V,items:V.items.map(it=>{const q=regs.findIndex(r=>r.name===it.region),ix=it.cells||(q<0?[]:regs[q].idx);
       let r0=1e9,r1=-1,c0=1e9,c1=-1;for(const c of ix){const p=cells[c],r=Math.floor(p/G.cols),cc=p%G.cols;r0=Math.min(r0,r);r1=Math.max(r1,r);c0=Math.min(c0,cc);c1=Math.max(c1,cc)}
       return{...it,v:dec(it.data,Float32Array),cr:(r0+r1)/2,cc:(c0+c1)/2,half:Math.max(1,Math.min(r1-r0+1,c1-c0+1)/2)}})}}
-    R.hands[G.key]={...G,cells,nc,tax,regs,rs,vec};R.tot[G.key]=tot}
+    // optional "paint" (Uint16, rows x cols): taxel index + 1 drawn in every grid cell, 0 = empty, so a taxel can fill its pad's area
+    const paint=G.paint?dec(G.paint,Uint16Array):null;
+    R.hands[G.key]={...G,cells,nc,tax,row,regs,rs,vec,paint};R.tot[G.key]=tot}
   R.series=(j.series||[]).map(s=>({...s,lines:s.lines.map(l=>({...l,v:dec(l.data,Float32Array)}))}));
   return R;
 }
@@ -419,9 +425,11 @@ function mountControls(){
 function mountGrid(){
   const vs=R.cams.map(k=>R.vid[k]),card=(v,big)=>`<div class="card"><h3>${esc(v.title)} <small id="meta_${v.key}"></small></h3><div class="vwrap"><video id="v_${v.key}" muted playsinline preload="auto"></video>${big?'<canvas id="poseC"></canvas>':''}</div></div>`;
   const rest=vs.slice(1);
-  const lay=document.querySelector('.layout');lay.classList.toggle('gl',R.hlist.length===2&&R.hlist.every(h=>R.hands[h].cols<=30));lay.innerHTML=`<div>${vs.length?card(vs[0],true):'<div class="card"><h3>No video in this dataset</h3></div>'}
-    ${rest.length?`<div class="wrists" style="grid-template-columns:repeat(${Math.max(1,Math.min(rest.filter(v=>!v.wide).length,3))},minmax(0,1fr))">${rest.map(v=>(v.wide?card(v,false).replace('<div class="card">','<div class="card" style="grid-column:1/-1">'):card(v,false))).join('')}</div>`:''}</div>
-    <div class="side"><div class="gloves">${R.hlist.map(h=>{const H=R.hands[h];return`<div class="card hand"><h3><span style="color:var(--${h==='lh'?'lh':'rh'})">${esc(H.title)}</span><small>${esc(H.label||`${H.nc} taxels`)} · ${H.rate} Hz</small></h3>
+  // touch-only recordings (no video at all): the hand panels take the full width, side by side, instead of an empty video card
+  const lay=document.querySelector('.layout'),nv=!vs.length;lay.classList.toggle('gl',!nv&&R.hlist.length===2&&R.hlist.every(h=>R.hands[h].cols<=30));lay.classList.toggle('nv',nv);
+  lay.style.setProperty('--nh',R.hlist.length);lay.innerHTML=`${nv?'':`<div>${card(vs[0],true)}
+    ${rest.length?`<div class="wrists" style="grid-template-columns:repeat(${Math.max(1,Math.min(rest.filter(v=>!v.wide).length,3))},minmax(0,1fr))">${rest.map(v=>(v.wide?card(v,false).replace('<div class="card">','<div class="card" style="grid-column:1/-1">'):card(v,false))).join('')}</div>`:''}</div>`}
+    <div class="side"><div class="gloves">${R.hlist.map(h=>{const H=R.hands[h];return`<div class="card hand"><h3><span style="color:var(--${h==='lh'?'lh':'rh'})">${esc(H.title)}</span><small>${esc(H.label||`${H.nc} taxels`)}${H.rate?` · ${H.rate} Hz`:''}</small></h3>
       <div class="hm${H.rows>H.cols?' tall':''}"><canvas id="hand_${h}"></canvas></div><div class="vals" id="vals_${h}" style="--nv:${Math.max(1,H.regs.length)}"></div></div>`}).join('')}</div>
     <div class="card" style="margin-top:14px"><div class="scale" id="scale"></div></div></div>`;
   for(const v of vs){const m=$('meta_'+v.key);m.dataset.base=[v.src_size&&v.src_size.join('×'),v.fps_src&&`${v.fps_src} fps`].filter(Boolean).join(' · ');m.textContent=m.dataset.base;
@@ -485,11 +493,19 @@ function drawHand(h,i){
 }
 
 // grid recordings: cells at their published (row, col) position; positions with no taxel stay empty
+// region colour: by finger name when the hand uses finger names (other names, e.g. palm, are muted); otherwise by position
+const regCol=(regs,q,m)=>{const f=FINGERS.indexOf(regs[q].name);return regs.some(r=>FINGERS.includes(r.name))?(f>=0?FCOL[f]:m):(q<5?FCOL[q]:m)};
 function drawGridHand(h,i){
   const c=$('hand_'+h),H=R.hands[h],CS=Math.max(8,Math.min(18,Math.round(250/H.cols))),G=2,pad=10,W=H.cols*(CS+G)-G+2*pad,Hh=H.rows*(CS+G)-G+2*pad,dpr=devicePixelRatio||1;
   if(c.width!==Math.round(W*dpr)){c.width=W*dpr;c.height=Hh*dpr;c.style.aspectRatio=`${W}/${Hh}`}
   const x=c.getContext('2d');x.setTransform(dpr,0,0,dpr,0,0);x.clearRect(0,0,W,Hh);
-  const b=i*H.nc;for(let k=0;k<H.nc;k++){const p=H.cells[k],r=Math.floor(p/H.cols),q=p%H.cols;x.fillStyle=cell(H.tax[b+k]/255);x.fillRect(pad+q*(CS+G),pad+r*(CS+G),CS,CS)}
+  const b=(H.row?H.row[i]:i)*H.nc;if(H.paint){const P=H.paint,C=H.cols,U=CS+G;   // painted pads: cells touch, pad borders cut out
+    for(let p=0;p<P.length;p++){const k=P[p];if(!k)continue;x.fillStyle=cell(H.tax[b+k-1]/255);x.fillRect(pad+(p%C)*U,pad+Math.floor(p/C)*U,U,U)}
+    for(let p=0;p<P.length;p++){const k=P[p];if(!k)continue;const r=Math.floor(p/C),q=p%C;
+      if(q+1<C&&P[p+1]&&P[p+1]!==k)x.clearRect(pad+(q+1)*U-.5,pad+r*U,1,U);if(r+1<H.rows&&P[p+C]&&P[p+C]!==k)x.clearRect(pad+q*U,pad+(r+1)*U-.5,U,1)}}
+  else for(let k=0;k<H.nc;k++){const p=H.cells[k],r=Math.floor(p/H.cols),q=p%H.cols;x.fillStyle=cell(H.tax[b+k]/255);x.fillRect(pad+q*(CS+G),pad+r*(CS+G),CS,CS)}
+  // optional "inactive": grid positions of taxels the hand has but the release does not contain, drawn as hollow squares
+  if(H.inactive){x.strokeStyle=css('--muted');x.lineWidth=1;for(const p of H.inactive){const r=Math.floor(p/H.cols),q=p%H.cols;x.strokeRect(pad+q*(CS+G)+.5,pad+r*(CS+G)+.5,CS-1,CS-1)}}
   if(H.vec&&$('vecOn')?.checked!==false){const V=H.vec,U=CS+G;x.lineCap='round';
     for(const it of V.items){const cx=pad+it.cc*U+CS/2,cy=pad+it.cr*U+CS/2,L=it.half*U,a=it.v[i*3]/V.range,bb=it.v[i*3+1]/V.range,z=it.v[i*3+2]/V.range;
       if(!isFinite(a))continue;const rz=Math.min(1.2,Math.abs(z))*L;
@@ -500,7 +516,7 @@ function drawGridHand(h,i){
         for(const pass of [0,1]){x.strokeStyle=pass?'#ffd400':'rgba(0,0,0,.65)';x.lineWidth=pass?2.2:4.4;x.beginPath();x.moveTo(cx,cy);x.lineTo(ex,ey);
           x.moveTo(ex-hd*Math.cos(ang-.5),ey-hd*Math.sin(ang-.5));x.lineTo(ex,ey);x.lineTo(ex-hd*Math.cos(ang+.5),ey-hd*Math.sin(ang+.5));x.stroke()}}}}
   const n=H.regs.length,fmt=v=>v>=1000?(v/1000).toFixed(1)+'k':v>=10?v.toFixed(0):v.toFixed(1);
-  $('vals_'+h).innerHTML=n?H.regs.map((g,q)=>`<div><span class="n" style="color:${q<5?FCOL[q]:'var(--muted)'}">${esc(g.name)}</span><b>${fmt(H.rs[i*n+q])}</b></div>`).join(''):`<div><span class="n">total</span><b>${fmt(R.tot[h][i])}</b></div>`;
+  $('vals_'+h).innerHTML=n?H.regs.map((g,q)=>`<div><span class="n" style="color:${regCol(H.regs,q,'var(--muted)')}">${esc(g.name)}</span><b>${fmt(H.rs[i*n+q])}</b></div>`).join(''):`<div><span class="n">total</span><b>${fmt(R.tot[h][i])}</b></div>`;
 }
 
 /* ---------- skeleton overlay ---------- */
@@ -530,7 +546,7 @@ const WIN=6;
 function gridPlots(){
   const defs=[];
   for(const h of R.hlist){const H=R.hands[h],n=H.regs.length;
-    defs.push(n?{title:`${H.title} · sum per region (${H.unit||'raw'})`,lines:H.regs.map((g,q)=>({name:g.name,col:q<5?FCOL[q]:css('--muted'),get:i=>H.rs[i*n+q]}))}:
+    defs.push(n?{title:`${H.title} · sum per region (${H.unit||'raw'})`,lines:H.regs.map((g,q)=>({name:g.name,col:regCol(H.regs,q,css('--muted')),get:i=>H.rs[i*n+q]}))}:
       {title:`${H.title} · sum of all taxels (${H.unit||'raw'})`,lines:[{name:'total',col:css(h==='lh'?'--lh':'--rh'),get:i=>R.tot[h][i]}]})}
   const pal=[...FCOL,'#7f8c8d'];
   for(const s of R.series)defs.push({title:s.title,fixed:s.fixed||null,legendText:s.legendText,lines:s.lines.map((l,k)=>({name:l.name,col:l.col||pal[k%pal.length],dash:!!l.dash,get:i=>l.v[i]}))});

@@ -1,0 +1,430 @@
+{
+  "id": "senstextile",
+  "surveyed": "2026-10-15",
+  "entry": {
+    "id": "senstextile",
+    "name": "Tactile textiles",
+    "title": "Learning human-environment interactions using conformal tactile textiles",
+    "authors": "Yiyue Luo et al.",
+    "year": 2021,
+    "venue": "Nature Electronics 4",
+    "summary": "Machine-knitted piezoresistive glove (722 sensors, 32x32 readout) worn by one person; released glove data is raw pressure maps while holding 27 objects or the bare hand, plus pressing on a digital scale, a tactile vest and a robot-arm sleeve for calibration.",
+    "embodiment": "human",
+    "hand": "Knitted tactile glove, one hand (the released calibration code uses the right-glove sensor layout)",
+    "bimanual": false,
+    "sensor": {
+      "type": "piezoresistive",
+      "taxels_per_hand": 722,
+      "coverage": [
+        "tip",
+        "phalanx",
+        "palm"
+      ],
+      "rate_hz": 14,
+      "calibrated": false,
+      "note": "One sample = 32x32 uint16 raw 10-bit ADC counts (0-1023, rest ~520-570, rising with pressure); 722 of the 1,024 cells lie on the glove (layout CSVs in the release). Coaxial piezoresistive fibres inlaid orthogonally in a machine-knitted glove, read by a grounding-based 32x32 circuit (5 kOhm feedback resistor for gloves, Arduino Nano).",
+      "maker": "custom (MIT CSAIL)",
+      "model": null,
+      "principle": "piezoresistive",
+      "range": "single sensor ~8 kOhm to 2 kOhm over 0.1-2 N; knit configurations up to 87.5 kPa (not glove-specific)"
+    },
+    "modalities": [],
+    "scale": {
+      "hours": 10.75,
+      "episodes": 118,
+      "frames": 566403,
+      "tasks": null,
+      "objects": 27,
+      "subjects": 1,
+      "scenes": null,
+      "scene_types": [],
+      "text": "glove only: ~10.8 h, 118 recordings, 566k tactile frames at ~14 Hz: 111 object recordings (27 objects + bare hand, ~5.7 h), 4 scale-pressing calibration recordings (~3.1 h), 3 recordings pressing a vest / robot-arm sleeve (~2.0 h); 1 subject"
+    },
+    "availability": "public",
+    "access": "Open Dropbox shared folder linked as 'Dataset' on the project page (data_classification.zip 451 MB, data_sensing_correction.zip 222 MB); the per-zip Dropbox links in the GitHub README are disabled.",
+    "license": "not stated",
+    "caveats": [
+      "Glove data is object classification (labelled only by object name) and sensor calibration, not annotated manipulation: no task descriptions, no video, no hand pose.",
+      "Touch values are raw 10-bit ADC counts, not N or kPa; the scale readings are raw counts too.",
+      "Many frames contain isolated cells at 1023; the authors' code treats readings above 1000 as artifacts and replaces them from neighbours.",
+      "The 32x32-to-glove layout files in the release are for the calibration glove (right-hand layout used in code); the layout for the October 2019 object recordings is not documented.",
+      "HDF5 arrays are preallocated: only the first frame_count rows are valid, the rest are zero.",
+      "The README's Dropbox links for the two data zips return 'shared link disabled' (checked 2026-10-15); use the project page's dataset folder."
+    ],
+    "links": {
+      "project": "https://senstextile.csail.mit.edu/",
+      "paper": "https://doi.org/10.1038/s41928-021-00558-0",
+      "code": "https://github.com/YunzhuLi/senstextile",
+      "data": "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0"
+    },
+    "image": "https://senstextile.csail.mit.edu/img/teaserv2.png",
+    "thumb": "assets/thumbs/senstextile.jpg",
+    "setup": {
+      "cameras": [],
+      "wrist_cameras": 0,
+      "depth": false,
+      "tracking": [
+        {
+          "target": "body",
+          "method": "imu",
+          "system": "Xsens MVN",
+          "note": "50 Hz, only for the separate sock pose dataset (tactile2pose folder); no hand or finger tracking for the glove"
+        }
+      ],
+      "other": [
+        "digital scale readings (Lansheng) synchronized with the glove for calibration",
+        "tactile socks, vest and KUKA arm sleeve recordings in the same release"
+      ]
+    },
+    "sources": [
+      "https://senstextile.csail.mit.edu/",
+      "https://senstextile.csail.mit.edu/file/NE2021.pdf",
+      "https://static-content.springer.com/esm/art%3A10.1038%2Fs41928-021-00558-0/MediaObjects/41928_2021_558_MOESM1_ESM.pdf",
+      "https://github.com/YunzhuLi/senstextile",
+      "https://github.com/YunzhuLi/senstextile/tree/master/sensing_correction (data.py, utils.py, visualizer.py)",
+      "https://github.com/YunzhuLi/senstextile/tree/master/classification/object_classification (config.py, data.py)",
+      "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0",
+      "data_classification.zip and data_sensing_correction.zip (central directories read; all glove HDF5 files opened)"
+    ],
+    "unconfirmed": [
+      "episodes = 118 counts glove HDF5 files: 111 in glove_objclaassification_26obj (28 folders x 4 rounds, emptycan has 3), 3 glove_calibration rec_* touch.hdf5 + 1 glove_calibration/test/calculator.hdf5, and 3 touch_1.hdf5 files in vest_calibration / kuka_calibration that the code loads as the glove.",
+      "frames = 566,403: sum of frame_count over those files (object set 313,476; scale calibration 151,206; calculator test 1,017; vest/KUKA glove 100,704). The paper's 108,305 'paired frames for glove calibration' matches the scale side (108,600 scale frames in the three rec_* None.hdf5).",
+      "hours = 10.75: sum of (last ts - first ts) over the same files = 38,711 s (object set 20,678 s; scale calibration 10,921 s; test 79 s; vest/KUKA 7,034 s).",
+      "objects = 27: object folder names in the release (26 in the code's 26-object list, plus 'emptycan'); 'barehand' is a 28th class with no object. The paper text does not describe the glove object set or what the wearer did with each object.",
+      "rate 14 Hz is the paper's figure for the whole dataset; frame timestamps give 14.1-15.6 Hz for the object set, 13.8-13.9 Hz for scale calibration, 13.6-14.8 Hz for the vest/KUKA glove files.",
+      "coverage tip/phalanx/palm: from glove_right_vis_sensor.csv, which defines 20 rectangular patches (14 finger patches: 2 + 4x3, and 6 palm patches) totalling 722 cells; the paper only says 'full-sized gloves (722 sensors over 160 cm2)'.",
+      "Higher ADC = more pressure: the masked cell sum correlates positively with the scale reading (r = 0.64 on rec_2019-12-17_18-40-25, frames without cells > 1000).",
+      "subjects = 1 from the Reporting Summary ('One consenting female subject with multiple recordings'); not stated per recording.",
+      "Xsens MVN is named in the Reporting Summary; 'imu' is inferred from the product."
+    ]
+  },
+  "license": {
+    "name": "not stated",
+    "redistribution": "not_stated",
+    "quote": "Data that support the findings of this study are available from the corresponding authors upon reasonable request. Source data are provided with this paper.",
+    "url": "https://senstextile.csail.mit.edu/file/NE2021.pdf",
+    "note": "No LICENSE file in the GitHub repository (GitHub API license: null) and no terms on the project page or in the Dropbox folder; the paper's data availability statement (quoted) predates the public Dropbox release and does not address redistribution. The only license text in the repo is SMPL's, for the body model, not the data."
+  },
+  "download": {
+    "where": "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0",
+    "access": "open",
+    "format": "Two zip archives (deflate) of HDF5 files, one per recording: datasets 'pressure' (frames x 32 x 32 uint16), 'ts' (int64 microseconds, Unix epoch), 'frame_count' (1,) uint32; scale recordings hold 'scale' (int32) instead of 'pressure'. Arrays are preallocated, valid rows = frame_count. Plus layout files under data_sensing_correction/visualization/: glove/ (left and right sensor CSVs, outline), vest/ (front and back sensor CSVs, outline), kuka/ (Sensor_info.txt, link_1_origin.obj mesh) and sock/ (tactile2pose, not glove data).",
+    "total_size": "Shared folder as one zip: 5,560,866,645 B (includes the tactile2pose sock/Xsens set). data_classification.zip 451,237,552 B; data_sensing_correction.zip 222,448,110 B. Glove parts: glove_objclaassification_26obj 233.6 MB compressed / 818.7 MB unpacked (111 files); glove_calibration 77.9 MB / 325.9 MB (7 files).",
+    "per_episode": "object recordings 4.2 MB (round 1) or 8.4 MB (rounds 2-4) unpacked, 0.76-2.8 MB compressed; scale calibration touch.hdf5 42-211 MB unpacked",
+    "partial_fetch": "The per-file shared-folder links (https://www.dropbox.com/scl/fo/64ban5axg6sojhm308lo7/AD790YivcRn7NhTlAI9Fn3Q/data_classification.zip?rlkey=87c1dzhggtql20akgejjhvo2g&dl=1 and https://www.dropbox.com/scl/fo/64ban5axg6sojhm308lo7/AGMyBUd_JvmW_YFM-fZ5e-E/data_sensing_correction.zip?rlkey=87c1dzhggtql20akgejjhvo2g&dl=1) answer HTTP Range requests with 206, so the zip central directory and single members can be read without the whole archive (tested with Python zipfile over a range-reading file object). The folder listing comes from Dropbox's list_shared_link_folder_entries endpoint; the old /s/ links in the GitHub README are disabled."
+  },
+  "channels": [
+    {
+      "name": "glove_objclaassification_26obj/<object>/<object>_<round>.hdf5: pressure",
+      "kind": "tactile_grid",
+      "shape": "(frame_count, 32, 32), frame_count 1,063-3,749 (preallocated 16,384 rows)",
+      "rate_hz": 15,
+      "unit": "raw 10-bit ADC counts (0-1023), uncalibrated; observed 48-1023, rest ~519-572 per cell",
+      "frame": "32x32 readout matrix (rows x columns of the knitted sensing grid); 722 cells lie on the glove, mapped to hand positions by data_sensing_correction/visualization/glove/glove_{left,right}_vis_sensor.csv (layout not documented for this October 2019 set)",
+      "note": "Whole-hand pressure map while interacting with one object (or bare hand). Rate from ts: 14.1-15.6 Hz. 10,221 of 313,476 frames have at least one cell >= 1000."
+    },
+    {
+      "name": "glove_objclaassification_26obj/.../*.hdf5: ts",
+      "kind": "other",
+      "shape": "(frame_count,) int64",
+      "rate_hz": 15,
+      "unit": "microseconds since Unix epoch",
+      "frame": "per tactile frame",
+      "note": "Recording dates 2019-10-21 to 2019-10-23."
+    },
+    {
+      "name": "*.hdf5: frame_count",
+      "kind": "other",
+      "shape": "(1,) uint32",
+      "rate_hz": null,
+      "unit": "count",
+      "frame": null,
+      "note": "Number of valid rows in pressure/ts/scale; rows beyond it are zero."
+    },
+    {
+      "name": "glove_calibration/rec_<date>/touch.hdf5: pressure",
+      "kind": "tactile_grid",
+      "shape": "(frame_count, 32, 32), frame_count 18,572 / 32,279 / 100,355",
+      "rate_hz": 14,
+      "unit": "raw 10-bit ADC counts (0-1023); observed 13-1023, rest ~520-680 per cell",
+      "frame": "32x32 readout matrix; the code applies the right-glove mask (722 cells) from glove_right_vis_sensor.csv",
+      "note": "Glove pressing on a digital scale through 3D-printed shapes (paper Methods). Rate from ts 13.8-13.9 Hz. Recordings 2019-12-06 (7,258 s) and 2019-12-17 (2,315 s, 1,348 s)."
+    },
+    {
+      "name": "glove_calibration/rec_<date>/None.hdf5: scale",
+      "kind": "pressure_scalar",
+      "shape": "(frame_count,) int32, frame_count 13,419 / 23,042 / 72,139",
+      "rate_hz": 10,
+      "unit": "raw scale counts, not stated (first sample 0, then ~1.06e6 at rest; observed -491,262 to 3,245,271)",
+      "frame": "total vertical load on the digital scale (Lansheng) the gloved hand presses on; not a sensor on the hand",
+      "note": "Force reference for self-supervised calibration; own ts (microseconds), 9.93 Hz from ts. The code synchronizes it to touch frames by timestamp and subtracts the mean of the first 20 synced readings."
+    },
+    {
+      "name": "glove_calibration/test/calculator.hdf5: pressure",
+      "kind": "tactile_grid",
+      "shape": "(1017, 32, 32)",
+      "rate_hz": 13,
+      "unit": "raw 10-bit ADC counts",
+      "frame": "32x32 readout matrix, right-glove mask",
+      "note": "Held-out test clip used by eval.sh for calibration visualization; 78.6 s, 12.9 Hz from ts; no scale file."
+    },
+    {
+      "name": "vest_calibration/rec_2019-12-14_15-17-58/touch_1.hdf5 and kuka_calibration/rec_*/touch_1.hdf5: pressure",
+      "kind": "tactile_grid",
+      "shape": "(frame_count, 32, 32), frame_count 56,076 / 8,191 / 36,437",
+      "rate_hz": 14,
+      "unit": "raw 10-bit ADC counts",
+      "frame": "32x32 readout matrix; the code loads it as the glove with the right-glove mask",
+      "note": "Glove used as a reference while pressing on the vest or KUKA sleeve; 13.6-14.8 Hz from ts."
+    },
+    {
+      "name": "vest_calibration/.../touch_0.hdf5 and kuka_calibration/.../touch_0.hdf5: pressure",
+      "kind": "tactile_grid",
+      "shape": "(frame_count, 32, 32)",
+      "rate_hz": 14,
+      "unit": "raw 10-bit ADC counts",
+      "frame": "vest back / KUKA arm sleeve sensing matrix, not the hand; vest: all 1,024 cells on the vest (visualization/vest/vest_{back,front}_vis_sensor.csv, one quad); sleeve: 630 cells listed in visualization/kuka/Sensor_info.txt, the other 394 are not sleeve sensors",
+      "note": "Target garment recorded synchronously with the glove (touch_1); start and end timestamps of touch_0 and touch_1 agree within 0.04 s."
+    },
+    {
+      "name": "visualization/glove/glove_{left,right}_vis_sensor.csv, glove_vis_outline.csv",
+      "kind": "other",
+      "shape": "80 rows x (x, y, grid row, grid col); outline 32 polylines",
+      "rate_hz": null,
+      "unit": "2-D drawing coordinates",
+      "frame": "palm-side hand outline",
+      "note": "Corner points of 20 rectangular sensor patches mapping 32x32 grid cells to glove positions (722 cells); used by visualizer.py."
+    },
+    {
+      "name": "visualization/vest/vest_{back,front}_vis_sensor.csv, vest_vis_outline.csv",
+      "kind": "other",
+      "shape": "4 rows x (x, y, grid row, grid col); outline polylines",
+      "rate_hz": null,
+      "unit": "2-D drawing coordinates",
+      "frame": "vest drawing, back or front view",
+      "note": "One quad whose corners carry grid (0,0), (0,31), (31,31), (31,0): row 0 along the top edge, column 0 at the left; the authors' inclusive ranges put all 1,024 cells on the vest. The front file holds the same quad; visualizer.py mirrors x for the front view. The vest calibration uses the back view."
+    },
+    {
+      "name": "visualization/kuka/Sensor_info.txt, link_1_origin.obj",
+      "kind": "other",
+      "shape": "630 lines 'row col x y z nx ny nz'; triangle mesh",
+      "rate_hz": null,
+      "unit": "not stated for Sensor_info.txt (positions span 0.17 x 0.20 x 0.28, read as metres by the converter); the mesh header says centimetres for non-parametric coordinates",
+      "frame": "KUKA arm link 1",
+      "note": "3-D position and surface normal of each of the 630 sleeve cells on the arm-link mesh; visualizer.py draws them as discs on the mesh with open3d and its mask (630 cells) is the sleeve mask of the KUKA calibration. Readout rows run around the link, columns up it."
+    }
+  ],
+  "episode_index": {
+    "where": "Folder and file names inside the zips: data_classification/glove_objclaassification_26obj/<object>/<object>_<round>.hdf5; data_sensing_correction/glove_calibration/rec_<YYYY-MM-DD_HH-MM-SS>/{touch,None}.hdf5 and test/calculator.hdf5; vest_calibration and kuka_calibration rec_*/touch_1.hdf5",
+    "count": 118,
+    "fields": [
+      "object (folder name)",
+      "round 1-4 (file suffix)",
+      "start time (ts[0])",
+      "duration (ts span)"
+    ],
+    "tasks": [
+      "object interaction, labelled by object only: airduster, apple, ball, barehand, battery, calculator, can, cat, chain, clamp, coin, driverset, emptycan, eraser, glasses, metalpart, mouse, mug, multimeter, pen, plate, scissors, screwdriver, spoon, sugarcan, tape, tapeholder, teabox",
+      "pressing on a digital scale (glove calibration)",
+      "pressing on the tactile vest with the glove (vest calibration)",
+      "pressing on the KUKA arm sleeve with the glove (sleeve calibration)"
+    ],
+    "scenes": [],
+    "note": "Object set: 28 classes x 4 rounds (emptycan has 3) = 111 files; round 1 lasts 68-95 s (mean 83 s), rounds 2-4 198-243 s (mean ~221 s). The code trains on rounds 1-4 of 26 objects (barehand and emptycan unused)."
+  },
+  "sample": {
+    "decision": "sample",
+    "reason": "The open Dropbox shared folder linked as 'Dataset' on the project page downloads without login, and both zips were fetched in full and pass integrity checks. No license or terms exist for the data (GitHub repo has no LICENSE and the API returns license null; nothing on the project page or in the folder); the paper's data availability statement ('available from the corresponding authors upon reasonable request') does not address redistribution, and the SMPL license in the repo covers the body model only. Redistribution is therefore not forbidden: re-host and label the collection \"License not stated\".",
+    "prefix": "se_",
+    "tasks_total": 31,
+    "tasks_sampled": 8,
+    "episodes": [
+      {
+        "id": "glove_objclaassification_26obj/mug/mug_1",
+        "task": "mug (object interaction; release labels only the object)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          32,
+          77
+        ],
+        "why": "Handled vessel. Round 1, recorded 2019-10-21 16:10 UTC, 89.2 s whole, so cut to 45 s. In the window (698 frames, 15.5 Hz, no ts gap > 0.07 s): in contact 31.3 s, longest run 3.9 s, up to 27 cells at once, 93 cells active in >= 15 frames, raw range 494-1002, rest median 517. 24 frames hold a cell >= 1000 (27 readings). No stuck (constant) mask cell, no all-zero frame; rows beyond frame_count are zero. Only one active cell lies outside the right-glove mask: (26, 30)."
+      },
+      {
+        "id": "glove_objclaassification_26obj/chain/chain_2",
+        "task": "chain (object interaction; release labels only the object)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          111,
+          156
+        ],
+        "why": "Deformable object. Round 2, recorded 2019-10-22 14:46 UTC, 213.8 s whole. In the window (700 frames, 15.56 Hz): in contact 26.2 s, longest run 7.0 s (the longest of the chain rounds), up to 31 cells, 62 cells active, range 509-1001, only 2 readings >= 1000. No stuck cell, no all-zero frame."
+      },
+      {
+        "id": "glove_objclaassification_26obj/scissors/scissors_3",
+        "task": "scissors (object interaction; release labels only the object)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          95,
+          140
+        ],
+        "why": "Finger-loop tool. Round 3, recorded 2019-10-22 18:58 UTC, 207.5 s whole. In the window (701 frames, 15.57 Hz): in contact 29.7 s, longest run 3.6 s, up to 25 cells, 94 cells active, range 511-1005, 43 frames with one reading >= 1000. No stuck cell, no all-zero frame. Picked over scissors_2 (more contact cells but 263 readings >= 1000 in its best window)."
+      },
+      {
+        "id": "glove_objclaassification_26obj/ball/ball_4",
+        "task": "ball (object interaction; release labels only the object)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          73,
+          118
+        ],
+        "why": "Sphere, whole-hand contact. Round 4, recorded 2019-10-23 10:32 UTC, 219.3 s whole. Strongest contact of the candidates: in the window (644 frames, 14.32 Hz) in contact 32.1 s, longest run 5.6 s, up to 48 cells, mean 10.7 cells above threshold, range 511-1002. 93 frames hold a reading >= 1000 (99 readings), which the converter must treat as artifacts. No stuck cell, no all-zero frame. Other rounds' best windows have runs of 1.0-2.8 s only."
+      },
+      {
+        "id": "glove_objclaassification_26obj/pen/pen_4",
+        "task": "pen (object interaction; release labels only the object)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          68,
+          113
+        ],
+        "why": "Thin rod, small contact area. Round 4, recorded 2019-10-23 09:46 UTC, 236.5 s whole. In the window (644 frames, 14.3 Hz): in contact 28.9 s, longest run 4.4 s (best of the pen rounds), up to 24 cells, 58 cells active, range 511-1001, 4 readings >= 1000. No stuck cell, no all-zero frame."
+      },
+      {
+        "id": "glove_calibration/rec_2019-12-17_18-40-25",
+        "task": "pressing on a digital scale (glove calibration; touch.hdf5 + scale reference None.hdf5)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          399,
+          444
+        ],
+        "why": "The only sampled episode with a force reference. 1,348 s whole, recorded 2019-12-17; window chosen for glove contact x scale range. Glove (618 frames, 13.72 Hz): in contact the whole 45 s, up to 47 cells, 98 cells active, range 500-1020, rest median 535; 291 frames hold a reading >= 1000 (528 readings). Scale (447 samples, 9.94 Hz): repeated press cycles of 3-5 s from rest 1,059,737 (median of samples 1-200) up to 2,078,369 raw counts, above rest + 1e5 for 36.6 s; the masked glove sum correlates with the scale interpolated to glove frames at r = 0.63. 13 scale samples in the window fall below 1.0e6 during presses, 4 of them exactly 0: dropouts, not unloading. Both files present; scale starts 3.7 s before the glove. Picked over rec_2019-12-06 (7,258 s, 211 MB) and rec_2019-12-17_18-01-29 (r = 0.62) as the smallest file with the same behaviour."
+      },
+      {
+        "id": "vest_calibration/rec_2019-12-14_15-17-58",
+        "task": "pressing on the tactile vest with the glove (touch_1 = glove, touch_0 = vest)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          860,
+          905
+        ],
+        "why": "The only vest recording, 3,782 s whole, recorded 2019-12-14. Glove (680 frames, 15.12 Hz): in contact the whole 45 s, up to 75 cells, 114 cells active, range 487-1019; 497 frames hold a reading >= 1000 (947 readings, mostly cells (10,21) and (10,23), which sit high under sustained pressing). Vest grid (681 frames, 15.15 Hz): in contact 44.6 s, longest run 43.8 s, up to 35 cells, 138 cells active, range 454-1023, 337 frames with readings >= 1000. Glove and vest sums correlate at r = 0.74. No stuck cell, no all-zero frame in either. The window avoids a 90.8 s timestamp gap at 2,383 s."
+      },
+      {
+        "id": "kuka_calibration/rec_2019-12-12_17-17-46",
+        "task": "pressing on the KUKA arm sleeve with the glove (touch_1 = glove, touch_0 = sleeve)",
+        "scene": null,
+        "subject": null,
+        "duration_s": 45,
+        "window": [
+          1740,
+          1785
+        ],
+        "why": "Robot-arm sleeve; the longer of the two KUKA recordings (2,650 s whole, recorded 2019-12-12). Glove (618 frames, 13.73 Hz): in contact the whole 45 s, up to 62 cells, 111 cells active, range 472-1023; 306 frames hold a reading >= 1000 (785 readings). Sleeve grid (617 frames, 13.71 Hz): in contact 33.0 s, longest run 8.2 s, up to 30 cells, 97 cells active, 261 frames with readings >= 1000. Glove and sleeve sums correlate at r = 0.88. No stuck cell, no all-zero frame. The other KUKA recording (rec_2019-12-12_17-03-25, r = 0.83) has 1.1 s timestamp gaps near its end and a sleeve cell (23, 0) at >= 1000 in 524 of 618 frames."
+      }
+    ],
+    "fetch_estimate": "0 B more: data_classification.zip (451 MB) and data_sensing_correction.zip (222 MB) were downloaded in full during the survey and the glove files are extracted under ~/data/ext/senstextile/{cls,sc}. Sampled files: 5 object HDF5 (4.2-8.4 MB each unpacked), glove_calibration/rec_2019-12-17_18-40-25 (42 MB + 0.2 MB), vest rec (2 x 118 MB), KUKA rec_17-17-46 (2 x 76 MB), plus the layout CSVs. No video, so no re-hosted media; episode JSON estimated from 45 s x 14-15.6 Hz as uint8 base64: ~0.6-0.7 MB with the 722-cell glove mask, ~1.5-1.6 MB for the vest and KUKA episodes with the full 32x32 garment grid added.",
+    "rules_applied": "README step 2. Decision: no license or terms, data downloadable -> sample, label 'License not stated'. Tasks: 31 in the release (28 object classes = 27 objects + barehand, 4 rounds each, emptycan 3; scale pressing; vest pressing; KUKA sleeve pressing; the calculator test clip is a held-out calibration test and not counted as a separate task) > 6, so 8 sampled, spanning action types (holding/manipulating an object, pressing on a scale, on a worn vest, on a robot-arm sleeve) and object shapes (handled vessel, deformable chain, finger-loop tool, sphere, thin rod), across all 4 rounds and the three object-recording days. One episode per task. Every object round is 68-243 s and every calibration recording 1,348-7,258 s, so each episode is cut to a 45 s window: the 1 s-step window with the highest mean number of in-contact cells (garment and scale episodes: glove contact times garment contact or scale range, skipping windows with timestamp gaps > 0.5 s). Windows are seconds from the first ts of the glove file (touch.hdf5 / touch_1.hdf5 / the object file). Contact test: contact = at least 3 right-mask cells more than 50 counts above their rest level (rest = per-cell 5th percentile over the recording after a 3-frame temporal median; rest noise std ~5 counts); all 8 episodes have >= 26 s in contact and runs >= 3.6 s. Channel check: every file holds frame_count, ts and pressure (or scale); valid rows = frame_count; ts strictly increasing; no constant (stuck) cell inside the mask and no all-zero frame in any window. Barehand was not sampled: its rounds have a mean of 0.1-2.2 cells and a 95th percentile of <= 4 cells above threshold, so they would barely show contact. subject null: the Reporting Summary names one female subject for the study, but no recording states its wearer; scene null: not stated. Observations for the converter: (1) Glove mask: the right-glove layout CSV gives exactly 722 cells only when patch corners are inclusive (half-open gives 616). Across all 111 object files the left-only columns (0-3) are almost silent (mean 37 active frames per cell vs 1,587 for the right-only cells), so the right layout fits the October 2019 set too, but a few cells outside it are active: (12-13, 25-26) in 4 of 5 sampled object windows, row 0 cols 9-10 and 20-24, (24-25, 27), (26, 30), (13, 31); show them (e.g. full 32x32 or 'paint' with extras) rather than dropping them, and say the layout is inferred. (2) Spikes: besides readings >= 1000 there are isolated one-frame readings of ~975-999 (in mug_1, 344 of 452 readings >= 900 have no 8-neighbour above 600); the authors replace > 1000 from neighbours, a 3-frame temporal median also removes them; say which is used. (3) Rest is ~515-535 counts per cell and readings stop near 1000, so ~480 counts above rest is the usable span; quantise against a fixed range, e.g. rest-subtracted 0-480. (4) Scale: own clock at 9.94 Hz starting ~3.7 s before the glove; the first sample is 0 and in-press dropouts to 0 or ~1e4-2e5 occur (391 of 13,419 samples < 1.0e6, 99 zeros in this recording); subtract the rest level (the code uses the mean of the first 20 synced readings), mark or mask dropouts, and show it as a series; unit not stated. (5) Garment grids (touch_0): layout files are in the release (visualization/vest/vest_back_vis_sensor.csv, one quad covering the whole 32x32 grid; visualization/kuka/Sensor_info.txt, 630 sleeve cells with 3-D positions and normals on link_1_origin.obj; the authors' vest/KUKA calibration uses these as the garment masks); show them as a second panel. (6) In glove_calibration/rec_2019-12-17_18-40-25/touch.hdf5 the row at index frame_count holds pressure with ts 0 (partly written frame); use only the first frame_count rows. (7) Glove and garment files of a recording start and end within 0.04 s; resample both onto one clock."
+  },
+  "visualization": [
+    {
+      "channel": "glove_objclaassification_26obj/<object>/<object>_<round>.hdf5: pressure",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "722 taxels painted on the release's right-glove drawing (glove_right_vis_sensor.csv, placed as visualizer.py), regions thumb/index/middle/ring/little/palm from the 20 patches; second panel: the full 32x32 readout matrix (incl. the 302 off-drawing cells); counts above per-cell median rest, artifacts > 1000 replaced as utils.filter_artifact_in_touch; colour scale 0-100 counts; plots: per-region sums, readout total, readings > 1000 per frame, cells > 50 above rest (glove vs off-drawing)",
+      "reason": null
+    },
+    {
+      "channel": "glove_calibration/rec_<date>/touch.hdf5: pressure",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "Same painted 722-taxel glove (the authors' calibration code applies this mask); colour scale 0-200 counts; per-region sums, readings > 1000 per frame, cells > 50 above rest incl. the off-drawing cells",
+      "reason": null
+    },
+    {
+      "channel": "glove_calibration/rec_<date>/None.hdf5: scale",
+      "shown_as": [
+        "series"
+      ],
+      "detail": "Scale reading minus rest (mean of the first 20 valid readings after the glove starts), raw counts on the glove clock (latest at or before each tick); dropouts < 1e6 left as gaps",
+      "reason": null
+    },
+    {
+      "channel": "glove_calibration/test/calculator.hdf5: pressure",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "Held-out calibration test clip, not in the sample; the converter would show it like touch.hdf5 if sampled"
+    },
+    {
+      "channel": "vest_calibration/rec_2019-12-14_15-17-58/touch_1.hdf5 and kuka_calibration/rec_*/touch_1.hdf5: pressure",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "Painted 722-taxel glove as above, colour scale 0-200 counts; per-region sums, readings > 1000, cells > 50 above rest",
+      "reason": null
+    },
+    {
+      "channel": "vest_calibration/.../touch_0.hdf5 and kuka_calibration/.../touch_0.hdf5: pressure",
+      "shown_as": [
+        "grid",
+        "series"
+      ],
+      "detail": "Second panel on the glove clock by its own ts. Vest: all 1,024 cells row-major, row 0 on top, column 0 left = the back view of visualization/vest/vest_back_vis_sensor.csv (one quad over the whole grid; cells drawn square). KUKA: the 630 sleeve cells of visualization/kuka/Sensor_info.txt, their 3-D positions unrolled by the converter (cylinder fitted to the cells within 40 mm of the link base; angle x radius horizontally seen from outside, height vertically, cut at the 49-degree open seam), each painting the sheet within 7 mm; the other 394 readout cells are not drawn and are counted in a dashed line of the cells-above-rest plot. Rest = per-cell 5th (vest) / 50th (KUKA) percentile as the authors' code; artifact filter with the authors' garment mask (vest all cells, sleeve 630 cells); total sum, readings > 1000 (garment cells) and cells > 50 above rest plotted",
+      "reason": null
+    },
+    {
+      "channel": "glove_objclaassification_26obj/.../*.hdf5: ts",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "timestamps, used to build the clock"
+    },
+    {
+      "channel": "*.hdf5: frame_count",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "valid-row count, used to read the preallocated arrays"
+    },
+    {
+      "channel": "visualization/glove/glove_{left,right}_vis_sensor.csv, glove_vis_outline.csv",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "layout files: the right-glove CSV defines the painted glove panel; the outline polylines are not drawn (the painted patches give the hand shape); the left-glove layout is not used"
+    },
+    {
+      "channel": "visualization/vest/vest_{back,front}_vis_sensor.csv, vest_vis_outline.csv",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "layout files: the back-view CSV gives the vest panel's orientation and mask (all 1,024 cells, row 0 on top, column 0 left); the outline is not drawn and the front view (same quad mirrored) is not used"
+    },
+    {
+      "channel": "visualization/kuka/Sensor_info.txt, link_1_origin.obj",
+      "shown_as": [
+        "not_shown"
+      ],
+      "reason": "layout files: Sensor_info.txt gives the sleeve panel's 630 taxels and their unrolled positions and the sleeve mask for the artifact filter; the mesh is not drawn"
+    }
+  ]
+}

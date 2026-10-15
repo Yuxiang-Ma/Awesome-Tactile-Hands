@@ -1,0 +1,49 @@
+{
+ "id": "tdex",
+ "prefix": "td_",
+ "group": "public",
+ "title": "T-Dex",
+ "provider": "Guzey et al. 2023 (CoRL, New York University)",
+ "kind": "recording",
+ "status": {
+  "label": "License not stated",
+  "tone": "neutral"
+ },
+ "about": "Teleoperated Allegro hand on a Kinova Jaco arm with 15 XELA uSkin 4×4 three-axis pads, recorded as task-agnostic play plus demonstrations of five contact-rich tasks: 38 play recordings and 32 task demonstrations in the release.",
+ "link": {
+  "label": "T-Dex project page",
+  "href": "https://tactile-dexterity.github.io/"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx"
+  ],
+  "taxels": 240
+ },
+ "hardware": [
+  {
+   "k": "Hand",
+   "v": "Allegro (16 DoF, 4 fingers) + 15 XELA uSkin pads",
+   "d": "4 pads per finger, 3 on the thumb · 4×4 taxels, (x, y, z) each, uncalibrated · ~98.5 Hz in the files (paper: 100 Hz)"
+  },
+  {
+   "k": "Arm",
+   "v": "Kinova Jaco, 6 DoF",
+   "d": "Joint states and end-effector pose at 50 Hz; Allegro joint states and PD efforts at ~300 Hz"
+  },
+  {
+   "k": "Cameras",
+   "v": "Intel RealSense RGB-D (model not stated)",
+   "d": "1280×720 · ~30 fps · one static camera in play, two in task demonstrations"
+  },
+  {
+   "k": "Teleoperation",
+   "v": "Holo-Dex (Oculus headset hand pose) + Kinova joystick",
+   "d": "Folder name gives the task; no object, scene or operator labels"
+  }
+ ],
+ "notes": "Paper: arXiv 2303.12076 (CoRL 2023). No license or terms of use were found for the data (project page, GitHub README and repository, Drive folder); the arXiv licence covers only the paper. The release is two zips on a public Google Drive folder; each sampled recording is read from them by byte range. Camera videos are the release's AVIs re-timed by their frame timestamps, re-encoded to H.264 and re-hosted. All tactile pads are shown in the release's own pad layout (one column per finger), with per-pad (x, y, z) sums as arrows; which Allegro finger each of columns 1-3 is, and which slot is the fingertip, is not documented. The Allegro PD efforts and Kinova joint efforts are plotted.",
+ "order": 10
+}
