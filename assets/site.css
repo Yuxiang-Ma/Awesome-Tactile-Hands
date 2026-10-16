@@ -153,6 +153,7 @@ footer{padding:20px;color:var(--muted);font-size:12px;border-top:1px solid var(-
   body[data-filters="open"]::after{content:"";position:fixed;inset:0;background:rgba(10,18,22,.4);z-index:15}
   .filtbtn{display:inline-flex;border:1px solid var(--line);background:var(--panel);border-radius:9px;padding:7px 12px;cursor:pointer}
   .top{padding:10px 16px}.top .sum{display:none}.top nav a span{display:none}
+  .top h1{white-space:nowrap}.top nav{gap:2px}.top nav a{padding:6px 8px}
   .main{padding:14px 16px 40px}
   .kv{grid-template-columns:1fr}.kv dt{margin-top:6px}
 }

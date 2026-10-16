@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Glove Data Viewer</title>
+<title>Taxel Atlas samples</title>
 <style>
 :root{
   --bg:#f3f5f6;--rail:#eaeef0;--panel:#fff;--ink:#14212a;--ink2:#3a4a54;--muted:#5b6c76;--line:#d9e1e5;--line2:#e7ecef;
@@ -29,7 +29,8 @@ button,select{font:inherit;color:var(--ink)}
 /* ---------- rail ---------- */
 .rail{background:var(--rail);border-right:1px solid var(--line);position:sticky;top:0;height:100vh;overflow:auto;padding:18px 12px 24px}
 .brand{padding:0 8px 4px}
-.brand .bname{font-size:15px;font-weight:700;margin:0;letter-spacing:-.01em;color:var(--ink2)}
+.brand .bname{display:block;font-size:15px;font-weight:700;margin:0;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.brand a.bname:hover{color:var(--accent)}
 .brand p{margin:2px 0 0;color:var(--muted);font-size:12px}
 .grp{margin-top:20px}
 .grph{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:13.5px;font-weight:700;color:var(--ink);margin:0 8px 2px;letter-spacing:-.005em}
@@ -89,11 +90,15 @@ button,select{font:inherit;color:var(--ink)}
 .hw dd span{display:block;font-size:12px;color:var(--ink2);margin-top:2px;line-height:1.4}
 .dsnote{margin:8px 2px 0;font-size:12px;color:var(--muted);max-width:120ch}
 .dshead .flag{margin-top:10px}
+.dsmore{margin-top:12px}
+.dsmore>summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--ink2);width:max-content;max-width:100%}
+.dsmore .hw{margin-top:8px}
+.ic{width:14px;height:14px;vertical-align:-2px;flex:none}
 .dschip{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink2);padding:2px 9px 2px 4px;border-radius:999px;background:var(--panel);border:1px solid var(--line);white-space:nowrap}
 .dschip .glyph{width:18px;height:18px}
 /* ---------- main ---------- */
 main{padding:0 20px 40px;min-width:0}
-.bar{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:saturate(1.4) blur(6px);
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:saturate(1.4) blur(6px);
   border-bottom:1px solid var(--line);padding:10px 0 8px;margin-bottom:12px}
 .ctrl{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:32px;min-width:32px;padding:0 10px;border-radius:8px;
@@ -129,7 +134,15 @@ main{padding:0 20px 40px;min-width:0}
 .wrists{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px}
 .gloves{display:grid;grid-template-columns:1fr;gap:14px}
 @media(max-width:1250px) and (min-width:700px){.gloves{grid-template-columns:1fr 1fr}}
-@media(max-width:620px){.wrists,.gloves,.layout.gl .gloves,.layout.nv .gloves{grid-template-columns:1fr}}
+@media(max-width:620px){
+  /* both hands stay side by side next to each other's numbers; per-finger values wrap to three columns */
+  .gloves,.layout.gl .gloves,.layout.nv .gloves{grid-template-columns:repeat(var(--nh,2),minmax(0,1fr));gap:8px}
+  .wrists{gap:8px}
+  .gloves .card>h3{flex-wrap:wrap;padding:6px 8px}
+  .gloves .vals{grid-template-columns:repeat(3,1fr)}.gloves .vals div{border-bottom:1px solid var(--line2)}.gloves .vals div:nth-child(3n){border-right:0}
+  .lbl{display:none}.ctrl{gap:6px 8px}.time{min-width:0;font-size:12px}.btn.primary{min-width:72px}
+  #scrub canvas{height:40px}.caption .task{font-size:14px}
+}
 /* heatmaps sit on a dark instrument surface in both themes: the provider's ramp starts near black */
 .hand .hm{background:#0e171c}
 .hand canvas{width:100%;max-width:380px;margin:0 auto;display:block}
@@ -190,7 +203,7 @@ td.num{text-align:right}
 <body>
 <div class="app">
 <nav class="rail" aria-label="Datasets and episodes">
-  <div class="brand"><p class="bname">Glove data viewer</p><p>Synchronized cameras, tactile gloves and annotations</p></div>
+  <div class="brand"><a class="bname" href="https://yuxiang-ma.github.io/Awesome-Tactile-Hands/">Taxel Atlas</a><p id="bcount">Sample episodes from public datasets and provider collections</p></div>
   <div id="sources"></div>
   <div id="epsMobile" aria-label="Episodes"></div>
 </nav>
@@ -317,9 +330,12 @@ function dsHead(s){
   return`<header class="dshead"><div class="dsid">${glyph(s.sensor)}<div>
       <div class="dstitle"><h1>${esc(s.title)}</h1><span class="tag ${s.status.tone}">${esc(s.status.label)}</span></div>
       <p class="dsmeta">${esc(s.provider)} · ${epCount(s)} · ${esc(s.about)}${s.link?` <a href="${esc(s.link.href)}" target="_blank" rel="noopener">${esc(s.link.label)}</a>`:''}</p></div></div>
+    <details class="dsmore"${matchMedia('(max-width:900px)').matches?'':' open'}><summary>${esc(listOf([...s.hardware.map(h=>h.k),...(s.notes?['notes']:[])]))}</summary>
     <dl class="hw" aria-label="Hardware">${s.hardware.map(h=>`<div><dt>${esc(h.k)}</dt><dd><b>${esc(h.v)}</b><span>${esc(h.d)}</span></dd></div>`).join('')}</dl>
-    ${s.notes?`<p class="dsnote">${esc(s.notes)}</p>`:''}${s.flag?`<p class="flag">${esc(s.flag)}</p>`:''}</header>`;
+    ${s.notes?`<p class="dsnote">${esc(s.notes)}</p>`:''}</details>${s.flag?`<p class="flag">${esc(s.flag)}</p>`:''}</header>`;
 }
+// "Gloves, head camera, labels and notes": first word keeps its capital, the rest read as one sentence
+const listOf=a=>a.map((x,i)=>i?x[0].toLowerCase()+x.slice(1):x).join(', ').replace(/, ([^,]*)$/,' and $1');
 function find(id){for(const s of M.sources)for(const it of s.items)if(it.id===id)return{s,it};return null}
 async function open(id,t0){
   stop();const f=find(id)||{s:M.sources[0],it:M.sources[0].items[0]};lastEp[f.s.id]=f.it.id;
@@ -405,7 +421,7 @@ function mountRecording(){
   $('scale').insertAdjacentHTML('beforeend',`<span>${H.range}${R.kind==='early'?'+':''}</span>${H.palm?`<span>· palm 0–${H.palmMax}</span>`:''}`);
   $('notes').insertAdjacentHTML('beforeend',R.kind==='fusionx'?`
     <p>All streams sit on one 30 Hz clock that starts at the first camera frame. Videos are re-timed from the H.264 message timestamps; every other stream shows its latest sample at or before the cursor. The gloves record at about 125 Hz.</p>
-    <p>The head view is the left image of the stereo pair. Each hand skeleton (AnyHand-WiLoR, reviewed by the provider) is drawn on the exact frame it was estimated from; frames whose estimate the provider rejected show none. Skeletons and task steps exist only inside the annotated window. The shaded lead-in, under one second, is decoder pre-roll.</p>
+    <p>The head view is the left image of the stereo pair. Hand skeletons are per-frame vision estimates from that image, made by AnyHand-WiLoR (WiLoR weights co-trained on the AnyHand synthetic set) and reviewed by the provider. Each one is drawn on the frame it came from; frames whose estimate the provider rejected show none. Skeletons and task steps exist only inside the annotated window. The shaded lead-in, under one second, is decoder pre-roll.</p>
     <p>Taxels are drawn in the recorded row order, 4 rows × 4 columns per finger, laid out like the provider's FusionX panel. This glove has no palm taxels (80 channels: 5 fingers × 16), so no palm grid or palm plot is shown. Values are raw ADC without force calibration, coloured on the provider's display range for this clip. Bend is the calibrated finger angle. Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>`:`
     <p>All streams sit on one 30 Hz clock that starts at the first camera frame; the gloves record at about 227 Hz. The taxel grids assume row-major order (4 rows × 3 columns per finger, fingertip row on top) and a 6 × 10 palm; this recording does not store the physical layout. Force is the per-taxel force the glove reports, summed per finger, before calibration. The glove IMUs log orientation only. Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>`);
   buildPlots();drawScrub();
@@ -438,7 +454,7 @@ function mountGrid(){
   const H=R.hands[R.hlist[0]];$('scale').innerHTML=`<span>Taxel value, ${esc(H.unit||'raw')}</span><span>0</span>`;$('scale').appendChild(colorbar());
   $('scale').insertAdjacentHTML('beforeend',`<span>${H.range}</span>`);
   const VH=R.hlist.map(h=>R.hands[h]).find(h=>h.vec);if(VH){const V=VH.vec;$('scale').insertAdjacentHTML('beforeend',`<label style="flex-basis:100%;display:flex;gap:6px;align-items:center"><input type="checkbox" id="vecOn" checked>
-    <span><b style="color:#d4a800">→</b> ${esc(V.label||'vector')}: arrow = ${esc(V.axes||'x, y')}, ring = ${esc(V.zname||'z')} (dashed if negative); full block = ${V.range} ${esc(V.unit||'')}</span></label>`);$('vecOn').onchange=()=>render()}
+    <span><svg class="ic" viewBox="0 0 16 16" style="fill:#d4a800" aria-hidden="true"><path d="M1.5 7h9.3L7.6 3.8 8.8 2.6 14.2 8l-5.4 5.4-1.2-1.2L10.8 9H1.5z"/></svg> ${esc(V.label||'vector')}: arrow = ${esc(V.axes||'x, y')}, ring = ${esc(V.zname||'z')} (dashed if negative); full block = ${V.range} ${esc(V.unit||'')}</span></label>`);$('vecOn').onchange=()=>render()}
   $('notes').insertAdjacentHTML('beforeend',R.notes+'<p>Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>');
   buildPlots();drawScrub();
 }
@@ -563,14 +579,14 @@ function buildPlots(){
   const IN={head:['head','#7f8c8d'],wrist_lh:['wrist L',css('--lh')],wrist_rh:['wrist R',css('--rh')]};
   defs.push({title:'Camera IMU · |gyro| (rad/s)',lines:Object.keys(R.imu).map(k=>({name:IN[k][0],col:IN[k][1],get:i=>R.imu[k][i]}))});
   defs.push({title:'Glove orientation · quaternion (left solid, right dashed)',lines:['w','x','y','z'].flatMap((a,k)=>[
-      {name:'L '+a,col:FCOL[k],get:i=>L.quat[i*4+k]},{name:'R '+a,col:FCOL[k],dash:true,get:i=>Rh.quat[i*4+k]}]),fixed:[-1,1],legendText:'w, x, y, z: purple, blue, green, yellow'});
+      {name:'L '+a,col:FCOL[k],get:i=>L.quat[i*4+k]},{name:'R '+a,col:FCOL[k],dash:true,get:i=>Rh.quat[i*4+k]}]),fixed:[-1,1],legend:['w','x','y','z'].map((a,k)=>({name:a,col:FCOL[k]}))});
   mountPlots(defs);
 }
 function mountPlots(defs){
   const host=$('plots');host.innerHTML='';PLOTS=[];
   for(const d of defs){
     const w=document.createElement('div');w.className='plot';
-    w.innerHTML=`<div class="ph"><b>${esc(d.title)}</b><span class="legend">${d.legendText?esc(d.legendText):d.lines.map(l=>`<span><i style="background:${l.col}"></i>${l.name}</span>`).join('')}</span></div><canvas></canvas>`;
+    w.innerHTML=`<div class="ph"><b>${esc(d.title)}</b><span class="legend">${(d.legend||d.lines).map(l=>`<span><i style="background:${l.col}"></i>${esc(l.name)}</span>`).join('')}</span></div><canvas></canvas>`;
     host.appendChild(w);const cv=w.querySelector('canvas');
     let lo=Infinity,hi=-Infinity;if(d.fixed){[lo,hi]=d.fixed}else{for(const l of d.lines)for(let i=0;i<R.n;i++){const v=l.get(i);if(!isFinite(v))continue;if(v<lo)lo=v;if(v>hi)hi=v}if(!isFinite(lo)){lo=0;hi=1}if(lo>0)lo=0;if(hi<=lo)hi=lo+1}
     PLOTS.push({...d,cv,lo,hi});
@@ -597,7 +613,7 @@ function drawPlot(p){
 }
 /* overview: total finger signal L/R on top, annotated steps underneath */
 function drawScrub(){
-  const cv=$('scrubC'),dpr=devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;
+  const cv=$('scrubC'),dpr=devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight;if(!W||!H){R.scrubImg=null;return}cv.width=W*dpr;cv.height=H*dpr;
   const x=cv.getContext('2d',{willReadFrequently:true});x.setTransform(dpr,0,0,dpr,0,0);
   const band=R.task?16:0,top=H-band,X=s=>s/R.duration*W;
   if(R.task){x.fillStyle=css('--pre');x.fillRect(0,top,W,band);
@@ -623,8 +639,11 @@ document.addEventListener('keydown',e=>{if(!R||!$('play')||/INPUT|SELECT|TEXTARE
 addEventListener('resize',()=>{if(R&&$('scrubC')){drawScrub();render()}});
 
 getJSON('data/manifest.json').then(m=>{M=m;
-  const h=location.hash,id=(h.match(/rec=([\w-]+)/)||[])[1],tt=(h.match(/t=([\d.]+)/)||[])[1];
-  const first=id&&find(id)?id:M.sources[0].items[0].id;open(first,tt);
+  const pub=M.sources.filter(s=>s.group==='public').length;
+  $('bcount').textContent=`Sample episodes from ${pub} public datasets and ${M.sources.length-pub} provider collections`;
+  // #rec=<id>&t=<s>&play opens a recording at a time and starts it (videos are muted, so autoplay is allowed)
+  const h=location.hash,id=(h.match(/rec=([\w-]+)/)||[])[1],tt=(h.match(/t=([\d.]+)/)||[])[1],go=/[#&]play\b/.test(h);
+  const first=id&&find(id)?id:M.sources[0].items[0].id;open(first,tt).then(()=>{if(go&&R)play()});
 }).catch(e=>{$('main').innerHTML=`<div class="err">Could not load the recording list: ${esc(e.message)}. Reload the page to retry.</div>`});
 </script>
 </body>

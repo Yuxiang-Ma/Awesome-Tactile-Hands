@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>How Hand Pose Is Captured · Taxel Atlas</title>
+<meta name="description" content="How the hand pose in tactile hand datasets is captured: 18 methods sorted by the hardware they need and how they compute the pose, with input and output formats and published accuracy.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a6c73'/%3E%3Cg fill='%23fff'%3E%3Crect x='9' y='5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='13.4' y='3.5' width='3.2' height='13' rx='1.6'/%3E%3Crect x='17.8' y='4.5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='22.2' y='7' width='3.2' height='10' rx='1.6'/%3E%3Crect x='8' y='15' width='17.6' height='12' rx='3'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* Layout: a reference document. Lede, contents row, then the classification (hardware rows x computation columns)
+   and one grouped overview table; one section per hardware tier, each method an entry with an input -> computation ->
+   output figure above a definition list. Catalog tokens; every rule is scoped to .pp so the page also sits under
+   the catalog's site.css. */
+:root{
+  --bg:#f3f5f6;--panel:#fff;--ink:#14212a;--ink2:#3a4a54;--muted:#5b6c76;--line:#d9e1e5;--line2:#e7ecef;--pre:#eef1f3;
+  --accent:#0a6c73;--accent-ink:#fff;--accent-soft:#dcecee;
+  --t1:#0a6c73;--t3:#c2501f;--t6:#7a4fb0;--timg:#2b6cb0;--trk:#14212a;--seg:#e3eef0;--off:#cdd6db;
+  --f-ui:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--f-mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0e1316;--panel:#161e22;--ink:#e2e9ed;--ink2:#c3cfd5;--muted:#91a2ab;--line:#283338;--line2:#1f292d;--pre:#1a2226;
+  --accent:#4cb1b8;--accent-ink:#06191b;--accent-soft:#18363a;
+  --t1:#4cb1b8;--t3:#ef8d5f;--t6:#b493e6;--timg:#6aa7e8;--trk:#e2e9ed;--seg:#1d3236;--off:#33424a;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1316;--panel:#161e22;--ink:#e2e9ed;--ink2:#c3cfd5;--muted:#91a2ab;--line:#283338;--line2:#1f292d;--pre:#1a2226;
+  --accent:#4cb1b8;--accent-ink:#06191b;--accent-soft:#18363a;
+  --t1:#4cb1b8;--t3:#ef8d5f;--t6:#b493e6;--timg:#6aa7e8;--trk:#e2e9ed;--seg:#1d3236;--off:#33424a;color-scheme:dark}
+*{box-sizing:border-box}
+html{scrollbar-color:var(--line) transparent;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-ui)}
+::selection{background:var(--accent-soft);color:var(--ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+.pp{font-size:15px;line-height:1.6;font-variant-numeric:tabular-nums;max-width:1160px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.pp a{color:var(--accent);text-underline-offset:2px}
+.pp h1{font-size:28px;line-height:1.2;margin:0 0 12px;letter-spacing:-.015em;text-wrap:balance}
+.pp h2{font-size:19px;line-height:1.3;margin:0 0 8px;letter-spacing:-.01em;text-wrap:balance}
+.pp h3{font-size:15.5px;margin:0;line-height:1.35}
+.pp p{margin:0 0 12px;max-width:72ch;color:var(--ink2)}
+.pp code{font:13px var(--f-mono);background:var(--pre);padding:1px 4px;border-radius:4px}
+.lede p{font-size:16px}
+.sk{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:650;padding:0 7px;border-radius:4px;line-height:1.65;background:var(--pre);color:var(--ink2);border:1px solid var(--line);white-space:nowrap;vertical-align:1px}
+.sk.v{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.sk svg,.cph svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+nav.toc{margin:26px 0 30px;padding:12px 0;border-block:1px solid var(--line)}
+nav.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px}
+nav.toc a{text-decoration:none;color:var(--ink2)}nav.toc a:hover{color:var(--accent);text-decoration:underline}
+.pp section{margin-top:44px;scroll-margin-top:72px}
+.pp section>p{margin-bottom:16px}
+.pp h2+.sub{margin-top:-2px}
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin-bottom:12px}
+.pp table{border-collapse:collapse;width:100%;font-size:13px;font-variant-numeric:tabular-nums}
+.pp th,.pp td{text-align:left;vertical-align:top;padding:8px 12px;border-bottom:1px solid var(--line2);white-space:normal;text-transform:none;letter-spacing:normal;position:static;cursor:auto;background:none;color:inherit;font-weight:inherit}
+.pp thead th{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--pre)}
+.pp tbody tr:last-child td,.pp tbody tr:last-child th{border-bottom:0}
+.pp tr:hover td{background:none}
+.pp td:first-child,.pp td:nth-child(2){min-width:0}
+.pp td b{cursor:auto}
+.pp td a{font-weight:600;text-decoration:none}.pp td a:hover{text-decoration:underline}
+.pp td.ds{color:var(--ink2)}.pp td.none{color:var(--muted)}
+table.ov{min-width:1040px}
+table.ov tr.grp th{background:var(--bg);font-size:12.5px;font-weight:650;color:var(--ink);padding:6px 12px;border-bottom:1px solid var(--line)}
+table.ov tr.grp th span{font-weight:400;color:var(--muted);margin-left:8px}
+table.ov td.er{color:var(--ink2);min-width:180px}
+/* classification matrix */
+table.mx{min-width:820px;table-layout:fixed}
+table.mx col.h{width:178px}
+table.mx thead th{text-transform:none;letter-spacing:0;font-size:12.5px;color:var(--ink);vertical-align:bottom}
+table.mx thead th small{display:block;font-weight:400;color:var(--muted);font-size:11.5px;line-height:1.35;margin-top:2px}
+.cph{display:flex;align-items:center;gap:6px}
+table.mx tbody th{font-size:13px;font-weight:650;color:var(--ink);background:var(--pre);border-right:1px solid var(--line2)}
+table.mx tbody th,table.mx thead th:first-child{position:sticky;left:0;z-index:1;background:var(--pre)}
+table.mx tbody th small{display:block;font-weight:400;color:var(--muted);font-size:11.5px;line-height:1.35}
+table.mx td{border-left:1px solid var(--line2)}
+.pp .mp{display:inline-block;margin:0 4px 4px 0;padding:1px 8px;border-radius:5px;border:1px solid var(--line);font-size:12.5px;font-weight:600;line-height:1.6;text-decoration:none;color:var(--ink);background:var(--panel)}
+.pp td a.mp:hover{border-color:var(--accent);color:var(--accent);text-decoration:none}
+.pp .mp.v{background:var(--accent-soft);border-color:transparent;color:var(--accent)}
+.pp .mp.alt{border-style:dashed;background:none;color:var(--muted);font-weight:500}
+.mx-key{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:12.5px;color:var(--muted);margin:0 0 20px}
+.mx-key .mp{margin:0}
+/* method entries */
+.ms{display:grid;border-top:1px solid var(--line)}
+.m{padding:20px 0 22px;border-bottom:1px solid var(--line);scroll-margin-top:72px}
+.mh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-bottom:12px}
+.mh .by{font-size:13px;color:var(--muted)}
+/* input -> computation -> output figure: one panel, three columns, no inner cards */
+figure.io{max-width:980px;margin:0 0 14px;display:grid;grid-template-columns:minmax(0,1fr) 22px minmax(0,1fr) 22px minmax(0,1fr);align-items:start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.io .c{min-width:0}
+.io .k{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.io .pic{display:block;width:100%;max-width:150px;height:auto;aspect-ratio:3/2;margin-bottom:8px}
+.io .t{font-size:13.5px;font-weight:650;color:var(--ink);line-height:1.35;margin-bottom:3px}
+.io ul{list-style:none;margin:0;padding:0;font:12px/1.5 var(--f-mono);color:var(--ink2)}
+.io li{margin:1px 0}
+.io .ar{align-self:start;justify-self:center;margin-top:58px;color:var(--muted)}
+.cp2{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
+.io .ar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;display:block}
+dl.f{display:grid;grid-template-columns:132px minmax(0,1fr);gap:6px 16px;margin:0;font-size:14px}
+dl.f dt{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+dl.f dd{margin:0;color:var(--ink2);max-width:80ch}
+dl.f ul{margin:0;padding-left:18px}dl.f li{margin:2px 0}dl.f li b{color:var(--ink);font-weight:600}
+dl.f .num{font-weight:650;color:var(--ink)}
+.srcl{display:flex;flex-wrap:wrap;gap:4px 14px}
+.srcl a{display:inline-flex;align-items:center;gap:3px}
+.ic{width:12px;height:12px;fill:currentColor;flex:none}
+.muted{color:var(--muted)}
+ul.defs{margin:0 0 12px;padding-left:20px;max-width:84ch;color:var(--ink2);font-size:14.5px}
+ul.defs li{margin:4px 0}ul.defs b{color:var(--ink)}
+.foot{margin-top:44px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+.foot p{color:var(--muted);font-size:13px}
+/* pictograms */
+.pic .fr{fill:var(--pre);stroke:var(--muted);stroke-width:1}
+.pic .ln{fill:none;stroke:var(--muted);stroke-width:1.1;stroke-linecap:round;stroke-linejoin:round}
+.pic .lk{fill:none;stroke:var(--ink2);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.pic .ray{fill:none;stroke:var(--muted);stroke-width:.9;stroke-dasharray:2.4 2}
+.pic .dev{fill:var(--panel);stroke:var(--ink2);stroke-width:1.2}
+.pic .devf{fill:var(--ink2)}
+.pic .bone{fill:none;stroke:var(--muted);stroke-width:1.1;stroke-linecap:round}
+.pic .jt{fill:var(--accent)}
+.pic .jx{fill:var(--panel);stroke:var(--accent);stroke-width:1}
+.pic .ac{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.pic .acf{fill:var(--accent)}
+.pic .acs{fill:var(--accent-soft);stroke:var(--accent);stroke-width:.8}
+.pic .tx{fill:var(--muted);font:600 7.5px var(--f-ui)}
+.pic .tk{fill:var(--ink2);font:600 7.5px var(--f-ui)}
+.pic .node{fill:var(--panel);stroke:var(--ink2);stroke-width:1.1}
+.pic .mesh .o{fill:url(#pmesh);stroke:var(--accent);stroke-width:.6}
+/* hand glyph (same drawing as the catalog cards) */
+.g .o{fill:var(--panel);stroke:var(--muted);stroke-width:.55}
+.g .ab{fill:none;stroke:var(--off);stroke-width:.55;stroke-dasharray:1.1 .9}
+.g .s{fill:var(--seg)}
+.g .c1{fill:var(--t1)}.g .c3{fill:var(--t3)}.g .c6{fill:none;stroke:var(--t6);stroke-width:.6}.g .c6f{fill:var(--t6)}
+.g .img{fill:url(#gimg)}.g .lens{fill:none;stroke:var(--panel);stroke-width:.45}
+.g .hollow{fill:none;stroke:var(--t3);stroke-width:.4}
+.g .unk{fill:url(#gunk)}
+.g .emf{fill:var(--trk)}.g .imu{fill:none;stroke:var(--trk);stroke-width:.45}.g .enc{fill:var(--panel);stroke:var(--trk);stroke-width:.45}
+.g .bend{stroke:var(--trk);stroke-width:.45;stroke-dasharray:.9 .7;fill:none}
+.g .eye{fill:none;stroke:var(--trk);stroke-width:.5}
+.g .shear{stroke:var(--t3);stroke-width:.5;fill:none}
+.g .mk{fill:var(--panel);stroke:var(--trk);stroke-width:.5}
+.g .grip{fill:var(--trk);opacity:.85}
+@media (max-width:760px){
+  figure.io{grid-template-columns:minmax(0,1fr);padding:12px 14px}
+  .io .c{display:grid;grid-template-columns:92px minmax(0,1fr);column-gap:12px;align-items:start}
+  .io .k{grid-column:1/-1}
+  .io .pic{grid-row:2/5;margin:0}
+  .io .ar{transform:rotate(90deg);margin:4px 0;align-self:center}
+}
+@media (max-width:640px){
+  .pp h1{font-size:24px}
+  table.mx{min-width:690px}table.mx col.h{width:116px}
+  table.mx tbody th small{display:none}
+  dl.f{grid-template-columns:minmax(0,1fr);gap:2px}
+  dl.f dt{padding-top:8px}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1><a href="./" style="color:inherit;text-decoration:none">Taxel Atlas</a></h1>
+  <nav>
+    <a href="./"><svg viewBox="0 0 24 24" class="ln"><path d="M4 5h16M4 12h16M4 19h16"/></svg><span>Datasets</span></a>
+    <a href="hardware.html"><svg viewBox="0 0 24 24" class="ln"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg><span>Hardware</span></a>
+    <a href="pose.html" aria-current="page"><svg viewBox="0 0 24 24" class="ln"><path d="M12 21v-6M12 15 6 11.5 4.5 8M12 15V4.5M12 15l3.5-9M12 15l5.5-5.5"/><circle cx="12" cy="15" r="1.4"/></svg><span>Hand pose</span></a>
+    <a href="viewer/" class="pri"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg><span>Data viewer</span></a>
+    <a id="contrib" href="#"><svg viewBox="0 0 24 24"><path d="M11 5h2v14h-2zM5 11h14v2H5z"/></svg><span>Suggest a correction</span></a>
+    <a id="gh" href="#" aria-label="GitHub repository"><svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg><span>GitHub</span></a>
+  </nav>
+</header>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <pattern id="pmesh" width="3.2" height="3.2" patternUnits="userSpaceOnUse"><rect width="3.2" height="3.2" style="fill:var(--accent-soft)"/><path d="M0 3.2L3.2 0M0 0h3.2M0 0v3.2" style="stroke:var(--accent);stroke-width:.25;opacity:.7"/></pattern>
+</defs></svg>
+<div class="pp">
+  <header class="lede">
+    <h1>How hand pose is captured</h1>
+    <p>These 18 methods cover every hand pose source in the 22 Taxel Atlas datasets, plus MediaPipe and HaWoR, which no catalog dataset uses yet but which are common ways to add pose to video. They are sorted on two axes: the hardware a recording needs, from any video to a worn glove or a robot, and how the pose is computed from the raw signal: a learned model, multi-view geometry, inertial fusion, a magnetic field, or a calibrated reading per joint.</p>
+    <p>Each entry draws what goes in and what comes out, with array shapes and units, and lists the published accuracy figures with the benchmark or reference system behind them.</p>
+  </header>
+  <nav class="toc" aria-label="Contents"><ol id="toc"></ol></nav>
+
+  <section id="overview"><h2>All methods at a glance</h2>
+    <p>Rows are the hardware a recording needs, columns the way the pose is computed. A dashed name is a method whose second stage uses that column too. Each name links to its entry below; datasets with no hand pose are listed at the end.</p>
+    <div class="tw"><table class="mx"><colgroup><col class="h"><col span="5"></colgroup><thead id="mxh"></thead><tbody id="mxb"></tbody></table></div>
+    <div class="mx-key"><span class="mp v">Learned</span>estimated from images<span class="mp">Name</span>measured by sensors<span class="mp alt">Name</span>secondary stage</div>
+    <div class="tw"><table class="ov"><thead><tr><th>Method</th><th>Computation</th><th>Output</th><th>Frame</th><th>Published error</th><th>Datasets in the catalog</th></tr></thead><tbody id="ov"></tbody></table></div>
+  </section>
+
+  <section id="errors"><h2>Reading the error numbers</h2>
+    <p>Each figure below comes from its own reference and conditions, so numbers compare within one method's list, and only loosely across methods.</p>
+    <ul class="defs" id="defs"></ul>
+  </section>
+  <div id="fams"></div>
+
+  <section id="retarget"><h2>From a human hand to robot joints</h2>
+    <p>Teleoperated and human-to-robot datasets turn a tracked human hand into robot joint angles. The released robot joints are measured, but how well they match what the operator did depends on this mapping. The most common open tool is <a href="https://github.com/dexsuite/dex-retargeting" target="_blank" rel="noopener">dex-retargeting</a> from AnyTeleop (Qin et al., RSS 2023): it solves for joint angles that match human keypoints, in a <code>vector</code> mode suggested for teleoperation, a <code>position</code> mode suggested for offline human data, or a <code>dexpilot</code> mode that follows the DexPilot cost.</p>
+    <div class="tw"><table class="rt" style="min-width:760px"><thead><tr><th>Dataset</th><th>Human input</th><th>Mapping</th><th>Robot</th></tr></thead><tbody id="rt"></tbody></table></div>
+  </section>
+
+  <section id="none"><h2>Datasets with no hand pose</h2>
+    <p id="nonep"></p>
+  </section>
+
+  <div class="foot">
+    <p>Method facts and error figures were checked on 2026-10-16 against the papers, vendor specifications and SDK documentation linked under each entry. Vendor figures are marked as vendor claims. Dataset details come from each dataset's catalog entry. Where a paper and a vendor disagree (TactiDex and DexViTac call MANUS EMF gloves "IMU" gloves), both are stated.</p>
+  </div>
+</div>
+<script>
+'use strict';
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const FING = {index: [14.6, 8.2], middle: [20.6, 5], ring: [26.6, 7], little: [32.6, 11.2]};
+const FW = 5.1, PY = 23.6, PALM = {x: 14, y: 23, w: 23.9, h: 19.5};
+const TROT = 'rotate(-30 14.2 41)', TH = {x: 8.6, y: 24.6, w: 5.4, h: 16.4};
+function segs(f) {
+  if (f === 'thumb') {const t = TH.h * .42; return [{x: TH.x, y: TH.y, w: TH.w, h: t}, {x: TH.x, y: TH.y + t + .5, w: TH.w, h: TH.h - t - .5}]}
+  const [x, top] = FING[f], L = PY + 1.2 - top, a = L * .32, b = L * .33;
+  return [{x, y: top, w: FW, h: a}, {x, y: top + a + .45, w: FW, h: b}, {x, y: top + a + b + .9, w: FW, h: L - a - b - .9}];
+}
+const wrench = (cx, cy, o) => o.push(`<circle class="c6f" cx="${cx}" cy="${cy}" r=".55"/><path class="c6" d="M${cx} ${cy}l1.6 -1.6m0 0l-.75 .05m.75 -.05l-.05 .75"/><path class="c6" d="M${cx - 1.5} ${cy + .4}a1.6 1.6 0 1 0 .5 -1.5"/>`);
+function fill(r, n, t, o) {
+  if (!n && n !== null) return;
+  const ix = r.x + .45, iy = r.y + .45, iw = r.w - .9, ih = r.h - .9;
+  if (n === -1) {o.push(`<rect class="hollow" x="${ix}" y="${iy}" width="${iw}" height="${ih}" rx=".8"/>`); return}
+  o.push(`<rect class="s" x="${r.x + .2}" y="${r.y + .2}" width="${r.w - .4}" height="${r.h - .4}" rx=".9"/>`);
+  if (n === null) {o.push(`<rect class="unk" x="${ix}" y="${iy}" width="${iw}" height="${ih}" rx=".8"/>`); return}
+  if (t === 'img' || t === 'img6') {
+    o.push(`<rect class="img" x="${ix}" y="${iy}" width="${iw}" height="${ih}" rx="1.4"/><circle class="lens" cx="${r.x + r.w / 2}" cy="${r.y + r.h / 2}" r="${Math.min(iw, ih) * .28}"/>`);
+    if (t === 'img6') wrench(r.x + r.w / 2, r.y + r.h / 2, o);
+    return;
+  }
+  if (t === '6') {wrench(r.x + r.w / 2, r.y + r.h / 2, o); return}
+  const cols = Math.max(1, Math.round(Math.sqrt(n * iw / ih))), rows = Math.ceil(n / cols), s = Math.min(iw / cols, ih / rows);
+  const ox = ix + (iw - cols * s) / 2, oy = iy + (ih - rows * s) / 2;
+  for (let k = 0; k < n; k++) {
+    const cx = ox + (k % cols + .5) * s, cy = oy + (Math.floor(k / cols) + .5) * s;
+    o.push(t === '3' ? `<circle class="c3" cx="${cx.toFixed(2)}" cy="${cy.toFixed(2)}" r="${(s * .36).toFixed(2)}"/>`
+      : `<rect class="c1" x="${(cx - s * .36).toFixed(2)}" y="${(cy - s * .36).toFixed(2)}" width="${(s * .72).toFixed(2)}" height="${(s * .72).toFixed(2)}"/>`);
+  }
+}
+function glyph(G, mirror) {
+  const L = G.L || {}, o = [], th = [], absent = new Set(G.absent || []), tr = new Set(G.tr || []);
+  o.push(`<rect class="o" x="${PALM.x}" y="${PALM.y}" width="${PALM.w}" height="${PALM.h}" rx="3.6"/>`);
+  for (const f of Object.keys(FING)) {const [x, top] = FING[f]; o.push(`<rect class="${absent.has(f) ? 'ab' : 'o'}" x="${x}" y="${top}" width="${FW}" height="${PY + 1.4 - top}" rx="2.4"/>`)}
+  th.push(`<rect class="${absent.has('thumb') ? 'ab' : 'o'}" x="${TH.x}" y="${TH.y}" width="${TH.w}" height="${TH.h}" rx="2.6"/>`);
+  for (const f of ['thumb', ...Object.keys(FING)]) {
+    if (absent.has(f)) continue;
+    const S = segs(f), c = L[f] || [], out = f === 'thumb' ? th : o;
+    S.forEach((r, i) => fill(r, c[i], G.t, out));
+    if (G.shear && c.some(v => v)) S.forEach((r, i) => c[i] && out.push(`<path class="shear" d="M${r.x + r.w / 2 - 1.2} ${r.y + r.h / 2 + .8}l2.2 -1.4m0 0l-.9 0m.9 0l-.35 .8"/>`));
+    if (tr.has('emf')) {const r = S[0]; out.push(`<path class="emf" d="M${r.x + r.w / 2} ${r.y - 1.6}l1 1 -1 1 -1 -1z"/>`)}
+    if (tr.has('imu')) S.slice(1, 2).forEach(r => out.push(`<rect class="imu" x="${r.x + r.w / 2 - .9}" y="${r.y + r.h / 2 - .9}" width="1.8" height="1.8"/>`));
+    if (tr.has('enc')) S.slice(0, -1).forEach(r => out.push(`<circle class="enc" cx="${r.x + r.w / 2}" cy="${r.y + r.h + .22}" r=".75"/>`));
+    if (tr.has('bend')) {const a = S[0], b = S[S.length - 1]; out.push(`<path class="bend" d="M${a.x + a.w - .9} ${a.y + 1} V${b.y + b.h}"/>`)}
+  }
+  if (L.palm !== undefined) fill({x: PALM.x + .6, y: PALM.y + 1, w: PALM.w - 1.2, h: PALM.h - 1.6}, L.palm, G.t, o);
+  if (tr.has('imu')) o.push(`<rect class="imu" x="${PALM.x + PALM.w / 2 - 1.1}" y="${PALM.y + PALM.h - 4}" width="2.2" height="2.2"/>`);
+  if (tr.has('eye')) o.push(`<path class="eye" d="M36 46.2q2.6 -2.4 5.2 0q-2.6 2.4 -5.2 0z"/><circle class="eye" cx="38.6" cy="46.2" r=".8"/>`);
+  if (tr.has('vive')) o.push(`<rect class="emf" x="23.4" y="44.2" width="4" height="2.4" rx=".9"/>`);
+  if (tr.has('mk')) {for (const f of Object.keys(FING)) {const [x, top] = FING[f]; o.push(`<circle class="mk" cx="${x + FW / 2}" cy="${top + 1.6}" r="1"/>`)}
+    o.push(`<circle class="mk" cx="${PALM.x + 5}" cy="${PALM.y + PALM.h - 4}" r="1"/><circle class="mk" cx="${PALM.x + PALM.w - 5}" cy="${PALM.y + PALM.h - 4}" r="1"/><circle class="mk" cx="${PALM.x + PALM.w / 2}" cy="${PALM.y + 6}" r="1"/>`)}
+  if (tr.has('grip')) o.push(`<rect class="grip" x="${PALM.x + 2}" y="${PALM.y + 7}" width="${PALM.w - 4}" height="6" rx="3"/>`);
+  const body = `${o.join('')}<g transform="${TROT}">${th.join('')}</g>`;
+  return `<svg class="g" viewBox="5 2 38 47" role="img" aria-label="${esc(G.label || 'hand glyph')}"><title>${esc(G.label || '')}</title>
+    <defs><linearGradient id="gimg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--timg);stop-opacity:.95"/><stop offset="1" style="stop-color:var(--timg);stop-opacity:.45"/></linearGradient>
+    <pattern id="gunk" width="1.6" height="1.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width=".55" height="1.6" style="fill:var(--t3)"/></pattern></defs>
+    ${mirror ? `<g transform="translate(48 0) scale(-1 1)">${body}</g>` : body}</svg>`;
+}
+
+const EXT = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6h-2V7.4l-7.3 7.3-1.4-1.4L16.6 6H14zM5 6h6v2H6v10h10v-5h2v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1z"/></svg>';
+const ARROW = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>';
+
+/* ---------- the two axes ---------- */
+const HW = [
+  {id: 'video', t: 'Any RGB video', d: 'One camera; nothing worn', intro: 'A network reads recorded frames and returns a hand skeleton or a MANO mesh. Nothing is worn on the hand, so it runs on any footage, including datasets recorded without tracking. With one camera, depth and hand size come from what the model learned, and fingers hidden behind an object are filled in by the model.'},
+  {id: 'rig', t: 'Calibrated camera rig', d: 'Several synced cameras; nothing worn', intro: 'Several cameras with known intrinsics and positions see the hand at once. 2-D detections from each view are intersected into 3-D points, which gives metric scale that a single camera cannot.'},
+  {id: 'headset', t: 'VR headset', d: 'Worn on the head; controllers optional', intro: "A headset tracks the operator's hands, or the controllers they hold, with its own cameras during teleoperation. The pose is computed live in the headset's world frame and drives the robot. The catalog datasets that use it release the robot's joints; the headset stream is the control input and is usually not in the release."},
+  {id: 'glove', t: 'Glove', d: 'Sensors on the fingers', intro: 'Sensors on the glove measure the fingers, so an object between the hand and a camera does not matter. Most give finger joints relative to the back of the hand; where the hand is in the room needs a tracker. A tracking glove worn under or over a tactile glove also changes the contact the tactile sensor sees.'},
+  {id: 'room', t: 'Worn tracker + room setup', d: 'Base stations or a camera ring', intro: 'A tracker or markers on the hand are located by equipment fixed in the room: laser base stations or a ring of infrared cameras. Accuracy is high inside the covered volume and gone outside it or out of line of sight.'},
+  {id: 'self', t: 'Self-contained tracker', d: 'Worn; tracks itself', intro: 'A device on the hand or body estimates its own motion from an on-board camera or inertial sensors, with nothing installed in the room. Positions drift over a session.'},
+  {id: 'robot', t: 'Robot hand', d: 'Encoders in the joints', intro: "On a robot, finger joint angles come from the hand's encoders and the wrist pose from the arm's forward kinematics. They describe that robot hand; using them for another hand needs retargeting."},
+];
+const ICP = {
+  learned: '<circle cx="5" cy="7" r="2"/><circle cx="5" cy="17" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="19" cy="17" r="2"/><path d="M7 7.8l3.2 3M7 16.2l3.2-3M13.8 11l3.4-3M13.8 13l3.4 3"/>',
+  geometry: '<path d="M4 20l8-14 8 14"/><rect x="2" y="18" width="5" height="4" rx="1"/><rect x="17" y="18" width="5" height="4" rx="1"/><circle cx="12" cy="5" r="1.8"/>',
+  fusion: '<path d="M3 6c3 0 4 2 5 4s2 2 4 2M3 18c2-1 3-3 4-4s2-2 5-2h9M18 9l3 3-3 3"/>',
+  field: '<rect x="2" y="9.5" width="5" height="5" rx="1"/><path d="M10 7a7 7 0 0 1 0 10M14 4a11 11 0 0 1 0 16"/><path d="M19.5 10.5l1.5 1.5-1.5 1.5-1.5-1.5z"/>',
+  direct: '<path d="M3 17a9 9 0 0 1 18 0"/><path d="M12 17l4-6"/><path d="M6 13l1 1M12 8v1.5M18 13l-1 1"/>',
+};
+const CP = [
+  {id: 'learned', t: 'Learned from images', d: 'A trained network maps pixels to a pose'},
+  {id: 'geometry', t: 'Multi-view geometry', d: 'Rays from known viewpoints are intersected'},
+  {id: 'fusion', t: 'Inertial fusion', d: 'IMU motion corrected by a second reference'},
+  {id: 'field', t: 'Magnetic field', d: 'Pose solved from a transmitter’s field'},
+  {id: 'direct', t: 'Direct reading', d: 'One sensor per joint, calibrated to an angle'},
+];
+const cpOf = id => CP.find(c => c.id === id), hwOf = id => HW.find(h => h.id === id);
+const cpIcon = id => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICP[id]}</svg>`;
+const cpChip = id => `<span class="sk${id === 'learned' ? ' v' : ''}">${cpIcon(id)}${esc(cpOf(id).t)}</span>`;
+const hwChip = id => `<span class="sk">${esc(hwOf(id).t)}</span>`;
+
+/* ---------- pictograms, 96 x 64 ---------- */
+const handAt = (x, y, h, tr = [], cls = '') => glyph({L: {}, tr, label: ''})
+  .replace(/^<svg class="g"[^>]*>/, `<svg class="g${cls ? ' ' + cls : ''}" x="${x}" y="${y}" width="${(h * 38 / 47).toFixed(1)}" height="${h}" viewBox="5 2 38 47">`)
+  .replace(/<title>[\s\S]*?<\/title>/, '').replace(/<defs>[\s\S]*?<\/defs>/, '');
+const cam = (x, y, r = 0) => `<g transform="translate(${x} ${y}) rotate(${r})"><rect class="dev" x="-5" y="-3.5" width="8" height="7" rx="1.2"/><path class="dev" d="M3 -2l3.5 -1.5v7L3 2z"/></g>`;
+// 21-keypoint hand in a 40 x 50 box; opt.meta adds 4 metacarpals, opt.forearm 2 forearm joints, opt.palm a palm centre
+const KP = {w: [20, 46], th: [[13, 41], [8.5, 35], [5.5, 29.5], [3.5, 24.5]],
+  f: [[[15, 27], [14, 18.5], [13.5, 12.5], [13, 7.5]], [[21, 26], [21, 16.5], [21, 10], [21, 4.5]], [[27, 27], [28, 18.5], [28.6, 13], [29, 8.5]], [[32.4, 30], [34.4, 23.5], [35.4, 19], [36.4, 15]]]};
+function skel(x, y, s, opt = {}) {
+  const b = [], j = [], [wx, wy] = KP.w, P = p => `${p[0]} ${p[1]}`;
+  const chain = pts => b.push(`<path class="bone" vector-effect="non-scaling-stroke" d="M${P(KP.w)}L${pts.map(P).join('L')}"/>`);
+  chain(KP.th); KP.th.forEach(p => j.push(p));
+  for (const f of KP.f) {
+    if (opt.meta) {const m = [(wx + f[0][0]) / 2, (wy + f[0][1]) / 2 + 1.5]; chain([m, ...f]); j.push(m)} else chain(f);
+    f.forEach(p => j.push(p));
+  }
+  j.push(KP.w);
+  if (opt.forearm) {b.push(`<path class="bone" vector-effect="non-scaling-stroke" d="M${wx} ${wy}V${wy + 12}"/>`); j.push([wx, wy + 6], [wx, wy + 12])}
+  if (opt.palm) j.push([22, 35]);
+  const r = opt.r || 1.6;
+  const tips = opt.tips ? [KP.th[3], ...KP.f.map(f => f[3])].map(p => `<path class="devf" d="M${p[0]} ${p[1] - 3.2}l2.2 2.2-2.2 2.2-2.2-2.2z"/>`).join('') : '';
+  return `<g transform="translate(${x} ${y}) scale(${s})">${b.join('')}${j.map(p => `<circle class="jt" cx="${p[0]}" cy="${p[1]}" r="${r}"/>`).join('')}${tips}</g>`;
+}
+const triad = (x, y, L = 12, lab = true) => `<g transform="translate(${x} ${y})"><path class="lk" d="M0 0h${L}M${L - 3} -2.5l3 2.5-3 2.5M0 0v-${L}M-2.5 -${L - 3}l2.5 -3 2.5 3M0 0l-${L * .62} ${L * .5}"/>${lab ? `<text class="tx" x="${L + 2}" y="3">x</text><text class="tx" x="3" y="-${L - 1}">y</text><text class="tx" x="-${L * .62 + 7}" y="${L * .5 + 3}">z</text>` : ''}</g>`;
+const PIN = {
+  frame: () => `<rect class="fr" x="12" y="5" width="72" height="54" rx="3"/>${handAt(34, 10, 44)}`,
+  crop: () => `<rect class="fr" x="4" y="5" width="60" height="54" rx="3"/>${handAt(18, 14, 34)}<rect x="15" y="12" width="32" height="38" class="ray" rx="1"/><path class="ln" d="M47 31h10"/><rect class="dev" x="64" y="18" width="28" height="28" rx="1.5"/>${handAt(69, 21, 22)}`,
+  clip: () => `<rect class="fr" x="26" y="3" width="64" height="44" rx="3"/><rect class="fr" x="18" y="9" width="64" height="44" rx="3"/><rect class="fr" x="10" y="15" width="64" height="44" rx="3"/>${handAt(31, 19, 37)}`,
+  views: () => `${handAt(37, 13, 38)}${cam(10, 10, 30)}${cam(86, 10, 150)}${cam(48, 58, -90)}<path class="ray" d="M15 13L40 30M81 13L58 30M48 52V44"/>`,
+  headset: (ctrl) => `<path class="dev" d="M26 6h44a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6H58l-4-4h-12l-4 4H26a6 6 0 0 1-6-6v-6a6 6 0 0 1 6-6z"/><circle class="devf" cx="30" cy="11" r="1.6"/><circle class="devf" cx="66" cy="11" r="1.6"/><circle class="devf" cx="30" cy="19" r="1.6"/><circle class="devf" cx="66" cy="19" r="1.6"/>
+    <path class="ray" d="M30 22L22 38M66 22L74 38"/>${ctrl ? `<g transform="translate(14 38)"><circle class="dev" cx="8" cy="7" r="7"/><rect class="dev" x="5" y="12" width="6" height="12" rx="2.5"/></g><g transform="translate(66 38)"><circle class="dev" cx="8" cy="7" r="7"/><rect class="dev" x="5" y="12" width="6" height="12" rx="2.5"/></g>` : `${handAt(12, 36, 26)}${handAt(64, 36, 26)}`}`,
+  glove: tr => handAt(29, 2, 60, tr),
+  gloveCam: tr => `${handAt(14, 2, 60, tr)}${cam(82, 24, 180)}<path class="ray" d="M76 22L58 16M76 26L58 40"/>`,
+  lighthouse: () => `${handAt(14, 6, 56, ['vive'])}<rect class="dev" x="74" y="4" width="16" height="16" rx="3"/><circle class="devf" cx="82" cy="12" r="2.6"/><path class="ray" d="M74 14L46 52M76 20L50 58"/>`,
+  mocap: () => `${handAt(30, 8, 54, ['mk'])}${cam(10, 8, 40)}${cam(86, 8, 140)}${cam(10, 56, -40)}<path class="ray" d="M15 12L34 24M81 12L64 22M15 52L34 46"/>`,
+  t265: () => `${handAt(12, 4, 58, ['vive'])}<rect class="dev" x="58" y="40" width="22" height="9" rx="4"/><circle class="devf" cx="63.5" cy="44.5" r="2.4"/><circle class="devf" cx="74.5" cy="44.5" r="2.4"/><path class="ray" d="M80 41L92 30M80 48L92 58"/>`,
+  suit: () => {
+    const imu = [[48, 9], [48, 21], [48, 33], [40, 18], [56, 18], [34, 26], [62, 26], [30, 36], [66, 36], [27, 44], [69, 44], [42, 42], [54, 42], [41, 51], [55, 51], [40, 59], [56, 59]];
+    return `<circle class="dev" cx="48" cy="7" r="5"/><path class="lk" d="M48 12v24M40 17h16M40 17l-6 9-4 10-3 8M56 17l6 9 4 10 3 8M44 36h8M44 36l-3 15-1 8M52 36l3 15 1 8"/>${imu.map(([x, y]) => `<rect class="devf" x="${x - 1.8}" y="${y - 1.8}" width="3.6" height="3.6"/>`).join('')}`;
+  },
+  enc: () => handAt(29, 2, 60, ['enc']),
+};
+const PCP = {
+  learned: () => {
+    const L = [[30, [16, 32, 48]], [48, [10, 24, 38, 52]], [66, [22, 42]]], o = [];
+    for (let i = 0; i < 2; i++) for (const a of L[i][1]) for (const b of L[i + 1][1]) o.push(`<path class="ln" d="M${L[i][0]} ${a}L${L[i + 1][0]} ${b}"/>`);
+    L.forEach(([x, ys]) => ys.forEach(y => o.push(`<circle class="node" cx="${x}" cy="${y}" r="4"/>`)));
+    return o.join('');
+  },
+  geometry: () => `${cam(18, 52, -50)}${cam(78, 52, -130)}${cam(48, 58, -90)}<path class="ray" d="M22 48L48 12M74 48L48 12M48 52L48 12"/><circle class="acf" cx="48" cy="12" r="3.2"/>`,
+  fusion: () => `<path class="lk" d="M8 18c4-8 8 8 12 0s8 8 12 0 8 8 12 0"/><path class="ln" d="M8 46h6v-6h6v6h6v-6h6v6h6"/><text class="tx" x="8" y="9">IMU</text><text class="tx" x="8" y="58">reference</text><path class="lk" d="M46 18c6 0 8 14 14 14M46 44c6 0 8-12 14-12"/><circle class="node" cx="62" cy="32" r="5"/><path class="ac" d="M67 32h20M83 28l4 4-4 4"/>`,
+  field: () => `<rect class="dev" x="8" y="25" width="14" height="14" rx="2"/><path class="ln" d="M28 20a16 16 0 0 1 0 24M36 13a26 26 0 0 1 0 38M44 6a36 36 0 0 1 0 52"/><path class="acf" d="M70 26l6 6-6 6-6-6z"/>${triad(70, 32, 11, false)}`,
+  direct: () => `<path class="lk" d="M18 50a30 30 0 0 1 60 0"/><path class="ln" d="M22 38l4 2M30 28l3 3M48 20v4M66 28l-3 3M74 38l-4 2"/><path class="ac" d="M48 50l16-20"/><circle class="node" cx="48" cy="50" r="3.5"/>`,
+};
+const POUT = {
+  kp2d: () => `<rect class="fr" x="18" y="4" width="60" height="56" rx="3"/>${skel(28, 7, 1)}<text class="tx" x="21" y="56">u, v</text>`,
+  kp3d: (o = {}) => `${skel(40, 6, 1, o)}${triad(14, 52)}`,
+  mano: () => `${handAt(2, 4, 56, [], 'mesh')}${skel(54, 8, .9, {r: 1.7})}`,
+  skel: o => `${skel(38, 2, o.forearm ? .96 : 1.1, o)}${triad(14, 52)}`,
+  angles: () => `<path class="lk" d="M10 56L34 44L54 28L62 8"/><circle class="node" cx="34" cy="44" r="2.6"/><circle class="node" cx="54" cy="28" r="2.6"/><path class="ac" d="M44 41a10 10 0 0 0 -2 -3M60 26a7 7 0 0 0 -3 -6"/><path class="ln" d="M34 44l18 -9M54 28l13 -10"/><text class="tk" x="48" y="49">θ₁</text><text class="tk" x="66" y="34">θ₂</text><text class="tx" x="70" y="58">deg</text>`,
+  pose6: () => `<rect class="dev" x="34" y="28" width="18" height="11" rx="4"/>${triad(43, 34, 22)}`,
+  tips: () => `${skel(40, 6, 1, {tips: true, r: 1.2})}${triad(14, 52)}`,
+  body: () => {
+    const p = [[48, 7], [48, 18], [48, 28], [48, 36], [40, 17], [56, 17], [34, 26], [62, 26], [30, 36], [66, 36], [27, 44], [69, 44], [44, 36], [52, 36], [41, 51], [55, 51], [40, 59], [56, 59]];
+    return `<path class="bone" d="M48 7V36M40 17h16M40 17l-6 9-4 10-3 8M56 17l6 9 4 10 3 8M44 36h8M44 36l-3 15-1 8M52 36l3 15 1 8"/>${p.map(([x, y], i) => `<circle class="${i === 10 || i === 11 ? 'jx' : 'jt'}" cx="${x}" cy="${y}" r="${i === 10 || i === 11 ? 3 : 1.8}"/>`).join('')}`;
+  },
+  ctrl: () => `${triad(20, 40, 14)}<text class="tx" x="50" y="20">grip</text><rect class="fr" x="50" y="24" width="38" height="6" rx="3"/><rect class="acf" x="50" y="24" width="26" height="6" rx="3"/><text class="tx" x="50" y="44">trigger</text><rect class="fr" x="50" y="48" width="38" height="6" rx="3"/><rect class="acf" x="50" y="48" width="12" height="6" rx="3"/>`,
+  q: () => {const h = [18, 30, 24, 36, 14, 28, 40, 22, 32, 16]; return `<path class="ln" d="M8 56h82"/>${h.map((v, i) => `<rect class="acs" x="${10 + i * 8}" y="${56 - v}" width="5.4" height="${v}" rx="1"/>`).join('')}<text class="tx" x="10" y="12">q₁ … qₙ (rad)</text>`},
+  traj: () => `${skel(46, 4, .95)}<path class="ray" d="M6 58c10-4 14-16 26-18s12-14 22-18"/>${cam(10, 56, -20)}${cam(30, 40, -10)}`,
+  markers: () => `${handAt(26, 6, 52, ['mk'])}${triad(14, 54, 11, false)}<text class="tx" x="70" y="58">mm</text>`,
+};
+const pic = (f, arg) => `<svg class="pic" viewBox="0 0 96 64" aria-hidden="true">${f(arg)}</svg>`;
+
+/* ---------- methods ----------
+   {id, hw, cp:[primary, secondary?], name, by,
+    io: [[inPic, inArg, title, [lines]], [title, [lines]], [outPic, outArg, title, [lines]]],
+    how, out, frame, err: [[label, text]], weak, used: [[dataset, note]], src: [[label, url]]} */
+const M = [
+  {id: 'mediapipe', hw: 'video', cp: ['learned'], name: 'MediaPipe Hands', by: 'Google · 2020',
+    io: [['frame', null, 'RGB frame', ['detector input 192 × 192', 'landmark crop 224 × 224', 'no camera intrinsics']],
+         ['Palm detector, then landmark network', ['in video the previous box is reused', 'detector re-runs when the hand is lost']],
+         ['kp2d', null, '21 landmarks per hand', ['x, y in [0, 1] of the image', 'z: depth relative to the wrist', '+ 21 × 3 world landmarks, m', '+ handedness score']]],
+    how: 'A palm detector finds each hand in the full image; a second network regresses 21 landmarks on a 224 × 224 crop. In video the previous frame’s box is reused, and the detector runs again only when the hand-presence score drops below 0.5. Real time on phone GPUs.',
+    out: '21 landmarks per hand: x and y normalised to the image, z relative to the wrist on roughly the x scale. Also 21 world landmarks in metres with the origin at the hand’s geometric centre, and a handedness score.',
+    frame: 'Image; hand-centred for the world landmarks',
+    head: 'MNAE 10.09 % of palm size (2-D)', err: [
+      ['Model card, 700 images from 14 regions', 'mean 2-D error 10.09 % of palm size for the Full model (6.10–13.00 % by region), 12.02 % for Lite; two human annotators differ by 6.0 %'],
+      ['Paper, Table 2', 'MSE normalised by palm size on real images: 13.4 % when trained on real and synthetic data, 16.1 % on real only'],
+      ['3-D', 'no accuracy published for z or the world landmarks; the model card says both were learned from synthetic GHUM renders']],
+    weak: 'No hand shape. The model card lists hands holding objects and gloved hands as out of scope; error grows from the finger base toward the fingertip and for blurred or occluded joints.',
+    used: [], src: [['arXiv 2006.10214', 'https://arxiv.org/abs/2006.10214'], ['Hand Landmarker docs', 'https://developers.google.com/edge/mediapipe/solutions/vision/hand_landmarker'], ['Model card', 'https://storage.googleapis.com/mediapipe-assets/Model%20Card%20Hand%20Tracking%20(Lite_Full)%20with%20Fairness%20Oct%202021.pdf']]},
+
+  {id: 'hamer', hw: 'video', cp: ['learned'], name: 'HaMeR', by: 'Pavlakos et al. · CVPR 2024',
+    io: [['crop', null, 'Hand crop', ['256 × 256 RGB, box padded × 2', 'box from ViTDet + ViTPose', 'focal fixed at 5000 px']],
+         ['ViT-H backbone, transformer head', ['one crop at a time', 'left hands mirrored to right']],
+         ['mano', null, 'MANO parameters', ['global_orient 1 × 3 × 3', 'hand_pose 15 × 3 × 3', 'betas 10, camera (s, tx, ty)', '→ vertices 778 × 3, m', '→ keypoints 21 × 3, m']]],
+    how: 'A ViT-H backbone and a transformer head regress MANO pose, shape and a weak-perspective camera from one 256 × 256 hand crop. The crop comes from separate models: a ViTDet person detector, ViTPose whole-body keypoints, then a hand box padded to twice its size. Left hands are mirrored and solved as right hands. Trained on 2.7 M examples.',
+    out: 'MANO rotations (16 × 3 × 3), shape (10) and camera; 778 vertices and 21 joints in metres, rotated but not translated, plus a camera translation',
+    frame: 'Camera, with a focal length of 5000 px per 256-px crop instead of the real intrinsics',
+    head: 'PA-MPJPE 6.0 mm (FreiHAND)', err: [
+      ['FreiHAND, Table 1', 'PA-MPJPE 6.0 mm, PA-MPVPE 5.7 mm, F@5 0.785'],
+      ['HO-3D v2, Table 2', 'PA-MPJPE 7.7 mm, PA-MPVPE 7.9 mm'],
+      ['HInt Ego4D, Table 3', '2-D PCK@0.05: 52.0 % of visible joints, 23.0 % of occluded joints'],
+      ['Ego-Exo4D, authors’ challenge report', 'MPJPE 76.95 mm against PA-MPJPE 10.36 mm on the same test set; 36.75 mm after re-fitting rotation and translation with the true intrinsics']],
+    weak: "Each frame is solved on its own, so the pose jitters. The authors' Ego-Exo4D report says the local pose is accurate but the pose in the camera frame is not, and traces it to the fixed focal length. Occluded joints score about half the PCK of visible ones.",
+    used: [['TACROSS', 'Ego-V setup: 21 3-D keypoints at 30 Hz over 69.6 h'], ['OSMO', 'with SAM2 masks; the wrist is corrected with FoundationStereo depth from the infrared pair; not in the release'],
+      ['EgoTouch', 'hamer_hands.json for 1,536 episodes, shipped next to the glove skeleton'], ['HRDexDB', '2-D keypoints in calibrated views, then triangulated (see the camera rig entry)']],
+    src: [['arXiv 2312.05251', 'https://arxiv.org/abs/2312.05251'], ['Code', 'https://github.com/geopavlakos/hamer'], ['Ego-Exo4D report', 'https://www.cs.utexas.edu/~pavlakos/hamer/resources/egoexo4d_challenge.pdf']]},
+
+  {id: 'wilor', hw: 'video', cp: ['learned'], name: 'WiLoR', by: 'Potamias et al. · CVPR 2025',
+    io: [['frame', null, 'Full RGB frame', ['its own detector finds the hands', 'then 256 × 256 crops as HaMeR', 'focal fixed at 5000 px']],
+         ['Detector, ViT regressor, refinement', ['one frame at a time', 'detector over 130 FPS on an RTX 4090']],
+         ['mano', null, 'MANO parameters per hand', ['same fields as HaMeR', '→ vertices 778 × 3, m', '→ keypoints 21 × 3, m', '+ box, is_right, score']]],
+    how: 'A one-stage detector finds every hand in the full frame and says which side it is. A transformer regresses MANO from each crop; a refinement stage projects that estimate onto image features at several scales and corrects pose and shape. Trained with WHIM, over 2 M in-the-wild hand images.',
+    out: 'MANO parameters, 778 vertices and 21 joints in metres, a camera translation, and handedness from the detector',
+    frame: 'Camera, with the same fixed focal length as HaMeR',
+    head: 'PA-MPJPE 5.5 mm (FreiHAND)', err: [
+      ['FreiHAND, Table 3', 'PA-MPJPE 5.5 mm, PA-MPVPE 5.1 mm, F@5 0.825'],
+      ['HO-3D v2, Table 4', 'PA-MPJPE 7.5 mm, PA-MPVPE 7.7 mm'],
+      ['HO-3D, Table 6', 'jitter 5.92 against 20.43 for HaMeR (units not printed)'],
+      ['HOT3D, from the HaWoR paper', 'world-space W-MPJPE 151.67 mm when paired with DROID-SLAM']],
+    weak: 'The authors list extreme finger poses, crowded scenes and hand-hand contact as failure cases, and note that camera-space output can mislead about the 3-D scene. Depth and hidden fingers come from the prior, as with HaMeR.',
+    used: [['TouchScale', 'the paper runs it on detected hand crops; no pose file in the release'], ['EgoTouch', 'wilor_hands.json for 1,930 episodes']],
+    src: [['arXiv 2409.12259', 'https://arxiv.org/abs/2409.12259'], ['Project page', 'https://rolpotamias.github.io/WiLoR/'], ['Code', 'https://github.com/rolpotamias/WiLoR']]},
+
+  {id: 'anyhand', hw: 'video', cp: ['learned'], name: 'AnyHand-WiLoR', short: 'AnyHand-WiLoR', by: 'Si et al. · 2026',
+    io: [['frame', null, 'Full RGB frame', ['WiLoR detector, 256 × 256 crops', 'focal 1000 px in the released config']],
+         ['WiLoR network, AnyHand weights', ['co-trained on rendered hands', 'one frame at a time']],
+         ['mano', null, 'MANO parameters per hand', ['mano_pose 48, mano_shape 10', 'keypoints_3d 21 × 3, m', 'cam_t 3, m', 'FusionX keeps keypoints_3d']]],
+    how: 'The WiLoR network unchanged, trained with the AnyHand set added to its original data at weight 0.4. AnyHand is rendered: 2.5 M single-hand and 4.1 M hand-object RGB-D images. A HaMeR checkpoint trained the same way is released too.',
+    out: 'MANO pose (48, axis-angle) and shape (10); 778 vertices and 21 joints in metres returned without the camera translation, which comes separately as cam_t',
+    frame: 'Camera, through cam_t; the released config assumes a 1000 px focal length where WiLoR uses 5000 px',
+    head: 'PA-MPJPE 5.39 mm (FreiHAND)', err: [
+      ['FreiHAND, Table 2', 'PA-MPJPE 5.394 mm against 5.5 mm for WiLoR'],
+      ['HO-3D v2, Table 3', 'PA-MPJPE 7.355 mm against 7.5 mm'],
+      ['HO-Cap zero-shot, Table 4', 'PA-MPJPE 4.69 mm against 5.02 mm, both run by the AnyHand authors'],
+      ['Camera space', 'not published for the RGB checkpoints']],
+    weak: 'The paper says RGB-only models stay ill-posed in depth, with translation and scale errors even when the 2-D projection looks right. Depth from cam_t scales with the assumed focal length. The released checkpoints are licensed CC BY-NC-ND 4.0.',
+    used: [['FusionX demos', 'Touchtronix clips in the sample viewer: skeletons from the head camera’s left image, reviewed by the provider']],
+    src: [['arXiv 2603.25726', 'https://arxiv.org/abs/2603.25726'], ['Checkpoints', 'https://huggingface.co/chen-si-02/AnyHand-Models'], ['Code', 'https://github.com/chen-si-cs/AnyHand']]},
+
+  {id: 'hawor', hw: 'video', cp: ['learned', 'geometry'], name: 'HaWoR', by: 'Zhang et al. · CVPR 2025',
+    io: [['clip', null, 'Egocentric RGB clip', ['T frames, moving camera', '16-frame windows of 256 crops', 'focal 600 px unless given']],
+         ['Hand network, SLAM, motion infilling', ['DROID-SLAM with hands masked', 'Metric3D sets the metric scale']],
+         ['traj', null, 'Hand motion in the world', ['trans 2 × T × 3, rot 2 × T × 3', 'hand_pose 2 × T × 45', 'camera path T × 7']]],
+    how: "Reconstructs both hands in camera space over 16-frame windows with WiLoR's backbone, estimates the camera's path with DROID-SLAM while masking the hands, scales it to metres with Metric3D, and fills frames where a hand leaves the view with a motion-infilling network.",
+    out: 'MANO translation, rotation, pose (45) and shape per frame for both hands, plus the camera trajectory',
+    frame: 'World, from the SLAM trajectory',
+    head: 'W-MPJPE 33.2 mm (HOT3D)', err: [
+      ['HOT3D world space, Table 3', 'W-MPJPE 33.20 mm with only the first frames aligned, WA-MPJPE 11.27 mm, PA-MPJPE 4.79 mm; WiLoR with SLAM gets 151.67, 39.49 and 6.00 mm'],
+      ['DexYCB camera frame, Table 1', 'PA-MPJPE 4.76 mm overall and 5.07 mm with 75–100 % occlusion, against 5.01 and 5.68 mm for WiLoR']],
+    weak: 'Tracker identity swaps between the hands propagate into the result, and nothing stops the two hands passing through each other. The authors report it is far from real time. World positions inherit any SLAM drift.',
+    used: [], src: [['arXiv 2501.02973', 'https://arxiv.org/abs/2501.02973'], ['Project page', 'https://hawor-project.github.io/'], ['Code', 'https://github.com/ThunderVVV/HaWoR']]},
+
+  {id: 'multiview', hw: 'rig', cp: ['geometry', 'learned'], name: 'Multi-view triangulation and MANO fit', short: 'Multi-view + MANO fit', by: 'per dataset',
+    io: [['views', null, 'N synced views', ['RGB per camera', 'intrinsics + extrinsics', '21 cameras in HRDexDB']],
+         ['2-D keypoints, triangulation, MANO fit', ['HaMeR keypoints per view', 'pose fitted per frame']],
+         ['mano', null, 'Metric MANO mesh', ['joints 21 × 3, m', 'vertices 778 × 3', 'in the rig frame']]],
+    how: '2-D keypoints from several calibrated cameras are triangulated into 3-D points, then a MANO mesh is fitted to them. HRDexDB follows GigaHands: HaMeR keypoints in each of 21 views calibrated with ChArUco and COLMAP, a per-frame MANO fit, hand shape calibrated per subject against SAM3 silhouettes, and temporal filtering.',
+    out: 'MANO mesh and 21 joints with metric scale',
+    frame: 'The calibrated camera rig',
+    head: 'not published for HRDexDB', err: [
+      ['HRDexDB', 'no hand accuracy reported; the only quality figure is object-silhouette IoU 0.921'],
+      ['InterHand2.6M, for comparison', '2.78 mm between its automatic triangulation and triangulated human labels, using 90 views'],
+      ['HO-3D, for comparison', '0.77 cm average joint error against joints annotated by hand in 5-camera point clouds']],
+    weak: 'Needs a calibrated multi-camera rig. A finger hidden in most views is still guessed.',
+    used: [['HRDexDB', 'HaMeR 2-D keypoints; hand shape calibrated from SAM3 silhouettes; per-frame MANO mesh and parameters in the release']],
+    src: [['HRDexDB, arXiv 2604.14944', 'https://arxiv.org/abs/2604.14944'], ['GigaHands, arXiv 2412.04244', 'https://arxiv.org/abs/2412.04244'], ['InterHand2.6M, arXiv 2008.09309', 'https://arxiv.org/abs/2008.09309'], ['HOnnotate, arXiv 1907.01481', 'https://arxiv.org/abs/1907.01481']]},
+
+  {id: 'avp', hw: 'headset', cp: ['learned'], name: 'Apple Vision Pro hand tracking', short: 'Vision Pro', by: 'ARKit on visionOS',
+    io: [['headset', false, 'Headset cameras', ['6 world-facing tracking cameras', 'infrared flood illuminators', 'images stay on the device']],
+         ["Apple's on-device model", ['hand size measured at setup', 'can predict ahead (visionOS 2)']],
+         ['skel', {meta: true, forearm: true}, '27 joints per hand', ['4 × 4 transform per joint', 'isTracked per joint', 'hand anchor at the wrist']]],
+    how: "The headset's cameras and Apple's on-device model, with infrared illuminators for low light and the wearer's hand size stored at setup. ARKit's HandTrackingProvider returns one skeleton per hand; visionOS 2 delivers updates at display rate and can predict hands at a requested time, and Apple states up to 90 Hz from visionOS 26.",
+    out: '27 joints per hand (25 on the hand, 2 on the forearm), each a 4 × 4 transform relative to the wrist anchor and to its parent, with an isTracked flag; the anchor gives the hand in the world',
+    frame: 'World, through an anchor at the base of the wrist',
+    head: 'not published', err: [
+      ['Joint accuracy', 'no study against motion capture found; Apple publishes no accuracy figure'],
+      ['Apple documentation', 'an occluded or poorly lit joint reports isTracked false but still gets a plausible transform; predicted poses may cost some accuracy'],
+      ['Latency, Road to VR 2024', 'about 128 ms on visionOS 1.1 against about 70 ms for Quest 3, counted from screen video; not peer-reviewed and before the visionOS 2 rate change']],
+    weak: "Hands outside the cameras' view, heavy occlusion and very fast motion. EgoDex, recorded on Vision Pro by Apple authors, says its labels are imperfect in exactly those cases because they are model predictions.",
+    used: [['Humanoid Everyday', 'teleoperation: finger keypoints to dex-retargeting, wrist poses to Pinocchio IK; head and wrist poses are in the raw data.json, not in the Hugging Face release'],
+      ['Humanoid VTA', 'Unitree teleoperation workflow; wrist pose to arm IK']],
+    src: [['HandSkeleton docs', 'https://developer.apple.com/documentation/arkit/handskeleton'], ['HandTrackingProvider', 'https://developer.apple.com/documentation/arkit/handtrackingprovider'], ['WWDC24 session', 'https://developer.apple.com/videos/play/wwdc2024/10100/'], ['EgoDex, arXiv 2505.11709', 'https://arxiv.org/abs/2505.11709']]},
+
+  {id: 'quest', hw: 'headset', cp: ['learned'], name: 'Meta Quest hand tracking', short: 'Quest hands', by: 'OpenXR XR_EXT_hand_tracking',
+    io: [['headset', false, 'Headset cameras', ['4 monochrome fisheye cameras', '(MEgATrack, Quest 1)', 'images stay on the device']],
+         ["Meta's on-device model", ['30 Hz, 60 Hz in Fast Motion Mode', 'extrapolated to the requested time']],
+         ['skel', {meta: true, palm: true}, '26 joints per hand', ['position, m + quaternion', 'radius per joint, m', 'valid / tracked flags']]],
+    how: "The headset's monochrome cameras and Meta's networks (MEgATrack, later UmeTrack) track both hands; OpenXR exposes the skeleton to applications. Wide Motion Mode keeps plausible poses for hands outside the cameras' view.",
+    out: '26 joints per hand (palm, wrist, 4 on the thumb, 5 on each finger), each a position in metres, a quaternion and a skin radius, with validity and tracking flags; velocities on request',
+    frame: 'Headset world (the OpenXR base space)',
+    head: 'fingertip 1.1 cm (Quest 2)', err: [
+      ['Abdlkarim et al. 2024, Quest 2', 'against Qualisys, 8 people: index fingertip error 1.1 cm on average (0.79 cm at central targets, 1.3 cm at peripheral ones), joint angles 9.6°, delay 45 ms'],
+      ['Godden et al. 2025, Quest Pro and Quest 3', 'a robot moves a replica hand: average error 1.22 cm (Pro) and 1.73 cm (Quest 3) at best; latency 14–229 ms; read from the abstract'],
+      ['Godden and Pan 2024, Quest Pro', 'static fingertip error 1.30 cm against Vicon; latency 177 ms when motion starts from rest, 28 ms during motion'],
+      ['Meta, UmeTrack 2022', 'MPJPE 9.4 mm for single hands and 10.5 mm for two interacting hands on Meta’s own mocap dataset']],
+    weak: "Error grows toward the edge of the view and with speed (MCP angle error 11.5° rising to 16.7°). One hand hiding the other, poor lighting, and hands outside the view, where poses are inferred. Fast Motion Mode adds jitter.",
+    used: [['T-Dex', 'Holo-Dex with an Oculus headset: finger poses retargeted to an Allegro hand, then IK and a PD controller'], ['RoboTacDex', 'Meta Horizon headset with a modified Unitree teleoperation script; upper body and fingers']],
+    src: [['OpenXR joint list', 'https://registry.khronos.org/OpenXR/specs/1.0/man/html/XrHandJointEXT.html'], ['Meta hand tracking', 'https://developers.meta.com/horizon/design/hands-technology/'], ['Abdlkarim et al. 2024', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10830632/'], ['Godden and Pan, arXiv 2406.04491', 'https://arxiv.org/abs/2406.04491'], ['UmeTrack, arXiv 2211.00099', 'https://arxiv.org/abs/2211.00099'], ['Holo-Dex, arXiv 2210.06463', 'https://arxiv.org/abs/2210.06463']]},
+
+  {id: 'controller', hw: 'headset', cp: ['fusion', 'direct'], name: 'VR controllers', short: 'Controllers', by: 'Meta Quest 2',
+    io: [['headset', true, 'Controllers seen by the headset', ['infrared LEDs in the ring', 'IMU in the controller', 'trigger, grip, buttons']],
+         ['LED constellation fused with the IMUs', ['the trigger is read directly']],
+         ['ctrl', null, 'Controller pose and inputs', ['grip and aim poses', 'trigger, squeeze in [0, 1]', 'thumbstick in [−1, 1]']]],
+    how: 'The headset cameras see infrared LEDs in each controller ring and fuse them with IMUs in the controller and headset (Oculus Insight). Buttons and triggers stand in for the fingers.',
+    out: 'Controller 6-DoF grip and aim poses, trigger and squeeze values from 0 to 1, thumbstick and button states',
+    frame: 'Headset world',
+    head: '1.4–13.5 mm static (Quest 2)', err: [
+      ['Carnevale et al. 2022, Quest 2 Touch', 'static, against Qualisys, one volunteer: 1.38 mm for a 5 mm step, 13.52 ± 6.57 mm at a 500 mm displacement about 700 mm from the headset; rotation error at most 1.11°'],
+      ['Costa et al. 2026, pilot', 'wrist trajectories correlate 0.83 with Vicon inside the headset view and 0.55 outside it; 3 people'],
+      ['Jitter and latency', 'not published for Quest 2 controllers']],
+    weak: 'No finger pose at all; the robot hand only opens and closes. Error grows with distance from the headset and outside the cameras’ view.',
+    used: [['HATO', 'controller pose to UR5e IK; grip and trigger close the Ability Hand fingers']],
+    src: [['Oculus Insight', 'https://ai.meta.com/blog/powered-by-ai-oculus-insight/'], ['Carnevale et al. 2022', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9332705/'], ['OpenXR Touch profile', 'https://registry.khronos.org/OpenXR/specs/1.1/html/xrspec.html']]},
+
+  {id: 'rokoko', hw: 'glove', cp: ['fusion', 'field'], name: 'Rokoko Smartgloves', short: 'Rokoko', by: 'IMU and EMF',
+    io: [['glove', ['imu', 'vive'], '7 sensors per glove', ['1 per finger, 1 on the forearm', 'IMU + EMF receiver each', 'hub on the back of the hand', 'is the EMF transmitter']],
+         ['Rokoko Studio solver', ['fuses IMU and EMF per sensor', 'infers the joints between sensors']],
+         ['kp3d', {}, 'Bone poses', ['hand + 20 finger bones', 'position + quaternion each', '83.33 Hz, 20 ms latency']]],
+    how: "Seven sensors per glove each combine an IMU with EMF reception: one on the middle segment of each finger, one on the thumb's proximal segment, one on the forearm. The hub on the back of the hand is the EMF transmitter. Rokoko's solver bends each finger as a hinge and spreads the measured curl over the joints without a sensor. An external Coil Pro transmitter adds position in the room.",
+    out: 'Per bone a position and a quaternion: the hand plus proximal, medial, distal and tip bones of each finger, 21 joints as EgoTouch and OpenTouch store them; 83.33 Hz',
+    frame: 'Relative to the hand; room position only with a Coil Pro or an external tracker',
+    head: '1.60 mm per EMF sensor, vendor simulation', err: [
+      ['Vendor, Smartgloves II datasheet', 'EMF position accuracy 1.60 mm typical for one finger sensor 12 cm from the hub, simulated from measured tolerances, before fusion; noise 1.23 mm'],
+      ['Vendor, first generation', 'rotational accuracy ±1°, as quoted by a 2021 review and by OpenTouch; the original page could not be read'],
+      ['Independent', 'no comparison with optical motion capture found']],
+    weak: 'Only one sensor per finger, so the other joints and the default finger spread come from the solver. Metal, motors and large electronics disturb the EMF field, and a Coil Pro saturates the receivers within about 50 cm.',
+    used: [['EgoTouch', '21 joints per hand, moved into the Vive frame through the wrist tracker'], ['OpenTouch', 'right hand: 21 landmarks plus wrist and palm positions at 30 Hz'], ['TACROSS', 'Ego-R setup, 89.5 h; the paper does not name the product']],
+    src: [['Comparison datasheet', 'https://sdk.rokoko.com/datasheets/Smartgloves_I_II_Comparison_v1.0.0_External.pdf'], ['SG II specifications', 'https://sdk.rokoko.com/datasheets/Smartgloves_II_Technical_Specifications_v1.0.0_External.pdf'], ['Hand solver', 'https://sdk.rokoko.com/guides/hand-solving/'], ['EMF and IMU overview', 'https://sdk.rokoko.com/guides/tech-overview-emf-imu/']]},
+
+  {id: 'manus', hw: 'glove', cp: ['field'], name: 'MANUS Metagloves Pro and Quantum Metagloves', short: 'MANUS', by: 'EMF',
+    io: [['glove', ['emf', 'vive'], '5 fingertip sensors', ['6-DoF each, 120 Hz', 'coils in the back-of-hand', 'housing make the field', '+ an IMU in the housing']],
+         ['Field solve, then the MANUS hand solver', ['fingertip poses to joints by IK', 'calibrated per wearer']],
+         ['tips', null, 'Angles and skeleton', ['20 joint angles, degrees', 'skeleton nodes: position,', 'quaternion, scale', '5 raw fingertip poses (Pro)']]],
+    how: 'Coils in the back-of-hand housing make a magnetic field; five fingertip sensors measure their 6-DoF pose in it at 120 Hz, and the MANUS hand solver turns the fingertip poses into joints by inverse kinematics. Quantum Metagloves are the discontinued predecessor with the same five sensors and higher latency (80 ms wired against 30 ms).',
+    out: '20 joint angles per hand in degrees (spread and flexion at the thumb CMC, MCP and IP; spread and flexion at each finger MCP, PIP and DIP), skeleton nodes with position and quaternion, and on the Pro the raw fingertip poses with a raw-data licence',
+    frame: 'Relative to the back of the hand; a tracker or markers give room position',
+    head: 'vendor: “millimeter-level”, no figure', err: [
+      ['Vendor', '“millimeter-level precision” (Pro) and “millimeter accurate” fingertips (Quantum), with no number or test method'],
+      ['FSGlove paper, Metagloves Pro', 'thumb-to-fingertip gap in a closed pinch averages 33.2 mm (Quest 3 hand tracking 19.6 mm); fingertip-to-object distance 26.7 mm with objects tracked by mocap. Written by the authors of a competing glove'],
+      ['Saggio et al. 2025, Quantum', 'repeatability only: joint angles vary 4.1–7.6° between blocks and 6.3–9.6° after taking the glove off and recalibrating; 12 subjects'],
+      ['Near a running PC', 'readings shift by up to 5.69° as the hand moves from 50 to 5 cm (arXiv 2603.28542, one operator)']],
+    weak: 'Metal, monitors and speakers distort the field. The IK hand model cannot fit every hand size, so the vendor recommends calibrating at every use. Ring and little pinches show the largest gaps, and built-in filtering distorts poses when fingers press on objects.',
+    used: [['TactiDex', 'Metagloves Pro with an OptiTrack marker plate; MANO fitted to the keypoints by L-BFGS. The paper calls the glove data IMU measurements.'],
+      ['DexViTac', 'Quantum Metagloves: 19 stretch and spread values at 120 Hz, downsampled to 60 Hz. The paper calls the gloves IMU-equipped.'],
+      ['T-Rex', "teleoperation input: fingertip positions to Sharpa's diff-IK"], ['HRDexDB', 'teleoperation input; raw glove skeletons released for the Inspire DFTP and Robotiq sequences']],
+    src: [['Metagloves Pro specs', 'https://www.manus-meta.com/metagloves-pro-specs'], ['Ergonomics data', 'https://docs.manus-meta.com/latest/Software/Rec/Ergonomics/'], ['FSGlove, arXiv 2509.21242', 'https://arxiv.org/abs/2509.21242'], ['Saggio et al. 2025', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC12564681/']]},
+
+  {id: 'bend', hw: 'glove', cp: ['direct'], name: 'Bend-sensor gloves', short: 'Bend sensors', by: 'CyberGlove, Manus Prime II',
+    io: [['glove', ['bend'], '18 or 22 bend sensors', ['resistive strips over joints', '0–255 per sensor (8-bit)', '12-bit on the CyberGlove III']],
+         ['Per-wearer linear calibration', ['angle = gain × (raw − offset)']],
+         ['angles', null, 'Joint angles', ['18 or 22 values', 'radians in the vendor SDK', 'no position']]],
+    how: 'Resistive strips over the joints change resistance as the fingers bend and spread; a linear calibration per wearer maps each reading to an angle. The 18-sensor CyberGlove has two bend sensors per finger, four abduction sensors, thumb crossover, palm arch and two wrist sensors; the 22-sensor version adds a third flexion sensor per finger.',
+    out: 'Joint angles: 18 or 22 on a CyberGlove (flexion, abduction, palm arch, wrist), at 90 records/s on the CyberGlove II and up to 120 on the III',
+    frame: 'Joint angles only, no position',
+    head: 'RMSE 10.2° MCP, 17.0° thumb MCP', err: [
+      ['Vendor, CyberGlove III', 'resolution under 1°; repeatability 3° as the average standard deviation between wearings'],
+      ['Heinrich et al. 2024, CyberGlove III', 'RMSE against goniometer-set wedges with a two-point calibration: MCP 10.17°, PIP 9.58°, DIP 12.29°, thumb MCP 17.03°, palm arch 22.66°; 8 subjects. One calibration shared across subjects raises MCP to 13.82° and DIP to 19.62°'],
+      ['Buffi et al. 2014, CyberGlove II', 'against bone axes from CT: mean error 16° (SD 14°), 26° at the distal joints; one subject, 7 postures'],
+      ['Vendor, Manus Prime II', 'orientation accuracy ±2.5°, as compiled in a 2021 review; no independent test found']],
+    weak: 'Calibration depends on the wearer. Bending one finger moves its neighbour’s abduction reading, the thumb saturates and has the largest errors in every study, and the 18-sensor glove has no DIP sensor. A hand shorter than the glove misses the distal sensors.',
+    used: [['Reach&Grasp', 'CyberGlove I inside the Bielefeld glove: 18 angles at 100 Hz, scaling tuned per subject'], ['ActionSense', 'Manus Prime II with the glove IMUs off, so finger curl only; arrives through the Xsens stream at 60 Hz, and the dataset site warns finger data may be unreliable']],
+    src: [['CyberGlove III', 'http://www.cyberglovesystems.com/cyberglove-iii'], ['CyberGlove II', 'https://www.cyberglovesystems.com/cyberglove-ii'], ['Heinrich et al. 2024', 'https://doi.org/10.1109/JSEN.2024.3376606'], ['Buffi et al. 2014', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4997816/']]},
+
+  {id: 'vicon', hw: 'glove', cp: ['fusion'], name: 'VICON glove, built on VIST', short: 'VICON glove (VIST)', by: 'Jeon et al. · 2026',
+    io: [['gloveCam', ['imu', 'mk'], 'IMUs and coloured markers', ['14 IMUs: 1 on the back,', '13 along the fingers', '80 markers in 4 colours', 'D435i, depth at ~30 Hz']],
+         ['Visual-inertial filter (VIST)', ['markers correct the IMU drift']],
+         ['kp3d', {}, 'Hand pose per frame', ['hand-to-camera transform', 'finger joints', 'MANO only for display']]],
+    how: 'Fourteen IMUs and 80 coloured markers on a two-layer glove; a RealSense D435i beside the subject sees the markers, with depth from its infrared pair by Fast-FoundationStereo, and corrects the inertial estimate. The method is VIST (Lee et al., Science Robotics 2021), which pairs glove IMUs with passive markers seen by a stereo camera.',
+    out: 'Finger joints and the global hand pose',
+    frame: 'Camera',
+    head: 'hand accuracy not reported', err: [
+      ['VICON paper', 'no hand-tracking accuracy reported; motion capture was the reference for objects only'],
+      ['VICON objects, for context', 'object pose refined from the hand and force data: median 3.9 mm and 3.0° in occluded frames, against 21.8 mm and 33.9° for FoundationPose'],
+      ['VIST, Science Robotics 2021', 'accuracy figures not checked: the paper is paywalled and no open copy was found']],
+    weak: 'Markers must stay in the camera view to correct drift. One hand only in the VICON release.',
+    used: [['VICON', 'fingers and global hand pose from the same tracking; the glove also carries 8 force sensors']],
+    src: [['arXiv 2610.05180', 'https://arxiv.org/abs/2610.05180'], ['VIST, Science Robotics', 'https://doi.org/10.1126/scirobotics.abe1315']]},
+
+  {id: 'vive', hw: 'room', cp: ['geometry', 'fusion'], name: 'HTC Vive Tracker', short: 'Vive Tracker', by: 'SteamVR Lighthouse',
+    io: [['lighthouse', null, 'Sweep timings and IMU', ['photodiodes time the laser sweeps', 'Base Station 2.0: coded lasers', 'IMU fused in']],
+         ['Angles from timing, pose solve, IMU fusion', ['base stations fixed in the room', 'libsurvive: 21-state EKF']],
+         ['pose6', null, '6-DoF pose', ['position, m', 'quaternion (x, y, z, w)', 'tracked / valid flags']]],
+    how: 'Base stations sweep the room with laser planes; photodiodes on the tracker time the sweeps, which gives the angle to each base station, and an IMU is fused in. Base Station 2.0 codes each laser so no sync flash is needed.',
+    out: '6-DoF pose: position in metres and a quaternion, with flags that say whether the pose is tracked or only predicted; OpenXR also gives linear and angular velocity',
+    frame: 'The base stations’ room frame (OpenXR stage or local space)',
+    head: '0.16–0.43 mm still, 4–11 mm moving', err: [
+      ['Kuhlmann de Canaviri et al. 2023, Tracker 3.0', 'against a UR10 robot: 0.43 mm and 0.57° after a move with 2 base stations, 0.16 mm and 0.23° with 4; during a 50 mm/s spiral 11.1 mm with 2 stations and 4.2 mm with 4'],
+      ['Merker et al. 2023, Tracker 3.0', 'on the knee and ankle while cycling, against Vicon: 10–11 mm at 80 rpm, 21–46 mm at 160 rpm; about 3 s to recover after a dropout'],
+      ['Bauer et al. 2021, Tracker 2018', 'rotating the tracker in place shifts its reported position by several mm, up to about 1 cm']],
+    weak: 'Error grows with speed and with fewer or badly placed base stations. Occluding one of four stations raises the error 3–5 times; losing tracking while moving shifted a Vive headset’s frame by up to 163 cm in one study. A hand turned away or a body in between loses it.',
+    used: [['EgoTouch', 'three trackers, on the chest and both wrists, through OpenXR'], ['T-Rex', "wrist targets for the arm's diff-IK"], ['HRDexDB', 'libsurvive; arm teleoperation']],
+    src: [['Kuhlmann de Canaviri et al. 2023', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9862184/'], ['Merker et al. 2023', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC10490571/'], ['Bauer et al. 2021', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7956487/'], ['libsurvive', 'https://github.com/cntools/libsurvive'], ['Lighthouse (Valve)', 'https://partner.steamgames.com/vrlicensing']]},
+
+  {id: 'mocap', hw: 'room', cp: ['geometry'], name: 'Optical marker capture', short: 'Optical mocap', by: 'OptiTrack, Vicon',
+    io: [['mocap', null, 'Marker centroids per camera', ['infrared strobe, reflective markers', 'PrimeX 13W: 240 Hz native', '120 fps in TactiDex']],
+         ['Triangulation, then rigid-body or skeleton solve', ['markers labelled every frame']],
+         ['markers', null, 'Markers and poses', ['marker x, y, z + occluded flag', 'rigid body: position, quaternion', 'or solved finger joints']]],
+    how: 'Infrared cameras around the space each send the 2-D centroids of the reflective markers they see; the software triangulates them and labels each marker. A rigid plate of 3 or more markers gives a 6-DoF pose; a marker set on the fingers gives joint angles.',
+    out: 'Marker positions with occluded and gap-filled flags, rigid-body poses (position, quaternion and mean marker error), or solved skeleton joints',
+    frame: 'The capture volume, set by the wand calibration',
+    head: '±0.30 mm (vendor); finger angles 3.3–3.8°', err: [
+      ['Vendor, OptiTrack PrimeX 13W', '±0.30 mm 3-D accuracy, typical for a 9 × 9 m area; rotation error under 0.5°'],
+      ['Merriaux et al. 2017, 8 Vicon cameras', 'static mean error 0.15 mm, moving up to 0.58 mm'],
+      ['Metcalf et al. 2020, Vicon finger markers', 'joint-angle RMSE against bones in CT: PIP 3.78°, DIP 3.30°; skin markers slide about 0.55 mm per 10° of flexion'],
+      ['Peiffer et al. 2026, 20 OptiTrack cameras', 'at least one of 19 hand markers occluded in 34 % of manipulation samples']],
+    weak: 'Finger markers hide each other and get swapped in a grasp: one study labelled 97.6 % of frames correctly for a lone hand and 77.8 % for a hand holding a pen. Shiny surfaces add ghost markers. Needs a fixed camera rig.',
+    used: [['TactiDex', 'eight OptiTrack PrimeX 13W at 120 fps; a marker plate on the glove; 1.2 × 1.8 m workspace'], ['Reach&Grasp', 'Vicon, 10 cameras, 23 markers: finger joint angles at 100 Hz; marker trajectories not released']],
+    src: [['PrimeX 13W specs', 'https://old.optitrack.com/cameras/primex-13w/specs.html'], ['Merriaux et al. 2017', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC5551098/'], ['Metcalf et al. 2020', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7154021/'], ['Peiffer et al., arXiv 2608.24572', 'https://arxiv.org/abs/2608.24572'], ['Han et al. 2018', 'https://ai.meta.com/research/publications/online-optical-marker-based-hand-tracking-with-deep-labels/']]},
+
+  {id: 't265', hw: 'self', cp: ['fusion'], name: 'Camera on the back of the hand', short: 'T265', by: 'Intel RealSense T265',
+    io: [['t265', null, 'Stereo fisheye and IMU', ['2 × 848 × 800 mono, 30 fps', 'gyro 200 Hz, accel 62.5 Hz', 'no magnetometer']],
+         ['Visual-inertial odometry on the device', ['runs on a Movidius Myriad 2', 'optional map relocalisation']],
+         ['pose6', null, '6-DoF pose, 200 Hz', ['translation, m, from the start', 'quaternion, velocities', 'confidence 0–3']]],
+    how: 'Two global-shutter fisheye cameras and an IMU run visual-inertial odometry on the device; with mapping on, it can relocalise against places it has seen.',
+    out: '6-DoF pose at 200 Hz: translation in metres from where tracking started, a quaternion, linear and angular velocity and acceleration, and tracker and mapper confidence from 0 to 3',
+    frame: 'Where tracking started: Y up along gravity, X and Z from the starting heading',
+    head: '0.7–1.6 % of path length', err: [
+      ['Vendor', 'under 1 % drift in repeated testing; the metric and path length are not defined'],
+      ['Ouerghi et al. 2020, hand-held', 'trajectory error 0.40–0.52 m over 25–58 m paths against Vicon, 0.7–1.6 % of path length'],
+      ['Hausamann et al. 2021, head-worn', 'median trajectory error about 0.4 m while walking and running; yaw drift 1–3.5° per hour']],
+    weak: 'Odometry drifts over a session, faster with fast motion, low texture or darkness, and relocalisation can make the pose jump. Discontinued in 2022; librealsense dropped it in v2.54.1.',
+    used: [['DexViTac', 'mounted on the back of the hand; matched to the 60 Hz stream']],
+    src: [['Datasheet', 'https://www.realsenseai.com/wp-content/uploads/2019/09/Intel_RealSense_Tracking_Camera_Datasheet_Rev004_release.pdf'], ['rs2_pose fields', 'https://github.com/IntelRealSense/librealsense/blob/v2.50.0/include/librealsense2/h/rs_types.h'], ['Hausamann et al. 2021', 'https://doi.org/10.1038/s41598-021-91861-5'], ['Ouerghi et al. 2020', 'https://www.scitepress.org/Papers/2020/89807/89807.pdf']]},
+
+  {id: 'xsens', hw: 'self', cp: ['fusion'], name: 'IMU body suit', short: 'Xsens suit', by: 'Xsens MVN Awinda',
+    io: [['suit', null, '17 IMUs on the body', ['gyro, accelerometer,', 'magnetometer, barometer', 'sampled at 1 kHz on board']],
+         ['MVN fusion with a body model', ['segment lengths from the wearer', 'calibrated in an N- or T-pose']],
+         ['body', null, '23 segment poses, 60 Hz', ['position, m + quaternion each', 'joint angles, degrees', 'each hand is one segment']]],
+    how: '17 wireless IMUs on the body send orientation and velocity increments over the Awinda radio; MVN fits a 23-segment body model to them. Each hand is one rigid segment from a single tracker on its back.',
+    out: 'Segment position, quaternion, velocity, acceleration and angular rates; joint angles in degrees; 60 Hz for a full body',
+    frame: "The suit's world frame, Z up",
+    head: '0.75° / 1.5° RMS per sensor (vendor)', err: [
+      ['Vendor, MTw Awinda sensor', 'roll and pitch 0.75° RMS, heading 1.5° RMS while moving, in an undisturbed magnetic field'],
+      ['Robert-Lachaine et al. 2017', 'sensor orientation error 1.2° RMSE in short tasks and 2.8° in a long handling task, against Optotrak clusters on each IMU'],
+      ['Mavor et al. 2020, MVN Link', 'joint-angle RMSE against Vicon 10.2° in flexion and 17.8° in axial rotation; upper limb 21.6°, or 8.7° after aligning the coordinate frames']],
+    weak: 'Ferrous metal, motors and robots corrupt the heading. No fingers without separate gloves (MANUS or StretchSense), and the wrist and hand are one segment.',
+    used: [['ActionSense', '17 IMUs at 60 Hz; fingers from Manus Prime II gloves'], ['Tactile textiles', 'body pose only, for the separate sock dataset']],
+    src: [['MTw Awinda manual', 'https://xsens.com/hubfs/Downloads/Manuals/MTw_Awinda_User_Manual.pdf'], ['MVN user manual', 'https://www.movella.com/hubfs/MVN_User_Manual.pdf'], ['Robert-Lachaine et al. 2017', 'https://pubmed.ncbi.nlm.nih.gov/27379397/'], ['Mavor et al. 2020', 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7435666/']]},
+
+  {id: 'encoders', hw: 'robot', cp: ['direct'], name: 'Joint encoders and arm kinematics', short: 'Encoders + FK', by: 'every robot dataset',
+    io: [['enc', null, 'Encoder readings', ['one per actuator', 'arm joints too', 'motor current']],
+         ['Calibration, then forward kinematics', ['coupled joints from a linkage model', 'wrist pose from the arm chain']],
+         ['q', null, 'Joint vector', ['position, rad', 'velocity, rad/s; effort, N·m', 'vendor units vary']]],
+    how: "Each actuator's encoder or potentiometer reports its position; joints driven through a linkage are computed from a model of it, and the wrist pose follows from the arm's joint angles through forward kinematics.",
+    out: 'Joint positions, often with velocities, efforts and commanded targets. Vendor units vary: Inspire reports 0–1000 without a unit, the Ability Hand degrees scaled to int16',
+    frame: 'Robot base',
+    head: 'repeatability 0.1° to ±2 mm (vendor)', err: [
+      ['Vendor repeatability', 'Inspire RH56 fingertip 0.2 mm, Unitree Dex3-1 fingertip ±2 mm, BrainCo Revo2 0.1°, Sharpa Wave fingertip ±1 mm; arms UR5e ±0.03 mm and Franka FR3 under ±0.1 mm (ISO 9283). Repeatability does not describe absolute accuracy'],
+      ['Tan et al. 2026, Inspire', 'a linearised linkage model puts the fingertip 2.4–3.3 mm off; the linkage tilts the finger up to 49°; 66 ms from command to reading'],
+      ['DLR Hand II', 'fingertip error mean 6 mm with the nominal kinematic model, 0.7 mm after calibration']],
+    weak: "Describes this robot's hand only. Joints coupled to one motor are inferred from a model, encoders behind gears or cables miss backlash and stretch, and some drivers report commanded effort as if measured (Allegro).",
+    used: [['T-Rex', '2 × (7 arm + 22 hand) at 30 Hz; actions are joint targets'], ['HATO', 'Ability Hand, 6 DoF, on a UR5e'], ['T-Dex', 'Allegro, 16 joints at ~300 Hz, on a Kinova Jaco at 50 Hz'],
+      ['Humanoid Everyday', 'Dex3-1 (14 hand joints) or Inspire (12) on Unitree G1 / H1'], ['Humanoid VTA', 'Inspire RH56DFX on Unitree G1 arms'], ['RoboTacDex', 'two BrainCo Revo2 on G1 arms, 30 Hz'],
+      ['HRDexDB', 'Allegro, Inspire and Robotiq hands on an xArm6'], ['TACROSS', 'robot side: Revo2 on a 7-DoF arm'], ['DexViTac', 'robot side: Inspire RH56DFTP on a RealMan RM-65']],
+    src: [['JointState message', 'https://github.com/ros2/common_interfaces/blob/rolling/sensor_msgs/msg/JointState.msg'], ['Tan et al., arXiv 2603.08988', 'https://arxiv.org/abs/2603.08988'], ['DLR Hand II, arXiv 2311.03957', 'https://arxiv.org/abs/2311.03957'], ['Unitree Dex3-1', 'https://www.unitree.com/Dex3-1'], ['BrainCo Revo2', 'https://www.brainco-hz.com/docs/revolimb-hand/en/revo2/parameters.html']]},
+];
+
+const RT = [
+  ['T-Rex', 'MANUS fingertips + Vive wrists', "Sharpa's diff-IK (Pinocchio + CasADi) for the hand; diff-IK (Pink) for the arm", 'Sharpa Wave on Dexmate Vega-1'],
+  ['Humanoid Everyday', 'Vision Pro hand tracking', 'dex-retargeting for the fingers; Pinocchio IK for the arms', 'Dex3-1 / Inspire on Unitree G1 / H1'],
+  ['Humanoid VTA', 'Vision Pro hand tracking', 'Unitree teleoperation workflow', 'Inspire RH56DFX on Unitree G1'],
+  ['RoboTacDex', 'Meta Horizon headset', 'modified Unitree teleoperation script', 'two BrainCo Revo2 on Unitree G1'],
+  ['T-Dex', 'Oculus hand tracking (Holo-Dex)', 'retargeting, then IK and a PD joint controller; the arm is driven by joystick', 'Allegro on Kinova Jaco'],
+  ['HATO', 'Quest 2 controllers', 'controller pose to IK; triggers to finger closure', 'Ability Hand on UR5e'],
+  ['DexViTac', 'MANUS Quantum Metagloves + T265', 'IK in PyBullet', 'Inspire RH56DFTP on RealMan RM-65'],
+  ['OSMO', 'HaMeR + stereo depth (offline)', 'smoothed, then IK in mink / MuJoCo', 'Ability Hand on Franka'],
+];
+const NONE = ['EgoTactile', 'STAG', 'VTDexManip', 'ADL21'];
+const DEFS = [
+  ['PA-MPJPE, PA-MPVPE', 'mean joint (or mesh vertex) distance in mm after the prediction is moved onto the label by the best single scale, rotation and translation. It scores finger articulation and hand proportions; a hand at the wrong depth, size or orientation can still score well.'],
+  ['MPJPE', 'the same distance without that alignment, so errors in the camera or world frame count. Where a paper reports both, it is several times larger: HaMeR on Ego-Exo4D scores 76.95 mm against 10.36 mm PA-MPJPE.'],
+  ['W-MPJPE, WA-MPJPE', 'world-frame MPJPE over 100-frame segments after aligning only the first frames, or the whole segment (HaWoR).'],
+  ['F@5, F@15', 'share of mesh vertices within 5 or 15 mm of the label, after the same alignment as PA-MPJPE.'],
+  ['PCK@0.05', 'share of 2-D keypoints within 5 % of the hand box size of the label.'],
+  ['Palm-normalised error', '2-D pixel error divided by the distance from the wrist to the middle-finger knuckle (MediaPipe).'],
+  ['Against a reference system', 'headset, glove and tracker studies compare with optical motion capture or a robot arm and report position error in mm or joint-angle error in degrees. Vendor figures are marked as vendor claims.']
+];
+
+/* ---------- render ---------- */
+const $ = id => document.getElementById(id);
+const dsList = m => m.used.length ? m.used.map(([d]) => esc(d)).join(', ') : '<span class="muted">none in the catalog</span>';
+$('toc').innerHTML = [['overview', 'All methods'], ['errors', 'Error numbers'], ...HW.filter(h => M.some(m => m.hw === h.id)).map(h => [h.id, h.t]), ['retarget', 'Human to robot'], ['none', 'No hand pose']]
+  .map(([id, t]) => `<li><a href="#${id}">${esc(t)}</a></li>`).join('');
+$('mxh').innerHTML = `<tr><th>Hardware needed</th>${CP.map(c => `<th><span class="cph">${cpIcon(c.id)}${esc(c.t)}</span><small>${esc(c.d)}</small></th>`).join('')}</tr>`;
+$('mxb').innerHTML = HW.map(h => `<tr><th scope="row">${esc(h.t)}<small>${esc(h.d)}</small></th>${CP.map(c => `<td>${M.filter(m => m.hw === h.id && m.cp.includes(c.id)).map(m => {
+  const alt = m.cp[0] !== c.id;
+  return `<a class="mp${alt ? ' alt' : c.id === 'learned' ? ' v' : ''}" href="#m-${m.id}"${alt ? ` title="${esc(m.name)}: ${esc(cpOf(m.cp[0]).t.toLowerCase())}, with a ${esc(c.t.toLowerCase())} stage"` : ''}>${esc(m.short || m.name)}</a>`;
+}).join('')}</td>`).join('')}</tr>`).join('');
+$('ov').innerHTML = HW.map(h => {
+  const ms = M.filter(m => m.hw === h.id);
+  return ms.length ? `<tr class="grp"><th colspan="6">${esc(h.t)}<span>${esc(h.d)}</span></th></tr>` + ms.map(m => `<tr><td><a href="#m-${m.id}">${esc(m.name)}</a></td><td>${cpChip(m.cp[0])}${m.cp[1] ? `<span class="cp2">+ ${esc(cpOf(m.cp[1]).t.toLowerCase())}</span>` : ''}</td><td>${esc(m.out)}</td><td>${esc(m.frame)}</td><td class="er">${esc(m.head || 'not published')}</td><td class="${m.used.length ? 'ds' : 'none'}">${dsList(m)}</td></tr>`).join('') : '';
+}).join('');
+$('defs').innerHTML = DEFS.map(([t, d]) => `<li><b>${esc(t)}</b>: ${esc(d)}</li>`).join('');
+const ioCell = (k, p, arg, t, lines) => `<div class="c"><div class="k">${k}</div>${p ? pic(p, arg) : ''}<div class="t">${esc(t)}</div><ul>${lines.map(l => `<li>${esc(l)}</li>`).join('')}</ul></div>`;
+const figure = m => {
+  const [[ip, ia, it, il], [rt, rl], [op, oa, ot, ol]] = m.io;
+  return `<figure class="io" aria-label="${esc(m.name)}: input, computation and output">${ioCell('Input', PIN[ip], ia, it, il)}<div class="ar">${ARROW}</div>${ioCell('Computation', PCP[m.cp[0]], null, rt, rl)}<div class="ar">${ARROW}</div>${ioCell('Output', POUT[op], oa, ot, ol)}</figure>`;
+};
+const entry = m => `<article class="m" id="m-${m.id}">
+    <div class="mh"><h3>${esc(m.name)}</h3><span class="by">${esc(m.by)}</span>${m.cp.map(cpChip).join('')}</div>
+    ${figure(m)}
+    <dl class="f"><dt>How it works</dt><dd>${esc(m.how)}</dd><dt>Output</dt><dd>${esc(m.out)}</dd><dt>Frame</dt><dd>${esc(m.frame)}</dd>
+      <dt>Published error</dt><dd>${m.err.length ? `<ul>${m.err.map(([l, t]) => `<li><b>${esc(l)}</b>: ${esc(t)}</li>`).join('')}</ul>` : '<span class="muted">No accuracy figure published for this method.</span>'}</dd>
+      <dt>Goes wrong</dt><dd>${esc(m.weak)}</dd>
+      <dt>In the catalog</dt><dd>${m.used.length ? `<ul>${m.used.map(([d, n]) => `<li><b>${esc(d)}</b>: ${esc(n)}</li>`).join('')}</ul>` : '<span class="muted">No catalog dataset uses it.</span>'}</dd>
+      ${m.src.length ? `<dt>Sources</dt><dd class="srcl">${m.src.map(([l, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)}${EXT}</a>`).join('')}</dd>` : ''}</dl></article>`;
+$('fams').innerHTML = HW.filter(h => M.some(m => m.hw === h.id)).map(h => `<section id="${h.id}"><h2>${esc(h.t)}</h2><p>${esc(h.intro)}</p><div class="ms">${M.filter(m => m.hw === h.id).map(entry).join('')}</div></section>`).join('');
+$('rt').innerHTML = RT.map(r => `<tr>${r.map((c, i) => `<td${i ? '' : ' class="ds"'}>${i ? esc(c) : `<b>${esc(c)}</b>`}</td>`).join('')}</tr>`).join('');
+$('nonep').textContent = `${NONE.join(', ')}: their catalog entries list no hand or finger tracking. Tactile textiles tracks the body with an Xsens suit, for a separate sock dataset only.`;
+</script>
+<script>
+document.getElementById('gh').href = 'https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands';
+document.getElementById('contrib').href = 'https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands/issues/new?title=' + encodeURIComponent('Hand pose page: ');
+</script>
+</body>
+</html>

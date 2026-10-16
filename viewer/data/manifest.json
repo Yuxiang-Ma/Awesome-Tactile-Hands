@@ -55,7 +55,7 @@
     {
      "k": "Labels",
      "v": "Hand skeletons, task steps",
-     "d": "AnyHand-WiLoR, reviewed by the provider"
+     "d": "Vision estimates from the head camera (AnyHand-WiLoR), reviewed by the provider"
     }
    ],
    "notes": "Glove firmware 1.12. Bend angles are calibrated per participant; taxels are raw ADC without force calibration. The source sessions also recorded three external cameras, which these clips leave out.",

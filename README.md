@@ -2,7 +2,7 @@
 
 > **Taxel Atlas**: a curated catalog of public datasets that record touch across the hand during manipulation, from human tactile gloves to dexterous robot hands with tactile skins.
 
-Browse, filter and compare them on the [live catalog](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/), play recorded samples in the [data viewer](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/viewer/), and see the gloves, robot hands and sensors they were recorded with on the [hardware page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/hardware.html).
+Browse, filter and compare them on the [live catalog](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/), play recorded samples in the [data viewer](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/viewer/), see the gloves, robot hands and sensors they were recorded with on the [hardware page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/hardware.html), and read how each dataset's hand pose was captured, with input and output formats and published accuracy, on the [hand pose page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/pose.html).
 
 **What gets in.** Tactile sensing *on the hand* (glove or robot hand), recorded while the hand manipulates objects, with data that is released or announced. Each entry states which regions are sensed (fingertips, finger segments, palm), how many taxels per hand, what else is recorded in sync, and how to get it. Numbers are as the authors report them; anything we could not confirm from a primary source is marked as not stated.
 
