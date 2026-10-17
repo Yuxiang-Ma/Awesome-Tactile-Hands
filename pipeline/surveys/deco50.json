@@ -1,0 +1,261 @@
+{
+ "id": "deco50",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "deco50",
+  "name": "DECO-50",
+  "title": "DECO: Decoupled Multimodal Diffusion Transformer for Bimanual Dexterous Manipulation with a Plugin Tactile Adapter",
+  "authors": "Xukun Li et al.",
+  "year": 2026,
+  "venue": "ICML 2026 (arXiv 2602.05513)",
+  "summary": "Teleoperated Unitree H1-2 with two Inspire RH56DFTP hands (17 piezoresistive pads, 1,062 taxels per hand) on pick-and-place, sorting, waste-disposal and assembly tasks, with active stereo head camera, joint states and actions at 30 Hz.",
+  "embodiment": "robot",
+  "hand": "Inspire RH56DFTP (6 DoF) x 2 on Unitree H1-2 (14-DoF arms, 2-DoF active camera head)",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 1062,
+   "sensors_per_hand": 17,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "Per frame and hand: tactiles/<idx>_{left,right}_ee_tactile.npy, a flat (1062,) float64 vector of raw readings. 17 pads per hand (paper Table 10): 5 fingertips 3x3, 5 finger tops 12x8, 4 finger palms 10x8, thumb middle 3x3, thumb palm 12x8, palm 8x14. Normal force only. Raw range 0-4095 (statistics files: per-task maxima 3,827-4,095).",
+   "maker": "Inspire Robots",
+   "model": "RH56DFTP built-in tactile sensors",
+   "principle": "piezoresistive",
+   "range": "raw 0-4096 per taxel (paper), uncalibrated",
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 50,
+   "episodes": 8174,
+   "frames": 5000000,
+   "tasks": 29,
+   "objects": 20,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "Paper: 50+ h, ~5M frames, 8,000+ successful trajectories, 4 scenarios / 28 sub-tasks. HF release: 8,174 episode archives in 29 sub-task folders (task1 12, task2 3, task3 8, task4 6), 1.61 TB"
+  },
+  "availability": "public",
+  "access": "Hugging Face BAAI-Humanoid/DECO-50, ungated: one tar.gz per episode (median 185 MB, 1.61 TB total) holding JPEG frames, per-frame tactile .npy, data.json and data.pkl; four per-task statistics YAMLs.",
+  "license": "Apache-2.0",
+  "caveats": [
+   "Tactile is raw 12-bit counts (0-4095), normal force only; no N or kPa conversion is given.",
+   "The 1,062-value vector has no documented taxel order; data.json tactile_names is empty. Pad sizes come from the paper's Table 10.",
+   "No per-frame timestamps in data.json; the paper states 30 Hz logging. data.json info declares 640x480 images, but the released JPEGs are 1280x720.",
+   "data.json text fields are template placeholders in the checked episode ('task description', 'step1: do this; ...'); only the goal string ('pick up cube.') varies.",
+   "Sub-task folders (data-t1-1 ... data-t4-6) are not mapped to object names in the release; data.pkl condition_indx carries the per-object index.",
+   "Release counts differ from the paper: 29 sub-task folders and 8,174 episodes vs 28 sub-tasks and 8,000+ successful trajectories (Table 8: 8,021 successful of 10,622).",
+   "data.pkl is a pickled pandas DataFrame; load only in a trusted environment."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2602.05513",
+   "project": "https://baai-humanoid.github.io/DECO-webpage/",
+   "data": "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50",
+   "code": "https://github.com/BAAI-Humanoid/DECO"
+  },
+  "image": "https://baai-humanoid.github.io/DECO-webpage/images/overview.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 1,
+     "model": "custom active binocular camera (yaw + pitch motors)",
+     "type": "stereo",
+     "resolution": "1280x720 per view",
+     "fps": 30,
+     "mount": "robot",
+     "note": "colors/<idx>_color_0.jpg (left) and _color_1.jpg (right); design files in GitHub assets/active_camera"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Inspire RH56DFTP joint states (6 per hand) + Unitree H1-2 arms (7 per arm) + active camera (2)",
+     "note": "states and actions in data.json; hand qpos normalized 0-1 (0.23-1.0 in the checked episode)"
+    },
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "Apple Vision Pro hand tracking",
+     "note": "teleoperation: hand keypoints retargeted to the Inspire hands; not released as a stream"
+    },
+    {
+     "target": "wrist",
+     "method": "vision_estimate",
+     "system": "Apple Vision Pro",
+     "note": "teleoperation: wrist pose -> IK for the arms; first-person stereo view streamed back to the headset"
+    }
+   ],
+   "other": [
+    "precomputed per-task normalization statistics (task<N>_statistics.yaml)",
+    "per-episode sub-task index (condition_indx)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2602.05513",
+   "https://arxiv.org/html/2602.05513 (v4, Appendix A: Tables 8-10, A.3 data collection)",
+   "https://baai-humanoid.github.io/DECO-webpage/ (index-Brr0z-L5.js bundle text)",
+   "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50 (README.md, API info, full tree via paginated tree API)",
+   "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50 task{1,2,3,4}_statistics.yaml",
+   "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50 task2/data-t2-1/episode_0416.tar.gz (38.6 MB; data.json, 111 frames of JPEG + tactile .npy; data.pkl strings listed with pickletools, not unpickled)",
+   "https://github.com/BAAI-Humanoid/DECO (README.MD, dataset.py, repo license)",
+   "https://arxiv.org/html/2607.24744 (survey table row, secondary)"
+  ],
+  "unconfirmed": [
+   "episodes = 8,174 counted from episode_*.tar.gz files in the HF tree (per folder: t1 158/129/159/128/150/175/165/189/298/178/196/174 for t1-1..t1-12 in folder order 1-12; t2-1 824, t2-2 1,082, t2-3 792; t3-1 143, t3-2 133, t3-3..t3-8 150 each; t4-1 356, t4-2 300, t4-3 300, t4-4 318, t4-5 575, t4-6 352). Whether failed trajectories are included is not stated.",
+   "hours = 50 and frames = 5M are the paper's figures ('over 5M', 'approximately 5 million'); paper Table 8 sums to 48.7 h successful / 60.0 h total. Not recomputed from the release (frame counts need a full download per episode). 5M frames / 8,174 episodes ~ 610 frames ~ 20 s per episode at 30 Hz (derived).",
+   "tasks = 29 counts sub-task folders in the release; the paper and card say 28 sub-tasks, and Table 8 lists 25 object/variant rows.",
+   "objects = 20 derived from paper Tables 8-9: 12 foods in task 1, 3 3D-printed materials (00081, 00553, 00296) in tasks 2 and 4 (scaled 1.5x-3x), 4 waste items in task 3, plus the custom interference-fit pair.",
+   "Checked episode task2/data-t2-1/episode_0416: 111 frames (3.7 s at 30 Hz), shorter than typical (38.6 MB vs 185 MB median archive). Left-hand tactile 0-569 with 39 of 1,062 taxels ever non-zero; right-hand max 364 with 35 non-zero; both hands carry constant non-zero offsets on some taxels.",
+   "Camera resolution from the released JPEGs (1280x720 MJPEG); fps 30 from the paper's logging rate and data.json info. Camera model beyond 'custom active camera' not stated.",
+   "Hand qpos appears normalized to 0-1 (range in the checked episode); unit not stated. Arm qpos in -0.5..0.3, likely rad (not stated).",
+   "Secondary survey arXiv 2607.24744 lists DECO-50 as '8K / 50+' h, 28 tasks; it adds nothing beyond the paper.",
+   "zh: the project page names affiliation 1 as '星源智 (xyz-eai.com)'; BAAI appears only in English."
+  ],
+  "zh": {
+   "name": null,
+   "title": null,
+   "maker": "星源智",
+   "en": "official",
+   "note": "Project page lists affiliation 1 as '星源智 (xyz-eai.com)' [XYZ Embodied AI]; dataset card, paper and BAAI affiliation are English only."
+  }
+ },
+ "license": {
+  "name": "Apache-2.0",
+  "redistribution": "allowed",
+  "quote": "This dataset is released under the Apache 2.0 license.",
+  "url": "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50",
+  "access": "open",
+  "format": "task<N>/data-t<N>-<k>/episode_<NNNN>.tar.gz, each holding episode_<NNNN>/colors/<idx>_color_{0,1}.jpg, tactiles/<idx>_{left,right}_ee_tactile.npy, data.json (per-frame states/actions/file paths), data.pkl (pandas DataFrame of actions/obs/condition_indx); task<N>_statistics.yaml at the root",
+  "total_size": "1.61 TB (8,179 files; HF usedStorage 1,619,261,535,274 B)",
+  "per_episode": "tar.gz median 185 MB (6.7 MB to 977 MB)",
+  "partial_fetch": "single episode archive via https://huggingface.co/datasets/BAAI-Humanoid/DECO-50/resolve/main/<path>; gzip prevents fetching tactile without the JPEGs, so one episode costs its whole archive"
+ },
+ "channels": [
+  {
+   "name": "colors/<idx>_color_0.jpg, colors/<idx>_color_1.jpg",
+   "kind": "camera",
+   "shape": "(720, 1280, 3) per view",
+   "rate_hz": 30,
+   "unit": "JPEG RGB",
+   "frame": "active binocular head camera (left = color_0, right = color_1 per README)",
+   "note": "one JPEG pair per data.json entry; data.json info says 640x480"
+  },
+  {
+   "name": "tactiles/<idx>_left_ee_tactile.npy",
+   "kind": "tactile_grid",
+   "shape": "(1062,) float64",
+   "rate_hz": 30,
+   "unit": "raw counts 0-4095 (12-bit), not calibrated",
+   "frame": "left Inspire RH56DFTP, 17 pads flattened; order not documented",
+   "note": "pads per paper Table 10: 5 tips 3x3, 5 finger tops 12x8, 4 finger palms 10x8, thumb middle 3x3, thumb palm 12x8, palm 8x14"
+  },
+  {
+   "name": "tactiles/<idx>_right_ee_tactile.npy",
+   "kind": "tactile_grid",
+   "shape": "(1062,) float64",
+   "rate_hz": 30,
+   "unit": "raw counts 0-4095 (12-bit), not calibrated",
+   "frame": "right Inspire RH56DFTP, 17 pads flattened; order not documented",
+   "note": null
+  },
+  {
+   "name": "data.json data[i].states.left_arm / right_arm.qpos",
+   "kind": "joint_state",
+   "shape": "(7,) each",
+   "rate_hz": 30,
+   "unit": "not stated (rad by range)",
+   "frame": "H1-2 arm joints",
+   "note": "qvel and torque lists are empty"
+  },
+  {
+   "name": "data.json data[i].states.left_ee / right_ee.qpos",
+   "kind": "joint_state",
+   "shape": "(6,) each",
+   "rate_hz": 30,
+   "unit": "normalized 0-1 (not stated)",
+   "frame": "Inspire RH56DFTP actuators",
+   "note": null
+  },
+  {
+   "name": "data.json data[i].states.head.qpos",
+   "kind": "joint_state",
+   "shape": "(2,)",
+   "rate_hz": 30,
+   "unit": "not stated (rad by range)",
+   "frame": "active camera yaw, pitch",
+   "note": "states.body.qpos is empty"
+  },
+  {
+   "name": "data.json data[i].actions.{left_arm,right_arm,left_ee,right_ee,head}.qpos",
+   "kind": "action",
+   "shape": "(7,), (7,), (6,), (6,), (2,)",
+   "rate_hz": 30,
+   "unit": "as the matching states",
+   "frame": "joint targets",
+   "note": "28-D action in the paper (14 arm, 12 hand, 2 camera)"
+  },
+  {
+   "name": "data.json text.goal",
+   "kind": "language",
+   "shape": "string",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "'pick up cube.' in the checked task-2 episode; desc and steps are template placeholders"
+  },
+  {
+   "name": "data.pkl",
+   "kind": "other",
+   "shape": "pandas DataFrame: index, left/right/head_action, left/right/head_obs, condition_indx",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "processed labels used by the official training code; condition_indx = sub-task index"
+  }
+ ],
+ "episode_index": {
+  "where": "HF repo tree (no episode table); sub-task index inside each data.pkl",
+  "count": 8174,
+  "fields": [
+   "scenario (task1-4)",
+   "sub-task folder",
+   "condition_indx (in data.pkl)"
+  ],
+  "tasks": [
+   "task1 Pick and Place: data-t1-1 ... data-t1-12 (12 foods per paper: onion, apple, lemon, orange, pomegranate, bread, cream puff, hamburger, cabbage, cake, steamed bun, bread slice; folder-to-object map not released)",
+   "task2 Material Sorting: data-t2-1 ... data-t2-3 (materials 00081, 00553, 00296)",
+   "task3 Waste Disposal: data-t3-1 ... data-t3-8 (paper: paper ball, plastic bottle, rotten apple, expired milk)",
+   "task4 Assembly: data-t4-1 ... data-t4-6 (paper: 00081 1.5x/2x, 00553 2x/3x, 00296 2x, interference-fit pair)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Apache-2.0 (HF card YAML and README 'This dataset is released under the Apache 2.0 license.') allows redistribution; repo is public and ungated. Label the collection 'Apache-2.0'.",
+  "prefix": "dc_",
+  "tasks_total": 29,
+  "tasks_sampled": 7,
+  "episodes": [],
+  "fetch_estimate": "Episodes cannot be chosen without downloading: tactile sits inside per-episode tar.gz archives (median 185 MB). Plan: 3 candidate archives in each of 7 sub-tasks = 21 x ~185 MB ~ 3.9 GB, keep 7. Re-hosted media: one stereo view per episode re-encoded to H.264 from 1280x720 JPEGs (~10-20 MB per 20 s clip). Episode JSON: 2 x 1,062 values x ~600 frames per episode ~ 1.3M numbers, so store tactile as integers (values are whole counts) or crop to a contact window to stay under 2 MB.",
+  "rules_applied": "Tasks: 29 sub-task folders > 6, so take 7 spanning all 4 scenarios: task1 x 2 (different foods), task2 x 1, task3 x 2, task4 x 2 (different parts). One episode per sampled sub-task. Each must have both 1,062-value tactile vectors present, contact above the per-taxel rest offsets for >= 1 s, and 10-60 s length (cut to a contact window otherwise). Budget: <= 20 GB download, <= 2 MB JSON, ~30 MB media per episode.",
+  "deviations": [
+   "Sub-task folders are not mapped to object names; the candidate's object is read from data.json text.goal and the paper's Table 8 order, and recorded as unconfirmed."
+  ]
+ }
+}

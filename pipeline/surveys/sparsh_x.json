@@ -1,0 +1,378 @@
+{
+ "id": "sparsh_x",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "sparsh_x",
+  "name": "Sparsh-X dataset (Allegro part)",
+  "title": "Tactile Beyond Pixels: Multisensory Touch Representations for Robot Manipulation",
+  "authors": "Carolina Higuera et al.",
+  "year": 2025,
+  "venue": "CoRL 2025 (arXiv 2506.14754)",
+  "summary": "Allegro hand on a Franka Panda with four Digit 360 fingertips dipping into trays of LEGO bricks and marbles, released as raw ROS 2 MCAP bags (tactile images, contact audio, IMU, pressure, joint states, RealSense RGB-D); the handheld-picker part of the Sparsh-X set is excluded.",
+  "embodiment": "robot",
+  "hand": "Allegro Hand (16 DoF) on Franka Panda",
+  "bimanual": false,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 4,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "Per Digit 360 (topics /d360_0 .. /d360_3) in the MCAP: image_raw/compressed and tactile_image, both 1280x720 JPEG at 30 Hz; pressure_topic (pressure ~93,600-93,900, Pa by range, + temperature) at 200 Hz; pressure_ap_topic (2 x 25 uint16 per message) at ~910 msg/s; mic_0 and mic_1 (512 float32 samples per message, 48 kHz); imu_raw_topic (accelerometer, gyroscope, magnetometer, linear acceleration, ~390 Hz each) and imu_quat_topic (~100 Hz); ght_topic (gas, humidity, temperature) at ~5 Hz; binary_tactile_array (16 float32, all zero in the checked messages).",
+   "maker": "Meta",
+   "model": "Digit 360",
+   "principle": "optical",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "depth",
+   "audio",
+   "imu",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 4.5,
+   "episodes": null,
+   "frames": null,
+   "tasks": null,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Paper: 4.5 of the 18.6 h Sparsh-X set come from the Allegro hand (8 sequences of ~8.5 min, four sensors each). Release: one 30.4 GB archive of MCAP bags; its first bag (lego_dip, 13.1 GB) covers 100 s"
+  },
+  "availability": "public",
+  "access": "Hugging Face facebook/sparsh-x-dataset, ungated: 5 tar.gz archives (89.5 GB). The Allegro part is d360/20240830-fre-metahand.tar.gz (30.4 GB, raw MCAP bags) plus d360/20240601-fre-metahand.tar.gz (2.4 MB, labels only). A tar.gz can only be read from the start.",
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "The dataset card describes one data.pickle per sequence, but in every archive checked data.pickle is a symlink to an absolute cluster path (/fsx-gum/shared/...). 20240601-fre-metahand.tar.gz (32 sequences: knife cutting, pan stirring, spatula tapping) therefore holds only metadata.yaml/info.yaml files and no sensor data.",
+   "20240830-fre-metahand.tar.gz holds raw ROS 2 MCAP bags with uncompressed chunks. Its first member, 1-none/lego_dip.mcap, is 13.1 GB for 100 s (bag_start/bag_end in metadata.yaml), ~124 MB/s, mostly raw RealSense images.",
+   "The rest of the 30.4 GB archive was not listed: gzip has no index, so a listing needs the whole download. The repository's SSL config names 5 sequences in this set (dip lego x 2, dip marble, pour water bottle x 2); whether all of the paper's 8 Allegro sequences of ~8.5 min are released is not confirmed.",
+   "The paper's 18.6 h include 14.1 h from a handheld two-finger picker (d360/2024*-trash_picker archives, 59 GB); this entry covers only the Allegro hand.",
+   "The 4.5 h Allegro figure matches sensor-hours (8 sequences x 8.5 min x 4 sensors = 4.5 h), i.e. about 1.1 h of recording time; the paper does not say which it counts.",
+   "No episode index file: labels (object, action, surface, bag start/end) are in metadata.yaml next to each dangling data.pickle.",
+   "tf_static lists ReSkin links on the Allegro phalanges and palm, but no ReSkin topic appears in the first 2.4 s of lego_dip.mcap. The compressed depth topics carry empty images (88-byte messages)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2506.14754",
+   "project": "https://akashsharma02.github.io/sparsh-x-ssl/",
+   "data": "https://huggingface.co/datasets/facebook/sparsh-x-dataset",
+   "code": "https://github.com/facebookresearch/sparsh-multisensory-touch"
+  },
+  "image": "https://akashsharma02.github.io/sparsh-x-ssl/media/figures/data-collection-setup.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Intel RealSense (model not stated)",
+     "type": "RGB-D",
+     "resolution": "640x480 colour, 848x480 depth and infrared",
+     "fps": 30,
+     "mount": null
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Allegro 16 joint positions, velocities and efforts (/allegroHand/joint_states, ~336 Hz) + /allegroHand/joint_cmd (~34 Hz)",
+     "note": null
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "Franka Panda 7 joint states (/franka/joint_states, ~30 Hz) + /joint_pos_cmd",
+     "note": "/joint_states merges arm and hand (23 joints, ~71 Hz)"
+    },
+    {
+     "target": "wrist",
+     "method": "optical_tracker",
+     "system": "lighthouse trackers (/headset_tracker_data, /tracker1_tracker_data, frame lighthouse_frame, ~31 Hz)",
+     "note": "with /teleop_tool_desired_joint_pose (14 values) these suggest teleoperation; the paper only says the hand 'performs random motions'"
+    }
+   ],
+   "other": [
+    "Digit 360 contact microphones, 2 per sensor, 48 kHz",
+    "Digit 360 gas, humidity and temperature",
+    "RealSense infrared stereo pair and camera_info/extrinsics",
+    "Allegro joint temperatures and status",
+    "URDF (/robot_description) and tf"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/html/2506.14754 (v1, incl. appendix A.1)",
+   "https://akashsharma02.github.io/sparsh-x-ssl/",
+   "https://huggingface.co/datasets/facebook/sparsh-x-dataset (README.md, API info, full file tree)",
+   "https://huggingface.co/datasets/facebook/sparsh-x-dataset d360/20240601-fre-metahand.tar.gz and d360/20241009-fre-trash_picker.tar.gz (downloaded whole, 2.4 MB and 0.6 MB)",
+   "https://huggingface.co/datasets/facebook/sparsh-x-dataset d360/20240830-fre-metahand.tar.gz bytes 0-80,000,000 (127 MB of lego_dip.mcap decoded: schemas, channels, messages) and the gzip trailer of three archives",
+   "https://github.com/facebookresearch/sparsh-multisensory-touch (README.md, LICENSE.md, config/data/d360.yaml, scripts/d360/mcap2pickle.py)"
+  ],
+  "unconfirmed": [
+   "Rates are message rates measured over the first 2.4 s of lego_dip.mcap (D360 topics) or its first 0.7 s (RealSense), not stated rates; the card states 30 Hz images, 400 Hz IMU, 48 kHz microphones and 200 Hz pressure.",
+   "pressure_topic unit not stated (values 93,600-93,900, Pa by range); the GHT sensor reads 101,827 for ambient pressure.",
+   "hours=4.5 is the paper's figure 8 value for the Allegro hand; the interpretation as sensor-hours is ours (8 x 8.5 min x 4 = 272 min = 4.5 h).",
+   "Release extent: if every bag in 20240830-fre-metahand.tar.gz records like lego_dip (~124 MB/s, compression to ~63% in the gzip stream), the 30.4 GB archive holds about 6-7 min of recording. Not checked.",
+   "The 20240601 'metahand' sequences (knife, pan, spatula) are labelled tool metahand_v1 with allegro_joint and franka_joint true in info.yaml, i.e. Allegro hand on Franka holding tools; none of their sensor data is in the release.",
+   "Camera model and mount are not stated; topic names say RealSense."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "license: cc-by-nc-4.0",
+  "url": "https://huggingface.co/datasets/facebook/sparsh-x-dataset/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/facebook/sparsh-x-dataset",
+  "access": "open",
+  "format": "tar.gz per recording set: <n>-<object>/info.yaml, <n>-<object>/<bag>.mcap (ROS 2, ros2msg schemas, uncompressed chunks) and <n>-<object>/seqs/<k>-<object>-<action>-<surface>/{metadata.yaml, data.pickle -> dangling symlink}",
+  "total_size": "89.5 GB in 5 archives; Allegro part 30.4 GB (20240830-fre-metahand) + 2.4 MB (20240601-fre-metahand)",
+  "per_episode": "lego_dip.mcap: 13.1 GB for 100 s",
+  "partial_fetch": "Stream the tar.gz from byte 0 and stop early: the first 80 MB of compressed stream yielded the first 127 MB (2.4 s) of lego_dip.mcap, which parses as MCAP record by record. Reaching a later bag needs every byte before it."
+ },
+ "channels": [
+  {
+   "name": "/d360_<i>/image_raw/compressed",
+   "kind": "tactile_image",
+   "shape": "JPEG 1280x720",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "per fingertip sensor d360_0..d360_3 (finger order not documented)",
+   "note": "sensor_msgs/CompressedImage, ~60-90 KB"
+  },
+  {
+   "name": "/d360_<i>/tactile_image",
+   "kind": "tactile_image",
+   "shape": "JPEG 1280x720",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "per fingertip sensor",
+   "note": "second image topic, ~100-125 KB per frame; how it differs from image_raw is not documented"
+  },
+  {
+   "name": "/d360_<i>/pressure_topic",
+   "kind": "pressure_scalar",
+   "shape": "PressureD360 {ts uint64, pressure float64, temperature float64}",
+   "rate_hz": 200,
+   "unit": "not stated (pressure ~93,600-93,900, Pa by range; temperature ~50, degC by range)",
+   "frame": "per sensor",
+   "note": null
+  },
+  {
+   "name": "/d360_<i>/pressure_ap_topic",
+   "kind": "other",
+   "shape": "PressureAPD360 {ts, seq, ch_a uint16[25], ch_b uint16[25]}",
+   "rate_hz": 910,
+   "unit": "not stated (raw ~2,040-2,055)",
+   "frame": "per sensor",
+   "note": "message rate; 25 samples per channel per message"
+  },
+  {
+   "name": "/d360_<i>/mic_0, /d360_<i>/mic_1",
+   "kind": "audio",
+   "shape": "AudioDataD360 {sample_rate 48000, data float32[512]}",
+   "rate_hz": 48000,
+   "unit": "not stated (float, |x| < 0.001 at rest)",
+   "frame": "per sensor, 2 contact microphones",
+   "note": "~94 messages/s"
+  },
+  {
+   "name": "/d360_<i>/imu_raw_topic",
+   "kind": "imu",
+   "shape": "ImuRawD360 {ts, sensor_ts, type (1 acc, 2 gyro, 3 mag, 6 linacc), x, y, z float32}",
+   "rate_hz": 390,
+   "unit": "raw",
+   "frame": "per sensor",
+   "note": "~1,570 messages/s across the 4 types"
+  },
+  {
+   "name": "/d360_<i>/imu_quat_topic",
+   "kind": "imu",
+   "shape": "ImuQuatD360 {quat (x, y, z, w) float64, accuracy}",
+   "rate_hz": 100,
+   "unit": "unit quaternion",
+   "frame": "per sensor",
+   "note": null
+  },
+  {
+   "name": "/d360_<i>/ght_topic",
+   "kind": "other",
+   "shape": "GasHTData {temperature, pressure, humidity, gas, gas_index}",
+   "rate_hz": 5,
+   "unit": "not stated",
+   "frame": "per sensor",
+   "note": null
+  },
+  {
+   "name": "/d360_<i>/binary_tactile_array",
+   "kind": "other",
+   "shape": "Float32MultiArray (16,)",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "per sensor",
+   "note": "all zero in the checked messages"
+  },
+  {
+   "name": "/allegroHand/joint_states",
+   "kind": "joint_state",
+   "shape": "JointState: 16 names (allegro_joint_0.0..15.0), position, velocity, effort",
+   "rate_hz": 336,
+   "unit": "rad (by range)",
+   "frame": "Allegro joints",
+   "note": null
+  },
+  {
+   "name": "/allegroHand/joint_cmd",
+   "kind": "action",
+   "shape": "JointState positions (16)",
+   "rate_hz": 34,
+   "unit": "rad",
+   "frame": "Allegro joints",
+   "note": null
+  },
+  {
+   "name": "/allegroHand/joint_temperature, /allegroHand/status",
+   "kind": "other",
+   "shape": "Float32MultiArray (16); DiagnosticArray",
+   "rate_hz": 5,
+   "unit": "degC (by range)",
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "/franka/joint_states, /joint_states",
+   "kind": "joint_state",
+   "shape": "JointState 7 (panda_joint1..7); 23 (arm + hand)",
+   "rate_hz": 30,
+   "unit": "rad",
+   "frame": "Franka Panda joints",
+   "note": "/joint_states at ~71 Hz"
+  },
+  {
+   "name": "/joint_pos_cmd, /teleop_tool_desired_joint_pose",
+   "kind": "action",
+   "shape": "franky_msgs/JointPosition; Float32MultiArray (14)",
+   "rate_hz": 33,
+   "unit": "rad (by range)",
+   "frame": "Franka joints",
+   "note": null
+  },
+  {
+   "name": "/headset_tracker_data, /tracker1_tracker_data",
+   "kind": "other",
+   "shape": "PoseStamped",
+   "rate_hz": 31,
+   "unit": "m, quaternion (by range)",
+   "frame": "lighthouse_frame (tf: base_link -> lighthouse_frame)",
+   "note": "tracker poses, probably the teleoperator's"
+  },
+  {
+   "name": "/realsense/color/image_raw (+ /compressed)",
+   "kind": "camera",
+   "shape": "640x480 rgb8; compressed JPEG",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "realsense_color_optical_frame",
+   "note": null
+  },
+  {
+   "name": "/realsense/depth/image_rect_raw, /realsense/aligned_depth_to_color/image_raw",
+   "kind": "depth",
+   "shape": "848x480 and 640x480 16UC1",
+   "rate_hz": 30,
+   "unit": "not stated (RealSense default mm)",
+   "frame": "realsense depth / colour optical frames",
+   "note": "the /compressed depth variants are empty (88-byte messages)"
+  },
+  {
+   "name": "/realsense/infra1, /realsense/infra2 image_rect_raw (+ /compressed)",
+   "kind": "camera",
+   "shape": "848x480 mono8",
+   "rate_hz": 30,
+   "unit": "8-bit IR",
+   "frame": "realsense infra optical frames",
+   "note": null
+  },
+  {
+   "name": "/realsense/*/camera_info, */metadata, /realsense/extrinsics/*",
+   "kind": "other",
+   "shape": "CameraInfo, Metadata, Extrinsics",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "/tf, /tf_static, /robot_description, /rosout",
+   "kind": "other",
+   "shape": "TFMessage, String (URDF), Log",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "tf_static includes allegro_link_*_tip, reskin_link_* and palm_reskin_link frames"
+  }
+ ],
+ "episode_index": {
+  "where": "metadata.yaml per sequence and info.yaml per recording inside each tar.gz; GitHub config/data/d360.yaml lists the SSL sequences (dataset_list: 114 entries, 5 from 20240830-fre-metahand)",
+  "count": null,
+  "fields": [
+   "object",
+   "action",
+   "surface",
+   "tool",
+   "bag",
+   "bag_start",
+   "bag_end",
+   "devices (lighting_cfg, lens_version)"
+  ],
+  "tasks": [
+   "dip (LEGO tray)",
+   "dip (marble tray)",
+   "pour (water bottle)"
+  ],
+  "scenes": [
+   "lab"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC 4.0 (card YAML) allows non-commercial redistribution with attribution; the repo is public and ungated. Label the collection 'CC BY-NC 4.0'. The only way to get data is to stream 20240830-fre-metahand.tar.gz from its start.",
+  "prefix": "sx_",
+  "tasks_total": 3,
+  "tasks_sampled": null,
+  "episodes": [
+   {
+    "id": "d360/20240830-fre-metahand.tar.gz : 1-none/lego_dip.mcap",
+    "task": "dip (LEGO tray)",
+    "scene": "lab",
+    "subject": null,
+    "duration_s": 100.2,
+    "window": null,
+    "why": "The only bag confirmed in the release; two 20-30 s windows with contact on several fingertips, chosen after streaming it."
+   },
+   {
+    "id": "next .mcap member of 20240830-fre-metahand.tar.gz (name unknown until reached)",
+    "task": "dip (marble tray) or pour (water bottle), per config",
+    "scene": "lab",
+    "subject": null,
+    "duration_s": null,
+    "window": null,
+    "why": "A second task, if the next member is a different sequence."
+   }
+  ],
+  "fetch_estimate": "~8.3 GB of compressed stream for the whole first bag (100 s); the second bag adds a similar amount; a 30 s window at the start of the first bag needs ~2.5 GB",
+  "rules_applied": "3 tasks or fewer (dip LEGO, dip marble, pour), so 2-3 episodes per task and 3-10 in total, but only the first bag is reachable without reading the archive in order. Windows of 10-60 s are cut from the 100 s bags. Contact check per window: Digit 360 pressure above rest for >= 1 s and visible change in the tactile images. Raw RealSense topics are dropped; the compressed colour topic is enough for the viewer.",
+  "deviations": [
+   "Episodes cannot be picked before streaming: the archive has no index and the dataset card's data.pickle files are dangling symlinks."
+  ]
+ }
+}

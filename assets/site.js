@@ -27,7 +27,7 @@ const RANK_TEXT = {1: 'Public download, license stated, sample episodes converte
 const QUAL = {calibrated: 'Touch in physical units (N, kPa)', video: 'Synchronized camera video', hand_pose: 'Finger pose or joint tracking',
   scale: '10 h or 1,000 episodes or more', diversity: '10 tasks or 5 environments or more'};
 const rankOf = d => d.rank ? d.rank.n : 4;
-const qbar = d => {const q = d.quality; if (!q) return ''; return `<span class="qbar" title="Quality ${q.score} of ${q.of}: ${Object.entries(q.flags).map(([k, v]) => `${v ? '✓' : '✗'} ${QUAL[k]}`).join('; ')}">${
+const qbar = d => {const q = d.quality; if (!q) return ''; return `<span class="qbar" title="Quality ${q.score} of ${q.of}: ${Object.entries(q.flags).map(([k, v]) => `${QUAL[k]}: ${v ? 'yes' : 'no'}`).join('; ')}">${
   Object.values(q.flags).map(v => `<i class="${v ? 'on' : ''}"></i>`).join('')}<b>Q${q.score}</b></span>`};
 const rankBadge = (d, cls = 'badge') => `<span class="${cls} rk rk${rankOf(d)}" title="${esc(RANK_TEXT[rankOf(d)])}">${LABEL.rank[rankOf(d)]}</span>`;
 // short names for compact cells
@@ -117,7 +117,7 @@ function writeHash() {
 }
 
 /* ---------- filtering ---------- */
-const textOf = d => [d.name, d.title, d.authors, d.summary, d.hand, d.venue, d.sensor.maker, d.sensor.model, (d.scale.scene_types || []).join(' '),
+const textOf = d => [d.name, zhText(d), d.title, d.authors, d.summary, d.hand, d.venue, d.sensor.maker, d.sensor.model, (d.scale.scene_types || []).join(' '),
   ...(setup(d).cameras || []).map(c => c.model), ...(setup(d).tracking || []).map(t => t.system), ...hwOf(d).map(([h]) => h.name)].join(' ').toLowerCase();
 // devices in data/hardware.json that list this dataset, with their role
 const hwOf = d => HW.flatMap(h => h.datasets.filter(x => x.id === d.id).map(x => [h, x.role]));
@@ -165,7 +165,7 @@ function renderChips() {
 const linkRow = d => {
   const L = d.links, out = [];
   for (const [k, t] of [['paper', 'Paper'], ['project', 'Project'], ['data', 'Data'], ['code', 'Code']]) if (L[k]) out.push(`<a href="${esc(L[k])}" target="_blank" rel="noopener">${t}</a>`);
-  if (d.viewer) out.push(`<a class="play" href="viewer/#rec=${esc(d.viewer)}">▶ Play samples</a>`);
+  if (d.viewer) out.push(`<a class="play" href="viewer/#rec=${esc(d.viewer)}"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor" aria-hidden="true" style="vertical-align:-2px"><path d="M8 5v14l11-7z"/></svg> Play samples</a>`);
   return out.join('');
 };
 const thumb = d => d.thumb ? `<img src="${esc(d.thumb)}" alt="" loading="lazy">` : glyph(d.sensor.coverage, covText(d.sensor.coverage));
@@ -188,7 +188,7 @@ function cardGrid(list) {
     <div class="thumb">${thumb(d)}${rankBadge(d)}</div>
     <div class="body">
       <div class="ttl"><h3>${esc(d.name)}</h3>${qbar(d)}<span>${d.year}</span></div>
-      <div class="src">${esc(d.venue)} · ${esc(d.authors)}</div>
+      ${zhLine(d)}<div class="src">${esc(d.venue)} · ${esc(d.authors)}</div>
       <p class="desc">${esc(d.summary)}</p>
       <div class="spec">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}<div><b>${sensorLine(d)}</b><span>${covText(d.sensor.coverage)} · ${esc(makerText(d))}</span></div></div>
       <dl class="facts">${facts(d).map(([k, v]) => `<div><dt>${k}</dt><dd>${v || '<i>not stated</i>'}</dd></div>`).join('')}</dl>
@@ -199,7 +199,7 @@ function cardGrid(list) {
 function table(list) {
   const num = (v, u = '') => v != null ? `${u === ' h' ? hrs(v) : fmt(v)}${u}` : '–', c = d => d.scale;
   const row = d => `<tr data-id="${d.id}">
-    <td><b>${esc(d.name)}</b><span class="sub">${esc(d.venue)}</span></td>
+    <td><b>${esc(d.name)}</b>${d.zh?.name ? `<span class="sub" lang="zh-CN">${esc(d.zh.name)}</span>` : ''}<span class="sub">${esc(d.venue)}</span></td>
     <td>${rankBadge(d, 'rk-t')}<span class="sub">${qbar(d)}</span></td>
     <td>${LABEL.embodiment[d.embodiment]}<span class="sub">${d.bimanual ? 'Bimanual' : 'Single hand'}</span></td>
     <td><span class="cov">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}${covText(d.sensor.coverage)}</span></td>
@@ -276,17 +276,18 @@ function openDetail(id) {
     : `<p class="src">${d.setup ? 'No hand tracking.' : 'Not yet compiled.'}</p>`;
   const other = [...d.modalities.map(m => LABEL.modality[m]), ...(u.other || [])];
   $('dlg').innerHTML = `<div class="dl"><header>${glyph(s.coverage, covText(s.coverage)).replace('class="glyph"', 'class="glyph" style="width:44px;flex:none"')}
-    <div><h2 id="dlgTitle">${esc(d.name)}</h2><p>${esc(d.title)}</p><p>${esc(d.authors)} · ${esc(d.venue)}</p></div><button class="x" aria-label="Close">×</button></header>
+    <div><h2 id="dlgTitle">${esc(d.name)}</h2><p>${esc(d.title)}</p>${zhHead(d, 'Name and title')}<p>${esc(d.authors)} · ${esc(d.venue)}</p></div><button class="x" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
     <div class="scroll">${d.thumb ? `<img class="hero" src="${esc(d.thumb)}" alt="${esc(d.name)} overview figure">` : ''}
     <p>${esc(d.summary)}</p>
     ${d.caveats.length ? `<div class="warn"><ul>${d.caveats.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
     <h4>Rank and quality</h4>${kvs([['Rank', `${rankBadge(d, 'rk-t')} ${esc(RANK_TEXT[rankOf(d)])}${d.rank ? `<span class="sub">${esc(d.rank.why.join(' · '))}</span>` : ''}`],
-      ['Quality', d.quality ? `<b>${d.quality.score} of ${d.quality.of}</b><ul class="ql">${Object.entries(d.quality.flags).map(([k, v]) => `<li class="${v ? 'on' : ''}">${v ? '✓' : '✗'} ${QUAL[k]}</li>`).join('')}</ul>` : '']])}
+      ['Quality', d.quality ? `<b>${d.quality.score} of ${d.quality.of}</b><ul class="ql">${Object.entries(d.quality.flags).map(([k, v]) => `<li class="${v ? 'on' : ''}">${v ? '<svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' : '<svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>'}${QUAL[k]}<span class="vh">${v ? ' (yes)' : ' (no)'}</span></li>`).join('')}</ul>` : '']])}
     <h4>Data</h4>${scale}<h4>Tactile sensing</h4>${tactile}${hwOf(d).length ? `<h4>Hardware</h4><div class="dsl">${hwOf(d).map(([h, r]) =>
       `<a href="hardware.html#h=${esc(h.id)}">${h.thumb ? `<img src="${esc(h.thumb)}" alt="" style="object-fit:contain">` : ''}<div><b>${esc(h.name)}</b><span>${esc(r)} · ${esc(h.maker)}</span></div></a>`).join('')}</div>` : ''}<h4>Cameras</h4>${cams}<h4>Hand tracking</h4>${track}
     <h4>Also recorded</h4><p class="plain">${esc([...new Set(other)].join(', ') || 'Tactile only')}</p>
     <h4>Access</h4>${kvs([['Availability', `${LABEL.availability[d.availability]} · ${esc(d.access)}`], ['License', esc(d.license)]])}
-    <div class="links">${d.viewer ? `<a class="btn" href="viewer/#rec=${esc(d.viewer)}">▶ Play samples in the viewer</a>` : ''}${linkRow(d).replace(/<a class="play"[^]*?<\/a>/, '')}</div>
+    ${(d.used_by || []).length ? `<h4>Used by</h4><ul class="usedby">${d.used_by.map(u => `<li><a href="${esc(u.url)}" target="_blank" rel="noopener">${esc(u.name)}</a>${u.note ? `: ${esc(u.note)}` : ''}</li>`).join('')}</ul>` : ''}
+    <div class="links">${d.viewer ? `<a class="btn" href="viewer/#rec=${esc(d.viewer)}"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play samples in the viewer</a>` : ''}${linkRow(d).replace(/<a class="play"[^]*?<\/a>/, '')}</div>
     ${(d.sources || []).length ? `<details class="srcs"><summary>Sources${(d.unconfirmed || []).length ? ' and open points' : ''}</summary>
       ${(d.unconfirmed || []).length ? `<p>Derived or not confirmed:</p><ul>${d.unconfirmed.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p>Read:</p>` : ''}
       <ul>${d.sources.map(x => `<li><a href="${esc(x)}" target="_blank" rel="noopener">${esc(x)}</a></li>`).join('')}</ul></details>` : ''}

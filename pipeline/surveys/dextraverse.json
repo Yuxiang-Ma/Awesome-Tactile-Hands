@@ -1,0 +1,336 @@
+{
+ "id": "dextraverse",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "dextraverse",
+  "name": "DextraVerse",
+  "title": "DextraVerse: real-robot task (pick_cube_place_box)",
+  "authors": "Xiangyu Chen et al.",
+  "year": 2026,
+  "venue": "Hugging Face dataset (no paper)",
+  "summary": "Two Sharpa Wave hands on a Dexmate Vega robot pick a purple cube into an orange box in 261 real episodes (~19.5 Hz), with a 24x24 deformation map and a 3-axis force in N from each of the 10 fingertip sensors, plus head and wrist RGB.",
+  "embodiment": "robot",
+  "hand": "Sharpa Wave (22 DoF) x 2 on Dexmate Vega (two 7-DoF arms)",
+  "bimanual": true,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 19.5,
+   "calibrated": true,
+   "note": "Per hand and frame: {side}_tactile_data_fingers (5, 24, 24) uint8 fingertip deformation map (mostly 0 at rest, up to ~200 in contact) and {side}_tactile_data_fingerforce (5, 3) float32 contact force in N in each fingertip sensor's own frame; channel order thumb, index, middle, ring, pinky (area ids 0-4). Forces are not tared: rest |F| is 0.35-2.05 N per finger (median over episodes). No palm or phalanx sensing.",
+   "maker": "Sharpa",
+   "model": "Sharpa Wave fingertip tactile sensor",
+   "principle": "optical",
+   "range": null
+  },
+  "modalities": [
+   "egocentric",
+   "wrist_rgb",
+   "language"
+  ],
+  "scale": {
+   "hours": 2.05,
+   "episodes": 261,
+   "frames": 138382,
+   "tasks": 1,
+   "objects": 1,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Real robot: 261 episodes, 138,382 frames at ~19.5 Hz (123 min), 1 task (cube into box); the 300 simulated episodes (3 tasks, 135,734 frames) in the same repo are not counted"
+  },
+  "availability": "public",
+  "access": "Hugging Face ntumars/DextraVerse, ungated: the real part is one 43 GB stored (uncompressed) ZIP64 of a zarr v2 replay buffer, so single zarr chunks can be range-read; an earlier HDF5 export with actions is on the gated repo Xiongge0212/dextraverse-rig-grasp-n261 (login, auto-approved).",
+  "license": "CC BY 4.0",
+  "caveats": [
+   "One real task on one rig: pick up a purple cube and place it in an orange box. 256 of 261 episodes use one hand (140 left, 116 right), 3 use both hands, 2 never grasp; the idle hand's tactile channels stay at rest.",
+   "The arm was teleoperated with a SpaceMouse and the hand closed by a learned grasp policy on the operator's command, so finger motion is not human-teleoperated.",
+   "No action stream in the CC BY 4.0 export (measured joints, wrist and head-camera poses only). The gated HDF5 original adds 63-D actions, hand joint commands, grasp phase and fingertip sensor poses; its card states no license.",
+   "Fingertip forces are not tared: rest |F| is 0.35-2.05 N per finger (median over episodes) and up to ~6.5 N (95th percentile, left index). Some maps are not blank at rest (64 episodes on the left hand, 18 on the right show a value > 20 in the first 20 frames); in episode 229 the left index reads ~4.8 N and a static pattern throughout.",
+   "Sampling is irregular: median 19.5 Hz (per-episode medians 15.9-22.1 Hz); episodes 32, 33 and 42 contain recording stalls of 4.8, 5.9 and 1.2 s.",
+   "The same repo holds 300 simulated episodes (handover, pick and place, stack cube; Isaac PhysX contact force and synthetic TacMap images, 224x224 renders). They are not counted here.",
+   "The hand-joint slot indices (FAAS slots) are a contributor-derived mapping, not one published by Sharpa or Open-X-Tactile.",
+   "No paper, project page or code: the card says these 'remain empty at the contributor's request'."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/ntumars/DextraVerse",
+   "project": null,
+   "paper": null,
+   "code": null
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": "320x240",
+     "fps": 19.5,
+     "mount": "robot"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "320x240",
+     "fps": 19.5,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Sharpa Wave hand joint angles, 22 per hand (rad, 0 = open)",
+     "note": "{side}_hand_joints + {side}_hand_joints_idx (FAAS slot per joint)"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "Dexmate Vega 7-DoF arm joints (rad) and wrist pose [x, y, z, rotation vector] in the robot base frame",
+     "note": "{side}_arm_joints, {side}_wrist_pose; camera_ego_pose for the head camera"
+    },
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "SpaceMouse",
+     "note": "teleoperation of the arm; the hand is closed by a learned grasp policy on the operator's command"
+    }
+   ],
+   "other": [
+    "head camera pose per frame (6-D, fixed within a session)",
+    "language instruction per episode (3 variants naming the hand used)",
+    "simulated part in the same repo (Isaac PhysX contact force, synthetic TacMap deformation images), not counted"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/ntumars/DextraVerse (README.md)",
+   "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README_real_robot.md",
+   "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README.md (simulation part)",
+   "https://huggingface.co/datasets/ntumars/DextraVerse (DextraVerse/joint_mapping.json, supplementary_joints_note.json, supplementary_tactile_note.json, canonical_mapping_evidence.json, SHA256SUMS.txt, commit history)",
+   "https://huggingface.co/api/datasets/ntumars/DextraVerse/tree/main?recursive=1",
+   "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/pick_cube_place_box.zarr.zip (ZIP central directory, all 11,740 member names; all non-camera zarr arrays and meta/episode_ends read in full, 52.8 MB; camera chunk 0 of each view decoded)",
+   "https://huggingface.co/datasets/Xiongge0212/dextraverse-rig-grasp-n261 (gated: README.md and file tree only)",
+   "https://open-x-tactile.github.io/ (site-data.js snapshot 2026-07-17)",
+   "https://huggingface.co/ntumars (organisation page)"
+  ],
+  "unconfirmed": [
+   "hours=2.05 is the card's '123 minutes'; the sum of per-episode timestamp spans is 122.8 min. rate_hz=19.5 is the card's 'about 19.5 Hz' and the median frame step over all episodes (0.0512 s); the gated HDF5 card says 20 Hz recording with a 50 Hz control loop.",
+   "objects=1: the grasped object is one purple cube; the orange box is the container. Derived from the task text.",
+   "scene_types=['lab'] from one decoded head-camera frame (office/lab room, table, bystander); the card does not describe the scene. Camera models are not stated.",
+   "Sensing principle 'optical' and type 'vision' come from Sharpa's description of the Wave fingertip sensor as camera-based (catalog hardware entry sharpa_wave); the DextraVerse card only calls the arrays a 'deformation map' and 'contact force'. The 24x24 map size differs from the 240x240 deformation maps T-Rex releases from the same hand; how DextraVerse's map was produced is not stated.",
+   "calibrated=true because the card states the force in newtons; it is the hand's own force output, and no calibration procedure is described.",
+   "Authors from the simulation README ('Authors, in contributor-specified order: xiangyu chen, chuhao zhou, jiaxiao shi'); the real-robot README names only the contact xiangyu.chen@ntu.edu.sg. Organisation is the HF org 'MARS Lab' (ntumars) and the card's 'MARS Lab, Nanyang Technological University'.",
+   "Episode i is demo_i of rig_grasp_merged_20260908_n261.hdf5 (zarr .zattrs source_demos is demo_0..demo_260 in order; the stall episodes 32, 33, 42 match the gated card's flagged demos). Gated card: recorded 2026-09-02 to 2026-09-06 in ten sessions; demos 212-260 come from session_20260904_150927.",
+   "Hand used per episode from data/sub_task_instruction: 140 'with the left hand', 116 'with the right hand', 5 with no hand named (episodes 33, 96, 145, 248, 253). Force rises > 1 N on both hands in 145, 248 and 253; none above 1 N in 96; 33 is a no-grasp episode per the gated card but its right fingertips rise by up to 11 N.",
+   "The gated HDF5 stores finger_force_mag (10,) and finger_force_dir_sensor (10, 3); that the zarr's (5, 3) force per hand is their product was not checked.",
+   "Peak |F| in the release is 44.9 N (right middle); the Sharpa W01 spec range is 0-30 N per the catalog hardware entry.",
+   "Not on the Open-X-Tactile site snapshot of 2026-07-17 (15 datasets); the HF card tags it 'open-x-tactile' and the simulation README says organiser acceptance is pending."
+  ]
+ },
+ "license": {
+  "name": "CC BY 4.0",
+  "redistribution": "allowed",
+  "quote": "Released under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).",
+  "url": "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README_real_robot.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/ntumars/DextraVerse",
+  "access": "open",
+  "format": "zarr v2 replay buffer (FTP-1 / Open-X-Tactile layout) inside a stored (uncompressed) ZIP64: data/<array> with the frame index as first axis, meta/episode_ends; Blosc-compressed chunks (cameras 36 frames per chunk; tactile maps 2,912 frames; other arrays one chunk for the whole release)",
+  "total_size": "real part 45.7 GB (pick_cube_place_box.zarr.zip, 45,748,772,040 B); simulation 25.1 GB in three archives; repo 116.6 GB used storage",
+  "per_episode": "~0.33 MB per frame for the three RGB views (median episode 462 frames = ~150 MB); all non-camera arrays for the whole release are 52.8 MB and cannot be split by episode",
+  "partial_fetch": "read the ZIP central directory (~1.6 MB of range reads), then range-read each zarr chunk member (local header + data) by offset; decode with zarr==2.18.7 / numcodecs Blosc"
+ },
+ "channels": [
+  {
+   "name": "data/timestamps",
+   "kind": "other",
+   "shape": "()",
+   "rate_hz": 19.5,
+   "unit": "s since episode start",
+   "frame": null,
+   "note": "float64; irregular, per-episode median 15.9-22.1 Hz; stalls of 1.2-5.9 s in episodes 32, 33, 42"
+  },
+  {
+   "name": "data/sub_task_instruction",
+   "kind": "language",
+   "shape": "() <U74",
+   "rate_hz": 19.5,
+   "unit": null,
+   "frame": null,
+   "note": "constant per episode; 3 variants naming the left hand, the right hand, or no hand"
+  },
+  {
+   "name": "data/camera_ego_rgb",
+   "kind": "camera",
+   "shape": "(240, 320, 3) uint8",
+   "rate_hz": 19.5,
+   "unit": "8-bit RGB",
+   "frame": "robot head camera; pose in camera_ego_pose",
+   "note": "stored as Blosc zarr chunks of 36 frames, not video"
+  },
+  {
+   "name": "data/left_wrist_camera_rgb, right_wrist_camera_rgb",
+   "kind": "camera",
+   "shape": "(240, 320, 3) uint8",
+   "rate_hz": 19.5,
+   "unit": "8-bit RGB",
+   "frame": "wrist-mounted, looking along the fingers",
+   "note": "Blosc zarr chunks of 36 frames"
+  },
+  {
+   "name": "data/camera_ego_pose",
+   "kind": "other",
+   "shape": "(6,) float64",
+   "rate_hz": 19.5,
+   "unit": "m, rad (rotation vector)",
+   "frame": "robot base: x forward, y left, z up; camera axes x right, y down, z forward",
+   "note": "6 distinct values over the release (fixed per session)"
+  },
+  {
+   "name": "data/left_wrist_pose, right_wrist_pose",
+   "kind": "hand_pose",
+   "shape": "(6,) float64",
+   "rate_hz": 19.5,
+   "unit": "m, rad (rotation vector)",
+   "frame": "robot base; wrist frame z along the fingers, y out of the palm",
+   "note": null
+  },
+  {
+   "name": "data/left_arm_joints, right_arm_joints",
+   "kind": "joint_state",
+   "shape": "(7,) float32",
+   "rate_hz": 19.5,
+   "unit": "rad",
+   "frame": "Dexmate Vega arm joints j1-j7",
+   "note": "measured"
+  },
+  {
+   "name": "data/left_hand_joints, right_hand_joints",
+   "kind": "joint_state",
+   "shape": "(22,) float32",
+   "rate_hz": 19.5,
+   "unit": "rad, 0 = open",
+   "frame": "Sharpa SDK joint order (thumb CMC FE, CMC AA, MCP FE, MCP AA, IP; index..ring MCP FE, MCP AA, PIP, DIP; pinky CMC, MCP FE, MCP AA, PIP, DIP)",
+   "note": "measured; range -0.39 to 1.84 rad"
+  },
+  {
+   "name": "data/left_hand_joints_idx, right_hand_joints_idx",
+   "kind": "other",
+   "shape": "(22,) int32",
+   "rate_hz": 19.5,
+   "unit": null,
+   "frame": null,
+   "note": "FAAS slot per joint, constant [1, 2, 3, 26, 4, 7, 6, 8, 9, 12, 11, 13, 14, 17, 16, 18, 19, 25, 22, 21, 23, 24]"
+  },
+  {
+   "name": "data/left_tactile_data_fingers, right_tactile_data_fingers",
+   "kind": "deformation_map",
+   "shape": "(5, 24, 24) uint8",
+   "rate_hz": 19.5,
+   "unit": "not stated (mostly 0 at rest, up to ~200 in contact)",
+   "frame": "per fingertip sensor, thumb..pinky",
+   "note": "tactile type 'image', sensor 'SharpaWave'; zarr chunks of 2,912 frames"
+  },
+  {
+   "name": "data/left_tactile_data_fingerforce, right_tactile_data_fingerforce",
+   "kind": "force_vector",
+   "shape": "(5, 3) float32",
+   "rate_hz": 19.5,
+   "unit": "N",
+   "frame": "each fingertip sensor's own frame (root attr force_frame = 'sensor')",
+   "note": "tactile type 'state'; not tared (rest |F| 0.35-2.05 N, median per finger); release max |F| 44.9 N; no NaN"
+  },
+  {
+   "name": "data/{side}_tactile_area_fingers, {side}_tactile_area_fingerforce",
+   "kind": "other",
+   "shape": "(5,) int32",
+   "rate_hz": 19.5,
+   "unit": null,
+   "frame": null,
+   "note": "constant [0, 1, 2, 3, 4] = thumb, index, middle, ring, pinky"
+  },
+  {
+   "name": "data/{side}_tactile_sensor_*, {side}_tactile_type_*",
+   "kind": "other",
+   "shape": "() string",
+   "rate_hz": 19.5,
+   "unit": null,
+   "frame": null,
+   "note": "'SharpaWave'; 'image' (maps) or 'state' (forces)"
+  },
+  {
+   "name": "meta/episode_ends",
+   "kind": "other",
+   "shape": "(261,) exclusive end indices",
+   "rate_hz": null,
+   "unit": "frame index",
+   "frame": null,
+   "note": "episode i = demo_i of the source HDF5 (root .zattrs source_demos)"
+  }
+ ],
+ "episode_index": {
+  "where": "pick_cube_place_box.zarr/meta/episode_ends (261 exclusive end indices) + data/sub_task_instruction (constant per episode)",
+  "count": 261,
+  "fields": [
+   "instruction (names the hand used)",
+   "duration (from timestamps)"
+  ],
+  "note": "Episodes 206-1,758 frames, 14.2-97.9 s (median 24.7 s); 253 of 261 within 10-60 s. Hand used: 140 left, 116 right, 5 unspecified (3 both-hand: 145, 248, 253; 2 no-grasp: 33, 96). No object, scene or operator labels. The gated HDF5 report groups demos into ten sessions (2026-09-02 to 2026-09-06); demos 212-260 are session_20260904_150927.",
+  "tasks": [
+   "pick up the purple cube with the left hand and place it in the orange box",
+   "pick up the purple cube with the right hand and place it in the orange box",
+   "pick up the purple cube and place it in the orange box"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY 4.0 (real-robot README: 'Released under CC BY 4.0') allows redistribution with attribution. The repo is public and ungated, and the ZIP is stored without compression, so single zarr chunks can be range-read. Label the collection 'CC BY 4.0'. Only the real-robot archive is sampled; the simulated archives are out of scope.",
+  "prefix": "dv_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "229",
+    "task": "pick up the purple cube with the left hand and place it in the orange box",
+    "scene": "lab table (purple cube, orange box)",
+    "subject": "robot: left Sharpa Wave on Dexmate Vega, SpaceMouse arm teleop + learned grasp",
+    "duration_s": 25.1,
+    "window": null,
+    "why": "Left hand. Force > rest + 1 N on 4 fingertips: thumb 8.8 s (peak +16.6 N), middle 10.2 s (+30.9 N), ring 2.9 s, pinky 2.8 s (+17.3 N), 10.7-25.1 s. Deformation maps reach 75-193 on all 5 fingertips. From session_20260904_150927 (demos 212-260). Left index reads a constant ~4.8 N and a static map throughout (not tared). 448 frames, no stall."
+   },
+   {
+    "id": "46",
+    "task": "pick up the purple cube with the right hand and place it in the orange box",
+    "scene": "lab table (purple cube, orange box)",
+    "subject": "robot: right Sharpa Wave on Dexmate Vega, SpaceMouse arm teleop + learned grasp",
+    "duration_s": 30.6,
+    "window": null,
+    "why": "Right hand, from demos 0-211 (a different session from 229). Force > rest + 1 N on thumb 9.6 s (+21.6 N), middle 12.1 s (+28.4 N), ring 8.6 s (+19.7 N), pinky 4.5 s (+14.9 N), 12.8-30.6 s; index touches briefly (0.4 s, map max 143). 533 frames, no stall."
+   },
+   {
+    "id": "145",
+    "task": "pick up the purple cube and place it in the orange box",
+    "scene": "lab table (purple cube, orange box)",
+    "subject": "robot: both Sharpa Wave hands on Dexmate Vega",
+    "duration_s": 40.5,
+    "window": null,
+    "why": "One of the 3 both-hand episodes: the right hand is in contact at 7.8-17.6 s (thumb +27.4 N for 8.0 s, middle, pinky) and the left at 29.1-38.6 s (thumb +16.7 N for 6.3 s, middle, ring, pinky). Shows both hands' channels in one episode. 787 frames, no stall."
+   }
+  ],
+  "fetch_estimate": "~675 MB: camera chunks for the three episodes (229: 160.9 MB, 46: 191.0 MB, 145: 270.1 MB, all three views, from the ZIP member sizes) + all non-camera arrays (52.8 MB, already fetched to the survey scratch dir, not ~/data/ext) + ~1.6 MB ZIP directory. Episode JSON: full-rate deformation maps are 2,880 B per hand per frame (145: 787 x 2 x 2,880 B = 4.5 MB raw), above the 2 MB JSON budget, so the maps should go into re-hosted media (a tactile video, or the idle hand dropped and the rate reduced) while forces stay in the JSON.",
+  "rules_applied": "Tasks: 1 real task, at most 6, so it is taken. Episodes: with 3 tasks or fewer, 2-3 per task and at least 3 in total, so 3, from different hands (left, right, both) and different sessions. Candidates: 10-60 s, no stall (max frame step < 0.5 s), force > rest + 1 N for at least 1 s on 3 or more fingertips; 91 left and 85 right episodes qualify. All three are within 10-60 s, so no window is cut. The 300 simulated episodes do not qualify (simulated touch)."
+ }
+}

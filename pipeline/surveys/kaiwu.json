@@ -1,0 +1,319 @@
+{
+ "id": "kaiwu",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "kaiwu",
+  "name": "Kaiwu",
+  "title": "Kaiwu: A Multimodal Manipulation Dataset and Framework for Robot Learning and Human-Robot Interaction",
+  "authors": "Shuo Jiang et al.",
+  "year": 2025,
+  "venue": "IEEE RA-L 2025 (doi 10.1109/LRA.2025.3609615); arXiv 2503.05231",
+  "summary": "20 participants each perform 15 robot-arm assembly steps (drilling, filing, fastening, bearing and motor installation) wearing data gloves on both hands with 19 finger-angle and 19 pressure sensors each (3 per finger, 4 on the palm) at 100 Hz, plus 16-channel forearm EMG, an eye tracker, 37-marker motion capture, one RGB-D camera and 4 microphones.",
+  "embodiment": "human",
+  "hand": "human hands in data gloves on both hands (19 finger-angle + 19 pressure sensors and palm/forearm/upper-arm orientation sensors per side); the glove model is not named in the paper",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 19,
+   "sensors_per_hand": 19,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 100,
+   "note": "Per hand and sample: 19 pressure values p0-p18 in the glove CSV (Table II columns 34-52, after sequence, timestamp, 3 quaternions and 19 finger angles). Fig. 2 places 3 sensors along each finger (1-15) and 4 on the palm (16-19). Units and calibration not stated; the paper gives a sensing accuracy of 9 g. Not checked against the files (access not granted).",
+   "maker": "not named in the paper; the glove cuff in Fig. 2 reads WISEGLOVE (Beijing Xintian Vision)",
+   "model": null,
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "hand_pose",
+   "imu",
+   "egocentric",
+   "rgb",
+   "depth",
+   "mocap",
+   "emg",
+   "eye_tracking",
+   "audio",
+   "segmentation"
+  ],
+  "scale": {
+   "hours": 6.3,
+   "episodes": 300,
+   "frames": null,
+   "tasks": 15,
+   "objects": 30,
+   "subjects": 20,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "~6.3 h, 20 subjects x 15 assembly steps (300 glove recordings), 30 parts and tools, 11,664 labelled action instances; 1.42 TB on ScienceDB"
+  },
+  "availability": "gated",
+  "access": "ScienceDB, restricted: each download needs the authors' approval of a request giving name, organisation and purpose (DOI 10.57760/sciencedb.14937, V3, 1.42 TB, 3,602 files; an earlier 2.47 GB annotation-only record is DOI 10.57760/sciencedb.14901). The file list is public.",
+  "license": "not stated",
+  "caveats": [
+   "Restricted access on ScienceDB: files are released only after the authors approve a request; both records list no license.",
+   "Pressure units and calibration are not stated (only '9 g' sensing accuracy); no channel-to-sensor map besides Fig. 2. Not verified from the files.",
+   "The 20 raw-data archives are single RAR files of 65-74 GB (1.38 TB total) holding RGB-D, motion capture, audio, eye-tracker and glove-export video; glove and EMG CSVs with labels are in the 31.8 GB annotation folders.",
+   "Table V rates: glove 100 Hz, glove export 20 Hz, eye tracking 25 Hz, RGB-D 60 Hz, motion capture 60 Hz, audio 50 Hz, ACC and EMG 40 Hz. The EMG and audio figures are far below the usual sensor rates and may describe exported or synchronised streams; not checked.",
+   "Motion capture is released as vendor files (.cap, .trb, .xrb), not as joint angles or marker CSVs.",
+   "Gesture-segmentation folders hold 299 of the 300 subject-step glove pairs; the paper notes some missing data, partly filled by an 'action segmentation supplement' (4 subjects)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2503.05231",
+   "project": null,
+   "data": "https://doi.org/10.57760/sciencedb.14937",
+   "code": null
+  },
+  "image": "https://arxiv.org/html/2503.05231v2/Figs/overview-0508.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": null,
+     "type": "RGB-D",
+     "resolution": null,
+     "fps": 60,
+     "mount": "static"
+    },
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": null,
+     "fps": 25,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "bend_sensor",
+     "system": "data glove, 19 finger-angle sensors per hand (model not named in the paper)",
+     "note": "100 Hz; angle columns named thumb, thindex, index, inmid, middle, midring, ring, ringlittle, little, thumbcmc (Table II)"
+    },
+    {
+     "target": "wrist",
+     "method": "imu",
+     "system": "glove arm sensors (palm, forearm, upper arm quaternions)",
+     "note": "3 x (w, x, y, z) per side in the glove CSV"
+    },
+    {
+     "target": "body",
+     "method": "optical_mocap",
+     "system": "not named (37 reflective markers)",
+     "note": "60 Hz; .cap/.trb/.xrb files"
+    }
+   ],
+   "other": [
+    "forearm EMG, 16 Delsys Trigno sensors (8 per arm) with built-in accelerometers",
+    "eye tracking (gaze, events, IMU) with first-person video; AOI annotations",
+    "4 microphones (2 at the workbench, 2 at the parts area)",
+    "labels: action segmentation (7,197 events), gesture segmentation into 8 grasp types (4,467), hand-state classification (4,959 images), semantic segmentation of 30 objects at 1 frame/s"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2503.05231",
+   "https://arxiv.org/html/2503.05231 (v2, incl. Fig. 2 and Fig. 3 images)",
+   "https://api.datacite.org/dois/10.57760/sciencedb.14937",
+   "https://api.datacite.org/dois/10.57760/sciencedb.14901",
+   "https://www.scidb.cn/en/detail?dataSetId=33060cd729604d2ca7d41189a9fc492b",
+   "https://www.scidb.cn/api/sdb-dataset-version-service/versionList?dataSetId=33060cd729604d2ca7d41189a9fc492b",
+   "https://www.scidb.cn/api/sdb-dataset-version-service/versionList?dataSetId=33d3fcf512994b128c24f3278d76ca76",
+   "https://www.scidb.cn/api/gin-sdb-filetree/public/file/childrenFileListByPath (full file trees of both records)",
+   "http://www.wiseglove.com/Product/WISEGLOVE19.html",
+   "http://www.wiseglove.com/html/6407581149.html"
+  ],
+  "unconfirmed": [
+   "Glove model: the paper does not name it. Supporting evidence for WISEGLOVE19FE+ (Beijing Xintian Vision): the cuff label in Fig. 2 reads 'WISEGLOVE' (mirrored in the figure); the vendor lists the 19FE+ as the WISEGLOVE19 version with 19-DoF finger angles, 9-DoF arm tracking (3 arm sensors) and 19-DoF grip force, matching the paper's 19 angle + 19 pressure sensors + palm/forearm/upper-arm sensors; the vendor's customer list includes Tongji University (同济大学).",
+   "episodes=300 from the design (20 subjects x 15 steps C1-C15) and the public file tree: action-segmentation folders (16 subjects) plus the supplement (4 subjects) hold 300 left/right glove CSV pairs; gesture segmentation holds 299. The paper's '6 x 15 x 20 sets' counts 6 recording devices.",
+   "hours=6.3 is the paper's figure (about 19 min per participant). Recording dates 2024-03-13 to 2024-03-21 (6 days) from file-name time stamps; the paper says 11 working days.",
+   "Camera models are not named. Folder names suggest Azure Kinect ('KinectData'), Tobii ('TobiiData', files opened with Tobii Lab) and NOKOV motion capture ('KonovData', .trb/.xrb); none is stated in the text.",
+   "objects=30 is the paper's count of interaction objects (parts and tools); tasks=15 assembly steps: C1 review tools, C2 drill a hole, C3 clamp a patch, C4 file rough edge, C5 polish a surface, C6 measure diameter, C7 spray lubricant, C8 tighten a steel column, C9 install a bearing, C10 fasten a screw, C11 connect a wire, C12 install a motor, C13 couple rod, C14 install a copper column, C15 fasten a nut (Fig. 3).",
+   "scenes=1, scene_types lab: one assembly workbench in a lab room (Fig. 1); not stated as a count.",
+   "Each step session lasts 140 s (0-10 s synchronisation plus buffer) per the paper; glove CSVs in the annotation folders are 0.17-1.0 MB each.",
+   "ScienceDB's file-preview endpoint returned one restricted glove file as an .xlsx without approval during this survey; it was deleted unopened and nothing in this survey is based on it."
+  ],
+  "zh": {
+   "name": null,
+   "title": null,
+   "maker": "同济大学",
+   "en": "official",
+   "note": "Paper and ScienceDB record are in English (the record's Chinese title field repeats 'Kaiwu Dataset'); ScienceDB gives the Chinese organisation name. Some folder names are Chinese: 标注结果 [annotation results], 过程文件 [process files], 手势分类.zip [gesture classification]."
+  }
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": "Restricted access: \"the applicant shall provide the name, organization/institute information and purpose\"; the record's license (copyRight) field is empty.",
+  "url": "https://www.scidb.cn/en/detail?dataSetId=33060cd729604d2ca7d41189a9fc492b"
+ },
+ "download": {
+  "where": "https://doi.org/10.57760/sciencedb.14937",
+  "access": "request",
+  "format": "ScienceDB folders: 'Kaiwu Dataset Annotation/' (action and gesture segmentation per subject: gloves_data/C<k>-source_data/{l,r}<time>.csv + delsys_data/{emg,acc}/C<k>-source_data/<time>.csv; gesture classification zip; semantic segmentation part1-4.zip; AOIs), 'action segmentation supplement/' (4 subjects), 'raw data/' (one RAR per subject)",
+  "total_size": "1.42 TB (1,417,354,389,580 B, 3,602 files, V3); annotation-only record 2.47 GB",
+  "per_episode": "glove CSV pair ~0.4-2 MB + EMG/ACC CSVs ~1-3 MB per subject-step; videos and mocap only inside the 65-74 GB per-subject RAR archives",
+  "partial_fetch": "single files after approval (per-file download on ScienceDB); raw RGB-D/mocap/audio need the whole per-subject RAR"
+ },
+ "channels": [
+  {
+   "name": "gloves_data/C<k>-source_data/{l,r}<time>.csv: p0-p18",
+   "kind": "pressure_scalar",
+   "shape": "(T, 19) per hand",
+   "rate_hz": 100,
+   "unit": "not stated (9 g sensing accuracy)",
+   "frame": "Fig. 2: sensors 1-15 three per finger (thumb to little), 16-19 palm",
+   "note": "from the paper (Table II, Sec. VI-B2); files not opened"
+  },
+  {
+   "name": "gloves_data CSV: 19 finger-angle columns",
+   "kind": "joint_state",
+   "shape": "(T, 19) per hand",
+   "rate_hz": 100,
+   "unit": "not stated",
+   "frame": "finger joints; named thumb, thindex, index, inmid, middle, midring, ring, ringlittle, little, thumbcmc (Table II lists 10 names for 19 columns)",
+   "note": "bend sensors"
+  },
+  {
+   "name": "gloves_data CSV: hand, forearm, upper-arm quaternions",
+   "kind": "imu",
+   "shape": "(T, 3, 4) per side (w, x, y, z)",
+   "rate_hz": 100,
+   "unit": "unit quaternion",
+   "frame": "not stated",
+   "note": "glove arm sensors"
+  },
+  {
+   "name": "gloves_data CSV: sequence, timestamp (+ action / gesture label columns in the annotation folders)",
+   "kind": "other",
+   "shape": "(T, 2+)",
+   "rate_hz": 100,
+   "unit": "absolute timestamp",
+   "frame": null,
+   "note": "labels: action segments per hand and 8 grasp types (Cyl, Obl, Lum, IntPP, Pinch, LatP, SpP, NonP)"
+  },
+  {
+   "name": "glove export MP4",
+   "kind": "other",
+   "shape": "video",
+   "rate_hz": 20,
+   "unit": null,
+   "frame": null,
+   "note": "rendered 3D hand animation, in raw data"
+  },
+  {
+   "name": "delsys_data/emg/C<k>-source_data/<time>.csv",
+   "kind": "emg",
+   "shape": "16 channels (8 per forearm) + index and timestamp rows",
+   "rate_hz": 40,
+   "unit": "not stated (raw)",
+   "frame": "forearm muscle groups, placement per subject",
+   "note": "Delsys Trigno; 40 Hz as stated in Table V"
+  },
+  {
+   "name": "delsys_data/acc/C<k>-source_data/<time>.csv",
+   "kind": "imu",
+   "shape": "16 sensors",
+   "rate_hz": 40,
+   "unit": "not stated",
+   "frame": "per Trigno sensor",
+   "note": "accelerometer of each EMG sensor"
+  },
+  {
+   "name": "KinectData: RGBVideo/C1-C15.mkv + timestamps .txt; IMGPicture/{Color .jpg, Depth .png, Pcd .pcd}",
+   "kind": "camera",
+   "shape": "not stated",
+   "rate_hz": 60,
+   "unit": null,
+   "frame": "static camera in front of the participant",
+   "note": "RGB-D; in the per-subject RAR archives"
+  },
+  {
+   "name": "KonovData: motion capture .cap/.trb/.xrb",
+   "kind": "body_pose",
+   "shape": "37 markers x 3",
+   "rate_hz": 60,
+   "unit": "not stated",
+   "frame": "capture volume",
+   "note": "vendor format; in the RAR archives"
+  },
+  {
+   "name": "TobiiData: tobii-data (gazedata, eventdata, imudata .gz + scene .mp4); tobii-export (.mp4, .xlsx)",
+   "kind": "eye_tracking",
+   "shape": "gaze points + first-person video",
+   "rate_hz": 25,
+   "unit": "not stated",
+   "frame": "scene camera",
+   "note": "AOI annotations in 'Kaiwu Dataset Annotation/AOIs'"
+  },
+  {
+   "name": "VoiceData: 4 x .wav + timestamps .txt",
+   "kind": "audio",
+   "shape": "4 microphones",
+   "rate_hz": 50,
+   "unit": null,
+   "frame": "mics 1-2 workbench, 3-4 parts area",
+   "note": "50 Hz as stated in Table V"
+  },
+  {
+   "name": "semantic segmentation part1-4.zip",
+   "kind": "other",
+   "shape": "label images at 1 frame/s",
+   "rate_hz": 1,
+   "unit": null,
+   "frame": "RGB camera",
+   "note": "30 object classes, 610,778 closed-area labels (Table IV)"
+  }
+ ],
+ "episode_index": {
+  "where": "public ScienceDB file tree: Kaiwu Dataset Annotation/{action,gesture} segmentation/sub<N>/gloves_data/C<k>-source_data/ (+ action segmentation supplement/)",
+  "count": 300,
+  "fields": [
+   "subject (sub1-sub20)",
+   "assembly step (C1-C15)",
+   "hand (l / r)",
+   "start time (file name)"
+  ],
+  "tasks": [
+   "C1 review tools",
+   "C2 drill a hole",
+   "C3 clamp a patch",
+   "C4 file rough edge",
+   "C5 polish a surface",
+   "C6 measure diameter",
+   "C7 spray lubricant",
+   "C8 tighten a steel column",
+   "C9 install a bearing",
+   "C10 fasten a screw",
+   "C11 connect a wire",
+   "C12 install a motor",
+   "C13 couple rod",
+   "C14 install a copper column",
+   "C15 fasten a nut"
+  ],
+  "scenes": [
+   "assembly workbench (lab)"
+  ]
+ },
+ "sample": {
+  "decision": "catalog_only",
+  "reason": "Gated: ScienceDB shareStatus RESTRICTED; files are released only after the authors approve a request (name, organisation, purpose). Access has not been requested or granted. No license is attached, so redistribution would also need the authors' permission.",
+  "prefix": "kw_",
+  "tasks_total": 15,
+  "tasks_sampled": 0,
+  "episodes": [],
+  "fetch_estimate": "0 now. After approval: glove + EMG/ACC CSVs for 6-8 subject-steps ~20 MB; matching RGB-D video needs the 65-74 GB per-subject RAR archives.",
+  "rules_applied": "catalog_only: gated, access not granted."
+ }
+}

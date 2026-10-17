@@ -1,0 +1,311 @@
+{
+ "id": "opengraph_ego_tactile",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "opengraph_ego_tactile",
+  "name": "Ego-Tactile Manipulation",
+  "title": "Ego-Tactile Manipulation",
+  "authors": "OpenGraph Labs",
+  "year": 2026,
+  "venue": "Hugging Face dataset release (no paper)",
+  "summary": "Bimanual OGLO tactile gloves (5 x 4x4 fingertip taxels per hand, raw 12-bit, ~90 Hz) with a head-worn iPhone ultrawide camera at 1920x1080, over 72 tabletop episodes (1.28 h) of container handling, whiteboard erasing, box cutting, plant spraying and sauce pouring, with contact-derived action labels.",
+  "embodiment": "human",
+  "hand": "OGLO tactile gloves (OpenGraph Labs) on both hands",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 80,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 90,
+   "note": "One 4x4 patch per finger, 80 taxels per hand, stored per hand as observation.tactile.left/right (80,) float32 in the order index, middle, pinky, ring, thumb x row x col, resampled to the 30 fps video frames; raw ~90 Hz rows (int, 0-4095 range, 0 at rest) in extra/raw_tactile with capture_ns. Values are raw readings with no unit. Each glove also streams a wrist-mounted 6-axis IMU in raw counts.",
+   "maker": "OpenGraph Labs",
+   "model": "OGLO tactile glove",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "imu",
+   "language"
+  ],
+  "scale": {
+   "hours": 1.28,
+   "episodes": 72,
+   "frames": 138629,
+   "tasks": 5,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "tabletop"
+   ],
+   "text": "1.28 h, 72 episodes (34-146 s), 138,629 frames @30 fps; 5 activity groups (container handling, whiteboard erasing, box cutting, plant spraying, sauce pouring) with 214 distinct action labels and 89 target-object labels"
+  },
+  "availability": "public",
+  "access": "Hugging Face OpenGraphLabs-Research/ego-tactile-manipulation, ungated, LeRobot v3.0 (one 18 MB parquet for all 72 episodes, AV1 video in 23 shared mp4 files, raw 90 Hz tactile and IMU per episode, one Rerun .rrd per episode), 6.3 GB in total.",
+  "license": "CC BY 4.0",
+  "caveats": [
+   "Taxels are raw 12-bit readings with no force calibration and no stated unit; the sensing principle is not stated.",
+   "Fingertip patches only: no palm or phalanx taxels.",
+   "Pinky patches stay at or below 100 raw for the whole episode in 60 of 72 episodes (left) and 52 of 72 (right), and the left ring patch in 15; most of those patches read 0-4 for the whole episode, so whether they are unloaded or not working cannot be told from the data.",
+   "No finger or hand pose: the release has no hand tracking, only a wrist IMU per glove and the phone's head IMU.",
+   "Video is AV1 1920x1080 packed several episodes per mp4 (LeRobot v3 layout); browsers without AV1 need a re-encode.",
+   "Action, sub-action, grasp-type, hand and object labels are generated from the contact signal plus captions (card: 'no human ground truth'); 463 task strings mix action labels with motion captions such as 'The right hand moves away from ...'.",
+   "Released as 'our first public sample'; subjects, scenes and collection site are not stated."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation",
+   "project": "https://www.opengraphlabs.com/"
+  },
+  "image": "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation/resolve/main/assets/ego_tactile.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "iPhone ultrawide camera (iPhone14,4 in 63 episodes, iPhone15,2 in 9)",
+     "type": "RGB",
+     "resolution": "1920x1080",
+     "fps": 30,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "wrist",
+     "method": "imu",
+     "system": "OGLO glove wrist IMU (6-axis, raw int16 counts)",
+     "note": "orientation not provided; acceleration and angular rate only"
+    },
+    {
+     "target": "body",
+     "method": "imu",
+     "system": "phone IMU (acceleration, gravity vector, gyroscope; ~100 Hz raw)",
+     "note": "head motion; no pose or odometry released"
+    }
+   ],
+   "other": [
+    "contact-derived action segmentation (action, sub-action, anchor event, grasp type, hand, target object)",
+    "per-episode tactile highlights JSON (task caption, contact percentage, force curve, storyboard keyframes)",
+    "camera intrinsics per episode (FOV estimate)",
+    "Rerun .rrd per episode"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation (README.md, meta/info.json, meta/tasks.parquet, meta/episodes/chunk-000/file-000.parquet, meta/stats.json, meta/opengraph/episode_manifest.json, file listing, commit history)",
+   "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation data/chunk-000/file-000.parquet (all 72 episodes)",
+   "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation extra/raw_tactile/episode_000000_left.parquet, _right.parquet, extra/raw_imu/episode_000000_head.parquet, _wrist_left.parquet",
+   "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation meta/opengraph/camera_intrinsics/episode_000000-000071.json, meta/opengraph/tactile_highlights/episode_000000.json",
+   "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation videos/observation.images.ego/chunk-000/file-000.mp4 (ffprobe over HTTP)",
+   "https://www.opengraphlabs.com/",
+   "https://nvidia.github.io/IsaacCapture/main/device/tactile/oglo.html (OGLO plugin: 80 taxels raw 12-bit, 6-axis IMU +-8 g / +-2000 dps raw int16, BLE)",
+   "https://www.manus-meta.com/use-cases/manus-gloves-enable-practical-egocentric-data-collection-for-physical-ai-at-opengraph-labs (search snippet only: OpenGraph Labs in South Korea)"
+  ],
+  "unconfirmed": [
+   "tasks=5 is the catalog's grouping of the episodes by their dominant action label: container handling (episodes 0-14), whiteboard erasing (15-27, 38-47), box tape cutting (28-37), plant spraying (48-62), sauce pouring (63-71). The release itself has no episode-level task field; meta/tasks.parquet lists 463 strings and annotation.l0_action has 214 distinct values.",
+   "rate_hz=90: the card says '90 Hz pressure'; extra/raw_tactile episode 0 has 13,212 (left) / 12,863 (right) rows over 145.7 s = 90.7 / 88.3 Hz. NVIDIA's IsaacCapture OGLO plugin page says 100 Hz.",
+   "Raw value range: 0-3,884 seen in the 30 Hz columns over all episodes; 12-bit (0-4095) per the IsaacCapture plugin page. Values are 0 at rest.",
+   "Camera models come from meta/opengraph/camera_intrinsics (device.model 'iPhone14,4' = Apple iPhone 13 mini, 'iPhone15,2' = iPhone 14 Pro, lens 'ultrawide', calibration_method 'fov_estimate', 107 / 106 deg horizontal FOV). The card calls it 'a head camera'; the mount is not described further.",
+   "Head IMU is inferred to be the phone's: it carries a gravity vector and accelerations of ~0.01 (g scale) at ~100 Hz, unlike the gloves' raw int16 counts. Wrist IMU scale +-8 g / +-2000 dps is from the IsaacCapture page, not the dataset card.",
+   "Recording dates 2026-06-25 and 2026-06-26 from the gcs_prefix paths in episode_manifest.json.",
+   "scene_types=['tabletop'] from the card ('tabletop manipulation'); one spraying episode is labelled 'hold a blue spray bottle while walking around plants'.",
+   "Same layout (5 x 4x4 per hand, 12-bit, wrist IMU) as the TouchTronix FusionX V3 glove; whether the two gloves share hardware is not stated anywhere."
+  ]
+ },
+ "license": {
+  "name": "CC BY 4.0",
+  "redistribution": "allowed",
+  "quote": "Released under **CC-BY-4.0** - free to use, including commercially, with attribution.",
+  "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation",
+  "access": "open",
+  "format": "LeRobot v3.0: data/chunk-000/file-000.parquet (all 72 episodes, 30 fps rows: tactile, IMU, annotations); videos/observation.images.ego/chunk-000/file-000..022.mp4 (AV1, 1920x1080, 2-5 episodes per file, located by meta/episodes from/to timestamps); extra/raw_tactile/episode_XXXXXX_{left,right}.parquet and extra/raw_imu/episode_XXXXXX_{head,wrist_left,wrist_right}.parquet (raw rate, capture_ns); meta/opengraph/ (camera intrinsics, tactile highlights, episode manifest); rerun/episode_XXXXXX.rrd",
+  "total_size": "6.3 GB (HF usedStorage 6,147,206,218 B; videos ~3.8 GB, rerun ~2 GB)",
+  "per_episode": "one video file 96-208 MB holding 2-5 episodes (~40-90 MB per episode at AV1 1080p), raw tactile ~0.1-0.6 MB per hand, raw IMU ~0.8 MB, data parquet shared (18 MB for all)",
+  "partial_fetch": "single files via https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation/resolve/main/<path>; ffmpeg/ffprobe can seek inside a shared mp4 over HTTP to the episode's from_timestamp"
+ },
+ "channels": [
+  {
+   "name": "observation.images.ego",
+   "kind": "camera",
+   "shape": "(1080, 1920, 3)",
+   "rate_hz": 30,
+   "unit": "RGB uint8",
+   "frame": "head-worn iPhone ultrawide camera; per-episode intrinsics (fx = fy ~711 px, FOV estimate)",
+   "note": "AV1 yuv420p; file-000.mp4 holds episodes 0-1 (6,883 frames, 229.4 s)"
+  },
+  {
+   "name": "observation.tactile.left",
+   "kind": "tactile_grid",
+   "shape": "(80,)",
+   "rate_hz": 30,
+   "unit": "raw reading, 12-bit range (0-3,884 seen), no unit",
+   "frame": "left glove; 5 fingers (index, middle, pinky, ring, thumb) x 4x4 (r0-r3, c0-c3), names in info.json",
+   "note": "co-registered to video frames; physical orientation of rows and columns on the finger not documented"
+  },
+  {
+   "name": "observation.tactile.right",
+   "kind": "tactile_grid",
+   "shape": "(80,)",
+   "rate_hz": 30,
+   "unit": "raw reading, 12-bit range, no unit",
+   "frame": "right glove; same order as left",
+   "note": null
+  },
+  {
+   "name": "extra/raw_tactile/episode_XXXXXX_{left,right}.parquet",
+   "kind": "tactile_grid",
+   "shape": "(T, 1 + 80): capture_ns + <finger>_<row>_<col> int64",
+   "rate_hz": 90,
+   "unit": "raw reading (0-3,739 in episode 0), no unit",
+   "frame": "same 80 taxels per hand; capture_ns on the recording clock",
+   "note": "episode 0: 13,212 left / 12,863 right rows over 145.7 s (90.7 / 88.3 Hz)"
+  },
+  {
+   "name": "observation.wrist_imu.left / .right",
+   "kind": "imu",
+   "shape": "(6,) ax, ay, az, gx, gy, gz",
+   "rate_hz": 30,
+   "unit": "raw int16 counts as float (az ~ -3,860 at rest; +-8 g / +-2000 dps full scale per the IsaacCapture OGLO page)",
+   "frame": "glove wrist IMU, sensor axes",
+   "note": "raw ~90 Hz version in extra/raw_imu/episode_XXXXXX_wrist_{left,right}.parquet (same row count as raw tactile)"
+  },
+  {
+   "name": "observation.imu.head",
+   "kind": "imu",
+   "shape": "(9,) ax, ay, az, gx, gy, gz, grx, gry, grz",
+   "rate_hz": 30,
+   "unit": "not stated (accelerations ~0.01-0.2, gravity vector unit length, gyro small floats)",
+   "frame": "head (phone) IMU",
+   "note": "raw ~100 Hz in extra/raw_imu/episode_XXXXXX_head.parquet as accel_*, gravity_*, gyro_* (14,592 rows in episode 0). The 30 Hz column names positions 4-6 'gx, gy, gz', but in episode 0 row 0 they equal the raw gravity_x/y/z, and positions 7-9 ('grx, gry, grz') equal gyro_x/y/z"
+  },
+  {
+   "name": "annotation.l0_action, l1_subaction, anchor, grasp_type, hand, target_object",
+   "kind": "language",
+   "shape": "string per frame",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "214 distinct l0 actions; anchor in {hand_switch, transition, load, release, contact_on, continuation}; grasp_type in {power, lateral, pinch, partial, none}; hand in {left, right, both, none}; 89 target-object strings; empty l0 on 27,098 transition frames"
+  },
+  {
+   "name": "task_index",
+   "kind": "language",
+   "shape": "(1,) int64 -> meta/tasks.parquet",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "463 task strings mixing action labels and motion captions"
+  },
+  {
+   "name": "meta/opengraph/tactile_highlights/episode_XXXXXX.json",
+   "kind": "other",
+   "shape": "task caption, objects, contact_pct per hand, force curve (t, left, right at ~15 Hz), force_events, episodes (labelled segments with steps), storyboard keyframes (base64 JPEG)",
+   "rate_hz": 15,
+   "unit": "not stated (force curve 0-1 scale)",
+   "frame": null,
+   "note": "derived summary, 4.9 MB for episode 0"
+  },
+  {
+   "name": "meta/opengraph/camera_intrinsics/episode_XXXXXX.json",
+   "kind": "other",
+   "shape": "fx, fy, cx, cy, width, height, fov_horizontal_deg, device",
+   "rate_hz": null,
+   "unit": "pixels, degrees",
+   "frame": null,
+   "note": "calibration_method 'fov_estimate'"
+  },
+  {
+   "name": "rerun/episode_XXXXXX.rrd",
+   "kind": "other",
+   "shape": "Rerun recording",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "visualisation copy; 48.6 MB for episode 0; not opened"
+  }
+ ],
+ "episode_index": {
+  "where": "meta/episodes/chunk-000/file-000.parquet (72 rows) + meta/opengraph/episode_manifest.json (recording_id, gcs_prefix, frames, duration_sec, raw tactile rows)",
+  "count": 72,
+  "fields": [
+   "tasks (list of task strings)",
+   "length",
+   "video file index and from/to timestamps",
+   "per-feature stats",
+   "recording_id",
+   "duration_sec"
+  ],
+  "tasks": [
+   "container handling: place, cap, open, transfer objects between clear plastic containers (episodes 0-14)",
+   "whiteboard erasing with an eraser or sponge (episodes 15-27, 38-47)",
+   "cutting or peeling tape on an orange cardboard box and removing the contents (episodes 28-37)",
+   "spraying a plant with a spray bottle (episodes 48-62)",
+   "opening a sauce bottle and pouring or squeezing into a cup or dish (episodes 63-71)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY 4.0 (card: 'free to use, including commercially, with attribution'); public, ungated, single-file downloads. Label the collection 'CC BY 4.0'.",
+  "prefix": "og_",
+  "tasks_total": 5,
+  "tasks_sampled": 5,
+  "episodes": [
+   {
+    "id": "episode_000006",
+    "task": "transfer silver metal objects from one container to another",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 67.9,
+    "window": [0, 60],
+    "why": "Container group. 8 of 10 patches above 100 raw for >= 1 s in 0-60 s (all but the two pinkies); contact 40.1 s left / 39.8 s right. Video file-002.mp4 from 64.43 s."
+   },
+   {
+    "id": "episode_000018",
+    "task": "erase the whiteboard with a yellow sponge",
+    "scene": "tabletop whiteboard",
+    "subject": null,
+    "duration_s": 34.8,
+    "window": null,
+    "why": "Whiteboard group. 8 of 10 patches active; right hand in contact 22.6 s, left 3.5 s (left hand mostly holds still in this group). Video file-004.mp4 from 244.83 s."
+   },
+   {
+    "id": "episode_000032",
+    "task": "cut the brown tape on the orange cardboard box",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 74.7,
+    "window": [0, 60],
+    "why": "Box-cutting group. 9 of 10 patches active in 0-60 s, including the left pinky (max 1,893); contact 48.6 s left / 54.6 s right. Video file-006.mp4 from 202.07 s."
+   },
+   {
+    "id": "episode_000052",
+    "task": "spray water on the green plant",
+    "scene": "tabletop plant",
+    "subject": null,
+    "duration_s": 68.3,
+    "window": [0, 60],
+    "why": "Spraying group. 9 of 10 patches active in 0-60 s, including the right pinky (max 1,940); contact 51.9 s left / 53.3 s right. Video file-011.mp4 from 77.6 s."
+   },
+   {
+    "id": "episode_000066",
+    "task": "pour red sauce from red ketchup bottle into clear plastic cup",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 120.8,
+    "window": [35, 95],
+    "why": "Pouring group, and one of the 9 iPhone15,2 episodes. All 10 patches exceed 100 raw somewhere in the episode (left pinky 250, right pinky 2,355); best 60 s window 35-95 s has 8 of 10 active for >= 1 s; contact 79.3 s left / 59.5 s right. Video file-020.mp4 from 0 s."
+   }
+  ],
+  "fetch_estimate": "~0.95 GB if the five whole shared video files are fetched (file-002 198 MB, file-004 193 MB, file-006 203 MB, file-011 160 MB, file-020 183 MB); less with ffmpeg HTTP seeking to each episode's from_timestamp. Plus the 18 MB data parquet (already fetched for the survey) and ~0.5-1 MB raw tactile per episode. Re-hosted media: AV1 1080p must be re-encoded to H.264 at lower resolution, a few MB per 60 s clip. Episode JSON: 60 s x 30 Hz x 160 values = 288k numbers, near the 2 MB limit as plain JSON; use the 30 Hz columns or quantise to integers.",
+  "rules_applied": "Tasks: 5 activity groups (catalog grouping; the release has no episode-level task field), <= 6, so all taken; one episode per group. Episodes: 5 in total, within 3-10. Each was checked on the 30 Hz data: all 160 taxel columns present, no NaN, contact above 100 raw for >= 1 s on both hands. Length: 34.8 s kept whole; four longer episodes cut to the 60 s window with the most active patches. Budget: within 2 MB JSON (with integer quantisation), ~30 MB media per episode and 20 GB download."
+ }
+}

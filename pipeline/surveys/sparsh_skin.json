@@ -1,0 +1,271 @@
+{
+ "id": "sparsh_skin",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "sparsh_skin",
+  "name": "Sparsh-skin dataset",
+  "title": "Self-supervised perception for tactile skin covered dexterous hands",
+  "authors": "Akash Sharma et al.",
+  "year": 2025,
+  "venue": "arXiv 2505.11420",
+  "summary": "Allegro hand covered with 18 XELA uSkin pads (368 three-axis magnetic taxels on fingertips, phalanges and palm), teleoperated with a Meta Quest 3 through in-hand play with 14 household objects; 140 sequences of ~2 min of raw magnetic signals, XELA force output and hand joint states.",
+  "embodiment": "robot",
+  "hand": "Allegro Hand (16 DoF) covered with XELA uSkin, on Franka Panda",
+  "bimanual": false,
+  "sensor": {
+   "type": "magnetic",
+   "taxels_per_hand": 368,
+   "sensors_per_hand": 18,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 100,
+   "note": "xela/data.pkl: one (368, 4) float64 array per frame = [t, x, y, z] raw magnetic readings (~32,800 at rest) for 4 curved fingertip pads x 30 + 11 phalanx pads 4x4 + 3 palm pads 4x6; frames at ~93-98 Hz (paper: 80-100 Hz). xela/forces.pkl: (248, 4) [t, fx, fy, fz] per frame from the XELA server, phalanx and palm pads only, unit not stated (|f| up to ~14 in pretraining/ball/0).",
+   "maker": "XELA Robotics",
+   "model": "uSkin (curved fingertip pads, 4x4 phalanx pads, 4x6 palm pads)",
+   "principle": "magnetic",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "object_pose"
+  ],
+  "scale": {
+   "hours": 4.62,
+   "episodes": 140,
+   "frames": null,
+   "tasks": null,
+   "objects": 14,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Pretraining: 140 sequences of 117-120 s (14 objects x 10), 4.6 h; downstream: 120 relative-pose sequences (~28 s each, one Pringles can) and force-estimation recordings with flat and spherical indenters"
+  },
+  "availability": "public",
+  "access": "Hugging Face facebook/sparsh-skin-dataset, ungated, 54.3 GB of numpy pickles in per-sequence folders; each file downloads on its own (~236 MB per pretraining sequence).",
+  "license": "not stated",
+  "caveats": [
+   "No license on the dataset card or in the Hugging Face metadata. The code repository (facebookresearch/sparsh-multisensory-touch) is CC BY-NC 4.0; it does not say that this covers the data.",
+   "Pretraining sequences hold only allegro/data.pkl (hand joint states) and xela/data.pkl + forces.pkl: no camera, no arm state, no teleoperation stream. The paper says the dataset includes top/left camera views; images exist only for one baseline recording and 2 of the 120 relative-pose sequences.",
+   "The paper reports 11 sequences per object; the release has 10 per object (140).",
+   "forces.pkl covers 248 of the 368 taxels (none for the four curved fingertip pads); the paper finds XELA's normal-force output inconsistent with F/T ground truth.",
+   "Raw magnetic values are uncalibrated and biased; the paper subtracts one baseline recording (pretraining/baseline, hand at rest palm up) and resamples to 100 Hz.",
+   "Taxel order and positions are not documented in the sequences; positions come from the hand URDF (pretraining/urdf/ahrcpcpn.urdf) plus forward kinematics. Taxel 145 is zero throughout the checked relative-pose sequence.",
+   "Actions are not labelled per sequence; the paper lists squeeze, slide, rotation, pick-and-drop, circumduction, pressing, wiping and articulation.",
+   "Allegro joint_states is (T, 33): time, 16 positions (rad by range) and 16 undocumented columns clipped at +-0.5 (likely joint torques)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2505.11420",
+   "data": "https://huggingface.co/datasets/facebook/sparsh-skin-dataset",
+   "code": "https://github.com/facebookresearch/sparsh-multisensory-touch"
+  },
+  "image": "https://raw.githubusercontent.com/facebookresearch/sparsh-multisensory-touch/main/assets/readme/xela_dataset.png",
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Allegro 16 joint positions (allegro/data.pkl joint_states)",
+     "note": "200 Hz in the checked sequences"
+    },
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "Meta Quest 3 hand tracking + IK retargeting (paper)",
+     "note": "teleoperation; headset data not released"
+    },
+    {
+     "target": "object",
+     "method": "vision_estimate",
+     "system": "ArUco tags, top camera",
+     "note": "relative-pose downstream set only: object_pose.pkl (T, 8) at 20 Hz"
+    }
+   ],
+   "other": [
+    "URDF/xacro of the XELA-covered Allegro hand (taxel geometry)",
+    "baseline recording with the hand at rest (XELA, Allegro, RealSense colour)",
+    "force-estimation set: F/T-probe indentations of hand pads (flat and spherical indenters)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/html/2505.11420 (v1)",
+   "https://huggingface.co/datasets/facebook/sparsh-skin-dataset (README.md, API info, full file tree of 6,699 entries)",
+   "https://huggingface.co/datasets/facebook/sparsh-skin-dataset files pretraining/ball/0/allegro/data.pkl, pretraining/ball/0/xela/forces.pkl, downstream_tasks/relative_pose_estimation/train/pringle_can/0/{allegro/data.pkl, object_pose.pkl, xela/data.pkl, xela/forces.pkl} (loaded with a numpy-only unpickler)",
+   "https://github.com/facebookresearch/sparsh-multisensory-touch (README.md, LICENSE.md, config/data/xela*.yaml, scripts/xela/convertbag2dataset.py)"
+  ],
+  "unconfirmed": [
+   "hours=4.62 derived from file sizes: each allegro/data.pkl is (T, 33) float64 (264 B per row, checked on 2 files), so T = (size - ~200 B) / 264; at the 200 Hz measured in pretraining/ball/0 the 140 sequences span 117-120 s each, 4.62 h in total. The paper says ~4 h; xela forces.pkl sizes give the same 4.65 h at ~97 Hz.",
+   "rate_hz=100 is the paper's resampling rate; raw frames came at 92.9 Hz (relative-pose 0) and 97.6 Hz (ball/0).",
+   "The forces.pkl unit is not stated. It is the XELA server's 'forces' field (scripts/xela/convertbag2dataset.py, sensor.forces); values of a few units are consistent with N.",
+   "relative-pose sequences ~28 s: 120 sequences, 0.93 h derived from allegro file sizes at 200 Hz; object_pose translations ~0.5-0.6 (m by range).",
+   "Force-estimation files (downstream_tasks/force_estimation/*/data.pkl) were not opened; the paper describes an F/T probe applying 0.25-5.0 N.",
+   "Hand mounted on a Franka Panda per the paper; no arm stream in the release."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://huggingface.co/datasets/facebook/sparsh-skin-dataset/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/facebook/sparsh-skin-dataset",
+  "access": "open",
+  "format": "numpy pickles (only numpy ndarray globals): pretraining/<object>/<k>/{allegro/data.pkl, xela/data.pkl, xela/forces.pkl}; downstream_tasks/{relative_pose_estimation, force_estimation}/...; pretraining/baseline; pretraining/urdf",
+  "total_size": "54.3 GB (HF usedStorage 54,277,067,514 B); pretraining 33.0 GB, relative pose 6.7 GB, force estimation ~14 GB",
+  "per_episode": "~236 MB per pretraining sequence (xela data 138 MB, forces 93 MB, allegro 6 MB)",
+  "partial_fetch": "single files via https://huggingface.co/datasets/facebook/sparsh-skin-dataset/resolve/main/<path>"
+ },
+ "channels": [
+  {
+   "name": "xela/data.pkl",
+   "kind": "tactile_grid",
+   "shape": "list of T arrays (368, 4) float64 = [t, x, y, z]",
+   "rate_hz": 97,
+   "unit": "raw magnetic counts (~32,800 at rest, 0-38,810 seen)",
+   "frame": "per taxel, 18 pads (taxel order per XELA server / URDF)",
+   "note": "t is seconds from the sequence start, repeated in every row"
+  },
+  {
+   "name": "xela/forces.pkl",
+   "kind": "force_vector",
+   "shape": "list of T arrays (248, 4) float64 = [t, fx, fy, fz]",
+   "rate_hz": 97,
+   "unit": "not stated (XELA server forces; few units, N by range)",
+   "frame": "per taxel of the 11 phalanx and 3 palm pads",
+   "note": "same timestamps as data.pkl; no fingertip-pad taxels"
+  },
+  {
+   "name": "allegro/data.pkl",
+   "kind": "joint_state",
+   "shape": "dict joint_states (T, 33) float64 = [t, 16 positions, 16 undocumented]",
+   "rate_hz": 200,
+   "unit": "rad (by range); columns 17-32 not documented",
+   "frame": "Allegro joints",
+   "note": "columns 17-32 clipped at +-0.5"
+  },
+  {
+   "name": "downstream_tasks/relative_pose_estimation/<split>/pringle_can/<k>/object_pose.pkl",
+   "kind": "object_pose",
+   "shape": "(T, 8) float64 = [t, x, y, z, qx, qy, qz, qw]",
+   "rate_hz": 20,
+   "unit": "not stated (m by range)",
+   "frame": "not stated (paper: camera frame transformed to the hand frame)",
+   "note": "downstream set only; ArUco tracking"
+  },
+  {
+   "name": "downstream_tasks/relative_pose_estimation/.../top_camera/color/*.jpg + timestamps.txt",
+   "kind": "camera",
+   "shape": "JPEG frames",
+   "rate_hz": null,
+   "unit": "8-bit RGB",
+   "frame": "top camera",
+   "note": "only in 2 of 120 relative-pose sequences (842 and 526 frames)"
+  },
+  {
+   "name": "downstream_tasks/force_estimation/<split>/<indenter>/data.pkl",
+   "kind": "force_vector",
+   "shape": "not opened",
+   "rate_hz": null,
+   "unit": "not checked",
+   "frame": "F/T probe",
+   "note": "ground truth for force estimation (paper: 0.25-5.0 N); xela/ data and forces alongside"
+  },
+  {
+   "name": "pretraining/baseline/{allegro, xela, realsense/color}",
+   "kind": "other",
+   "shape": "same pickles + 3,567 colour JPEGs",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "rest recording used for baseline subtraction"
+  },
+  {
+   "name": "pretraining/urdf/*.urdf, *.xacro",
+   "kind": "other",
+   "shape": "URDF/xacro",
+   "rate_hz": null,
+   "unit": null,
+   "frame": "hand links and taxel frames",
+   "note": "ahrcpcpn.urdf is the file the training config loads"
+  }
+ ],
+ "episode_index": {
+  "where": "folder tree only (pretraining/<object>/<0-9>)",
+  "count": 140,
+  "fields": [
+   "object (folder name)",
+   "sequence index"
+  ],
+  "tasks": [
+   "teleoperated in-hand play (actions not labelled per sequence)"
+  ],
+  "scenes": [
+   "lab"
+  ],
+  "objects": [
+   "ball",
+   "corn",
+   "cup",
+   "drill",
+   "lego",
+   "legopool",
+   "loofah",
+   "metalcup",
+   "mustard",
+   "popcorn",
+   "pringle",
+   "rubikscube",
+   "slipper",
+   "watermelon"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Public, ungated, per-file downloads. No license is stated for the data and nothing forbids redistribution, so re-host and label the collection 'License not stated'.",
+  "prefix": "sk_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "pretraining/ball/0",
+    "task": "in-hand play",
+    "scene": "lab",
+    "subject": null,
+    "object": "ball",
+    "duration_s": 119,
+    "window": null,
+    "why": "Already partly checked: forces above 0.5 on 112 of 248 taxels, in 28% of frames; cut a 30-60 s window holding the densest contact."
+   },
+   {
+    "id": "pretraining/rubikscube/0",
+    "task": "in-hand play",
+    "scene": "lab",
+    "subject": null,
+    "object": "rubikscube (rigid, edged)",
+    "duration_s": null,
+    "window": null,
+    "why": "Rigid object with edges, different from the ball."
+   },
+   {
+    "id": "pretraining/slipper/0",
+    "task": "in-hand play",
+    "scene": "lab",
+    "subject": null,
+    "object": "slipper (soft, large)",
+    "duration_s": null,
+    "window": null,
+    "why": "Large deformable object, likely palm contact."
+   }
+  ],
+  "fetch_estimate": "~0.7 GB (3 sequences x ~236 MB)",
+  "rules_applied": "1 task (<= 6), taken. With 3 tasks or fewer: 2-3 episodes per task from different objects, at least 3 in total. Sequences are 117-120 s, so each is cut to a 30-60 s window with contact on fingertip, phalanx or palm pads. 368 taxels x 3 axes at ~97 Hz exceed 2 MB of JSON for a 60 s window, so the converter must downsample in time."
+ }
+}

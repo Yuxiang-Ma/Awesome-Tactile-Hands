@@ -1,0 +1,427 @@
+{
+ "id": "htac",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "htac",
+  "name": "H-Tac DeskTask-Tac",
+  "title": "Human-Centric Transferable Tactile Pre-Training for Dexterous Robotic Manipulation",
+  "authors": "Chi Zhang et al.",
+  "year": 2026,
+  "venue": "arXiv 2607.01067",
+  "summary": "Bimanual desktop tasks by people wearing a 137-channel pressure glove on each hand, recorded at 30 Hz with MANO hand pose, wrist and head-camera pose and head-mounted RealSense D435 video; finger pose comes from multi-view keypoint triangulation (RawHand) or MANUS Quantum mocap gloves plus AprilTags (AprilTag).",
+  "embodiment": "human",
+  "hand": "Human hands, both gloved: 137-channel tactile glove ('TacGlove') on each hand; MANUS Quantum mocap gloves over them in the AprilTag pipeline",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 137,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "tactile.left_tacglove and tactile.right_tacglove: float32 (137,) per frame, integer values 0-180 in the 14 sample episodes (units not stated), resampled to the 30 fps first-person camera timeline. tactile_pred.* is the same vector one frame later (tactile_pred[t] == tactile[t+1] in all 14 episodes). The channel-to-sensor map is not released; UniTacHand (same authors) splits the 137 channels into thumb, index, middle, ring, pinky, palm and 'bend' regions. The paper projects the glove onto 891 MANO UV vertices and a 351-taxel UniTacHand space for training; the release carries the raw 137-D vectors.",
+   "maker": "custom (Peking University / BeingBeyond; vendor not named)",
+   "model": "TacGlove (name used in the release field names)",
+   "principle": "piezoresistive",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "hand_pose",
+   "egocentric",
+   "language"
+  ],
+  "scale": {
+   "hours": 37.2,
+   "episodes": 947,
+   "frames": 4000000,
+   "tasks": null,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab tabletop"
+   ],
+   "text": "Paper: 37.2 h, 947 episodes, ~4M frames at 30 Hz (the DeskTask-Tac part of the 160 h H-Tac). Released: 14-episode sample (10 RawHand, 4 AprilTag), 22,078 frames (~12.3 min), 12 task names"
+  },
+  "availability": "partial",
+  "access": "Hugging Face BeingBeyond/H-Tac_Sample, ungated: 14 DeskTask-Tac episodes (LeRobot v2.1-style parquet + one head-camera MP4 each); the GitHub README says the full H-Tac release is 'coming soon' (checked 2026-10-16).",
+  "license": "MIT (sample package)",
+  "caveats": [
+   "Only the DeskTask-Tac part of H-Tac (37.2 h of 160 h) is catalogued. HOI-Tac (~106 h, 124.8K sequences) derives binary contact from hand-object mesh distance in 14 public datasets (ARCTIC, DexYCB, OakInk, ...), and InternData-Tac (17.8 h, 9,563 episodes) projects simulated robot-gripper contact patches (Genie1, Lift2, Split ALOHA) onto a MANO hand; neither is measured touch on a hand, so both are excluded.",
+   "Released data is a 14-episode, ~12.3 min sample of the 947 announced episodes; the same repo also holds 84 InternData-Tac episodes (351-D simulated tactile), which are not human touch.",
+   "The Hugging Face card has no license tag; the MIT terms are in the LICENSE file of the sample package ('Copyright (c) 2026 H-Tac dataset authors'). The code repository is Apache-2.0.",
+   "Tactile values are raw integer counts (0-180 in the sample) with no stated unit; many channels read above zero at rest, and 0-73 of the 137 channels per hand stay at zero for a whole episode. AprilTagPip episode_000001 (operate_calculator): 73 right-glove channels read zero throughout and the right hand shows no contact.",
+   "state.dexhand_position, action.dexhand_position and the MANO beta (shape) vectors are all zeros in the 14 sample episodes.",
+   "AprilTag episodes: wrist pose and MANO theta are exactly zero in frames where a hand was not tracked (6-177 frames per hand per episode).",
+   "Only one camera view is released (video.top_view, the head-mounted first-person RealSense view despite its name); the two external D435 views and depth are not in the sample.",
+   "The project URL printed in the paper (beingbeyond.github.io/TTP/) returned 404 on 2026-10-16; the page is at research.beingbeyond.com/ttp."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2607.01067",
+   "project": "https://research.beingbeyond.com/ttp",
+   "data": "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample",
+   "code": "https://github.com/BeingBeyond/TTP"
+  },
+  "image": "https://research.beingbeyond.com/ttp/images/data-collection-system.webp",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Intel RealSense D435",
+     "type": "RGB",
+     "resolution": "1280x720",
+     "fps": 30,
+     "mount": "head"
+    },
+    {
+     "role": "third_person",
+     "count": 2,
+     "model": "Intel RealSense D435",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "RawHand pipeline: 2D hand keypoint detection in the RealSense views + multi-view triangulation -> MANO theta (45) per hand",
+     "note": "10 of 14 sample episodes; manus_frame_index = -1"
+    },
+    {
+     "target": "fingers",
+     "method": "magnetic",
+     "system": "MANUS Quantum Metagloves (AprilTag pipeline)",
+     "note": "worn with the tactile glove; manus_frame_index holds the MANUS frame; model read from the 'QUANTUM' print in the paper's Fig. 3 photo"
+    },
+    {
+     "target": "wrist",
+     "method": "vision_estimate",
+     "system": "AprilTags on the glove backs and on the desk (AprilTag pipeline); triangulated keypoints (RawHand pipeline)",
+     "note": "wrist position + axis-angle in the first-person camera (OpenCV) frame"
+    },
+    {
+     "target": "body",
+     "method": "vision_estimate",
+     "system": "head camera pose from scene AprilTags",
+     "note": "state.first_person_camera_position/rotation_world in the scene-board frame anchored to a reference AprilTag"
+    }
+   ],
+   "other": [
+    "foot pedal (shown in the collection-system figure; use not stated)",
+    "scene AprilTags on the desk"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2607.01067 (abstract page and HTML v1, sections 3.1-3.4, 4.2, 5.3, appendix)",
+   "https://research.beingbeyond.com/ttp (project page, incl. images/data-collection-system.webp and images/datasets.webp)",
+   "https://beingbeyond.github.io/TTP/ (404 on 2026-10-16)",
+   "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample (README.md, SCHEMA.md, LICENSE, CITATION.md, DeskTaskTac/README.md, RawHandPip/README.md, AprilTagPip/README.md, full tree API)",
+   "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample DeskTaskTac/{RawHandPip,AprilTagPip}/meta/{dataset_info.json,features.json,tasks.jsonl,episodes.parquet,episode_records/*.json} and all 14 DeskTaskTac data/episode_*.parquet files (32 MB); RawHandPip/videos/video.top_view/episode_000009.mp4 (15.5 MB, probed)",
+   "https://huggingface.co/api/datasets?author=BeingBeyond (no other H-Tac repo)",
+   "https://github.com/BeingBeyond/TTP (README.md, repo license)",
+   "https://arxiv.org/abs/2512.21233 (UniTacHand HTML, same authors: 137-channel glove, section 4.1 and appendix A)",
+   "https://beingbeyond.com (company name)"
+  ],
+  "unconfirmed": [
+   "Tactile glove maker and model: the TTP paper says only 'a tactile glove'; the release calls it TacGlove (field names). UniTacHand (arXiv 2512.21233, same first authors) uses 'a custom pressure-sensitive tactile glove providing 137-dimensional tactile readings' with 'pressure-sensitive fiber sensors'; the identical 137 dimensions suggest the same glove, which neither source states.",
+   "Sensor principle: TTP section 4.2 says 'We project piezoresistive tactilities from different embodiments onto these taxels'; the glove itself is not described as piezoresistive in so many words.",
+   "Coverage tip/phalanx/palm: from UniTacHand's region list (thumb, index, middle, ring, pinky, palm, bend) and the glove photo in TTP Fig. 3 (sensor strips along the fingers); the per-channel layout is not released. Some of the 137 channels may be bend channels rather than pressure taxels ('bend' region in UniTacHand).",
+   "MoCap glove = MANUS Quantum Metagloves: the paper says 'motion capture (MoCap) glove'; 'QUANTUM' is printed on the glove module in Fig. 3 and the release has manus_frame_index / manus_frozen_left / manus_frozen_right fields.",
+   "frames = 4,000,000 is the paper's '~4M'; 37.2 h x 30 Hz x 3,600 = 4.02M.",
+   "Sample size: 10,974 + 11,104 = 22,078 frames (meta/dataset_info.json) / 30 fps = 736 s (~12.3 min); durations from meta/episodes.parquet 20.2-202.9 s.",
+   "Tasks: DeskTask-Tac's task count is not stated (H-Tac in total: 300+). The sample has 12 distinct task names (10 RawHand, 3 AprilTag, play_tangram in both). Subjects, objects and scene count not stated.",
+   "Native glove sampling rate not stated; all streams are resampled to the first-person camera timeline (timestamp step 33 ms median; 4-6 duplicate timestamps in two AprilTag episodes).",
+   "video.top_view is the head-mounted first-person camera: the view shifts with head motion between frames 1 s and 22 s of RawHandPip episode_000009 and the hands enter from the bottom edge; the card calls it 'top-view'. The probed file is H.264 High 1280x720, 30 fps, 723 frames = 723 parquet rows.",
+   "Camera model 'Realsense D435' is the label in the project-page figure; the paper text says 'Three RealSense cameras'.",
+   "Wrist position unit: not stated; ranges 0.07-0.57 suggest metres.",
+   "Recording dates from timestamp_ms (unix ms) in the sample: AprilTag episodes 2026-01-28 to 2026-02-04, RawHand episodes 2026-02-28 to 2026-03-05.",
+   "RawHandPip episode_000000 right channel 7 holds half-integer values equal to half of channel 6 in 1,057 frames, which looks like interpolation of a dead channel (not documented)."
+  ],
+  "zh": {
+   "name": null,
+   "title": null,
+   "maker": "北京智在无界科技有限公司 (智在无界)",
+   "en": "official",
+   "note": "paper, project page and dataset card are in English; the Chinese company name is from beingbeyond.com"
+  }
+ },
+ "license": {
+  "name": "MIT",
+  "redistribution": "allowed",
+  "quote": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software ...",
+  "url": "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample/blob/main/LICENSE"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample",
+  "access": "open",
+  "format": "LeRobot v2.1-style, per subset (DeskTaskTac/RawHandPip, DeskTaskTac/AprilTagPip): data/episode_*.parquet (38 columns, list columns for vectors), meta/{episodes.parquet, tasks.jsonl, features.json, dataset_info.json, episode_records/*.json}, videos/video.top_view/episode_*.mp4 (H.264 1280x720 30 fps)",
+  "total_size": "1.61 GB for the whole sample repo (HF usedStorage 1,611,677,359 B); DeskTaskTac part 886 MB (tree sizes: 32 MB parquet, ~854 MB video)",
+  "per_episode": "parquet 0.9-9.1 MB + video 15.5-263.7 MB",
+  "partial_fetch": "single files via https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample/resolve/main/<path>; fetch one parquet + one MP4 per episode"
+ },
+ "channels": [
+  {
+   "name": "tactile.left_tacglove, tactile.right_tacglove",
+   "kind": "tactile_grid",
+   "shape": "(137,) float32 per hand",
+   "rate_hz": 30,
+   "unit": "not stated (integer counts 0-180 in the sample)",
+   "frame": "per glove channel; channel-to-sensor map not released",
+   "note": "resampled to the first-person camera timeline; 0-73 channels per hand stay zero for a whole episode"
+  },
+  {
+   "name": "tactile_pred.left_tacglove, tactile_pred.right_tacglove",
+   "kind": "tactile_grid",
+   "shape": "(137,) float32 per hand",
+   "rate_hz": 30,
+   "unit": "as tactile.*",
+   "frame": "as tactile.*",
+   "note": "card: 'predicted or processed' values; in all 14 sample episodes tactile_pred[t] == tactile[t+1] exactly (next-frame target)"
+  },
+  {
+   "name": "state.eef_position, state.eef_rotation (right); state.left_eef_position, state.left_eef_rotation",
+   "kind": "hand_pose",
+   "shape": "(3,) + (3,) per hand",
+   "rate_hz": 30,
+   "unit": "not stated (metres by range); axis-angle rad",
+   "frame": "first_person_camera_opencv (x right, y down, z forward)",
+   "note": "wrist/anchor pose; exactly zero in untracked AprilTag frames"
+  },
+  {
+   "name": "state.right_theta, state.left_theta",
+   "kind": "hand_pose",
+   "shape": "(45,) per hand",
+   "rate_hz": 30,
+   "unit": "axis-angle rad (MANO pose)",
+   "frame": "MANO joint-relative",
+   "note": "RawHand: from triangulated keypoints; AprilTag: from MANUS + AprilTags"
+  },
+  {
+   "name": "state.right_beta, state.left_beta",
+   "kind": "hand_pose",
+   "shape": "(10,) per hand",
+   "rate_hz": 30,
+   "unit": "MANO shape coefficients",
+   "frame": null,
+   "note": "all zeros in the 14 sample episodes"
+  },
+  {
+   "name": "state.first_person_camera_position_world, state.first_person_camera_rotation_world",
+   "kind": "other",
+   "shape": "(3,) + (3,)",
+   "rate_hz": 30,
+   "unit": "not stated (metres by range); axis-angle rad",
+   "frame": "world_scene (scene board anchored to a reference AprilTag)",
+   "note": "head-camera pose"
+  },
+  {
+   "name": "state.dexhand_position, state.left_dexhand_position",
+   "kind": "joint_state",
+   "shape": "(6,) per hand",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": null,
+   "note": "all zeros in the 14 sample episodes (placeholder for robot hands)"
+  },
+  {
+   "name": "action.eef_position, action.eef_rotation, action.left_eef_position, action.left_eef_rotation",
+   "kind": "action",
+   "shape": "(3,) + (3,) per hand",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "first_person_camera_opencv",
+   "note": "declared absolute=false (relative); not equal to the next-frame state difference, convention not documented"
+  },
+  {
+   "name": "action.right_theta, action.left_theta, action.right_beta, action.left_beta",
+   "kind": "action",
+   "shape": "(45,) / (10,) per hand",
+   "rate_hz": 30,
+   "unit": "MANO parameters",
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "action.dexhand_position, action.left_dexhand_position",
+   "kind": "action",
+   "shape": "(6,) per hand",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": null,
+   "note": "all zeros in the sample"
+  },
+  {
+   "name": "video.top_view (+ video.top_view_frame_index)",
+   "kind": "camera",
+   "shape": "(T, 720, 1280, 3)",
+   "rate_hz": 30,
+   "unit": "8-bit RGB, H.264 High",
+   "frame": "head-mounted RealSense D435 (first-person)",
+   "note": "one MP4 per episode; frame index equals frame_index; frame count equals parquet rows in the probed episode"
+  },
+  {
+   "name": "task, task_index",
+   "kind": "language",
+   "shape": "string / int64",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "snake_case task name, e.g. fold_paper; meta/tasks.jsonl"
+  },
+  {
+   "name": "timestamp, timestamp_ms, frame_index, episode_index, session_name, session_dir, episode_done",
+   "kind": "other",
+   "shape": "scalars",
+   "rate_hz": 30,
+   "unit": "s (episode-relative) / unix ms",
+   "frame": null,
+   "note": "timestamp step 33 ms"
+  },
+  {
+   "name": "manus_frame_index",
+   "kind": "other",
+   "shape": "int64",
+   "rate_hz": 30,
+   "unit": "MANUS frame number",
+   "frame": null,
+   "note": "-1 in all RawHand frames; MANUS source frame in AprilTag episodes"
+  }
+ ],
+ "episode_index": {
+  "where": "DeskTaskTac/{RawHandPip,AprilTagPip}/meta/episodes.parquet + meta/episode_records/episode_*.json + meta/tasks.jsonl",
+  "count": 14,
+  "fields": [
+   "episode_index",
+   "session_name",
+   "length",
+   "task_index",
+   "task",
+   "fps",
+   "duration_seconds",
+   "camera_serials",
+   "multiview_min_hand_tags",
+   "rts_smooth_wrist_pose",
+   "first_person_camera_serial",
+   "timeline_mode",
+   "pad_frozen_data",
+   "manus_frozen_left",
+   "manus_frozen_right",
+   "pipeline_mode (RawHand only)",
+   "hand_2d_backend (RawHand only)"
+  ],
+  "tasks": [
+   "assemble_lego",
+   "operate_desk_lamp",
+   "fold_paper",
+   "make_fruit_basket",
+   "stack_cups",
+   "play_tangram",
+   "play_doll",
+   "organize_exam_pouch",
+   "use_binder_clip",
+   "erase_text",
+   "work_with_cylinder",
+   "operate_calculator"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "The sample package carries an MIT LICENSE ('Copyright (c) 2026 H-Tac dataset authors'), which allows redistribution with the notice; the repo is public and ungated and single files download through resolve URLs. Label the collection 'MIT'. Only the 14-episode sample exists; the full DeskTask-Tac is not released.",
+  "prefix": "hc_",
+  "tasks_total": 12,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "DeskTaskTac/RawHandPip/episode_000003",
+    "task": "fold_paper",
+    "scene": "desk with AprilTags (RawHand pipeline)",
+    "subject": "not stated",
+    "duration_s": 23.9,
+    "window": null,
+    "why": "Two-handed paper folding. Left glove sum above rest (+100 counts over the episode's 5th percentile) for 22.1 s, longest run 18.5 s; right 13.3 s. Peaks 1,950 / 2,331."
+   },
+   {
+    "id": "DeskTaskTac/RawHandPip/episode_000009",
+    "task": "erase_text",
+    "scene": "whiteboard on the desk (RawHand pipeline)",
+    "subject": "not stated",
+    "duration_s": 24.1,
+    "window": null,
+    "why": "Wiping with an eraser. Contact 20.6 s left / 17.5 s right; video probed (H.264 1280x720, 723 frames = 723 rows)."
+   },
+   {
+    "id": "DeskTaskTac/RawHandPip/episode_000007",
+    "task": "assemble_lego",
+    "scene": "desk (RawHand pipeline)",
+    "subject": "not stated",
+    "duration_s": 36.0,
+    "window": null,
+    "why": "Small-part pressing/insertion. Contact 23.2 s left (longest 4.4 s) / 18.3 s right."
+   },
+   {
+    "id": "DeskTaskTac/RawHandPip/episode_000005",
+    "task": "use_binder_clip",
+    "scene": "desk (RawHand pipeline)",
+    "subject": "not stated",
+    "duration_s": 34.2,
+    "window": null,
+    "why": "Pinching a clip open. Contact 28.3 s left / 25.5 s right, runs over 5 s on both hands."
+   },
+   {
+    "id": "DeskTaskTac/RawHandPip/episode_000008",
+    "task": "operate_desk_lamp",
+    "scene": "desk with lamp (RawHand pipeline)",
+    "subject": "not stated",
+    "duration_s": 20.2,
+    "window": null,
+    "why": "Articulated object (lamp). Contact 17.1 s left / 15.8 s right; 46 left channels read zero throughout (noted)."
+   },
+   {
+    "id": "DeskTaskTac/RawHandPip/episode_000001",
+    "task": "stack_cups",
+    "scene": "desk (RawHand pipeline)",
+    "subject": "not stated",
+    "duration_s": 42.0,
+    "window": null,
+    "why": "Grasp-and-place. Contact 25.0 s left / 30.1 s right, longest run 4.0 s."
+   },
+   {
+    "id": "DeskTaskTac/AprilTagPip/episode_000002",
+    "task": "work_with_cylinder",
+    "scene": "desk with AprilTags (AprilTag pipeline, MANUS gloves)",
+    "subject": "not stated",
+    "duration_s": 21.3,
+    "window": null,
+    "why": "AprilTag/MANUS pipeline. Contact 19.8 s left (longest 17.7 s) / 14.1 s right. 25 right and 1 left untracked (zero-pose) frames."
+   },
+   {
+    "id": "DeskTaskTac/AprilTagPip/episode_000000",
+    "task": "play_tangram",
+    "scene": "desk with AprilTags (AprilTag pipeline, MANUS gloves)",
+    "subject": "not stated",
+    "duration_s": 202.9,
+    "window": [
+     66.5,
+     121.6
+    ],
+    "why": "Second AprilTag/MANUS episode; 202.9 s long, cut to the 55 s window with the most two-hand contact: 50.3 s left / 46.0 s right in the window. 51 left and 12 right zero-pose frames in the window."
+   }
+  ],
+  "fetch_estimate": "~520 MB: 8 parquets (~18 MB; all 14 DeskTaskTac parquets, 32 MB, already in the survey scratch dir) + 8 top-view MP4s (15.5 + 24.9 + 40.5 + 49.1 + 29.3 + 48.7 + 30.8 + 263.7 MB = ~502 MB; AprilTag episode_000000 is cut to 66.5-121.6 s). Re-hosted media: re-encode to H.264 at a lower bitrate (source ~5 Mbps, 1280x720) to stay under ~30 MB per episode. Episode JSON: 2 x 137 integer channels at 30 Hz is ~0.45M values for the 55 s window, about 1.5 MB, so drop tactile_pred (duplicate of tactile shifted by one frame) and downsample hand pose if needed to stay under 2 MB.",
+  "rules_applied": "Tasks: 12 distinct task names in the release (more than 6), so 8 are taken, spanning both hand-pose pipelines (6 RawHand, 2 AprilTag/MANUS), different actions (fold, wipe, press/insert, pinch, operate an articulated lamp, grasp-place, manipulate a cylinder, arrange tangram pieces) and different objects. Not taken: play_doll, make_fruit_basket, organize_exam_pouch (69.9 s), and operate_calculator (AprilTagPip episode_000001: right glove 73 of 137 channels zero, no right-hand contact). One episode per task, 8 in total. All sampled episodes show contact on both hands for at least 1 s (glove sum more than 100 counts above the episode's 5th percentile) and have both 137-channel vectors in every frame with no NaN. Length: seven are 20-42 s; play_tangram (202.9 s) is cut to a 55 s window. Budget: within 2 MB JSON (see fetch_estimate), ~30 MB media per episode after re-encoding, 20 GB download.",
+  "deviations": [
+   "The release does not label subjects or scenes, so episodes cannot be spread over subjects; they are spread over the two collection pipelines instead.",
+   "No glove channel map is released, so the grid layout of the 137 channels will have to be drawn as a plain 137-cell strip or derived from UniTacHand's region grouping (thumb, index, middle, ring, pinky, palm, bend), which gives no per-channel indices."
+  ]
+ }
+}

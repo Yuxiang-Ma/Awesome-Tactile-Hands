@@ -1,0 +1,364 @@
+{
+ "id": "fusionx_sample",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "fusionx_sample",
+  "name": "FusionX Multimodal Sample Data",
+  "title": "FusionX Multimodal Sample Dataset (V2 and V3)",
+  "authors": "Touchtronix Robotics",
+  "year": 2026,
+  "venue": "Hugging Face dataset release (no paper)",
+  "summary": "Two TouchTronix conductive-fabric tactile gloves (5 x 4x3 finger patches + 4x15 palm per hand, raw 0-255, glove ~197 Hz resampled to 30 Hz, one bend sensor per finger) with an OAK-D Pro W egocentric camera (720p RGB, 640x400 mono stereo, depth in V2), in 37 short recordings (~20.5 min) of first-aid kit, strap, water pouring, box cutting, drilling, screwing and syringe tasks.",
+  "embodiment": "human",
+  "hand": "TouchTronix FusionX conductive-fabric tactile gloves, both hands",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 120,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "Per hand and camera frame: <hand>_<finger>_pressure (12,) uint8 for thumb, index, middle, ring, little (4x3 each) + <hand>_palm_pressure (60,) uint8 (4x15), raw 0-255; *_pressure_cal = raw minus the per-taxel zero in calib.json (not a physical unit); finger_bend (5,) raw + finger_bend_cal 0-1 normalised; glove IMU quaternion. Glove sampled at ~197 Hz (dataset_info: glove_measured_fps; 'fps': 188) and matched to each 30 fps camera frame by nearest neighbour.",
+   "maker": "TouchTronix Robotics",
+   "model": "FusionX conductive-fabric tactile glove (data format of the v1-conductive-fabric SDK)",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "depth",
+   "hand_pose",
+   "imu"
+  ],
+  "scale": {
+   "hours": 0.34,
+   "episodes": 37,
+   "frames": 36991,
+   "tasks": 8,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "tabletop"
+   ],
+   "text": "37 recordings, ~20.5 min, 36,991 frames @30 fps: V3 repo 11 recordings (first-aid kit x3, strap x4, water x4; 8.8 min, 2026-05-07), V2 repo 26 recordings (box cut, drill, screw/unscrew, syringe, water pour x5 each + 1 test; 11.8 min, 2026-03-13)"
+  },
+  "availability": "public",
+  "access": "Two ungated Hugging Face repos, touchtronix/FusionX-Multimodal-Sample-Data-V3 (15.9 GB, per-frame JPG/PNG folders) and -V2 (19.8 GB, H.264 RGB + lossless depth MKV + zipped frames); one folder per recording with frames.parquet holding all glove data.",
+  "license": "CC BY 4.0",
+  "caveats": [
+   "The repo labels V2 and V3 are dataset versions, not glove generations: both use the conductive-fabric glove format (4x3 per finger, 4x15 palm, one bend value per finger). The catalog's FusionX V3 thin-film glove (5 x 4x4, no palm) is a different sensor and is not in these files.",
+   "Tactile values are raw 0-255 counts; the '_cal' columns are zero-offset subtracted (calib.json tactile_zero_*), not force or pressure units.",
+   "Finger tracking is one bend value per finger (raw and min-max normalised), not joint angles; no wrist position.",
+   "Glove gyro and accelerometer are all zero in the V3 recordings (only the quaternion is populated); the V3 OAK IMU sits in a separate oak_imu.parquet on the device clock (~199 Hz), while the V2 frames.parquet carries it per frame.",
+   "Glove samples are matched to camera frames (nearest neighbour, 30 fps); the full ~197 Hz glove stream is not released, and glove_timestamp equals the frame timestamp (glove_dt_ms 0).",
+   "Task names exist only as folder names (firstaid1, strap2, waterpour3, ...); no task descriptions, objects or subject counts are given.",
+   "Short sample release: 37 recordings of 15-96 s; V3 has no depth stream.",
+   "Separate from the provider-supplied FusionX clips in the catalog viewer (source 'fusionx', thin-film glove)."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V3",
+   "code": "https://github.com/TouchTronix-Robotics/FusionX-DataCollection"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Luxonis OAK-D Pro W (RGB)",
+     "type": "RGB-D",
+     "resolution": "1280x720",
+     "fps": 30,
+     "mount": null
+    },
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Luxonis OAK-D Pro W (mono pair)",
+     "type": "stereo",
+     "resolution": "640x400",
+     "fps": 30,
+     "mount": null
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "bend_sensor",
+     "system": "glove bend sensors, one per finger",
+     "note": "finger_bend raw (0-160 seen) and finger_bend_cal normalised 0-1 with per-user bend_min/bend_max in calib.json"
+    },
+    {
+     "target": "wrist",
+     "method": "imu",
+     "system": "glove IMU (fused quaternion w, x, y, z)",
+     "note": "orientation only; gyro/accel zero in V3"
+    },
+    {
+     "target": "body",
+     "method": "imu",
+     "system": "OAK-D camera IMU",
+     "note": "accel + gyro (V3, ~199 Hz, device clock); quaternion + accel + gyro per frame (V2)"
+    }
+   ],
+   "other": [
+    "camera intrinsics, distortion and mono/IMU-to-RGB extrinsics (calib.json)",
+    "per-user tactile zero and bend range (calib.json)",
+    "V2: RGB-aligned 16-bit depth (mm), preview videos"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V3 (README.md, file listing, all 11 frames.parquet and oak_imu.parquet, water1/calib.json, water1/rgb/000300.jpg, strap1/rgb/000800.jpg)",
+   "https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V2 (README.md, dataset_info.json, file listing, all 26 frames.parquet and calib.json, video_meta.json of 6 recordings, waterpour1/rgb.mp4 via ffprobe)",
+   "https://huggingface.co/api/datasets?author=touchtronix (two datasets: V2, V3)",
+   "https://github.com/TouchTronix-Robotics/FusionX-DataCollection (branches v1-conductive-fabric, v2-conductive-fabric, v3-thimfilm; v1 docs/tactile-glove-sdk-api.md; v2 README.md and docs/glove-map-rh.png)",
+   "https://github.com/TouchTronix-Robotics (repository list)",
+   "data/hardware.json entry touchtronix_fusionx_v3 (for comparison)"
+  ],
+  "unconfirmed": [
+   "Glove generation: inferred from the data layout. frames.parquet has 12 values per finger and 60 palm values (dataset_info: finger_shape [4, 3], palm_shape [4, 15]) and one bend value per finger, which matches the v1-conductive-fabric SDK (12 pressure values per finger, palm list, one bend per finger). The v2-conductive-fabric SDK has a 5x15 palm with 72 populated cells and two bend values per finger; the v3 thin-film glove has 5 x 4x4 and no palm. Neither HF card names the glove version.",
+   "taxels_per_hand=120 = 5 x 12 + 60, counted from the columns.",
+   "coverage 'tip' is inferred from one 4x3 patch per finger; where on the finger the patch sits is not stated (as in the catalog's FusionX V3 hardware entry). 'palm' is stated by the column names.",
+   "hours=0.34 and frames=36,991: frame counts and first-to-last timestamps of all 37 frames.parquet files (V3 15,783 frames / 525.7 s; V2 21,208 frames / 706.3 s, matching dataset_info.json 706.24 s).",
+   "tasks=8 from folder-name stems (firstaid, strap, water, box_cut, drill, screwunscrew, syringe, waterpour); the V3 README calls its 11 folders '11 distinct tasks', and V2 also has one 'test1' recording. V3 'water' and V2 'waterpour' are counted separately; their content was not compared.",
+   "Camera model 'OAK-D Pro W' from V2 dataset_info.json; V3 says 'on-board OAK IMU' only. Mount not stated; the RGB frames checked look forward and down onto a table from about head height.",
+   "Dates from the frame UNIX timestamps (V3 water1: 2026-05-07) and dataset_info 'created' (V2: 2026-03-13).",
+   "subjects not stated; every V2 video_meta.json checked (6 of 26) names the same calibration user.",
+   "Contact check over all 37 recordings: zero-subtracted readings above 20 on at least 2 of 6 regions per hand for >= 1 s in every recording; V3 left-hand readings stay low in the water recordings (2-3 regions)."
+  ]
+ },
+ "license": {
+  "name": "CC BY 4.0",
+  "redistribution": "allowed",
+  "quote": "Share — Copy and redistribute the material in any medium or format. ... as long as appropriate attribution is provided to Touchtronix Robotics.",
+  "url": "https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V3/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V3 and https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V2",
+  "access": "open",
+  "format": "One folder per recording. V3: calib.json, frames.parquet, oak_imu.parquet, mono_left/*.png and mono_right/*.png (640x400), rgb/*.jpg (1280x720). V2: calib.json, frames.parquet, video_meta.json, rgb.mp4 (H.264 1280x720 CRF 15), depth.mkv (FFV1 gray16le), preview_all/depth/glove.mp4, plus rgb/depth/mono_left/mono_right .zip of the raw frames; dataset_info.json at the root.",
+  "total_size": "35.7 GB (V3 15.9 GB, 47,427 files; V2 19.8 GB, 341 files)",
+  "per_episode": "frames.parquet 0.2-0.6 MB (all glove data); V3 RGB JPG folder 212-443 MB per recording (mono PNG folders larger); V2 rgb.mp4 65-153 MB",
+  "partial_fetch": "single files via https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-<V2|V3>/resolve/main/<recording>/<file>; the README's snapshot_download(allow_patterns='<recording>/*') also works"
+ },
+ "channels": [
+  {
+   "name": "rgb (V3 rgb/*.jpg, V2 rgb.mp4)",
+   "kind": "camera",
+   "shape": "(720, 1280, 3)",
+   "rate_hz": 30,
+   "unit": "RGB uint8",
+   "frame": "OAK-D Pro W RGB; intrinsics/distortion in calib.json",
+   "note": "frames.parquet rgb_path per frame; V2 mp4 is H.264 yuvj420p"
+  },
+  {
+   "name": "mono_left, mono_right",
+   "kind": "camera",
+   "shape": "(400, 640) per view",
+   "rate_hz": 30,
+   "unit": "grayscale PNG",
+   "frame": "own frames; mono-to-RGB extrinsics in calib.json (calib lists 1280x720 intrinsics)",
+   "note": "V2: zipped"
+  },
+  {
+   "name": "depth (V2 only: depth.mkv, depth.zip)",
+   "kind": "depth",
+   "shape": "(720, 1280) uint16",
+   "rate_hz": 30,
+   "unit": "mm (dataset_info depth_meter 1000)",
+   "frame": "software-aligned to the RGB camera",
+   "note": "lossless FFV1"
+  },
+  {
+   "name": "oak_imu (V3 oak_imu.parquet; V2 frames.parquet oak_imu_*)",
+   "kind": "imu",
+   "shape": "V3: timestamp + accel xyz + gyro xyz; V2: quaternion (4) + gyro (3) + accel (3) per frame",
+   "rate_hz": 199,
+   "unit": "m/s^2, rad/s (V2 README)",
+   "frame": "OAK IMU; imu_to_rgb extrinsic in calib.json",
+   "note": "V3 file on the device clock (12,850 s in water1), not UNIX time; V3 frames.parquet oak_imu_quaternion is null; V2 is per frame (30 Hz)"
+  },
+  {
+   "name": "<lh|rh>_<thumb|index|middle|ring|little>_pressure",
+   "kind": "tactile_grid",
+   "shape": "(12,) uint8 per finger = 4x3",
+   "rate_hz": 30,
+   "unit": "raw 0-255",
+   "frame": "per finger patch; row/column order per the TouchTronix SDK, physical placement not stated",
+   "note": "nearest glove sample per camera frame; glove native ~197 Hz"
+  },
+  {
+   "name": "<lh|rh>_palm_pressure",
+   "kind": "tactile_grid",
+   "shape": "(60,) uint8 = 4x15",
+   "rate_hz": 30,
+   "unit": "raw 0-255",
+   "frame": "palm patch",
+   "note": null
+  },
+  {
+   "name": "<lh|rh>_<finger|palm>_pressure_cal",
+   "kind": "tactile_grid",
+   "shape": "same as raw, int32",
+   "rate_hz": 30,
+   "unit": "raw minus per-taxel zero (calib.json tactile_zero_finger / tactile_zero_palm), clipped at 0",
+   "frame": "same as raw",
+   "note": "the V2 README calls these 'Calibrated Pressure'; no physical unit"
+  },
+  {
+   "name": "<lh|rh>_finger_bend, _finger_bend_cal",
+   "kind": "joint_state",
+   "shape": "(5,) int32 raw; (5,) float 0-1",
+   "rate_hz": 30,
+   "unit": "raw counts; normalised by bend_min/bend_max",
+   "frame": "thumb, index, middle, ring, little",
+   "note": "dataset_info bend_range [0, 100]"
+  },
+  {
+   "name": "<lh|rh>_imu_quaternion, _imu_gyro, _imu_accel",
+   "kind": "imu",
+   "shape": "(4,), (3,), (3,)",
+   "rate_hz": 30,
+   "unit": "quaternion w, x, y, z; rad/s; m/s^2",
+   "frame": "glove IMU",
+   "note": "gyro/accel all zero in V3"
+  },
+  {
+   "name": "timestamp, frame_idx, <lh|rh>_glove_timestamp, <lh|rh>_glove_dt_ms",
+   "kind": "other",
+   "shape": "scalars",
+   "rate_hz": 30,
+   "unit": "UNIX s, ms",
+   "frame": null,
+   "note": "glove_timestamp equals the frame timestamp and glove_dt_ms is 0 (median) in the recordings checked"
+  },
+  {
+   "name": "calib.json",
+   "kind": "other",
+   "shape": "camera intrinsics/distortion/extrinsics; per-hand bend_min/max and tactile zero",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "preview_all.mp4, preview_depth.mp4, preview_glove.mp4 (V2 only)",
+   "kind": "other",
+   "shape": "visualisation videos",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "glove heatmap + bend bars; for viewing only"
+  }
+ ],
+ "episode_index": {
+  "where": "folder names in each repo + V2 dataset_info.json (episodes: name, num_frames, duration_s, created, measured fps)",
+  "count": 37,
+  "fields": [
+   "folder name (task + take number)",
+   "num_frames",
+   "duration_s (V2)",
+   "created (V2)"
+  ],
+  "tasks": [
+   "firstaid (V3, 3 takes)",
+   "strap (V3, 4 takes)",
+   "water (V3, 4 takes)",
+   "box_cut (V2, 5 takes)",
+   "drill (V2, 5 takes)",
+   "screwunscrew (V2, 5 takes)",
+   "syringe (V2, 5 takes)",
+   "waterpour (V2, 5 takes)",
+   "test (V2, 1 take)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY 4.0 on both cards (attribution to Touchtronix Robotics); public, ungated, single-file downloads. Label the collection 'CC BY 4.0'. Keep it separate from the provider-supplied 'fusionx' viewer source, which uses the thin-film glove.",
+  "prefix": "fs_",
+  "tasks_total": 8,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "V3/firstaid1",
+    "task": "firstaid",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 38.6,
+    "window": null,
+    "why": "All 6 right-hand regions and 5 left-hand regions above zero + 20 for >= 1 s; contact 19.9 s left / 27.1 s right."
+   },
+   {
+    "id": "V3/strap1",
+    "task": "strap",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 55.9,
+    "window": null,
+    "why": "Highest V3 raw values (right hand up to 179); 5 left / 6 right regions active; contact 46.5 s / 45.7 s."
+   },
+   {
+    "id": "V3/water1",
+    "task": "water",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 24.8,
+    "window": null,
+    "why": "All 6 right-hand regions active; left hand only 2 regions (holding). Contact 14.9 s / 22.5 s."
+   },
+   {
+    "id": "V2/box_cut1",
+    "task": "box_cut",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 44.7,
+    "window": null,
+    "why": "All 6 left-hand regions active (raw up to 214), 5 right; contact for the whole clip. V2 adds depth and the per-frame glove gyro/accel."
+   },
+   {
+    "id": "V2/drill5",
+    "task": "drill",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 41.8,
+    "window": null,
+    "why": "5 left / 6 right regions active; contact 41.7 s / 41.3 s."
+   },
+   {
+    "id": "V2/screwunscrew1",
+    "task": "screwunscrew",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 45.7,
+    "window": null,
+    "why": "4 left / 5 right regions active, left raw up to 210; contact 44.1 s / 45.0 s."
+   },
+   {
+    "id": "V2/syringe1",
+    "task": "syringe",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 23.5,
+    "window": null,
+    "why": "4 left / 5 right regions active; contact 23.5 s / 22.3 s."
+   },
+   {
+    "id": "V2/waterpour1",
+    "task": "waterpour",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 20.2,
+    "window": null,
+    "why": "4 left / 5 right regions active; contact 19.6 s / 17.9 s."
+   }
+  ],
+  "fetch_estimate": "~1.6 GB: V3 RGB JPG folders 336 + 443 + 212 MB (mono PNG not needed), V2 rgb.mp4 146 + 145 + 153 + 74 + 65 MB; all 37 frames.parquet (~15 MB) were already fetched for the survey. Re-hosted media: V3 JPG sequences must be encoded to H.264; V2 rgb.mp4 is already H.264 (CRF 15) but large, so re-encode at lower bitrate (a few MB per clip). Episode JSON: 56 s x 30 Hz x 240 uint8 values ~ 0.4M numbers, under 2 MB as integers.",
+  "rules_applied": "Tasks: 8 named tasks (folder stems; 'test' excluded), 6-8 rule allows all 8, which span both repo versions, one- and two-handed work, tool use (drill, screwdriver, cutter, syringe) and pouring. Episodes: one per task, 8 in total. Each has all 12 tactile arrays (5 fingers + palm per hand, uint8, no gaps) and zero-subtracted readings above 20 for >= 1 s on both hands. Lengths 20-56 s, within 10-60 s, so no window. Budget: within 2 MB JSON, ~30 MB media per episode after re-encoding, and 20 GB download."
+ }
+}

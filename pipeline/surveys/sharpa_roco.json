@@ -1,0 +1,302 @@
+{
+ "id": "sharpa_roco",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "sharpa_roco",
+  "name": "RoCo Task Board Assembly",
+  "title": "RoCo Task Board Assembly Demonstrations",
+  "authors": "Sharpa",
+  "year": 2026,
+  "venue": "RoCo Challenge @ IROS 2026 training data (no paper)",
+  "summary": "Real-robot demonstrations of industrial task-board assembly on Sharpa's North robot with two 22-DoF Sharpa Wave hands, with a 6-axis force/torque reading plus deformation and raw tactile video from each of the 10 fingertip sensors at 30 Hz.",
+  "embodiment": "robot",
+  "hand": "Sharpa Wave (22 DoF) x 2 on Sharpa North (two 7-DoF arms + 7 torso/motor joints)",
+  "bimanual": true,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "Same sensor output as SharpaDex. Per frame: observation.tactile (60,) float32 = (left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), unit not stated; observation.images.tactile_deform, one 480x1200 video tiling 10 deformation maps of 240x240; observation.images.tactile_raw, one 480x1600 video tiling 10 raw sensor-camera images of 320x240. In the 9 episodes checked, thumb, index and middle carry the contact (per-episode fz maxima 4.4-43.2 in the 8 with contact); ring and little stay near 0.",
+   "maker": "Sharpa",
+   "model": "Sharpa Wave fingertip tactile sensor (Dynamic Tactile Array)",
+   "principle": "optical",
+   "range": "0-30 N detection, 50 N maximum load (maker spec, Sharpa Wave W01 page)",
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "wrist_rgb",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 107.1,
+   "episodes": 3252,
+   "frames": 11569502,
+   "tasks": 1,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "Repo: 3,252 episodes, 11,569,502 frames @30 fps (~107 h), 162 seasons from 4 stations, Jun-Sep 2026, one task (task-board assembly; median episode 105 s). Card: 30 seasons, 562 episodes, 2,461,024 frames"
+  },
+  "availability": "public",
+  "access": "Hugging Face SharpaIT/RoCo_TaskBoardAssembly, ungated, ~1.6 TB (LeRobot v3.0 and v2.1 copies per season), one LeRobot root per season folder; the challenge's Google-form registration is for competition updates and is not needed to download.",
+  "license": "CC BY 4.0",
+  "caveats": [
+   "Fingertips only (10 sensors); no palm or phalanx touch. Ring and little fingertips stay near 0 in all 9 episodes checked.",
+   "Tactile units are not stated ('tactile force/torque signal', fx..tz). The tile order inside the two tactile videos is not documented.",
+   "The card's statistics (30 seasons, 562 episodes) lag the repository, which holds 162 seasons and 3,252 episodes (Oct 2026); season_POC22018_2026_08_19_13_40_06_train has only the v2.1 export.",
+   "One task: every episode's language label is the single string 'north ces task'; no subtask or scene annotation.",
+   "Episodes are long: 9-746 s, median 105 s; only 4 of 3,252 are 10-60 s.",
+   "Collection method is not stated (the card says 'demonstrations'). No observation.state.tcp_pose / action.tcp_pose fields. The 24-D observation.state.tcp is all 0 in the 7 POC22061 and POC22002 episodes checked, but carries arm TCP poses and nonzero force/torque slots (magnitudes up to ~40, unit not stated) in the 2 POC22018 episodes.",
+   "The card says the v3.0 videos are 'primarily AV1'; info.json lists H.264 for all 161 v3.0 seasons and the one v3.0 file probed is H.264."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly",
+   "project": "https://rocochallenge.github.io/RoCo-IROS2026/"
+  },
+  "image": "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly/resolve/main/assets/assemble_parts_overview.gif",
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "480x480",
+     "fps": 30,
+     "mount": "robot"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "480x480",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Sharpa Wave hand joint states, 22 per hand",
+     "note": "observation.state / action = 65-D: left arm 7, left hand 22, right arm 7, right hand 22, torso/motor 7; observation.state.joint_torque (65, torso dims 0)"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "arm joint encoders (2 x 7) and joint torques",
+     "note": null
+    }
+   ],
+   "other": [
+    "6-axis fingertip force/torque (10 per frame)",
+    "joint torque (58 active dims)",
+    "tactile deformation video and raw tactile video (10 fingertips tiled in one frame each)"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly (README.md; season list of 162 folders)",
+   "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly lerobot3.0/meta/info.json, lerobotv2.1/meta/episodes.jsonl and tasks.jsonl of all 162 seasons",
+   "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly season_POC22061_2026_06_11_14_29_08_train (v3.0 and v2.1 info.json, modality.json, file listing; v3.0 and v2.1 tactile_deform mp4 headers)",
+   "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly 9 v2.1 episode parquets from stations POC22061, POC22018, POC22002 (tactile contact scan)",
+   "https://rocochallenge.github.io/RoCo-IROS2026/",
+   "https://rocochallenge.github.io/RoCo-IROS2026/industrial_docs/overview.md",
+   "https://www.sharpa.com/pages/w01 (Sharpa Wave tactile sensor spec)",
+   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 (for comparison: card, all 495 season names and info.json files)"
+  ],
+  "unconfirmed": [
+   "Robot: the challenge's Industrial Board Assembly page lists 'Real-robot dataset using Sharpa North: https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly' and describes Sharpa North as 'A dexterous hand-based mobile manipulator with two robotic arms and 22-DoF hands'; robot_type in the files is 'north_ces'. The hand model (Sharpa Wave) is inferred from the maker, 22 joints per hand and the sensor output (240x240 deformation maps, 6-axis F/T).",
+   "Task-board contents: the challenge page says 'a task board inspired by the NIST task board' with connector insertion, wire routing, screw tightening and battery assembly; the parts on the real Sharpa board are not listed.",
+   "Totals summed from the files: v2.1 episodes.jsonl of 162 seasons = 3,252 episodes / 11,569,502 frames (107.1 h at 30 fps); v3.0 info.json of 161 seasons = 3,224 / 11,482,834; per-season v3.0 and v2.1 counts agree. Stations from season names: POC22061 101 seasons / 2,015 episodes, POC22018 40 / 872, POC22002 19 / 343, POC22048 2 / 22; start times 2026-06-11 to 2026-09-10.",
+   "Tactile tiles (2 x 5; row 0 left, row 1 right; columns thumb..little) assumed identical to SharpaDex, where the order was read from one deformation frame; not checked on a RoCo frame.",
+   "Unit of observation.tactile not stated; magnitudes look like N and N m (per-episode fz maxima 4.4-43.2, torques < 0.6, rest ~0, in 8 episodes with contact).",
+   "Head cameras are two streams (head_left, head_right); whether they form a calibrated stereo pair is not stated. Camera models not stated.",
+   "HF tag size_categories:10K<n<100K does not match either the card (562 episodes) or the repo (3,252 episodes)."
+  ]
+ },
+ "license": {
+  "name": "CC BY 4.0",
+  "redistribution": "allowed",
+  "quote": "This dataset is released under the Creative Commons Attribution 4.0 International License (CC-BY-4.0). You may use, share, and adapt the dataset, including for commercial purposes, provided that you give appropriate attribution.",
+  "url": "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly",
+  "access": "open",
+  "format": "<season>/{lerobot3.0, lerobotv2.1}/: LeRobot v3.0 (concatenated parquet + mp4 per stream) and LeRobot v2.1 (one parquet + 6 mp4 per episode)",
+  "total_size": "~1.65 TB (HF usedStorage 1,645,962,852,136 B, both exports)",
+  "per_episode": "v2.1, 46-104 s episodes: parquet 1.3-3.0 MB (7.3 MB for a 271 s episode); 6 videos 100-220 MB, of which tactile_raw 45-103 MB, tactile_deform ~1 MB, each RGB camera 13-29 MB",
+  "partial_fetch": "single v2.1 files via resolve URLs (<season>/lerobotv2.1/data/chunk-000/episode_NNNNNN.parquet and videos/chunk-000/<key>/episode_NNNNNN.mp4); git sparse checkout per season (card)"
+ },
+ "channels": [
+  {
+   "name": "observation.images.head_left, observation.images.head_right",
+   "kind": "camera",
+   "shape": "(480, 480, 3) each",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "robot head, left and right",
+   "note": "H.264 per info.json; models not stated"
+  },
+  {
+   "name": "observation.images.wrist_left, observation.images.wrist_right",
+   "kind": "camera",
+   "shape": "(480, 480, 3) each",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "left / right wrist",
+   "note": null
+  },
+  {
+   "name": "observation.images.tactile_deform",
+   "kind": "deformation_map",
+   "shape": "(480, 1200, 3) = 2 x 5 tiles of 240x240",
+   "rate_hz": 30,
+   "unit": "8-bit grey rendered as RGB (scale not stated)",
+   "frame": "per fingertip sensor image; tile order as SharpaDex (assumed)",
+   "note": "~1 MB per episode"
+  },
+  {
+   "name": "observation.images.tactile_raw",
+   "kind": "tactile_image",
+   "shape": "(480, 1600, 3) = 2 x 5 tiles of 320x240",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "raw fingertip sensor-camera images, tiled",
+   "note": "largest stream (~1 MB/s)"
+  },
+  {
+   "name": "observation.tactile",
+   "kind": "wrench",
+   "shape": "(60,) float32",
+   "rate_hz": 30,
+   "unit": "not stated (magnitudes consistent with N and N m)",
+   "frame": "per fingertip sensor, axes not documented",
+   "note": "(left, right) x (thumb..little) x (fx, fy, fz, tx, ty, tz); no NaN in 9 episodes; one 27 s POC22002 episode has no contact"
+  },
+  {
+   "name": "observation.state",
+   "kind": "joint_state",
+   "shape": "(65,) float32",
+   "rate_hz": 30,
+   "unit": "not stated (rad by range)",
+   "frame": "left_arm_j0-6, left_hand_j0-21, right_arm_j0-6, right_hand_j0-21, motor_j0-6 (torso)",
+   "note": null
+  },
+  {
+   "name": "observation.state.joint_torque",
+   "kind": "joint_state",
+   "shape": "(65,) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "same order as observation.state",
+   "note": "torso dims 0"
+  },
+  {
+   "name": "observation.state.tcp",
+   "kind": "other",
+   "shape": "(24,) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "left pose 0:6, left force 6:12, right pose 12:18, right force 18:24",
+   "note": "all 0 in 7 POC22061/POC22002 episodes; pose and force/torque populated in 2 POC22018 episodes (station-dependent)"
+  },
+  {
+   "name": "action",
+   "kind": "action",
+   "shape": "(65,) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "same order as observation.state",
+   "note": "joint-space action"
+  },
+  {
+   "name": "task_index",
+   "kind": "language",
+   "shape": "(1,)",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "one task string, 'north ces task'"
+  },
+  {
+   "name": "timestamp, frame_index, episode_index, index",
+   "kind": "other",
+   "shape": "(1,) each",
+   "rate_hz": 30,
+   "unit": "s / index",
+   "frame": null,
+   "note": "timestamp step 1/30 s"
+  }
+ ],
+ "episode_index": {
+  "where": "<season>/lerobotv2.1/meta/episodes.jsonl (episode_index, tasks, length) per season; v3.0: meta/episodes/chunk-000/file-000.parquet",
+  "count": 3252,
+  "fields": [
+   "task (one string)",
+   "season (station id + start time)",
+   "duration"
+  ],
+  "tasks": [
+   "north ces task"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Public, ungated Hugging Face release under CC BY 4.0, which allows redistribution with attribution. v2.1 stores one parquet and six mp4 files per episode. Label the collection 'CC BY 4.0'.",
+  "prefix": "sr_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "season_POC22061_2026_06_19_13_51_05_train#21",
+    "task": "task-board assembly (north ces task)",
+    "scene": "station POC22061 (card season list)",
+    "subject": null,
+    "duration_s": 104.3,
+    "window": [
+     18,
+     78
+    ],
+    "why": "Typical length for the busiest station (median 108 s). Left thumb and index 8.9 / 9.1 s continuous (peaks 20.5 / 14.5); right thumb, index and middle 6.2-7.4 s continuous, 17-35 s in total (peaks 14-26). The 60 s window holds 91 of 125 fingertip-seconds of contact."
+   },
+   {
+    "id": "season_POC22018_2026_08_24_10_16_51_train#22",
+    "task": "task-board assembly (north ces task)",
+    "scene": "station POC22018",
+    "subject": null,
+    "duration_s": 74.4,
+    "window": [
+     8,
+     68
+    ],
+    "why": "Second station. Left thumb and index 4.5 / 4.1 s continuous, 11.6 s in total (peaks 26 / 30); right thumb, index and middle 3.5-3.9 s continuous, 10.5-21.4 s in total (peaks 23-30). Window holds 70 of 76 fingertip-seconds."
+   },
+   {
+    "id": "season_POC22002_2026_09_09_13_50_50_train#24",
+    "task": "task-board assembly (north ces task)",
+    "scene": "station POC22002",
+    "subject": null,
+    "duration_s": 89.8,
+    "window": [
+     20,
+     80
+    ],
+    "why": "Third station, latest month. Left thumb, index and middle 3.5-6.3 s continuous (peaks 15-30); right thumb, index and middle 3.9-5.1 s continuous (peaks 14-48, the highest in the RoCo scan). Window holds 65 of 83 fingertip-seconds."
+   }
+  ],
+  "fetch_estimate": "~550 MB: all 6 v2.1 videos of the 3 episodes are 219 + 167 + 162 MB (tree API sizes), tactile_raw 103 / 73 / 88 MB of that; parquets (3-7 MB) already local from the scan. Re-hosted media: cut to the 60 s windows and re-encode tactile_raw to stay under ~30 MB per episode. Episode JSON: 60 values x 30 Hz x 60 s = 108k numbers, under 2 MB.",
+  "rules_applied": "One task, so 3 episodes from 3 stations (POC22061, POC22018, POC22002; POC22048 has only 22 episodes) stand in for different scenes. 9 v2.1 episodes scanned. Contact = fingertip |F| above the episode's starting median + 1.0 (release units) for at least 1 s continuous; all 3 picks have 5-6 fingertips in contact for 3.5 s or more, no NaN, timestamps at exactly 1/30 s. 3,247 of 3,252 episodes are longer than 60 s, so each pick is cut to the 60 s window with the most fingertip contact (searched in 0.5 s steps).",
+  "deviations": []
+ }
+}

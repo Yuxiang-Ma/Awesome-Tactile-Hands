@@ -1,0 +1,235 @@
+{
+ "id": "grasp_like_humans",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "grasp_like_humans",
+  "name": "Grasp Like Humans",
+  "title": "Grasp Like Humans: Learning Generalizable Multi-Fingered Grasping from Human Proprioceptive Sensorimotor Integration",
+  "authors": "Ce Guo et al.",
+  "year": 2025,
+  "venue": "IEEE T-RO (accepted; arXiv 2509.08354)",
+  "summary": "Two demonstrators wore a data glove with 25 printed force-sensitive pads (ROXIFSR) and a Noitom PN3 Pro inertial hand tracker for 150 ten-second grasp-and-lift trials of 5 objects, with left and right hands.",
+  "embodiment": "human",
+  "hand": "Custom data glove: 25-pad printed FSR array (ROXIFSR) + Noitom PN3 Pro (6 IMUs)",
+  "bimanual": false,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 25,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 15,
+   "note": "Per pad <name>_Tactile_Feedback: raw ADC value of the contact-force magnitude (readme.pdf). Rest ~1,100-1,800 counts, rising by up to ~1,100 in a grasp; maximum in the release 3,687. Pads on the distal, middle and proximal phalanges and metacarpal of each finger plus the lower palm (paper Fig. 3). 15 Hz in the release; the array samples above 200 Hz (paper).",
+   "maker": "ROXIFSR",
+   "model": "custom printed flexible FSR array",
+   "principle": "piezoresistive",
+   "range": "~20 N per pad (paper)",
+   "calibrated": false
+  },
+  "modalities": [
+   "hand_pose",
+   "imu"
+  ],
+  "scale": {
+   "hours": 0.42,
+   "episodes": 150,
+   "frames": 22800,
+   "tasks": 1,
+   "objects": 5,
+   "subjects": 2,
+   "scenes": null,
+   "scene_types": [],
+   "text": "150 trials x 10 s (152 samples at 15 Hz), 5 objects, 2 demonstrators, left and right hands, side and top-down grasps"
+  },
+  "availability": "public",
+  "access": "One 21 MB zip linked as 'Dataset' on the project page (GitHub Pages), no login.",
+  "license": "not stated",
+  "caveats": [
+   "Only the training demonstrations are released: 5 seen objects. The 15 unseen test objects and the robot-hand trials with the glove are not included.",
+   "No video, timestamps or object pose: one CSV per 10 s trial.",
+   "Tactile values are raw ADC counts with a non-zero rest level (~1,100-1,800); the paper calibrates pads with standard weights but the conversion is not released.",
+   "The root joint position (Hand_Joint_Posi_X/Y/Z) is constant within a trial and Bone_Length columns are constants from the PN3 Pro skeleton template.",
+   "File numbering differs between folders (group1-group15 vs group01-group30)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2509.08354",
+   "project": "https://grasplikehuman.github.io/",
+   "data": "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip"
+  },
+  "image": "https://grasplikehuman.github.io/static/images/fig_2a.png",
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "imu",
+     "system": "Noitom PN3 Pro",
+     "note": "20 hand joints: Euler angles, joint positions, bone angle and angular velocity; ~70 Hz native (paper), 15 Hz in the release"
+    }
+   ],
+   "other": []
+  },
+  "sources": [
+   "https://grasplikehuman.github.io/",
+   "https://arxiv.org/abs/2509.08354",
+   "https://arxiv.org/html/2509.08354 (Sec. III-A, IV, VI-A, Table I)",
+   "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip (whole release: 150 CSVs + readme.pdf)",
+   "https://github.com/GraspLikeHuman/GraspLikeHuman.github.io (README.md, file tree)"
+  ],
+  "unconfirmed": [
+   "hours and frames derived: 150 CSVs x 152 rows at 15 Hz = 22,800 samples, 1,520 s.",
+   "subjects=2 from readme.pdf: GC (male, 180 cm, hand length 18.5 cm) and YH (female, 165 cm, 15.5 cm).",
+   "tasks=1: grasp and lift; grasp mode (side or top-down) is fixed per object.",
+   "Paper: 30 grasps per object; in the release carambola is split 15 left / 15 right hand (GC) and football 15 GC right / 15 YH left.",
+   "Contact check: pad 'rise' = mean of the last 5 s minus mean of the first 10 samples; all 150 trials show pads rising during the grasp.",
+   "NUDT (National University of Defense Technology) is a Chinese university; the release has no Chinese names, so no zh entry.",
+   "Zip members dated 2025-07-14; project repository last pushed 2025-09-11; the repository README licenses only the website (CC BY-SA 4.0)."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": "Repository README: 'This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. Modified upon original Nerfies website' (website template, not the data)",
+  "url": "https://github.com/GraspLikeHuman/GraspLikeHuman.github.io/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip",
+  "access": "open",
+  "format": "zip: grasplikehumans_dataset/<demonstrator>_<hand>_<object>_<side|td>_<n>/<same>_group<k>.csv (150 CSVs, 152 rows x 251 columns) + readme.pdf",
+  "total_size": "21.2 MB zip (21,185,342 B; 60.5 MB unpacked)",
+  "per_episode": "~0.4 MB per CSV",
+  "partial_fetch": "none needed; the whole zip is 21 MB"
+ },
+ "channels": [
+  {
+   "name": "<pad>_Tactile_Feedback (25 pads: Hand, Thumb1-3, InHandIndex, Index1-3, ..., Pinky1-3, InHandThumb, Index_1, Middle_1, Ring_1, Pinky_1)",
+   "kind": "pressure_scalar",
+   "shape": "(152, 25) int",
+   "rate_hz": 15,
+   "unit": "raw ADC counts",
+   "frame": "pads named after the hand joint they sit on (paper Fig. 3)",
+   "note": "rest ~1,100-1,800"
+  },
+  {
+   "name": "<joint>_Bone_Angle, <joint>_Angular_Velocity",
+   "kind": "joint_state",
+   "shape": "(152, 25) each",
+   "rate_hz": 15,
+   "unit": "not stated (degrees and degrees/s by range)",
+   "frame": "primary motion direction of each joint",
+   "note": "0 for the 9 palm/metacarpal entries (InHand*, Index_1-Pinky_1) and Hand angular velocity; angular velocity spikes up to ~6,200"
+  },
+  {
+   "name": "<joint>_Bone_Euler_Alpha/Beta/Gamma",
+   "kind": "hand_pose",
+   "shape": "(152, 25, 3)",
+   "rate_hz": 15,
+   "unit": "not stated (degrees by range)",
+   "frame": "inertial system",
+   "note": "palm/metacarpal entries repeat the Hand root values"
+  },
+  {
+   "name": "<joint>_Joint_Posi_X/Y/Z",
+   "kind": "hand_pose",
+   "shape": "(152, 25, 3)",
+   "rate_hz": 15,
+   "unit": "not stated",
+   "frame": "inertial system",
+   "note": "root (Hand) position constant within a trial"
+  },
+  {
+   "name": "<joint>_Bone_Length",
+   "kind": "other",
+   "shape": "(152, 25)",
+   "rate_hz": 15,
+   "unit": "not stated",
+   "frame": null,
+   "note": "constant skeleton template"
+  },
+  {
+   "name": "Row_ID",
+   "kind": "other",
+   "shape": "(152,)",
+   "rate_hz": 15,
+   "unit": "index 1-152",
+   "frame": null,
+   "note": "no timestamps"
+  }
+ ],
+ "episode_index": {
+  "where": "folder and file names (naming rule in readme.pdf)",
+  "count": 150,
+  "fields": [
+   "demonstrator",
+   "hand",
+   "object",
+   "grasp mode",
+   "group"
+  ],
+  "tasks": [
+   "grasp and lift (bottleS side, nailoong side, pitaya top-down, carambola top-down, football top-down)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "The zip is public on GitHub Pages with no login; no data license is stated, so the collection is re-hosted and labelled 'License not stated'.",
+  "prefix": "gl_",
+  "tasks_total": 5,
+  "tasks_sampled": 5,
+  "episodes": [
+   {
+    "id": "GC_left_bottle_side_30/GC_left_bottle_side_30_group04.csv",
+    "task": "side grasp and lift, steel bottle",
+    "scene": "lab table",
+    "subject": "GC (male), left hand",
+    "duration_s": 10.1,
+    "window": null,
+    "why": "19 pads rise by more than 200 counts; Middle3 rises 1,132. Strongest trial of the folder."
+   },
+   {
+    "id": "GC_left_nailoong_side_30/GC_left_nailoong_side_30_group30.csv",
+    "task": "side grasp and lift, soft TPE toy",
+    "scene": "lab table",
+    "subject": "GC (male), left hand",
+    "duration_s": 10.1,
+    "window": null,
+    "why": "12 pads rise by more than 200 counts; peak rise 422 (Pinky1)."
+   },
+   {
+    "id": "GC_left_pitaya_td_30/GC_left_pitaya_td_30_group11.csv",
+    "task": "top-down grasp and lift, soft TPE pitaya",
+    "scene": "lab table",
+    "subject": "GC (male), left hand",
+    "duration_s": 10.1,
+    "window": null,
+    "why": "10 pads rise by more than 200 counts; peak rise 414."
+   },
+   {
+    "id": "GC_right_carambola_td_15/GC_right_carambola_td_15_group1.csv",
+    "task": "top-down grasp and lift, MDPE carambola",
+    "scene": "lab table",
+    "subject": "GC (male), right hand",
+    "duration_s": 10.1,
+    "window": null,
+    "why": "Only right-hand carambola folder; 22 pads rise by more than 200 counts; peak rise 534."
+   },
+   {
+    "id": "YH_left_football_td_15/YH_left_football_td_15_group2.csv",
+    "task": "top-down grasp and lift, small TPE ball",
+    "scene": "lab table",
+    "subject": "YH (female), left hand",
+    "duration_s": 10.1,
+    "window": null,
+    "why": "Only YH folder; 7 pads rise by more than 200 counts; peak rise 511."
+   }
+  ],
+  "fetch_estimate": "21 MB (the whole zip, already fetched under the survey scratch directory); episode JSON ~0.2 MB each; no media.",
+  "rules_applied": "5 objects, each a grasp-and-lift task (<= 6), so all 5 are taken, one trial each; with 4-5 tasks one episode per task. The picks cover both hands (right for carambola) and both demonstrators (YH for football). Within each folder the trial with the most pads rising more than 200 counts (last 5 s vs first 10 samples) was chosen. Trials are 10.1 s, within 10-60 s.",
+  "deviations": []
+ }
+}

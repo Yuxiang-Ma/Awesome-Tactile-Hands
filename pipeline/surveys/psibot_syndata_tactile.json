@@ -1,0 +1,360 @@
+{
+ "id": "psibot_syndata_tactile",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "psibot_syndata_tactile",
+  "name": "SynData glove-with-tactile",
+  "title": "SynData: A Large-Scale Real-World Multimodal Dataset for Embodied Intelligence (glove-with-tactile subset)",
+  "authors": "PsiBot",
+  "year": 2026,
+  "venue": "Hugging Face dataset",
+  "summary": "Bimanual PsiBot exoskeleton data gloves with 256 tactile channels per hand, recorded with a head-mounted RGB-D camera and exoskeleton hand and wrist tracking at 10 fps over 36,780 clips of 34 household and assembly tasks.",
+  "embodiment": "human",
+  "hand": "PsiBot exoskeleton data glove x 2 (hand states retargeted to the 30-joint ITW hand model)",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 256,
+   "coverage": [],
+   "rate_hz": 10,
+   "note": "left_glove_tactile and right_glove_tactile, (T, 256) float32 per hand, integer-valued counts (0-117 in the checked volumes). Channel layout, sensor type, placement and units are not documented. In two checked volumes at most 156 (right) and 129 (left) of the 256 channels were ever nonzero, and up to 43 channels sat above zero in every frame. Stored on the release's common 10 fps timeline.",
+   "maker": "PsiBot (灵初智能)",
+   "model": null,
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "depth",
+   "hand_pose",
+   "language"
+  ],
+  "scale": {
+   "hours": 145.5,
+   "episodes": 36780,
+   "frames": 5236535,
+   "tasks": 34,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": null,
+   "text": "glove-with-tactile subset: 36,780 clips, 5,236,535 frames at 10 fps (145.5 h), 34 tasks, 310 volumes (2.63 TB)"
+  },
+  "availability": "public",
+  "access": "Hugging Face PsiBotAI/SynData, ungated; the glove-with-tactile subset is 310 .zarr.tar volumes of 0.4-10.9 GB (2.63 TB) plus parquet clip index and annotations. Also mirrored on AtomGit.",
+  "license": "CC BY 4.0",
+  "caveats": [
+   "Only the glove-with-tactile subset carries touch. The rest of SynData has none: ego (313,674 clips, 2,765 volumes, 19.8 TB; head RGB, depth and IMU, bare hands), glove-origin (95,383 clips, 793 volumes, 6.55 TB; exoskeleton-glove modalities without tactile) and glove-rep-bg (3,526 clips, 69 volumes, 0.28 TB; background-replaced glove data).",
+   "The tactile arrays have no documented layout, sensor type or unit; channel-to-hand-region mapping cannot be recovered from the release.",
+   "Hand state is the exoskeleton reading retargeted to an ITW robot-hand model (30 joint angles, 11 keypoints incl. wrist), not human joint angles.",
+   "All streams are resampled to 10 fps; head RGB and depth are stored at 640x360 in the checked volume. Depth is float32 millimetres with 0 for invalid pixels.",
+   "A clip cannot be downloaded alone: clips are frame ranges inside 0.4-10.9 GB tar archives of Zarr v3 volumes (median 9.0 GB); tar members are 64-frame chunks, so range reads of single chunks are possible.",
+   "Press (钛媒体, May 2026) says 1,000 h of SynData are released; the tactile subset is 145.5 h of that."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/PsiBotAI/SynData",
+   "code": "https://huggingface.co/datasets/PsiBotAI/SynData/tree/main/tools/syndata_render"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": null,
+     "type": "RGB-D",
+     "resolution": "640x360",
+     "fps": 10,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "exoskeleton",
+     "system": "PsiBot exoskeleton data glove",
+     "note": "left/right_qpos (30 joints of the ITW hand model, retargeted) and left/right_fingertip (11 x 3 keypoints)"
+    },
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "PsiBot exoskeleton glove system (README: captures both hands and arms with millimetre-level positioning; tracker not named)",
+     "note": "left/right_wrist_pose (7,) xyz + quaternion xyzw"
+    },
+    {
+     "target": "body",
+     "method": "other",
+     "system": "head tracker (not named)",
+     "note": "head_pose (7,) and head_tracker2head_camera (4 x 4) per frame"
+    }
+   ],
+   "other": [
+    "clip-level task summaries and step-level annotations (scene state, object state, action) in English",
+    "head camera intrinsics per frame",
+    "ITW hand URDFs and a render script (tools/syndata_render)"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/PsiBotAI/SynData (README.md, README_zh.md, API file tree)",
+   "https://huggingface.co/datasets/PsiBotAI/SynData/tree/main/glove-with-tactile (manifest.json, task.json, index/clips.parquet, annotations/clip_annotations.parquet, annotations/clip_steps.parquet)",
+   "https://huggingface.co/datasets/PsiBotAI/SynData/blob/main/tools/syndata_render/README.md",
+   "glove-with-tactile/tasks/task_0050/000009.zarr.tar (tar headers, zarr.json files and all non-image arrays by range reads)",
+   "glove-with-tactile/tasks/task_0026/000023.zarr.tar (tar headers and both tactile arrays by range reads)",
+   "manifest.json of ego, glove-origin and glove-rep-bg; HF treesize of each subset",
+   "https://finance.ifeng.com/c/8tJ44mM1o4c",
+   "https://news.pedaily.cn/20260413/127515.shtml",
+   "https://gitcode.csdn.net/6a745f44662f9a54cb991ae6.html"
+  ],
+  "unconfirmed": [
+   "hours=145.5 derived: sum of num_frames in glove-with-tactile/index/clips.parquet (5,236,535) / 10 fps.",
+   "taxels_per_hand=256 is the array width; it is not stated how many are physical taxels. Active-channel counts come from task_0050/000009 (right 83, left 22 ever nonzero) and task_0026/000023 (right 156, left 129).",
+   "calibrated=false because values are integer counts with no unit; the README does not describe the tactile signal at all.",
+   "Camera mount 'head' from the field names (head_rgb, head_pose); camera model not stated. Resolution 640x360 read from head_rgb/zarr.json of one volume; the README says modalities are not guaranteed to share spatial resolution.",
+   "Units of wrist and fingertip positions not stated (ranges -0.8 to 0.8, consistent with metres).",
+   "Wrist tracking method not stated; classed 'other'.",
+   "Tasks per clip: 34 task keys; clip lengths 0.3-87 s (median 12.4 s)."
+  ],
+  "zh": {
+   "maker": "灵初智能",
+   "en": "official",
+   "note": "SynData is the publisher's name; the Hugging Face card and README_zh.md write the maker as PsiBot, and Chinese press and the AtomGit mirror write 灵初智能. README_zh.md describes this subset as 带触觉信号的外骨骼手套操作数据集 [exoskeleton-glove manipulation dataset with tactile signals]."
+  }
+ },
+ "license": {
+  "name": "CC BY 4.0",
+  "redistribution": "allowed",
+  "quote": "SynData is released under the Creative Commons Attribution 4.0 International License (CC BY 4.0).",
+  "url": "https://huggingface.co/datasets/PsiBotAI/SynData/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/PsiBotAI/SynData/tree/main/glove-with-tactile",
+  "access": "open",
+  "format": "tasks/<task_key>/<volume>.zarr.tar: tar of a Zarr v3 group (data/<modality>/zarr.json + zstd chunks of 64 frames); index/clips.parquet maps clip_id to rel_path, start_idx, end_idx (inclusive); annotations/*.parquet",
+  "total_size": "2.63 TB for glove-with-tactile (310 volumes); 29.4 TB for all of SynData",
+  "per_episode": "one volume 0.4-10.9 GB (median 9.0 GB) holds 100+ clips; per clip about 24 MB of head_rgb and 6 MB of depth per 64 frames, tactile and poses a few KB per chunk",
+  "partial_fetch": "walk the tar headers with HTTP range requests (members are 64-frame chunks, about 500 headers in a 0.4 GB volume) and fetch only the chunks covering a clip"
+ },
+ "channels": [
+  {
+   "name": "head_rgb",
+   "kind": "camera",
+   "shape": "(T, 360, 640, 3) uint8",
+   "rate_hz": 10,
+   "unit": "8-bit RGB",
+   "frame": "head camera",
+   "note": "Zarr chunks of 64 frames, zstd"
+  },
+  {
+   "name": "head_depth",
+   "kind": "depth",
+   "shape": "(T, 360, 640) float32",
+   "rate_hz": 10,
+   "unit": "mm (0 = invalid)",
+   "frame": "head camera",
+   "note": "no separate validity mask"
+  },
+  {
+   "name": "head_camera_intrinsics, head_tracker2head_camera",
+   "kind": "other",
+   "shape": "(T, 3, 3), (T, 4, 4)",
+   "rate_hz": 10,
+   "unit": "pixels / not stated",
+   "frame": null,
+   "note": "per-frame copies"
+  },
+  {
+   "name": "head_pose",
+   "kind": "body_pose",
+   "shape": "(T, 7)",
+   "rate_hz": 10,
+   "unit": "not stated",
+   "frame": "not stated",
+   "note": "head tracker pose"
+  },
+  {
+   "name": "left_wrist_pose, right_wrist_pose",
+   "kind": "hand_pose",
+   "shape": "(T, 7)",
+   "rate_hz": 10,
+   "unit": "position not stated; quaternion xyzw",
+   "frame": "not stated",
+   "note": "[x, y, z, qx, qy, qz, qw]"
+  },
+  {
+   "name": "left_qpos, right_qpos",
+   "kind": "joint_state",
+   "shape": "(T, 30) float32",
+   "rate_hz": 10,
+   "unit": "rad",
+   "frame": "ITW hand model joints (index, little, middle, ring, thumb; 6 each)",
+   "note": "retargeted from the exoskeleton glove"
+  },
+  {
+   "name": "left_fingertip, right_fingertip",
+   "kind": "hand_pose",
+   "shape": "(T, 11, 3) float32",
+   "rate_hz": 10,
+   "unit": "not stated",
+   "frame": "not stated",
+   "note": "5 fingertips, 5 proximal links, wrist; from the retargeting output"
+  },
+  {
+   "name": "left_glove_tactile, right_glove_tactile",
+   "kind": "tactile_grid",
+   "shape": "(T, 256) float32",
+   "rate_hz": 10,
+   "unit": "not stated (integer counts, 0-117 seen)",
+   "frame": "channel layout not documented",
+   "note": "only in glove-with-tactile; many channels never nonzero in a volume"
+  },
+  {
+   "name": "annotations/clip_annotations.parquet, annotations/clip_steps.parquet",
+   "kind": "language",
+   "shape": "one task_summary_en per clip; steps with description, scene state, object state, action and frame range",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "English"
+  }
+ ],
+ "episode_index": {
+  "where": "glove-with-tactile/index/clips.parquet + task.json",
+  "count": 36780,
+  "fields": [
+   "clip_id",
+   "task_key",
+   "volume_id",
+   "rel_path",
+   "start_idx",
+   "end_idx",
+   "num_frames",
+   "task_summary_en (annotations)",
+   "steps (annotations)"
+  ],
+  "tasks": [
+   "task_0001 Sort Clothes",
+   "task_0002 Sort Boxes",
+   "task_0003 Pack Fragile Items",
+   "task_0006 Pack Boxes",
+   "task_0007 Organize Cluttered Items",
+   "task_0008 Fold a Towel",
+   "task_0009 Fold Clothes",
+   "task_0012 Wrap a Box with Rope",
+   "task_0014 Lift a Teapot and Pour Water",
+   "task_0019 Flip an Object",
+   "task_0022 Pick Up and Put Down a Burger",
+   "task_0023 Fold Eyeglass Temples",
+   "task_0024 Seal or Tie a Shopping Bag",
+   "task_0025 Place a Screwdriver into Its Holder",
+   "task_0026 Tighten a Screw",
+   "task_0027 Use Tongs to Place Bread on a Tray",
+   "task_0028 Scrub a Bowl with a Small Brush",
+   "task_0032 Sharpen a Pencil",
+   "task_0034 Pick Up Scissors, Cut a Strip of Tape, Stick It to a Paper Corner, and Put the Scissors Back",
+   "task_0038 Pick Up Tableware",
+   "task_0040 Fold Clothes (Standard)",
+   "task_0042 Place Three Washers of Different Diameters onto Three Posts by Size",
+   "task_0043 Arrange Five Dominoes in a Straight Line with Spacing",
+   "task_0046 Open a Remote Battery Cover, Insert Two AA Batteries, and Close It",
+   "task_0048 Place Slippers on a Shoe Rack",
+   "task_0049 Toggle an Individual Power Strip Switch",
+   "task_0050 Assemble Building Blocks",
+   "task_0054 Wipe a Mirror",
+   "task_0055 Wipe a Whiteboard",
+   "task_0056 Unscrew a Water Bottle Cap and Tighten It Again",
+   "task_0059 Clean a Helmet",
+   "task_0062 Wipe an Eyeglass Lens Model with an Alcohol Wipe",
+   "task_0063 Use Tweezers to Pick Up a Small Screw from the Table and Place It into a Parts Tray Slot",
+   "task_0064 Scoop Coffee Beans"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY 4.0 (README section 11) allows redistribution with attribution; the repo is public and ungated, and tar members can be range-read. Label the collection 'CC BY 4.0'.",
+  "prefix": "ps_",
+  "tasks_total": 34,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "clip_7wfwujifgvcimjrqbpfd (tasks/task_0009/000004.zarr, frames 5681-6114)",
+    "task": "Fold Clothes",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 43.4,
+    "window": null,
+    "why": "cloth, bimanual; smallest task_0009 volume (4.3 GB); contact not yet checked"
+   },
+   {
+    "id": "clip_xjjcvwuvbpl2d6aoq4wb (tasks/task_0012/000017.zarr, frames 6781-7134)",
+    "task": "Wrap a Box with Rope",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 35.4,
+    "window": null,
+    "why": "rope and box, bimanual; contact not yet checked"
+   },
+   {
+    "id": "clip_tsrifmnkphvgbb2vyzbp (tasks/task_0014/000007.zarr, frames 1139-1277)",
+    "task": "Lift a Teapot and Pour Water",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 13.9,
+    "window": null,
+    "why": "one-handed pour (right hand per the clip summary); contact not yet checked"
+   },
+   {
+    "id": "clip_zkjgg6ngt247gf6jnrop (tasks/task_0026/000023.zarr, frames 7456-7714)",
+    "task": "Tighten a Screw",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 25.9,
+    "window": null,
+    "why": "twisting with both hands; contact checked: 243 (right) and 240 (left) of 259 frames have at least 3 channels more than 3 counts above the volume median"
+   },
+   {
+    "id": "clip_zpcpvqjzfohpy4pgbmkx (tasks/task_0027/000012.zarr, frames 3200-3453)",
+    "task": "Use Tongs to Place Bread on a Tray",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 25.4,
+    "window": null,
+    "why": "tool held in the right hand; contact not yet checked"
+   },
+   {
+    "id": "clip_inebvhz4rhchud3zbqnr (tasks/task_0050/000009.zarr, frames 0-202)",
+    "task": "Assemble Building Blocks",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 20.3,
+    "window": null,
+    "why": "smallest volume of the subset (0.4 GB); contact checked: 177 of 203 right-hand frames have at least 3 channels more than 3 counts above the median"
+   },
+   {
+    "id": "clip_73q367rouga4jrbdfwul (tasks/task_0055/000004.zarr, frames 2627-2760)",
+    "task": "Wipe a Whiteboard",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 13.4,
+    "window": null,
+    "why": "wiping with an eraser, right hand; contact not yet checked"
+   },
+   {
+    "id": "clip_xq47uqkb7j5alqfjpss7 (tasks/task_0056/000006.zarr, frames 758-1176)",
+    "task": "Unscrew a Water Bottle Cap and Tighten It Again",
+    "scene": "not stated",
+    "subject": "not stated",
+    "duration_s": 41.9,
+    "window": null,
+    "why": "cap twisting, left hand turns while right hand holds; contact not yet checked"
+   }
+  ],
+  "fetch_estimate": "~1.3 GB: per clip the 3-8 head_rgb chunks (~24 MB each), matching depth chunks (~6 MB) and the small pose/tactile chunks, read from the tar by range requests; whole volumes would be 3.3-7.6 GB each",
+  "rules_applied": "34 tasks (more than 6), so 8 are taken, spanning cloth folding, rope wrapping, pouring, screw tightening, tool use with tongs, block assembly, wiping and cap twisting; one- and two-handed clips are both included. One clip per task, chosen from the smallest volume of that task among clips of 12-45 s; all are under 60 s, so no window is cut. Contact was checked for the 2 clips whose tactile arrays were read; the other 6 are checked in step 3 and replaced by another clip of the same task if they show no contact for 1 s.",
+  "deviations": [
+   "No scene or subject labels exist in the index, so diversity across scenes and subjects cannot be planned."
+  ]
+ }
+}

@@ -43,11 +43,25 @@ HW_AVAIL = {"commercial": "commercial", "open_hardware": "open hardware", "resea
             "discontinued": "discontinued"}
 
 
+def check_zh(x: dict, tag: str) -> list:
+    """Optional Chinese original: zh = {name, title, maker, en: official | translated, note}."""
+    z = x.get("zh")
+    if z is None:
+        return []
+    errs = [] if z.get("en") in ("official", "translated") else [f"{tag}: zh.en must be 'official' or 'translated'"]
+    return errs + ([] if z.get("name") or z.get("title") or z.get("maker") else [f"{tag}: zh needs a name, title or maker"])
+
+
+def zh_suffix(x: dict) -> str:
+    z = x.get("zh") or {}
+    return f" ({z['name']}{'; English name translated by the catalog' if z.get('en') == 'translated' else ''})" if z.get("name") else ""
+
+
 def validate_hw(hw: list, dataset_ids: set) -> list:
     errs, seen = [], set()
     for h in hw:
         tag = f"hardware {h.get('id', '?')}"
-        errs += [f"{tag}: missing {k}" for k in HW_REQUIRED if k not in h]
+        errs += [f"{tag}: missing {k}" for k in HW_REQUIRED if k not in h] + check_zh(h, tag)
         if h.get("id") in seen:
             errs.append(f"{tag}: duplicate id")
         seen.add(h.get("id"))
@@ -67,7 +81,7 @@ def validate_hw(hw: list, dataset_ids: set) -> list:
 def hw_line(h: dict, names: dict) -> str:
     L = h["links"]
     url = L.get("product") or L.get("project") or L.get("paper") or L.get("code")
-    head = f"[{h['name']}]({url})" if url else h["name"]
+    head = (f"[{h['name']}]({url})" if url else h["name"]) + zh_suffix(h)
     bits = [h["maker"] + (f", {h['year']}" if h.get("year") else ""), HW_AVAIL[h["availability"]]]
     if h.get("taxels") is not None:
         bits.append(f"{h['taxels']:,} taxels" + (f" {h['taxels_note']}" if h.get("taxels_note") else ""))
@@ -81,7 +95,9 @@ def validate(ds: list) -> list:
     errs, seen = [], set()
     for d in ds:
         tag = d.get("id", "?")
-        errs += [f"{tag}: missing {k}" for k in REQUIRED if k not in d]
+        errs += [f"{tag}: missing {k}" for k in REQUIRED if k not in d] + check_zh(d, tag)
+        if not isinstance((d.get("sensor") or {}).get("coverage"), list) or not isinstance(d.get("modalities"), list):
+            errs.append(f"{tag}: sensor.coverage and modalities must be lists ([] when not stated)")
         if tag in seen:
             errs.append(f"{tag}: duplicate id")
         seen.add(tag)
@@ -163,7 +179,7 @@ def line(d: dict) -> str:
     dens = f"{n:,} taxels/hand" if n else f"{s['sensors_per_hand']} sensors/hand" if s.get("sensors_per_hand") else "taxel count not stated"
     cov = ", ".join(COVER[c] for c in s["coverage"]) or "coverage not stated"
     links = ", ".join(f"[{k}]({L[k]})" for k in ("paper", "project", "data", "code") if L.get(k))
-    head = f"[{d['name']}]({L.get('project') or L.get('paper')})"
+    head = f"[{d['name']}]({L.get('project') or L.get('paper')})" + zh_suffix(d)
     f = facts(d)
     r, q = d["rank"], d["quality"]
     return f"- `R{r['n']}` `Q{q['score']}/{q['of']}` {head} - {d['summary']} {dens}; {cov}{'; ' + f if f else ''}; {AVAIL[d['availability']]}. {d['venue']} ({links})."

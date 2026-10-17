@@ -1,0 +1,276 @@
+{
+ "id": "linkerbot_umi_dex_l6",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "linkerbot_umi_dex_l6",
+  "name": "UMI-Dex-Pro-L6",
+  "title": "UMI-Dex-Pro-L6 Manipulation Dataset",
+  "authors": "Linkerbot Beijing Technology Co., Ltd.",
+  "year": 2026,
+  "venue": "ModelScope dataset (2026)",
+  "summary": "A person carries the UMI-Dex-Pro-L6 right hand (L6-type, 6 DoF, no robot arm) with five 12x6 fingertip taxel arrays and per-finger grip force in mN, recorded with a wrist D405 camera and a VIVE Ultimate Tracker over 251 single-hand pick-and-place and cup-stacking segments.",
+  "embodiment": "robot",
+  "hand": "UMI-Dex-Pro-L6 (Linker L6-type right hand, 6 DoF, fingertip tactile), carried by a person; no robot arm or body",
+  "bimanual": false,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 360,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 60,
+   "note": "/hand/touch_state (umi_dex_msgs/HandTouchState) at 60 Hz: touch_matrix uint8[360] = 5 fingers x 72 (12 rows x 6 columns, row-major, raw 0-255), finger_force_mn uint16[5] = grip force per finger in mN (0-65.535 N; thumb, index, middle, ring, little), plus hwk_valid_mask and force_valid_mask bits and a firmware seq that matches /hand/joint_states. The per-finger force is in physical units; the taxels are raw.",
+   "maker": "Linkerbot",
+   "model": "UMI-Dex-Pro-L6 fingertip tactile",
+   "principle": "unspecified",
+   "range": "grip force 0-65.535 N per finger (uint16 mN); taxels 0-255 raw",
+   "calibrated": true
+  },
+  "modalities": [
+   "wrist_rgb",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 0.83,
+   "episodes": 251,
+   "frames": null,
+   "tasks": 5,
+   "objects": 5,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "251 segments, ~0.83 h, 5 right-hand tabletop tasks (stack 6 cups 50, nail 50, water bottle 51, apple model 50, green cube 50); segments 8.3-21.3 s; 51.1 GiB"
+  },
+  "availability": "public",
+  "access": "ModelScope Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset, open download (git LFS or SDK): one uncompressed TAR per task (8.5-15.7 GiB) with one ROS2 MCAP bag + metadata.yaml per segment; HTTP range reads into the TARs work.",
+  "license": "CC BY-NC-SA 4.0; commercial use needs written authorization",
+  "caveats": [
+   "No robot arm or body ('UMI-Dex 无本体数据采集系统' [UMI-Dex robot-body-free data collection system]): a person carries the hand, and the wrist pose comes from a VIVE Ultimate Tracker, not from robot joints.",
+   "How the fingers are moved is not stated on the card; finger channels are 6 raw encoder readings (0-255, 'not radians or percent'). The UMI-Dex GitHub hardware folder describes an 'L6 6-DOF serial encoder glove' with finger and arm straps.",
+   "Touch is sparse: in 6 segments checked, only thumb and index pads registered; a nail-pinch segment showed no taxel above 0 and an apple segment peaked at 3 counts (sampled every ~0.5 s).",
+   "Taxel values are low (peaks of 14-22 of 255 on single taxels in the checked segments); per-finger force reached 0.98-1.2 N.",
+   "touch_matrix finger order is 'STM32_FINGER_ORDER' in the message definition; the card states thumb-to-little only for finger_force_mn. In the checked segments the matrix finger with contact matched the force channel with contact.",
+   "Right hand only; one operator count not stated.",
+   "Wrist images are raw YUYV 640x480 inside the MCAP (~150-390 MB per 8-21 s segment).",
+   "Commercial use, including training commercial models, needs prior written authorization from Linkerbot."
+  ],
+  "links": {
+   "data": "https://modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset",
+   "code": "https://github.com/linker-bot/UMI-Dex"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "wrist",
+     "count": 1,
+     "model": "Intel RealSense D405",
+     "type": "RGB",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": "wrist",
+     "note": "color only (yuv422_yuy2) in /camera_d405/color/image_raw; the hand's palm and four fingers are in view"
+    }
+   ],
+   "wrist_cameras": 1,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "VIVE Ultimate Tracker (inside-out, self-tracking)",
+     "note": "/vut/pose 6DoF at ~120 Hz (125 Hz measured) with tracking_status and map_state per sample; /vut/status at ~5 Hz"
+    },
+    {
+     "target": "fingers",
+     "method": "other",
+     "system": "UMI-Dex-Pro-L6 joint encoders (6 channels, raw 0-255, validity flags)",
+     "note": "names thumb_roll, thumb_pitch, index_pitch, middle_pitch, ring_pitch, pinky_pitch in the checked segment; actuation path not stated"
+    }
+   ],
+   "other": [
+    "per-finger grip force (mN)",
+    "VUT tracking and SLAM map status"
+   ]
+  },
+  "sources": [
+   "https://modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset (API info, README.md, README_CN.md, dataset_infos.json, checksums.txt, file tree)",
+   "https://modelscope.cn TAR listings of all 5 task archives via HTTP range reads (251 metadata.yaml files read)",
+   "https://modelscope.cn pick_and_place_a_water_bottle TAR: seg_20 MCAP summary + every 3rd chunk (all 6 topics decoded); seg_29 every 8th chunk (touch only)",
+   "https://modelscope.cn nail seg_34, apple seg_29, cups seg_29 MCAP summaries + every 8th chunk (touch only)",
+   "https://github.com/linker-bot/UMI-Dex (README.md, README_zhCN.md, hardware/README.md, hardware/README_zhCN.md, docs/recording_sop.md, docs/processing.md, ros2/README.md, src/umi_dex/controllers/*.py, repo tree)"
+  ],
+  "unconfirmed": [
+   "embodiment = robot: the touch comes from the L6-type hand's fingertip sensors, not from the person's skin, and the D405 frames show the hand's black palm and fingers. The person carries it; there is no robot arm. Recorded as a robot hand because the sensor and kinematics are the hand's.",
+   "hours 0.83 = sum of rosbag2 metadata.yaml durations over all 251 segments (0.831 h), matching the card's per-task totals (0.25 + 0.15 + 0.14 + 0.14 + 0.15 h).",
+   "Contact checked (every 3rd or 8th MCAP chunk): water bottle seg_20 index pad 4.4-6.1 s (finger force up to 981 mN), seg_29 thumb 4.4-6.6 s and index 4.9-6.6 s (up to 1,206 mN); cups seg_29 thumb 4.3-14.4 s (981 mN); nail seg_34 nothing; apple seg_29 index 3 counts for < 0.1 s.",
+   "Per-finger force vs taxel sum: in seg_20 force (mN) ran ~10x the finger's taxel sum (e.g. 981 mN vs 98).",
+   "Rates measured in seg_20: touch and joints 60.0 Hz, images 30.0 Hz, VUT pose 125 Hz, VUT status 5.1 Hz.",
+   "VUT positions span ~0.27 m in seg_20; unit taken as m (geometry_msgs/Pose), frame 'vut_tracker' not documented.",
+   "The GitHub UMI-Dex repo (Apache-2.0) documents an older recording setup (D455 + ORB-SLAM3, /hand/can_raw or /hand/usart_raw) than this release (VUT, /hand/touch_state); its link to this dataset is the card's 'SDK access' line.",
+   "objects = 5 counts object types (cups, nail, water bottle, apple model, green cube); the cup task uses 6 cups.",
+   "Linkerbot also publishes CCF-Dexterous-Assembly-Dataset and Linkerhand-Open-World-Dataset on ModelScope; not checked for tactile.",
+   "Sensing principle not stated by the release; the catalog's hardware entry linker_hand lists Linker 6x12 fingertip arrays as piezoresistive (L20 / L20 Lite manuals). Whether the UMI-Dex-Pro-L6 uses the same arrays is not stated; the 360-value 12x6-per-finger layout matches."
+  ],
+  "zh": {
+   "name": "UMI-Dex-Pro-L6 操作数据集",
+   "title": null,
+   "maker": "灵心巧手（北京）科技股份有限公司",
+   "en": "official",
+   "note": "Card in English (README.md) and Chinese (README_CN.md); ModelScope org name 灵心巧手."
+  }
+ },
+ "license": {
+  "name": "CC BY-NC-SA 4.0 (commercial use needs written authorization)",
+  "redistribution": "allowed",
+  "quote": "It permits copying, distribution, display, and modification for non-commercial research and educational use; derivative works must be released under the same or a compatible license. Commercial use (including training commercial models with this dataset) requires prior written authorization from the publisher.",
+  "url": "https://modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset"
+ },
+ "download": {
+  "where": "https://modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset",
+  "access": "open",
+  "format": "<task>/umi_dex_pro_l6_<task>.tar (uncompressed, + checksums.txt) -> '<Task Name>/seg_N/seg_N_0.mcap' (ROS2 MCAP, cdr, uncompressed chunks of ~1.2 MB) + metadata.yaml",
+  "total_size": "51.1 GiB (StorageSize 54,863,413,080 B)",
+  "per_episode": "MCAP 147-394 MB per segment (raw YUYV video dominates)",
+  "partial_fetch": "HTTP range reads on the TAR (CDN redirect from the ModelScope repo URL): walk 512-byte TAR headers to get each MCAP's offset, read the MCAP footer + summary (chunk index), then fetch single chunks; touch-only reads still pull the interleaved images (no multi-range support)"
+ },
+ "channels": [
+  {
+   "name": "/hand/touch_state touch_matrix",
+   "kind": "tactile_grid",
+   "shape": "uint8[360] = 5 x 12 x 6",
+   "rate_hz": 60,
+   "unit": "raw 0-255",
+   "frame": "per finger 12 rows x 6 columns, row-major; finger order 'STM32_FINGER_ORDER'",
+   "note": "hwk_valid_mask bits 0-4 (thumb..little) = 31 in all checked messages"
+  },
+  {
+   "name": "/hand/touch_state finger_force_mn",
+   "kind": "pressure_scalar",
+   "shape": "uint16[5]",
+   "rate_hz": 60,
+   "unit": "mN",
+   "frame": "per finger: thumb, index, middle, ring, little",
+   "note": "force_valid_mask bit i = fresh reading; 0 with the bit unset is a placeholder. Mask 31 in all checked messages"
+  },
+  {
+   "name": "/hand/joint_states",
+   "kind": "joint_state",
+   "shape": "names string[6], positions float64[6], valid bool[6]",
+   "rate_hz": 60,
+   "unit": "raw encoder 0-255",
+   "frame": "thumb roll, thumb pitch, index, middle, ring, pinky pitch",
+   "note": "aligned with touch_state by firmware seq"
+  },
+  {
+   "name": "/camera_d405/color/image_raw",
+   "kind": "camera",
+   "shape": "(480, 640) yuv422_yuy2",
+   "rate_hz": 30,
+   "unit": "raw YUYV",
+   "frame": "camera_d405_color_optical_frame (wrist)",
+   "note": "uncompressed sensor_msgs/Image, 614,400 B per frame"
+  },
+  {
+   "name": "/camera_d405/color/camera_info",
+   "kind": "other",
+   "shape": "CameraInfo 640x480, plumb_bob",
+   "rate_hz": 30,
+   "unit": "pixels",
+   "frame": "camera_d405_color_optical_frame",
+   "note": null
+  },
+  {
+   "name": "/vut/pose",
+   "kind": "hand_pose",
+   "shape": "Pose (position xyz, quaternion) + vut_timestamp_ms, sequence, tracking_status, map_state",
+   "rate_hz": 120,
+   "unit": "m, quaternion",
+   "frame": "vut_tracker (tracker map frame, not documented)",
+   "note": "end-effector 6D pose per the card; tracking_status 2 = OK throughout seg_20"
+  },
+  {
+   "name": "/vut/status",
+   "kind": "other",
+   "shape": "VutStatus (tracking_status, map_state, map_id, sequence, last_pose_age_ms, tracker_sn, failure_hint, paired)",
+   "rate_hz": 5,
+   "unit": null,
+   "frame": null,
+   "note": null
+  }
+ ],
+ "episode_index": {
+  "where": "TAR member names (<Task Name>/seg_N/) + per-segment metadata.yaml (duration, start time, per-topic counts)",
+  "count": 251,
+  "fields": [
+   "task",
+   "segment",
+   "duration",
+   "start time"
+  ],
+  "tasks": [
+   "Stack Disposable Cups (50)",
+   "Pick and Place a Nail (50)",
+   "Pick and Place a Water Bottle (51)",
+   "Pick and Place an Apple Model (50)",
+   "Pick and Place a Green Cube (50)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC-SA 4.0 allows non-commercial redistribution with attribution under the same license; only commercial use needs authorization. ModelScope download is open and range reads work. Label the collection 'CC BY-NC-SA 4.0 (non-commercial)'.",
+  "prefix": "lk_",
+  "tasks_total": 5,
+  "tasks_sampled": 5,
+  "episodes": [
+   {
+    "id": "Pick and Place a Water Bottle/seg_29",
+    "task": "pick and place a water bottle",
+    "scene": "tabletop (only setting)",
+    "subject": "operator not named",
+    "duration_s": 10.51,
+    "window": null,
+    "why": "Checked: thumb pad 4.4-6.6 s and index pad 4.9-6.6 s above 0, finger force up to 1,206 mN. 193 MB MCAP."
+   },
+   {
+    "id": "Stack Disposable Cups/seg_29",
+    "task": "stack 6 disposable cups",
+    "scene": "tabletop",
+    "subject": "operator not named",
+    "duration_s": 18.37,
+    "window": null,
+    "why": "Checked: thumb pad active 4.3-14.4 s (sampled), force up to 981 mN. 340 MB MCAP."
+   },
+   {
+    "id": "Pick and Place a Nail/seg_34",
+    "task": "pick and place a nail",
+    "scene": "tabletop",
+    "subject": "operator not named",
+    "duration_s": 11.04,
+    "window": null,
+    "why": "Candidate only: no taxel above 0 in 87 sampled touch messages. Replace with another nail segment of 10-14 s (41 qualify) that shows contact; a thumb-index pinch may stay below the taxel threshold, so check finger_force_mn too. 204 MB."
+   },
+   {
+    "id": "Pick and Place an Apple Model/seg_29",
+    "task": "pick and place an apple model",
+    "scene": "tabletop",
+    "subject": "operator not named",
+    "duration_s": 10.41,
+    "window": null,
+    "why": "Candidate only: index pad reached 3 counts for < 0.1 s. Replace with another of the 25 apple segments of 10-12.4 s that shows >= 1 s of contact. 193 MB."
+   },
+   {
+    "id": "Pick and Place a Green Cube/seg_10",
+    "task": "pick and place a green cube",
+    "scene": "tabletop",
+    "subject": "operator not named",
+    "duration_s": 10.94,
+    "window": null,
+    "why": "Candidate, not checked (median of the 34 cube segments of 10-13.8 s). 202 MB."
+   }
+  ],
+  "fetch_estimate": "~1.1 GB for the 5 MCAPs (193 + 340 + 204 + 193 + 202 MB) plus ~0.2 GB per replacement segment; already fetched ~180 MB of sampled chunks for the survey. Re-hosted media: YUYV 640x480 re-encoded to H.264, ~5-10 MB per clip. Episode JSON: 360 uint8 + 5 forces at 60 Hz x <= 21 s ~ 0.46M values, under 2 MB if stored compactly.",
+  "rules_applied": "Tasks: 5 <= 6, so all 5. Episodes: one per task (5 > 3 tasks), 5 in total. Each must be 10-60 s (segments 8.3-21.3 s; 18-50 per task qualify), have touch_state with valid masks, and show contact (taxels or finger force above rest) for >= 1 s. Contact was checked on every 8th MCAP chunk (~0.5 s spacing) for 4 picks; 2 pass, 2 need replacement, 1 unchecked."
+ }
+}

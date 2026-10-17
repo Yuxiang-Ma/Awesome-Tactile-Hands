@@ -1,0 +1,307 @@
+{
+ "id": "vint6d",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "vint6d",
+  "name": "VinT-6D",
+  "title": "VinT-6D: A Large-Scale Object-in-hand Dataset from Vision, Touch and Proprioception",
+  "authors": "Zhaoliang Wan et al.",
+  "year": 2024,
+  "venue": "ICML 2024 (PMLR 235); arXiv 2501.00510",
+  "summary": "Tencent's 3-finger TRX-Hand with a 620-taxel piezoresistive skin on fingers and palm holds one of 4 released objects while an ABB arm moves it through workspace poses; each snapshot pairs the activated-taxel positions with RGB-D, finger poses and Vicon object pose (plus a MuJoCo/Blender simulated split).",
+  "embodiment": "robot",
+  "hand": "TRX-Hand (Tencent Robotics X, 3 fingers, 8 DoF) on an ABB arm; the simulated split uses a MuJoCo model of the same hand",
+  "bimanual": false,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 620,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "note": "Released touch is not per-taxel pressure. Each snapshot has touch_point_cloud.ply: x, y, z (float64, m) of the activated taxels in the hand frame, 5-53 points per real sample (median 11-31 per object). Paper: sensors respond above 250 Hz with a non-linear response to normal force; the released data are single snapshots about 1-2 s apart.",
+   "maker": "custom (Tencent Robotics X)",
+   "model": "TRX-Hand whole-hand tactile skin (curved piezoresistive arrays)",
+   "principle": "piezoresistive",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "depth",
+   "hand_pose",
+   "object_pose",
+   "segmentation"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": 37294,
+   "tasks": 1,
+   "objects": 4,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Released real split: 37,294 snapshots of 4 objects in 41 sessions (paper: 100,000 snapshots of 10 objects); simulated split: 57,500 TRX-Hand grasps of 23 objects x 16 rendered views (paper: 2M samples including an Allegro hand)"
+  },
+  "availability": "public",
+  "access": "Hugging Face vint6d/vint6d, ungated, MIT: real_trx_<object>.zip (4 files, 3.4 GB each) and syn_trx_<object>.zip (23 files, 1.5-3.4 GB); single samples can be read out of the zips with HTTP range requests.",
+  "license": "MIT",
+  "caveats": [
+   "Touch is released only as positions of activated taxels (touch_point_cloud.ply). No per-taxel pressure values, taxel IDs or taxel layout file are in the release.",
+   "Real data are snapshots, not continuous recordings: each object was grasped in about 10 sessions of roughly 950 snapshots taken 1-2 s apart while the arm moved through 125 positions x 8 hand rotations. The object stays in one grasp; there is no in-hand manipulation.",
+   "Only 4 of the paper's 10 real objects are released (folders 5, 7, 900, 904); names are not given in the release.",
+   "The simulated split contains only the TRX-Hand. No data from the 679-taxel Allegro skin described in the paper (simulated or real) is released.",
+   "No code, object meshes or marker-fixture models are in the release or linked from the project page (the paper says the fixtures are on the website; not found).",
+   "Simulated touch is a MuJoCo contact model (activated sensor positions), not measured data."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2501.00510",
+   "project": "https://vint-6d.github.io/",
+   "data": "https://huggingface.co/datasets/vint6d/vint6d",
+   "code": null
+  },
+  "image": "https://vint-6d.github.io/data/imgs/teaser.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 2,
+     "model": null,
+     "type": "stereo",
+     "resolution": "1200x960 (released: right camera, undistorted, 640x400)",
+     "fps": null,
+     "mount": "static"
+    },
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Azure Kinect (ToF depth)",
+     "type": "RGB-D",
+     "resolution": "640x565 depth (released: reprojected into the RGB camera, 640x400)",
+     "fps": null,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "object",
+     "method": "optical_mocap",
+     "system": "Vicon",
+     "note": "markers on a custom fixture per object; released as object2hand_pose.txt and object2camera_pose.txt (7 values each)"
+    },
+    {
+     "target": "wrist",
+     "method": "optical_mocap",
+     "system": "Vicon",
+     "note": "marker flange plate on the TRX-Hand; hand pose used for alignment, not released as its own file"
+    },
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "TRX-Hand joint readings + forward kinematics",
+     "note": "finger2hand_pose.txt: 6 rows of position + quaternion"
+    }
+   ],
+   "other": [
+    "object masks from SAM prompted with touch points",
+    "simulated split: MuJoCo grasps rendered in Blender with HDRI backgrounds, 16 views per grasp, train/val/test lists"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2501.00510",
+   "https://arxiv.org/html/2501.00510 (v2)",
+   "https://vint-6d.github.io/",
+   "https://huggingface.co/datasets/vint6d/vint6d (README.md, API metadata, file tree)",
+   "https://huggingface.co/datasets/vint6d/vint6d zip central directories of real_trx_05/07/900/904.zip and syn_trx_05.zip (range reads)",
+   "https://huggingface.co/datasets/vint6d/vint6d real_trx_05.zip sample_0304205435 (camera.json, rgb.png, depth.png, mask.png, touch_point_cloud.ply, 3 pose files) and syn_trx_05.zip sample_1716 (camera.json, scene_obj2cam.json, rgb/000000.jpg, depth/000000.png, test.txt)",
+   "https://github.com/VinT-6D/vint-6d.github.io",
+   "https://www.qbitai.com/2023/04/49352.html"
+  ],
+  "unconfirmed": [
+   "frames=37,294 counted from the real zips (rgb.png per sample folder: 9,286 / 9,463 / 8,999 / 9,546 for objects 5 / 7 / 900 / 904). It counts snapshots; the paper's 0.1M is for 10 objects.",
+   "Sessions: snapshot folder names are MMDDHHMMSS time stamps (year not encoded). Gaps over 60 s split them into 10 / 11 / 10 / 10 sessions of up to 964 snapshots, 1-2 s apart, recorded on 2024-03-03 to 03-12 (year assumed from the paper date). The paper describes 10 variations per object over 1,000 poses; the session-to-variation match is inferred.",
+   "Activated taxels per real snapshot (5-53, medians 31 / 19 / 27 / 11) derived from PLY file sizes (24 bytes per float64 vertex after a 144-145 byte header); one file opened to confirm (31 vertices).",
+   "Simulated split: 23 objects x 2,500 grasps = 57,500 grasps; each sample folder has 16 views (rgb/*.jpg, depth/*.png, mask/*.png). Counted in syn_trx_05.zip; the other 22 zips assumed to match. Simulated object ids (02-61, 901-903) follow YCB-Video numbering; real ids 5 and 7 would be YCB tomato soup can and tuna fish can, both named in the paper's tables, but the release does not say so.",
+   "Pose files hold 7 numbers: 3 translations (m, by range) + a unit quaternion; the quaternion order (wxyz or xyzw) is not documented.",
+   "Real depth.png is 16-bit with values 579-827 in the opened sample (mm by range; the real camera.json has no depth_scale, the simulated one has depth_scale 1.0). Only 19,089 of 256,000 pixels are non-zero in that sample, so the depth appears cropped to the hand-object region.",
+   "Tasks=1 (hold the grasped object while the arm moves); not a stated count. scenes=1: one robot platform.",
+   "zh.maker '腾讯Robotics X实验室' is from Chinese press coverage of the TRX-Hand (QbitAI, April 2023), not from the release, which is English only. The paper's first affiliation is Sun Yat-sen University; the TRX-Hand and data collection are Tencent Robotics X.",
+   "sensor.rate_hz null: the paper gives '>250 Hz' for the sensors, but released snapshots are 1-2 s apart."
+  ],
+  "zh": {
+   "name": null,
+   "title": null,
+   "maker": "腾讯Robotics X实验室",
+   "en": "official",
+   "note": "Paper, project page and dataset card are English only; the Chinese lab name comes from Chinese press coverage of the TRX-Hand."
+  }
+ },
+ "license": {
+  "name": "MIT",
+  "redistribution": "allowed",
+  "quote": "license: mit",
+  "url": "https://huggingface.co/datasets/vint6d/vint6d/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/vint6d/vint6d",
+  "access": "open",
+  "format": "one zip per hand/object: vint6d_release/{real,syn}/trx/<object>/output/sample_<id>/ with PNG/JPG images, PLY touch point cloud, TXT poses and JSON intrinsics",
+  "total_size": "79.2 GB (HF usedStorage 79,165,238,678 B): real 13.7 GB (4 zips), simulated 65.5 GB (23 zips)",
+  "per_episode": "real snapshot ~0.37 MB (rgb.png ~350 KB); a 30-snapshot window ~11 MB",
+  "partial_fetch": "HTTP range requests on the zip: read the central directory (~11 MB per real zip), then fetch single members by local-header offset"
+ },
+ "channels": [
+  {
+   "name": "real: sample_<id>/touch_point_cloud.ply",
+   "kind": "contact_flag",
+   "shape": "(N, 3) float64, N = 5-53",
+   "rate_hz": null,
+   "unit": "m (by range)",
+   "frame": "hand (palm) frame per the paper",
+   "note": "positions of taxels activated at the snapshot; binary activation, no pressure values; one snapshot per sample, 1-2 s apart within a session"
+  },
+  {
+   "name": "real: sample_<id>/rgb.png",
+   "kind": "camera",
+   "shape": "(400, 640, 3) uint8",
+   "rate_hz": null,
+   "unit": "8-bit RGB",
+   "frame": "right stereo camera, undistorted; intrinsics in camera.json",
+   "note": "single frame per snapshot"
+  },
+  {
+   "name": "real: sample_<id>/depth.png",
+   "kind": "depth",
+   "shape": "(400, 640) uint16",
+   "rate_hz": null,
+   "unit": "not stated (579-827 in one sample, consistent with mm)",
+   "frame": "Azure Kinect ToF depth reprojected into the RGB camera",
+   "note": "about 7% of pixels non-zero in the checked sample"
+  },
+  {
+   "name": "real: sample_<id>/mask.png",
+   "kind": "other",
+   "shape": "(400, 640) uint8, 0/255",
+   "rate_hz": null,
+   "unit": null,
+   "frame": "RGB camera",
+   "note": "object mask (SAM prompted with touch points)"
+  },
+  {
+   "name": "real: sample_<id>/object2hand_pose.txt, object2camera_pose.txt",
+   "kind": "object_pose",
+   "shape": "(7,) each",
+   "rate_hz": null,
+   "unit": "m + unit quaternion (order not documented)",
+   "frame": "hand frame / camera frame",
+   "note": "from Vicon markers on per-object fixtures"
+  },
+  {
+   "name": "real: sample_<id>/finger2hand_pose.txt",
+   "kind": "joint_state",
+   "shape": "(6, 7)",
+   "rate_hz": null,
+   "unit": "m + unit quaternion",
+   "frame": "hand frame",
+   "note": "6 finger-link poses of the 3-finger TRX-Hand"
+  },
+  {
+   "name": "real: sample_<id>/camera.json",
+   "kind": "other",
+   "shape": "fx, fy, cx, cy, width 640, height 400",
+   "rate_hz": null,
+   "unit": "pixels",
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "syn: sample_<n>/touch_point_cloud.ply",
+   "kind": "contact_flag",
+   "shape": "(N, 3) float64, N = 82-252 in syn_trx_05",
+   "rate_hz": null,
+   "unit": "m (by range)",
+   "frame": "hand frame",
+   "note": "simulated (MuJoCo) activated-sensor positions"
+  },
+  {
+   "name": "syn: sample_<n>/rgb/0000xx.jpg, depth/0000xx.png, mask/0000xx.png",
+   "kind": "camera",
+   "shape": "16 views x (400, 640, 3) JPEG; depth (400, 640) uint16; mask uint8",
+   "rate_hz": null,
+   "unit": "8-bit RGB; depth_scale 1.0 in camera.json",
+   "frame": "per-view camera; scene_obj2cam.json gives R (3x3) and t per view",
+   "note": "Blender renders with simulated Azure Kinect depth noise"
+  },
+  {
+   "name": "syn: sample_<n>/object2hand_pose.txt, finger2hand_pose.txt, scene_obj2cam.json, camera.json",
+   "kind": "object_pose",
+   "shape": "(7,), (6, 7), 16 x {R, t}, intrinsics",
+   "rate_hz": null,
+   "unit": "m + quaternion",
+   "frame": "hand / camera",
+   "note": "simulated split only; train.txt / val.txt / test.txt list samples per object"
+  }
+ ],
+ "episode_index": {
+  "where": "zip central directories: vint6d_release/real/trx/<object>/output/sample_<MMDDHHMMSS>/ (no index file)",
+  "count": 37294,
+  "fields": [
+   "object (folder id)",
+   "time stamp (folder name)"
+  ],
+  "tasks": [
+   "hold the grasped object while the arm moves through 125 positions x 8 hand rotations"
+  ],
+  "scenes": [
+   "Tencent Robotics X robot platform (ABB arm, TRX-Hand, Vicon)"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "MIT license on the HF card allows redistribution; the repo is public and ungated and single samples can be range-read from the zips. Label the collection 'MIT'.",
+  "prefix": "vn_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "real/trx/5 session 1: sample_0304204436 .. sample_0304204510 (30 snapshots)",
+    "task": "hold object while the arm moves",
+    "scene": "robot platform",
+    "subject": "robot: TRX-Hand on ABB arm",
+    "object": "5 (name not given; YCB id 005 = tomato soup can)",
+    "duration_s": 34,
+    "window": [0, 34],
+    "why": "First 30 snapshots of the first session; 23-31 activated taxels per snapshot, so the contact set changes as the arm moves. ~10.7 MB."
+   },
+   {
+    "id": "real/trx/7 session 1: sample_0303201858 .. sample_0303201943 (30 snapshots)",
+    "task": "hold object while the arm moves",
+    "scene": "robot platform",
+    "subject": "robot: TRX-Hand on ABB arm",
+    "object": "7 (name not given; YCB id 007 = tuna fish can)",
+    "duration_s": 45,
+    "window": [0, 45],
+    "why": "Second object; 16-20 activated taxels per snapshot. ~11.4 MB."
+   },
+   {
+    "id": "real/trx/900 session 1: sample_0306101931 .. sample_0306102017 (30 snapshots)",
+    "task": "hold object while the arm moves",
+    "scene": "robot platform",
+    "subject": "robot: TRX-Hand on ABB arm",
+    "object": "900 (custom object, name not given)",
+    "duration_s": 46,
+    "window": [0, 46],
+    "why": "Non-YCB object; 21-26 activated taxels per snapshot. ~11.6 MB. Object 904 was not taken: its first window has a constant 8 activated taxels."
+   }
+  ],
+  "fetch_estimate": "~34 MB: 3 windows x 30 snapshots x ~0.37 MB (all files of each sample folder, sizes from the zip central directories), via range reads; ~45 MB of central directories already read. Re-hosted media: 30 RGB stills per episode, ~10 MB as PNG or far less as a re-encoded H.264 slideshow.",
+  "rules_applied": "1 task (at most 6, so taken). With 3 tasks or fewer: 2-3 episodes per task and at least 3 in total, so 3 episodes from 3 different objects. The release has no continuous recordings: an episode is a window of 30 consecutive snapshots (1-2 s apart, 34-46 s) from one session, so the 10-60 s rule is met on the snapshot clock. Every real snapshot has at least 5 activated taxels (contact throughout). Simulated samples not sampled (simulated touch)."
+ }
+}

@@ -1,0 +1,384 @@
+{
+ "id": "uvta",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "uvta",
+  "name": "UVTA",
+  "title": "Unified Visual-Tactile-Action Modeling from Human Demonstrations for Dexterous Manipulation",
+  "authors": "Wenqiao Li et al.",
+  "year": 2026,
+  "venue": "arXiv 2609.34182",
+  "summary": "Right-hand demonstrations of 5 contact-rich tasks from people wearing a passive 22-DoF exoskeleton glove with fingertip FSR arrays (5,000) and from a teleoperated Sharpa Wave hand on a Sharpa North robot (749), released as 20 fingertip-region touch values, wrist fisheye video and 22 joint angles at 30 Hz.",
+  "embodiment": "both",
+  "hand": "Human right hand in a passive 22-DoF exoskeleton glove (fingertip FSR arrays); Sharpa Wave (22 DoF), right hand of a fixed-base Sharpa North",
+  "bimanual": false,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 100,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "Released field tactile (T, 20) float32 for both embodiments: 5 fingertips (thumb, index, middle, ring, little) x 4 regions (A tip = 5 taxels, B side = 3, C middle = 9, D side = 3), each the mean of its taxels. Human: FSR array of 20 taxels per fingertip read from a 240-value glove payload (blocks 0-19, 40-59, 80-99, 120-139, 160-179), raw counts (region means up to ~1,700 in the checked episodes). Robot: Sharpa Wave fingertip deformation maps (240x240 grayscale) summed per glove-taxel region by a fixed pixel-to-taxel map, then averaged per region (VTPM); values up to ~140,000 in the checked episodes. Raw taxels, Sharpa tactile images, deformation maps and the fingertip force magnitudes named in the metadata are not released. The paper subtracts a per-recording baseline (human: mean of first 5 frames; robot: first frame).",
+   "maker": "not stated (FSR exoskeleton glove); robot: Sharpa",
+   "model": "FSR fingertip arrays on a passive 22-DoF exoskeleton glove; robot: Sharpa Wave fingertip tactile sensor",
+   "principle": "piezoresistive",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "wrist_rgb",
+   "hand_pose",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 19.7,
+   "episodes": 5749,
+   "frames": 2124537,
+   "tasks": 5,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "5,749 episodes over 5 tasks: 5,000 human (1,000 per task) + 749 robot (150 per task, 149 for flip_book); ~19.7 h at 30 Hz (16.3 h human, 3.4 h robot; derived from file counts); 482 GB"
+  },
+  "availability": "public",
+  "access": "Hugging Face Chopper233/UVTA, ungated, 28 tar shards (5-22 GB each, 482 GB in total) of Zarr v2 episode stores, one set of shards per task and embodiment.",
+  "license": "Apache-2.0",
+  "caveats": [
+   "Touch is released only as 20 pooled values per frame (4 regions per fingertip); raw glove taxels, Sharpa tactile images, deformation maps and fingertip forces are not in the release.",
+   "Robot touch is derived from Sharpa Wave deformation maps by a fixed pixel-to-glove-taxel map (VTPM), so robot values (up to ~140,000) and human FSR counts (up to ~1,700 in the checked episodes) are on different scales; neither is in physical units.",
+   "Right hand only: the robot has two Sharpa Wave hands, but only the right arm, right hand and right wrist camera are released. Fingertips only, no phalanx or palm sensing.",
+   "Robot demonstrations use one fixed scene per task (layout, start pose, table height); human demonstrations vary objects, backgrounds and glove colour (black or white).",
+   "Human actions are derived: hand_action and pose_action are the next frame's joint angles and wrist pose.",
+   "No per-frame timestamps and no object, scene or operator labels; 30 Hz is the paper's resampling rate. The robot metadata names a head stereo camera that is not released.",
+   "Per-frame RGB is stored as blosc-lz4 Zarr chunks inside large tar shards with no per-episode byte offsets; fetching one episode means walking the tar headers or streaming the shard from its start.",
+   "Many episodes are shorter than 10 s (mean 7.7 s for robot switch, 8.7 s for human flip_book, 9.1 s for human switch)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2609.34182",
+   "project": "https://uni-vta.github.io/",
+   "data": "https://huggingface.co/datasets/Chopper233/UVTA",
+   "code": "https://github.com/uni-vta/UVTA"
+  },
+  "image": "https://uni-vta.github.io/static/images/system.jpg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "wrist",
+     "count": 1,
+     "model": null,
+     "type": "fisheye",
+     "resolution": "480x384",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 1,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "exoskeleton",
+     "system": "passive 22-DoF linkage exoskeleton (carbon-fibre links, dorsal mount, joint encoders)",
+     "note": "human; encoder FK -> fingertip poses in the Sharpa Wave palm frame -> constrained IK to the 22 Sharpa Wave joint angles, released as proprioception"
+    },
+    {
+     "target": "wrist",
+     "method": "optical_tracker",
+     "system": "HTC VIVE Tracker 3.0 x 2 (one fixed to the table as reference, one on the wrist via a 3D-printed adapter)",
+     "note": "human; released as pose (xyz + rotation vector) in the robot base frame after calibration"
+    },
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Sharpa Wave right-hand joint angles (22) and commanded targets",
+     "note": "robot"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "Sharpa North right-arm forward kinematics (arm joints + 5 torso motors)",
+     "note": "robot; observed and commanded end-effector pose"
+    },
+    {
+     "target": "fingers",
+     "method": "other",
+     "system": null,
+     "note": "robot demonstrations are teleoperated; the teleoperation device is not stated"
+    }
+   ],
+   "other": [
+    "commanded wrist pose and 22 hand joint targets (robot: teleop commands; human: next-frame state)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2609.34182 (abstract page and PDF v2, incl. Appendix I-IV)",
+   "https://uni-vta.github.io/ (text, static/images/system.jpg, static/images/dataset.jpg)",
+   "https://huggingface.co/datasets/Chopper233/UVTA (README.md, MANIFEST.json, PLAN.json, *.tar.json, full repo tree)",
+   "https://huggingface.co/datasets/Chopper233/UVTA switch/robot-00000.tar episode_0 and switch/human-00000.tar episode_0 (all files: .zattrs, rgb, tactile, proprioception, hand_action, pose, pose_action)",
+   "https://huggingface.co/datasets/Chopper233/UVTA .zattrs and tactile arrays of 37 more episodes read by tar-header range reads (all 5 tasks, both embodiments)",
+   "https://github.com/uni-vta/UVTA (README.md, LICENSE, configs/flip_book.yaml, deform_to_human/fsr_region.py, deform_to_taxel.py, core.py, glove_sharpa_mapping/out/*right.json)",
+   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 (README.md, season folder names of all 59 tasks) for the overlap check",
+   "https://huggingface.co/datasets/zekaiwang/trex_dataset (meta/info.json) for the overlap check"
+  ],
+  "unconfirmed": [
+   "frames = 2,124,537 and hours = 19.7 derived from MANIFEST.json: per shard, frames = n_files - 14 x n_episodes - 1, since each episode holds T per-frame RGB chunk files plus 14 metadata and array files and each shard one task-level .zgroup (checked on the two extracted episodes: 280 = 266 + 14, 321 = 307 + 14). 2,124,537 / 30 Hz = 19.7 h; human 1,758,592 frames (16.3 h), robot 365,945 (3.4 h). Mean episode length by task (human / robot): flip_book 8.7 / 9.7 s, light_bulb 13.6 / 31.3 s, switch 9.1 / 7.7 s, ball 10.2 / 12.6 s, tube 17.1 / 20.1 s.",
+   "taxels_per_hand = 100 from the release metadata (fsr_layout: 20 taxels per finger at glove payload blocks 0-19 ... 160-179) and deform_to_human/fsr_region.py; the paper describes each fingertip FSR array as 'four sensing regions, each with an active area of 15 x 15 mm2', which matches the 4 pooled regions. The glove payload has 240 values; whether the other 140 positions carry sensors is not stated (the paper says sensing is fingertip-only).",
+   "Glove maker, FSR model, native glove sampling rate and force range are not stated; a code comment in deform_to_human/core.py refers to a '~0..4095 glove scale' (12-bit ADC, inferred).",
+   "Robot platform name 'Sharpa North' (fixed base, two 22-DoF Sharpa Wave hands) is from the paper; the release metadata names URDF north_poc2_2 and station POC22002 in the source paths.",
+   "Pose xyz unit not stated (values 0.15-1.1, consistent with metres); joint-angle unit not stated (range about -0.4 to 1.25, consistent with radians).",
+   "Wrist camera model and native resolution not stated; released frames are 480x384 RGB (resize_hw [384, 480]). The decoded robot and human frames are fisheye views with near-neutral colour.",
+   "Collection dates from source file paths in the episode metadata: human 2026-07-05 to 2026-08-21, robot 2026-07-08 to 2026-08-22 (shard-first and probed episodes only).",
+   "Human B_side regions were zero for the whole switch human episode_0 but active in flip_book human episode_3; no dead region is claimed.",
+   "subjects not stated: human source folders carry names such as ZZH-0705, tablecloth-170, light-100, ball_1_ego, dropper_ego, which are not documented.",
+   "Overlap with SharpaDex v1.0: its 495 seasons span 2026-03 to 2026-07-07 on stations POC22002/07/18/21/27/32/48/50/54/61/65 (POC22002 only in deal_playing_cards, 2026-07-01 to 07-03); the UVTA robot seasons seen (POC22002, 2026-07-08 to 08-22) are not among them, and SharpaDex is bimanual LeRobot with 60-D fingertip wrench and tactile videos. Related task themes exist (SharpaDex turn_book_pages, transfer_liquid_with_dropper). Checked by season names of 6 robot shard-first episodes and 20 probed robot episodes, not every UVTA episode.",
+   "Overlap with T-Rex (catalog trex): different platform (Dexmate Vega-1 + two Sharpa Wave, robot_type dexmate_vega1_and_sharpa_wave), format (LeRobot v3) and tasks. UVTA uses the pretrained T-Rex model as a baseline post-trained on UVTA robot demos; the paper does not train on the T-Rex dataset or any other public dataset."
+  ]
+ },
+ "license": {
+  "name": "Apache-2.0",
+  "redistribution": "allowed",
+  "quote": "HF dataset card metadata: 'license: apache-2.0'. The GitHub code is MIT ('MIT; see LICENSE').",
+  "url": "https://huggingface.co/datasets/Chopper233/UVTA/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/Chopper233/UVTA",
+  "access": "open",
+  "format": "28 uncompressed tar shards <task>/<embodiment>-NNNNN.tar, each holding Zarr v2 stores <task>/<embodiment>/episode_<k>/ with camera_0/rgb (one blosc-lz4 chunk per frame), tactile, proprioception, hand_action, pose, pose_action (one blosc-lz4 chunk each) and .zattrs meta_json; MANIFEST.json lists episode ids, file counts and SHA-256 per shard",
+  "total_size": "482 GB (482,351,124,480 B of tar; human 408.7 GB, robot 69.7 GB)",
+  "per_episode": "~35-200 MB (RGB dominates: ~150-260 kB per frame); non-RGB arrays < 100 kB",
+  "partial_fetch": "HTTP range requests on the shard: hop tar headers (each episode starts with its .zattrs, the RGB chunks are in lexicographic order, tactile/0.0 is the last member) to read T and the touch array with ~5 requests (~1.6 MB) per episode; one whole episode is one contiguous byte range"
+ },
+ "channels": [
+  {
+   "name": "camera_0/rgb",
+   "kind": "camera",
+   "shape": "(T, 384, 480, 3) uint8",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "right-wrist fisheye camera (robot: observe/vision/right_wrist/fisheye/rgb; human: camera on the exoskeleton calibrated to the robot's camera-to-end-effector transform)",
+   "note": "both embodiments; one blosc-lz4 Zarr chunk per frame; camera model not stated"
+  },
+  {
+   "name": "tactile (human)",
+   "kind": "pressure_scalar",
+   "shape": "(T, 20) float32",
+   "rate_hz": 30,
+   "unit": "raw glove counts, region mean (not stated; up to ~1,700 seen)",
+   "frame": "[thumb, index, middle, ring, little] x [A tip (5 taxels), B side (3), C middle (9), D side (3)]; right hand, B = thumb side, D = little side",
+   "note": "FSR glove source tactile/glove/right/values (240-value payload, fingertip blocks of 20) pooled by fsr_region.py; nearest-time aligned to camera frames"
+  },
+  {
+   "name": "tactile (robot)",
+   "kind": "pressure_scalar",
+   "shape": "(T, 20) float32",
+   "rate_hz": 30,
+   "unit": "sum of grayscale deformation-map pixels per glove-taxel region, region mean (up to ~140,000 seen; 0 at rest)",
+   "frame": "same 20-column layout as the human glove",
+   "note": "derived from Sharpa Wave observe/tactile/right_<finger>/deform (240x240 grayscale) by the region maps in deform_to_human/glove_sharpa_mapping; the deform maps and the per-finger force magnitudes listed in .zattrs are not released"
+  },
+  {
+   "name": "proprioception (human)",
+   "kind": "hand_pose",
+   "shape": "(T, 22) float32",
+   "rate_hz": 30,
+   "unit": "not stated (radians by range)",
+   "frame": "Sharpa Wave joint order",
+   "note": "exoskeleton encoders -> fingertip FK -> constrained IK to Sharpa Wave joints (state/retarget/right_hand/joint/position)"
+  },
+  {
+   "name": "proprioception (robot)",
+   "kind": "joint_state",
+   "shape": "(T, 22) float32",
+   "rate_hz": 30,
+   "unit": "not stated (radians by range)",
+   "frame": "Sharpa Wave right-hand joints",
+   "note": "state/right_hand/joint_angle"
+  },
+  {
+   "name": "hand_action",
+   "kind": "action",
+   "shape": "(T, 22) float32",
+   "rate_hz": 30,
+   "unit": "not stated (radians by range)",
+   "frame": "Sharpa Wave right-hand joints",
+   "note": "robot: raw teleop command stream action/right_hand/joint_angle; human: proprioception shifted by +1 frame (last frame repeated)"
+  },
+  {
+   "name": "pose",
+   "kind": "hand_pose",
+   "shape": "(T, 6) float32",
+   "rate_hz": 30,
+   "unit": "xyz not stated (metres by range) + axis-angle rotation vector (rad)",
+   "frame": "robot base frame",
+   "note": "robot: FK of right-arm joints + torso motors[:5] from the north_poc2_2 URDF; human: VIVE wrist tracker relative to the table tracker, retargeted (state/retarget/right_hand_pose)"
+  },
+  {
+   "name": "pose_action",
+   "kind": "action",
+   "shape": "(T, 6) float32",
+   "rate_hz": 30,
+   "unit": "as pose",
+   "frame": "robot base frame",
+   "note": "robot: FK of commanded arm joints; human: pose shifted by +1 frame"
+  },
+  {
+   "name": ".zattrs meta_json",
+   "kind": "other",
+   "shape": "JSON string",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "source HDF5 path (task, station or session folder, date), T, valid window into the source, channel sources and layouts"
+  }
+ ],
+ "episode_index": {
+  "where": "MANIFEST.json (per shard: task, embodiment, episode ids, n_files, tar_bytes, sha256) + per-episode .zattrs meta_json (T, source file path)",
+  "count": 5749,
+  "fields": [
+   "task",
+   "embodiment",
+   "episode id",
+   "T (frames, in .zattrs)",
+   "source file path (in .zattrs)"
+  ],
+  "note": "episode ids restart at episode_0 per task and embodiment. No object, scene, operator or success labels. Paper task names: flip_book = Flip Page, light_bulb = Screw Light Bulb, switch = Toggle Switch, ball = Ball Classification, tube = Liquid Transfer with a Dropper.",
+  "tasks": [
+   "flip_book",
+   "light_bulb",
+   "switch",
+   "ball",
+   "tube"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Public, ungated HF release under Apache-2.0 (dataset card metadata), which allows redistribution with attribution. Both embodiments carry touch, so each task gets one human and one robot episode. Label the collection 'Apache-2.0'.",
+  "prefix": "uv_",
+  "tasks_total": 5,
+  "tasks_sampled": 5,
+  "episodes": [
+   {
+    "id": "flip_book/robot/episode_4",
+    "task": "flip_book (Flip Page)",
+    "embodiment": "robot",
+    "scene": "fixed robot scene for the task (book on table)",
+    "subject": null,
+    "duration_s": 10.77,
+    "window": null,
+    "byte_range": "flip_book/robot-00000.tar bytes 249036288-325185023 (72.6 MB)",
+    "why": "323 frames. Contact for >= 1 s on all five fingers: thumb A 4.8 s (peak 36,777), index A/C, middle A 4.4 s / C 3.2 s (peak 123,832), ring A/C, little A 4.7 s / C. Episodes 0-3 and 7 are 8.3-9.5 s; 4-6 are 10.4-10.8 s and 4 has the most fingers in contact."
+   },
+   {
+    "id": "flip_book/human/episode_3",
+    "task": "flip_book (Flip Page)",
+    "embodiment": "human",
+    "scene": "source folder tablecloth-170 (not documented)",
+    "subject": null,
+    "duration_s": 10.9,
+    "window": null,
+    "byte_range": "flip_book/human-00000.tar bytes 218985984-305687551 (82.7 MB)",
+    "why": "327 frames. All 20 columns non-zero; 13 regions in contact for >= 1 s on thumb, middle, ring and little (thumb A 4.8 s, peak 686; little D peak 561). Of human episodes 0-7, only 3, 4 and 6 reach 10 s."
+   },
+   {
+    "id": "light_bulb/robot/episode_103",
+    "task": "light_bulb (Screw Light Bulb)",
+    "embodiment": "robot",
+    "scene": "fixed robot scene for the task (bulb in socket)",
+    "subject": null,
+    "duration_s": 27.57,
+    "window": null,
+    "byte_range": "light_bulb/robot-00001.tar bytes 0-206824959 (197.2 MB)",
+    "why": "827 frames, first episode of shard robot-00001. Contact >= 1 s on 8 regions of thumb, index and middle (thumb A 9.4 s, peak 88,499; thumb C peak 100,792; index D 3.7 s). episode_0 (shard robot-00000) is 63 s and would need a cut."
+   },
+   {
+    "id": "light_bulb/human/episode_4",
+    "task": "light_bulb (Screw Light Bulb)",
+    "embodiment": "human",
+    "scene": "source folder light-100 (not documented)",
+    "subject": null,
+    "duration_s": 13.37,
+    "window": null,
+    "byte_range": "light_bulb/human-00000.tar bytes 240278528-316981759 (73.1 MB)",
+    "why": "401 frames, no all-zero column. Contact >= 1 s on thumb A 2.3 s, thumb C 3.3 s and middle C 2.1 s (peak 541). Episodes 1 and 2 show the same pattern with weaker peaks; 0 and 3 are under 10 s."
+   },
+   {
+    "id": "switch/robot/episode_11",
+    "task": "switch (Toggle Switch)",
+    "embodiment": "robot",
+    "scene": "fixed robot scene for the task (circuit breaker on table)",
+    "subject": null,
+    "duration_s": 10.5,
+    "window": null,
+    "byte_range": "switch/robot-00000.tar bytes 378308608-426963967 (46.4 MB)",
+    "why": "315 frames. Contact >= 1 s on thumb A 5.7 s (peak 123,733), thumb C, index C 5.3 s, middle A 4.7 s. Of robot episodes 0-16 only 11 (10.5 s) and 14 (11.2 s) reach 10 s; 14 has thumb and index only."
+   },
+   {
+    "id": "switch/human/episode_0",
+    "task": "switch (Toggle Switch)",
+    "embodiment": "human",
+    "scene": "circuit breaker on table (fisheye view checked)",
+    "subject": null,
+    "duration_s": 10.23,
+    "window": null,
+    "byte_range": "switch/human-00000.tar bytes 0-56965119 (54.3 MB; already extracted locally)",
+    "why": "307 frames. Contact >= 1 s on thumb A/C/D (peak 1,162), index A/C, middle A/C/D and little A. Ring regions and B_side of thumb, index, middle and little stay 0 for the whole episode (ring not used in this task)."
+   },
+   {
+    "id": "ball/robot/episode_0",
+    "task": "ball (Ball Classification)",
+    "embodiment": "robot",
+    "scene": "fixed robot scene for the task (balls and cups)",
+    "subject": null,
+    "duration_s": 14.43,
+    "window": null,
+    "byte_range": "ball/robot-00000.tar bytes 0-62308863 (59.4 MB)",
+    "why": "433 frames. Contact >= 1 s on thumb A/C (6.3 s, peak 86,180), index C (peak 103,015), middle B/C (5.7-5.8 s), during the grasp of a ball."
+   },
+   {
+    "id": "ball/human/episode_0",
+    "task": "ball (Ball Classification)",
+    "embodiment": "human",
+    "scene": "source folder ball_1_ego (not documented)",
+    "subject": null,
+    "duration_s": 14.8,
+    "window": null,
+    "byte_range": "ball/human-00000.tar bytes 0-104217599 (99.4 MB)",
+    "why": "444 frames, no all-zero column. Contact >= 1 s on 7 regions of thumb, index and middle for ~6.5 s (middle B peak 1,077)."
+   },
+   {
+    "id": "tube/robot/episode_0",
+    "task": "tube (Liquid Transfer with a Dropper)",
+    "embodiment": "robot",
+    "scene": "fixed robot scene for the task (dropper, flask, cup)",
+    "subject": null,
+    "duration_s": 22.57,
+    "window": null,
+    "byte_range": "tube/robot-00000.tar bytes 0-110328319 (105.2 MB)",
+    "why": "677 frames. Long two-finger contact while holding and squeezing the dropper: thumb A 15.3 s, thumb C 17.8 s, index C 18.6 s, index A 6.2 s (peaks 10,194-38,202)."
+   },
+   {
+    "id": "tube/human/episode_0",
+    "task": "tube (Liquid Transfer with a Dropper)",
+    "embodiment": "human",
+    "scene": "source folder dropper_ego (not documented)",
+    "subject": null,
+    "duration_s": 26.63,
+    "window": null,
+    "byte_range": "tube/human-00000.tar bytes 0-177483263 (169.3 MB)",
+    "why": "799 frames, no all-zero column. Thumb and index regions in contact for ~18 s (thumb C peak 1,277, thumb D 1,097, index C 740)."
+   }
+  ],
+  "fetch_estimate": "~960 MB: the 10 episodes are contiguous byte ranges in their shards (listed per episode, 46-197 MB each, RGB dominates); switch/human/episode_0 is already extracted (/tmp/claude-1003/-home-yxma-src-visual-wrist-tactile-cosmos/d1a1d10f-d10b-45ec-a896-918e856e78ff/scratchpad/survey_uvta/dl_human). Re-hosted media: one 480x384 fisheye stream per episode re-encoded to H.264 (few MB each). Episode JSON: 20 touch + 22 joint values per frame at 30 Hz, < 1 MB.",
+  "rules_applied": "Tasks: 5 tasks (<= 6), all taken. Episodes: one per task per embodiment, 10 in total (the upper limit), because both the glove and the robot carry touch and they are recorded with different sensors. Candidates: the first episodes of each shard, read with tar-header range reads (37 episodes probed: T from .zattrs, tactile array decoded). Contact: a region above its baseline (human mean of first 5 frames, robot first frame, as in the paper) by max(10% of the episode range, 50 counts human / 2,000 robot) for >= 1 s. Length: all picks 10.2-27.6 s, no window cut. All 20 tactile columns are present in every pick; columns that stay 0 are named in 'why'. Budget within 2 MB JSON, ~30 MB media per episode and 20 GB download.",
+  "deviations": [
+   "Two episodes per task (one per embodiment) instead of one per task; total stays at 10.",
+   "Episodes were picked from the start of each shard (cheapest to reach); no random sampling across the full release."
+  ]
+ }
+}

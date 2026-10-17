@@ -1,0 +1,342 @@
+{
+ "id": "tacdex3d",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "tacdex3d",
+  "name": "3dtacdex",
+  "title": "Canonical Representation and Force-Based Pretraining of 3D Tactile for Dexterous Visuo-Tactile Policy Learning",
+  "authors": "Tianhao Wu et al.",
+  "year": 2025,
+  "venue": "ICRA 2025 (arXiv 2409.17549)",
+  "summary": "Right LEAP hand on a JAKA MiniCobo arm with 8 PaXini 3-axis pads (15 taxels each, thumb to ring fingertips and pulps), teleoperated through HaMeR + DexPilot for box opening, cap flipping, assembly and play data, with 2 fixed RGB-D views at 5 Hz.",
+  "embodiment": "robot",
+  "hand": "LEAP Hand (16 DoF, right) on a JAKA MiniCobo 6-DoF arm",
+  "bimanual": false,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 120,
+   "sensors_per_hand": 8,
+   "coverage": [
+    "tip",
+    "phalanx"
+   ],
+   "rate_hz": 5,
+   "note": "data/right_tactile_data_fingers (T, 8, 15, 3) float64: 8 pads x 15 taxels x 3-axis force, raw uncalibrated readings (whole numbers; -100 to 105 over all 47,124 frames). Pad order thumb_tip, thumb_pulp, index_tip, index_pulp, middle_tip, middle_pulp, ring_tip, ring_pulp; tips PX6AX-GEN1-DP-S2716, pulps PX6AX-GEN1-IP-S2516 (3x5 taxels each per the paper). No little finger on the LEAP hand, no palm pads.",
+   "maker": "PaXini",
+   "model": "PX-6AX GEN1 (PX6AX-GEN1-DP-S2716 fingertip, PX6AX-GEN1-IP-S2516 finger pulp)",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "multiview_rgb",
+   "depth",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 2.6,
+   "episodes": 328,
+   "frames": 47124,
+   "tasks": 4,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "47,124 frames at 5 Hz (~2.6 h), 328 continuous segments from 283 source trajectories, 4 task stores (assembly 22,069 / flip 12,570 / play_data 8,814 / openbox 3,671 frames)"
+  },
+  "availability": "public",
+  "access": "Hugging Face kingchou007/3dtacdex, ungated: one ZIP64 archive (ZIP_STORED) per task holding a Zarr v2 store, 174 GB in total; single arrays and frames can be range-read from the archives.",
+  "license": "not stated",
+  "caveats": [
+   "License not stated: the card says 'final release version and license are not yet specified' and that no license is inferred from public availability.",
+   "Public review draft for Open-X-Tactile (OXT); official acceptance pending. Uploaded by a paper co-author (kingchou007, Jinzhou Li per the card contact).",
+   "5 Hz: demonstrations were recorded at the policy rate (paper: collection and inference at 5 Hz).",
+   "Tactile values are uncalibrated; axis signs, physical slot placement and camera conventions still need collection-owner confirmation (card).",
+   "openbox: the four middle- and ring-finger pads read zero in every frame; the owner states this is expected.",
+   "25,846 frames carry a source 'nouse' label whose training meaning is not documented; play_data mixes train (frames 0-7,705) and test (7,706-8,813), split by data/source_split.",
+   "No success labels; instructions are coarse labels derived from directory names. The one-trajectory reorient task (195 frames) was removed.",
+   "RGB is stored per frame as lossless Zarr chunks (~1.9 MB main + ~1.0 MB secondary per frame); a 20 s segment costs ~290 MB for both views."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2409.17549",
+   "project": "https://3dtacdex.github.io/",
+   "data": "https://huggingface.co/datasets/kingchou007/3dtacdex",
+   "code": "https://github.com/tianhaowuhz/3dtacdex"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": null,
+     "type": "RGB-D",
+     "resolution": "1280x720",
+     "fps": 5,
+     "mount": "static",
+     "note": "data/camera_main_rgb + raw/camera_1_depth_image (uint16, unit not stated). The paper names an Intel RealSense D415 mounted diagonally to the robot as the policy camera."
+    },
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": null,
+     "type": "RGB-D",
+     "resolution": "1024x768",
+     "fps": 5,
+     "mount": "static",
+     "note": "data/camera_secondary_rgb + raw/camera_2_depth_image; card: 'additional fixed external camera'. The paper's second camera is a D415 for HaMeR hand tracking; whether this is it is not stated."
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "LEAP Hand 16 joints (source radians) + commanded joints, velocities, efforts in raw/",
+     "note": "joint-to-URDF mapping in OXT_Submission_3dtacdex/mapping_notes.json"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "JAKA MiniCobo 6 joints + Link_6 flange pose in robot base (m + rotation vector)",
+     "note": "not a calibrated palm pose"
+    },
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "HaMeR on an Intel RealSense D415 + DexPilot retargeting",
+     "note": "teleoperation (paper Sec. III); operator hand pose not released"
+    }
+   ],
+   "other": [
+    "source lineage per frame (record SHA256, source episode id, frame index, version group, train/test split)",
+    "coarse English sub-task instruction per frame"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2409.17549",
+   "https://arxiv.org/html/2409.17549 (Sec. III robot system, Sec. V tasks)",
+   "https://huggingface.co/datasets/kingchou007/3dtacdex (README.md, API info, file tree, QUALITY_REPORT.md, CHANGELOG.md, OXT_COMPLIANCE.md)",
+   "https://huggingface.co/datasets/kingchou007/3dtacdex OXT_Submission_3dtacdex/metadata.json, sensor_details.json, mapping_notes.json",
+   "https://huggingface.co/datasets/kingchou007/3dtacdex openbox/openbox.zarr.zip (ZIP central directory; every .zarray/.zattrs; data/timestamps, meta/episode_ends, data/right_tactile_data_fingers, data/sub_task_instruction chunks)",
+   "https://huggingface.co/datasets/kingchou007/3dtacdex {openbox,flip,play_data,assembly}.zarr.zip (all chunks of timestamps, episode_ends, right_tactile_data_fingers, sub_task_instruction, source_split, source_group)"
+  ],
+  "unconfirmed": [
+   "hours = 2.6 derived: 47,124 frames x 0.2 s (timestamps step 0.200 s, checked in the openbox, flip, play_data and assembly stores).",
+   "episodes = 328 counts meta/episode_ends segments; the card says they come from 283 source trajectories and are 'not 328 independent human demonstrations'.",
+   "Coverage: pulp pads sit on the LEAP 'dip' link (middle phalanx) per mapping_notes.json, so tip + phalanx.",
+   "Tactile principle not stated by the card or the paper; the paper says each taxel measures a 3-axis force. The catalog's hardware entry paxini_px6ax lists PX-6AX as magnetic (Hall array) for GEN3/GEN4; this release uses GEN1.",
+   "Camera models of the released views not stated in the release; RGB sizes from the .zarray shapes (1280x720 and 1024x768).",
+   "Depth unit not stated ('original source values; per-camera calibration not asserted').",
+   "Card contact kingchou007@gmail.com; author name Jinzhou Li is inferred from the handle and the author list, not stated."
+  ],
+  "zh": {
+   "name": null,
+   "title": null,
+   "maker": "北京大学",
+   "en": "official",
+   "note": "Dataset card and metadata.json give the institution as '北京大学（Peking University）'; QUALITY_REPORT.md is in Chinese."
+  }
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": "Snapshot: local-oxt-task-merged-v2 (local conversion identifier; final release version and license are not yet specified). ... No license is inferred from public availability.",
+  "url": "https://huggingface.co/datasets/kingchou007/3dtacdex/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/kingchou007/3dtacdex",
+  "access": "open",
+  "format": "<task>/<task>.zarr.zip: ZIP64, ZIP_STORED, one Zarr v2 store per task (data/ canonical arrays, raw/ source depth/commands/efforts, meta/episode_ends); blosc-zstd chunks of 256 frames for state/tactile, 1 frame per chunk for images",
+  "total_size": "174 GB (assembly 81.1 GB, flip 46.8 GB, play_data 32.7 GB, openbox 13.5 GB)",
+  "per_episode": "~2.9 MB per frame for both RGB views + ~0.76 MB depth; a 20 s (100-frame) segment ~290 MB RGB; tactile + states < 1 MB per store",
+  "partial_fetch": "HTTP range reads: read the ZIP central directory (1.5 MB for openbox), then fetch single Zarr chunks by local-header offset; tactile, timestamps and episode_ends for all four stores cost a few MB"
+ },
+ "channels": [
+  {
+   "name": "data/camera_main_rgb",
+   "kind": "camera",
+   "shape": "(T, 720, 1280, 3) uint8",
+   "rate_hz": 5,
+   "unit": "RGB",
+   "frame": "fixed external camera",
+   "note": "lossless Zarr, ~1.9 MB per frame"
+  },
+  {
+   "name": "data/camera_secondary_rgb",
+   "kind": "camera",
+   "shape": "(T, 768, 1024, 3) uint8",
+   "rate_hz": 5,
+   "unit": "RGB",
+   "frame": "additional fixed external camera",
+   "note": "~1.0 MB per frame"
+  },
+  {
+   "name": "raw/camera_1_depth_image, raw/camera_2_depth_image",
+   "kind": "depth",
+   "shape": "(T, 720, 1280) / (T, 768, 1024) uint16",
+   "rate_hz": 5,
+   "unit": "not stated",
+   "frame": "same cameras as main / secondary RGB",
+   "note": null
+  },
+  {
+   "name": "data/right_tactile_data_fingers",
+   "kind": "force_vector",
+   "shape": "(T, 8, 15, 3) float64",
+   "rate_hz": 5,
+   "unit": "uncalibrated source readings",
+   "frame": "per pad, sensor axes; no axis transform applied",
+   "note": "pads 0-7 = thumb_tip, thumb_pulp, index_tip, index_pulp, middle_tip, middle_pulp, ring_tip, ring_pulp"
+  },
+  {
+   "name": "data/right_tactile_area_fingers, right_tactile_sensor_fingers, right_tactile_type_fingers",
+   "kind": "other",
+   "shape": "(T, 8) int32 / (T,) str / (T,) str",
+   "rate_hz": 5,
+   "unit": null,
+   "frame": null,
+   "note": "OXT functional-area ids and sensor/type labels"
+  },
+  {
+   "name": "data/right_hand_joints (+ right_hand_joints_idx)",
+   "kind": "joint_state",
+   "shape": "(T, 16) float32 (+ (T, 16) int32 slot ids)",
+   "rate_hz": 5,
+   "unit": "rad (source)",
+   "frame": "LEAP joints",
+   "note": null
+  },
+  {
+   "name": "data/right_arm_joints",
+   "kind": "joint_state",
+   "shape": "(T, 6) float64",
+   "rate_hz": 5,
+   "unit": "rad (source)",
+   "frame": "JAKA joints",
+   "note": null
+  },
+  {
+   "name": "data/right_wrist_pose (raw/arm_ee_pose)",
+   "kind": "hand_pose",
+   "shape": "(T, 6) float64",
+   "rate_hz": 5,
+   "unit": "m + rotation vector rad",
+   "frame": "JAKA Link_6 flange in robot base",
+   "note": "not a palm or camera pose"
+  },
+  {
+   "name": "raw/hand_commanded_joint_position, raw/arm_commanded_joint_position, raw/hand_command_present",
+   "kind": "action",
+   "shape": "(T, 16) float32 / (T, 6) float64 / (T,) bool",
+   "rate_hz": 5,
+   "unit": "rad",
+   "frame": "joint targets",
+   "note": "missing hand commands are NaN with presence False (26 records)"
+  },
+  {
+   "name": "raw/hand_joint_velocity, raw/hand_joint_effort",
+   "kind": "joint_state",
+   "shape": "(T, 16) float32 each",
+   "rate_hz": 5,
+   "unit": "not stated",
+   "frame": "LEAP joints",
+   "note": null
+  },
+  {
+   "name": "data/timestamps",
+   "kind": "other",
+   "shape": "(T,) float64",
+   "rate_hz": 5,
+   "unit": "unix s",
+   "frame": null,
+   "note": "strictly increasing within a segment; 0.200 s steps"
+  },
+  {
+   "name": "data/sub_task_instruction",
+   "kind": "language",
+   "shape": "(T,) str",
+   "rate_hz": 5,
+   "unit": null,
+   "frame": null,
+   "note": "one coarse label per store, e.g. 'Open the box with the dexterous hand.'"
+  },
+  {
+   "name": "data/source_record_sha256, source_episode_id, source_frame_index, source_group, source_split; meta/episode_ends",
+   "kind": "other",
+   "shape": "(T,) each; episode_ends (segments,) int64",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "lineage and segment boundaries (exclusive ends)"
+  }
+ ],
+ "episode_index": {
+  "where": "meta/episode_ends per store + data/source_group, source_split, source_episode_id",
+  "count": 328,
+  "fields": [
+   "task store",
+   "source_group (version)",
+   "source_split",
+   "source_episode_id"
+  ],
+  "tasks": [
+   "assembly",
+   "flip",
+   "openbox",
+   "play_data"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "License not stated: the card neither grants nor forbids redistribution ('final release version and license are not yet specified'). Per step 2, re-host and label the collection 'License not stated'. Repo is public and ungated; frames can be range-read.",
+  "prefix": "dt_",
+  "tasks_total": 4,
+  "tasks_sampled": 4,
+  "episodes": [
+   {
+    "id": "assembly:16 (frames 4193-4386)",
+    "task": "assembly",
+    "scene": "fixed lab setup (the only scene)",
+    "subject": "robot: LEAP hand on JAKA, teleoperated (HaMeR + DexPilot)",
+    "source_group": "assembly_random_v2",
+    "duration_s": 38.4,
+    "window": null,
+    "why": "All 8 pads rise more than 5 counts above rest for >= 1 s; highest pad peak in the store (236 = sum of |F| over a pad's 15 taxels). 194 frames at 5 Hz."
+   },
+   {
+    "id": "flip:14 (frames 2749-2865)",
+    "task": "flip",
+    "scene": "fixed lab setup",
+    "subject": "robot: LEAP hand on JAKA, teleoperated",
+    "source_group": "flip_random_v1",
+    "duration_s": 23.0,
+    "window": null,
+    "why": "7 of 8 pads in contact for >= 1 s, peak 139; within 10-60 s (the top-ranked flip segment, 46, has all 8 pads but runs 66.4 s)."
+   },
+   {
+    "id": "openbox:46 (frames 3343-3421)",
+    "task": "openbox",
+    "scene": "fixed lab setup",
+    "subject": "robot: LEAP hand on JAKA, teleoperated",
+    "source_group": "task__openbox_random_v1_refined",
+    "duration_s": 15.6,
+    "window": null,
+    "why": "All 4 live pads (thumb and index, tip and pulp) in contact for >= 1 s, peak 84. Middle and ring pads are zero throughout the openbox store (owner: expected); state this in the episode notes."
+   },
+   {
+    "id": "play_data:22 (frames 829-923)",
+    "task": "play_data",
+    "scene": "fixed lab setup",
+    "subject": "robot: LEAP hand on JAKA, teleoperated",
+    "source_group": "play_data__tactile_play_data_v2_train_numbered (split train)",
+    "duration_s": 18.8,
+    "window": null,
+    "why": "All 8 pads in contact for >= 1 s, highest peak in the store (260)."
+   }
+  ],
+  "fetch_estimate": "485 frames in total. Both RGB views ~2.9 MB per frame = ~1.4 GB (main view alone ~0.9 GB); depth would add ~0.37 GB; tactile, joints and timestamps < 5 MB, already scanned. Fetch by ZIP range reads of single Zarr chunks (no full 13.5-81 GB archive). Re-hosted media: H.264 re-encode of 5 Hz frames, a few MB per clip. Episode JSON: 8 x 15 x 3 values x <= 194 frames, far below 2 MB.",
+  "rules_applied": "Tasks: 4 stores <= 6, so all 4. Episodes: one per task (4 tasks > 3), 4 in total. Contact = pad force magnitude (sum over taxels of |F|) more than 5 counts above the segment's first-10% median for >= 1 s; segments ranked by the number of pads in contact, then peak. Length 10-60 s. Tactile, timestamps and episode_ends for all 4 stores were scanned (a few MB of range reads)."
+ }
+}

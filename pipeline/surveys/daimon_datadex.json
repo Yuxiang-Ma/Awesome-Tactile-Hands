@@ -1,0 +1,449 @@
+{
+ "id": "daimon_datadex",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "daimon_datadex",
+  "name": "Daimon-Infinity DM-DataDex",
+  "title": "TacExoGaze: A Human-Centric Glove Interface for Multi-View Vision-Tactile Data Collection in Dexterous Manipulation",
+  "authors": "Daimon Robotics (authors not listed)",
+  "year": 2026,
+  "venue": "Dataset release (Hugging Face, ModelScope), 2026-04-15; TacExoGaze preprint forthcoming",
+  "summary": "Both hands of human operators in the TacExoGaze exoskeleton (DM-DataDex) with vision-based DM-Tac X sensors on the thumb, index and middle fingertips, released as per-sensor deformation, shear and depth maps alongside exoskeleton finger encoders, wrist, head and eye tracking, stereo headset video and an RGB-D third view over 22 tabletop tasks.",
+  "embodiment": "human",
+  "hand": "Human hands wearing the TacExoGaze exoskeleton glove (DM-DataDex), both hands",
+  "bimanual": true,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 3,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 20,
+   "note": "Three fingertip sensors per hand (thumb, index, middle; 6 per session when both hands are recorded). Per sensor and frame: a deformation map and a shear map (3 planes each) and a depth map (1 plane), uint16, lossless FFV1 in .mov. 802 sessions (2026-01-23 to 03-03): 320x240 maps at 20 fps. 393 sessions tagged newtac/tacV2 (2026-03-19 to 04-03): 384x288 maps at 30 fps plus the raw 640x480 grayscale sensor image (H.264 mp4). Deformation/shear values sit around 30,000 (offset encoding); scale and units are not documented in the card (decoding is left to the Daimon SDK in the gated Daimon-Infinity-Lite repo).",
+   "maker": "Daimon Robotics",
+   "model": "DM-Tac X (label in the card's DM-DataDex figure: 'DM-Tac X 120FPS Vision-based Tactile Sensors')",
+   "principle": "optical",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "hand_pose",
+   "egocentric",
+   "rgb",
+   "depth",
+   "eye_tracking",
+   "language"
+  ],
+  "scale": {
+   "hours": 45.1,
+   "episodes": 10015,
+   "frames": 3927883,
+   "tasks": 22,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "DM-DataDex part: ~45.1 h, 10,015 episodes in 1,195 sessions, 22 tabletop tasks, 3.93M frames at 20 or 30 fps; ~4% of the hours and 6% of the 37.75 TB in the Daimon-Infinity release (card pie chart: 5%), the rest being DM-DataClaw gripper data"
+  },
+  "availability": "public",
+  "access": "Hugging Face daimonrobotics/Daimon-Infinity, folder DataDex_Datasets/ (ungated; 2.28 TB, one LeRobot v3.0 folder per session, single files downloadable); the ModelScope copy requires an application form.",
+  "license": "CC BY-NC-SA 4.0",
+  "caveats": [
+   "This entry covers only the DM-DataDex (TacExoGaze exoskeleton) sessions in DataDex_Datasets/. The rest of Daimon-Infinity (DM-DataClaw/ and the folder named TacExo/, robot_type ugripper_left / ugripper_right / dual_ugripper, ~1,091 h and 35.5 TB) is handheld parallel-gripper (DM-DataClaw) data and is excluded; the TacExo/ folder holds gripper data despite its name.",
+   "Two recording formats: 802 sessions at 20 fps with 320x240 tactile maps and no raw sensor image; 393 sessions (folder tags newtac, tacV2) at 30 fps with 384x288 maps plus the raw 640x480 sensor image. The card describes only 384x288 maps and says video and state are unified at 30 fps.",
+   "Tactile maps are 16-bit FFV1 .mov files (not H.264), 135-250 MB per sensor per session; deformation/shear values are offset-encoded around 30,000 with no documented scale or unit.",
+   "Each stream is one concatenated file per session (5-10 episodes); episodes are cut by from/to timestamps in meta/episodes. Sessions are 0.8-7.4 GB (median 1.6 GB).",
+   "Not every session has both hands: 110 sessions record tactile on the left hand only (Orient and place blocks on peg, pen to cup, Wiping whiteboard on laptop), 15 on the right hand only, and 7 have 1-2 sensors on one hand. 43 Store Allen keys sessions have no camera streams.",
+   "One wrist pose is nearly constant (position range < 2 cm over the session) in 165 (left) and 335 (right) of 1,094 sessions checked. In the pouring sessions the third-view video shows both hands on the cup while the left wrist pose stays within ~2 mm, so wrist tracking is missing in at least some sessions.",
+   "Eye pose (gaze) is constant in 184 of 1,094 sessions, 158 of them 30 fps sessions, i.e. gaze is mostly not recorded in the newer format.",
+   "observation.state and action share the gripper/robot layout of the card (114-D / 111-D); robot, gripper and IMU dimensions are the placeholder 9930 throughout DataDex, and action equals the recorded state (human demonstration).",
+   "Upload incomplete when listed (repo last modified 2026-10-17): 28 sessions (275 episodes, 1.3 h) lack 510 of their declared video files, 8 sessions have none, and 30 lack meta/episodes and meta/stats.json.",
+   "No operator, scene or object labels: DataDex sessions have no episodes_metadata.json; the task label (meta/tasks.parquet) is the only annotation. 'Wiping the whiteboard clean' is spelled two ways.",
+   "The TacExoGaze preprint named in the card's citation is not published; the arXiv paper linked from the card (2610.20320, TacClaw-Infinity) covers the gripper data only."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity",
+   "data_mirror": "https://modelscope.cn/datasets/daimonrobotics/Daimon-Infinity",
+   "code": "https://modelscope.cn/datasets/daimonrobotics/Daimon-Infinity-Lite",
+   "related_paper": "https://arxiv.org/abs/2610.20320"
+  },
+  "image": "https://modelscope.cn/datasets/daimonrobotics/images/resolve/master/images/datadex_en.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 2,
+     "model": null,
+     "type": "stereo",
+     "resolution": "640x480",
+     "fps": 20,
+     "mount": "head"
+    },
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": null,
+     "type": "RGB-D",
+     "resolution": "640x480",
+     "fps": 20,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "exoskeleton",
+     "system": "TacExoGaze exoskeleton position encoders",
+     "note": "observation.state finger0-finger35: 18 values per hand (left 0-17, right 18-35); unit not stated (about -1.6 to 1.6, likely rad)"
+    },
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "wrist-mounted 'VSLAM & IMU Tracker' (card figure label), same tracking system as the headset; model not named",
+     "note": "position + quaternion per wrist in observation.state; nearly constant for one wrist in ~45% of checked sessions"
+    },
+    {
+     "target": "body",
+     "method": "other",
+     "system": "VR headset 6-DoF head pose (headset model not named)",
+     "note": "head_x..head_qw in observation.state"
+    }
+   ],
+   "other": [
+    "eye tracking: left/right eye pose (constant offset + rotation quaternion) from the VR headset",
+    "third-view camera 6-DoF pose from an attached tracker (third_x..third_qw)",
+    "per-fingertip deformation, shear and depth maps (16-bit) and, in the 30 fps sessions, raw 640x480 sensor images",
+    "tacV2_URDF.zip (17.6 MB) at the repo root, not opened"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity (README.md, README_CN.md, API info, recursive tree of DataDex_Datasets/ and TacExo/, treesize of each top folder)",
+   "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity/tree/main/DataDex_Datasets (meta/info.json and meta/tasks.parquet of all 1,195 sessions; meta/stats.json of 1,165; meta/episodes of 21; data parquet of 3)",
+   "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity DM-DataClaw/ and TacExo/ session meta/info.json (570 sessions, for the hour split)",
+   "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity/tree/main/DataDex_Datasets/tacexo_Fold_the_towels_pc_0206_110646 (ffprobe of video headers; one decoded frame of deformation, shear, depth, headset and third view)",
+   "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity/tree/main/DataDex_Datasets/tacexo_Folding_Polo_pc_newtac_0319_100930 (ffprobe; one raw tactile frame and one deformation/depth frame)",
+   "https://modelscope.cn/datasets/daimonrobotics/images/resolve/master/images/datadex_en.png (card figure)",
+   "https://modelscope.cn/datasets/daimonrobotics/images/resolve/master/images/dataset_share_pie.png (card figure)",
+   "https://www.modelscope.cn/api/v1/datasets/daimonrobotics/Daimon-Infinity (card, license, gating fields; file tree refused: no access)",
+   "https://www.modelscope.cn/api/v1/datasets/daimonrobotics/Daimon-Infinity-Lite (README)",
+   "https://www.qbitai.com/2026/04/403701.html",
+   "https://arxiv.org/abs/2610.20320 (abstract and HTML)",
+   "https://github.com/daimon-robotics/TacClaw-Infinity (README, file tree)"
+  ],
+  "unconfirmed": [
+   "hours=45.1 derived: sum over the 1,195 DataDex sessions of meta/info.json total_frames / fps (802 sessions at 20 fps = 26.1 h, 393 at 30 fps = 18.9 h). Includes 1.3 h in 28 sessions whose video files are partly missing. episodes=10,015 and frames=3,927,883 are sums of total_episodes / total_frames (frames mix 20 and 30 fps).",
+   "Share of the release: DataDex_Datasets/ is 2,281,886,948,206 B of 37,748,239,156,224 B in the three data folders (HF treesize; DM-DataClaw/ 35.09 TB, TacExo/ 0.37 TB) = 6.0% by bytes. By hours, DataDex 45.1 h vs 1,090.7 h of gripper data (563 DM-DataClaw + 7 TacExo session info.json files) = 4.0%. The card's pie chart gives DM-DataDex 5%.",
+   "Hours claims conflict: the card says the first 1,000 h are released and 10,000+ h will be open-sourced, and its statistics section is 'based on approximately 1,209 hours'; QbitAI (2026-04-20) writes '其中 10000 小时数据直接开源' [of which 10,000 hours are directly open-sourced]; the TacClaw-Infinity paper and GitHub README give 10,000+ h collected; the files sum to ~1,136 h (all devices).",
+   "tasks=22: 23 task strings in meta/tasks.parquet over all sessions, two of which ('Wiping_the_whiteboard_clean', 'Wiping the whiteboard clean') are the same task. Session folder names carry extra tags (pc, laptop, newtac, tacV2, right_hand) whose meaning is not documented.",
+   "Sensor model: the card's DM-DataDex figure labels the fingertip sensors 'DM-Tac X 120FPS'. The 20 fps sessions store 320x240 maps, which matches the 320x240 sensing resolution Daimon lists for DM-Tac F, while DM-Tac X is listed at 384x288 (the size in the 30 fps sessions); which sensor the 20 fps sessions used is not stated.",
+   "Deformation and shear: 3 planes each (gbrp16le), decoded values centred on 30,000 (e.g. 29,950-30,103 in sampled frames), plane 1 never below 30,000; the TacClaw-Infinity paper calls the DM-Tac X output 'three-axis tactile signals'. Axis order, scale and unit are not documented. Tactile depth: one plane, 0 in a non-contact frame and 0-199 in a v2 frame; unit not stated.",
+   "Raw tactile images (30 fps sessions) are declared as (480, 640, 1) but stored as H.264 yuv420p 640x480; a decoded frame shows a grayscale speckle-pattern gel image.",
+   "Third-view depth: FFV1 gray16le 640x480 with intrinsics for 1280x720 / 640x480 / 640x360 in info.json; camera model and depth unit not stated.",
+   "scene_types=['lab']: from 9 third-view frames (8 tasks, 2026-01-23 to 04-01) all showing the same white table in an office-like room; the card says data were collected 'in real environments' and gives no scene list. Several different operators are visible; their number is not stated.",
+   "Wrist-tracker and gaze dropout counts come from the per-session min/max in meta/stats.json (1,094 of 1,165 files had a 114-D state; 71 had a different layout and were skipped); threshold 2 cm for wrist position, 0.02 for eye quaternion components.",
+   "action vs observation.state in tacexo_Fold_the_towels_pc_0206_110646: same values at lag 0 (mean absolute difference 1e-5, max 0.03 on eye quaternions).",
+   "fps of the egocentric and third-view streams in the 30 fps sessions taken from info.json (fps 30); ffprobe was run on 20 fps session files only (H.264 640x480 at 20 fps)."
+  ],
+  "zh": {
+   "name": "Daimon-Infinity 触觉操作数据集",
+   "title": null,
+   "maker": "戴盟机器人",
+   "en": "official",
+   "note": "README_CN.md mirrors the English card; DM-DataDex and TacExoGaze have no Chinese names; the QbitAI article is in Chinese only"
+  }
+ },
+ "license": {
+  "name": "CC BY-NC-SA 4.0",
+  "redistribution": "allowed",
+  "quote": "This dataset is released under: **CC BY-NC-SA 4.0 License** (card YAML: license: cc-by-nc-sa-4.0)",
+  "url": "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity/tree/main/DataDex_Datasets",
+  "access": "open",
+  "format": "LeRobot v3.0, one folder per session tacexo_<task>_<tags>_<MMDD>_<HHMMSS>/: data/chunk-000/file-000.parquet (observation.state 114-D, action 111-D, timestamps), meta/{info.json, stats.json, tasks.parquet, episodes/chunk-000/file-000.parquet}, videos/<key>/chunk-000/file-000.mp4 (H.264 RGB / raw tactile) or .mov (FFV1 16-bit tactile maps and third-view depth)",
+  "total_size": "2.28 TB for DataDex_Datasets/ (HF treesize 2,281,886,948,206 B, 32,382 files); whole repo 37.1 TB (usedStorage)",
+  "per_episode": "~0.2-0.6 GB per episode as a time slice of its session's stream files (sessions 0.8-7.4 GB, median 1.6 GB, 5-10 episodes each); state/action parquet 1.4-15 MB per session",
+  "partial_fetch": "single files via resolve URLs; one episode's window out of the concatenated stream files with ffmpeg -ss/-t over HTTP range requests (single-frame seeks into the FFV1 .mov and H.264 .mp4 files were checked); the ModelScope mirror is gated (application form) and its file API returned 'no access'"
+ },
+ "channels": [
+  {
+   "name": "observation.deformation.cam_{left,right}_hand_{thumb,indexFinger,middleFinger}_tactile",
+   "kind": "deformation_map",
+   "shape": "(T, 240, 320, 3) uint16; (T, 288, 384, 3) in the 30 fps sessions",
+   "rate_hz": 20,
+   "unit": "not stated (offset-encoded around 30,000)",
+   "frame": "sensor image plane per fingertip",
+   "note": "6 files per bimanual session (thumb, indexFinger, middleFinger x left, right); FFV1 gbrp16le .mov; 30 Hz in the newtac/tacV2 sessions"
+  },
+  {
+   "name": "observation.shear.cam_{left,right}_hand_{thumb,indexFinger,middleFinger}_tactile",
+   "kind": "deformation_map",
+   "shape": "(T, 240, 320, 3) uint16; (T, 288, 384, 3) in the 30 fps sessions",
+   "rate_hz": 20,
+   "unit": "not stated (offset-encoded around 30,000)",
+   "frame": "sensor image plane per fingertip",
+   "note": "shear field, same layout and codec as deformation"
+  },
+  {
+   "name": "observation.depth.cam_{left,right}_hand_{thumb,indexFinger,middleFinger}_tactile",
+   "kind": "deformation_map",
+   "shape": "(T, 240, 320) uint16; (T, 288, 384) in the 30 fps sessions",
+   "rate_hz": 20,
+   "unit": "not stated",
+   "frame": "sensor image plane per fingertip",
+   "note": "contact depth map; FFV1 gray16le .mov; ~1 MB per session when there is little contact"
+  },
+  {
+   "name": "observation.tactile.cam_{left,right}_hand_{thumb,indexFinger,middleFinger}_tactile",
+   "kind": "tactile_image",
+   "shape": "(T, 480, 640) grayscale (declared (480, 640, 1); stored as H.264 yuv420p)",
+   "rate_hz": 30,
+   "unit": "8-bit intensity",
+   "frame": "sensor camera",
+   "note": "raw sensor image, only in the 393 sessions at 30 fps (newtac/tacV2); present on HF for 282-375 sessions per sensor"
+  },
+  {
+   "name": "observation.images.cam_headset.left_frame, cam_headset.right_frame",
+   "kind": "camera",
+   "shape": "(T, 480, 640, 3)",
+   "rate_hz": 20,
+   "unit": "8-bit RGB",
+   "frame": "VR headset stereo pair (headset pose in observation.state head_*)",
+   "note": "H.264 yuv420p mp4; 30 fps in the newer sessions; absent in 43 Store Allen keys sessions"
+  },
+  {
+   "name": "observation.images.cam_third_view",
+   "kind": "camera",
+   "shape": "(T, 480, 640, 3)",
+   "rate_hz": 20,
+   "unit": "8-bit RGB",
+   "frame": "static third-view camera with a tracker (pose in observation.state third_*)",
+   "note": "H.264 yuv420p mp4, top-down view of the table"
+  },
+  {
+   "name": "observation.depth.cam_third_view",
+   "kind": "depth",
+   "shape": "(T, 480, 640) uint16",
+   "rate_hz": 20,
+   "unit": "not stated",
+   "frame": "third-view camera; intrinsics for 1280x720, 640x480, 640x360 in info.json",
+   "note": "FFV1 gray16le .mov"
+  },
+  {
+   "name": "observation.state[0:14] (left_x..left_qw, right_x..right_qw)",
+   "kind": "hand_pose",
+   "shape": "(T, 14)",
+   "rate_hz": 20,
+   "unit": "not stated (position ~m by range; quaternion xyzw)",
+   "frame": "tracking-system world shared by wrist trackers, headset and third-view tracker",
+   "note": "wrist poses; one wrist nearly constant in many sessions (see caveats)"
+  },
+  {
+   "name": "observation.state[14:21] (head_x..head_qw)",
+   "kind": "body_pose",
+   "shape": "(T, 7)",
+   "rate_hz": 20,
+   "unit": "not stated (~m; quaternion)",
+   "frame": "tracking world",
+   "note": "VR headset pose"
+  },
+  {
+   "name": "observation.state[21:35] (left_eye_*, right_eye_*)",
+   "kind": "eye_tracking",
+   "shape": "(T, 14)",
+   "rate_hz": 20,
+   "unit": "not stated (constant position offset + rotation quaternion)",
+   "frame": "headset",
+   "note": "gaze per eye; constant (not recorded) in 184 of 1,094 sessions"
+  },
+  {
+   "name": "observation.state[35:42] (third_x..third_qw)",
+   "kind": "other",
+   "shape": "(T, 7)",
+   "rate_hz": 20,
+   "unit": "not stated",
+   "frame": "tracking world",
+   "note": "pose of the third-view camera"
+  },
+  {
+   "name": "observation.state[66:102] (finger0..finger35)",
+   "kind": "joint_state",
+   "shape": "(T, 36)",
+   "rate_hz": 20,
+   "unit": "not stated (-1.6 to 1.6, likely rad)",
+   "frame": "exoskeleton joints, 18 per hand (left 0-17, right 18-35)",
+   "note": "joint-to-finger mapping not documented in the card"
+  },
+  {
+   "name": "observation.state[42:66], [102:114] (arm, head joints, base, gripper, IMU)",
+   "kind": "other",
+   "shape": "(T, 36)",
+   "rate_hz": 20,
+   "unit": null,
+   "frame": null,
+   "note": "placeholder 9930 in all DataDex sessions (layout shared with the gripper data)"
+  },
+  {
+   "name": "action",
+   "kind": "action",
+   "shape": "(T, 111)",
+   "rate_hz": 20,
+   "unit": "as observation.state",
+   "frame": "as observation.state",
+   "note": "same values as the recorded state (human demonstration); unused dims 9930"
+  },
+  {
+   "name": "timestamp, frame_index, episode_index, index, task_index",
+   "kind": "other",
+   "shape": "(T,)",
+   "rate_hz": 20,
+   "unit": "s / indices",
+   "frame": null,
+   "note": "timestamp restarts at 0 per episode; video files are addressed via meta/episodes from/to_timestamp"
+  },
+  {
+   "name": "meta/tasks.parquet",
+   "kind": "language",
+   "shape": "1 task string per session",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "e.g. 'Plug test tubes with rubber stoppers and place on the rack'; no subtask or object annotations for DataDex"
+  }
+ ],
+ "episode_index": {
+  "where": "per session: meta/episodes/chunk-000/file-000.parquet (LeRobot v3) + meta/tasks.parquet + meta/info.json; session folders listed by the HF tree API under DataDex_Datasets/",
+  "count": 10015,
+  "fields": [
+   "task",
+   "length",
+   "dataset_from_index",
+   "dataset_to_index",
+   "per-stream from_timestamp / to_timestamp",
+   "per-episode stats"
+  ],
+  "tasks": [
+   "Plug test tubes with rubber stoppers and place on the rack",
+   "Orient_and_place_blocks_on_peg",
+   "Store Allen keys to target slots",
+   "pick up the peg and place it in the hole",
+   "Folding the polo",
+   "Place test tubes on the rack",
+   "Insert blocks into matching slots",
+   "NIST Transfer Ethernet Cable",
+   "Write on the whiteboard",
+   "Insert_plugs",
+   "Fold_the_towels",
+   "Folding the clothes",
+   "NIST Transfer Square Peg",
+   "Pouring water from a cup",
+   "NIST Insert Two and Three Prong Plug",
+   "NIST Transfer Two Prong Plug",
+   "put the pen into the red cup",
+   "NIST Transfer Round Peg",
+   "Wiping_the_whiteboard_clean",
+   "Wiping the whiteboard clean",
+   "Stack_the_cubes",
+   "Retrieve fruit from a deep bag",
+   "prepare tableware"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC-SA 4.0 (card text and YAML) allows non-commercial redistribution with attribution under the same license; the Hugging Face repo is ungated and single files download through resolve URLs. Label the collection 'CC BY-NC-SA 4.0'. The ModelScope mirror's gate links an agreement page that did not render; the HF copy has no gate.",
+  "prefix": "dm_",
+  "tasks_total": 22,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "tacexo_Fold_the_towels_pc_0206_135244/episode_000000",
+    "task": "Fold_the_towels",
+    "scene": "white tabletop, office-like room",
+    "subject": "not stated",
+    "duration_s": 32.3,
+    "window": null,
+    "format": "20 fps, 320x240 maps",
+    "why": "deformable object, bimanual; one of the few towel sessions where both wrist poses and gaze vary; all 22 streams present"
+   },
+   {
+    "id": "tacexo_Pouring_water_from_a_cup_pc_0127_152236/episode_000000",
+    "task": "Pouring water from a cup",
+    "scene": "white tabletop, office-like room",
+    "subject": "not stated",
+    "duration_s": 31.6,
+    "window": null,
+    "format": "20 fps, 320x240 maps",
+    "why": "pouring; both hands hold the cup in the third view; left wrist pose is constant in every pouring session, which the episode notes must state"
+   },
+   {
+    "id": "tacexo_Write_on_whiteboard_laptop_right_hand_0303_153807/episode_000007",
+    "task": "Write on the whiteboard (right hand)",
+    "scene": "white tabletop with a small whiteboard",
+    "subject": "not stated",
+    "duration_s": 16.9,
+    "window": null,
+    "format": "20 fps, 320x240 maps",
+    "why": "one-handed tool use (marker); folder tag right_hand; both wrist poses vary"
+   },
+   {
+    "id": "tacexo_Plug_test_tubes_pc_newtac_0326_102333/episode_000004",
+    "task": "Plug test tubes with rubber stoppers and place on the rack",
+    "scene": "white tabletop, test-tube rack",
+    "subject": "not stated",
+    "duration_s": 29.9,
+    "window": null,
+    "format": "30 fps, 384x288 maps + raw sensor images",
+    "why": "largest task (9.2 h); insertion with small parts; newer sensor format with raw images; gaze constant in this session"
+   },
+   {
+    "id": "tacexo_Store_Allen_keys_laptop_tacV2_0330_101803/episode_000005",
+    "task": "Store Allen keys to target slots",
+    "scene": "white tabletop, slotted box",
+    "subject": "not stated",
+    "duration_s": 15.5,
+    "window": null,
+    "format": "30 fps, 384x288 maps + raw sensor images",
+    "why": "thin metal objects, precision placement; 0330 sessions have cameras (the 0326 ones do not)"
+   },
+   {
+    "id": "tacexo_Transfer_Ethernet_Cable_laptop_0213_142840/episode_000006",
+    "task": "NIST Transfer Ethernet Cable",
+    "scene": "white tabletop, NIST task board",
+    "subject": "not stated",
+    "duration_s": 16.9,
+    "window": null,
+    "format": "20 fps, 320x240 maps",
+    "why": "cable handling on a NIST task board; both wrists and gaze vary"
+   },
+   {
+    "id": "tacexo_Folding_Polo_pc_newtac_0319_100930/episode_000002",
+    "task": "Folding the polo",
+    "scene": "white tabletop, black polo shirt",
+    "subject": "not stated",
+    "duration_s": 19.1,
+    "window": null,
+    "format": "30 fps, 384x288 maps + raw sensor images",
+    "why": "large deformable garment, bimanual, newer format"
+   },
+   {
+    "id": "tacexo_Stack_the_cubes_pc_0123_102916/episode_000003",
+    "task": "Stack_the_cubes",
+    "scene": "white tabletop, small cubes",
+    "subject": "not stated",
+    "duration_s": 16.2,
+    "window": null,
+    "format": "20 fps, 320x240 maps",
+    "why": "stacking small rigid objects; earliest recording date (2026-01-23)"
+   }
+  ],
+  "fetch_estimate": "~2.8 GB if each episode is cut out of its session's stream files with ffmpeg seeks over HTTP (episode length / session length x session size: 0.39 + 0.49 + 0.21 + 0.60 + 0.33 + 0.21 + 0.41 + 0.20 GB); ~20.8 GB if the 8 whole sessions were downloaded, which exceeds the 20 GB budget, so windowed fetching is required. Re-hosted media: headset and third-view H.264 640x480 clips of 15-32 s are a few MB each; the 16-bit FFV1 tactile maps cannot be re-hosted as video and must be reduced (e.g. a coarse vector grid per sensor) to fit 2 MB of episode JSON: 6 sensors x 3 maps x 320x240 at 20 fps is far above that.",
+  "rules_applied": "Tasks: 22 > 6, so 8 were chosen to span action types (fold, pour, write with a tool, plug/insert, place in slots, cable transfer, stack), objects (towel, cup, marker, test tubes and stoppers, Allen keys, Ethernet cable, polo shirt, cubes), one-handed (right-hand writing) and two-handed tasks, and both recording formats (5 at 20 fps / 320x240, 3 at 30 fps / 384x288 with raw sensor images). The release shows one tabletop room, so scenes cannot vary. One episode per task, all 15-33 s (inside 10-60 s, no window). Candidates came from sessions with every declared stream file present; where available, sessions in which both wrist poses and gaze vary (meta/stats.json ranges) were preferred. Contact (readings above rest for >= 1 s on the tactile maps) has not been checked: it needs the FFV1 files and must be verified at conversion, replacing an episode from the same session if it fails."
+ }
+}

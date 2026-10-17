@@ -1,0 +1,264 @@
+{
+ "id": "tachin_fixed_view",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "tachin_fixed_view",
+  "name": "Fixed Viewpoint Tactile Dataset",
+  "title": "Fixed Viewpoint Tactile Dataset",
+  "authors": "Tachin Technology (Tachintech)",
+  "year": 2026,
+  "venue": "Hugging Face dataset",
+  "summary": "One Tachin tactile glove (20 pads, 932 taxels) on a human hand, recorded by a static RGB-D camera and a fixed motion-capture setup tracking 20 hand points, over 160 episodes of 4 tabletop tasks (whiteboard wiping, peg-in-hole, pliers, cylinder lift).",
+  "embodiment": "human",
+  "hand": "Tachin tactile glove x 1 (one hand)",
+  "bimanual": false,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 932,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 20,
+   "note": "20 pads (tactile_0 to tactile_19, flattened per pad; 2-D shapes in meta/info.json tactile_2d_shapes): thumb tip 16x10, mid 4x8, base 6x15; index, middle and ring tip 9x8, mid 3x8, base 4x8, palm-side joint 3x4; pinky tip 9x8, mid 3x8, base 4x8, palm-side joint 3x4; palm 15x6. Pad roles from the publisher's visualize_dataset.py labels. Units not stated; values 0 to 2.6 in data file 0 with small per-episode offsets (the publisher's viewer subtracts the mean of the first 10 frames).",
+   "maker": "Tachin Technology (途见科技, Beijing)",
+   "model": null,
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "rgb",
+   "depth",
+   "hand_pose",
+   "mocap",
+   "language"
+  ],
+  "scale": {
+   "hours": 0.82,
+   "episodes": 160,
+   "frames": 59158,
+   "tasks": 4,
+   "objects": null,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "160 episodes, 59,158 frames at 20 fps (49 min), 4 tasks: peg-in-hole 82, whiteboard wiping 62, pliers 10, cylinder lift 6"
+  },
+  "availability": "public",
+  "access": "Hugging Face Tachintech/Fixed_Viewpoint_Tactile_Dataset, ungated, 3.8 GB LeRobot v3.0 (50 data parquet files, 50 RGB and 50 depth mp4 files).",
+  "license": "Apache-2.0",
+  "caveats": [
+   "One hand only; the card does not say which, and the checked video shows a single gloved hand.",
+   "Hand tracking is 20 points with a position and a quaternion each from a 'fixed-position motion-capture device' (固定机位动捕设备); the system, marker set and units are not named. Missing samples are stored as all-zero frames (0-1.2% of frames per checked episode).",
+   "Depth video is stored as 3-channel MPEG-4 Part 2 (lossy) with banding in the decoded frame; the depth encoding and units are not documented. RGB video is also MPEG-4 Part 2, not H.264.",
+   "Tactile units are not stated; meta/info.json declares float32 but the parquet stores float64.",
+   "Card text is in Chinese; the title, task strings and field names are English.",
+   "Task balance is uneven: the cylinder-lift episodes (6) show little touch (4 of 6 checked peak below 2 summed units above baseline)."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset",
+   "project": "https://www.tachin.com/en"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": null,
+     "type": "RGB-D",
+     "resolution": "848x480",
+     "fps": 20,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "other",
+     "system": "fixed-position motion-capture device (not named)",
+     "note": "observation_motion_positions (20 x 3) and observation_motion_quaternions (20 x 4, w-first in the publisher's viewer) per frame; the viewer labels them '20 markers, 5 fingers'"
+    }
+   ],
+   "other": [
+    "English task string per episode",
+    "publisher web viewer (visualize_dataset.py) with pad layout and skeleton"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset (README.md, API file tree)",
+   "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset/blob/main/meta/info.json (and meta/tasks.parquet, meta/episodes/chunk-000/file-0000.parquet, meta/stats.json)",
+   "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset/blob/main/example_usage.py",
+   "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset/blob/main/visualize_dataset.py",
+   "data/chunk-000/file-0000, 0022, 0023, 0024, 0025, 0030.parquet (whole files); videos/observation.images.color/chunk-000/file-0000.mp4 (whole); videos/observation.images.depth/chunk-000/file-0000.mp4 (one frame via ffmpeg range reads)"
+  ],
+  "unconfirmed": [
+   "hours=0.82 derived: 59,158 frames / 20 fps.",
+   "taxels_per_hand=932 summed from meta/info.json tactile_2d_shapes (20 pads). The Demo01 release of the same maker has 880 values in 15 pads; this glove adds four 3x4 palm-side pads, a third pinky pad, and uses 6x15 / 15x6 shapes for thumb base and palm.",
+   "Glove on a human hand confirmed from RGB frames of episode 1 (gloved hand with a mount on the back, sweater sleeve). Which hand is not stated.",
+   "Motion-capture units not stated: within one frame the 20 points span up to about 1.66 units, which fits a hand only if the unit is decimetres; tracking method is classed 'other' because the system is not named.",
+   "scene_types 'lab' and scenes=1 from video frames (one white table with aluminium-profile rigs behind it).",
+   "Robot type field reads 'tactile_hand_motion_321_340'; its meaning is not documented.",
+   "Camera model not stated; 848x480 at 20 fps is the stored video size."
+  ],
+  "zh": {
+   "title": "基于固定机位动捕设备的动捕-触觉数据集",
+   "maker": "途见科技",
+   "en": "official",
+   "note": "English name is the card title; the Chinese line under it reads 'motion-capture and tactile dataset based on a fixed-position motion-capture device'. Card text is otherwise Chinese."
+  }
+ },
+ "license": {
+  "name": "Apache-2.0",
+  "redistribution": "allowed",
+  "quote": "license: apache-2.0",
+  "url": "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset",
+  "access": "open",
+  "format": "LeRobot v3.0: data/chunk-000/file-00NN.parquet (3-4 episodes each), videos/observation.images.color and .depth/chunk-000/file-00NN.mp4 (MPEG-4 Part 2, 848x480, 20 fps), meta/info.json, stats.json, tasks.parquet, episodes parquet",
+  "total_size": "3.8 GB (158 MB parquet, 388 MB RGB video, 3.27 GB depth video)",
+  "per_episode": "one data file 1.3-4.4 MB + RGB 3-10 MB + depth 25-90 MB (each file holds 3-4 episodes)",
+  "partial_fetch": "single files via resolve URLs; the episodes parquet maps each episode to its data/video file and time range"
+ },
+ "channels": [
+  {
+   "name": "observation.images.color",
+   "kind": "camera",
+   "shape": "(480, 848, 3)",
+   "rate_hz": 20,
+   "unit": "8-bit RGB",
+   "frame": "static third-person camera",
+   "note": "MPEG-4 Part 2 mp4, several episodes per file"
+  },
+  {
+   "name": "observation.images.depth",
+   "kind": "depth",
+   "shape": "(480, 848, 3)",
+   "rate_hz": 20,
+   "unit": "not stated",
+   "frame": "same camera",
+   "note": "depth packed into a 3-channel lossy MPEG-4 Part 2 video; encoding not documented"
+  },
+  {
+   "name": "tactile_tactile_0 ... tactile_tactile_19",
+   "kind": "tactile_grid",
+   "shape": "20 pads, (160,) (32,) (90,) (72,) (24,) (32,) (12,) ... (90,); 932 values in total",
+   "rate_hz": 20,
+   "unit": "not stated (0 to 2.6 in data file 0)",
+   "frame": "per pad; reshape with tactile_2d_shapes",
+   "note": "stored float64 in parquet; pads tactile_10 and tactile_14 were 0 throughout data file 0"
+  },
+  {
+   "name": "observation_motion_positions",
+   "kind": "hand_pose",
+   "shape": "(60,) = 20 x 3",
+   "rate_hz": 20,
+   "unit": "not stated (hand span about 1.6 units)",
+   "frame": "motion-capture world",
+   "note": "all-zero rows where tracking was missing"
+  },
+  {
+   "name": "observation_motion_quaternions",
+   "kind": "hand_pose",
+   "shape": "(80,) = 20 x 4",
+   "rate_hz": 20,
+   "unit": "unit quaternion",
+   "frame": "motion-capture world",
+   "note": "w-first in the publisher's viewer"
+  },
+  {
+   "name": "action",
+   "kind": "action",
+   "shape": "(140,)",
+   "rate_hz": 20,
+   "unit": "as above",
+   "frame": "motion-capture world",
+   "note": "equals positions (60) + quaternions (80) of the same frame (checked)"
+  },
+  {
+   "name": "task_index, timestamp, frame_index, episode_index, index",
+   "kind": "language",
+   "shape": "scalars",
+   "rate_hz": 20,
+   "unit": "s for timestamp",
+   "frame": null,
+   "note": "task text in meta/tasks.parquet (task_type + English instruction)"
+  }
+ ],
+ "episode_index": {
+  "where": "meta/episodes/chunk-000/file-0000.parquet + meta/tasks.parquet",
+  "count": 160,
+  "fields": [
+   "tasks",
+   "length",
+   "data/video file index",
+   "video from/to timestamp"
+  ],
+  "tasks": [
+   "peg_in_hole: Pick up the cuboid block, adjust its posture and insert it into the hole (82)",
+   "blackboard_wiping: Pick up the yellow whiteboard eraser, move it to the whiteboard and wipe off the handwriting (62)",
+   "catch_pliers: Grasp the handle of the pliers, pick up the pliers and squeeze them a few times (10)",
+   "lift_cylinder: Grasp one side of the cylinder and lift the cylinder up (6)"
+  ],
+  "scenes": [
+   "one table in a lab"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Apache-2.0 (card YAML 'license: apache-2.0') allows redistribution; the repo is public and ungated. Label the collection 'Apache-2.0'.",
+  "prefix": "tf_",
+  "tasks_total": 4,
+  "tasks_sampled": 4,
+  "episodes": [
+   {
+    "id": "episode 0 (data/video file 0, 0.0-23.7 s)",
+    "task": "blackboard_wiping",
+    "scene": "lab table",
+    "subject": "not stated",
+    "duration_s": 23.7,
+    "window": null,
+    "why": "6 pads above their first-10-frame baseline by more than 1 (summed per pad) for at least 1 s; peak pad sum 31.8"
+   },
+   {
+    "id": "episode 68 (data/video file 22, 42.05-65.4 s)",
+    "task": "catch_pliers",
+    "scene": "lab table",
+    "subject": "not stated",
+    "duration_s": 23.4,
+    "window": null,
+    "why": "6 pads in contact for at least 1 s; peak pad sum 12.6"
+   },
+   {
+    "id": "episode 76 (data/video file 25, 0.0-26.95 s)",
+    "task": "lift_cylinder",
+    "scene": "lab table",
+    "subject": "not stated",
+    "duration_s": 26.9,
+    "window": null,
+    "why": "strongest of the 6 cylinder episodes: thumb tip and middle tip pads in contact for at least 1 s, peak pad sum 5.2; episodes 72, 73 and 75 peak below 1.5"
+   },
+   {
+    "id": "episode 95 (data/video file 30, 21.05-33.0 s)",
+    "task": "peg_in_hole",
+    "scene": "lab table",
+    "subject": "not stated",
+    "duration_s": 11.9,
+    "window": null,
+    "why": "4 pads in contact for at least 1 s; peak pad sum 17.9"
+   }
+  ],
+  "fetch_estimate": "~47 MB without depth (4 data files + 4 RGB videos); ~336 MB with the 4 depth videos",
+  "rules_applied": "4 tasks (6 or fewer), so all are taken; more than 3 tasks, so one episode per task (4 in total, at least 3). All four are 11.9-26.9 s, so no window is cut. Contact was checked on the parquet files: per pad, the sum of values above the mean of the episode's first 10 frames, contact = sum above 1 for at least 20 frames (1 s).",
+  "deviations": [
+   "Depth video uses an undocumented 3-channel lossy encoding; decide in step 3 whether to show it or only the RGB view."
+  ]
+ }
+}

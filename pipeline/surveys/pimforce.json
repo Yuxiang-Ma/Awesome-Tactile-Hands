@@ -1,0 +1,272 @@
+{
+ "id": "pimforce",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "pimforce",
+  "name": "PiMForce",
+  "title": "Posture-Informed Muscular Force Learning for Robust Hand Pressure Estimation",
+  "authors": "Kyungjin Seo et al.",
+  "year": 2024,
+  "venue": "NeurIPS 2024",
+  "summary": "21 right-handed participants wore a PPS TactileGlove (65 nodes) with 5 Marveldex RA18DIY fingertip sensors, a MANUS Quantum Metaglove and an 8-channel Delsys sEMG armband while repeating 22 press, pinch and grasp postures for 30 s each, 3 sessions per person.",
+  "embodiment": "human",
+  "hand": "PPS TactileGlove (65 nodes) + 5 Marveldex RA18DIY fingertip FSRs, with a MANUS Quantum Mocap Metaglove (right hand)",
+  "bimanual": false,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 70,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 40,
+   "note": "pps_<i>.csv: Time + Elem0-Elem64 (65 TactileGlove nodes), ~1,200 unique timestamps per 30 s (~40 Hz) with each row repeated ~3x; floats with small negative values at rest and peaks of ~1.6 (index press) to ~600 (grasps); unit not stated. fsr_<i>.csv: Timestamp + FSR_1-FSR_5 integer counts at ~99 Hz, 0 to ~600 (FSR_1..5 = little, ring, middle, index, thumb by activity). The paper reduces these to 9 regions (5 fingertips + 4 palm regions) in processing_ours.py.",
+   "maker": "Pressure Profile Systems (glove); Marveldex (fingertip sensors)",
+   "model": "TactileGlove; RA18DIY",
+   "principle": "unspecified",
+   "range": "up to 55 N/cm^2 (paper)",
+   "calibrated": null
+  },
+  "modalities": [
+   "emg",
+   "hand_pose"
+  ],
+  "scale": {
+   "hours": 11.55,
+   "episodes": 1386,
+   "frames": null,
+   "tasks": 22,
+   "objects": null,
+   "subjects": 21,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "1,386 trials (21 participants x 3 sessions x 22 postures, 30 s each) = 11.6 h; 7 plane presses, 5 pinches, 10 grasp types"
+  },
+  "availability": "public",
+  "access": "Dropbox shared folder linked as 'Code & Data' on the project page, no login: Dataset_NeurIPS2024.zip (8.2 GB) or the 4,158 trial CSVs (40.0 GB) one by one.",
+  "license": "not stated",
+  "caveats": [
+   "No video in the release; the paper uses RGB only at inference time.",
+   "Trial files are numbered 0-21 per session with no posture labels; the code README says 21 actions. Fingertip activity matches Table 6 except the order of the plane postures (see unconfirmed).",
+   "Units: TactileGlove values carry no unit (the code multiplies them by 0.689009, the psi to N/cm^2 factor); fingertip FSR values are raw counts that the code converts to N with Codes/Checkpoints/regression_model.sav.",
+   "Pinch and grasp postures hold an object in the left hand while the right hand applies force; the objects are not listed.",
+   "The same Dropbox folder holds the code (MIT) and a 63.3 GB Benchmark_PressureVision++_Dataset.egg (5 participants, Logitech Brio webcam + Sensel Morph pad; no glove data).",
+   "join_<i>.csv holds 8-channel sEMG at ~1.93 kHz with the MANUS joint angles linearly interpolated onto the same rows (~24 MB per trial)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2410.23629",
+   "project": "https://hci-tech-lab.github.io/PiMForce/",
+   "data": "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0"
+  },
+  "image": "https://hci-tech-lab.github.io/PiMForce/static/images/fig1_v3.png",
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "magnetic",
+     "system": "MANUS Quantum Mocap Metaglove",
+     "note": "120 Hz per paper; 20 joint angles (spread and stretch per finger) in join_<i>.csv, interpolated to the sEMG rows"
+    }
+   ],
+   "other": [
+    "sEMG: Delsys Trigno Avanti, 8 channels in a custom TPU forearm armband"
+   ]
+  },
+  "sources": [
+   "https://hci-tech-lab.github.io/PiMForce/",
+   "https://arxiv.org/abs/2410.23629",
+   "https://arxiv.org/html/2410.23629v2",
+   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0 (recursive listing of all 4,195 files via the share's folder-listing endpoint)",
+   "Dropbox Codes/README.md, Codes/LICENSE, Codes/dataset.py, Codes/preprocessing_data.py, Codes/processing_ours.py, Codes/utils.py",
+   "Dropbox Dataset/User1/Session1 fsr_0-21.csv, pps_0.csv, pps_14.csv, first 200 KB of join_0.csv; fsr + pps of User4/S2/11, User7/S3/9, User10/S1/12, User13/S2/14, User16/S3/17, User19/S1/18, User21/S2/13"
+  ],
+  "unconfirmed": [
+   "hours=11.55 derived: 1,980 s per participant (paper) x 21 = 41,580 s; matches 1,386 trials x 30 s in the file tree.",
+   "Paper Table 1 lists 83.2M frames, which equals 41,580 s x 2,000 Hz (sEMG samples); frames left null.",
+   "File index to posture mapping inferred from fingertip FSR activity in User1/Session1 and 7 other trials: 0-3 single-finger presses (index, middle, ring, little), 4 index+middle, 5 middle+ring, 6-10 thumb+index, thumb+middle, thumb+index+middle, +ring, +little (pinches), 11 no fingertip contact (palm press), 12-21 the 10 grasps in Table 6 order (12 two-finger, 13 thumb only = lateral, 17 all five = medium wrap, 18 four fingers without thumb = fixed hook). Table 6 lists TI-Press and no MR-Press; the PressureVision++ benchmark section lists MR-Press.",
+   "FSR_1..FSR_5 finger order inferred from trials 0-3 (FSR_4 index, FSR_3 middle, FSR_2 ring, FSR_1 little) and the lateral grasp (FSR_5 thumb).",
+   "sEMG rate: join_0.csv timestamp step 0.518 ms (~1.93 kHz); the paper states 2,000 Hz.",
+   "taxels_per_hand=70 = 65 TactileGlove nodes + 5 fingertip FSRs; the paper evaluates 16 of the 65 nodes (4 palm regions) plus the 5 FSRs. coverage lists only what the paper names (fingertips, palm); where the other TactileGlove nodes sit is not documented.",
+   "calibrated=null: TactileGlove output is likely psi (factor 0.689009 in the code) but no unit is written in the files or paper.",
+   "TactileGlove transduction principle not stated in the paper; RA18DIY are FSRs (paper Fig. 6).",
+   "Recording timestamps (e.g. 1707902576 = 2024-02-14) place collection in early 2024."
+  ]
+ },
+ "license": {
+  "name": "not stated (code: MIT)",
+  "redistribution": "not_stated",
+  "quote": "Codes/README.md: 'This project is licensed under the MIT License' (code only; no dataset license in the folder, paper or project page)",
+  "url": "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0"
+ },
+ "download": {
+  "where": "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0",
+  "access": "open",
+  "format": "Dataset/User<1-21>/Session<1-3>/{fsr,pps,join}_<0-21>.csv (4,158 CSVs), also as Dataset_NeurIPS2024.zip",
+  "total_size": "8.2 GB zip (8,200,737,484 B); 40.0 GB as loose CSVs; whole share 112.6 GB incl. the 63.3 GB PressureVision++ benchmark .egg",
+  "per_episode": "~29 MB per trial (join ~24 MB, pps ~4 MB, fsr ~0.09 MB)",
+  "partial_fetch": "per-file Dropbox links (dl=1) taken from the shared-folder listing"
+ },
+ "channels": [
+  {
+   "name": "pps_<i>.csv: Elem0-Elem64",
+   "kind": "tactile_grid",
+   "shape": "(T, 65) + Time [s]",
+   "rate_hz": 40,
+   "unit": "not stated (psi by the code's conversion)",
+   "frame": "PPS TactileGlove nodes; node layout not documented in the release (the code maps Elem0-3, 5-12, 15-18 to 4 palm regions)",
+   "note": "~3,550 rows per 30 s with ~1,200 unique timestamps"
+  },
+  {
+   "name": "fsr_<i>.csv: FSR_1-FSR_5",
+   "kind": "pressure_scalar",
+   "shape": "(T, 5) + Timestamp",
+   "rate_hz": 99,
+   "unit": "raw counts",
+   "frame": "one per fingertip; order little, ring, middle, index, thumb (inferred)",
+   "note": "Marveldex RA18DIY; ~2,975 rows per 30 s"
+  },
+  {
+   "name": "join_<i>.csv: Sensor0_sEMG-Sensor7_sEMG",
+   "kind": "emg",
+   "shape": "(T, 8) + timestamp",
+   "rate_hz": 1930,
+   "unit": "not stated (about -0.06 to 0.05 at rest)",
+   "frame": "8 electrodes around the right forearm",
+   "note": "Delsys Trigno Avanti"
+  },
+  {
+   "name": "join_<i>.csv: [thumb]-cmc-spread ... [pinky]-dip-stretch",
+   "kind": "hand_pose",
+   "shape": "(T, 20)",
+   "rate_hz": 1930,
+   "unit": "not stated (values -24 to 62, consistent with degrees)",
+   "frame": "MANUS joint angles, right hand",
+   "note": "120 Hz native, linearly interpolated onto the sEMG rows"
+  }
+ ],
+ "episode_index": {
+  "where": "folder tree only (Dataset/User<u>/Session<s>/<kind>_<i>.csv); no index file",
+  "count": 1386,
+  "fields": [
+   "user",
+   "session",
+   "posture index 0-21"
+  ],
+  "tasks": [
+   "I-Press (index)",
+   "M-Press (middle)",
+   "R-Press (ring)",
+   "P-Press (pinky)",
+   "TI-Press (thumb & index)",
+   "IM-Press (index & middle)",
+   "Palm-Press",
+   "TI-Pinch",
+   "TM-Pinch",
+   "TIM-Pinch",
+   "TIMR-Pinch",
+   "TIMRP-Pinch",
+   "Palmar Pinch",
+   "Lateral",
+   "Sphere 3 Finger",
+   "Power Sphere",
+   "Ring",
+   "Medium Wrap",
+   "Fixed Hook",
+   "Quadpod",
+   "Parallel Extension",
+   "Adducted Thumb"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "The Dropbox share is public without login and per-file downloads work; no dataset license is stated (the code is MIT), so the collection is re-hosted and labelled 'License not stated'.",
+  "prefix": "pm_",
+  "tasks_total": 22,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "Dataset/User1/Session1/{fsr,pps,join}_0.csv",
+    "task": "I-Press (plane)",
+    "scene": "lab desk",
+    "subject": "User1",
+    "duration_s": 30,
+    "window": null,
+    "why": "Index FSR (FSR_4) above 50 counts for 11.8 s, peak 505; TactileGlove nodes near rest (max 1.6), since a fingertip press loads the added FSR."
+   },
+   {
+    "id": "Dataset/User4/Session2/{fsr,pps,join}_11.csv",
+    "task": "Palm-Press (plane)",
+    "scene": "lab desk",
+    "subject": "User4",
+    "duration_s": 30,
+    "window": null,
+    "why": "No fingertip FSR above 50 counts; 20 TactileGlove nodes above 1 for >= 1 s, peak 13.7. Palm-only contact."
+   },
+   {
+    "id": "Dataset/User7/Session3/{fsr,pps,join}_9.csv",
+    "task": "TIMR-Pinch (pinch)",
+    "scene": "lab desk",
+    "subject": "User7",
+    "duration_s": 30,
+    "window": null,
+    "why": "FSR_2-FSR_5 above 50 counts for 13.3-14.0 s; 5 glove nodes active, peak 7.3."
+   },
+   {
+    "id": "Dataset/User10/Session1/{fsr,pps,join}_12.csv",
+    "task": "Palmar Pinch (grasp)",
+    "scene": "lab desk",
+    "subject": "User10",
+    "duration_s": 30,
+    "window": null,
+    "why": "Thumb and index FSRs above 50 counts for 13.2-13.6 s; 6 glove nodes active, peak 22.8."
+   },
+   {
+    "id": "Dataset/User13/Session2/{fsr,pps,join}_14.csv",
+    "task": "Sphere 3 Finger (grasp)",
+    "scene": "lab desk",
+    "subject": "User13",
+    "duration_s": 30,
+    "window": null,
+    "why": "Thumb, index, middle FSRs above 50 counts for 8.1-10.0 s; 21 glove nodes active, peak 476."
+   },
+   {
+    "id": "Dataset/User16/Session3/{fsr,pps,join}_17.csv",
+    "task": "Medium Wrap (grasp)",
+    "scene": "lab desk",
+    "subject": "User16",
+    "duration_s": 30,
+    "window": null,
+    "why": "All 5 FSRs above 50 counts for 10.7-11.8 s; 20 glove nodes active, peak 26.8."
+   },
+   {
+    "id": "Dataset/User19/Session1/{fsr,pps,join}_18.csv",
+    "task": "Fixed Hook (grasp)",
+    "scene": "lab desk",
+    "subject": "User19",
+    "duration_s": 30,
+    "window": null,
+    "why": "Four finger FSRs above 50 counts for 9.0-10.6 s, thumb FSR at rest; 28 glove nodes active, peak 209."
+   },
+   {
+    "id": "Dataset/User21/Session2/{fsr,pps,join}_13.csv",
+    "task": "Lateral (grasp)",
+    "scene": "lab desk",
+    "subject": "User21",
+    "duration_s": 30,
+    "window": null,
+    "why": "Thumb FSR above 50 counts for 14.1 s; 6 glove nodes active, peak 604."
+   }
+  ],
+  "fetch_estimate": "~235 MB: 8 trials x (join ~24 MB + pps ~4 MB + fsr ~0.09 MB). fsr and pps of all 8 are already fetched under the survey scratch directory; only the 8 join files (~197 MB) remain.",
+  "rules_applied": "22 postures (> 6): 8 taken across the three types (2 plane presses, 1 pinch, 5 grasps with different contact sets: two-finger, thumb only, three-finger, five-finger, four fingers without thumb). One trial per posture from 8 different participants and all 3 sessions. Contact: fingertip FSR > 50 counts or TactileGlove node > 1 for 1 s or more. Trials are 30 s, within 10-60 s.",
+  "deviations": [
+   "Posture names come from the inferred file-index mapping; the release does not label them."
+  ]
+ }
+}

@@ -1,0 +1,333 @@
+{
+ "id": "let_dex",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "let_dex",
+  "name": "LET-Dex",
+  "title": "LET: Full-size humanoid robot real machine force and tactile dataset",
+  "authors": "Leju Robotics",
+  "year": 2025,
+  "venue": "Hugging Face / ModelScope dataset (2025)",
+  "summary": "Leju Kuavo 4 Pro humanoid with two Linker Hand L6 hands, each with five 12x6 fingertip taxel arrays (uint8) and a 6-axis force/torque stream, on 4 parcel-sorting and desk clean-up tasks, with head and wrist RGB-D, released as 714 ROS bags.",
+  "embodiment": "robot",
+  "hand": "Linker Hand L6 (6 active + 5 passive joints) x 2 on Leju Kuavo 4 Pro",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 360,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "Per hand: /cb_<side>_hand_matrix_touch_pc2, a PointCloud2 of 360 uint8 values (field 'val'), 5 fingers x 12 rows x 6 columns, filled thumb to little finger; 255 = full pressure, 0 = none (card). Plus /force6d_<side>_hand_force_torque (WrenchStamped: force in N, torque in Nm, 30 Hz). Taxel values are raw; the wrench is in physical units but is a whole-hand reading, not per taxel.",
+   "maker": "Linkerbot (Linker Hand L6)",
+   "model": "Linker Hand L6 fingertip tactile matrix; 6-axis force/torque sensor (model and mount not stated)",
+   "principle": "unspecified",
+   "range": "taxels 0-255 raw; wrench range not stated",
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "wrist_rgb",
+   "depth",
+   "imu",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 7.8,
+   "episodes": 714,
+   "frames": null,
+   "tasks": 4,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "logistics",
+    "home"
+   ],
+   "text": "714 ROS bags (~7.8 h, 546 GB), 4 tasks: desk clean-up 301 bags / 4.4 h, SF Express parcel sorting 198 / 1.3 h, smart postal packages 121 / 0.55 h, 'Smartandfast-forward' 94 / 1.5 h; recorded 2025-12-18 and -19 on two robots"
+  },
+  "availability": "public",
+  "access": "Hugging Face LejuRobotics/LET-Dex-Dataset, ungated: 714 ROS1 bags (65 MB to 1.8 GB each) in 4 task folders. The ModelScope mirror lejurobot/LET-Dex-Dataset refused an anonymous file listing ('无权访问该数据集' [no permission to access this dataset]).",
+  "license": "CC BY-NC-SA 4.0",
+  "caveats": [
+   "Tactile is sparse and low in the bags checked: in 3 bags (40-72 evenly spaced chunks each) the right-hand array read 0 in every sampled frame; left-hand contact showed on 1-2 fingers with taxel peaks of 22-83 of 255.",
+   "One clean-up bag (...-20251218150758-v001.bag) is truncated at 224 MiB: its header points to an index at 1.016 GB, past the end of the file. Another clean-up bag lasts 3.0 s.",
+   "The card describes per-bag label JSON files (scene, task, step marks with language); none are in the release, so the 4 folder names are the only task labels.",
+   "The card's topic tables also list gripper and simulation topics (/leju_claw_*, /gripper/*, /cmd_pose_world, /control_robot_hand_position, /dexhand/state) that do not occur in the tactile bags; the bags carry the 30 topics listed in the survey's channels.",
+   "Force/torque sensor placement not stated: the ROS frame is force6d_<side>_hand, the HF card calls it external force on the hand, the ModelScope text calls it fingertip force and torque.",
+   "Hand state runs 0-255 with 255 = open; a few hand_state messages carry 7 values instead of 6.",
+   "Teleoperation device per bag is not stated; the card lists the Linker TA arm exoskeleton, Linker TG glove and Linker FFG force-feedback glove."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset",
+   "code": "https://github.com/LejuRobotics/kuavo_data_challenge"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 1,
+     "model": "Orbbec (model not stated; orbbec_camera driver metadata)",
+     "type": "RGB-D",
+     "resolution": "848x480",
+     "fps": 30,
+     "mount": "robot",
+     "note": "/cam_h: JPEG color + compressedDepth PNG (16UC1)"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": "Intel RealSense (model not stated; realsense2_camera driver metadata)",
+     "type": "RGB-D",
+     "resolution": "848x480",
+     "fps": 30,
+     "mount": "robot",
+     "note": "/cam_l and /cam_r on the left and right wrists"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Linker Hand L6 state (6 per hand, 0-255) and commands (120 Hz)",
+     "note": null
+    },
+    {
+     "target": "body",
+     "method": "robot_proprioception",
+     "system": "Kuavo 4 Pro /sensors_data_raw: 12 leg + 14 arm + 2 head joints (rad, rad/s, rad/s^2, A) + IMU at ~500 Hz; arm targets at 240 Hz; /tf",
+     "note": null
+    },
+    {
+     "target": "body",
+     "method": "exoskeleton",
+     "system": "Linker TA 14-DoF teleoperation arm + Linker TG glove / Linker FFG force-feedback glove",
+     "note": "devices listed on the card ('exoskeleton teleoperation data'); which device drove each bag is not stated"
+    }
+   ],
+   "other": [
+    "6-axis force/torque per hand (N, Nm)",
+    "robot IMU",
+    "camera_info and driver metadata per camera"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset (README.md in Chinese, README_EN.md, API info, recursive tree)",
+   "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset bag headers and indexes of all 714 bags (HTTP range reads: first message time and last chunk-info end time)",
+   "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset .../Clean-up_desktop_items-P4-Linker_Hand_L6/A10-A12-H-C-05-TQ_02_01-p4_353-dex_hand-20251218112213-v001.bag (full index; 100 chunks: tactile, wrench, hand state, camera_info, images)",
+   "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset .../SF_Express_Parcel_Sorting-P4-Linker_Hand_L6/A10-A12-I-L-03-TQ_01_02-P4_338-dex_hand-20251219114820-v001.bag (index + 45 chunks)",
+   "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset .../Smart_postal_packages-P4-Linker_Hand_L6/A10-A12-I-L-03-TQ_04_01-P4_338-dex_hand-20251219163409-v001.bag (index + 40 chunks)",
+   "https://modelscope.cn/api/v1/datasets/lejurobot/LET-Dex-Dataset (ChineseName, Description, license; file tree refused)",
+   "https://arxiv.org/html/2607.24744 (survey table row, secondary)"
+  ],
+  "unconfirmed": [
+   "hours = 7.8 derived from the bag indexes: first message time to last chunk end time, summed over 713 bags (the truncated bag has no index). Per task: 4.40 / 1.31 / 0.55 / 1.52 h; bag length 3.0-106.4 s (median 52.6 s clean-up, 23.1 s parcel sorting, 16.0 s postal, 56.2 s 'Smartandfast-forward').",
+   "Frame rate: cameras and wrench 30.0 Hz, tactile and hand state 29.6 Hz, hand commands 120 Hz, from message counts / bag duration in the clean-up bag.",
+   "Contact seen: parcel bag ...20251219114820 left thumb 6.4-9.9 s and 19.5-21.0 s (pad sum up to 86, taxel max 22); postal bag ...20251219163409 left middle pad 19 taxels summing 534-596 and ring 47-84 in every sampled frame for 21 s (held object or offset, not decided); clean-up bag ...20251218112213 non-zero in 1 of 72 sampled frames. Right hand 0 in all sampled frames of all three.",
+   "Finger order thumb to little is the card's statement; not checked against video.",
+   "scene_types from the ModelScope description ('快递包裹分拣、日化瓶翻面、家庭桌面整理' [express parcel sorting, flipping household-chemical bottles, home desk tidying]); bottle flipping has no folder of its own in the HF release.",
+   "Release size vs other counts: ModelScope says the first batch is '600余条' [600+ samples]; survey arXiv 2607.24744 lists LET-Dex as 3K episodes / 20 h / 14 tasks. The HF release has 714 bags / ~7.8 h / 4 task folders.",
+   "Two robots inferred from the device serials in file names (P4_338, p4_353); the card's label example uses deviceSn 'P4-209'.",
+   "Camera makers inferred from the driver metadata topic types (orbbec_camera/Metadata on /cam_h, realsense2_camera/Metadata on /cam_l, /cam_r); resolution 848x480 from camera_info and JPEG headers.",
+   "Sensing principle not stated by the release; the catalog's hardware entry linker_hand lists the 6x12 fingertip arrays as piezoresistive from the L20 / L20 Lite manuals, and says the SDK returns a 12x6 uint8 matrix per finger for the L6."
+  ],
+  "zh": {
+   "name": "LET全尺寸人形机器人真机力觉触觉数据集",
+   "title": null,
+   "maker": "乐聚机器人",
+   "en": "official",
+   "note": "HF card in Chinese (README.md) and English (README_EN.md); English title from the card's citation block. ModelScope gives the Chinese name and publisher 乐聚机器人."
+  }
+ },
+ "license": {
+  "name": "CC BY-NC-SA 4.0",
+  "redistribution": "allowed",
+  "quote": "All the data and code within this repo are under CC BY-NC-SA-4.0.",
+  "url": "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset/blob/main/README_EN.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset",
+  "access": "open",
+  "format": "ROS1 bag v2.0, uncompressed chunks (~0.84 MB each, all topics interleaved): datasets/rosbag/tactile/real/Labelled/<task>/<code>-<robot>-dex_hand-<YYYYMMDDhhmmss>-v001.bag",
+  "total_size": "546 GB (714 bags)",
+  "per_episode": "65 MB to 1.8 GB per bag, ~20.5 MB per second of recording",
+  "partial_fetch": "HTTP range reads: bag header + index (end of file) give topics, counts and chunk offsets; single chunks can be fetched, but tactile messages are interleaved with images, so the tactile of a whole episode costs about the whole bag"
+ },
+ "channels": [
+  {
+   "name": "/cb_left_hand_matrix_touch_pc2, /cb_right_hand_matrix_touch_pc2",
+   "kind": "tactile_grid",
+   "shape": "PointCloud2 height 1 x width 360, uint8 field 'val'",
+   "rate_hz": 29.6,
+   "unit": "raw 0-255 (255 = full pressure)",
+   "frame": "5 fingers (thumb to little) x 12 rows x 6 columns",
+   "note": "frame_id empty; right hand 0 in every sampled frame of 3 bags"
+  },
+  {
+   "name": "/force6d_left_hand_force_torque, /force6d_right_hand_force_torque",
+   "kind": "wrench",
+   "shape": "WrenchStamped (force xyz, torque xyz)",
+   "rate_hz": 30,
+   "unit": "N, Nm",
+   "frame": "force6d_<side>_hand",
+   "note": "|F| stayed between 4 and 11 N over the sampled postal bag, never near 0 (offset not removed); sensor mount not stated"
+  },
+  {
+   "name": "/cb_left_hand_state, /cb_right_hand_state",
+   "kind": "joint_state",
+   "shape": "JointState position (6), velocity (6, zero)",
+   "rate_hz": 29.6,
+   "unit": "0-255, 255 = open",
+   "frame": "thumb flexion, thumb abduction, index, middle, ring, little flexion",
+   "note": "a few messages have 7 values"
+  },
+  {
+   "name": "/cb_left_hand_control_cmd, /cb_right_hand_control_cmd",
+   "kind": "action",
+   "shape": "JointState position (6) + velocity thresholds (6)",
+   "rate_hz": 120,
+   "unit": "0-255",
+   "frame": "same joints as hand_state",
+   "note": "names joint1..joint6"
+  },
+  {
+   "name": "/kuavo_arm_traj",
+   "kind": "action",
+   "shape": "JointState position (14)",
+   "rate_hz": 240,
+   "unit": "not stated (rad per card: same structure as sensors_data_raw items 12-25)",
+   "frame": "arm joints",
+   "note": null
+  },
+  {
+   "name": "/joint_cmd",
+   "kind": "action",
+   "shape": "kuavo_msgs/jointCmd",
+   "rate_hz": 482,
+   "unit": "not stated",
+   "frame": "whole-body joints",
+   "note": "not described on the card"
+  },
+  {
+   "name": "/sensors_data_raw",
+   "kind": "joint_state",
+   "shape": "kuavo_msgs/sensorsData: joint_data (28: 12 legs, 14 arms, 2 head; position, velocity, acceleration, current), imu_data, end_effector_data (unused)",
+   "rate_hz": 500,
+   "unit": "rad, rad/s, rad/s^2, A; IMU rad/s, m/s^2, quaternion",
+   "frame": "joint space / IMU",
+   "note": null
+  },
+  {
+   "name": "/tf",
+   "kind": "body_pose",
+   "shape": "tf2_msgs/TFMessage",
+   "rate_hz": 198,
+   "unit": "m, quaternion",
+   "frame": "robot frames",
+   "note": null
+  },
+  {
+   "name": "/cam_h/color/image_raw/compressed",
+   "kind": "camera",
+   "shape": "JPEG 848x480",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "head camera (Orbbec)",
+   "note": "+ /cam_h/color/camera_info, /cam_h/color/metadata"
+  },
+  {
+   "name": "/cam_h/depth/image_raw/compressedDepth",
+   "kind": "depth",
+   "shape": "PNG 16UC1, 848x480",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "registered to cam_h_color_optical_frame",
+   "note": "+ camera_info, metadata"
+  },
+  {
+   "name": "/cam_l/color/image_raw/compressed, /cam_r/color/image_raw/compressed",
+   "kind": "camera",
+   "shape": "JPEG 848x480",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "left / right wrist cameras (RealSense)",
+   "note": "+ camera_info, metadata"
+  },
+  {
+   "name": "/cam_l/depth/image_rect_raw/compressedDepth, /cam_r/depth/image_rect_raw/compressedDepth",
+   "kind": "depth",
+   "shape": "PNG 16UC1",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "wrist depth optical frames",
+   "note": "+ camera_info, metadata"
+  }
+ ],
+ "episode_index": {
+  "where": "file listing: task folder + file name (task code TQ_xx_xx, robot serial P4_338 / p4_353, start time YYYYMMDDhhmmss)",
+  "count": 714,
+  "fields": [
+   "task (folder)",
+   "robot serial",
+   "start time"
+  ],
+  "tasks": [
+   "Clean-up_desktop_items (301 bags)",
+   "SF_Express_Parcel_Sorting (198)",
+   "Smart_postal_packages (121)",
+   "Smartandfast-forward (94)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC-SA 4.0 (card: 'All the data and code within this repo are under CC BY-NC-SA-4.0') allows non-commercial redistribution with attribution under the same license; the HF repo is public and ungated. Label the collection 'CC BY-NC-SA 4.0'.",
+  "prefix": "le_",
+  "tasks_total": 4,
+  "tasks_sampled": 4,
+  "episodes": [
+   {
+    "id": "SF_Express_Parcel_Sorting-P4-Linker_Hand_L6/A10-A12-I-L-03-TQ_01_02-P4_338-dex_hand-20251219114820-v001.bag",
+    "task": "SF Express parcel sorting",
+    "scene": "not stated",
+    "subject": "robot P4_338, teleoperated",
+    "duration_s": 22.8,
+    "window": null,
+    "why": "Contact checked on 45 evenly spaced chunks: left thumb pad non-zero 6.4-9.9 s and 19.5-21.0 s (pad sum up to 86). Right hand 0 throughout, as in every bag checked. 478 MB."
+   },
+   {
+    "id": "Smart_postal_packages-P4-Linker_Hand_L6/A10-A12-I-L-03-TQ_04_01-P4_338-dex_hand-20251219163409-v001.bag",
+    "task": "smart postal packages",
+    "scene": "not stated",
+    "subject": "robot P4_338, teleoperated",
+    "duration_s": 21.1,
+    "window": null,
+    "why": "Candidate: left middle and ring pads non-zero in all 47 sampled frames (middle sum 534-596). Whether this is a held object or an offset must be checked in step 3; replace with another postal bag if the values never change with contact. 450 MB."
+   },
+   {
+    "id": "Clean-up_desktop_items-P4-Linker_Hand_L6/A10-A12-H-C-05-TQ_02_01-p4_353-dex_hand-20251219115931-v001.bag",
+    "task": "desk clean-up",
+    "scene": "not stated",
+    "subject": "robot p4_353, teleoperated",
+    "duration_s": 41.1,
+    "window": null,
+    "why": "Candidate, contact not yet checked (median-length bag in 20-45 s). The one clean-up bag sampled (...112213, 57.5 s) had tactile in 1 of 72 sampled frames, so scan 2-3 bags. 853 MB."
+   },
+   {
+    "id": "Smartandfast-forward-P4-Linker_Hand_L6/A10-A12-I-L-03-TQ_03_01-p4_353-dex_hand-20251219170934-v001.bag",
+    "task": "Smartandfast-forward",
+    "scene": "not stated",
+    "subject": "robot p4_353, teleoperated",
+    "duration_s": 44.8,
+    "window": null,
+    "why": "Candidate, contact not yet checked; one of only 2 bags in this task between 20 and 45 s (63 of 94 are 10-60 s). 796 MB."
+   }
+  ],
+  "fetch_estimate": "~2.6 GB for the 4 bags (478 + 450 + 853 + 796 MB); add ~1-2 GB if clean-up or 'Smartandfast-forward' candidates lack contact and need replacing. Tactile cannot be fetched without the interleaved images. Re-hosted media: head + one wrist JPEG stream re-encoded to H.264 848x480, ~10-20 MB per clip. Episode JSON: 2 x 360 uint8 at ~30 Hz x <= 45 s ~ 1M values, so store sparse or crop to the contact window.",
+  "rules_applied": "Tasks: 4 <= 6, so all 4. Episodes: one per task (4 > 3 tasks), 4 in total. Each must have both tactile topics present and contact above rest for >= 1 s; the right-hand arrays were 0 in every bag checked, so contact is judged on the hand that touches. Length 10-60 s (bags 3-106 s; all 4 picks within range). Budget: 2.6 GB of 20 GB."
+ }
+}

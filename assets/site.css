@@ -58,7 +58,7 @@ button,select,input{font:inherit;color:var(--ink)}
 .filtbtn{display:none}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:-4px 0 12px}
 .chips button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 10px;font-size:12px;cursor:pointer;color:var(--ink2)}
-.chips button::after{content:" ×";color:var(--muted)}
+.chips button::after{content:"";display:inline-block;width:8px;height:8px;margin-left:6px;background:var(--muted);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1 1 9' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M1 1l8 8M9 1 1 9' stroke='black' stroke-width='1.6'/%3E%3C/svg%3E") center/contain no-repeat}
 /* ---------- cards ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
 .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s,transform .15s}
@@ -109,6 +109,12 @@ table.mini{min-width:0;font-size:12.5px;margin:2px 0}table.mini th{position:stat
 .srcs{margin-top:14px;font-size:12px;color:var(--muted)}.srcs ul{margin:6px 0 0;padding-left:18px}.srcs a{word-break:break-all}
 .kv .sub{display:block;color:var(--muted);font-size:12px}
 .empty{padding:40px 0;color:var(--muted);text-align:center}
+.zhn{display:flex;flex-wrap:wrap;gap:2px 8px;align-items:baseline;margin-top:-4px;font-size:12.5px;color:var(--ink2)}
+.trn{font-size:10.5px;font-weight:650;line-height:1.5;padding:0 5px;border:1px solid currentColor;border-radius:4px;color:var(--warn)}
+.dl header p.zhl{color:var(--ink2)}
+.ql .qi{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;vertical-align:-1px;margin-right:5px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.usedby{margin:0;padding-left:18px;font-size:13.5px}.usedby li{margin:3px 0}
 /* ---------- glyph ---------- */
 .glyph .o{fill:none;stroke:var(--muted);stroke-width:.7}
 .glyph .r{fill:var(--glyph-off)}

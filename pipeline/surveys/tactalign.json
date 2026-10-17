@@ -1,0 +1,310 @@
+{
+ "id": "tactalign",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "tactalign",
+  "name": "TactAlign",
+  "title": "TactAlign: Human-to-Robot Policy Transfer via Tactile Alignment",
+  "authors": "Youngsun Wi et al.",
+  "year": 2026,
+  "venue": "arXiv 2602.13579",
+  "summary": "Unpaired pivoting and insertion demonstrations from a human wearing the OSMO magnetic tactile glove (index-fingertip 3-axis signal) and from an Allegro hand with XELA 30-taxel fingertip sensors on a Franka arm, released as fingertip tactile, fingertip/wrist state, estimated object pose and actions at 10 Hz.",
+  "embodiment": "both",
+  "hand": "Human hand in the OSMO tactile glove; Wonik Allegro Hand (16 DoF) with XELA fingertip sensors on a Franka Emika Panda",
+  "bimanual": false,
+  "sensor": {
+   "type": "magnetic",
+   "taxels_per_hand": null,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 10,
+   "note": "Released per frame, one fingertip per modality. Human: observation/tactile (3, 1, 3) = the last 3 samples of one 3-axis OSMO reading on the index fingertip (finger column 'index' in every row), signed, near 0 at rest, peaks of ~200-1,500. Robot: observation/tactile (10, 30, 3) = 10 consecutive XELA samples (100 Hz) of one 30-taxel fingertip, 3 axes each. Frames are 0.1 s apart. Paper: glove recorded at 30 fps, XELA at 100 fps; glove baseline removed per trajectory, XELA baseline recorded per session. No force units.",
+   "maker": "Meta FAIR (OSMO glove); XELA Robotics (robot fingertips)",
+   "model": "OSMO tactile glove; XELA uSkin fingertip sensors (30 taxels each)",
+   "principle": "magnetic",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "hand_pose",
+   "object_pose",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 1.32,
+   "episodes": 314,
+   "frames": 47616,
+   "tasks": 2,
+   "objects": null,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Release: 210 human glove demonstrations (37,740 frames @10 Hz, ~63 min; pivoting 103 + insertion 98 + 9 val) and 104 robot episodes in the XELA encoder repo (9,876 frames, ~16.5 min, incl. one 300 s play episode); the two downstream robot repos (100 episodes) repeat the encoder repo's pivoting and insertion episodes. Paper: 200 human + 100 robot alignment demos, 140-160 human and 50 robot demos per co-training task (pivoting, insertion, lid closing), 20 human light-bulb demos"
+  },
+  "availability": "partial",
+  "access": "Four ungated Hugging Face repos by the first author (youngw/tactile_align_encoder_pretrain_glove, _encoder_pretrain_xela, _downstream_insertion, _downstream_pivoting; 204 MB, Hugging Face datasets Arrow files with train/val splits), with no dataset card and no link from the paper or project page; the project page lists code as 'Coming Soon' and its data link is commented out.",
+  "license": "not stated",
+  "caveats": [
+   "Only pivoting and insertion are released; lid closing, light-bulb screwing (Manus glove + OSMO), the human-only-object demos, the force-labelled F/T dataset, play data for the glove, and all camera images are not in the repos.",
+   "One fingertip per sample: the glove repo carries only the index fingertip (one 3-axis reading), the robot repos one 30-taxel XELA fingertip; which Allegro finger is not stated (the paper's pivoting policy uses the index fingertip).",
+   "No images or depth: the RealSense D455 frames used for WiLoR hand pose and FoundationPose object pose are not released; observation/state and observation/object_pose are those estimates (human) or proprioception (robot).",
+   "No dataset card, README or license on any of the four repos; the arXiv paper is CC BY-NC-SA 4.0 and the project page CC BY-SA 4.0, neither covers the data.",
+   "Tactile values are baseline-subtracted magnetic readings without units; the paper takes the absolute value of the glove signal because the OSMO skin flips sign by quadrant, but the release keeps signed values.",
+   "Robot insertion episodes are 2.6-9.3 s and pivoting 5-15.6 s; robot demonstrations are kinesthetic teaching, not teleoperation.",
+   "The glove repo's metadata/info.json says fps 30 while its timestamps step by 0.1 s."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2602.13579",
+   "project": "https://yswi.github.io/tactalign/",
+   "data": "https://huggingface.co/datasets/youngw/tactile_align_encoder_pretrain_glove"
+  },
+  "image": "https://yswi.github.io/tactalign/static/media/images/tactalign_teaser.png",
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "WiLoR (SAM3 hand masks) refined by ICP on FoundationStereo depth, Savitzky-Golay filtered",
+     "note": "human fingertip positions and wrist pose from a RealSense D455 (images not released); released as observation/state (6,)"
+    },
+    {
+     "target": "object",
+     "method": "vision_estimate",
+     "system": "FoundationPose on FoundationStereo depth with SAM3/SAM3D meshes",
+     "note": "observation/object_pose (6,) in both human and robot repos; some robot frames are all zero"
+    },
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Allegro joint position and effort (16 each)",
+     "note": "robot repos"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "Franka Emika Panda joint position and effort (7 each)",
+     "note": "robot repos; demonstrations by kinesthetic teaching"
+    }
+   ],
+   "other": [
+    "Intel RealSense D455 recorded during collection; no images released",
+    "ATI Gamma F/T sensor for the force-labelled set (not released)",
+    "action / delta_action (6) and 32-step relative action chunks"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2602.13579",
+   "https://arxiv.org/html/2602.13579v1 (Sec. IV-A, IV-B, App. A, B-A, B-B, D, E)",
+   "https://yswi.github.io/tactalign/ (page text and HTML source: code link 'Coming Soon' to github.com/google/tactalign, commented-out data link)",
+   "https://github.com/google/tactalign (404) and https://github.com/yswi/tactalign (project-page source only)",
+   "https://huggingface.co/api/users/youngw/overview (full name 'youngsun wi', 4 datasets)",
+   "https://huggingface.co/datasets/youngw/tactile_align_encoder_pretrain_glove (tree, train+val Arrow, dataset_info.json, metadata/*)",
+   "https://huggingface.co/datasets/youngw/tactile_align_encoder_pretrain_xela (tree, train+val Arrow, dataset_info.json, metadata/*)",
+   "https://huggingface.co/datasets/youngw/tactile_align_downstream_insertion (tree, train+val Arrow, metadata/*)",
+   "https://huggingface.co/datasets/youngw/tactile_align_downstream_pivoting (tree, train+val Arrow, metadata/*)"
+  ],
+  "unconfirmed": [
+   "The HF repos are not linked from the paper or project page; they are attributed to the paper by uploader (full name 'youngsun wi', the first author), repo names and content (pivoting/insertion labels, OSMO 'index' finger rows, Allegro + Franka joints).",
+   "episodes=314 = 210 glove (201 train + 9 val) + 104 XELA encoder episodes (99 + 5); frames=47,616 = 37,740 + 9,876; hours=1.32 at the 0.1 s frame step. The downstream repos (insertion 49 + 3, pivoting 46 + 2 episodes) are left out because their episodes have the same lengths and peak values as encoder-repo episodes (e.g. downstream pivoting 27 = encoder 61, 156 frames, peak 2,230), i.e. they look like the same demonstrations.",
+   "The (3, 1, 3) glove array is a 3-step history window: slice i+1 of each row equals slice i of the next row. The (10, 30, 3) XELA array holds 10 distinct consecutive samples per frame (no overlap between rows), consistent with 100 fps XELA in 0.1 s frames.",
+   "XELA model: 30 taxels per fingertip matches XELA's curved Allegro fingertip (uSCu ALHA, 30 points); the paper says only 'Xela sensors mounted on the Allegro Hand fingertips'.",
+   "The paper's glove has 'three-axis magnetic tactile signals at the fingertips'; the OSMO glove has 12 taxels (5 fingertips + palm), but only the index fingertip is released.",
+   "objects: the alignment set uses one shared object per task (paper: Cheez-It box for pivoting, an adapter for insertion); whether the glove repo also holds human-only objects is not stated. Subjects not stated.",
+   "scenes=1: one Franka tabletop setup; not stated as a count."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://huggingface.co/datasets/youngw/tactile_align_encoder_pretrain_glove",
+  "note": "No README, card or license tag on any of the four HF repos (API tags: only 'region:us'; dataset_info.json license ''). The paper (arXiv CC BY-NC-SA 4.0) and project page (CC BY-SA 4.0 website notice) do not license the data."
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/youngw/tactile_align_encoder_pretrain_glove (+ _encoder_pretrain_xela, _downstream_insertion, _downstream_pivoting)",
+  "access": "open",
+  "format": "Hugging Face datasets save_to_disk layout: <split>/data-00000-of-00001.arrow (Arrow IPC stream) + dataset_info.json + state.json + metadata/{info.json, episode_data_index.safetensors, stats.safetensors}; LeRobot-v1-style episode_data_index (from/to)",
+  "total_size": "204 MB (glove 42.6 MB, XELA encoder 120.1 MB, insertion 14.9 MB, pivoting 26.3 MB)",
+  "per_episode": "glove ~0.2 MB, robot ~0.6 MB on average (episodes are rows inside one Arrow file per split)",
+  "partial_fetch": "none needed: each repo is one Arrow file per split; the whole release is 204 MB"
+ },
+ "channels": [
+  {
+   "name": "observation/tactile (glove repo)",
+   "kind": "force_vector",
+   "shape": "(3, 1, 3)",
+   "rate_hz": 10,
+   "unit": "not stated (baseline-subtracted magnetic reading, signed, -3,678 to 1,352 seen)",
+   "frame": "OSMO index-fingertip sensor axes",
+   "note": "3-step history window of one 3-axis reading; columns finger='index', finger_idx=0 in all rows"
+  },
+  {
+   "name": "observation/tactile (XELA repos)",
+   "kind": "tactile_grid",
+   "shape": "(10, 30, 3)",
+   "rate_hz": 100,
+   "unit": "not stated (raw counts, -1,482 to 2,228 seen)",
+   "frame": "one XELA fingertip, 30 taxels x (x, y, z)",
+   "note": "10 consecutive 100 Hz samples per 0.1 s frame; finger not stated"
+  },
+  {
+   "name": "observation/state",
+   "kind": "hand_pose",
+   "shape": "(6,)",
+   "rate_hz": 10,
+   "unit": "m + rad (by range; not stated)",
+   "frame": "robot base frame (paper App. D)",
+   "note": "index fingertip position + wrist rotation; human: WiLoR/FoundationStereo estimate, robot: proprioception"
+  },
+  {
+   "name": "observation/object_pose",
+   "kind": "object_pose",
+   "shape": "(6,)",
+   "rate_hz": 10,
+   "unit": "m + rotation (by range; not stated)",
+   "frame": "not stated",
+   "note": "FoundationPose estimate; zeros in some robot frames"
+  },
+  {
+   "name": "observation/orn (XELA repos)",
+   "kind": "other",
+   "shape": "(3,)",
+   "rate_hz": 10,
+   "unit": "not stated",
+   "frame": "not stated",
+   "note": "orientation; meaning not documented"
+  },
+  {
+   "name": "allegro_joint_position, allegro_joint_effort (XELA repos)",
+   "kind": "joint_state",
+   "shape": "(16,), (16,)",
+   "rate_hz": 10,
+   "unit": "not stated",
+   "frame": "Allegro joints",
+   "note": null
+  },
+  {
+   "name": "franka_joint_position, franka_joint_effort (XELA repos)",
+   "kind": "joint_state",
+   "shape": "(7,), (7,)",
+   "rate_hz": 10,
+   "unit": "not stated",
+   "frame": "Franka joints",
+   "note": null
+  },
+  {
+   "name": "action, delta_action, relative_action",
+   "kind": "action",
+   "shape": "(6,), (6,), (32, 6)",
+   "rate_hz": 10,
+   "unit": "not stated",
+   "frame": "robot base frame",
+   "note": "index fingertip position + wrist rotation targets; relative_action = 32-step chunk"
+  },
+  {
+   "name": "label, task_idx (encoder repos)",
+   "kind": "language",
+   "shape": "string / int",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "glove: pivoting / insertion; XELA: pivoting / insertion / play"
+  },
+  {
+   "name": "timestamp, frame_index, episode_index, index",
+   "kind": "other",
+   "shape": "scalars",
+   "rate_hz": 10,
+   "unit": "s",
+   "frame": null,
+   "note": "timestamps step 0.1 s in every repo"
+  }
+ ],
+ "episode_index": {
+  "where": "<repo>/<split>/metadata/episode_data_index.safetensors (from/to row ranges) + label column",
+  "count": 314,
+  "fields": [
+   "episode_index",
+   "label (encoder repos)",
+   "task_idx",
+   "length"
+  ],
+  "tasks": [
+   "pivoting",
+   "insertion",
+   "play (one robot episode)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Data download without login; no license or terms anywhere, so redistribution is not forbidden: re-host and label the collection 'License not stated'. The paper's CC BY-NC-SA 4.0 and the project page's CC BY-SA 4.0 must not be shown as the data license.",
+  "prefix": "ta_",
+  "tasks_total": 2,
+  "tasks_sampled": 2,
+  "episodes": [
+   {
+    "id": "tactile_align_encoder_pretrain_glove/train/episode_147",
+    "task": "pivoting",
+    "scene": "tabletop",
+    "subject": null,
+    "embodiment": "human (OSMO glove)",
+    "duration_s": 23.4,
+    "window": null,
+    "why": "Index-fingertip magnitude above rest + 100 for 15.8 s, peak 1,471; no NaN."
+   },
+   {
+    "id": "tactile_align_encoder_pretrain_glove/train/episode_90",
+    "task": "insertion",
+    "scene": "tabletop",
+    "subject": null,
+    "embodiment": "human (OSMO glove)",
+    "duration_s": 35.4,
+    "window": null,
+    "why": "Longest contact among glove insertion episodes (31.8 s above rest + 100, peak 1,147)."
+   },
+   {
+    "id": "tactile_align_downstream_pivoting/train/episode_27",
+    "task": "pivoting",
+    "scene": "tabletop",
+    "subject": null,
+    "embodiment": "robot (Allegro + XELA, kinesthetic)",
+    "duration_s": 15.6,
+    "window": null,
+    "why": "Longest robot pivoting episode; max taxel-force norm above rest + 100 for 9.9 s, peak 2,230. Same demonstration as encoder repo episode 61."
+   },
+   {
+    "id": "tactile_align_downstream_insertion/train/episode_38",
+    "task": "insertion",
+    "scene": "tabletop",
+    "subject": null,
+    "embodiment": "robot (Allegro + XELA, kinesthetic)",
+    "duration_s": 9.3,
+    "window": null,
+    "why": "Longest robot insertion episode in the release (all are 2.6-9.3 s); contact 6.9 s, peak 1,637."
+   },
+   {
+    "id": "tactile_align_encoder_pretrain_xela/train/episode_9",
+    "task": "play",
+    "scene": "tabletop",
+    "subject": null,
+    "embodiment": "robot (Allegro + XELA)",
+    "duration_s": 299.5,
+    "window": [0, 60],
+    "why": "The only play episode; contact above rest + 100 for 202.8 s over the episode, peak 10,935. Cut to 60 s."
+   }
+  ],
+  "fetch_estimate": "0 MB more: all four repos' Arrow files (204 MB) were fetched for the survey (scratchpad s6/ta/). No video exists to re-host. Episode JSON: robot 60 s x 100 Hz x 90 values = 540k numbers for the play window; downsample to 10 Hz (the frame rate) or round to integers to stay under 2 MB.",
+  "rules_applied": "Tasks: 2 released tasks (pivoting, insertion), <= 6, so both taken. Episodes: with <= 3 tasks, 2-3 per task; here 2 per task, one human and one robot, to show both embodiments, plus the robot play episode (5 in total). Contact: magnitude above the episode's 5th percentile + 100 for >= 1 s, all channels present, no NaN. Length: glove 23-35 s and robot pivoting 15.6 s kept whole; play cut to 60 s.",
+  "deviations": [
+   "Robot insertion episode is 9.3 s, below 10 s: every robot insertion episode in the release is 2.6-9.3 s.",
+   "No camera video: the release has no images, so the viewer shows touch and state only."
+  ]
+ }
+}

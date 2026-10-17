@@ -1,0 +1,327 @@
+{
+ "id": "feel_benchmark",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "feel_benchmark",
+  "name": "FEEL-Benchmark",
+  "title": "FEEL-Benchmark: Egocentric Tactile-Visual Manipulation Dataset",
+  "authors": "FeelAuthors (anonymous)",
+  "year": 2026,
+  "venue": "Hugging Face dataset, anonymous (no paper)",
+  "summary": "Two PaXini PX6AX-GEN3 fingertip force modules on a bare right hand (thumb and index tips; middle and little tips in 7 trials), recorded with Project Aria RGB video and MPS fingertip positions while 4 collectors picked up bottles, jelly, sponges, cups, Want Want cans and chips.",
+  "embodiment": "human",
+  "hand": "Bare right hand with 2 PaXini PX6AX-GEN3-DP-S2015-Elite fingertip modules",
+  "bimanual": false,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 2,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 10,
+   "note": "Per module and video frame: force_total = |(Fx, Fy, Fz)| and force_xyz (Fx, Fy, Fz) in raw signed 16-bit counts in the module's own frame, linearly interpolated onto the 10 fps video grid from ~900 Hz logs (2026-01 to 05) or ~91 Hz logs (2026-08; 50 ms host-time resolution on 2026-08-07). Modules sit on thumb + index tips in 45 trials and middle + little tips in the 7 trials of 2026-08-05/06. The hardware also reports per-taxel forces; they are not released.",
+   "maker": "PaXini",
+   "model": "PX6AX-GEN3-DP-S2015-Elite",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "hand_pose",
+   "language"
+  ],
+  "scale": {
+   "hours": 2.81,
+   "episodes": 3317,
+   "frames": 101219,
+   "tasks": 1,
+   "objects": 7,
+   "subjects": 4,
+   "scenes": null,
+   "scene_types": [],
+   "text": "~2.8 h (168.7 min), 3,317 episodes in 52 trials, 101,219 frames at 10 fps, 7 object categories, 4 collectors; mean episode 3.1 s, longest 12.5 s"
+  },
+  "availability": "public",
+  "access": "Hugging Face FeelAuthors/FEEL-Benchmark, ungated, 4.6 GB in LeRobot v3.0 format (one parquet + one mp4 per episode).",
+  "license": "CC BY 4.0",
+  "caveats": [
+   "Anonymous upload: account FeelAuthors (full name 'Authors', created 2026-05-07, one dataset); no paper, authors or affiliation.",
+   "No stated link to FEEL (UMD, arXiv 2603.15847): different sensors (2 PaXini modules vs 6 FlexiForce sensors per glove), collectors, objects and file format. The two share the name and the Project Aria camera.",
+   "Force is in raw counts, not newtons; the axes are each module's local frame and its orientation on the finger was not recorded.",
+   "Columns action.tactile.left/right are modules 1 and 2 on one right hand, and which fingers they sit on changes by session (see sensor note).",
+   "Episodes are 0.8-12.5 s segments with gaps of 7-13 s between them (checked in Want_Milk_collectorC); the continuous trial recordings are not released.",
+   "Videos are MPEG-4 Part 2 at 10 fps; 28 episodes in 3 trials also carry an .h264.mp4 copy.",
+   "Some trial names and task strings disagree: Half_water_collectorC_3 and sponge_collectorD_2 are labelled 'pick up the jelly', sponge_collectorB_1 and the water_p25 trials 'pick up the bottle'.",
+   "MPS fingertip positions are NaN for whole episodes in 5 Collector C trials (e.g. Jelly_collectorC_5, Sponge_collectorC_2, Quarter_water_collectorC_2).",
+   "Sponge, chip and most Collector D episodes peak below ~20 counts; Want Want Milk and Wangzai episodes reach ~130-140."
+  ],
+  "links": {
+   "project": "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark",
+   "data": "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Meta Project Aria",
+     "type": "RGB",
+     "resolution": "1408x1408",
+     "fps": 10,
+     "mount": "glasses"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "Aria MPS hand tracking",
+     "note": "right thumb tip (landmark 4) and index tip (landmark 8) xyz in the Aria world frame + pinch distance; NaN when the hand is not tracked; other landmarks, left hand, gaze, device pose and IMU not exported"
+    }
+   ],
+   "other": [
+    "per-frame right-hand tracking validity flag"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark (README.md v2.1, full repo tree via API)",
+   "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark/tree/main/20260807/water_p25_collectorB_1_lerobot/meta (info.json, modality.json, tasks.jsonl, episodes.jsonl, stats.json) and data/chunk-000/episode_000010.parquet",
+   "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark meta/episodes.jsonl of all 52 trials; meta/episodes parquet and episodes 0-2 of 20260506/Want_Milk_collectorC_lerobot; the 2 longest episode parquets of every trial (104 files)",
+   "https://huggingface.co/api/users/FeelAuthors/overview",
+   "https://arxiv.org/abs/2603.15847 (FEEL, for comparison)"
+  ],
+  "unconfirmed": [
+   "Anonymous-submission status is inferred: the FeelAuthors account was created 2026-05-07 09:21 UTC, the day the anonymous PULSE dataset (which states NeurIPS 2026 E&D double-blind review) was uploaded; the FEEL-Benchmark card names no venue or review.",
+   "Relation to FEEL (UMD) checked by comparing cards, papers and files only; the card does not expand 'FEEL' or cite arXiv 2603.15847. FEEL-Benchmark's first upload (2026-05-07) predates edessa/feel (2026-06-26).",
+   "Aria generation not stated; 1408x1408 RGB matches Aria Gen 1.",
+   "objects=7 is the card's object-category count (Bottle, Jelly, Sponge, Water, Wangzai, Chip, Coke); fill-level and empty/full variants are counted once.",
+   "tasks=1: the 21 task strings are all 'pick up <object>' variants.",
+   "Episode lengths from the 52 meta/episodes.jsonl files: 8-125 frames; 31 episodes reach 10 s, all in Collector C trials of 2026-01-10 to 2026-01-28.",
+   "Scan of the 2 longest episodes per trial (104 parquets): force_total peaks range 0.8-143 counts; 'contact' below means force_total > 10 counts.",
+   "The card gives no Chinese text; the object names (Want Want Milk, Wangzai) are Want Want brand products and PaXini is a Chinese sensor maker. Collection location not stated; no zh entry."
+  ]
+ },
+ "license": {
+  "name": "CC BY 4.0",
+  "redistribution": "allowed",
+  "quote": "license: cc-by-4.0 (card YAML); '## License  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).'",
+  "url": "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark",
+  "access": "open",
+  "format": "LeRobot v3.0 (GR00T path variant): <date>/<trial>_lerobot/{meta/, data/chunk-000/episode_NNNNNN.parquet, videos/chunk-000/observation.images.main/episode_NNNNNN.mp4}",
+  "total_size": "4.62 GB (4,619,446,829 B in the HF tree)",
+  "per_episode": "parquet 7-14 KB + mp4 median ~1.0 MB (up to ~10 MB for 10 s Collector C episodes)",
+  "partial_fetch": "single files via https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark/resolve/main/<path>"
+ },
+ "channels": [
+  {
+   "name": "observation.images.main",
+   "kind": "camera",
+   "shape": "(T, 1408, 1408, 3)",
+   "rate_hz": 10,
+   "unit": "8-bit RGB (mpeg4, yuv420p)",
+   "frame": "Aria RGB camera",
+   "note": "one mp4 per episode; 28 episodes also have .h264.mp4"
+  },
+  {
+   "name": "action.tactile.left.force_total (= action[0], module 1)",
+   "kind": "pressure_scalar",
+   "shape": "(T, 1)",
+   "rate_hz": 10,
+   "unit": "raw counts (signed 16-bit source)",
+   "frame": "module 1: thumb tip, or middle tip on 2026-08-05/06",
+   "note": "magnitude of (Fx, Fy, Fz), interpolated separately from force_xyz"
+  },
+  {
+   "name": "action.tactile.right.force_total (= action[1], module 2)",
+   "kind": "pressure_scalar",
+   "shape": "(T, 1)",
+   "rate_hz": 10,
+   "unit": "raw counts",
+   "frame": "module 2: index tip, or little tip on 2026-08-05/06",
+   "note": null
+  },
+  {
+   "name": "action.tactile.module1.force_xyz",
+   "kind": "force_vector",
+   "shape": "(T, 3)",
+   "rate_hz": 10,
+   "unit": "raw counts (-128 to 136 after resampling)",
+   "frame": "module's own frame; Fz carries ~78% of the magnitude (card)",
+   "note": "added in v2.1"
+  },
+  {
+   "name": "action.tactile.module2.force_xyz",
+   "kind": "force_vector",
+   "shape": "(T, 3)",
+   "rate_hz": 10,
+   "unit": "raw counts",
+   "frame": "module's own frame",
+   "note": "added in v2.1"
+  },
+  {
+   "name": "observation.state",
+   "kind": "hand_pose",
+   "shape": "(T, 7)",
+   "rate_hz": 10,
+   "unit": "m",
+   "frame": "Aria world frame",
+   "note": "right thumb tip xyz, index tip xyz, pinch distance; NaN when untracked"
+  },
+  {
+   "name": "status.hands.valid_right",
+   "kind": "other",
+   "shape": "(T, 1) bool",
+   "rate_hz": 10,
+   "unit": null,
+   "frame": null,
+   "note": "MPS right-hand tracking validity"
+  },
+  {
+   "name": "task_index -> meta/tasks.jsonl",
+   "kind": "language",
+   "shape": "(T, 1)",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "one task string per trial, e.g. 'pick up the bottle'"
+  },
+  {
+   "name": "index, episode_index, episode_id, episode_chunk, frame_index, step, timestamp, timestamp_ns",
+   "kind": "other",
+   "shape": "(T, 1) each",
+   "rate_hz": 10,
+   "unit": "index; s; ns (Aria device clock)",
+   "frame": null,
+   "note": null
+  }
+ ],
+ "episode_index": {
+  "where": "<trial>/meta/episodes.jsonl and meta/episodes/chunk-000/file-000.parquet in each of 52 trial directories",
+  "count": 3317,
+  "fields": [
+   "task",
+   "length",
+   "dataset_from_index",
+   "dataset_to_index",
+   "video from/to timestamp"
+  ],
+  "tasks": [
+   "pick up the bottle",
+   "pick up the jelly",
+   "pick up the chip",
+   "pick up the sponge",
+   "pick up the empty bottle",
+   "pick up the want milk",
+   "pick up the empty want milk",
+   "pick up the bottle containing 25% water",
+   "pick up the bottle containing 50% water",
+   "pick up the bottle filling with 50% water",
+   "pick up the bottle containing 75% water",
+   "pick up a quarter cup of water",
+   "pick up the Empty Want Want Milk",
+   "pick up the full bottle",
+   "pick up the Want Want Milk",
+   "pick_wz_trick",
+   "pick_empty_wz",
+   "pick up half cup of water",
+   "pick up a quarter cup of coke",
+   "pick_chip_broken",
+   "pick up half cup of coke"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY 4.0 (card YAML and License section) allows redistribution with attribution; the repo is public and ungated and single files download through resolve URLs. Label the collection 'CC BY 4.0'.",
+  "prefix": "fb_",
+  "tasks_total": 21,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "20260807/bottle_p75_collectorB_1_lerobot/episode_000012",
+    "task": "pick up the bottle",
+    "scene": "not stated",
+    "subject": "Collector B",
+    "duration_s": 2.9,
+    "window": null,
+    "why": "Collector B, 75% full bottle. Both modules above 10 counts for 2.0 s, peaks 106 / 52 counts. Hand tracking valid throughout."
+   },
+   {
+    "id": "20260430/Full_bottle_collectorC_1_lerobot/episode_000000",
+    "task": "pick up the full bottle",
+    "scene": "not stated",
+    "subject": "Collector C",
+    "duration_s": 9.4,
+    "window": null,
+    "why": "Both modules above 10 counts for 6.1 s, peaks 46 / 57. Hand tracking valid."
+   },
+   {
+    "id": "20260806/jelly_collectorD_2_lerobot/episode_000028",
+    "task": "pick up the jelly",
+    "scene": "not stated",
+    "subject": "Collector D",
+    "duration_s": 3.1,
+    "window": null,
+    "why": "Collector D with the modules on the middle and little tips (2026-08-06 placement). Module 1 above 10 counts for 1.4 s (peak 33), module 2 for 1.2 s (peak 17)."
+   },
+   {
+    "id": "20260128/Half_water_collectorC_4_lerobot/episode_000000",
+    "task": "pick up half cup of water",
+    "scene": "not stated",
+    "subject": "Collector C",
+    "duration_s": 10.1,
+    "window": null,
+    "why": "Both modules above 10 counts for 5.3 / 6.8 s, peaks 16 / 19. Hand tracking valid."
+   },
+   {
+    "id": "20260121/Half_coke_collectorC_2_lerobot/episode_000003",
+    "task": "pick up half cup of coke",
+    "scene": "not stated",
+    "subject": "Collector C",
+    "duration_s": 11.0,
+    "window": null,
+    "why": "Module 2 above 10 counts for 5.0 s (peak 14); module 1 for 1.0 s (peak 12). Chosen over the 11.2 s episode 4, whose module 1 stays at rest (0.1 s above 10 counts)."
+   },
+   {
+    "id": "20260506/Want_Milk_collectorC_lerobot/episode_000025",
+    "task": "pick up the Want Want Milk",
+    "scene": "not stated",
+    "subject": "Collector C",
+    "duration_s": 5.5,
+    "window": null,
+    "why": "Wangzai category. Both modules above 10 counts for 4.4-4.5 s, peaks 129 / 128 (the strongest grip in the scan)."
+   },
+   {
+    "id": "20260506/Chip_intact_collectorC_lerobot/episode_000013",
+    "task": "pick up the chip",
+    "scene": "not stated",
+    "subject": "Collector C",
+    "duration_s": 5.3,
+    "window": null,
+    "why": "Light grasp of a chip: module 1 above 10 counts for 1.7 s (peak 12); module 2 peaks at 7.5 counts and stays below the threshold."
+   },
+   {
+    "id": "20260807/sponge_collectorA_1_lerobot/episode_000092",
+    "task": "pick up the sponge",
+    "scene": "not stated",
+    "subject": "Collector A",
+    "duration_s": 3.3,
+    "window": null,
+    "why": "Collector A; soft object. Module 1 above 10 counts for 1.3 s (peak 18), module 2 for 0.5 s (peak 15)."
+   }
+  ],
+  "fetch_estimate": "~26 MB: 8 episode parquets (8-13 KB each) + 8 mp4s (1.2-10.7 MB; HF tree sizes). Videos are MPEG-4 Part 2 and need re-encoding to H.264 (~1-3 MB per clip expected).",
+  "rules_applied": "The release labels 21 task strings (all pick-up), more than 6, so 8 are taken: one per object category (Bottle twice: full bottle and 75% bottle; Jelly, Water, Coke, Wangzai, Chip, Sponge), covering all 4 collectors and both module placements. Within each task the longest scanned episode with force_total > 10 counts for 1 s or more and valid hand tracking was chosen.",
+  "deviations": [
+   "Episodes are shorter than the 10 s minimum: the release has no episode longer than 12.5 s and the segments are not contiguous, so episodes are taken whole (2.9-11.0 s).",
+   "Chip (module 2) and sponge (module 2) stay below 1 s of contact; both are soft or light objects and no scanned episode of these tasks does better on both modules."
+  ]
+ }
+}

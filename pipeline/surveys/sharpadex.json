@@ -1,0 +1,442 @@
+{
+ "id": "sharpadex",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "sharpadex",
+  "name": "SharpaDex v1.0",
+  "title": "SharpaDex v1.0: Large-Scale Bimanual Dexterous Manipulation Demonstrations",
+  "authors": "Sharpa",
+  "year": 2026,
+  "venue": "Hugging Face dataset (no paper)",
+  "summary": "Teleoperated bimanual demonstrations on Sharpa's North robot with two 22-DoF Sharpa Wave hands: 28,993 episodes of 59 tabletop tasks, with a 6-axis force/torque reading plus deformation and raw tactile video from each of the 10 fingertip sensors at 30 Hz.",
+  "embodiment": "robot",
+  "hand": "Sharpa Wave (22 DoF) x 2 on Sharpa North (two 7-DoF arms + 7 torso/motor joints)",
+  "bimanual": true,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "Five fingertip sensors per hand (Sharpa Wave built-in), no palm. Per frame: observation.tactile (60,) float32 = (left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), unit not stated; observation.images.tactile_deform, one 480x1200 H.264 video tiling 10 deformation maps of 240x240 (2 rows x 5); observation.images.tactile_raw, one 480x1600 H.264 video tiling 10 raw sensor-camera images of 320x240. Per-episode fz maxima are 5.7-49.8 and torque magnitudes stay below 0.9 in the 23 episodes checked.",
+   "maker": "Sharpa",
+   "model": "Sharpa Wave fingertip tactile sensor (Dynamic Tactile Array)",
+   "principle": "optical",
+   "range": "0-30 N detection, 50 N maximum load (maker spec, Sharpa Wave W01 page)",
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "wrist_rgb",
+   "robot_action",
+   "language"
+  ],
+  "scale": {
+   "hours": 300.0,
+   "episodes": 28993,
+   "frames": 32396172,
+   "tasks": 59,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "28,993 episodes, 59 tasks, 32,396,172 frames @30 fps (~300 h), 495 collection seasons from 11 stations, Mar-Jul 2026; every season is released twice (LeRobot v3.0 and v2.1)"
+  },
+  "availability": "public",
+  "access": "Hugging Face Sharpa-Robotics/SharpaDex-v1.0, ungated, ~7.7 TB (LeRobot v3.0 and v2.1 copies of every season), one LeRobot root per task/season folder; single seasons or v2.1 episode files can be fetched alone.",
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "Fingertips only (10 sensors); no palm or phalanx touch.",
+   "Tactile units are not stated: observation.tactile is called a 'force/torque signal' with fx..tz names. The tile order inside the two tactile videos is not documented.",
+   "The card names neither the robot nor the hand ('two 7-DoF arms, two 22-DoF dexterous hands'); robot_type is 'robot' in all 495 seasons.",
+   "observation.state.tcp force/torque slots and the 7 torso joint torques are 0 in every episode; TCP units and rotation convention are not documented (rotation_type null).",
+   "v3.0 and v2.1 are two exports of the same 28,993 episodes; count them once.",
+   "Released as 495 separate LeRobot roots (task/season), not one root; the card recommends splitting by season.",
+   "The raw tactile video (480x1600) is the largest stream: ~45-140 MB per 15-50 s episode in the v2.1 export.",
+   "Commercial use is prohibited (CC BY-NC 4.0).",
+   "Some seasons also appear in FTP-1-Dataset's sharpa/ archive (catalog entry ftp1_sharpa, MIT per ModelScope): 15 of 92 sampled FTP-1 sessions carry the same station and session timestamp as SharpaDex seasons of place_pens_in_holder, insert_plug_into_socket and place_books_on_shelf (POC22007 and POC22018, 2026-03-16 to 03-20). FTP-1 holds more episodes per shared session (52 vs 37 in one checked session) and only 3 fingertip deformation maps per hand. Sharpa's Robotic Origami Challenge and RoCo releases come from the same stations but share no season with SharpaDex."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0",
+   "project": "https://www.sharpa.com/"
+  },
+  "image": "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0/resolve/main/assets/task_overview_56_tasks_grid.gif",
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "480x480",
+     "fps": 30,
+     "mount": "robot"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "480x480",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Sharpa Wave hand joint states, 22 per hand",
+     "note": "observation.state / action = 65-D: left arm 7, left hand 22, right arm 7, right hand 22, torso/motor 7; observation.state.joint_torque (65, torso dims 0)"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "arm joint encoders (2 x 7) and observed / commanded TCP poses (2 x 6)",
+     "note": "observation.state.tcp_pose and action.tcp_pose, 12-D each"
+    },
+    {
+     "target": "fingers",
+     "method": "other",
+     "system": "not stated",
+     "note": "card: 'human teleoperation of a real bimanual robotic system'; teleoperation device not named"
+    }
+   ],
+   "other": [
+    "6-axis fingertip force/torque (10 per frame)",
+    "joint torque (58 active dims)",
+    "tactile deformation video and raw tactile video (10 fingertips tiled in one frame each)",
+    "language: structured global task (task, instruction, scene, success) + 217,642 frame-aligned subtask segments with 45 skill labels"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 (README.md; tree of all 59 task folders and 495 seasons)",
+   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 lerobot_v3.0/meta/info.json and v40_validation.json, lerobot_v2.1/meta/episodes.jsonl of all 495 seasons",
+   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 clean_plate_with_eraser/season_POC22027_2026_04_17_11_01_59_train (v3.0 and v2.1 meta: info, modality, stats, tasks, subtasks, annotations; v2.1 episode_000000.parquet and tactile_deform episode_000000.mp4; v3.0 tactile_deform file-000.mp4 header)",
+   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 22 v2.1 episode parquets from 8 tasks (tactile contact scan) and annotations.jsonl of their seasons",
+   "https://www.sharpa.com/",
+   "https://www.sharpa.com/pages/w01 (Sharpa Wave tactile sensor spec)",
+   "https://www.sharpa.com/pages/d01",
+   "https://github.com/sharpa-robotics (repository list; READMEs of sharpawave-deform-encoder, sharpa-tactile-sensor-assets, sharpa-wave-sdk)",
+   "https://rocochallenge.github.io/RoCo-IROS2026/industrial_docs/overview.md (names the Sharpa North robot)",
+   "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly (README.md, season list, meta of all 162 seasons; for comparison)",
+   "https://huggingface.co/datasets/zekaiwang/trex_dataset meta/info.json and https://arxiv.org/abs/2606.17055 (T-Rex, for comparison)",
+   "https://huggingface.co/datasets/MJJJJ1064/FTP-1-Dataset (sharpa/ tar headers, via the ftp1_sharpa survey)"
+  ],
+  "unconfirmed": [
+   "Robot name 'Sharpa North' is inferred: annotations.jsonl anno_path reads '/mnt/netdata/Team/Academic/Data/North/SharpaOpenData/...', and the RoCo challenge page (co-organized by Sharpa) calls the same 65-D platform 'Sharpa North: A dexterous hand-based mobile manipulator with two robotic arms and 22-DoF hands'. The SharpaDex card names neither robot nor hand.",
+   "Hand identified as Sharpa Wave from the maker, 22 joints per hand, and the sensor output matching the Wave W01 spec (240x240 tactile resolution, 6-dimensional force/torque Fx..Mz).",
+   "Tactile tiles: 480x1200 = 2 x 5 tiles of 240x240 and 480x1600 = 2 x 5 tiles of 320x240, by division (T-Rex releases the same sensor as separate 240x240 deform and 320x240 raw streams). Row 0 = left hand, row 1 = right hand, columns thumb..little: read from one deformation frame (clean_plate_with_eraser ep 0, frame 701), where blobs appear exactly on the tiles whose fingertip |F| exceeds 2.",
+   "Unit of observation.tactile not stated; magnitudes look like N and N m (per-episode fz maxima 5.7-49.8, torques < 0.9, rest ~0, in 23 episodes). The clean_plate_with_eraser season's stats.json has fz max 76.3, above the W01 spec's 50 N maximum load, so N is not confirmed.",
+   "Principle set to optical from the card's wording ('raw tactile camera layout'); Sharpa's pages call the sensor a Dynamic Tactile Array without naming the principle.",
+   "hours=300.0: 32,396,172 frames / 30 fps = 299.96 h; episode and frame totals summed from all 495 v3.0 info.json files (v2.1 episodes.jsonl gives the same); per-task counts match the card's table for all 59 tasks.",
+   "Episode lengths 10.0-323.8 s (median 28.8 s); 24,453 of 28,993 are 10-60 s (from v2.1 episodes.jsonl).",
+   "Stations: season names carry a station id (POC22002 ... POC22065, 11 ids) and a start time from 2026-03-10 to 2026-07-07; read as collection stations and dates (not documented). Episodes per station: POC22027 7,758, POC22018 6,696, POC22048 6,594, POC22007 2,335, POC22032 1,663, POC22050 1,037, POC22054 994, POC22061 886, POC22065 585, POC22002 423, POC22021 22.",
+   "Head cameras are two streams (head_left, head_right); whether they form a calibrated stereo pair is not stated. Camera models not stated.",
+   "All 495 v3.0 info.json files list H.264 for the 6 video streams; the card says 'Codec may differ between exports'. Probed: the v3.0 and v2.1 tactile_deform files of one season are H.264 (avc1).",
+   "Annotation tags carry 'score' (S or B in the files read) and 'SOP' (V1.0 / V1.1 / empty); their meaning is not documented.",
+   "Torso/motor joints (state dims 58-64) are constant in some episodes and move by up to ~0.6 rad in others.",
+   "Chinese name: a third-party article (VCA创投社, 2026-09-02) writes 'Sharpa（大裂谷）' [Sharpa (Great Rift Valley)]; no official Sharpa page with a Chinese name was found, so zh is omitted.",
+   "FTP-1 overlap derived from session names, not stated by either release: SharpaDex place_pens_in_holder/season_POC22007_2026_03_16_15_28_42_train = FTP-1 sharpa/pick_place_pen_season_POC22007_2026_03_16_15_28_42_train.zarr; in that session all 37 SharpaDex episode lengths occur in the same order among FTP-1's 52 episodes (one session checked at episode level). 15 matches come from 92 FTP-1 sessions sampled by tar-header range reads; the full FTP-1 session list was not indexed, so the total overlap is not known. FTP-1 sessions are dated 2026-01-15 to 03-21; SharpaDex's earliest season is 2026-03-10."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "This dataset is released under the Creative Commons Attribution-NonCommercial 4.0 International License (CC BY-NC 4.0). Commercial use is prohibited under this license. You may share and adapt the dataset for non-commercial purposes only, provided that you give appropriate attribution, include a link to the license, and indicate whether changes were made.",
+  "url": "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0",
+  "access": "open",
+  "format": "<task>/<season>/{lerobot_v3.0, lerobot_v2.1}/: LeRobot v3.0 (data/chunk-000/file-NNN.parquet, videos/<key>/chunk-000/file-NNN.mp4, meta/episodes parquet) and LeRobot v2.1 (one parquet + 6 mp4 per episode); meta/annotations.jsonl in both",
+  "total_size": "~7.7 TB (HF usedStorage 7,686,135,218,101 B, both exports)",
+  "per_episode": "v2.1, 15-50 s episodes: parquet 0.6-3 MB; 6 videos 58-229 MB, of which tactile_raw 29-140 MB, tactile_deform 0.2-1.1 MB, each RGB camera 6-32 MB",
+  "partial_fetch": "single v2.1 files via resolve URLs (<task>/<season>/lerobot_v2.1/data/chunk-000/episode_NNNNNN.parquet and videos/chunk-000/<key>/episode_NNNNNN.mp4); git sparse checkout per task (card)"
+ },
+ "channels": [
+  {
+   "name": "observation.images.head_left, observation.images.head_right",
+   "kind": "camera",
+   "shape": "(480, 480, 3) each",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "robot head, left and right",
+   "note": "H.264 yuv420p mp4, no audio; models not stated"
+  },
+  {
+   "name": "observation.images.wrist_left, observation.images.wrist_right",
+   "kind": "camera",
+   "shape": "(480, 480, 3) each",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "left / right wrist",
+   "note": "H.264 yuv420p mp4"
+  },
+  {
+   "name": "observation.images.tactile_deform",
+   "kind": "deformation_map",
+   "shape": "(480, 1200, 3) = 2 x 5 tiles of 240x240",
+   "rate_hz": 30,
+   "unit": "8-bit grey rendered as RGB (scalar deformation, scale not stated)",
+   "frame": "per fingertip sensor image; row 0 left hand, row 1 right hand, columns thumb..little (inferred)",
+   "note": "H.264 mp4, ~1 MB per 40 s episode; blobs appear where the matching fingertip force rises"
+  },
+  {
+   "name": "observation.images.tactile_raw",
+   "kind": "tactile_image",
+   "shape": "(480, 1600, 3) = 2 x 5 tiles of 320x240",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "raw fingertip sensor-camera images, tiled like tactile_deform (inferred)",
+   "note": "H.264 mp4, the largest stream (~2-3 MB/s)"
+  },
+  {
+   "name": "observation.tactile",
+   "kind": "wrench",
+   "shape": "(60,) float32",
+   "rate_hz": 30,
+   "unit": "not stated (magnitudes consistent with N and N m)",
+   "frame": "per fingertip sensor, axes not documented",
+   "note": "(left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz); rest ~0, per-episode fz maxima 5.7-49.8 in 23 checked episodes; no NaN"
+  },
+  {
+   "name": "observation.state",
+   "kind": "joint_state",
+   "shape": "(65,) float32",
+   "rate_hz": 30,
+   "unit": "not stated (rad by range)",
+   "frame": "joints: left_arm_j0-6, left_hand_j0-21, right_arm_j0-6, right_hand_j0-21, motor_j0-6 (torso)",
+   "note": null
+  },
+  {
+   "name": "observation.state.joint_torque",
+   "kind": "joint_state",
+   "shape": "(65,) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "same joint order as observation.state",
+   "note": "dims 58-64 (torso) always 0"
+  },
+  {
+   "name": "observation.state.tcp",
+   "kind": "other",
+   "shape": "(24,) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "left pose 0:6, left force 6:12, right pose 12:18, right force 18:24",
+   "note": "force/torque slots always 0; pose slots equal observation.state.tcp_pose"
+  },
+  {
+   "name": "observation.state.tcp_pose",
+   "kind": "other",
+   "shape": "(12,) float32",
+   "rate_hz": 30,
+   "unit": "not stated (translations ~0.2-1.1, likely m)",
+   "frame": "left 0:6, right 6:12; reference frame and rotation convention not documented",
+   "note": "observed end-effector pose"
+  },
+  {
+   "name": "action",
+   "kind": "action",
+   "shape": "(65,) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "same joint order as observation.state",
+   "note": "joint-space targets"
+  },
+  {
+   "name": "action.tcp_pose",
+   "kind": "action",
+   "shape": "(12,) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "left 0:6, right 6:12",
+   "note": "commanded TCP poses, recorded separately (not forward kinematics)"
+  },
+  {
+   "name": "task_index, subtask_index + meta/annotations.jsonl",
+   "kind": "language",
+   "shape": "per frame indices; per episode global_task, tags, language_segments",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "global task 'Task | Instruction | Scene | Success'; segments with start_step/end_step, text and skill label"
+  },
+  {
+   "name": "timestamp, frame_index, episode_index, index",
+   "kind": "other",
+   "shape": "(1,) each",
+   "rate_hz": 30,
+   "unit": "s / index",
+   "frame": null,
+   "note": "timestamp step 1/30 s"
+  }
+ ],
+ "episode_index": {
+  "where": "<task>/<season>/lerobot_v2.1/meta/episodes.jsonl (episode_index, tasks, length) and meta/annotations.jsonl (global_task, tags, language_segments) per season; v3.0: meta/episodes/chunk-000/file-000.parquet",
+  "count": 28993,
+  "fields": [
+   "task",
+   "instruction",
+   "scene_description",
+   "success_criteria",
+   "subtasks",
+   "skill",
+   "score",
+   "SOP",
+   "season (station id + start time)",
+   "duration"
+  ],
+  "tasks": [
+   "assemble_gears_on_base",
+   "clean_garment_with_lint_roller",
+   "clean_knife_with_cloth",
+   "clean_plate_with_eraser",
+   "close_kraft_paper_box",
+   "collect_toys_into_basket",
+   "collect_waste_into_bin",
+   "cover_ball_with_cup",
+   "deal_playing_cards",
+   "empty_dustpan_into_bin",
+   "fit_trash_bag_into_bin",
+   "fold_and_close_box",
+   "fold_towel",
+   "form_kraft_paper_box",
+   "grind_medicine_with_mortar_and_pestle",
+   "hammer_nails",
+   "hang_garment_on_hanger",
+   "insert_batteries_into_charger",
+   "insert_batteries_into_device",
+   "insert_knife_into_cutlery_bin",
+   "insert_plug_into_socket",
+   "insert_socket_module_into_board",
+   "iron_garment",
+   "nest_cups",
+   "organize_objects_in_drawer",
+   "pack_blueberries_in_bag",
+   "pack_object_in_storage_bag",
+   "place_ball_in_box",
+   "place_ball_in_cup_then_cup_in_box",
+   "place_books_on_shelf",
+   "place_coffee_filter_in_dripper",
+   "place_cup_on_plate",
+   "place_fruits_in_basket",
+   "place_knife_and_fork_on_plate",
+   "place_pens_in_holder",
+   "play_tic_tac_toe",
+   "pry_nails_from_board",
+   "relocate_tennis_ball",
+   "remove_block_from_box",
+   "reorient_and_relocate_carton",
+   "reorient_cup_upright",
+   "reposition_and_stack_blocks",
+   "rotate_bottle_cap",
+   "scoop_salt_from_jar_into_cup",
+   "scrub_cup_interior",
+   "seal_box_with_tape",
+   "secure_coiled_cable_with_velcro_tie",
+   "sort_utensils",
+   "stack_napkins_in_holder",
+   "stack_two_plates",
+   "staple_paper",
+   "sweep_waste_into_dustpan",
+   "tighten_bottle_cap",
+   "tomato_boxed_lunch_packaging",
+   "transfer_liquid_with_dropper",
+   "transfer_pills_between_cups",
+   "transfer_salt_between_cups_with_spoon",
+   "turn_book_pages",
+   "unscrew_bottle_cap"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Public, ungated Hugging Face release under CC BY-NC 4.0, which allows non-commercial redistribution with attribution. v2.1 stores one parquet and six mp4 files per episode, so single episodes can be fetched. Label the collection 'CC BY-NC 4.0'.",
+  "prefix": "sd_",
+  "tasks_total": 59,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "insert_plug_into_socket/season_POC22007_2026_03_18_19_22_03_train#25",
+    "task": "insert_plug_into_socket (Plug In Connector)",
+    "scene": "tabletop, plug and socket; station POC22007",
+    "subject": null,
+    "duration_s": 22.9,
+    "window": null,
+    "why": "Insert, one hand. Right thumb and index in contact 14.0 / 14.6 s continuous (peaks 26.3 / 40.2). Grade S."
+   },
+   {
+    "id": "unscrew_bottle_cap/season_POC22048_2026_06_29_13_44_42_train#37",
+    "task": "unscrew_bottle_cap (Unscrew the Bottle Cap)",
+    "scene": "tabletop, 500 ml PET bottle; station POC22048",
+    "subject": null,
+    "duration_s": 35.7,
+    "window": null,
+    "why": "Twist, two hands. Left hand holds the bottle with 5 fingertips (thumb-ring 24-29 s continuous, peaks 7-25; little 8.9 s); right thumb, index and middle turn the cap (8.7-11.5 s in total, peaks 13-19). 8 of 10 fingertips in contact."
+   },
+   {
+    "id": "clean_plate_with_eraser/season_POC22027_2026_04_17_11_01_59_train#19",
+    "task": "clean_plate_with_eraser (ClearPlate)",
+    "scene": "tabletop, marked plate and blackboard eraser; station POC22027",
+    "subject": null,
+    "duration_s": 24.0,
+    "window": null,
+    "why": "Wipe with a tool, two hands. Left 5 fingertips hold the plate 8.9-17.4 s (peaks 12-34); right thumb, index and middle hold the eraser 4.1-7.2 s continuous (peaks 21-37). Same season as the card's metadata example."
+   },
+   {
+    "id": "fold_towel/season_POC22027_2026_05_13_14_18_58_train#59",
+    "task": "fold_towel",
+    "scene": "tabletop, towel; station POC22027",
+    "subject": null,
+    "duration_s": 40.9,
+    "window": null,
+    "why": "Deformable object, two hands. Thumb and index of both hands pinch the towel 6.4-6.6 s continuous (right 12 s in total); peaks 6-12, the lowest forces among the picks."
+   },
+   {
+    "id": "hammer_nails/season_POC22048_2026_05_22_10_21_37_train#104",
+    "task": "hammer_nails (Hammer_Nails_v2)",
+    "scene": "tabletop, hammer and wooden peg bench; station POC22048",
+    "subject": null,
+    "duration_s": 33.9,
+    "window": null,
+    "why": "Tool use with impacts, one hand. All 5 right fingertips grip the hammer (thumb 20.0 s, index 8.9, middle 10.4, ring 10.1, little 8.3 s; peaks 10-21). Annotation grade B with 15 segments and no skill labels."
+   },
+   {
+    "id": "transfer_salt_between_cups_with_spoon/season_POC22048_2026_06_03_11_22_05_train#13",
+    "task": "transfer_salt_between_cups_with_spoon (Scoop Salt into Cup)",
+    "scene": "tabletop, spoon and two cups with salt; station POC22048",
+    "subject": null,
+    "duration_s": 23.2,
+    "window": null,
+    "why": "Spoon scooping, one hand. Right thumb, index and middle hold the spoon 13.3-16.3 s (peaks 8-15)."
+   },
+   {
+    "id": "deal_playing_cards/season_POC22018_2026_03_26_20_54_04_train#15",
+    "task": "deal_playing_cards (Card Dealing)",
+    "scene": "tabletop, card stack and tray; station POC22018",
+    "subject": null,
+    "duration_s": 49.1,
+    "window": null,
+    "why": "Fine bimanual handling: left hand holds the deck (thumb 3.6 s, peak 2.6), right thumb, index and middle extract and flip 5 cards (5.7-7.1 s continuous; thumb 24.2 s and index 18.5 s in total; peaks 15-30). 26 annotated segments."
+   },
+   {
+    "id": "relocate_tennis_ball/season_POC22018_2026_05_29_11_16_12_train#448",
+    "task": "relocate_tennis_ball (Pick and Place Tennis Ball)",
+    "scene": "tabletop, tennis ball; station POC22018",
+    "subject": null,
+    "duration_s": 15.0,
+    "window": null,
+    "why": "Pick and place, one hand. Right thumb, middle and ring wrap the ball 3.5-4.4 s (peaks 13.5-28.5); index under 1 s."
+   }
+  ],
+  "fetch_estimate": "~1.3 GB: all 6 v2.1 videos of the 8 episodes total 1,283 MB (tree API sizes: 105, 221, 115, 229, 195, 141, 219, 58 MB), of which tactile_raw is 713 MB; parquets 1-3 MB each. Already local: the 8 parquets (scan). Re-hosted media: tactile_raw (29-140 MB per episode at 480x1600) must be re-encoded smaller to stay under ~30 MB per episode. Episode JSON: 60 values x 30 Hz x <=49 s ~= 88k numbers, under 2 MB.",
+  "rules_applied": "59 tasks, so 8 were taken, spanning insert (plug), twist (bottle cap), wipe with a tool (eraser), deformable folding (towel), tool impacts (hammer), scooping (spoon), card dealing and pick-and-place (ball); one- and two-handed tasks; 4 collection stations (POC22007, POC22048, POC22027, POC22018) stand in for scenes. Candidates: random v2.1 episodes of 10-50 s from seasons on different stations, 22 scanned. Contact = fingertip |F| above the episode's starting median + 1.0 (release units) for at least 1 s continuous; every pick has 2-8 fingertips in contact for 3.5 s or more, no NaN, timestamps at exactly 1/30 s. All picks are 15-49 s, so no window is cut.",
+  "deviations": []
+ }
+}

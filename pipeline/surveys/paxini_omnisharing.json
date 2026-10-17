@@ -1,0 +1,357 @@
+{
+ "id": "paxini_omnisharing",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "paxini_omnisharing",
+  "name": "PX OmniSharing DB (sample data)",
+  "title": "PX OmniSharing DB",
+  "authors": "PaXini",
+  "year": 2026,
+  "venue": "Hugging Face dataset (public sample of a commercial database)",
+  "summary": "Bimanual PaXini exoskeleton data gloves with 15 multi-axis tactile sensors per hand (3,465 values per hand), recorded at about 30 Hz with 29 glove joint angles per hand, 11 RGB and 3 RGB-D static cameras and spoken Chinese instructions, over 1,000 episodes of 10 tabletop tasks.",
+  "embodiment": "human",
+  "hand": "PaXini exoskeleton data glove x 2 (exoskeleton_hand_left/right_2_0, 29 joints per hand)",
+  "bimanual": true,
+  "sensor": {
+   "type": "magnetic",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 15,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "observation/<hand>/tactile/data (n, 3465) float32 per hand, split into 15 sensors by the sensor_names / sensor_lengths attributes: palm_sensor1 219, J32L 219, J42L 282, M6L 378, S22L 195, S32L 105, S6L 318, Z22L 195, Z32L 105, Z6L 318, W22L 195, W32L 105, W6L 318, X22L 195, X6L 318. Every length is a multiple of 3, consistent with 3-axis force per point (1,155 points per hand; not stated). Values are signed with 0.1 steps (-1.3 to 25.5 in the checked files); units not stated. An unused hand reads exactly 0.",
+   "maker": "PaXini (帕西尼)",
+   "model": null,
+   "principle": "magnetic",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "multiview_rgb",
+   "depth",
+   "hand_pose",
+   "audio",
+   "language"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 1000,
+   "frames": null,
+   "tasks": 10,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "office",
+    "home",
+    "restaurant",
+    "industrial",
+    "retail"
+   ],
+   "text": "Sample: 1,000 HDF5 episodes (1.08 TB), 10 tasks of 33-200 episodes, 4.5-42 s per checked episode (about 4.8 h estimated from file sizes); the full OmniSharing DB is sold separately"
+  },
+  "availability": "partial",
+  "access": "The sample (1,000 HDF5 files, 0.29-4.1 GB each, 1.08 TB) is public on Hugging Face without login; the full OmniSharing DB is sold through the PaXini data mall (dataset-mall.paxini.com).",
+  "license": "CC BY-NC-SA 4.0",
+  "caveats": [
+   "The Hugging Face repo is a sample; raw data (DF-1) and the full database are commercial. The card's task table lists 9 tasks with 100 episodes each, while the files hold 10 task codes; the ice-scooping and flower-in-vase tasks found in the files are not in the table, and its 'Insert and Remove' task was not identified.",
+   "Tactile sensor layout, axis order and units are not documented beyond sensor names and lengths; the 15 names read as palm plus thumb (M), index (S), middle (Z), ring (W) and little (X) segments, which is our reading.",
+   "36Kr (2026-04-21) describes the PaXini PXCap V glove as having 30 six-axis tactile modules and 3,015 tactile points. The sample has 15 sensors per hand (30 per pair) and 3,465 values per hand (6,930 per pair, or 1,155 three-axis points per hand); neither count matches 3,015, and the sample's glove is labelled exoskeleton_hand_2_0, so it may be a different glove version.",
+   "Files are large because RGBD_0 aligned depth is stored as an uncompressed (n, 720, 1280) uint16 array (about 1.8 MB per frame); RGB streams are stored as 1-D byte payloads (HEVC for RGB_Camera*, Matroska for RGBD color) and must be decoded.",
+   "Task metadata (dataset/meta attributes) and spoken-instruction transcripts are Chinese only. Object pose groups (obj1, obj2) described in the card were absent from all 12 checked files.",
+   "Recorded 2025-10-11 to 2025-12-11 according to the generated_time attribute of the checked files."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/paxini/Omnisharing_DB_SampleData",
+   "project": "https://omnisharingdb.paxini.com/",
+   "code": "https://github.com/px-DataCollection/px_omnisharing_dataprocess_kit"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 11,
+     "model": null,
+     "type": "RGB",
+     "resolution": "1920x1200",
+     "fps": 30,
+     "mount": "static"
+    },
+    {
+     "role": "third_person",
+     "count": 3,
+     "model": null,
+     "type": "RGB-D",
+     "resolution": "1280x720",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "exoskeleton",
+     "system": "PaXini exoskeleton data glove (exoskeleton_hand_2_0)",
+     "note": "observation/<hand>/joints (n, 29) with URDF joint names J1J-J4J, M1J-M5J, X1J-X5J, S1J-S5J, Z1J-Z5J, W1J-W5J; 36Kr says the glove uses in-house magnetic encoders"
+    },
+    {
+     "target": "wrist",
+     "method": "vision_estimate",
+     "system": "pose estimation from RGBD_0 (attribute source_camera)",
+     "note": "observation/<hand>/handpose (n, 7) [x, y, z, qw, qx, qy, qz]; the card says the sample 'has undergone pose estimation'"
+    }
+   ],
+   "other": [
+    "audio (8 kHz) with Chinese instruction transcript",
+    "camera intrinsics, distortion and extrinsics per camera (calibrated 2025-11-17 in the checked file)",
+    "stereo left/right images of each RGB-D camera",
+    "per-episode task attributes in Chinese (objects, start positions, grasp location, hands used)"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/paxini/Omnisharing_DB_SampleData (README.md, API file list and tree)",
+   "data/part_04/episode_1552_220118_108_110095_glove.hdf5 (HDF5 structure and all non-image arrays by range reads)",
+   "one HDF5 per task code (11 files in part_01 to part_08): meta attributes, audio transcript, tactile arrays, timestamps, camera list, by range reads (~160 MB in total)",
+   "https://www.36kr.com/p/3776307484902144",
+   "https://omnisharingdb.paxini.com/",
+   "https://dataset-mall.paxini.com/ (title only)",
+   "https://arxiv.org/abs/2602.05325 (abstract; does not mention OmniSharing)",
+   "https://arxiv.org/html/2606.13102 (data-source table and acknowledgements)"
+  ],
+  "unconfirmed": [
+   "episodes=1,000 counted from the HF file list (100 per folder part_01 to part_10). The recursive tree API returns only 987 of them (pagination); sizes are from that listing.",
+   "tasks=10: the fourth file-name field takes 11 values, 9 of them on exactly 100 files and two (108: 55, 91: 45) that both hold flower-in-vase episodes. Task text read from one file per value: 75 disassemble a three-tier file basket; 76 put blocks into a block box (right hand only); 79 clean glasses in an ultrasonic cleaner and wipe them; 81 scoop ice into a cup; 93 brush dust off a keyboard; 91/108 put a flower into a vase; 114 screw a nut onto a hex bolt; 115 put a beer into a rack; 131 connect ribbon cables; 138 assemble a three-tier file basket.",
+   "hours not stated. About 4.8 h estimated: the 12 checked files store 2.1 MB per frame (dominated by the uncompressed depth array), and 1.078 TB / 2.1 MB = about 513,000 frames at 30 Hz.",
+   "rate 30 Hz from aligned_timestamp steps (33-34 ms) in the checked files; RGB camera timestamps have the same step and different counts per camera (135-181 frames for 136 aligned frames).",
+   "sensor.type and principle 'magnetic' from 36Kr: PXCap is built on PaXini's '6D 霍尔阵列式触觉传感技术' [6-D Hall-array tactile sensing]; the release itself does not name the principle. Whether the sample glove is PXCap V is not stated.",
+   "coverage tip/phalanx/palm from the sensor names and 36Kr's '全五指无盲区触觉覆盖' [touch coverage of all five fingers without blind spots].",
+   "scene_types from the card's task table (Office, Restaurant, Automotive, Home, Industrial, Supermarket, Primitive Action scenes); the checked videos were not viewed.",
+   "Subjects not stated; the fifth file-name field (e.g. 110026, 120105) has 10 values whose meaning is not documented.",
+   "Not in the catalog's hardware list: the closest PaXini glove entry, paxini_pxcap_pro, lists 1,743 tactile signals and 17 DoF, which does not match this sample."
+  ],
+  "zh": {
+   "maker": "帕西尼",
+   "en": "official",
+   "note": "Card and dataset name are English (PX OmniSharing DB); task attributes and spoken instructions inside each HDF5 are Chinese only. 36Kr calls the product 全模态具身智能数据集产品 OmniSharing DB [omni-modal embodied-AI dataset product]."
+  },
+  "used_by": [
+   {
+    "name": "FTP-1 (arXiv 2606.13102)",
+    "url": "https://arxiv.org/abs/2606.13102",
+    "note": "pretraining mix includes OmniSharingDB human data with the PaXini glove as a state-type sensor (1.0% of the final mix); the paper thanks PaXini for providing the data, so it may not be the public sample"
+   }
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC-SA 4.0",
+  "redistribution": "allowed",
+  "quote": "All the data within this repo is licensed under CC BY-NC-SA 4.0.",
+  "url": "https://huggingface.co/datasets/paxini/Omnisharing_DB_SampleData/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/paxini/Omnisharing_DB_SampleData",
+  "access": "open",
+  "format": "data/part_NN/episode_<n>_<hhmmss>_<task code>_<id>_glove.hdf5 in the DF-2 layout: dataset/{action,observation}/{lefthand,righthand}/{joints,handpose[,tactile]}, observation/image/{RGB_CameraN,RGBD_N}, observation/audio, observation/aligned_timestamp, dataset/meta attributes",
+  "total_size": "1.08 TB (usedStorage 1,077,806,270,796 B)",
+  "per_episode": "0.29-4.1 GB per file (median 0.77 GB); tactile, joints, pose and audio together are a few MB, each RGB camera stream about 1-3 MB, the depth array most of the rest",
+  "partial_fetch": "HDF5 datasets are unchunked and uncompressed, so HTTP range reads through h5py on a file-like object fetch only the wanted arrays (about 5-35 MB per file for metadata, tactile and poses)"
+ },
+ "channels": [
+  {
+   "name": "observation/lefthand/tactile/data, observation/righthand/tactile/data",
+   "kind": "tactile_grid",
+   "shape": "(n, 3465) float32",
+   "rate_hz": 30,
+   "unit": "not stated (signed, 0.1 steps, -1.3 to 25.5 seen)",
+   "frame": "15 sensors per hand, sizes in the sensor_lengths attribute",
+   "note": "mostly 0 (0.6-4.5% of values nonzero per checked file); unused hand all 0"
+  },
+  {
+   "name": "observation/<hand>/joints/data (+ action/<hand>/joints/data)",
+   "kind": "joint_state",
+   "shape": "(n, 29) float32",
+   "rate_hz": 30,
+   "unit": "rad (range -1.0 to 1.6)",
+   "frame": "glove URDF joints (joint_names attribute)",
+   "note": "action group repeats the same fields without tactile"
+  },
+  {
+   "name": "observation/<hand>/handpose/data (+ action/<hand>/handpose/data)",
+   "kind": "hand_pose",
+   "shape": "(n, 7) float32",
+   "rate_hz": 30,
+   "unit": "position not stated (about 1 m from RGBD_0, so metres); quaternion wxyz",
+   "frame": "RGBD_0 camera (source_camera attribute)",
+   "note": null
+  },
+  {
+   "name": "observation/image/RGB_Camera{0-4,6,8-12}/data",
+   "kind": "camera",
+   "shape": "1-D uint8 payload (HEVC stream), 1920x1200",
+   "rate_hz": 30,
+   "unit": "8-bit RGB after decoding",
+   "frame": "calibrated, extrinsics relative to RGB_Camera6",
+   "note": "11 cameras, own timestamp arrays (135-181 frames for 136 aligned frames)"
+  },
+  {
+   "name": "observation/image/RGBD_{0,1,2}/color, left, right",
+   "kind": "camera",
+   "shape": "1-D uint8 payloads (Matroska for color), 1280x720",
+   "rate_hz": 30,
+   "unit": "8-bit",
+   "frame": "extrinsics relative to RGBD_0",
+   "note": "color plus stereo left/right streams per RGB-D camera"
+  },
+  {
+   "name": "observation/image/RGBD_0/aligned_depth",
+   "kind": "depth",
+   "shape": "(n, 720, 1280) uint16",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "aligned to RGBD_0 color",
+   "note": "only RGBD_0 has a depth array; uncompressed"
+  },
+  {
+   "name": "observation/audio",
+   "kind": "audio",
+   "shape": "(samples, 1) float64",
+   "rate_hz": 8000,
+   "unit": "waveform",
+   "frame": null,
+   "note": "attribute txt holds the Chinese instruction, e.g. '将螺母拧在六角头螺栓上。' [screw the nut onto the hex bolt]"
+  },
+  {
+   "name": "observation/aligned_timestamp",
+   "kind": "other",
+   "shape": "(n,) int64",
+   "rate_hz": 30,
+   "unit": "Unix ms",
+   "frame": null,
+   "note": "common timeline of the hand streams"
+  },
+  {
+   "name": "dataset/meta attributes",
+   "kind": "language",
+   "shape": "key-value strings",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "Chinese task attributes (objects, initial positions, grasp location, hands used, order)"
+  }
+ ],
+ "episode_index": {
+  "where": "no index file; one HDF5 per episode, task code in the file name, task text in dataset/meta and observation/audio attributes",
+  "count": 1000,
+  "fields": [
+   "file-name task code",
+   "file-name id (meaning not documented)",
+   "Chinese task attributes",
+   "spoken instruction transcript"
+  ],
+  "tasks": [
+   "75: 将工作台上的三联文件框拆卸为分散的零件 [disassemble a three-tier file basket] (100)",
+   "76: 将工作台上的正方体，锐角三角体，半圆柱体收纳进积木盒 [put a cube, a triangular prism and a half cylinder into a block box] (100)",
+   "79: 用超声波清洗机清洁眼镜一并用眼镜布擦拭干净 [clean glasses in an ultrasonic cleaner and wipe them with a cloth] (100)",
+   "81: 将冰桶中的冰块加入猫爪饮料杯中 [scoop ice from a bucket into a cup] (100)",
+   "93: 使用清洁毛刷清扫台式电脑键盘上的灰尘 [brush dust off a desktop keyboard] (100)",
+   "91 / 108: 将玫红腊梅 / 木棉花放入花瓶中 [put an artificial flower into a vase] (45 + 55)",
+   "114: 将螺母拧在六角头螺栓上 [screw a nut onto a hex bolt] (100)",
+   "115: 将燕京啤酒放入红色啤酒架 [put a beer into a red beer rack] (100)",
+   "131: 将同针数不同种类排线相互对接 [connect ribbon cables with the same pin count] (100)",
+   "138: 将工作台上分散的三联文件框零件组装成一体 [assemble a three-tier file basket] (100)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC-SA 4.0 (card text) allows non-commercial redistribution with attribution under the same license; the sample repo is public and ungated. Label the collection 'CC BY-NC-SA 4.0'. Only the public sample is in scope; the commercial full DB is not.",
+  "prefix": "px_",
+  "tasks_total": 10,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "data/part_03/episode_133_105203_75_110026_glove.hdf5",
+    "task": "disassemble a three-tier file basket (both hands)",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 13.8,
+    "window": null,
+    "why": "both hands nonzero (peak 12.1 left, 25.5 right)"
+   },
+   {
+    "id": "data/part_01/episode_1000_214745_76_110069_glove.hdf5",
+    "task": "put blocks into a block box (right hand only)",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 14.9,
+    "window": null,
+    "why": "one-handed task; right peak 8.6, left all 0"
+   },
+   {
+    "id": "data/part_06/episode_558_202239_79_110026_glove.hdf5",
+    "task": "clean glasses in an ultrasonic cleaner and wipe them",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 38.4,
+    "window": null,
+    "why": "long bimanual task with cloth; peaks 12.3 / 12.2"
+   },
+   {
+    "id": "data/part_07/episode_573_194149_81_110047_glove.hdf5",
+    "task": "scoop ice into a cup",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 18.6,
+    "window": null,
+    "why": "tool use (scoop); peaks 18.1 / 15.3"
+   },
+   {
+    "id": "data/part_01/episode_1217_212953_93_110056_glove.hdf5",
+    "task": "brush dust off a keyboard",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 10.7,
+    "window": null,
+    "why": "brushing; peaks 5.6 / 8.9"
+   },
+   {
+    "id": "data/part_08/episode_707_203413_114_120061_glove.hdf5",
+    "task": "screw a nut onto a hex bolt",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 11.8,
+    "window": null,
+    "why": "twisting; peaks 8.8 / 5.7"
+   },
+   {
+    "id": "data/part_05/episode_239_152605_131_120105_glove.hdf5",
+    "task": "connect ribbon cables (16-pin)",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 11.3,
+    "window": null,
+    "why": "insertion; highest nonzero fraction of the checked files (3.4% / 4.5%)"
+   },
+   {
+    "id": "data/part_01/episode_100_101302_138_120105_glove.hdf5",
+    "task": "assemble a three-tier file basket",
+    "scene": "not checked",
+    "subject": "not stated",
+    "duration_s": 42.0,
+    "window": null,
+    "why": "long bimanual assembly; peaks 8.8 / 10.3"
+   }
+  ],
+  "fetch_estimate": "~150-250 MB by range reads (tactile, joints, poses, audio, timestamps and 1-2 RGB camera payloads per file); whole files would be 11.3 GB",
+  "rules_applied": "10 tasks (more than 6), so 8 are taken, one episode each, spanning disassembly, assembly, a one-handed pick-and-place, cleaning with a cloth, tool use (scoop, brush), twisting and cable insertion. The beer-rack and flower-in-vase tasks are left out because their checked episodes are 5.4-8.3 s, under the 10 s minimum. All 8 are 10.7-42.0 s, so no window is cut. Each listed peak is the largest absolute tactile value in the file; contact for at least 1 s is checked in step 3 when the arrays are converted.",
+  "deviations": [
+   "Each episode is the first file found for its task code (the other 99 were not scanned); replace any that fail the 1 s contact check with another file of the same task.",
+   "Depth (uncompressed, ~1.8 MB per frame) should not be fetched; the viewer can use one RGB camera."
+  ]
+ }
+}

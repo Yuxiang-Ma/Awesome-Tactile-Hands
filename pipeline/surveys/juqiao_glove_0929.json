@@ -1,0 +1,331 @@
+{
+ "id": "juqiao_glove_0929",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "juqiao_glove_0929",
+  "name": "juqiao glove 0929",
+  "title": "juqiao glove 0929",
+  "authors": "NIRC Computer Vision Lab and Addx Technology",
+  "year": 2026,
+  "venue": "Hugging Face dataset (Open-X-Tactile contribution)",
+  "summary": "JQ (juqiao) fabric tactile glove, 132 raw ADC taxels per hand (12 per fingertip, 72 on the palm), recorded with one static RGB camera and reconstructed MANO-based hand states over 11 pick and manipulation recordings of household objects, two of them bimanual.",
+  "embodiment": "human",
+  "hand": "JQ tactile glove (right hand; both hands in 2 of 11 recordings)",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 132,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 10,
+   "note": "Per recorded hand: <side>_tactile_data_fingers (T, 5, 12) and <side>_tactile_data_palm (T, 1, 72), raw 8-bit ADC 0-255 stored as float32. All 12 finger taxels sit on the distal link of each finger; the palm block has 56 taxels on the palm and 16 on the thumb base link (channel_mapping.json). Each 10 Hz value is the median of the raw samples within +/-50 ms of the camera frame (raw glove rate about 81 Hz, 4,745-5,759 samples per recording); no baseline subtraction, threshold or force calibration. 132 of the glove's 256 raw channels are bound; left and right mappings differ.",
+   "maker": "JQ Industries (矩侨工业, Weihai)",
+   "model": "juqiao glove",
+   "principle": "unspecified",
+   "range": "0-255 ADC",
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "hand_pose",
+   "language"
+  ],
+  "scale": {
+   "hours": 0.2,
+   "episodes": 16,
+   "frames": 7126,
+   "tasks": 11,
+   "objects": 10,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "11 recordings (45-90 s), 16 continuous spans, 7,126 frames at 10 Hz (11.9 min), 10 household objects; 8 single-object picks, 1 single-hand manipulation, 2 bimanual"
+  },
+  "availability": "public",
+  "access": "Hugging Face lilfiiiiish/juqiao-glove-0929, ungated, 3.3 GB of Zarr v2 directories (one per recording, one blosc-compressed RGB chunk per frame).",
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "Very small: 11 recordings from one day (2026-09-29), one external camera, 10 objects; 9 of 11 recordings have the right hand only, and an absent hand has no arrays (no zero filling).",
+   "Tactile values are raw ADC with standing readings: in the first 5 frames of every recording most regions already sum to 6-140 ADC, and the pinky and palm regions are almost never 0, so contact has to be judged against a baseline. The README warns of glove and posture noise and says a low ADC does not certify no contact.",
+   "Hand state is a 21-D vector of FTP-1 geometric angle features in radians plus a 6-D wrist pose (metres, rotation vector) in the camera frame, reconstructed by an unnamed method; the README says it is not motion-capture ground truth. Depth, extra RGB views and IMU from the capture were not released.",
+   "Instructions were drafted from file names ('Pick up the cola can.') and are flagged as needing review; the 16 spans are data-continuity breaks, and 4 recordings start with a 1-frame span.",
+   "Published 2026-10-16 as an Open-X-Tactile (OXT) contribution; OXT acceptance is not claimed. pinkcup_pick_0929 was excluded (missing visual timestamps)."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929",
+   "project": "https://open-x-tactile.github.io/",
+   "code": "https://github.com/nolann030628/OXT-QC"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": "640x360 (resized from 1280x720)",
+     "fps": 10,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "other",
+     "system": "reconstructed MANO hand state (method not stated)",
+     "note": "<side>_hand_joints (T, 21) FTP-1 angle features in radians; source MANO model hashes in .zattrs; MANO files not distributed"
+    },
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "same reconstruction",
+     "note": "<side>_wrist_pose (T, 6): xyz in metres + rotation vector, camera0 optical frame"
+    }
+   ],
+   "other": [
+    "camera intrinsics and world-to-camera in each recording's .zattrs",
+    "per-frame ADC window sample count and nearest-sample offset",
+    "taxel binding coordinates on MANO-URDF links (channel_mapping.json)"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929 (README.md, API file tree)",
+   "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929/blob/main/LICENSE (and hosting_status.json, metadata.json, instructions.json, export_report.json, channel_mapping.json)",
+   "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929/tree/main/submission (README.txt, HOSTING_AND_REVIEW.txt, contributor_decisions.json, dataset_validation.json)",
+   "provenance/original_export/README.md, provenance/pre_public_release_20261016/README.md and submission/hand_feature_mapping.json",
+   "zarr/colacan_pick_0929.zarr (all non-RGB arrays, .zattrs, 2 RGB frames); tactile, timestamp and episode_ends arrays of the other 10 recordings",
+   "https://open-x-tactile.github.io/ (linked from the card; not read in depth)"
+  ],
+  "unconfirmed": [
+   "Glove maker: the card names the sensor 'juqiao glove'; 'juqiao' is the pinyin of 矩侨 (JQ Industries), maker of the catalog's jq_tactile_glove (256 raw channels in EgoTouch). The raw CSVs here have columns p1-p256, of which 132 are bound.",
+   "hours=0.2 derived: 7,126 frames / 10 Hz = 712.6 s.",
+   "episodes=16 are the continuous spans (meta/episode_ends); the card says no action labels or split exist. tasks=11 is the metadata.json 'task' count (one draft instruction per recording).",
+   "objects=10 counted from recording names (black cup, cola can, coffee bottle, coffee box, cookie box, green spray bottle, pink spray bottle, Lay's snack can, soup can, capybara toy).",
+   "Raw glove rate about 81 Hz derived from export_report.json raw_adc_samples / recording duration (80.8-81.3 Hz in all 11).",
+   "scenes=1 and scene_type 'lab' from one RGB frame (optical breadboard table, robot arms at the edges). Subjects not stated; source paths contain 'subject_fbs', which suggests one subject.",
+   "Institutions: the card names 'NIRC Computer Vision Lab' and 'Addx Technology' with a bupt.edu.cn contact address; their Chinese names were not found."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "This dataset is publicly available under Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0).",
+  "url": "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929",
+  "access": "open",
+  "format": "zarr/<recording>.zarr (Zarr v2, blosc zstd): data/camera_main_rgb (T, 360, 640, 3) one chunk per frame, <side>_tactile_data_fingers/palm, <side>_hand_joints, <side>_wrist_pose, timestamps, source_timestamp_unix_ns, sub_task_instruction, meta/episode_ends; attributes in .zattrs. Also an OXT submission ZIP and provenance files.",
+  "total_size": "3.3 GB (3,289,513,001 B under zarr/)",
+  "per_episode": "about 200-410 MB per recording, nearly all RGB (~460 KB per frame); non-RGB arrays under 1 MB",
+  "partial_fetch": "Zarr chunk files are separate repo files: fetch the non-RGB arrays plus only the RGB chunks of the wanted frames"
+ },
+ "channels": [
+  {
+   "name": "data/camera_main_rgb",
+   "kind": "camera",
+   "shape": "(T, 360, 640, 3) uint8",
+   "rate_hz": 10,
+   "unit": "8-bit RGB",
+   "frame": "camera0, static third-person; K in .zattrs camera_main_K",
+   "note": "resized from 1280x720 without cropping"
+  },
+  {
+   "name": "data/<side>_tactile_data_fingers",
+   "kind": "tactile_grid",
+   "shape": "(T, 5, 12) float32",
+   "rate_hz": 10,
+   "unit": "raw ADC 0-255",
+   "frame": "thumb, index, middle, ring, pinky; 12 taxels on each distal link (channel_mapping.json)",
+   "note": "window median of ~81 Hz raw samples; max 48 in colacan_pick, up to 377 summed per region elsewhere"
+  },
+  {
+   "name": "data/<side>_tactile_data_palm",
+   "kind": "tactile_grid",
+   "shape": "(T, 1, 72) float32",
+   "rate_hz": 10,
+   "unit": "raw ADC 0-255",
+   "frame": "56 palm taxels + 16 on the thumb base link",
+   "note": "ordered state vector, not a rectangular image"
+  },
+  {
+   "name": "data/<side>_tactile_area_*, _sensor_*, _type_*",
+   "kind": "other",
+   "shape": "(T, 5) / (T, 1) int32; (T,) strings",
+   "rate_hz": 10,
+   "unit": null,
+   "frame": null,
+   "note": "region ids 0-5, sensor name 'juqiao_glove', type 'state'"
+  },
+  {
+   "name": "data/<side>_adc_window_sample_count, <side>_adc_nearest_sample_ms",
+   "kind": "other",
+   "shape": "(T,)",
+   "rate_hz": 10,
+   "unit": "count / ms",
+   "frame": null,
+   "note": "2-13 raw samples per window; nearest sample within 34 ms"
+  },
+  {
+   "name": "data/<side>_hand_joints (+ _idx)",
+   "kind": "hand_pose",
+   "shape": "(T, 21) float32",
+   "rate_hz": 10,
+   "unit": "rad",
+   "frame": "joint-angle features (FTP-1), not xyz",
+   "note": "adduction, MCP, PIP, DIP per finger plus palm features; reconstructed, not mocap"
+  },
+  {
+   "name": "data/<side>_wrist_pose",
+   "kind": "hand_pose",
+   "shape": "(T, 6) float32",
+   "rate_hz": 10,
+   "unit": "m + rotation vector (rad)",
+   "frame": "camera0 optical (x right, y down, z forward)",
+   "note": "wrist-to-world in a neutral anatomical basis"
+  },
+  {
+   "name": "data/timestamps, source_timestamp_unix_ns, source_frame_id",
+   "kind": "other",
+   "shape": "(T,)",
+   "rate_hz": 10,
+   "unit": "s from first visual host timestamp / ns / index",
+   "frame": null,
+   "note": "steps 0.1 s with occasional 0.2 s gaps that split spans"
+  },
+  {
+   "name": "data/sub_task_instruction",
+   "kind": "language",
+   "shape": "(T,) string",
+   "rate_hz": 10,
+   "unit": null,
+   "frame": null,
+   "note": "one draft instruction per recording, inferred from the file name"
+  }
+ ],
+ "episode_index": {
+  "where": "README recording table, metadata.json, instructions.json, export_report.json; meta/episode_ends per Zarr",
+  "count": 16,
+  "fields": [
+   "recording",
+   "frames",
+   "hands present",
+   "instruction",
+   "continuous spans"
+  ],
+  "tasks": [
+   "blackcup_colacan_bimanual_0929: Manipulate the black cup and cola can with both hands.",
+   "coffeebottle_pick_0929: Pick up the coffee bottle.",
+   "coffeebox_pick_0929: Pick up the coffee box.",
+   "colacan_pick_0929: Pick up the cola can.",
+   "cookiebox_pick_0929: Pick up the cookie box.",
+   "greenspraybottle_pinkspraybottle_bimanual_0929: Manipulate the green and pink spray bottles with both hands.",
+   "layscan_pick_0929: Pick up the snack can.",
+   "pinkspraybottle_manip_0929: Manipulate the pink spray bottle.",
+   "pinkspraybottle_pick_0929: Pick up the pink spray bottle.",
+   "soupcan_pick_0929: Pick up the soup can.",
+   "toycapibara_pick_0929: Pick up the capybara toy."
+  ],
+  "scenes": [
+   "one optical-breadboard table"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC 4.0 (README and LICENSE) allows non-commercial redistribution with attribution; the repo is public and ungated and Zarr chunks are single files. Label the collection 'CC BY-NC 4.0'.",
+  "prefix": "jq_",
+  "tasks_total": 11,
+  "tasks_sampled": 7,
+  "episodes": [
+   {
+    "id": "blackcup_colacan_bimanual_0929",
+    "task": "Manipulate the black cup and cola can with both hands.",
+    "scene": "breadboard table",
+    "subject": "not stated",
+    "duration_s": 40,
+    "window": [
+     28.8,
+     68.8
+    ],
+    "why": "bimanual; both hands have all 6 regions above 30 ADC for at least 1 s; window = 40 s with the highest summed tactile above each taxel's 10th percentile"
+   },
+   {
+    "id": "greenspraybottle_pinkspraybottle_bimanual_0929",
+    "task": "Manipulate the green and pink spray bottles with both hands.",
+    "scene": "breadboard table",
+    "subject": "not stated",
+    "duration_s": 40,
+    "window": [
+     12.6,
+     52.6
+    ],
+    "why": "second bimanual recording; 89.7 s long, cut to the 40 s with most touch"
+   },
+   {
+    "id": "pinkspraybottle_manip_0929",
+    "task": "Manipulate the pink spray bottle.",
+    "scene": "breadboard table",
+    "subject": "not stated",
+    "duration_s": 40,
+    "window": [
+     21.3,
+     61.3
+    ],
+    "why": "single-hand in-hand manipulation; 5 of 6 regions above 30 ADC for at least 1 s"
+   },
+   {
+    "id": "coffeebox_pick_0929",
+    "task": "Pick up the coffee box.",
+    "scene": "breadboard table",
+    "subject": "not stated",
+    "duration_s": 40,
+    "window": [
+     6.4,
+     46.3
+    ],
+    "why": "box (flat faces); peak region sum 313"
+   },
+   {
+    "id": "toycapibara_pick_0929",
+    "task": "Pick up the capybara toy.",
+    "scene": "breadboard table",
+    "subject": "not stated",
+    "duration_s": 45.3,
+    "window": null,
+    "why": "soft toy; whole recording is under 60 s"
+   },
+   {
+    "id": "layscan_pick_0929",
+    "task": "Pick up the snack can.",
+    "scene": "breadboard table",
+    "subject": "not stated",
+    "duration_s": 59.1,
+    "window": null,
+    "why": "highest single-region peak (377) of the pick recordings; under 60 s"
+   },
+   {
+    "id": "soupcan_pick_0929",
+    "task": "Pick up the soup can.",
+    "scene": "breadboard table",
+    "subject": "not stated",
+    "duration_s": 40,
+    "window": [
+     22.7,
+     62.6
+    ],
+    "why": "small cylinder; chosen over colacan_pick, whose dropped frame 122 splits the recording"
+   }
+  ],
+  "fetch_estimate": "~1.4 GB (RGB chunks of the 7 windows at ~460 KB per frame, ~2,900 frames; tactile and pose arrays < 10 MB)",
+  "rules_applied": "11 recordings, each its own instruction (more than 6), so 7 are taken: both bimanual recordings, the single-hand manipulation recording, and 4 picks spanning a box, a soft toy, a snack can and a soup can. One episode per task. Recordings longer than 60 s are cut to a 40 s window chosen by the largest tactile energy (sum over taxels of value minus that taxel's 10th percentile); the window still has to be checked against the video for contact in step 3, because the raw ADC has standing readings from the first frame.",
+  "deviations": [
+   "Contact was judged from region sums above 30 ADC; with no baseline in the data, the step-3 converter should subtract a per-taxel rest level before calling a frame 'contact'."
+  ]
+ }
+}

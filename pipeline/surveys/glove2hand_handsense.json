@@ -1,0 +1,204 @@
+{
+ "id": "glove2hand_handsense",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "glove2hand_handsense",
+  "name": "HandSense (Glove2Hand)",
+  "title": "Glove2Hand: Synthesizing Natural Hand-Object Interaction from Multi-Modal Sensing Gloves",
+  "authors": "Xinyu Zhang et al.",
+  "year": 2026,
+  "venue": "CVPR 2026 (Highlight)",
+  "summary": "5 subjects wore a Meta Reality Labs research glove with 5 capacitive fingertip tactile sensors and 12 IMUs, filmed by egocentric grayscale headset cameras with marker mocap, over 6 tasks and 10 objects; matching bare-hand sessions and Glove2Hand-synthesized bare-hand videos are included.",
+  "embodiment": "human",
+  "hand": "Meta Reality Labs research sensing glove (12 IMUs, 5 capacitive fingertip sensors)",
+  "bimanual": null,
+  "sensor": {
+   "type": "capacitive",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "note": "One continuous force channel per fingertip, synchronized to the egocentric frames by nearest timestamp (paper). Released file format not checked (request form not submitted).",
+   "maker": "custom (Meta Reality Labs)",
+   "model": null,
+   "principle": "capacitive",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "egocentric",
+   "hand_pose",
+   "mocap",
+   "imu"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": 200000,
+   "tasks": 6,
+   "objects": 10,
+   "subjects": 5,
+   "scenes": null,
+   "scene_types": [],
+   "text": "~200K images, 5 subjects, 10 objects, 6 tasks; one glove session and one bare-hand session per subject, 2-5 min per task segment"
+  },
+  "availability": "gated",
+  "access": "Google Form (name, affiliation, email); the download link is shown on the confirmation page after submitting.",
+  "license": "not stated",
+  "caveats": [
+   "Tactile and IMU signals exist only for the glove session; bare-hand contact labels are manual binary per-fingertip annotations.",
+   "The paper defers glove details: 'More detailed information about the glove configuration will be shared upon acceptance'.",
+   "Release contents (raw glove video, synthesized bare-hand video, sensor files) were not checked; the request form was not submitted.",
+   "The project page says larger dataset releases are planned."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2603.20850",
+   "project": "https://mlzxy.github.io/glove2hand",
+   "data": "https://forms.gle/QzEPJ7ncuGHgi1gS9"
+  },
+  "image": "https://arxiv.org/html/2603.20850v2/assets/images/dataset.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 2,
+     "model": null,
+     "type": null,
+     "resolution": null,
+     "fps": null,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "optical_mocap",
+     "system": "marker-based MoCap (system not named)",
+     "note": "retro-reflective markers on the dorsal glove or hand; ground-truth 3D hand pose for both sessions"
+    },
+    {
+     "target": "fingers",
+     "method": "imu",
+     "system": "12 6-DoF IMUs on the glove",
+     "note": "glove session; used as pseudo ground truth for occluded hand tracking"
+    }
+   ],
+   "other": [
+    "Glove2Hand-synthesized bare-hand videos of the glove sessions",
+    "manual binary fingertip contact labels (bare-hand session)"
+   ]
+  },
+  "sources": [
+   "https://mlzxy.github.io/glove2hand",
+   "https://arxiv.org/abs/2603.20850",
+   "https://arxiv.org/html/2603.20850v2 (Sec. 4, Appendix A-B, Tables 5-6)",
+   "https://docs.google.com/forms/d/e/1FAIpQLSeWNRPYq3UOXgMOf0Rea91dxbtumFquzCsry6zHgpPHo2yS8w/viewform (form text only)"
+  ],
+  "unconfirmed": [
+   "Headset not named; the paper says 'egocentric grayscale video recordings from headset cameras' and 'our egocentric headset provides only two closely positioned cameras'. Camera type left null (grayscale is not a schema type).",
+   "Whether one or both hands wore the glove is not stated.",
+   "frames=200,000 is Table 6's 'Images' count; whether it counts both cameras, both sessions or synthesized frames is not stated.",
+   "Tactile and IMU rates not stated (glove 'streams sensor data at high framerates').",
+   "No license on the project page, the form or in the paper; the arXiv paper itself is CC BY 4.0, which covers the paper only.",
+   "Affiliations: paper lists Meta Reality Labs and Rutgers University (Abdeslam Boularias); first author worked on it during a Meta internship. The glove is called 'our research platform'; maker taken as Meta Reality Labs from that context."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://mlzxy.github.io/glove2hand"
+ },
+ "download": {
+  "where": "https://forms.gle/QzEPJ7ncuGHgi1gS9",
+  "access": "form",
+  "format": "not checked",
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [
+  {
+   "name": "egocentric headset video (glove and bare-hand sessions)",
+   "kind": "camera",
+   "shape": "not checked",
+   "rate_hz": null,
+   "unit": "grayscale",
+   "frame": "headset cameras",
+   "note": "from the paper; files not checked"
+  },
+  {
+   "name": "fingertip tactile",
+   "kind": "pressure_scalar",
+   "shape": "(T, 5)",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "one capacitive sensor per fingertip",
+   "note": "glove session; from the paper"
+  },
+  {
+   "name": "glove IMUs",
+   "kind": "imu",
+   "shape": "(T, 12, 6)",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "phalanges",
+   "note": "glove session; from the paper"
+  },
+  {
+   "name": "MoCap hand pose",
+   "kind": "hand_pose",
+   "shape": "not checked",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "mocap frame",
+   "note": "both sessions; glove poses corrected per joint for glove thickness"
+  },
+  {
+   "name": "bare-hand contact labels",
+   "kind": "contact_flag",
+   "shape": "(T, 5)",
+   "rate_hz": null,
+   "unit": "binary",
+   "frame": "per fingertip",
+   "note": "manual annotation, bare-hand session"
+  },
+  {
+   "name": "Glove2Hand bare-hand video",
+   "kind": "camera",
+   "shape": "not checked",
+   "rate_hz": null,
+   "unit": null,
+   "frame": "same as glove video",
+   "note": "synthesized; release status per the paper, files not checked"
+  }
+ ],
+ "episode_index": {
+  "where": null,
+  "count": null,
+  "fields": [],
+  "tasks": [
+   "Bottle Opening",
+   "Object Rotation",
+   "Piano Keystroke",
+   "Pick-and-Place",
+   "Surface Interaction",
+   "In-Hand Rotation"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "catalog_only",
+  "reason": "Data sits behind a Google Form asking for name, affiliation and email; the link appears after submission. The form was not submitted on the user's behalf. After the user submits it, the dataset can be sampled and labelled 'License not stated' (no license found).",
+  "prefix": "gh_",
+  "tasks_total": 6,
+  "tasks_sampled": 0,
+  "episodes": [],
+  "fetch_estimate": "unknown (release size not published)",
+  "rules_applied": "catalog_only: gated, access not granted."
+ }
+}

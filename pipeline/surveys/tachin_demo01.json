@@ -1,0 +1,458 @@
+{
+ "id": "tachin_demo01",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "tachin_demo01",
+  "name": "TachinTactileGlove-Demo01",
+  "title": "TachinTactileGlove-Demo01",
+  "authors": "Tachin Technology (Tachintech)",
+  "year": 2026,
+  "venue": "Hugging Face dataset",
+  "summary": "Bimanual Tachin tactile gloves (880 taxels per hand, 15 pads, pressure plus x/y tangential fields) recorded with a head-mounted fisheye RGB camera on a desk in 11 motion categories, with 21-joint hand tracks and SLAM camera poses estimated from the video.",
+  "embodiment": "human",
+  "hand": "Tachin tactile glove x 2",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 880,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "15 pads per hand (keys tactile_0-5, 7-9, 11-13, 15, 16, 18): thumb tip 16x10, thumb mid 4x8, thumb base 13x8; index, middle and ring 9x8 + 3x8 + 4x8; pinky 9x8 + 3x8; palm 13x8 = 880 values. Each pad also has tf_tactile_x and tf_tactile_y fields of the same shape (card: 'local X/Y transform'; launch press: tangential force). Processed LeRobot files hold the three fields per frame at 30 fps (resampled to the video frames); raw npz files keep the glove's own timestamps at about 55.6 Hz (median step 18 ms over WiFi, sensor class 'Wifi32'). Units not stated; pressure values 0 to about 4.2 in the checked files.",
+   "maker": "Tachin Technology (途见科技, Beijing)",
+   "model": "TachinGlove",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "egocentric",
+   "hand_pose",
+   "language"
+  ],
+  "scale": {
+   "hours": 0.5,
+   "episodes": 102,
+   "frames": 54237,
+   "tasks": 11,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "102 processed segments (54,237 frames at 30 fps, 30.1 min) cut from 31 of 34 raw sessions (37.9 min of video), 11 motion categories, 31 task recordings; card says about 1 h"
+  },
+  "availability": "public",
+  "access": "Hugging Face Tachintech/TachinTactileGlove-Demo01, ungated, 4.1 GB: 102 per-segment LeRobot v3 ZIPs (5-119 MB each) under Processed/<category>/ and 34 raw sessions under Origin/.",
+  "license": "GPL-3.0",
+  "caveats": [
+   "Small: 102 segments of 1.5-62.5 s (median 12.8 s) recorded on one day (2026-07-10, 16:26-17:38) at one desk, with two glove pairs (two MAC address pairs) and overlapping session times, so likely two stations; the number of subjects is not stated.",
+   "Hand pose and camera pose are estimated from the egocentric video (21 OpenPose-style joints, 16 joint rotation matrices per hand, SLAM camera trajectory); there is no hand-tracking hardware. Joints are in the camera frame at raw SLAM scale.",
+   "Task names and descriptions (meta/segment_info.json) are in Chinese only; folder names give 11 English motion categories (Fold, Grasp, Plug&Unplug, Pour, Press, Push&Pull, Scroll, Squeeze, Tighten a screw, Twist the bottle cap, Wipe). Launch press describes the release as covering 20 task categories.",
+   "Tactile units are not stated. Launch press says calibrated tactile data are provided; the release has no unit or calibration file.",
+   "Raw videos are HEVC although the raw-format guide says H.264; processed segment videos are H.264.",
+   "Three raw sessions (20260710_163343_778, 164007_606, 165853_253) have no processed segment; two raw-session video clocks differ by 12.4 s between meta_data.json mp4_start_time and video_ntp_time.csv for one glove pair.",
+   "Derived release: MIT-Media-Lab/tachin-annotations-v1 (CC BY-NC 4.0) re-cuts the 102 segments into 2,422 per-hand episodes with MANO fits from MIT-Media-Lab/tachin-vitra-precut-mano-v1 (GPL-3.0), which pins this dataset at revision 2eb0e45e."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01",
+   "project": "https://www.tachin.com/en"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": null,
+     "type": "fisheye",
+     "resolution": "1920x1080",
+     "fps": 30,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "hand tracking from the egocentric video (algorithm not named)",
+     "note": "observation.joints 2 x 21 x 3 and rotmats 2 x 16 x 3 x 3 per frame, with per-hand validity and confidence"
+    },
+    {
+     "target": "wrist",
+     "method": "vision_estimate",
+     "system": "same hand tracker; camera trajectory from monocular SLAM on the fisheye video",
+     "note": "slam_pose (7,) and R/t world-to-camera per frame; slam_scale in meta/worldpose_static.json; sparse keyframe disparity maps in meta/slam_keyframes.npz"
+    }
+   ],
+   "other": [
+    "per-pad x/y tangential fields (tf_tactile_x/y)",
+    "Chinese task name and description per segment",
+    "fisheye intrinsics and distortion per segment",
+    "raw glove streams with acquisition-side Unix timestamps"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01 (README.md, API file tree)",
+   "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01/blob/main/Origin/RAW_UPLOAD_DATA_EN.md (and RAW_UPLOAD_DATA_CN.md)",
+   "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01/blob/main/Processed/LEROBOT_DATASET_EN.md (and LEROBOT_DATASET_CN.md)",
+   "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01/blob/main/vis_tools.zip (README_EN.md, lib/tactile_vis.py by range reads)",
+   "Processed/Plug&Unplug/task-63-segment-002.zip (whole file) and meta/info.json, meta_data.json, segment_info.json, stats.json of the other zips by range reads",
+   "Origin/customized_glove_无_20260710_162622_504_0/ (all files), plus video_ntp_time.csv and meta_data.json of all 34 raw sessions",
+   "https://www.stdaily.com/web/gdxw/2026-08/21/content_567606.html",
+   "https://news.qq.com/rain/a/20260823A08S8P00",
+   "https://huggingface.co/datasets/MIT-Media-Lab/tachin-annotations-v1 (README.md)",
+   "https://huggingface.co/datasets/MIT-Media-Lab/tachin-vitra-precut-mano-v1 (README.md)",
+   "https://huggingface.co/datasets/zzzqzzz/ego_2_tianji (README.md, meta/export_state.json, meta/release_contract.json)"
+  ],
+  "unconfirmed": [
+   "hours=0.5 and frames=54,237 summed from meta/info.json total_frames of the 102 processed ZIPs (30 fps). Raw sessions: 68,173 video frames in the 34 video_ntp_time.csv files = 37.9 min. The card's 'approximately one hour' counts neither figure exactly.",
+   "tasks=11 is the number of category folders; the folders hold 31 task ids (task-38 to task-71), each matched by start time to one raw session. Launch press (科技日报 2026-08-21): '包含抓取、折叠、装配、插拔、倾倒、按压、滚动、挤压、旋转、擦拭等20类触觉丰富的操作任务' [contains 20 categories of touch-rich tasks such as grasping, folding, assembly, plug/unplug, pouring, pressing, rolling, squeezing, rotating and wiping]. The release has 11.",
+   "Raw tactile rate 55.6 Hz is the median step in one raw session (933 left / 951 right samples over 19.9 s; steps 0-175 ms). Processed tactile_timestamp steps are exactly 1/30 s and values are fractional between raw levels, so the processed tactile is interpolated onto video frames; the method is not stated (the MIT derived card says interpolated without crossing gaps above 100 ms).",
+   "Camera mount 'head' and scene type 'lab' are read from two video frames (downward view of a white desk with the wearer's cap at the frame edge); the card says only 'ego-view camera'. Camera model not stated; worldpose_static.json gives camera_model 'fisheye' with 4 distortion coefficients.",
+   "Two glove pairs: left/right MACs 8c:8c:29:55:73:b0 / 8c:8c:29:56:4c:68 (44 segments) and d4:8c:49:98:cb:b4 / 8c:8c:29:55:fe:ac (58 segments); raw sessions of the two pairs overlap in time.",
+   "Same glove family as the catalog's TouchScale entry (hardware tachin_glove): identical 15-pad layout and 880 values per hand. The glove model name TachinGlove comes from the launch press, not from the card.",
+   "zzzqzzz/ego_2_tianji (no license, 1,006 episodes, 4.0 h) retargets a Tachin glove dataset it calls '10h' to a ZYHand robot; its upstream could not be traced to this release, so it is not listed as a user.",
+   "Units of tf_tactile_x/y not stated; values -1.34 to 1.04 in the checked raw session.",
+   "The video shows brown or orange outer gloves with a module on the back of the hand; segment descriptions call them '棕色工作手套' [brown work gloves] or '橙色手套' [orange gloves]. Whether the tactile glove is worn under an outer glove is not stated."
+  ],
+  "used_by": [
+   {
+    "name": "MIT-Media-Lab/tachin-annotations-v1 (Hugging Face dataset)",
+    "url": "https://huggingface.co/datasets/MIT-Media-Lab/tachin-annotations-v1",
+    "note": "derived annotation set: re-cuts the 102 segments into 2,422 per-hand VITRA-style episodes with MANO fits, dense tactile and generated instructions; frames are not redistributed"
+   }
+  ],
+  "zh": {
+   "maker": "途见科技",
+   "en": "official",
+   "note": "English dataset name is the publisher's. Format guides come in English and Chinese (RAW_UPLOAD_DATA_CN.md, LEROBOT_DATASET_CN.md); per-segment task names and descriptions are Chinese only. Launch press calls the release 首批全手触觉具身数据集 [first batch of whole-hand tactile embodied data]; full company name in press: 途见科技（北京）有限公司."
+  }
+ },
+ "license": {
+  "name": "GPL-3.0",
+  "redistribution": "allowed",
+  "quote": "license: gpl-3.0",
+  "url": "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01",
+  "access": "open",
+  "format": "Processed/<category>/task-<id>-segment-<n>.zip: one LeRobot v3.0 episode each (data parquet, H.264 mp4, meta/*.json incl. tactile_layout.json, segment_info.json, worldpose_static.json, slam_keyframes.npz). Origin/<session>/: video.mp4 (HEVC), video_ntp_time.csv, meta_data.json, left/right_hand_data.npz.",
+  "total_size": "4.1 GB (3.36 GB processed ZIPs, 0.75 GB raw, 17 MB vis_tools.zip)",
+  "per_episode": "5-119 MB per processed ZIP (one segment); 7-45 MB per raw session",
+  "partial_fetch": "single ZIPs via https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01/resolve/main/Processed/<category>/<zip>; ZIP central directories can be range-read to pull meta files only"
+ },
+ "channels": [
+  {
+   "name": "observation.images.main",
+   "kind": "camera",
+   "shape": "(3, 1080, 1920)",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "egocentric fisheye camera",
+   "note": "H.264 yuv420p mp4 per segment; frame count equals parquet rows"
+  },
+  {
+   "name": "observation.tactile_left / observation.tactile_right",
+   "kind": "tactile_grid",
+   "shape": "(880,) float32",
+   "rate_hz": 30,
+   "unit": "not stated (0 to 4.1 in task-63-segment-002)",
+   "frame": "15 pads concatenated in sensor_keys order; per-pad (H, W) in meta/tactile_layout.json",
+   "note": "interpolated onto video frames; 5-7% of values above 0 in the checked segment"
+  },
+  {
+   "name": "observation.tactile_tf_x_left / _right, observation.tactile_tf_y_left / _right",
+   "kind": "tactile_grid",
+   "shape": "(880,) float32 each",
+   "rate_hz": 30,
+   "unit": "not stated (about -0.7 to 0.3 in the checked segment)",
+   "frame": "per-pad local x / y, same flatten order as pressure",
+   "note": "card: 'local X/Y transform field'; launch press: tangential force"
+  },
+  {
+   "name": "observation.tactile_timestamp",
+   "kind": "other",
+   "shape": "(1,) float64",
+   "rate_hz": 30,
+   "unit": "Unix s",
+   "frame": null,
+   "note": "acquisition-side time per frame; not used for video lookup"
+  },
+  {
+   "name": "observation.joints",
+   "kind": "hand_pose",
+   "shape": "(126,) float32 = 2 x 21 x 3",
+   "rate_hz": 30,
+   "unit": "SLAM raw scale (not metric)",
+   "frame": "camera",
+   "note": "left then right; OpenPose hand order (wrist, thumb CMC..tip, index MCP..tip, ...); zeroed when hand_valid is false"
+  },
+  {
+   "name": "observation.rotmats_left / observation.rotmats_right",
+   "kind": "hand_pose",
+   "shape": "(144,) float32 = 16 x 3 x 3",
+   "rate_hz": 30,
+   "unit": "rotation matrices",
+   "frame": "not stated",
+   "note": "joint rotations per hand"
+  },
+  {
+   "name": "observation.hand_valid, hand_det_conf, hand_vis_conf",
+   "kind": "other",
+   "shape": "(2,) bool / float32",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "per-hand validity and confidences; both hands valid in 94-97% of frames of the checked segment"
+  },
+  {
+   "name": "observation.slam_pose, R_w2c, t_w2c, R_c2w, t_c2w",
+   "kind": "other",
+   "shape": "(7,), (9,), (3,), (9,), (3,) float32",
+   "rate_hz": 30,
+   "unit": "SLAM raw scale; slam_scale in meta/worldpose_static.json",
+   "frame": "SLAM world",
+   "note": "head-camera trajectory"
+  },
+  {
+   "name": "observation.state",
+   "kind": "other",
+   "shape": "(133,) float32",
+   "rate_hz": 30,
+   "unit": "mixed",
+   "frame": "joints in camera frame; camera translation x slam_scale",
+   "note": "left joints 63 + right joints 63 + camera pose 7"
+  },
+  {
+   "name": "action",
+   "kind": "action",
+   "shape": "(126,) float32",
+   "rate_hz": 30,
+   "unit": "SLAM raw scale",
+   "frame": "camera",
+   "note": "action_mode 'joints' = current-frame joints (equal to observation.joints)"
+  },
+  {
+   "name": "task, task_index, next.reward, next.done, timestamp, frame_index, episode_index, index",
+   "kind": "language",
+   "shape": "scalars",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "task is the Chinese task name; reward always 0"
+  },
+  {
+   "name": "meta/segment_info.json",
+   "kind": "language",
+   "shape": "{start, end, task, desc}",
+   "rate_hz": null,
+   "unit": "s (start/end in the raw session)",
+   "frame": null,
+   "note": "Chinese task name and one-paragraph description per segment"
+  },
+  {
+   "name": "meta/worldpose_static.json, meta/slam_keyframes.npz, meta/tactile_layout.json",
+   "kind": "other",
+   "shape": "intrinsics + 4 fisheye distortion coefficients; slam_tstamp (K,), slam_disps (K, H, W); pad sizes",
+   "rate_hz": null,
+   "unit": "pixels / inverse depth",
+   "frame": null,
+   "note": "per segment"
+  },
+  {
+   "name": "Origin/<session>/left_hand_data.npz, right_hand_data.npz",
+   "kind": "tactile_grid",
+   "shape": "tactile_<k> (T, H, W) float64; tf_tactile_x_<k>, tf_tactile_y_<k> (T, H, W) float32; timestamps (T,)",
+   "rate_hz": 55.6,
+   "unit": "not stated; timestamps Unix s",
+   "frame": "per pad",
+   "note": "raw glove stream; steps 0-175 ms in the checked session"
+  },
+  {
+   "name": "Origin/<session>/video.mp4 + video_ntp_time.csv + meta_data.json",
+   "kind": "camera",
+   "shape": "(T, 1080, 1920, 3)",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "egocentric fisheye camera",
+   "note": "HEVC; csv gives per-frame NTP time; meta_data.json gives mp4_start_time and glove IPs/MACs"
+  }
+ ],
+ "episode_index": {
+  "where": "Processed/<category>/task-<id>-segment-<n>.zip (102 ZIPs); meta/segment_info.json inside each",
+  "count": 102,
+  "fields": [
+   "category (folder)",
+   "task id",
+   "segment",
+   "task (Chinese)",
+   "desc (Chinese)",
+   "start/end in the raw session",
+   "total_frames"
+  ],
+  "tasks": [
+   "Fold",
+   "Grasp",
+   "Plug&Unplug",
+   "Pour",
+   "Press",
+   "Push&Pull",
+   "Scroll",
+   "Squeeze",
+   "Tighten a screw",
+   "Twist the bottle cap",
+   "Wipe"
+  ],
+  "task_ids": {
+   "Fold": [
+    "task-46",
+    "task-62"
+   ],
+   "Grasp": [
+    "task-70",
+    "task-71"
+   ],
+   "Plug&Unplug": [
+    "task-44",
+    "task-45",
+    "task-63",
+    "task-64"
+   ],
+   "Pour": [
+    "task-40",
+    "task-55"
+   ],
+   "Press": [
+    "task-41",
+    "task-56",
+    "task-57"
+   ],
+   "Push&Pull": [
+    "task-50",
+    "task-68",
+    "task-69"
+   ],
+   "Scroll": [
+    "task-39",
+    "task-52",
+    "task-53"
+   ],
+   "Squeeze": [
+    "task-42",
+    "task-43",
+    "task-60",
+    "task-61"
+   ],
+   "Tighten a screw": [
+    "task-47",
+    "task-48"
+   ],
+   "Twist the bottle cap": [
+    "task-49",
+    "task-66",
+    "task-67"
+   ],
+   "Wipe": [
+    "task-38",
+    "task-58",
+    "task-59"
+   ]
+  },
+  "scenes": [
+   "white desk (seen in the checked frames)"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "GPL-3.0 (card YAML 'license: gpl-3.0') allows redistribution under the same license; the repo is public and ungated and single ZIPs download through resolve URLs. Label the collection 'GPL-3.0'.",
+  "prefix": "tg_",
+  "tasks_total": 11,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "Processed/Plug&Unplug/task-44-segment-003.zip",
+    "task": "Plug&Unplug: 连接第三根USB-C线缆（或重新插拔） [connect a third USB-C cable to a hub, or re-plug]",
+    "scene": "desk",
+    "subject": "glove pair d4:8c:49:98:cb:b4 / 8c:8c:29:55:fe:ac",
+    "duration_s": 18.0,
+    "window": null,
+    "why": "insertion with both hands; per-segment stats.json: 11 of 15 left pads and 9 of 15 right pads have a taxel above 0.2 for at least 10% of frames (q90), peak 4.1"
+   },
+   {
+    "id": "Processed/Twist the bottle cap/task-66-segment-001.zip",
+    "task": "Twist the bottle cap: 反复拧开与盖紧瓶盖 [repeatedly unscrew and retighten a bottle cap]",
+    "scene": "desk",
+    "subject": "glove pair 8c:8c:29:55:73:b0 / 8c:8c:29:56:4c:68",
+    "duration_s": 33.3,
+    "window": null,
+    "why": "twisting; q90 above 0.2 on 7 left and 8 right pads, peak 5.1"
+   },
+   {
+    "id": "Processed/Wipe/task-59-segment-001.zip",
+    "task": "Wipe: 用纸巾擦拭桌面 [wipe the desk with a tissue]",
+    "scene": "desk",
+    "subject": "glove pair 8c:8c:29:55:73:b0 / 8c:8c:29:56:4c:68",
+    "duration_s": 24.6,
+    "window": null,
+    "why": "wiping, mostly right hand; q90 above 0.2 on 7 left and 10 right pads, peak 4.4"
+   },
+   {
+    "id": "Processed/Pour/task-40-segment-002.zip",
+    "task": "Pour: 第二次液体转移 [pour liquid from one bottle into another]",
+    "scene": "desk",
+    "subject": "glove pair d4:8c:49:98:cb:b4 / 8c:8c:29:55:fe:ac",
+    "duration_s": 14.8,
+    "window": null,
+    "why": "pouring with both hands holding bottles; q90 above 0.2 on 7 left and 5 right pads"
+   },
+   {
+    "id": "Processed/Tighten a screw/task-48-segment-003.zip",
+    "task": "Tighten a screw: 第四次拧紧螺丝并检查 [tighten a screw with a screwdriver]",
+    "scene": "desk",
+    "subject": "glove pair d4:8c:49:98:cb:b4 / 8c:8c:29:55:fe:ac",
+    "duration_s": 17.9,
+    "window": null,
+    "why": "tool use; q90 above 0.2 on 5 left pads (holding the box) and 3 right pads (screwdriver)"
+   },
+   {
+    "id": "Processed/Squeeze/task-42-segment-004.zip",
+    "task": "Squeeze: 抓取并挤压黄色小鸭玩具 [grasp and squeeze a yellow rubber duck]",
+    "scene": "desk",
+    "subject": "glove pair d4:8c:49:98:cb:b4 / 8c:8c:29:55:fe:ac",
+    "duration_s": 12.4,
+    "window": null,
+    "why": "deformable object; q90 above 0.2 on 9 left and 8 right pads"
+   },
+   {
+    "id": "Processed/Push&Pull/task-68-segment-001.zip",
+    "task": "Push&Pull: 单手推动并重新定位绿色长方体物体 [push a green block with one hand, then reposition it]",
+    "scene": "desk",
+    "subject": "glove pair 8c:8c:29:55:73:b0 / 8c:8c:29:56:4c:68",
+    "duration_s": 11.0,
+    "window": null,
+    "why": "pushing with the palm and fingers; q90 above 0.2 on 6 left and 7 right pads, peak 3.1"
+   },
+   {
+    "id": "Processed/Press/task-57-segment-001.zip",
+    "task": "Press: 拿起并检查绿色喷雾瓶 [right hand picks up and inspects a green spray bottle]",
+    "scene": "desk",
+    "subject": "glove pair 8c:8c:29:55:73:b0 / 8c:8c:29:56:4c:68",
+    "duration_s": 10.8,
+    "window": null,
+    "why": "one-handed: right q90 above 0.2 on 5 pads (peak 3.1); left stays below 0.2"
+   }
+  ],
+  "fetch_estimate": "~271 MB (8 ZIPs, 22-63 MB each)",
+  "rules_applied": "11 categories (more than 6), so 8 are sampled: insertion, twisting, wiping, pouring, tool use, squeezing a deformable toy, pushing, and a one-handed pick; Fold, Grasp and Scroll are left out (Fold and Scroll segments checked had q90 at or below 0.3 on all but 1-3 pads). One segment per category; both glove pairs are represented (4 each). All 8 segments are 10.8-33.3 s, so no window is cut. Contact was checked from each ZIP's meta/stats.json (per-taxel q90 above 0.2 means at least 10% of frames, i.e. at least 1.1 s); the 30 Hz series itself is checked in step 3.",
+  "deviations": [
+   "Category names come from folder names; the Press example is a pick-and-inspect segment because the Press recordings mostly lift and inspect spray bottles."
+  ]
+ }
+}

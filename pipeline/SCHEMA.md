@@ -91,7 +91,13 @@ files themselves). Unknown -> `null` (never guess). Numbers are numbers, not str
   },
   "sources": ["URLs actually read"],
   "unconfirmed": ["anything derived or not confirmed, and how it was derived"],
-  "viewer": "<prefix><episode>"          // set after samples are published: the episode the catalog card opens
+  "viewer": "<prefix><episode>",         // set after samples are published: the episode the catalog card opens
+  "used_by": [{"name": "TouchWorld (arXiv 2607.07287)", "url": "...", "note": "what it used the data for"}],   // optional
+  "zh": {                                // optional: Chinese original for Chinese-language releases
+    "name": "白虎-VTouch", "title": "...", "maker": "...",
+    "en": "official" | "translated",     // translated = no official English; name/title/summary above are ours
+    "note": "release page in Chinese only"
+  }
 }
 ```
 

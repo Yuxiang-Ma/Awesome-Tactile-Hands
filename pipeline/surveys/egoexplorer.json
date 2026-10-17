@@ -1,0 +1,355 @@
+{
+ "id": "egoexplorer",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "egoexplorer",
+  "name": "EgoExplorer",
+  "title": "EgoExplorer: A Vision-Motion-Touch Observatory for Human Loco-Manipulation In Situ",
+  "authors": "Yunsong Zhou et al.",
+  "year": 2026,
+  "venue": "arXiv 2610.18872",
+  "summary": "Whole-body human loco-manipulation in 5 rooms (6 laboratory procedures, 4 household and industrial tasks), recorded with a head-mounted GoPro HERO13, 5 VIVE Ultimate trackers and gloves; the Wuji glove configuration (41% of regular recordings) adds a 24x31 pressure matrix with 526 active taxels per hand.",
+  "embodiment": "human",
+  "hand": "Human hands x 2 in Wuji gloves (tactile + EMF finger tracking) or MANUS Metagloves Pro (EMF finger tracking, no tactile)",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 526,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "Wuji recordings only. Per 30 Hz release row: 2 x 24 x 31 normalized taxel readings with invalid cells masked, plus 2 x 17 binary regional contact with separate validity (thumb 2 regions, other fingers 3 each, palm 3). The 24 x 31 matrix (744 cells, row-major) has 526 active points (maker spec; the paper's health mask also retains 526 of 744). Native rate 120 Hz nominal, resampled to the 30 Hz grid; contact is the logical OR of native detections in each 1/30 s bin. The paper defines raw (L0), baseline-relative (L1) and regional-contact (L2) interfaces and states the values are not calibrated force or pressure.",
+   "maker": "Wuji Technology",
+   "model": "Wuji Glove (tactile configuration)",
+   "principle": "unspecified",
+   "range": "0-20 N, 0.1 N resolution (maker spec)",
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "hand_pose",
+   "mocap",
+   "language"
+  ],
+  "scale": {
+   "hours": 100,
+   "episodes": 2715,
+   "frames": null,
+   "tasks": 10,
+   "objects": null,
+   "subjects": null,
+   "scenes": 5,
+   "scene_types": [
+    "laboratory",
+    "industrial workspace",
+    "living room",
+    "food-preparation area",
+    "study"
+   ],
+   "text": "Paper: 2,715 recordings, 100 h, 10 task templates, 5 environments; touch in 41% of regular recordings (Wuji gloves). Released: mini release of 18 recordings, 118,910 frames at 30 Hz (66 min), all 10 tasks"
+  },
+  "availability": "partial",
+  "access": "Hugging Face InternRobotics/EgoExplorer, gated behind a Google form that is checked automatically (access in about a minute); it holds the 66-min mini release (18 recordings, 21.1 GB), and the full collection opens in stages through a waitlist.",
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "Only the 66-min mini release (18 recordings) can be downloaded; the paper's 2,715 recordings (100 h) are opened in stages to waitlisted groups.",
+   "Touch exists only in Wuji-glove recordings: 41% of regular recordings. The MANUS recordings (58%) have finger articulation and no tactile data.",
+   "Released taxel values are normalized readings with invalid cells masked; the paper calls them contact indicators and says they are not calibrated force or pressure. The GitHub README describes them as 'calibrated taxels'.",
+   "Tactile is resampled from ~120 Hz native to the 30 Hz grid; regional contact is the logical OR of native detections inside each 1/30 s bin.",
+   "Paper statistics mark the right-hand index and central-palm regions n/a: fewer than three recordings have 30% or more live taxels there.",
+   "Whole-body SMPL-X is reconstructed from 5 trackers (head, wrists, ankles); 17 joints are inferred. The 18.0 mm / 20.3 mm body-point errors are measured against tracker-fitted reference labels, with no optical mocap reference.",
+   "Step annotations are VLM drafts reviewed by operators; the expert audit of drafts found factual errors in 11.09% of segments before correction.",
+   "The card and paper name the video key observation.images.ego; the mini release stores it as observation.images.camera_0. The repository also holds a per-task zarr copy (dataset/oxt/EgoExplorer/<task>.zarr) that the card does not describe.",
+   "Number of participants and objects not stated.",
+   "The release files were not opened for this survey (gated, access not requested); channels come from the card, the paper and the file tree."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2610.18872",
+   "project": "https://internrobotics.github.io/egoexplorer.github.io/",
+   "data": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+   "code": "https://github.com/InternRobotics/EgoExplorer"
+  },
+  "image": "https://internrobotics.github.io/egoexplorer.github.io/assets/hero-poster.jpg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "GoPro HERO13 Black with Media Mod",
+     "type": "RGB",
+     "resolution": "1920x970",
+     "fps": 30,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "body",
+     "method": "other",
+     "system": "5 x VIVE Ultimate Tracker (head, both wrists, both ankles), inside-out camera tracking without base stations, 60 Hz; C3 (Calibrate-Complete-Constrain) reconstruction to metric SMPL-X",
+     "note": "head tracker rigidly coupled to the GoPro, so the camera pose is measured; released as tracker poses (5 x 3 + 5 x 4) and SMPL-X body (3 + 3 + 63) on the 30 Hz grid"
+    },
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "VIVE Ultimate Trackers on the glove dorsum",
+     "note": "calibrated device-to-wrist transforms carry the glove frame onto the solved arm"
+    },
+    {
+     "target": "fingers",
+     "method": "magnetic",
+     "system": "Wuji glove or MANUS Metagloves Pro: five 6-DoF fingertip EMF sensors per glove, 120 Hz nominal",
+     "note": "glove skeleton fitted to the SMPL-X hand (45 local axis-angle values per hand); the card lists 21-joint glove skeletons per hand in the mini release"
+    }
+   ],
+   "other": [
+    "step annotations (step ID, free-text description, interval bounds, skill, object roles, observed outcome)",
+    "per-episode refined SMPL-X parameters (episode_meta/<episode>/smplx/smplx_episode.npz)",
+    "per-episode calibration profile and quality report",
+    "validity masks, source-time mapping and interpolation flags per stream"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2610.18872",
+   "https://arxiv.org/html/2610.18872v1 (sections 3-4, appendices A, B, D.1, E, F.3, G)",
+   "https://huggingface.co/datasets/InternRobotics/EgoExplorer (dataset card, YAML metadata, gating prompt)",
+   "https://huggingface.co/api/datasets/InternRobotics/EgoExplorer/tree/main?recursive=1 (full tree, 11,699 files)",
+   "https://forms.gle/2tT2dTxAYXgGXBkK6 (access form and its terms of use)",
+   "https://internrobotics.github.io/egoexplorer.github.io/",
+   "https://github.com/InternRobotics/EgoExplorer (README.md)",
+   "https://wuji.tech/en/glove",
+   "https://www.shlab.org.cn/ (Chinese organisation name)",
+   "https://api.github.com/orgs/InternRobotics (org description: 'from Shanghai AI Lab')"
+  ],
+  "unconfirmed": [
+   "Mini release counts (18 episodes, 118,910 frames, 66 min) are the card's; the files are gated and were not opened. The tree has 18 episode_meta folders (episode_000001-000018), 18 data shards and 18 camera_0 MP4s.",
+   "One episode per shard is inferred: data/chunk-000/file-i.parquet, videos/.../file-i.mp4 and episode_meta/episode_(i+1)/smplx_episode.npz sizes rise and fall together (video/data ratio 35-62). The card says a shard may hold several episodes.",
+   "Episode lengths estimated from MP4 sizes at the mean bitrate (7.0 GB over 66 min): ~50 s (file-004, 87 MB) to ~440 s (file-008, 781 MB); mean ~3.7 min.",
+   "That all 18 mini-release recordings carry Wuji tactile follows from the card ('every one with all four streams', '24x31 Wuji tactile per hand'); not checked in the files.",
+   "In the card, the mini release keeps 17-region contact under episode_meta/<episode>/, while the paper's Table 9 puts it in every row; episode_meta holds annotations/, calibration/, metadata.json, quality/ and smplx/ only, so it is not clear which file carries contact.",
+   "Hand representation: paper Table 9 gives 2 x 45 SMPL-X finger rotations per row; the card's mini-release list says both hands' 21-joint skeletons; the paper's fitting keeps 20 non-wrist landmarks from a 25-node glove layout.",
+   "The zarr copy (dataset/oxt/EgoExplorer/, one group per task, ~13.7 GB) has arrays camera_ego_rgb, camera_ego_pose, left/right_wrist_pose, left/right_hand_pose, left/right_hand_joints(_idx), left/right_tactile_{data,sensor,type,area}_wuji each with _contact and _score variants, sub_task_instruction, timestamps and meta/episode_ends. Shapes, rates and meanings were not read (gated) and are not documented.",
+   "120 Hz is the manufacturer's nominal glove rate (paper Table 8); per-recording timing follows native timestamps.",
+   "Taxel count: the Wuji product page states '24 x 31 Pressure Sensor Matrix (526 active points)'; the paper says its health mask, estimated from earlier recordings, retains 526 of 744 taxels. Sensing principle not stated by either.",
+   "Coverage 'phalanx' comes from the paper's 17-region map (3 regions on each non-thumb finger); the maker page states only full palm coverage.",
+   "Project page says '100+ hours' growing by 5 h/day and that the dataset, toolkit and reconstruction code 'will be released'; the GitHub README dates the toolkit code to early November 2026 (repository holds only README and assets on 2026-10-16).",
+   "The paper reports 545 regular Wuji recordings with healthy tactile on both hands and 565 recordings with 1,110 healthy hand streams; the total number of Wuji recordings is not stated.",
+   "Laboratory tasks are 41% of recordings (46% of duration); the other environments: study 23%, industrial workspace 17%, food-preparation area 11%, living room 8%.",
+   "Whether this account already has access was not checked; the HF token was not used."
+  ],
+  "zh": {
+   "name": null,
+   "title": null,
+   "maker": "上海人工智能实验室",
+   "en": "official",
+   "note": "Shanghai AI Laboratory (InternRobotics org); no Chinese dataset name or title published; card, paper and project page in English, the access form adds one Chinese sentence"
+  }
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "EgoExplorer is released under the Creative Commons Attribution-NonCommercial 4.0 International (CC BY-NC 4.0) license. Commercial use is not permitted.",
+  "url": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+  "note": "HF YAML 'license: cc-by-nc-4.0'. Access-form terms: 'I will use EgoExplorer for non-commercial research only, under CC BY-NC 4.0, and will cite the paper in any resulting publication.' Neither text forbids redistribution. The arXiv paper itself is CC BY-NC-SA 4.0."
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+  "access": "form",
+  "format": "LeRobot v3.0 under dataset/lerobot/: meta/{info.json, stats.json, tasks.parquet, episodes/chunk-000/file-000.parquet}, data/chunk-000/file-000..017.parquet, videos/observation.images.camera_0/chunk-000/file-000..017.mp4, episode_meta/episode_XXXXXX/{metadata.json, annotations/{instruction.json, segments.parquet}, calibration/calibration.json, quality/quality.json, smplx/smplx_episode.npz}; plus an undocumented zarr copy, dataset/oxt/EgoExplorer/<task>.zarr (10 groups)",
+  "total_size": "21.1 GB in 11,699 files (tree sum 21,065,414,766 B; HF usedStorage 24.4 GB): MP4 7.0 GB, zarr 13.7 GB, parquet 0.14 GB, episode_meta 0.16 GB",
+  "per_episode": "data parquet 1.4-17.2 MB (median 8.0), camera_0 MP4 87-781 MB (median 360), SMPL-X npz 1.6-20.4 MB, other episode_meta files < 50 kB",
+  "partial_fetch": "after access: single files via https://huggingface.co/datasets/InternRobotics/EgoExplorer/resolve/main/<path> (one data shard, one MP4 and one episode_meta folder per episode); zarr arrays can be fetched per chunk (camera_ego_rgb median 1.3 MB per chunk)"
+ },
+ "channels": [
+  {
+   "name": "observation.images.camera_0",
+   "kind": "camera",
+   "shape": "(T, 970, 1920, 3)",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "head camera rigidly mounted to the head tracker; intrinsics fx=1012.0, fy=1016.0, cx=960.0, cy=430.0 (pixels)",
+   "note": "GoPro HERO13 Black + Media Mod; card/paper call it observation.images.ego; one MP4 per episode in the mini release (inferred); codec not checked"
+  },
+  {
+   "name": "episode_index, frame_index, index, task_index, timestamp",
+   "kind": "other",
+   "shape": "scalars per row",
+   "rate_hz": 30,
+   "unit": "timestamp in s (episode-relative)",
+   "frame": null,
+   "note": "LeRobot v3.0 indexing fields"
+  },
+  {
+   "name": "tracker poses (field names not read)",
+   "kind": "body_pose",
+   "shape": "5 x 3 position + 5 x 4 quaternion (x, y, z, w) + per-device validity",
+   "rate_hz": 30,
+   "unit": "m; unit quaternion",
+   "frame": "world: metric, right-handed, +Y up; active device-to-world rotations",
+   "note": "VIVE Ultimate Trackers on head, wrists (glove dorsum), ankles; native 60 Hz, linear/SLERP interpolation to 30 Hz"
+  },
+  {
+   "name": "body motion (SMPL-X)",
+   "kind": "body_pose",
+   "shape": "3 + 3 + 63",
+   "rate_hz": 30,
+   "unit": "m; axis-angle rad",
+   "frame": "world pelvis position (not the SMPL-X additive transl), world-relative root orientation, 21 local body-joint rotations",
+   "note": "C3 reconstruction from 5 trackers; shape, scale and mounts referenced by calibration-profile ID"
+  },
+  {
+   "name": "hand motion (SMPL-X hands)",
+   "kind": "hand_pose",
+   "shape": "2 x 45",
+   "rate_hz": 30,
+   "unit": "axis-angle rad",
+   "frame": "local SMPL-X (MANO-compatible) finger rotations",
+   "note": "fitted from the glove skeleton in wrist-local coordinates; native glove rate 120 Hz nominal"
+  },
+  {
+   "name": "glove hand skeletons (field names not read)",
+   "kind": "hand_pose",
+   "shape": "21 joints per hand (card); exact shape not read",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "not stated (paper fits in wrist-local coordinates)",
+   "note": "listed in the card's mini-release streams; Wuji or MANUS EMF fingertip tracking"
+  },
+  {
+   "name": "tactile readings (field names not read)",
+   "kind": "tactile_grid",
+   "shape": "2 x 24 x 31",
+   "rate_hz": 30,
+   "unit": "normalized, dimensionless; not calibrated force or pressure",
+   "frame": "per-hand 24 x 31 matrix, row-major, canonical layout after layout correction (GitHub README)",
+   "note": "Wuji recordings only; invalid cells masked; 526 of 744 cells active; native 120 Hz nominal; baselines, response normalization and region mappings accompany each recording (paper D.1)"
+  },
+  {
+   "name": "regional contact",
+   "kind": "contact_flag",
+   "shape": "2 x 17 + validity",
+   "rate_hz": 30,
+   "unit": "binary",
+   "frame": "17 anatomical regions per hand: thumb 2, index/middle/ring/little 3 each, palm 3",
+   "note": "logical OR of valid native-rate detections in each 1/30 s bin; bins without valid samples masked; card puts it under episode_meta/ for the mini release"
+  },
+  {
+   "name": "step annotations (annotation.* row fields; episode_meta/<episode>/annotations/segments.parquet, instruction.json)",
+   "kind": "language",
+   "shape": "ints, text, times",
+   "rate_hz": null,
+   "unit": "interval bounds in s",
+   "frame": null,
+   "note": "step ID, description, interval bounds, skill, object roles, observed outcome; VLM draft from video + instruction + expert skill documents, then operator review"
+  },
+  {
+   "name": "validity and provenance",
+   "kind": "other",
+   "shape": "arrays and masks",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "stream support, source-time mapping, interpolation flags, diagnostics, review status; unavailable streams masked, never written as zeros"
+  },
+  {
+   "name": "episode_meta/<episode>/smplx/smplx_episode.npz",
+   "kind": "body_pose",
+   "shape": "not read",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": null,
+   "note": "per-episode refined SMPL-X parameters, 1.6-20.4 MB"
+  },
+  {
+   "name": "episode_meta/<episode>/calibration/calibration.json, metadata.json, quality/quality.json",
+   "kind": "other",
+   "shape": "JSON, 4.8-47 kB",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "calibration profile, episode metadata and quality report; contents not read"
+  },
+  {
+   "name": "dataset/oxt/EgoExplorer/<task>.zarr: data/camera_ego_rgb, camera_ego_pose, timestamps",
+   "kind": "camera",
+   "shape": "not read",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "undocumented per-task copy; camera_ego_rgb 13.0 GB in 10,051 chunks over 10 tasks; meta/episode_ends per group"
+  },
+  {
+   "name": "dataset/oxt/EgoExplorer/<task>.zarr: data/left|right_wrist_pose, left|right_hand_pose, left|right_hand_joints(_idx)",
+   "kind": "hand_pose",
+   "shape": "not read",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "undocumented"
+  },
+  {
+   "name": "dataset/oxt/EgoExplorer/<task>.zarr: data/left|right_tactile_{data,sensor,type,area}_wuji (+ _contact, _score)",
+   "kind": "tactile_grid",
+   "shape": "not read",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "undocumented; four tactile views per hand, each with contact and score arrays; tactile_data_wuji ~6.5 MB (left) / 5.3 MB (right) over all 10 tasks"
+  },
+  {
+   "name": "dataset/oxt/EgoExplorer/<task>.zarr: data/sub_task_instruction",
+   "kind": "language",
+   "shape": "not read",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "undocumented; 555 MB over 10 tasks"
+  }
+ ],
+ "episode_index": {
+  "where": "dataset/lerobot/meta/episodes/chunk-000/file-000.parquet and meta/tasks.parquet (gated, not read); 18 folders dataset/lerobot/episode_meta/episode_000001-000018",
+  "count": 18,
+  "fields": [
+   "task_index",
+   "row range",
+   "video offsets",
+   "session ID",
+   "split",
+   "calibration-profile ID"
+  ],
+  "tasks": [
+   "weighing",
+   "liquid-liquid extraction",
+   "reaction setup",
+   "rotary evaporation",
+   "oven drying",
+   "column chromatography",
+   "folding a cardboard box",
+   "bookshelf organisation",
+   "clothes folding",
+   "sandwich making"
+  ],
+  "scenes": [
+   "laboratory",
+   "industrial workspace",
+   "study",
+   "living room",
+   "food-preparation area"
+  ]
+ },
+ "sample": {
+  "decision": "catalog_only",
+  "reason": "Files are gated (HF returns 401 without access) and access was not requested for this survey. The form is checked automatically and grants access in about a minute, and CC BY-NC 4.0 allows non-commercial redistribution, so the decision becomes 'sample' once the user submits the form.",
+  "prefix": "ex_",
+  "tasks_total": 10,
+  "tasks_sampled": null,
+  "episodes": [],
+  "fetch_estimate": "If access is granted: 6-8 episodes x (one data parquet, median 8 MB + one camera_0 MP4, median 360 MB + episode_meta, ~10 MB) = ~2.5-3.5 GB; the whole mini release is 21.1 GB. Most episodes are estimated at 1-7 min, so each needs a 10-60 s contact window; the video must be cut and re-encoded to H.264 within ~30 MB per episode.",
+  "rules_applied": "Gated without access -> catalog_only (pipeline/README.md step 2). Episodes cannot be mapped to tasks without meta/episodes and tasks.parquet, which are gated, so no episode list. With access: 10 tasks > 6, so take 6-8 spanning the 5 environments (e.g. weighing, extraction, rotary evaporation, cardboard box, bookshelf, clothes folding, sandwich making), one episode each, with contact above rest for at least 1 s on both hands' 24 x 31 grids."
+ }
+}

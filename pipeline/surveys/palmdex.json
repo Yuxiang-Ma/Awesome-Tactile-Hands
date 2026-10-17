@@ -1,0 +1,338 @@
+{
+ "id": "palmdex",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "palmdex",
+  "name": "PalmDex",
+  "title": "PalmDex: An Embodiment-Agnostic Tactile Manipulation Dataset",
+  "authors": "Rimbot",
+  "year": 2026,
+  "venue": "Hugging Face dataset release (no paper)",
+  "summary": "Two 256-channel pressure gloves (raw 8-bit-range readings at 30 Hz) with UDexReal finger tracking and two 640x480 RealSense views (ego and side), over 2,849 episodes (~16.7 h) of lab-bench, electronics and kitchen tasks cut into 12,399 labelled action segments.",
+  "embodiment": "human",
+  "hand": "Human hands in 256-channel tactile gloves plus UDexReal hand-tracking gloves, both hands",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 256,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "observation.tactile_left / tactile_right (256,) float32 per hand, 'raw pressure values', no channel names or layout. Values 0-142 in 25 sampled episodes; many channels sit at 20-30 at rest. Only 147 of the 256 channels per hand ever read above 0 in those episodes. Released at the 30 fps video rate; the glove packet counter advances ~198 per second (native rate, from sync_diagnostics).",
+   "maker": null,
+   "model": null,
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "rgb",
+   "hand_pose",
+   "language"
+  ],
+  "scale": {
+   "hours": 16.7,
+   "episodes": 2849,
+   "frames": 1804667,
+   "tasks": 18,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "chemistry lab",
+    "electronics workbench",
+    "physics lab",
+    "biology lab",
+    "pharmaceutical lab",
+    "kitchen"
+   ],
+   "text": "Release (2026-06): 30 sub-datasets, 2,849 raw episodes, 1,804,667 frames @30 fps (~16.7 h), 12,399 annotated segments, 18 task descriptions, 42 action labels, 20 object-set labels, 6 environment labels; the card's summary table still lists the first release (4 sub-datasets, 1,001 segments, 2 tasks, ~8.6 GB)"
+  },
+  "availability": "public",
+  "access": "Hugging Face Rimbot/PalmDex, ungated, 74 GB in 30 per-session folders, each a LeRobot v3.0 raw copy (one parquet and two AV1 mp4 per episode) plus an annotated package of per-segment clips, parquet and labels; anonymous downloads hit the HF rate limit quickly, a logged-in token avoids it.",
+  "license": "CC BY-SA 4.0",
+  "caveats": [
+   "Tactile glove maker, model and channel layout are not stated; the tactile values are raw readings with no unit, and only 147 of the 256 channels per hand ever read above 0 in 25 sampled episodes.",
+   "The dataset card's summary (1,001 segments, mortar-and-pestle and crucible-tongs tasks, ~8.6 GB) describes the 2026-05-23 first release; the repository now holds 30 sub-datasets, 12,399 segment folders and 74 GB.",
+   "Annotated segment clips are MPEG-4 Part 2 (mpeg4), not H.264 as the card states; raw episode videos are AV1.",
+   "0508_4_crucible_tongs_transfer ships only the raw LeRobot copy (no annotated folder), and 0515_pharmaceutical_reagent_handling has per-segment meta.json labels but no annotations.jsonl.",
+   "Several sub-datasets have sparse episode indices after cleanup (e.g. 0509_5 removed 26 episodes and kept the gaps); the per-folder README lists the removed ranges.",
+   "Annotation notes and some grasp_type values are in Chinese (e.g. 双指旋转 [two-finger rotation], 单指推动 [one-finger push]); 87% of segments are labelled 'Small Diameter'.",
+   "Environment labels are per sub-dataset; the side view checked for a 'chemistry lab' session (0508_3 episode 4) shows an office desk with a cup, cube and cylinder.",
+   "The UDexReal head-bone fields (location, rotation, scale) are 0 in the episode checked; there is no wrist or head pose. The gloves carry printed fiducial markers that the cleanup notes refer to as QR codes, but no marker-based pose is released.",
+   "Number of operators and the collection sites are not stated; one sub-dataset is tagged source collection 'changxiang' and the others 'rimbot' or untagged."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/Rimbot/PalmDex"
+  },
+  "image": "https://cdn-uploads.huggingface.co/production/uploads/6a0c0bb7b236464fd3d3a954/Xw4TtEiMrf-21rGa4B6mc.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Intel RealSense (model not stated)",
+     "type": "RGB",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": null
+    },
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Intel RealSense (model not stated)",
+     "type": "RGB",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "other",
+     "system": "UDexReal hand-tracking gloves",
+     "note": "observation.udexreal (72,): head bone location/parent/rotation/scale (10, zero in the episode checked) + per hand calibration status, 24 joint parameters, joystick X/Y and 4 buttons; joint parameter units not stated (values roughly -40 to 40). Sensing principle of the UDexReal glove not stated in the release."
+    }
+   ],
+   "other": [
+    "per-frame sync diagnostics (camera hardware timestamps, tactile sample age, packet counters, stale flags, raw UDexReal JSON)",
+    "action-segment labels (environment, object, action, grasp type, success frame, notes)",
+    "SHA-256 checksums per package"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/Rimbot/PalmDex (README.md, full file listing via the tree API, commit history)",
+   "https://huggingface.co/datasets/Rimbot/PalmDex <30 sub-dataset folders>/README.md and dataset_metadata.json",
+   "https://huggingface.co/datasets/Rimbot/PalmDex <30 sub-datasets>/raw/lerobot/<id>/meta/info.json and meta/tasks.parquet",
+   "https://huggingface.co/datasets/Rimbot/PalmDex 0508_3_crucible_tongs_transfer/raw/lerobot/0508_3/meta/{tactile_routing.txt, udexreal_schema.json, episodes/chunk-000/file-001.parquet}, data/chunk-000/file-001.parquet, sync_diagnostics/episode_000001.parquet",
+   "https://huggingface.co/datasets/Rimbot/PalmDex <28 sub-datasets>/annotated/annotations.jsonl; 0508_3_crucible_tongs_transfer/annotated/{schema.json, release_report.json}",
+   "https://huggingface.co/datasets/Rimbot/PalmDex 0508_3_crucible_tongs_transfer/annotated/segments/train/rbt_ep000004_s000002/{meta.json, data.parquet, ego.mp4, side.mp4}",
+   "https://huggingface.co/datasets/Rimbot/PalmDex raw data parquets of 25 episodes in 7 sub-datasets (0508_3, 0509_5, 0510_6, 0515, 0507_1, 0509_3, 0509_1)",
+   "https://huggingface.co/api/users/Rimbot/overview",
+   "https://raw.githubusercontent.com/Jianyi2004/TouchAnything/main/configs/pressure_position_mapping_left.json and _right.json (EgoTouch JQ glove channel maps, for comparison)",
+   "https://hiverlab.com/udexreal-unveil-udcap-data-glove-for-xr-and-robotics (search result: UDEXREAL UDCAP data glove)"
+  ],
+  "unconfirmed": [
+   "hours=16.7 and frames=1,804,667: sum of total_frames over the 30 raw meta/info.json files at 30 fps; episodes=2,849 is the sum of their total_episodes (0508_4 includes unannotated beaker-stirring episodes). Annotated segments: 12,399 segment folders in the tree (11,483 lines in 28 annotations.jsonl files plus 916 segment folders in 0515), ~11.3 h of segment time in the 28 jsonl files.",
+   "tasks=18: distinct 'task' strings in the 30 dataset_metadata.json files (several sub-datasets mix two tasks by episode range, e.g. 0509_5 vacuum-pen chip placement and screwdriver terminal wiring). The raw LeRobot tasks.parquet files only say 'pick and place', 'wash test tube', 'chenmistry experiment' or 'electronic'.",
+   "Glove maker: not stated. The set of channels that ever read above 0 in 25 sampled episodes equals the 147 channels of the right-glove map in EgoTouch's JQ Industries glove code exactly, and covers 137 of the 138 left-glove channels plus 10 more (128-137). This suggests the same 16x16-channel JQ glove family as EgoTouch, but the release does not name it. coverage (tip, phalanx, palm) is taken from that match, not from a PalmDex document.",
+   "The card says 'UDexReal hand-tracking gloves with integrated tactile sensing', while tactile_routing.txt reads the two tactile gloves from separate serial ports (/dev/tactile_left, /dev/tactile_right) with their own packet protocol (4-byte header, sequence, type 0x01 left / 0x02 right).",
+   "Native tactile rate ~198 Hz: tactile_left_count rises from 38,362 to 40,352 over 303 frames (10.07 s) in 0508_3 episode 1 sync_diagnostics.",
+   "Camera models: the card says 'Dual RealSense cameras'; models and mounts are not stated. The ego frame checked looks down on the table from above the operator; the side view is static and shows the operator.",
+   "subjects not stated; at least one operator is visible in the side view of 0508_3 episode 4.",
+   "Episode file layout: in every raw folder checked, data/ and video file-XXX index equals the episode index (one file per episode), confirmed by meta/episodes for 0508_3 episode 1 and by the episode_index inside 24 data files."
+  ]
+ },
+ "license": {
+  "name": "CC BY-SA 4.0",
+  "redistribution": "allowed",
+  "quote": "license: cc-by-sa-4.0",
+  "url": "https://huggingface.co/datasets/Rimbot/PalmDex/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/Rimbot/PalmDex",
+  "access": "open",
+  "format": "30 folders <session>_<task>/: raw/lerobot/<raw_id>/ (LeRobot v3.0: data/chunk-000/file-XXX.parquet and videos/observation.images.{ego,side}/chunk-000/file-XXX.mp4, one file per episode, AV1 640x480; meta/ with info.json, stats.json, tasks.parquet, episodes/, tactile_routing.txt, udexreal_schema.json; sync_diagnostics/episode_XXXXXX.parquet) + annotated/ (annotations.jsonl, schema.json, manifest.json, validation_report.json, release_report.json, segments/train/rbt_epXXXXXX_sXXXXXX/{ego.mp4, side.mp4, data.parquet, meta.json}) + dataset_metadata.json + checksums.sha256",
+  "total_size": "74 GB (HF usedStorage 74,333,418,050 B; 76,942 files)",
+  "per_episode": "raw episode: data parquet 0.1-1 MB + two AV1 mp4 of ~4-100 MB (e.g. 0508_3 episode 43, 26.6 s: 0.1 + 6.3 + 11.5 MB); annotated segment: ego.mp4 median 0.56 MB",
+  "partial_fetch": "single files via https://huggingface.co/datasets/Rimbot/PalmDex/resolve/main/<path>; one episode = 3 raw files (data, ego, side) with the same file index; send an HF token, anonymous requests were rate-limited after ~70 files"
+ },
+ "channels": [
+  {
+   "name": "observation.images.ego",
+   "kind": "camera",
+   "shape": "(480, 640, 3)",
+   "rate_hz": 30,
+   "unit": "RGB uint8",
+   "frame": "ego-view RealSense (mount not stated)",
+   "note": "raw: AV1 per episode (file-043.mp4 = 799 frames = episode 43); segments: ego.mp4 MPEG-4 Part 2"
+  },
+  {
+   "name": "observation.images.side",
+   "kind": "camera",
+   "shape": "(480, 640, 3)",
+   "rate_hz": 30,
+   "unit": "RGB uint8",
+   "frame": "static side-view RealSense",
+   "note": "same encoding as ego"
+  },
+  {
+   "name": "observation.tactile_left",
+   "kind": "tactile_grid",
+   "shape": "(256,)",
+   "rate_hz": 30,
+   "unit": "raw reading, no unit (0-117 seen)",
+   "frame": "left tactile glove; channel order = device order, layout not documented",
+   "note": "147 channels ever above 0 in 25 sampled episodes; rest values ~20-30 on many channels"
+  },
+  {
+   "name": "observation.tactile_right",
+   "kind": "tactile_grid",
+   "shape": "(256,)",
+   "rate_hz": 30,
+   "unit": "raw reading, no unit (0-142 seen)",
+   "frame": "right tactile glove; layout not documented",
+   "note": "147 channels ever above 0 in 25 sampled episodes"
+  },
+  {
+   "name": "observation.udexreal",
+   "kind": "hand_pose",
+   "shape": "(72,)",
+   "rate_hz": 30,
+   "unit": "not stated (joint parameters roughly -40 to 40)",
+   "frame": "UDexReal glove joint space; head bone fields 0",
+   "note": "names in info.json: Head Location/Parent/Rotation/Scale, L_CalibrationStatus, l0-l23, l_joyX, l_joyY, l_aButton, l_bButton, l_joyButton, l_menu, then the same for R"
+  },
+  {
+   "name": "sync_diagnostics/episode_XXXXXX.parquet",
+   "kind": "other",
+   "shape": "(T, 20)",
+   "rate_hz": 30,
+   "unit": "ms",
+   "frame": null,
+   "note": "ego/side wall and hardware timestamps, tactile_left/right wall time, age, packet count, stale flag and type byte, udexreal age, udexreal_raw_json"
+  },
+  {
+   "name": "annotated/annotations.jsonl + segments/*/meta.json",
+   "kind": "language",
+   "shape": "one record per segment: start/end frame, labels {environment, object, action, grasp_type}, outcome {success_frame, final_success, events}, notes",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "42 action labels, 20 object-set labels; notes in Chinese"
+  },
+  {
+   "name": "annotated/segments/*/data.parquet",
+   "kind": "tactile_grid",
+   "shape": "(T_seg, ...) same columns as the raw data parquet",
+   "rate_hz": 30,
+   "unit": "as raw",
+   "frame": null,
+   "note": "re-cut from the raw episode (rbt_ep000004_s000002: frames 114-216, 103 rows)"
+  }
+ ],
+ "episode_index": {
+  "where": "per sub-dataset: raw/lerobot/<id>/meta/episodes/*.parquet (episode lengths, file indices) + annotated/annotations.jsonl or segments/*/meta.json (segment labels) + dataset_metadata.json and README.md (task, environment, object, episode ranges, removed episodes)",
+  "count": 2849,
+  "fields": [
+   "sub-dataset (session + task)",
+   "episode_idx",
+   "segment start/end frame",
+   "environment",
+   "object",
+   "action",
+   "grasp_type",
+   "success_frame / final_success",
+   "notes"
+  ],
+  "tasks": [
+   "installing and removing a graphics card",
+   "graphics card installation/removal and IMU finished product testing",
+   "vacuum pickup pen chip placement and terminal block wiring",
+   "cleaning a test tube with a test tube brush",
+   "mortar and pestle grinding",
+   "chemistry reagent handling with solid powder, liquid pouring, and dropper dispensing",
+   "using a rubber bulb dropper to draw liquid and dispense it into a test tube",
+   "liquid transfer with a rubber bulb dropper and graduated cylinder pouring",
+   "using crucible tongs to transfer a crucible",
+   "stirring with a beaker and glass rod",
+   "using tweezers to place a solid reagent block at a test tube opening and stand the test tube upright",
+   "pharmaceutical reagent handling and lab apparatus assembly",
+   "using a pipette to transfer sample from a petri dish to a beaker",
+   "using tweezers to place weights on a balance",
+   "using a lab spatula to place solid powder on a balance",
+   "using chopsticks to place red dates on a balance",
+   "using a sponge cup brush to clean the inside of a mug",
+   "adding solid powder and liquid to a mug and stirring to prepare a beverage"
+  ],
+  "scenes": [
+   "chemistry lab",
+   "electronics workbench",
+   "physics lab",
+   "biology lab",
+   "pharmaceutical lab",
+   "kitchen"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-SA 4.0 (card YAML 'license: cc-by-sa-4.0') allows redistribution with attribution under the same license; the repository is public and ungated and one episode is three single files. Label the collection 'CC BY-SA 4.0'; re-hosted clips stay under CC BY-SA 4.0.",
+  "prefix": "pd_",
+  "tasks_total": 18,
+  "tasks_sampled": 7,
+  "episodes": [
+   {
+    "id": "0508_3_crucible_tongs_transfer/episode_000043",
+    "task": "using crucible tongs to transfer a crucible",
+    "scene": "chemistry lab (label)",
+    "subject": null,
+    "duration_s": 26.6,
+    "window": null,
+    "why": "Two-handed tool use. Both gloves present, no NaN; summed raw reading above its 5th percentile + 50 for 24.7 s (left) / 23.7 s (right). 799 frames, AV1 ego file-043 has 799 frames."
+   },
+   {
+    "id": "0509_5_vacuum_pen_and_terminal_wiring/episode_000238",
+    "task": "using a screwdriver to install and secure a wire into a terminal block",
+    "scene": "electronics workbench (label)",
+    "subject": null,
+    "duration_s": 169.5,
+    "window": [0, 60],
+    "why": "Screwdriver / fine assembly; highest right-hand reading seen (142). Summed reading above rest + 50 for most of the episode (146 s left, 153 s right). Cut to the first 60 s; pick the final window from the segment labels."
+   },
+   {
+    "id": "0510_6_mug_brush_cleaning/episode_000025",
+    "task": "using a sponge cup brush to clean the inside of a mug",
+    "scene": "kitchen (label)",
+    "subject": null,
+    "duration_s": 31.2,
+    "window": null,
+    "why": "Scrubbing (cyclic force). Contact 28.8 s left / 28.9 s right by the same measure; no NaN."
+   },
+   {
+    "id": "0515_pharmaceutical_reagent_handling/episode_000099",
+    "task": "pharmaceutical reagent handling and lab apparatus assembly",
+    "scene": "pharmaceutical lab (label)",
+    "subject": null,
+    "duration_s": 75.2,
+    "window": [0, 60],
+    "why": "The 'changxiang' source collection; labels only in segment meta.json. Contact 67.6 s left / 69.6 s right; cut to 60 s."
+   },
+   {
+    "id": "0507_1_graphics_card_installation/episode_000095",
+    "task": "installing and removing a graphics card",
+    "scene": "electronics workbench (label)",
+    "subject": null,
+    "duration_s": 26.2,
+    "window": null,
+    "why": "Insertion into a PCIe slot (push force). Contact 15.0 s left / 23.5 s right."
+   },
+   {
+    "id": "0509_3_tweezers_weight_balance/episode_000001",
+    "task": "using tweezers to place weights on a balance",
+    "scene": "physics lab (label)",
+    "subject": null,
+    "duration_s": 16.7,
+    "window": null,
+    "why": "Precision tool grip, mostly right hand; left contact 6.9 s, right 15.1 s (episodes 38 and 109 have < 1.5 s left contact)."
+   },
+   {
+    "id": "0509_1_pipette_sample_transfer/episode_000079",
+    "task": "using a pipette to transfer sample from a petri dish to a beaker",
+    "scene": "biology lab (label)",
+    "subject": null,
+    "duration_s": 14.3,
+    "window": null,
+    "why": "Thumb press on a pipette; contact 12.0 s left / 13.5 s right."
+   }
+  ],
+  "fetch_estimate": "~325 MB for the seven raw episodes (data parquet + AV1 ego + AV1 side, sizes from the tree API; 0509_5 episode 238 alone is 167 MB). Re-hosted media: AV1 640x480 re-encoded to H.264, a few MB per clip. Episode JSON: 60 s x 30 Hz x 512 values = 0.92M numbers for the longest windows; quantise to integers (values 0-142) or drop the 109 channels that never leave 0 to stay under 2 MB.",
+  "rules_applied": "Tasks: 18 task descriptions > 6, so 7 chosen to span the 6 environment labels (chemistry lab, electronics workbench x2, kitchen, pharmaceutical lab, physics lab, biology lab) and action types (tool transfer, screwing, scrubbing, insertion, tweezers placement, pipetting, mixed handling). Episodes: one per task, 7 in total. Contact was screened on the raw 30 Hz data already fetched for the survey (summed reading of all 256 channels above its 5th percentile + 50 for >= 1 s on both hands; rest values are high, so step 3 must re-check per channel). Length: four episodes of 14-32 s kept whole, two cut to 60 s windows. Budget: within 20 GB; JSON needs integer quantisation for the 60 s windows."
+ }
+}

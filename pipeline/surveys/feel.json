@@ -1,0 +1,329 @@
+{
+ "id": "feel",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "feel",
+  "name": "FEEL",
+  "title": "FEEL (Force-Enhanced Egocentric Learning): A Dataset for Physical Action Understanding",
+  "authors": "Eadom Dessalene et al.",
+  "year": 2026,
+  "venue": "ECCV 2026 (arXiv 2603.15847)",
+  "summary": "Custom gloves with 6 Tekscan FlexiForce A301 sensors each (5 fingertips + palm strip), recorded with Meta Aria Gen 1 egocentric video during unscripted kitchen work (both hands); the release adds right-hand lab recordings from a second camera.",
+  "embodiment": "human",
+  "hand": "Custom glove: 6 Tekscan FlexiForce A301 + Arduino Nano per hand (both hands in Kitchen, right hand in Lab)",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 6,
+   "sensors_per_hand": 6,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": null,
+   "note": "One row per video frame. Kitchen force_{left,right}_aligned.csv: sensor0-5 (filtered, baseline-subtracted, normalized; 0 to ~2.5), force (combined contact signal), force_row_idx (-1 = no glove sample); Kitchen/P13 also has raw_sensor0-5 + raw_force. Lab force_aligned_.csv (right hand): sensor0-4 processed + raw_sensor0-4 (ADC counts, 0-565 in P1) + raw_force + force. Masked drift or malfunction intervals are NaN. Sensor-to-finger order not documented.",
+   "maker": "Tekscan",
+   "model": "FlexiForce A301",
+   "principle": "piezoresistive",
+   "range": "up to 45 N per sensor (paper)",
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric"
+  ],
+  "scale": {
+   "hours": 27,
+   "episodes": 34,
+   "frames": 3000000,
+   "tasks": null,
+   "objects": null,
+   "subjects": null,
+   "scenes": 2,
+   "scene_types": [
+    "kitchen",
+    "lab"
+   ],
+   "text": "Paper: ~27 h, ~3M force-synchronized frames of kitchen manipulation. Release: 13 Kitchen + 21 Lab participant recordings (622 GB); readable force CSVs index 1.81M frames (Kitchen 1.07M without P05, Lab 0.73M; Lab P20, P21 have no CSV)"
+  },
+  "availability": "public",
+  "access": "Hugging Face edessa/feel, ungated, 622 GB: one uncompressed rgb.tar of JPEG frames per participant (0.5-54 GB) plus per-frame force CSVs (0.4-15 MB).",
+  "license": "not stated",
+  "caveats": [
+   "The release holds video frames and glove force only. Audio, eye gaze, MPS hand tracking, contact labels and contacted-object masks described in the paper are not in it.",
+   "Force columns are processed values without units; the README says the preprocessing targets contact detection and that force magnitudes need a different pipeline.",
+   "Kitchen/P05 force CSVs are not text: binary content whose sha256 matches the stored LFS object. Lab/P20 and Lab/P21 have frames but no force CSV.",
+   "Lab recordings (848x480 frames from a camera behind the participant, right glove, 5 sensor columns) are not described in the paper; the camera is not named. The first Lab/P1 frame shows laptop typing at a desk.",
+   "No task labels or episode segmentation: one continuous recording per participant, 3-64 min at 30 fps.",
+   "Masked intervals are NaN; the README says to treat them as missing, not zero. Lab/P1 sensor0 and sensor4 are NaN for the whole file.",
+   "No timestamps file; frame rate not stated.",
+   "The README points to Kitchen/participant_mapping.tsv; the file is not in the repository.",
+   "Lab/P21 holds 4,707 JPEGs that OpenCV cannot decode (README)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2603.15847",
+   "project": "https://www.cs.umd.edu/~edessale/feel",
+   "data": "https://huggingface.co/datasets/edessa/feel"
+  },
+  "image": "https://arxiv.org/html/2603.15847v1/mosaic.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Meta Project Aria (Gen 1)",
+     "type": "fisheye",
+     "resolution": "1408x1408 (paper: 1440x1440)",
+     "fps": null,
+     "mount": "glasses"
+    },
+    {
+     "role": "other",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": "848x480",
+     "fps": null,
+     "mount": null
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [],
+   "other": [
+    "recorded, not released: Aria audio (7 mics), SLAM cameras, IMUs, eye tracking, MPS hand tracking and 6-DoF trajectory"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2603.15847",
+   "https://arxiv.org/html/2603.15847v1",
+   "https://www.cs.umd.edu/~edessale/feel",
+   "https://huggingface.co/datasets/edessa/feel (README.md, preprocess.py, .gitattributes, full repo tree via API)",
+   "https://huggingface.co/datasets/edessa/feel force CSVs: Kitchen/P06, P09, P12, P13 (both hands), Lab/P1 (+ before_reprocess), P6, P11, P19; head and tail range reads of every CSV; first 2 MB of Kitchen/P12 and Lab/P1 rgb.tar",
+   "https://huggingface.co/api/datasets/edessa/feel/paths-info/main (LFS hashes of Kitchen/P05, P13 CSVs)"
+  ],
+  "unconfirmed": [
+   "Frame rate not stated. 30 fps is derived from the paper (~3M frames / ~27 h = 30.9 fps) and fits the project-page clip times (Lab/P9 has 19,123 frames and a clip ending at 598.5 s, so its rate is at most 32 fps).",
+   "Release frame counts are last frame_idx + 1 of each CSV (range reads): Kitchen 1,072,092 over P01-P04, P06-P13; Lab 733,434 over P1-P19. Estimated from rgb.tar bytes per frame: Kitchen/P05 ~88,600, Lab/P20 ~35,800, Lab/P21 ~9,600. Total ~1.94M frames (~18 h at 30 fps), below the paper's ~3M frames / ~27 h; scale.hours and scale.frames are the paper's figures.",
+   "sensors_per_hand=6 from the paper (one per fingertip + a palm strip). Lab CSVs carry 5 sensor columns; whether the Lab glove lacks a sensor is not stated.",
+   "The arXiv HTML renders the sensor count as '55' and the range as '4545 N' (duplicated digits from math markup); Sec. 3.1 and Fig. 4 give six sensors per glove and 45 N (~10 lbs).",
+   "subjects not stated: 13 Kitchen and 21 Lab folders use separate anonymized IDs; overlap between them is not stated. README calls Kitchen/P12 'the Yianni recording' (author Yianni Karabatis).",
+   "scenes=2 counts the release's top-level folders (Kitchen, Lab); the number of kitchens is not stated.",
+   "Kitchen frames are 1408x1408 fisheye JPEGs (Aria Gen 1 RGB native); the paper says 1440x1440. Lab frames are 848x480; the first Lab/P1 frame shows the participant's head from behind, so the Lab camera is not head-worn. README mentions unuploaded depth/ directories.",
+   "Venue from the project page ('ECCV 2026 (oral presentation)'); arXiv v1 lists none.",
+   "Column meaning from the paper (Hampel filter, smoothing, rolling-percentile baseline, normalization by the 99.5th percentile, geometric mean of sensors = combined signal) and preprocess.py (raw_sensorN = original readings; force_aligned_.before_reprocess.csv = backup before participant-specific ignore rules).",
+   "Kitchen/P05 force CSVs: 2,767,495 and 2,072,576 bytes with ~8 bits/byte entropy, no gzip/zlib/xz header; sha256 of the left file equals its LFS oid fc6edb82..., so the upload itself is unreadable."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://huggingface.co/datasets/edessa/feel/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/edessa/feel",
+  "access": "open",
+  "format": "per participant: rgb.tar (uncompressed tar, members rgb/frame_XXXXXXXXXX.jpg in Kitchen, rgb/NNNNNN.jpg in Lab) + force CSV(s) with one row per frame",
+  "total_size": "622 GB (622,226,531,457 B in the HF tree)",
+  "per_episode": "rgb.tar 0.5-54 GB per participant; a 20 s window at 30 fps is ~280 MB (Kitchen, ~460 KB/frame) or ~66 MB (Lab, ~110 KB/frame); CSVs 0.4-15 MB",
+  "partial_fetch": "HTTP range requests on rgb.tar: frames are stored in order, so a frame window is one contiguous byte range, located by scanning 512-byte tar headers near the offset estimated from bytes per frame. CSVs are fetched whole."
+ },
+ "channels": [
+  {
+   "name": "Kitchen/Pxx/rgb.tar: rgb/frame_XXXXXXXXXX.jpg",
+   "kind": "camera",
+   "shape": "(T, 1408, 1408, 3)",
+   "rate_hz": null,
+   "unit": "8-bit RGB JPEG",
+   "frame": "Aria Gen 1 RGB camera (fisheye, circular image)",
+   "note": "~460 KB per frame; frame number = frame_idx in the CSVs"
+  },
+  {
+   "name": "Lab/Px/rgb.tar: rgb/NNNNNN.jpg",
+   "kind": "camera",
+   "shape": "(T, 480, 848, 3)",
+   "rate_hz": null,
+   "unit": "8-bit RGB JPEG",
+   "frame": "camera behind the participant, model not stated",
+   "note": "~110 KB per frame; README: P21 frames processed with EgoBlur, 4,707 P21 JPEGs undecodable"
+  },
+  {
+   "name": "Kitchen/Pxx/force_left_aligned.csv, force_right_aligned.csv: sensor0-sensor5",
+   "kind": "pressure_scalar",
+   "shape": "(T, 6) per hand",
+   "rate_hz": null,
+   "unit": "not stated (normalized, 0 to ~2.5)",
+   "frame": "6 sensors per glove (5 fingertips + palm strip); column-to-finger order not documented",
+   "note": "NaN where the authors masked drift or malfunction (6-9% of rows per sensor in P12)"
+  },
+  {
+   "name": "Kitchen force CSVs: force",
+   "kind": "other",
+   "shape": "(T,)",
+   "rate_hz": null,
+   "unit": "not stated (0 to ~0.75)",
+   "frame": "per hand",
+   "note": "combined contact signal (paper: geometric mean of the normalized sensors)"
+  },
+  {
+   "name": "Kitchen force CSVs: frame_idx, force_row_idx",
+   "kind": "other",
+   "shape": "(T,) each",
+   "rate_hz": null,
+   "unit": "index",
+   "frame": null,
+   "note": "force_row_idx = matched row of the raw glove log, -1 before the glove stream starts"
+  },
+  {
+   "name": "Kitchen/P13 force CSVs: raw_sensor0-5, raw_force",
+   "kind": "pressure_scalar",
+   "shape": "(T, 7) per hand",
+   "rate_hz": null,
+   "unit": "not stated (raw readings)",
+   "frame": "same sensors as sensor0-5",
+   "note": "only Kitchen participant with raw columns"
+  },
+  {
+   "name": "Lab/Px/force_aligned_.csv: sensor0-4, raw_sensor0-4, raw_force, force",
+   "kind": "pressure_scalar",
+   "shape": "(T, 12)",
+   "rate_hz": null,
+   "unit": "processed: not stated (0 to ~1.5 in P1); raw: ADC counts (0-565 in P1)",
+   "frame": "right glove; 5 columns; order not documented",
+   "note": "Lab/P1 sensor0 and sensor4 are NaN throughout"
+  },
+  {
+   "name": "Lab/Px/force_aligned_.before_reprocess.csv",
+   "kind": "other",
+   "shape": "(T, 13)",
+   "rate_hz": null,
+   "unit": "as force_aligned_.csv",
+   "frame": null,
+   "note": "version before preprocess.py applied per-participant ignore rules; identical to force_aligned_.csv for most participants"
+  }
+ ],
+ "episode_index": {
+  "where": "no index file; one recording per participant folder (Kitchen/P01-P13, Lab/P1-P21)",
+  "count": 34,
+  "fields": [
+   "environment",
+   "participant"
+  ],
+  "tasks": [],
+  "scenes": [
+   "Kitchen",
+   "Lab"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Public and ungated on Hugging Face; no license in the card, repo or project page, so the collection is re-hosted and labelled 'License not stated'.",
+  "prefix": "fl_",
+  "tasks_total": null,
+  "tasks_sampled": null,
+  "episodes": [
+   {
+    "id": "Kitchen/P12",
+    "task": "unscripted kitchen activity",
+    "scene": "Kitchen",
+    "subject": "Kitchen P12",
+    "duration_s": 20,
+    "window": [
+     315.8,
+     335.8
+    ],
+    "frames": [
+     9474,
+     10073
+    ],
+    "why": "README recommends P12 as a higher-quality recording. In the window, left sensors 0, 1, 2, 3, 5 exceed 0.1 for 0.9-3.7 s and right sensors 0, 2, 3, 4, 5 for 2.7-11.8 s; right sensor2/3 are NaN for 13% of the window. Window = the authors' project-page clip."
+   },
+   {
+    "id": "Kitchen/P13",
+    "task": "unscripted kitchen activity",
+    "scene": "Kitchen",
+    "subject": "Kitchen P13",
+    "duration_s": 20,
+    "window": [
+     1003.9,
+     1023.9
+    ],
+    "frames": [
+     30117,
+     30716
+    ],
+    "why": "No NaN in the window on either hand; left sensor0 3.9 s, sensor1 2.3 s, sensor3 1.7 s above 0.1, right sensor4 2.9 s. Only Kitchen participant with raw_sensor columns."
+   },
+   {
+    "id": "Kitchen/P06",
+    "task": "unscripted kitchen activity",
+    "scene": "Kitchen",
+    "subject": "Kitchen P06",
+    "duration_s": 20,
+    "window": [
+     2166.2,
+     2186.2
+    ],
+    "frames": [
+     64986,
+     65585
+    ],
+    "why": "All 6 left sensors above 0.1 for 0.3-1.7 s; right sensor1 4.6 s, sensor3 3.4 s, sensor4 4.6 s. Right sensor2 is NaN for the whole window (masked by the authors)."
+   },
+   {
+    "id": "Lab/P11",
+    "task": "unscripted activity (Lab)",
+    "scene": "Lab",
+    "subject": "Lab P11",
+    "duration_s": 20,
+    "window": [
+     1081.4,
+     1101.4
+    ],
+    "frames": [
+     32442,
+     33041
+    ],
+    "why": "All 5 sensor columns above 0.1 for 1.5-3.8 s, no NaN."
+   },
+   {
+    "id": "Lab/P19",
+    "task": "unscripted activity (Lab)",
+    "scene": "Lab",
+    "subject": "Lab P19",
+    "duration_s": 20,
+    "window": [
+     103.6,
+     123.6
+    ],
+    "frames": [
+     3108,
+     3707
+    ],
+    "why": "All 5 sensor columns above 0.1 for 2.8-6.5 s, no NaN."
+   },
+   {
+    "id": "Lab/P6",
+    "task": "unscripted activity (Lab)",
+    "scene": "Lab",
+    "subject": "Lab P6",
+    "duration_s": 20,
+    "window": [
+     551.6,
+     571.6
+    ],
+    "frames": [
+     16548,
+     17147
+    ],
+    "why": "Sensors 0-2 above 0.1 for 5.3-7.7 s; sensors 3-4 stay below 0.1 but are present (no NaN)."
+   }
+  ],
+  "fetch_estimate": "~1.05 GB: 3 Kitchen windows x 600 frames x ~460 KB + 3 Lab windows x 600 frames x ~110 KB, by range requests on rgb.tar; the 12 force CSVs of these participants (~75 MB) are already fetched under the survey scratch directory.",
+  "rules_applied": "No task labels: the release has 2 environments, so episodes span both (3 two-hand Kitchen, 3 right-hand Lab) from 6 different participants. Windows are the authors' 20 s project-page clips, checked for contact in the force CSVs (normalized value > 0.1 for 1 s or more on at least 3 sensors per glove). 6 episodes, 20 s each, within the 10-60 s rule.",
+  "deviations": [
+   "Window seconds assume 30 fps (not stated); frame ranges are what the converter should use.",
+   "Kitchen/P06 right sensor2 and Lab/P6 sensors 3-4 show no contact in their windows; the NaN mask is the authors'."
+  ]
+ }
+}

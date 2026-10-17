@@ -1,0 +1,272 @@
+{
+ "id": "ace_data_0",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "ace_data_0",
+  "name": "ACE-Data-0",
+  "title": "ACE-Data-0: Human-Centric Ambient Capture as Embodied Data Engine",
+  "authors": "Yukang Cao et al.",
+  "year": 2026,
+  "venue": "arXiv 2607.28625",
+  "summary": "Two-handed household tasks at a table-scale home workspace (folding socks, wrapping food, packing a backpack, assembling racks) recorded with ACE-Sense-Glove Lite full-palm pressure gloves (256 or 460 raw values per hand at ~80-92 Hz), a 4-fisheye egocentric headset and 5-8 GoPro views; 541 tactile takes (534 distinct, ~20.5 h) are uploaded so far.",
+  "embodiment": "human",
+  "hand": "Human hands, both wearing ACE-Sense-Glove Lite tactile gloves",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": null,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 80,
+   "calibrated": false,
+   "note": "raw/tactile/{left,right}/take-NNNNNN.parquet, one row per glove packet, every column stored as a string. Two packet formats: shard ACE-Data-Tactile-0 (47 takes) has MAT_0..MAT_459 (PACKAGE_SIZE 460) + sync_time_s, SN, TIMESTAMP at ~91 Hz, of which ~100-108 channels stay 0 in every scanned take (~352-360 live); shards 1-10 (494 takes) have pressure_0..pressure_255 + a glove quaternion (w, x, y, z), imu_raw_hex, a 0/1 contact column, sensor_name LH/RH and packet times at ~80 Hz nominal (42-81 Hz effective, gaps up to 1.15 s), with 76 (left) / 44 (right) channels 0 in all 37 scanned files and 93-187 per take. Values are 8-bit counts 0-255 (255 reached in several takes). No channel-to-hand map is released; units are not stated. The paper describes 'hand-shaped pressure grids remapped from raw glove sensors, with calibrated normalization and baseline correction'; the files hold the raw packets.",
+   "maker": "ACE Robotics (by product name; the paper names the maker only for the headset)",
+   "model": "ACE-Sense-Glove Lite",
+   "principle": "unspecified",
+   "range": null
+  },
+  "modalities": [
+   "egocentric",
+   "multiview_rgb",
+   "imu",
+   "language"
+  ],
+  "scale": {
+   "hours": 20.5,
+   "episodes": 534,
+   "frames": 2215170,
+   "tasks": null,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "home"
+   ],
+   "text": "Tactile part uploaded so far: 541 table-scale takes in 11 shards (534 unique, ~20.5 h; 21-875 s per take, median 108 s; ~730 GB), 435 distinct free-text goals. Planned whole release (all parts, card): 150 h+, 17M+ frames, 75,000+ interaction episodes, 200+ task categories, 50+ participants, 2 sites"
+  },
+  "availability": "gated",
+  "access": "Hugging Face ACERobotics/ACE-Data-0: the card defines a personal access form for non-commercial academic research (the gate was not enforced on 2026-10-16); glove data is under Table-scale/Tactile/ACE-Data-Tactile-{0..10}, and per-take parquet and mp4 files can be fetched one by one.",
+  "license": "ACE-Data-0 Research License Agreement v1.0 (non-commercial academic research only, no redistribution)",
+  "caveats": [
+   "Only the Table-scale/Tactile shards (541 takes) carry glove data. Room-scale (1,131 takes), Table-scale/HOI (290 takes) and Table-scale/Hands (199 takes) have no tactile files.",
+   "The tactile takes ship without body mocap, hand pose, object pose, headset pose or audio: each holds egocentric and GoPro video, one IMU stream, camera calibration and a caption. Mocap, hand poses (raw/hand_poses in HOI), object poses and SMPL-X (Room-scale) are only in the parts without gloves.",
+   "Two tactile packet formats in one release: shard 0 (47 takes) stores 460 values per hand (~360 live), shards 1-10 (494 takes) store 256 values per hand plus a glove quaternion and a 0/1 contact column. Neither comes with a channel-to-taxel map, units or calibration; the paper's remapped, normalized, baseline-corrected grids are not in the files.",
+   "In shards 1-10 the glove packets arrive irregularly: effective rates of 42-81 Hz against ~80 Hz nominal, with gaps up to 1.15 s; one scanned right-glove file (shard 9 take-000000) has corrupt quaternion rows (norms up to ~1e14).",
+   "Shard ACE-Data-Tactile-3 lists takes 8 and 10-15 as byte-identical copies (same LFS hashes for tactile, IMU and every video) of takes 0 and 2-7, so 541 listed takes hold 534 distinct recordings.",
+   "The card says the repository is gated and that 'Data files are not published yet', but the Hugging Face API reported gated: false and 22.2 TB of files on 2026-10-16, with uploads still running on 2026-10-14. The card's headline figures describe the planned release and 'will be verified in the final release manifest'.",
+   "The license forbids redistribution to anyone not granted access individually (section 3.2), so no sample is re-hosted.",
+   "83 of the 535 caption files are placeholders (Task: episode-NNNNNN.mp4, no subtasks) and 6 takes have none. Captions were replaced on 2026-09-07 by repository PRs titled 'Claude-generated task/subtask descriptions'; the paper names Gemini-3.1-pro-preview as the captioner.",
+   "Egocentric videos are MPEG-4 Part 2 in shards 1-10 and H.264 in shard 0; GoPro videos are H.264. info.json lists no audio track in any video, and no audio files are in the tactile shards.",
+   "The glove is synchronized to the headset by matching an IMU motion pattern performed at the start of each take; the glove streams keep their own packet clock (sync_time_s, take-relative s) next to a 30 Hz reference timeline in data/."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2607.28625",
+   "project": "https://ace-data-engine.github.io/ACE-Data-0/",
+   "data": "https://huggingface.co/datasets/ACERobotics/ACE-Data-0",
+   "code": null
+  },
+  "image": "https://ace-data-engine.github.io/ACE-Data-0/assets/images/data-teaser.webp",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 4,
+     "model": "ACE-Ego-Head-V02 Lite (ACE Robotics)",
+     "type": "fisheye",
+     "resolution": "1088x1280",
+     "fps": 20,
+     "mount": "head"
+    },
+    {
+     "role": "third_person",
+     "count": 8,
+     "model": "GoPro (model not stated)",
+     "type": "RGB",
+     "resolution": "1920x1080",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [],
+   "other": [
+    "glove quaternion per packet (shards 1-10)",
+    "IMU: one 6-axis stream per take at 200 Hz (raw/imu; device not named, likely the headset since shards without gloves carry it too)",
+    "per-take fisheye calibration (xi, K, D, inter-camera transforms) and GoPro intrinsics/extrinsics (aniposelib toml)",
+    "LLM-written task goal and timed subtasks per take",
+    "capture rig per the paper, not released for tactile takes: 16 OptiTrack PrimeX 22 cameras, a 41-marker body suit, finger keypoints triangulated from the 8 GoPro views"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2607.28625 (abstract and HTML v1)",
+   "https://ace-data-engine.github.io/ACE-Data-0/",
+   "https://huggingface.co/datasets/ACERobotics/ACE-Data-0 (README.md, LICENSE, card YAML incl. access form text)",
+   "https://huggingface.co/api/datasets/ACERobotics/ACE-Data-0 (gated: false, usedStorage, lastModified)",
+   "https://huggingface.co/api/datasets/ACERobotics/ACE-Data-0/tree/main/Table-scale/Tactile?recursive=1 (full listing, 10,446 files); Table-scale/HOI and Table-scale/Hands (full listings); Room-scale (take list, take-000000 full, raw/ of take-000100/500/900)",
+   "https://huggingface.co/api/datasets/ACERobotics/ACE-Data-0/discussions and /commits/main",
+   "Table-scale/Tactile/ACE-Data-Tactile-{0..10}: README.md, meta/info.json, meta/tasks.parquet, meta/takes/chunk-000/file-000.parquet; all 535 raw/captions/*.txt",
+   "Table-scale/Tactile/ACE-Data-Tactile-0: data/chunk-000/file-000.parquet, raw/calibration/take-000000.json, raw/camera_array_aniposelib/take-000000.toml, raw/imu/take-000000.parquet",
+   "raw/tactile/{left,right}/take-NNNNNN.parquet: 40 full files (2 takes per shard, both hands; 4 refused by rate limit) plus parquet-footer range reads of 10 more left-hand files (shards 0, 1, 2, 4, 8, 10)",
+   "https://www.ifanr.com/1673470 (Chinese press coverage, company name)",
+   "https://cn.chinadaily.com.cn/a/202512/19/WS69450572a310942cc49978f4.html (company name)"
+  ],
+  "unconfirmed": [
+   "hours=20.5 and frames=2,215,170: meta/info.json total_frames summed over the 11 tactile shards (2,238,840 samples of the 30 Hz reference timeline, not video frames; 20.7 h) minus the 23,670 samples of the 7 duplicated shard-3 takes, / 30 / 3600. Takes per shard: 47, 17, 35, 16, 187, 4, 10, 32, 167, 5, 21.",
+   "episodes=534 counts distinct takes (541 listed minus 7 byte-identical copies in shard 3). Shard-3 take-000009 is 6,630 samples vs 6,660 for take-000001 and may be a re-export (not checked). The paper's 'episode' is a sub-goal segment inside a take; the 452 non-placeholder captions list 5,618 timed subtasks.",
+   "Packet format per shard: full reads of 1-4 files per shard plus footer reads of 10 more; shard 0 always MAT_0..459, shards 1-10 always pressure_0..255. Not checked for all 1,082 files.",
+   "tasks=null: goals are free text per take (435 distinct strings in 535 caption files, many near-duplicates such as 'Wrap a plate of fruit with plastic wrap.'); meta/tasks.parquet holds a single task 'ACE-Data human multimodal demonstration'. The paper's 200+ task categories cover the whole dataset.",
+   "objects, subjects, scenes = null for the tactile part: the paper gives 25+ object instances in 8+ categories at table scale, 50 participants and 2 sites overall; no per-take subject or object label is released in the tactile shards.",
+   "rate_hz=80: median of (rows-1)/span over 37 scanned 256-value files (79.4 left, 80.6 right; median sync_time_s step ~10 ms); the 460-value files of shard 0 give ~90-92 Hz. The paper's hardware table lists no glove rate.",
+   "Live channel counts are the channels that leave 0 in at least one scanned take: 360 left / 352 right of 460 (shard 0, 3 files), 180 left / 212 right of 256 (shards 1-10, 37 files). The true taxel count is not stated. The 460-raw / 360-live packet matches HumanTouch's glove (460 raw, 360 valid points per hand); neither source names a shared vendor. Whether the 256-value format is a second glove version or a firmware change is not stated.",
+   "The 0/1 contact column (shards 1-10) is undocumented; it is 1 in 8-100 % of packets per scanned file.",
+   "Glove maker: the paper credits ACE Robotics for the ACE-Ego-Head-V02 Lite headset only; the glove's maker is inferred from its name.",
+   "Coverage tip/phalanx/palm from the paper's 'contact pressure maps across the palm and fingers area' and CoP over 'fingertips and palm'; the released files give no layout.",
+   "IMU units read as rad/s and m/s^2 from the ranges (acc_z ~ -9.6); not stated.",
+   "Third-person count 8 is the paper's figure; per shard info.json lists 5-8 GoPro streams (shard 0: 5).",
+   "Chinese company name 大晓机器人 for ACE Robotics comes from press coverage of the release, not from the card, paper or license."
+  ]
+ },
+ "license": {
+  "name": "ACE-Data-0 Research License Agreement, Version 1.0 (non-commercial academic research only)",
+  "redistribution": "forbidden",
+  "quote": "3.2 Distribute, publish, transmit, sublicense, sell, rent, lend, host, mirror, or otherwise make the Dataset available, in whole or in part, to any person who has not been granted access individually and directly by the Licensors. This includes shared drives, public or private code repositories, torrents, model hubs, and inclusion in any other dataset or collection.",
+  "url": "https://huggingface.co/datasets/ACERobotics/ACE-Data-0/blob/main/LICENSE"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/ACERobotics/ACE-Data-0",
+  "access": "form",
+  "format": "LeRobot v3-style shards Table-scale/Tactile/ACE-Data-Tactile-{0..10}/: data/chunk-000/file-000.parquet (30 Hz reference timeline, indices only), meta/{info.json, tasks.parquet, takes/chunk-000/file-000.parquet}, raw/tactile/{left,right}/take-N.parquet, raw/imu/take-N.parquet, raw/calibration/take-N.json, raw/camera_array_aniposelib/take-N.toml, raw/captions/take-N.txt, videos/egocap/{cam0..3,stereo0,stereo1}/take-N.mp4, videos/gopro/<serial>/take-N.mp4",
+  "total_size": "tactile shards 0.73 TB (729,798,568,581 B, 10,446 files); whole repository 22.2 TB (usedStorage 22,176,330,852,720 B) on 2026-10-16, upload in progress",
+  "per_episode": "tactile left + right ~0.4-2.7 MB per take; IMU ~1.4 MB; videos ~0.2-0.7 GB per egocentric fisheye view and ~0.1-0.3 GB per GoPro view (shard 0 take-000000: 4 x ~0.2-0.24 GB fisheye)",
+  "partial_fetch": "single files via https://huggingface.co/datasets/ACERobotics/ACE-Data-0/resolve/main/<path>; anonymous requests hit the Hugging Face rate limit after ~40 quick downloads"
+ },
+ "channels": [
+  {
+   "name": "raw/tactile/{left,right}/take-N.parquet (shard ACE-Data-Tactile-0)",
+   "kind": "tactile_grid",
+   "shape": "(T, 460) MAT_0..MAT_459 + sync_time_s, SN, TIMESTAMP, PACKAGE_SIZE (string columns)",
+   "rate_hz": 91,
+   "unit": "not stated (integer counts 0-216 seen)",
+   "frame": "one file per glove; channel-to-taxel layout not released",
+   "note": "47 takes; ~100 (left) / ~108 (right) channels stay 0; sync_time_s on the take clock (s), TIMESTAMP wall clock to ms, SN packet counter"
+  },
+  {
+   "name": "raw/tactile/{left,right}/take-N.parquet pressure_0..255 (shards 1-10)",
+   "kind": "tactile_grid",
+   "shape": "(T, 256) + sync_time_s, sample_index, sensor_type (0x01 / 0x02), sensor_name (LH / RH), packet1_time, packet2_time (string columns)",
+   "rate_hz": 80,
+   "unit": "not stated (8-bit counts 0-255)",
+   "frame": "one file per glove; channel-to-taxel layout not released",
+   "note": "494 takes; 42-81 Hz effective with gaps up to 1.15 s; 93-187 channels 0 per take"
+  },
+  {
+   "name": "raw/tactile/{left,right}/take-N.parquet quaternion_w/x/y/z, imu_raw_hex (shards 1-10)",
+   "kind": "imu",
+   "shape": "(T, 4) unit quaternion + 16-byte hex string",
+   "rate_hz": 80,
+   "unit": "unitless",
+   "frame": "glove orientation, reference frame not stated",
+   "note": "same rows as the pressure values; corrupt rows (norm ~1e14) in shard 9 take-000000 right"
+  },
+  {
+   "name": "raw/tactile/{left,right}/take-N.parquet contact (shards 1-10)",
+   "kind": "contact_flag",
+   "shape": "(T,) 0/1",
+   "rate_hz": 80,
+   "unit": null,
+   "frame": "per glove",
+   "note": "undocumented; 1 in 8-100 % of packets per scanned file"
+  },
+  {
+   "name": "raw/imu/take-N.parquet",
+   "kind": "imu",
+   "shape": "(T, 6) gyro_x/y/z, acc_x/y/z + sync_time_s, device_timestamp_ns, host_timestamp_ns (strings)",
+   "rate_hz": 200,
+   "unit": "not stated (rad/s and m/s^2 by range)",
+   "frame": "sensor frame, device not named",
+   "note": "one stream per take; the same file type exists in the HOI and Hands shards, which have no gloves"
+  },
+  {
+   "name": "videos/egocap/cam0..cam3/take-N.mp4",
+   "kind": "camera",
+   "shape": "(T, 1280, 1088, 3)",
+   "rate_hz": 20,
+   "unit": "8-bit RGB",
+   "frame": "fisheye, calibrated in raw/calibration/take-N.json (xi, K, D, T_cn_cnm1)",
+   "note": "ACE-Ego-Head-V02 Lite front/back fisheye pairs; H.264 in shard 0, MPEG-4 Part 2 in shards 1-10"
+  },
+  {
+   "name": "videos/egocap/stereo0, stereo1/take-N.mp4",
+   "kind": "camera",
+   "shape": "(T, 720, 720, 3)",
+   "rate_hz": 20,
+   "unit": "8-bit RGB",
+   "frame": "not documented",
+   "note": "two extra 720x720 egocentric streams; how they are derived from the fisheye cameras is not stated"
+  },
+  {
+   "name": "videos/gopro/<serial>/take-N.mp4",
+   "kind": "camera",
+   "shape": "(T, 1080, 1920, 3) (some 1920x1080 portrait)",
+   "rate_hz": 29.97,
+   "unit": "8-bit RGB",
+   "frame": "calibrated per take (raw/camera_array_aniposelib/take-N.toml)",
+   "note": "5-8 static GoPro views per shard, H.264, no audio track per info.json"
+  },
+  {
+   "name": "raw/calibration/take-N.json, raw/camera_array_aniposelib/take-N.toml",
+   "kind": "other",
+   "shape": "per camera intrinsics, distortion, extrinsics",
+   "rate_hz": null,
+   "unit": "pixels / m (not stated)",
+   "frame": "headset rig (fisheye) and GoPro array",
+   "note": null
+  },
+  {
+   "name": "raw/captions/take-N.txt",
+   "kind": "language",
+   "shape": "Task: <goal>; Subtasks: numbered [t0-t1] s spans",
+   "rate_hz": null,
+   "unit": "s",
+   "frame": "take clock",
+   "note": "83 of 535 files are placeholders; 6 takes have no caption"
+  },
+  {
+   "name": "data/chunk-000/file-000.parquet + meta/takes",
+   "kind": "other",
+   "shape": "timestamp, frame_index, take_index, index, task_index per 30 Hz sample; per take length and video time spans",
+   "rate_hz": 30,
+   "unit": "s",
+   "frame": "take clock",
+   "note": "reference timeline; holds no sensor values"
+  }
+ ],
+ "episode_index": {
+  "where": "Table-scale/Tactile/ACE-Data-Tactile-{0..10}/meta/takes/chunk-000/file-000.parquet (541 rows) + raw/captions/take-N.txt",
+  "count": 541,
+  "fields": [
+   "take_index",
+   "length (30 Hz samples)",
+   "video paths and from/to timestamps",
+   "caption goal and timed subtasks"
+  ],
+  "tasks": [
+   "label field: free-text 'Task:' line in raw/captions/take-N.txt; 435 distinct strings in 535 files (83 placeholders)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "skip_forbidden",
+  "reason": "The ACE-Data-0 Research License Agreement section 3.2 forbids making the Dataset available 'in whole or in part, to any person who has not been granted access individually and directly by the Licensors', naming 'model hubs, and inclusion in any other dataset or collection'. Section 4.2 allows only 'a limited number of images or short clips' in papers, theses, posters and talks. No sample is re-hosted; add the dataset to SKIPPED.md.",
+  "prefix": "ae_",
+  "tasks_total": null,
+  "tasks_sampled": 0,
+  "episodes": [],
+  "fetch_estimate": "0 for the sample. The survey fetched ~86 MB (metadata of all 11 shards, 535 captions, one data parquet, one IMU file, 40 tactile parquets, 10 footer reads). If permission were granted: tactile ~1-3 MB per take plus 1-2 videos (~0.1-0.7 GB each) per take.",
+  "rules_applied": "README step 2: the license explicitly forbids redistribution -> skip_forbidden; SKIPPED.md row to be added by hand."
+ }
+}

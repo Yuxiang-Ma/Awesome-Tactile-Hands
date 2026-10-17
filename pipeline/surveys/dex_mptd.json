@@ -1,0 +1,131 @@
+{
+ "id": "dex_mptd",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "dex_mptd",
+  "name": "Dex-MPTD",
+  "title": "TacCompress: A Benchmark for Multi-Point Tactile Data Compression in Dexterous Hand",
+  "authors": "Yan Zhao et al.",
+  "year": 2025,
+  "venue": "ACM MM 2025 Workshop MSMA (arXiv 2505.16289)",
+  "summary": "PaXini DexH13 four-finger hand with 11 three-axis tactile arrays (1,140 units) grasping 8 objects in 4 grasp poses, 10 repeats each; tactile signals only.",
+  "embodiment": "robot",
+  "hand": "PaXini DexH13 (4 fingers, one rotary motor per finger)",
+  "bimanual": false,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 1140,
+   "sensors_per_hand": 11,
+   "coverage": [
+    "tip",
+    "phalanx"
+   ],
+   "rate_hz": null,
+   "note": "11 arrays on the four fingers: distal and proximal arrays 120 units each, intermediate arrays 60 units each; every unit reports a 3-axis force (normal and tangential) in its local frame. The paper stores 8 bits per axis and converts each recording into a 1,140 x T x 3 image for compression. No palm sensing.",
+   "maker": "PaXini Tech",
+   "model": "DexH13 built-in tactile arrays",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [],
+  "scale": {
+   "hours": null,
+   "episodes": 320,
+   "frames": null,
+   "tasks": 4,
+   "objects": 8,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "4 grasp poses (pinch, tripod, cylindrical, spherical) x 8 objects x 10 repeats = 320 grasps; recording length per grasp and frame count not stated"
+  },
+  "availability": "announced",
+  "access": "Paper: 'Our codes and dataset will be released upon acceptance.' The workshop paper is published (Oct 2025), but no release was found on Hugging Face, GitHub or ModelScope on 2026-10-17.",
+  "license": "not stated",
+  "caveats": [
+   "Grasp-and-hold only: the hand lifts the object 0.3 m, holds it 15 s and releases it; recording starts 10 s before the grasp.",
+   "Tactile only: no camera, joint or pose stream is described as part of the dataset.",
+   "Recording rate not stated; 100 Hz appears only in a bandwidth example (100 Hz x 1,140 units x 3 axes x 8 bits).",
+   "Units and calibration not stated; raw values are 8 bits per axis."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2505.16289"
+  },
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [],
+   "other": [
+    "48 V DC supply and PaXini hand controller (collection platform, Fig. 2)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2505.16289 (v1 22 May 2025, v2 28 Aug 2025)",
+   "https://arxiv.org/html/2505.16289v2 (Sec. 3.1-3.2, Sec. 5, header with MSMA '25 and DOI 10.1145/3728485.3759170)",
+   "https://huggingface.co/api/datasets?search=Dex-MPTD, ?search=MPTD, ?search=TacCompress (no results)",
+   "https://api.github.com/search/repositories?q=Dex-MPTD and ?q=TacCompress (0 results)",
+   "https://modelscope.cn/api/v1/datasets?Search=MPTD and ?Search=TacCompress (no results)"
+  ],
+  "unconfirmed": [
+   "episodes = 320 derived from the stated design (4 poses x 8 objects x 10 repeats); the paper gives no trial count.",
+   "tasks = 4 counts the grasp poses; objects: apple, egg, orange, tomato, potato, vitamin bottle, water bottle, glass bottle.",
+   "rate_hz left null: 100 Hz is used only to illustrate bandwidth in Fig. 1's caption.",
+   "Coverage tip + phalanx from 'distal, intermediate and proximal sensors' on the four fingers; per-finger sensor count (11 over 4 fingers) not broken down.",
+   "Sensing principle of the PaXini arrays not stated in the paper. The catalog's hardware entry paxini_dexh13 (which already cites this paper) lists DexH13 GEN2 as magnetic (Hall array, PX-6AX GEN2 units); the generation used for Dex-MPTD is not stated.",
+   "v1 of the arXiv paper is titled '... in Dexterous Manipulation'; v2 and the workshop version use '... in Dexterous Hand'."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": "Our codes and dataset will be released upon acceptance.",
+  "url": "https://arxiv.org/html/2505.16289v2"
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [
+  {
+   "name": "tactile (per paper; no release)",
+   "kind": "force_vector",
+   "shape": "(1140, 3) per frame",
+   "rate_hz": null,
+   "unit": "not stated (8 bits per axis)",
+   "frame": "per tactile unit, local sensor frame",
+   "note": "11 arrays: distal and proximal 120 units each, intermediate 60 units each; described in the paper, not checked against files"
+  }
+ ],
+ "episode_index": {
+  "where": null,
+  "count": null,
+  "fields": [
+   "grasp pose",
+   "object",
+   "repeat"
+  ],
+  "tasks": [
+   "pinch grasp",
+   "tripod grasp",
+   "cylindrical grasp",
+   "spherical grasp"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "catalog_only",
+  "reason": "No data released: the paper says code and dataset 'will be released upon acceptance', and no release exists on Hugging Face, GitHub or ModelScope as of 2026-10-17.",
+  "prefix": "mp_",
+  "tasks_total": 4,
+  "tasks_sampled": 0,
+  "episodes": [],
+  "fetch_estimate": "0 (nothing to fetch)",
+  "rules_applied": "catalog_only: no data can be downloaded (announced, not released)."
+ }
+}

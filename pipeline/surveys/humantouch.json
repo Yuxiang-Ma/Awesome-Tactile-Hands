@@ -1,0 +1,425 @@
+{
+ "id": "humantouch",
+ "surveyed": "2026-10-16",
+ "entry": {
+  "id": "humantouch",
+  "name": "HumanTouch",
+  "title": "HumanTouch: A Multimodal System for Scalable Human-Hand Tactile Acquisition",
+  "authors": "Chuqiao Lyu et al.",
+  "year": 2026,
+  "venue": "Project page (SparkLab@Xspark AI), Aug 2026",
+  "summary": "Two-handed tabletop manipulation (10 tasks) recorded with Moxian piezoresistive gloves (360 mapped taxels per hand) worn under MANUS MetaGloves, with HTC VIVE wrist and head poses, one head camera and two wrist cameras, all resampled to 60 Hz.",
+  "embodiment": "human",
+  "hand": "Human hands x 2: Moxian tactile gloves (inner) under MANUS MetaGloves (outer)",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 360,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 60,
+   "note": "observation.tactile.raw_left / raw_right: (460,) float64 per hand = a 23 x 20 grid. meta/humantouch/tactile_mapping.json assigns 360 cells (palm 15 x 16 = 240, 6 x 4 = 24 per finger) and leaves 100 unassigned. Raw values 0-247 in 24 checked episodes, integer ADC counts except where interpolated onto the 60 Hz timeline. Also observation.tactile.patch_pressure (12,) = (left, right) x (palm, thumb, index, middle, ring, pinky), a processed per-region value that is 0 at rest; the episode metadata labels it newton, the project page says these outputs are relative and uncalibrated.",
+   "maker": "Moxian Technology (Dongguan)",
+   "model": "Fabric Tactile Data-Acquisition Glove (matched by layout; HumanTouch names only 'Moxian Gloves')",
+   "principle": "piezoresistive",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "hand_pose",
+   "egocentric",
+   "wrist_rgb",
+   "language"
+  ],
+  "scale": {
+   "hours": 132.8,
+   "episodes": 17608,
+   "frames": 28674858,
+   "tasks": 10,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Release: 17,608 episodes, ~132.8 h at 60 Hz (28.7M frames), 10 tabletop tasks; project page: ~100 h, 13,469 episodes (10.0 h per task); 1,000 h announced"
+  },
+  "availability": "public",
+  "access": "Hugging Face chuqiaoLyu/Xspark-HumanTouch (ungated; 33 X008 parquets missing) or the ModelScope mirror (complete); LeRobot v2.1, one folder per task, 2.09 TB, single files downloadable.",
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "Touch values are uncalibrated: the project page says the outputs \"are not calibrated pressure, force, or object-load measurements\", while each episode's data_contract says pressure_unit \"newton\" and the page's comparison table ticks \"Force Calibration\".",
+   "The release is larger than the project page describes: meta/info.json lists 17,608 episodes / 28,674,858 frames (~132.8 h); the page's Fig. 8 shows 13,469 episodes and 10.0 h per task (~100 h). Per task the release holds 10.8-17.7 h.",
+   "The Hugging Face copy is incomplete: X008 has 711 of 744 parquets (episodes 194-225 and 228 missing; all 744 are on ModelScope). X005 has a parquet, episode JSON, head and left-wrist video for episode 361, which episodes.jsonl and info.json do not list and which has no right-wrist video.",
+   "One tactile_mapping.json serves all tasks. In 3 of 24 checked episodes the 15 x 4 strip beside the palm, marked unassigned, reads up to 87, so the 360-cell mapping may not fit every glove.",
+   "Task names, subtask labels and captions are in Chinese only; English task names appear only in the project page's Fig. 8.",
+   "All streams are resampled onto one 60 Hz timeline (linear interpolation for tactile and positions, SLERP for rotations); the glove's native rate is not stated.",
+   "Episode metadata has no operator, glove or site ID.",
+   "Videos are HEVC (head 1920x1080, wrists 1280x960, 60 fps) and make up 1.98 of the 2.09 TB.",
+   "A 1,000 h release was announced for the end of September 2026; on 2026-10-16 both mirrors hold the 10-task release (HF last modified 2026-09-06)."
+  ],
+  "links": {
+   "project": "https://xsparkai.com/sparklab/humantouch/",
+   "data": "https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch"
+  },
+  "image": "https://xsparkai.com/sparklab/humantouch/_astro/figure-5.D1HbAxGj_3i2Hg.webp",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": "1920x1080",
+     "fps": 60,
+     "mount": "head"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "1280x960",
+     "fps": 60,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "magnetic",
+     "system": "MANUS MetaGloves (EMF)",
+     "note": "25 joints per hand, position (m) + quaternion (xyzw) in the world frame; worn over the tactile gloves"
+    },
+    {
+     "target": "wrist",
+     "method": "optical_tracker",
+     "system": "HTC VIVE trackers + base stations",
+     "note": "6-DoF wrist pose per hand, (7,) = position (m) + quaternion (xyzw)"
+    },
+    {
+     "target": "body",
+     "method": "optical_tracker",
+     "system": "head tracker (device not named)",
+     "note": "observation.human.pose.head (7,); episode metadata stores a camera_from_head_tracker extrinsic; Fig. 5 shows the head unit tracked by the base stations"
+    }
+   ],
+   "other": [
+    "per-episode subtask segments with Chinese captions (observation.semantic.subtask_index + semantic_annotations)",
+    "head camera intrinsics (ChArUco) and camera-from-head-tracker extrinsic per episode",
+    "per-region patch_pressure (12,) and validity flags"
+   ]
+  },
+  "sources": [
+   "https://xsparkai.com/sparklab/humantouch/",
+   "https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch (README.md, X001-X010 meta/info.json, tasks.jsonl, episodes.jsonl, meta/humantouch/format.json, tactile_mapping.json, .humantouch_lerobot_checkpoint.json, full tree via the HF API)",
+   "https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch X001 episode 1 (parquet + meta/humantouch/episodes/episode_000001.json)",
+   "https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch (ModelScope API: license, README, X008 file list; 24 parquets downloaded for the contact scan; ffprobe of X003 episode 888 head and left-wrist videos)",
+   "https://arxiv.org/abs/2609.20649 (DexTouch-WM, HTML v2)",
+   "https://arxiv.org/abs/2609.20414 (TouchSight, HTML v1)",
+   "https://www.xsparkai.com/zh/ and https://www.xsparkai.com/zh/news (company name, release announcement)",
+   "https://www.moxiantech.com/uploads/upload/files/20260928/5c10e83e39997a0f5c8971a3c3bf5205.pdf (Moxian glove manual, Chinese)"
+  ],
+  "unconfirmed": [
+   "hours = 132.8 derived: sum of total_frames in the 10 meta/info.json files (28,674,858) / 60 Hz. Per task: X001 17.7 h, X002 12.7, X003 11.1, X004 12.4, X005 10.8, X006 15.8, X007 10.9, X008 12.8, X009 16.0, X010 12.6. The project page and card say ~100 h (10.0 h per task in Fig. 8).",
+   "episodes = 17,608 is the sum of info.json total_episodes; the HF tree holds 17,576 parquets and 17,609 episode JSONs / head videos. Project page Fig. 8: 13,469 episodes (Stack Bowls 3,071, Insert Test Tubes 1,865, Place Fruit on Plate 1,497, Fill Pen Holder 1,270, Put Objects in Basket 1,257, Discard Bottles 1,211, Fill Egg Carton 1,193, Fold Clothes 853, Pack Phone in Box 669, Screw Nut onto Bolt 583).",
+   "subjects: not stated for the release; the page's DcSNR analysis uses 32 operators with 1 h each.",
+   "scene_types = ['lab']: the sampled head views show a white table against a black backdrop; the page claims multi-site deployment but gives no site count.",
+   "coverage and model: the release mapping (palm 15 x 16 = 240, 6 x 4 = 24 per finger, 360 per hand) matches Moxian's manual for its fabric glove: '标准配置360点位' [standard configuration 360 points], '手指24点位，分布于指尖（16个）、指中（8个）' [24 points per finger: 16 at the fingertip, 8 at the middle segment], palm '16×15 矩阵分布' [16 x 15 matrix], 120 Hz standard, single-point ADC values. HumanTouch and DexTouch-WM name only 'Moxian' gloves, so the model is matched by layout. DexTouch-WM Fig. 3 keeps 4 x 4 fingertip pads + the 15 x 16 palm (320 taxels).",
+   "Glove maker: 'Moxian Gloves (Inner Gloves)' in project page Fig. 5 and 'Moxian tactile gloves beneath Manus MetaGloves' in DexTouch-WM Sec. III-C; company name 墨现科技（东莞）有限公司 [Moxian Technology (Dongguan)] from Moxian's own manual.",
+   "rate 60 Hz is the resampled timeline (DexTouch-WM: 'The gloves record 360 taxels per hand at 60 Hz'); Moxian's manual gives 120 Hz as the glove's standard rate; MANUS and VIVE rates are not stated.",
+   "patch_pressure: in X001 episode 1 each region correlates with the sum of its raw cells (r = 0.88-0.98 for 10 of 12 regions) and is 0 at rest; how it is computed is not documented.",
+   "Xspark AI's Chinese news page announces '1000小时最大规模人手全掌触觉数据集发布！' [1,000-hour, largest human full-palm tactile dataset released!] (item dated 08.20, linking the project page); the files hold ~132.8 h.",
+   "The upload checkpoint (.humantouch_lerobot_checkpoint.json, 2026-08-12) also lists groups X011 and X012, which are not in the release.",
+   "Camera models are not stated; head intrinsics fx = 679.6 px at 1920 px width (pinhole + 5 distortion coefficients) imply a ~110 deg horizontal field of view.",
+   "In 24 checked episodes 6-248 of the 360 mapped cells per hand stay at 0 for the whole episode; whether these are dead cells or untouched areas is not documented."
+  ],
+  "used_by": [
+   {
+    "name": "DexTouch-WM (arXiv 2609.20649)",
+    "url": "https://arxiv.org/abs/2609.20649",
+    "note": "pretrains its tactile world model on ~100 h of HumanTouch recordings over 50 bimanual tasks (a task set different from the 10-task release), plus 5 h of robot data"
+   },
+   {
+    "name": "TouchSight (arXiv 2609.20414)",
+    "url": "https://arxiv.org/abs/2609.20414",
+    "note": "trains full-hand force prediction from egocentric video on 500 h of HumanTouch glove recordings and re-renders 10 h of them as bare hands (TwinTouch-20H)"
+   }
+  ],
+  "zh": {
+   "name": null,
+   "title": null,
+   "maker": "深圳无界智航科技有限公司",
+   "en": "official",
+   "note": "Dataset card (HF and ModelScope) in Chinese, titled 'HumanTouch 数据集发布页' [HumanTouch dataset release page]; project page in English. Task names and subtask captions in Chinese; English task names from project page Fig. 8. Company name from the footer of xsparkai.com."
+  }
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "ModelScope dataset metadata: \"License\": \"CC-BY-NC-4.0\". HF/ModelScope card: \"数据集许可以 ModelScope 仓库页标注的许可证为准。\" [The dataset license is the one marked on the ModelScope repository page.]",
+  "url": "https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch (mirror: https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch)",
+  "access": "open",
+  "format": "LeRobot v2.1, one folder per task X001-X010: data/chunk-000/episode_NNNNNN.parquet (one per episode), videos/chunk-000/observation.images.{cam_head,cam_left_wrist,cam_right_wrist}/episode_NNNNNN.mp4 (HEVC), meta/{info.json,episodes.jsonl,tasks.jsonl,episodes_stats.jsonl}, meta/humantouch/{format.json,tactile_mapping.json,episodes/episode_NNNNNN.json}",
+  "total_size": "2.09 TB (HF tree sum 2,094,547,979,876 B: video 1.98 TB, parquet 109 GB, episodes_stats.jsonl 1.2 GB; ModelScope StorageSize 2,094,939,571,821 B)",
+  "per_episode": "median 106 MB (10th-90th percentile 39-206 MB, max 719 MB): parquet median 5.6 MB, the rest three HEVC videos",
+  "partial_fetch": "single files: HF resolve URLs or the ModelScope API (https://www.modelscope.cn/api/v1/datasets/chuqiaoLyu/Xspark-HumanTouch/repo?Revision=master&FilePath=<path>). HF returned HTTP 429 after the 88k-entry tree listing plus a few downloads; ModelScope did not. ffprobe/ffmpeg can seek in the videos over HTTP."
+ },
+ "channels": [
+  {
+   "name": "observation.tactile.raw_left, observation.tactile.raw_right",
+   "kind": "tactile_grid",
+   "shape": "(460,) float64 per hand",
+   "rate_hz": 60,
+   "unit": "raw ADC counts (Moxian manual: single-point ADC value), 0-247 in 24 checked episodes; non-integer where interpolated",
+   "frame": "23 x 20 grid; meta/humantouch/tactile_mapping.json gives row, column and region per cell for each hand (sensor_id = index into the array)",
+   "note": "360 mapped cells per hand: palm 15 x 16 (left columns 4-19, right columns 0-15, rows 0-14), fingers 6 x 4 each in rows 17-22 (vendor: 16 fingertip + 8 middle-segment points) (left: thumb, index, middle, ring, pinky from column 0; right mirrored); rows 15-16 and the 15 x 4 strip beside the palm are unassigned"
+  },
+  {
+   "name": "observation.tactile.valid",
+   "kind": "other",
+   "shape": "(2,) bool (left, right)",
+   "rate_hz": 60,
+   "unit": null,
+   "frame": null,
+   "note": "all true in the 24 checked episodes"
+  },
+  {
+   "name": "observation.tactile.patch_pressure",
+   "kind": "pressure_scalar",
+   "shape": "(12,) float64",
+   "rate_hz": 60,
+   "unit": "data_contract says newton; the project page says relative and uncalibrated (0-42.5 in checked episodes)",
+   "frame": "left_palm, left_thumb, left_index, left_middle, left_ring, left_pinky, right_palm, ..., right_pinky",
+   "note": "0 at rest; tracks the region sum of raw cells (r = 0.88-0.98 for 10 of 12 regions in X001 episode 1)"
+  },
+  {
+   "name": "observation.tactile.patch_pressure_valid",
+   "kind": "other",
+   "shape": "(1,) bool",
+   "rate_hz": 60,
+   "unit": null,
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "observation.human.hand_skeleton.{left,right}.position",
+   "kind": "hand_pose",
+   "shape": "(25, 3) float64 per hand",
+   "rate_hz": 60,
+   "unit": "m",
+   "frame": "world (data_contract coordinate_frame)",
+   "note": "MANUS joints: hand, thumb metacarpal..tip, index..pinky metacarpal..tip (joint_names in the episode JSON)"
+  },
+  {
+   "name": "observation.human.hand_skeleton.{left,right}.orientation",
+   "kind": "hand_pose",
+   "shape": "(25, 4) float64 per hand",
+   "rate_hz": 60,
+   "unit": "quaternion xyzw",
+   "frame": "world",
+   "note": null
+  },
+  {
+   "name": "observation.human.hand_skeleton.{left,right}.valid",
+   "kind": "other",
+   "shape": "(25,) bool per hand",
+   "rate_hz": 60,
+   "unit": null,
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "observation.human.pose.wrist_left, observation.human.pose.wrist_right",
+   "kind": "hand_pose",
+   "shape": "(7,) float64 per hand",
+   "rate_hz": 60,
+   "unit": "m + quaternion xyzw",
+   "frame": "world",
+   "note": "HTC VIVE wrist trackers; skeleton root sits ~9 cm from this point in X001 episode 1"
+  },
+  {
+   "name": "observation.human.pose.head",
+   "kind": "body_pose",
+   "shape": "(7,) float64",
+   "rate_hz": 60,
+   "unit": "m + quaternion xyzw",
+   "frame": "world",
+   "note": "head tracker; camera_from_head_tracker offset in the episode JSON"
+  },
+  {
+   "name": "observation.human.pose.valid",
+   "kind": "other",
+   "shape": "(3,) bool (head, wrist_left, wrist_right)",
+   "rate_hz": 60,
+   "unit": null,
+   "frame": null,
+   "note": null
+  },
+  {
+   "name": "observation.images.cam_head",
+   "kind": "camera",
+   "shape": "(T, 1080, 1920, 3)",
+   "rate_hz": 60,
+   "unit": "8-bit RGB (HEVC yuv420p)",
+   "frame": "head camera; intrinsics in the episode JSON",
+   "note": "frame count equals parquet rows (X003 episode 888: 970 and 970)"
+  },
+  {
+   "name": "observation.images.cam_left_wrist, observation.images.cam_right_wrist",
+   "kind": "camera",
+   "shape": "(T, 960, 1280, 3) each",
+   "rate_hz": 60,
+   "unit": "8-bit RGB (HEVC yuv420p)",
+   "frame": "wrist-mounted, no calibration released",
+   "note": null
+  },
+  {
+   "name": "observation.semantic.subtask_index",
+   "kind": "language",
+   "shape": "(1,) int32",
+   "rate_hz": 60,
+   "unit": null,
+   "frame": null,
+   "note": "index into the episode JSON's semantic_annotations (type, Chinese caption, start/end frame); 5-36 segments per episode in the checked ones"
+  },
+  {
+   "name": "observation.session_time_ns, timestamp, frame_index, episode_index, index, task_index, observation.source_valid",
+   "kind": "other",
+   "shape": "(1,) each",
+   "rate_hz": 60,
+   "unit": "ns / s / index",
+   "frame": null,
+   "note": "timestamp steps 1/60 s"
+  },
+  {
+   "name": "meta/humantouch/episodes/episode_NNNNNN.json",
+   "kind": "other",
+   "shape": "per episode",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "session (duration, quality_status 'accepted'), source mcap name, data_contract (units), semantic_annotations, head camera intrinsics and head-tracker extrinsic, joint_names"
+  }
+ ],
+ "episode_index": {
+  "where": "X00N/meta/episodes.jsonl (episode_index, length, task) + X00N/meta/humantouch/episodes/episode_NNNNNN.json",
+  "count": 17608,
+  "fields": [
+   "task",
+   "length (frames at 60 Hz)",
+   "subtask segments with Chinese captions",
+   "quality_status",
+   "source mcap"
+  ],
+  "tasks": [
+   "X001 将任意物体放入篮子 (Put Objects in Basket): 2,217 episodes, 17.74 h",
+   "X002 堆叠碗 (Stack Bowls): 3,836 episodes, 12.66 h",
+   "X003 插入试管 (Insert Test Tubes): 2,054 episodes, 11.06 h",
+   "X004 将水果放到盘子上 (Place Fruit on Plate): 1,853 episodes, 12.39 h",
+   "X005 将手机装入盒子 (Pack Phone in Box): 722 episodes, 10.8 h",
+   "X006 折叠衣物 (Fold Clothes): 1,362 episodes, 15.83 h",
+   "X007 将瓶子丢入垃圾桶 (Discard Bottles): 1,313 episodes, 10.86 h",
+   "X008 将螺母拧到螺栓上 (Screw Nut onto Bolt): 744 episodes, 12.8 h",
+   "X009 填装蛋托 (Fill Egg Carton): 1,897 episodes, 15.99 h",
+   "X010 填装笔筒 (Fill Pen Holder): 1,610 episodes, 12.62 h"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC 4.0 (ModelScope license field; the card defers to it) allows non-commercial redistribution with attribution. The HF repo is ungated and the ModelScope mirror is open; single parquets and videos download separately. Label the collection 'CC BY-NC 4.0'.",
+  "prefix": "hx_",
+  "tasks_total": 10,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "X002/10334",
+    "task": "X002 堆叠碗 (Stack Bowls)",
+    "scene": "white table, black backdrop",
+    "subject": null,
+    "duration_s": 17.9,
+    "window": null,
+    "why": "Stack, short task (median 11 s; this one 17.9 s). Region sums above rest + 50 for >= 1 s on 8 of 12 regions: both palms (13.8 / 14.1 s) and right thumb, index, middle, ring, pinky (1.8-3.5 s). All validity flags true; no unassigned cell above 0."
+   },
+   {
+    "id": "X003/888",
+    "task": "X003 插入试管 (Insert Test Tubes)",
+    "scene": "white table, black backdrop (test-tube rack)",
+    "subject": null,
+    "duration_s": 16.2,
+    "window": null,
+    "why": "Insert, two hands. 9 regions above rest + 50 for >= 1 s (left thumb 7.4 s, right index 9.6 s, right middle 9.2 s). Fewest all-zero cells of the checked episodes (left 6, right 30). Head and left-wrist videos 970 frames = 970 parquet rows."
+   },
+   {
+    "id": "X004/1350",
+    "task": "X004 将水果放到盘子上 (Place Fruit on Plate)",
+    "scene": "white table, black backdrop",
+    "subject": null,
+    "duration_s": 35.6,
+    "window": null,
+    "why": "Pick and place. 11 regions above rest + 50 for >= 1 s, left thumb 14.5 s, right thumb 8.3 s; 12 of 12 patch_pressure regions > 0.5 for >= 1 s."
+   },
+   {
+    "id": "X005/76",
+    "task": "X005 将手机装入盒子 (Pack Phone in Box)",
+    "scene": "white table, black backdrop",
+    "subject": null,
+    "duration_s": 54.5,
+    "window": null,
+    "why": "Long packing task (median 52 s). 11 regions above rest + 50 for >= 1 s (left ring 19.2 s, left middle 14.4 s, left thumb 10.9 s); left raw peak 199, the highest of the picks. X005/373 was skipped because its unassigned strip reads up to 67."
+   },
+   {
+    "id": "X006/1683",
+    "task": "X006 折叠衣物 (Fold Clothes)",
+    "scene": "white table, black backdrop (garment)",
+    "subject": null,
+    "duration_s": 38.7,
+    "window": null,
+    "why": "Deformable object, two hands, palm-heavy. 8 regions above rest + 50 for >= 1 s; both palms ~35 s, left index 6.8 s, right index 4.5 s; 12 of 12 patch_pressure regions > 0.5 for >= 1 s."
+   },
+   {
+    "id": "X007/7",
+    "task": "X007 将瓶子丢入垃圾桶 (Discard Bottles)",
+    "scene": "white table, black backdrop",
+    "subject": null,
+    "duration_s": 35.9,
+    "window": null,
+    "why": "Grasp and throw. 10 regions above rest + 50 for >= 1 s (right thumb 21.1 s, right middle 26.2 s, left middle 14.0 s). 104 / 111 mapped cells stay at 0, more than in the other picks; unassigned cells peak at 1."
+   },
+   {
+    "id": "X008/1688",
+    "task": "X008 将螺母拧到螺栓上 (Screw Nut onto Bolt)",
+    "scene": "white table, black backdrop",
+    "subject": null,
+    "duration_s": 52.9,
+    "window": null,
+    "why": "Twist, fine manipulation. All 12 regions above rest + 50 for >= 1 s (right middle 44.0 s, right ring 43.7 s, right thumb 31.3 s); right palm peak +3,504 over rest (region sum). The parquet is on ModelScope and HF (only episodes 194-228 are missing on HF). X008/295 was skipped because its unassigned strip reads up to 87."
+   },
+   {
+    "id": "X009/53",
+    "task": "X009 填装蛋托 (Fill Egg Carton)",
+    "scene": "white table, black backdrop",
+    "subject": null,
+    "duration_s": 24.4,
+    "window": null,
+    "why": "Repeated small-object placing. 11 regions above rest + 50 for >= 1 s (left thumb 14.1 s, right ring 10.8 s, right thumb 6.2 s)."
+   }
+  ],
+  "fetch_estimate": "~1.2 GB: parquets 64 MB (already in the scratch scan), plus head + both wrist videos 1,141 MB for the 8 episodes (from the HF tree: 69, 58, 152, 264, 163, 126, 271, 102 MB per episode including the parquet). Re-hosted media must be re-encoded from HEVC to H.264 at lower resolution. Episode JSON: full-rate touch for the longest pick is 3,270 frames x 720 mapped cells = 2.4M values, above the 2 MB budget, so the converter must decimate (e.g. 15 Hz, integers) or use patch_pressure for the plots.",
+  "rules_applied": "10 tasks > 6, so 8 were taken: stack (X002), insert (X003), pick and place (X004), packing (X005), deformable folding (X006), grasp and throw (X007), screwing (X008), small-object filling (X009). X001 (basket, another pick and place) and X010 (pen holder, another insertion) were left out. All tasks are two-handed and share one scene. One episode per task. Candidates: 3 random episodes per task (seed 0) of 15-55 s with a parquet on HF; fetched from ModelScope (24 parquets, 174 MB). Picked the one per task with every validity flag true, no reading in unassigned cells, and the most regions above rest + 50 (region sum, rest = 5th percentile) for >= 1 s. All picks are 16-55 s, so no window is cut. Subject: no operator ID is released.",
+  "checks": {
+   "contact": "Region sums (raw cells per region) above the episode's 5th percentile + 50 for >= 1 s: 8-12 of 12 regions in every pick. Palm regions read above rest for most of each episode, also before the first grasp (onset at 0.0 s in all picks); the project page attributes such signals to glove bending.",
+   "unassigned": "3 of 24 checked episodes (X003/379, X005/373, X008/295) read in cells the mapping marks unassigned, 60 cells per hand in the 15 x 4 strip beside the palm, up to 87.",
+   "video_sync": "X003/888: head and left-wrist mp4 970 frames at 60 fps = 970 parquet rows (ffprobe over HTTP)."
+  }
+ }
+}

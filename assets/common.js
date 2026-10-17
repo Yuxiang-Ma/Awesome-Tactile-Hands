@@ -2,6 +2,12 @@
 const REPO = 'https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands';
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+/* Chinese originals: x.zh = {name, title, maker, en: 'official' | 'translated', note}. English is shown first; the Chinese
+   original follows it, and a Translated tag marks English the catalog wrote because the publisher has none. */
+const zhTag = x => x.zh?.en === 'translated' ? '<span class="trn" title="No official English name; the English is the catalog\u2019s translation">Translated</span>' : '';
+const zhLine = x => x.zh?.name ? `<div class="zhn"><span lang="zh-CN">${esc(x.zh.name)}</span>${zhTag(x)}</div>` : '';
+const zhText = x => x.zh ? [x.zh.name, x.zh.title, x.zh.maker].filter(Boolean).join(' ') : '';
+const zhHead = (x, what) => x.zh ? `<p class="zhl"><span lang="zh-CN">${esc([x.zh.name, x.zh.title, x.zh.maker].filter(Boolean).join(' · '))}</span>${x.zh.en === 'translated' ? ` · ${what} translated from Chinese by the catalog` : ''}</p>` : '';
 const fmt = n => n == null ? '' : n >= 1e6 ? `${+(n / 1e6).toFixed(1)}M` : n >= 1e4 ? `${Math.round(n / 1e3)}K` : n.toLocaleString('en-US');
 
 /* ---------- coverage glyph: palm side of a right hand; filled regions carry taxels ---------- */

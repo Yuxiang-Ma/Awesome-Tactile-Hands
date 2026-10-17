@@ -1,0 +1,386 @@
+{
+ "id": "ftp1_sharpa",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "ftp1_sharpa",
+  "name": "Sharpa North-FTP-1",
+  "title": "FTP-1: A Generalist Foundation Tactile Policy Across Tactile Sensors for Contact-Rich Manipulation",
+  "authors": "Chengbo Yuan et al.",
+  "year": 2026,
+  "venue": "arXiv 2606.13102",
+  "summary": "Bimanual demonstrations on Sharpa North robots with two 22-DoF Sharpa Wave hands, released in FTP-1's zarr format with 224x224 fingertip deformation maps for the thumb, index and middle finger of each hand, a head and two wrist RGB cameras and joint states at ~30 Hz.",
+  "embodiment": "robot",
+  "hand": "Sharpa Wave (22 DoF) x 2 on Sharpa North",
+  "bimanual": true,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 3,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "<side>_tactile_data_fingers (T, 3, 224, 224) uint8 per hand: one single-channel deformation map per fingertip for FTP-1 functional areas 0, 1, 2 (thumb, index, middle tip); ring and little fingertips are not in the release. Maps are dark at rest with a bright contact blob. Rest level differs between sessions (24 in tube_season_POC22007_2026_02_09, 0 in fixSharpaHandModel_V2_season_POC22007_2026_03_08); contact peaks of ~200-230 were seen. No raw sensor image and no force/wrench values are released in this subset.",
+   "maker": "Sharpa",
+   "model": "Sharpa Wave fingertip tactile sensor (paper: 'Sharpa DTC'; product page: Dynamic Tactile Array)",
+   "principle": "optical",
+   "range": "0-30 N (maker spec, Wave W01)",
+   "calibrated": false
+  },
+  "modalities": [
+   "egocentric",
+   "wrist_rgb",
+   "language"
+  ],
+  "scale": {
+   "hours": 73.2,
+   "episodes": 9328,
+   "frames": 7902778,
+   "tasks": 12,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "Open-X-Tactile listing: 9,328 trajectories, 7,902,778 frames (~73 h at 30 Hz), 12 tasks; paper: ~4,000 long-horizon demonstrations; 1.86 TB of zarr stores recorded on two robots (POC22007, POC22018) between 2026-01-15 and 2026-03-21"
+  },
+  "availability": "public",
+  "access": "Hugging Face MJJJJ1064/FTP-1-Dataset (ungated) or ModelScope Eureka1064/FTP-1-Dataset, folder sharpa/: one 1.86 TB tar split into 20 parts holding one zarr store per recording session; there is no per-episode file, so an episode is fetched by indexing tar headers with range reads.",
+  "license": "MIT (ModelScope listing)",
+  "caveats": [
+   "The ModelScope mirror's metadata gives 'MIT License'; the Hugging Face card, paper, project page and Open-X-Tactile page state no license. At least three of the 12 tasks share recording sessions with SharpaDex v1.0, which Sharpa releases under CC BY-NC 4.0.",
+   "Recordings overlap with SharpaDex v1.0: 15 of 92 sampled sessions have the same robot and session timestamp as SharpaDex seasons (pick_place_pen = place_pens_in_holder, charger_into_the_socket = insert_plug_into_socket, Tidy_up_the_books = place_books_on_shelf). In session POC22007_2026_03_16_15_28_42 FTP-1 has 52 episodes and SharpaDex 37, and all 37 SharpaDex episode lengths appear in the same order in FTP-1. Sessions before 2026-03-10 (tube, gear, usb_charger, power_strip, drawOnBalloon, most SciExperiment_V2 and fixSharpaHandModel_V2) are not in SharpaDex.",
+   "Only 3 of the 5 Wave fingertip sensors per hand are released (thumb, index, middle), as 224x224 deformation maps; SharpaDex releases raw and deformation videos plus 6-axis values for all 10 fingertips of the shared sessions.",
+   "Processed for FTP-1 pretraining: images resized to 224x224, no commanded action array (FTP-1 derives targets from future states), language from GPT-4o rewrites (paper).",
+   "Units are not stated for any stream; joint values look like radians, poses like metres + rotation vectors (FTP-1 docs: (x, y, z, rx, ry, rz), z forward, x right, y down).",
+   "The middle-fingertip map of the right hand stayed at its rest value in all 29 chunks sampled from tube_season_POC22007_2026_02_09; whether that channel is dead in some sessions is not checked.",
+   "Counts disagree: the paper says ~4,000 demonstrations, Open-X-Tactile lists 9,328 trajectories and 12 tasks; 10 task names (11 spellings) were seen in 92 sampled sessions.",
+   "Sessions hold 50-100 episodes each (two checked); the tar must be range-read member by member, ~30,000 members per session.",
+   "Other FTP-1-Dataset archives are not covered here. MotionTrans (Franka arm + 6-DoF Inspire right hand) has no tactile sensor: its only touch-related signal is the hand's 6 actuator force readings (right_tactile_data_fingertorque (T, 4, 1) + thumbtorque (T, 1, 2), raw values about -31 to 860), which FTP-1 maps to finger-joint torque slots 16-20. The other 13 archives are grippers or UMI rigs (FreeTacMan, RDP, RDP_Bimanual, RH20TCfg5Franka, RH20TCfg6ATIAxia, RH20TCfg7Tactile, Unit, Unit_Bimanual, VLA_touch, ViTaMIn, VisuoTactile_D-WHEEL, VisuoTactile_QINGLOONG, exUMI). The card announces 18 archives and lists 15; the paper's glove and hand sources (EgoTac, OpenTouch, OmniSharingDB, OpenLETDex, HumanoidEveryday, DexUMI) are not in the release."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2606.13102",
+   "project": "https://ftp1-policy.github.io/",
+   "data": "https://huggingface.co/datasets/MJJJJ1064/FTP-1-Dataset",
+   "code": "https://github.com/michaelyuancb/ftp1-policy"
+  },
+  "image": "https://ftp1-policy.github.io/assets/figures/hardware_seen.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": "224x224",
+     "fps": 30,
+     "mount": "robot"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "224x224",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Sharpa Wave 22 hand joints per side",
+     "note": "<side>_hand_joints (T, 22) + FAAS slot ids; <side>_hand_pose (T, 33, 6) and <side>_hand_keypoints (T, 33, 3) per hand"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "Sharpa North 7-DoF arm joints + wrist pose",
+     "note": "<side>_wrist_pose (T, 6) xyz + rotation vector; camera_ego_pose (T, 6); torso/other 'motor_joints' (T, 7)"
+    }
+   ],
+   "other": [
+    "per-frame language instruction (sub_task_instruction)",
+    "head camera pose",
+    "33-point hand link poses and keypoints per hand"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2606.13102 (abstract page and HTML: Sec. 2.4, App. C Table 7, App. E Table 8, acknowledgements)",
+   "https://ftp1-policy.github.io/ (incl. assets/figures/hardware_seen.png)",
+   "https://huggingface.co/datasets/MJJJJ1064/FTP-1-Dataset (README.md, API metadata, full file tree)",
+   "https://www.modelscope.cn/api/v1/datasets/Eureka1064/FTP-1-Dataset (license field, README, sharpa/ file list)",
+   "https://open-x-tactile.github.io/ (site-data.js: Sharpa_FTP1 and MotionTrans rows)",
+   "https://github.com/michaelyuancb/ftp1-policy (README.md, README_zh.md, data_processing/README.md, data_processing/definition_tactile_torque_function_area.png, data_processing/parse_data_module/parse_data_motiontrans.py, src/openpi/dataset_zarr.py)",
+   "sharpa/sharpa.tar.part-0000 and part-0001: HTTP range reads of every array header (31 data arrays + meta/episode_ends) and the small arrays of tube_season_POC22007_2026_02_09_15_57_16_train.zarr, 30 right-hand tactile chunks, and episode_ends of pick_place_pen_season_POC22007_2026_03_16_15_28_42_train.zarr; 200 sampled 0.5 MB windows across all 20 parts for session names",
+   "MotionTrans/MotionTrans.tar: first 2 MB (one zarr's tactile arrays)",
+   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 (README.md, task/season tree, place_pens_in_holder/season_POC22007_2026_03_16_15_28_42_train/lerobot_v3.0/meta/info.json and meta/episodes parquet)",
+   "https://huggingface.co/datasets/zekaiwang/trex_dataset (meta/info.json)",
+   "https://www.sharpa.com/pages/wave, /pages/w01, /pages/d01, /pages/north-at-work",
+   "https://arxiv.org/abs/2509.17759 (MotionTrans paper, hardware section)"
+  ],
+  "unconfirmed": [
+   "hours=73.2 derived: Open-X-Tactile frame count 7,902,778 / 30 Hz. Measured time step in one session: median 0.0337 s (29.7 Hz) from data/timestamps (unix s). The paper states no rate for this subset.",
+   "episodes=9,328, frames and tasks=12 are the Open-X-Tactile listing, not counted from the files; the paper says ~4,000 demonstrations. Not reconciled.",
+   "Task names seen in 92 sessions sampled from 200 evenly spaced windows: SciExperiment_V2 (24 sessions), usb_charger (12), fixSharpaHandModel_V2 (12), tube (8), gear (8), pick_place_pen (7), Tidy_up_the_books (6), power_strip (5), charger_into_the_socket (4), drawOnBalloon_V2 (4; one 'drawOnBalloon_v2'); one store is named 'power_strip_ .zarr'. Robots POC22018 (51) and POC22007 (40); dates 2026-01-15 to 2026-03-21.",
+   "Overlap with SharpaDex v1.0 found by session ID: 15 sampled FTP-1 sessions (POC22007 2026-03-16 to 03-20, POC22018 2026-03-17) are SharpaDex seasons; SharpaDex's earliest season is 2026-03-10. Episode-level match checked for one session only (52 FTP-1 vs 37 SharpaDex episodes, all 37 lengths matching in order).",
+   "Functional areas 0, 1, 2 read as thumb, index and middle fingertip from FTP-1's area figure (definition_tactile_torque_function_area.png). The maps look like the deformation images that T-Rex releases for the same sensor (dark background, bright contact region); FTP-1 does not say whether they are deformation or processed raw images.",
+   "Principle optical: inferred from the T-Rex release of the same Sharpa Wave sensor (raw camera images of an elastomer); neither FTP-1 nor Sharpa's product page names the principle. Range 0-30 N and 240x240 are the Wave W01 product spec, not stated for this data.",
+   "Sharpa North: the paper names the robot 'Sharpa North' (Table 8) and its figure shows an upper-body humanoid with head and two arms; Sharpa's site uses 'North' in a customer story and sells the D01 robot with Wave hands and 7-DoF arms. Whether North and D01 are the same robot is not stated.",
+   "Teleoperation method is not stated in FTP-1; SharpaDex (sharing some sessions) describes human teleoperation.",
+   "motor_joints (T, 7) matches the first 7 columns of supplementary_joints (T, 9, last two 0); its meaning (torso or waist) is not documented. neck_joints (T, 2) has no stored chunks (fill value 0).",
+   "Camera model and mounting are not stated; 'camera_ego_rgb' is taken as the robot head camera from the hardware figure."
+  ],
+  "zh": {
+   "name": null,
+   "title": "FTP-1：面向接触丰富操作、跨触觉传感器的通用基础触觉策略",
+   "maker": null,
+   "en": "official",
+   "note": "Chinese title from the code repository's README_zh.md; the dataset card and paper are English. No Chinese name is given for the Sharpa North-FTP-1 subset."
+  }
+ },
+ "license": {
+  "name": "MIT License (ModelScope mirror metadata); not stated on the Hugging Face card",
+  "redistribution": "allowed",
+  "quote": "ModelScope API for Eureka1064/FTP-1-Dataset: \"License\": \"MIT License\". The Hugging Face card (README.md, no YAML header), paper, project page and Open-X-Tactile page contain no license text.",
+  "url": "https://www.modelscope.cn/datasets/Eureka1064/FTP-1-Dataset"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/MJJJJ1064/FTP-1-Dataset (sharpa/); mirror https://www.modelscope.cn/datasets/Eureka1064/FTP-1-Dataset",
+  "access": "open",
+  "format": "sharpa/sharpa.tar.part-0000..0019: one GNU tar (concatenate the parts) of zarr v2 stores named <task>_season_<robot>_<YYYY_MM_DD_hh_mm_ss>_train.zarr; each store holds meta/episode_ends and data/<key> arrays (blosc-zstd chunks; images 14 frames per chunk, other arrays ~700-2,300 rows per chunk)",
+  "total_size": "1.86 TB (1,857,996,503,040 B: 19 parts of 96.6 GB + 21.9 GB); whole FTP-1-Dataset 7.53 TB",
+  "per_episode": "~180 MB for a ~680-frame episode with all streams (session tube_season_POC22007_2026_02_09: 18.08 GB for 68,142 frames, ~265 KB per frame: each 224x224 camera ~86 KB, left tactile ~4.3 KB, right tactile ~2.8 KB per frame); tactile + joints alone ~10 MB",
+  "partial_fetch": "HTTP range reads on the tar parts: find a session's start offset (binary search on tar headers), walk its member headers (~30,000 per session, ~13 headers/s per connection), then fetch only the chunks of the chosen episode's frame range"
+ },
+ "channels": [
+  {
+   "name": "data/left_tactile_data_fingers, data/right_tactile_data_fingers",
+   "kind": "deformation_map",
+   "shape": "(T, 3, 224, 224) uint8",
+   "rate_hz": 30,
+   "unit": "not stated (uint8 intensity; rest 0 or 24 depending on session, contact up to ~230)",
+   "frame": "per fingertip sensor image; FTP-1 areas 0, 1, 2 = thumb, index, middle tip",
+   "note": "single-channel maps, dark background with a bright contact region; 14 frames per blosc chunk; ring and little fingertips absent"
+  },
+  {
+   "name": "data/<side>_tactile_area_fingers",
+   "kind": "other",
+   "shape": "(T, 3) int64",
+   "rate_hz": 30,
+   "unit": "FTP-1 functional-area id",
+   "frame": null,
+   "note": "constant [0, 1, 2] in the session checked"
+  },
+  {
+   "name": "data/<side>_tactile_sensor_fingers, data/<side>_tactile_type_fingers",
+   "kind": "other",
+   "shape": "(T,) <U10 / <U5",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "constant 'SharpaWave' and 'image'"
+  },
+  {
+   "name": "data/camera_ego_rgb",
+   "kind": "camera",
+   "shape": "(T, 224, 224, 3) uint8",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "robot head camera",
+   "note": "raw pixel arrays in zarr (blosc), not video; ~87 KB per frame compressed"
+  },
+  {
+   "name": "data/left_wrist_camera_rgb, data/right_wrist_camera_rgb",
+   "kind": "camera",
+   "shape": "(T, 224, 224, 3) uint8",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "wrist cameras",
+   "note": "raw pixel arrays in zarr (blosc)"
+  },
+  {
+   "name": "data/camera_ego_pose",
+   "kind": "other",
+   "shape": "(T, 6) float64",
+   "rate_hz": 30,
+   "unit": "not stated (xyz ~0.06/0.01/1.41, rotation vector)",
+   "frame": "world; FTP-1 convention z forward, x right, y down",
+   "note": "head camera pose"
+  },
+  {
+   "name": "data/left_wrist_pose, data/right_wrist_pose",
+   "kind": "hand_pose",
+   "shape": "(T, 6) float64",
+   "rate_hz": 30,
+   "unit": "not stated (xyz ~0.3/0.2/1.0, rotation vector)",
+   "frame": "world; FTP-1 convention",
+   "note": "wrist (end-effector) pose state"
+  },
+  {
+   "name": "data/left_arm_joints, data/right_arm_joints",
+   "kind": "joint_state",
+   "shape": "(T, 7) float32",
+   "rate_hz": 30,
+   "unit": "not stated (rad by range)",
+   "frame": "Sharpa North arm joints",
+   "note": "arm joint states"
+  },
+  {
+   "name": "data/left_hand_joints, data/right_hand_joints",
+   "kind": "joint_state",
+   "shape": "(T, 22) float32",
+   "rate_hz": 30,
+   "unit": "not stated (0-1.65, rad by range)",
+   "frame": "Sharpa Wave joints",
+   "note": null
+  },
+  {
+   "name": "data/left_hand_joints_idx, data/right_hand_joints_idx",
+   "kind": "other",
+   "shape": "(T, 22) int32",
+   "rate_hz": 30,
+   "unit": "FAAS slot id",
+   "frame": null,
+   "note": "constant [1, 2, 3, 26, 4, 7, 6, 8, 9, 12, 11, 13, 14, 17, 16, 18, 19, 25, 22, 21, 23, 24]"
+  },
+  {
+   "name": "data/left_hand_pose, data/right_hand_pose",
+   "kind": "hand_pose",
+   "shape": "(T, 33, 6) float64",
+   "rate_hz": 30,
+   "unit": "not stated (xyz ~0.3-0.5, 0.0-0.3, 1.0-1.15; rotation vector)",
+   "frame": "world",
+   "note": "33 hand link poses (robot hand, from joint states)"
+  },
+  {
+   "name": "data/left_hand_keypoints, data/right_hand_keypoints",
+   "kind": "hand_pose",
+   "shape": "(T, 33, 3) float64",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "world",
+   "note": "33 hand keypoints"
+  },
+  {
+   "name": "data/motor_joints, data/supplementary_joints",
+   "kind": "joint_state",
+   "shape": "(T, 7) / (T, 9) float32",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "not documented (torso/waist)",
+   "note": "supplementary_joints = motor_joints + 2 zero columns"
+  },
+  {
+   "name": "data/neck_joints",
+   "kind": "joint_state",
+   "shape": "(T, 2) float32",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "no chunks stored (all fill value 0) in the session checked"
+  },
+  {
+   "name": "data/timestamps, data/camera_ego_real_timestamp",
+   "kind": "other",
+   "shape": "(T,) float64",
+   "rate_hz": 30,
+   "unit": "unix s",
+   "frame": null,
+   "note": "median step 0.0337 s; gaps of several seconds between episodes"
+  },
+  {
+   "name": "data/sub_task_instruction",
+   "kind": "language",
+   "shape": "(T,) <U100",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": null,
+   "note": "e.g. 'pick up the tube, reverse it and put it back.'"
+  },
+  {
+   "name": "meta/episode_ends",
+   "kind": "other",
+   "shape": "(n_episodes,) int64",
+   "rate_hz": null,
+   "unit": "frame index (exclusive end)",
+   "frame": null,
+   "note": "100 episodes / 68,142 frames (tube session), 52 / 88,860 (pick_place_pen session)"
+  }
+ ],
+ "episode_index": {
+  "where": "meta/episode_ends inside each zarr store; task, robot and session time only in the store name; no global index file",
+  "count": 9328,
+  "fields": [
+   "task (store name)",
+   "robot id (store name)",
+   "session start time (store name)",
+   "episode length (episode_ends)",
+   "language instruction (per frame)"
+  ],
+  "note": "count is the Open-X-Tactile figure (not counted). Episode lengths: 477-956 frames (16-32 s) in the tube session, 1,156-2,608 frames (39-88 s) in the pick_place_pen session.",
+  "tasks": [
+   "SciExperiment_V2",
+   "usb_charger",
+   "fixSharpaHandModel_V2",
+   "tube",
+   "gear",
+   "pick_place_pen",
+   "Tidy_up_the_books",
+   "power_strip",
+   "charger_into_the_socket",
+   "drawOnBalloon_V2"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Open download (HF and ModelScope, ungated). The ModelScope listing gives MIT, which allows redistribution; label the collection 'MIT (ModelScope listing)'. Overlapping SharpaDex sessions are CC BY-NC 4.0, so prefer sessions dated before 2026-03-10, which are not in SharpaDex.",
+  "prefix": "fp_",
+  "tasks_total": 12,
+  "tasks_sampled": 7,
+  "episodes": [],
+  "candidate_sessions": [
+   {
+    "task": "drawOnBalloon_V2",
+    "session": "drawOnBalloon_V2_season_POC22007_2026_03_02_10_48_49_train.zarr",
+    "why": "paper's Draw Balloon task; deformable object"
+   },
+   {
+    "task": "fixSharpaHandModel_V2",
+    "session": "fixSharpaHandModel_V2_season_POC22007_2026_03_07_14_14_06_train.zarr",
+    "why": "paper's Fix Hand task; small parts"
+   },
+   {
+    "task": "tube",
+    "session": "tube_season_POC22007_2026_02_09_15_57_16_train.zarr",
+    "why": "already indexed (all member headers walked); 100 episodes of 16-32 s; thumb and index maps active"
+   },
+   {
+    "task": "usb_charger",
+    "session": "usb_charger_season_POC22007_2026_01_16_14_35_49_train.zarr",
+    "why": "insertion"
+   },
+   {
+    "task": "gear",
+    "session": "gear_season_POC22007_2026_01_15_14_38_59_train.zarr",
+    "why": "assembly"
+   },
+   {
+    "task": "power_strip",
+    "session": "power_strip_season_POC22007_2026_01_25_10_36_18_train.zarr",
+    "why": "plug/press"
+   },
+   {
+    "task": "SciExperiment_V2",
+    "session": "SciExperiment_V2_season_POC22007_2026_03_03_14_38_45_train.zarr",
+    "why": "largest task by sessions; lab tools"
+   }
+  ],
+  "fetch_estimate": "Indexing: ~30,000 tar headers per session (~15 MB of 512-byte reads; ~40 min per session on one connection, faster in parallel) for 7 sessions. Data: ~180 MB per ~680-frame episode with all three cameras and both tactile streams, ~10 MB without cameras; 7 episodes ~1.3 GB. About 1.5 GB in total.",
+  "rules_applied": "12 tasks (Open-X-Tactile) > 6, so 6-8 tasks; 7 picked across insertion, assembly, deformable, tool use and pick-place, all two-armed robot sessions. Episodes not picked: contact (>= 1 s above rest on the thumb or index map) and 10-60 s length must be checked from tactile chunks after indexing each session; sessions not shared with SharpaDex are preferred. Long sessions (e.g. pick_place_pen, 39-88 s episodes) need a contact window.",
+  "survey_download": "~280 MB fetched during the survey (tar header walks, 200 sampled 0.5 MB windows, chunk reads), above the ~200 MB guideline because the release is one tar without an index."
+ }
+}

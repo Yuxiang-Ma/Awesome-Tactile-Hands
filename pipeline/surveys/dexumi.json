@@ -1,0 +1,248 @@
+{
+ "id": "dexumi",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "dexumi",
+  "name": "DexUMI",
+  "title": "DexUMI: Using Human Hand as the Universal Manipulation Interface for Dexterous Manipulation",
+  "authors": "Mengda Xu et al.",
+  "year": 2025,
+  "venue": "CoRL 2025 (arXiv 2505.21864)",
+  "summary": "Human hand in a 3D-printed exoskeleton matched to the XHand or Inspire robot hand, with the XHand's own magnetic fingertip sensors (thumb, index, middle) or FSRs on the exoskeleton fingertips, joint encoders, an under-wrist OAK-1 W camera and iPhone ARKit wrist pose; only a 544 MB sample is public, with fingertip force in one 15.8 s XHand reference episode.",
+  "embodiment": "human",
+  "hand": "Human hand in a DexUMI exoskeleton matched to the ROBOTERA XHand (12 DoF) or the Inspire hand (6 DoF); the released sample is XHand only",
+  "bimanual": false,
+  "sensor": {
+   "type": "magnetic",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 3,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "XHand exoskeleton: XHand fingertip tactile modules on the thumb, index and middle exoskeleton fingertips, read over UART; the recording code keeps only each module's resultant force (fx int8, fy int8, fz uint8), so numeric_1/2/3 fsr_values are (T, 3) int64 per finger; the 120-point per-module force arrays are parsed out but not stored. Inspire exoskeleton (not in the sample): ZD10-100 force-sensitive resistors through a voltage divider. XHand data recorded at 30 fps (paper; 29.9 Hz measured for index and middle, 23.9 Hz for thumb in the sample).",
+   "maker": "ROBOTERA (XHand fingertip tactile modules); generic ZD10-100 FSR (Inspire variant)",
+   "model": "XHAND 1 fingertip tactile sensor mounted on the exoskeleton",
+   "principle": "magnetic",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "wrist_rgb",
+   "hand_pose",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": null,
+   "tasks": 4,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab",
+    "kitchen"
+   ],
+   "text": "Paper: 310 cube-picking, 175 egg-carton, 400 tea-picking (stated 'for both Inspire Hand and XHand') and 370 + 100 kitchen trajectories over 4 tasks. Public sample: 3 XHand-exoskeleton episodes (13.5 s and 12.2 s without touch, plus a 15.8 s reference episode with touch) and 2 robot replays"
+  },
+  "availability": "partial",
+  "access": "Sample zip (544 MB, real.stanford.edu/dexumi/sample_data.zip, linked from the GitHub README) with two XHand-exoskeleton episodes, their XHand replays and one reference episode; the full dataset is not released, and the README's 'All data collected by us' link goes to the UMI dataset list, which has no DexUMI entry. Hardware CAD, firmware and code are on GitHub (MIT).",
+  "license": "not stated (code: MIT)",
+  "caveats": [
+   "Touch is recorded in one 15.8 s reference episode only; the two demonstration episodes in the sample have no tactile streams (numeric_0 joint encoders only) and their replays have none either.",
+   "The XHand fingertip modules have 120 sensing points each, but the recorder stores one resultant 3-axis force per fingertip (int8 fx, fy; uint8 fz), 3 fingertips per hand; the unit is not stated.",
+   "The sensors sit on the human-worn exoskeleton, not on a robot; robot-side data in the sample are replays (hand motor values and robot-hand video) without touch.",
+   "Paper: the XHand sensors drift after high pressure, and the Inspire FSRs are sensitive to how they are attached.",
+   "The demonstration data of the paper (~1,355+ trajectories over 4 tasks on two hands) are not public.",
+   "Data come as zarr v2 groups (blosc-lz4) and mp4 files inside a single zip; mp4 entries are deflate-compressed with the moov atom at the end, so a video cannot be probed without fetching its whole entry."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2505.21864",
+   "project": "https://dex-umi.github.io/",
+   "code": "https://github.com/real-stanford/DexUMI",
+   "data": "https://real.stanford.edu/dexumi/sample_data.zip"
+  },
+  "image": "https://dex-umi.github.io/static/images/teaser.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "wrist",
+     "count": 1,
+     "model": "Luxonis OAK-1 W (150 deg DFoV)",
+     "type": "fisheye",
+     "resolution": null,
+     "fps": 30,
+     "mount": "wrist"
+    },
+    {
+     "role": "wrist",
+     "count": 1,
+     "model": "iPhone (ARKit), rigidly mounted on the exoskeleton",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "exoskeleton",
+     "system": "Alps RDC506018A resistive rotary encoders at every actuated exoskeleton joint",
+     "note": "numeric_0 joint_angles (T, 12) and raw_voltage (T, 14) for the XHand exoskeleton"
+    },
+    {
+     "target": "wrist",
+     "method": "vision_estimate",
+     "system": "iPhone ARKit 6-DoF pose",
+     "note": "camera_1 pose / pose_interp + intrinsics; iPhone video in camera_1.mp4"
+    },
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "XHand motor values from replaying the exoskeleton actions on the robot hand",
+     "note": "software_go_through_replay/*/hand_motor_value; robot-hand video in dex_camera_0.mp4"
+    }
+   ],
+   "other": [
+    "valid_indices and capture/receive timestamps per stream",
+    "reference episode + finger/thumb point pickles for inpainting (xhand_reference_5_14)",
+    "UR5 arm used only at deployment"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2505.21864",
+   "https://arxiv.org/html/2505.21864v2 (Sec. 3, 5, App. D.2, E.1)",
+   "https://dex-umi.github.io/ (and tutorial/hardware.html)",
+   "https://github.com/real-stanford/DexUMI (README.md, repository license via GitHub API, real_script/data_collection/record_exoskeleton.py, dexumi/encoder/xhand_tactile.py, file tree)",
+   "https://real.stanford.edu/dexumi/sample_data.zip (HEAD, zip central directory via HTTP range, and these entries: reference_episode numeric_0-3 arrays and .zarray files, software_go_through/episode_0 numeric_0 and camera_0 timestamps, constants.py, first 2 MB of two mp4 entries)",
+   "https://umi-data.github.io/ (dataset list; no DexUMI entry)",
+   "https://arxiv.org/html/2606.13102 (FTP-1 data-source table)"
+  ],
+  "unconfirmed": [
+   "numeric_1/2/3 = thumb, index, middle: from the order of fsr_name ['xhand_thumbs', 'xhand_index', 'xhand_middle'] in record_exoskeleton.py, appended after the encoder (numeric_0); the zarr groups carry no names.",
+   "Contact in the reference episode: resultant-force norm above 10 for 5.2 s (thumb, peak 98), 4.9 s (index, peak 58) and 7.3 s (middle, peak 143); readings start at 0.",
+   "Sample episode lengths from capture_time: reference 15.8 s (474 encoder rows), software_go_through/episode_0 13.5 s (403 rows); camera_0 of episode_0 has 625 frames over 13.9 s (~45 fps), while the paper says XHand data were recorded at 30 fps. software_go_through/episode_1: 365 encoder rows over 12.2 s.",
+   "Camera resolutions were not checked (the mp4 moov atoms are at the end of deflated zip entries).",
+   "Total paper trajectories: 310 + 175 + 400 + 370 + 100 = 1,355 if the 400 tea-picking trajectories are shared by both hands; the wording 'for both Inspire Hand and XHand' could also mean 400 per hand.",
+   "scene_types from the task list (tabletop cube, egg carton, tea picking; a kitchen task with knob, pan and salt); scene count not stated.",
+   "Data license: the zip has no license file; the MIT license is the GitHub repository's and is not stated to cover the data."
+  ],
+  "used_by": [
+   {
+    "name": "FTP-1 (arXiv 2606.13102)",
+    "url": "https://arxiv.org/abs/2606.13102",
+    "note": "trains its tactile policy partly on DexUMI Inspire and XHand data ('DexumiInspire', 'DexumiXHand', 5.4% of the mixture, sensor type listed as state); the Inspire data are not in the public sample"
+   }
+  ]
+ },
+ "license": {
+  "name": "not stated (code: MIT)",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://github.com/real-stanford/DexUMI",
+  "note": "The README links the sample zip without terms; the zip has no license file. The repository is MIT (GitHub API), the paper page carries the arXiv perpetual non-exclusive license, and the project page is CC BY-SA 4.0 as a website template notice; none of these is stated to cover the data."
+ },
+ "download": {
+  "where": "https://real.stanford.edu/dexumi/sample_data.zip",
+  "access": "open",
+  "format": "One zip (233 entries): sample_data/software_go_through/episode_{0,1}/ (zarr v2 groups camera_0, camera_1, numeric_0 + camera_0.mp4, camera_1.mp4), sample_data/software_go_through_replay/episode_{0,1}/ (dex_camera_0.mp4, exo_camera_0.mp4, hand_motor_value, joint_angles_interp, pose_interp, valid_indices), sample_data/xhand_reference_5_14/ (reference_episode with numeric_0-3 + videos, point pickles, constants.py); arrays blosc-lz4",
+  "total_size": "544,417,783 B (zip; Last-Modified 2025-05-29)",
+  "per_episode": "reference episode: camera_0.mp4 93.6 MB + camera_1.mp4 32.9 MB + arrays < 0.3 MB; demonstration episode: 74-82 MB + 21-24 MB of video",
+  "partial_fetch": "HTTP range requests work (Accept-Ranges: bytes); read the central directory from the last 32 KB and fetch single entries by their local-header offsets (deflate, method 8)"
+ },
+ "channels": [
+  {
+   "name": "reference_episode/numeric_1|2|3/fsr_values",
+   "kind": "force_vector",
+   "shape": "(T, 3) int64 per finger (thumb, index, middle)",
+   "rate_hz": 30,
+   "unit": "not stated (XHand resultant fx, fy int8 and fz uint8 counts)",
+   "frame": "XHand fingertip module axes on the exoskeleton",
+   "note": "T = 379 (thumb, 23.9 Hz), 474, 474; plus fsr_values_interp (235, 3) float64 resampled to the video/policy timeline and capture/receive_time"
+  },
+  {
+   "name": "numeric_0/joint_angles, joint_angles_interp, raw_voltage",
+   "kind": "joint_state",
+   "shape": "(T, 12), (T', 12), (T, 14)",
+   "rate_hz": 30,
+   "unit": "joint angles (unit not stated), raw encoder voltage",
+   "frame": "exoskeleton joints",
+   "note": "Alps resistive encoders; all three sample episodes"
+  },
+  {
+   "name": "camera_0.mp4 + camera_0/{capture_time, receive_time, valid_indices}",
+   "kind": "camera",
+   "shape": "video",
+   "rate_hz": 45,
+   "unit": "RGB",
+   "frame": "OAK-1 W under the wrist, fixed relative to the exoskeleton",
+   "note": "625 frames / 13.9 s in software_go_through/episode_0; resolution not checked"
+  },
+  {
+   "name": "camera_1.mp4 + camera_1/{pose, pose_interp, intrinsics, capture_time, receive_time}",
+   "kind": "camera",
+   "shape": "video + pose (T, 4, 4) float64 per frame (625 in episode_0) + intrinsics",
+   "rate_hz": null,
+   "unit": "RGB; pose unit not stated",
+   "frame": "iPhone ARKit world frame",
+   "note": "wrist 6-DoF pose source"
+  },
+  {
+   "name": "replay/hand_motor_value",
+   "kind": "action",
+   "shape": "(T, 12) float64 (202 rows in episode_0)",
+   "rate_hz": null,
+   "unit": "XHand motor units (constants.py XHAND_HAND_MOTOR_SCALE_FACTOR = 3)",
+   "frame": "XHand joints",
+   "note": "robot replay of the exoskeleton actions; no touch"
+  },
+  {
+   "name": "replay/dex_camera_0.mp4, exo_camera_0.mp4",
+   "kind": "camera",
+   "shape": "video",
+   "rate_hz": null,
+   "unit": "RGB",
+   "frame": "same under-wrist camera pose on robot and exoskeleton",
+   "note": "robot-hand replay video and the original exoskeleton video, used for inpainting"
+  }
+ ],
+ "episode_index": {
+  "where": "zip directory listing (no index file)",
+  "count": 3,
+  "fields": [
+   "folder name"
+  ],
+  "tasks": [
+   "software_go_through (pipeline test recording, task not described)",
+   "reference_episode (inpainting reference)"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "The sample zip downloads without login and no text restricts redistribution (no data license; code MIT), so re-host and label the collection 'License not stated'. Only the reference episode carries touch.",
+  "prefix": "du_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "sample_data/xhand_reference_5_14/reference_episode",
+    "task": "XHand exoskeleton reference recording (task not described)",
+    "scene": "tabletop",
+    "subject": null,
+    "duration_s": 15.8,
+    "window": null,
+    "why": "The only released episode with touch: thumb, index and middle resultant forces all present and non-zero, norm above 10 for 4.9-7.3 s per finger. Also has encoder joints and both videos."
+   }
+  ],
+  "fetch_estimate": "~127 MB by range-reading three entries of the zip: reference_episode/camera_0.mp4 (93.6 MB deflated), camera_1.mp4 (32.9 MB) and the numeric/camera zarr arrays (< 0.3 MB, already fetched to the scratchpad). Re-hosted media: one 15.8 s clip re-encoded to H.264, a few MB. Episode JSON: 474 x 9 values, tiny.",
+  "rules_applied": "Only one released episode has tactile channels, so the 3-episode minimum cannot be met; the two software_go_through episodes fail the 'every tactile channel present' rule (no tactile streams). Length 15.8 s, within 10-60 s, no window.",
+  "deviations": [
+   "1 episode instead of at least 3: the other two sample episodes have no tactile data."
+  ]
+ }
+}

@@ -55,7 +55,7 @@ function writeHash() {
 }
 
 /* ---------- filtering ---------- */
-const textOf = h => [h.name, h.maker, h.kind, HL.region[h.region], h.principle, ...(h.specs || []), ...h.datasets.map(x => DS[x.id]?.name)].join(' ').toLowerCase();
+const textOf = h => [h.name, zhText(h), h.maker, h.kind, HL.region[h.region], h.principle, ...(h.specs || []), ...h.datasets.map(x => DS[x.id]?.name)].join(' ').toLowerCase();
 function passes(h, skip) {
   if (S.q && !S.q.toLowerCase().split(/\s+/).every(w => textOf(h).includes(w))) return false;
   for (const F of FACETS) {
@@ -109,7 +109,7 @@ function cardGrid(list) {
     <div class="thumb">${photo(h)}${avBadge(h)}</div>
     <div class="body">
       <div class="ttl"><h3>${esc(h.name)}</h3><span>${h.year ?? ''}</span></div>
-      <div class="src">${metaLine(h)}</div>
+      ${zhLine(h)}<div class="src">${metaLine(h)}</div>
       <div class="spec">${glyph(h.coverage || [], covText(h.coverage) || 'coverage not stated')}<div><b>${esc(density(h))}</b><span>${esc(specLine(h) || HL.kind[h.kind])}</span></div></div>
       ${(h.specs || []).length ? `<ul class="specs">${h.specs.slice(0, 4).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
       ${used(h)}
@@ -123,7 +123,7 @@ function cards(list) {
 }
 function table(list) {
   const row = h => `<tr data-id="${h.id}">
-    <td><b>${esc(h.name)}</b><span class="sub">${esc(h.maker)}</span></td>
+    <td><b>${esc(h.name)}</b>${h.zh?.name ? `<span class="sub" lang="zh-CN">${esc(h.zh.name)}</span>` : ''}<span class="sub">${esc(h.maker)}</span></td>
     <td>${HL.kind[h.kind]}<span class="sub">${avBadge(h, 'av')}</span></td>
     <td>${esc(HL.region[h.region] || '–')}<span class="sub">${h.year ?? ''}</span></td>
     <td>${esc(HL.principle[h.principle || 'unspecified'])}</td>
@@ -209,7 +209,7 @@ function openDetail(id) {
   const dsl = h.datasets.filter(x => DS[x.id]).map(x => {const d = DS[x.id];
     return `<a href="./#d=${esc(x.id)}">${d.thumb ? `<img src="${esc(d.thumb)}" alt="">` : ''}<div><b>${esc(d.name)}</b><span>${esc(x.role)} · ${d.year}${d.viewer ? ' · samples in viewer' : ''}</span></div></a>`}).join('');
   $('dlg').innerHTML = `<div class="dl"><header>${glyph(h.coverage || [], covText(h.coverage) || h.name).replace('class="glyph"', 'class="glyph" style="width:44px;flex:none"')}
-    <div><h2 id="dlgTitle">${esc(h.name)}</h2><p>${esc(HL.kind[h.kind])} · ${metaLine(h)}</p></div><button class="x" aria-label="Close">×</button></header>
+    <div><h2 id="dlgTitle">${esc(h.name)}</h2><p>${esc(HL.kind[h.kind])} · ${metaLine(h)}</p>${zhHead(h, 'Name')}</div><button class="x" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
     <div class="scroll">${h.thumb ? `<img class="hero hw" src="${esc(h.thumb)}" alt="${esc(h.name)}">` : ''}
     <h4>Touch sensing</h4>${kvs([['Availability', `${avBadge(h, 'av')} · ${esc(AV_TEXT[h.availability])}`], ['Principle', esc(HL.principle[h.principle || 'unspecified'])],
       ['Density', esc(density(h, true))], ['Coverage', esc(covText(h.coverage))], ['Rate', h.rate_hz ? `${h.rate_hz} Hz` : ''], ['Joints', h.dof ? `${h.dof} DoF` : ''],

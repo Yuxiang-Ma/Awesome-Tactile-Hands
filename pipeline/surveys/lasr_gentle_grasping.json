@@ -1,0 +1,279 @@
+{
+ "id": "lasr_gentle_grasping",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "lasr_gentle_grasping",
+  "name": "Gentle Grasping (LASR)",
+  "title": "Learning Gentle Grasping Using Vision, Sound, and Touch",
+  "authors": "Ken Nakahara et al.",
+  "year": 2025,
+  "venue": "IROS 2025 (arXiv 2503.07926)",
+  "summary": "Self-supervised grasp-regrasp-lift trials of one squeaking toy with an Allegro Hand v4 on an xArm7, two DIGIT fingertips (thumb, middle) and a RealSense D435i; 1,500 trials with stability and sound-based gentleness labels, stored as 5 snapshots per trial.",
+  "embodiment": "robot",
+  "hand": "Allegro Hand v4.0 (16 DoF) on xArm7; thumb and middle finger used",
+  "bimanual": false,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 2,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "note": "DIGIT images 240x320 RGB PNG from the thumb and middle fingertips, one frame at each of 5 moments per trial (t0 before grasp, t1 initial grasp, t12 after release, t2 regrasp, t3 lift). The paper gives 60 Hz for the DIGIT stream, but only these snapshots are released. Index and ring fingers stay fixed and no images from them are released.",
+   "maker": "Meta (DIGIT, open hardware)",
+   "model": "DIGIT",
+   "principle": "optical",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "depth",
+   "audio",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 25,
+   "episodes": 1500,
+   "frames": null,
+   "tasks": 1,
+   "objects": 1,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab tabletop"
+   ],
+   "text": "1,500 trials (about 1 min each, 25 h of collection) on one sound-emitting toy; labels: 749 stable, 973 gentle (paper Table I)"
+  },
+  "availability": "public",
+  "access": "OPARA (TU Dresden), DOI 10.25532/OPARA-787, no login: one 4.78 GB zip (data_gentle_grasping.zip) with 1,500 trial folders and view/process scripts; HTTP range requests work, so single files can be fetched.",
+  "license": "CC BY-NC-ND 4.0",
+  "caveats": [
+   "No time series: each trial stores 5 still frames per camera (RGB, depth heat map, thumb and middle DIGIT) plus one 3 s stereo audio clip of the regrasp; the 25 h of collection are not released as video.",
+   "Only two DIGIT sensors (thumb, middle) are released; index and ring do not move in the task.",
+   "Depth is an 8-bit RGB heat-map PNG (camera_depth_*.png), not metric depth.",
+   "One object (a toy that squeaks under strong force); gentleness is labelled from microphone loudness during the 3 s regrasp, stability from fingertip displacement after the lift, with some labels corrected by hand (labels_supervised.npy).",
+   "Units are not written in the files: hand joints read in radians by range, arm joints in degrees, the regrasp shift in mm and degrees (dx, dy, dz, dyaw)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2503.07926",
+   "project": "https://lasr.org/research/gentle-grasping",
+   "data": "https://doi.org/10.25532/OPARA-787"
+  },
+  "image": "https://lasr.org/assets/static/overview.reownU8O.svg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Intel RealSense D435i (held by a second xArm7 at a fixed pose)",
+     "type": "RGB-D",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Allegro Hand 16 joint angles",
+     "note": "observed before and after the regrasp (hand_obs_before/after.npy) and commanded poses action0/action1_hand.npy; snapshots, not streams"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "xArm7 7 joint angles (action0/action1_arm.npy) + regrasp end-effector shift (dx, dy, dz, dyaw)",
+     "note": null
+    }
+   ],
+   "other": [
+    "commodity microphone on the side of the hand, 3 s stereo 44.1 kHz WAV per trial",
+    "binary stability and gentleness labels (self-supervised and hand-corrected)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/html/2503.07926 (v2)",
+   "https://arxiv.org/abs/2503.07926 (comments: accepted by IROS 2025)",
+   "https://lasr.org/research/gentle-grasping",
+   "https://opara.zih.tu-dresden.de/items/f7fab7cd-9c40-4e59-9f92-7c5a9cb11f18 (DSpace REST: item metadata, bundles, bitstream list)",
+   "OPARA bitstream README.md; data_gentle_grasping.zip central directory (46,506 entries) via HTTP range requests",
+   "Zip entries of trial data_2024_07_13_115223 (all 30 files), view_data.py, process_data.py, and labels_supervised.npy of 15 trials spread over the release"
+  ],
+  "unconfirmed": [
+   "hours=25 is the paper's collection time ('1,500 grasping samples over 25 h, about 1 min per trial'); the released content per trial is 5 snapshots and 3 s of audio.",
+   "Label counts (749 stable / 751 failed, 973 gentle / 527 non-gentle) are from paper Table I; not recounted from the 1,500 labels files.",
+   "scenes=1: one 200 x 400 mm tabletop workspace; not stated as a count.",
+   "Units by range: hand_obs and action*_hand values -0.5 to 1.6 (radians), action*_arm -66 to 118 (degrees), action1_regrasp_pose (-0.08, -0.66, 7.4, -11.24) consistent with mm and degrees.",
+   "The DIGIT PNGs are 240 wide x 320 high; the paper writes 240x320 at 60 Hz.",
+   "15 recording days, 2024-07-13 to 2024-08-21, from the trial folder names."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC-ND 4.0",
+  "redistribution": "allowed",
+  "quote": "dc.rights = Attribution-NonCommercial-NoDerivatives 4.0 International (http://creativecommons.org/licenses/by-nc-nd/4.0/). Under that license: 'reproduce and Share the Licensed Material, in whole or in part, for NonCommercial purposes only' and 'produce and reproduce, but not Share, Adapted Material'.",
+  "url": "https://opara.zih.tu-dresden.de/items/f7fab7cd-9c40-4e59-9f92-7c5a9cb11f18"
+ },
+ "download": {
+  "where": "https://doi.org/10.25532/OPARA-787",
+  "access": "open",
+  "format": "one deflate zip: data_gentle_grasping/collected_data/data_<YYYY_MM_DD_hhmmss>/ with 30 files per trial (PNG images, .npy arrays, WAV) + view_data.py, process_data.py, requirements.txt, README.md",
+  "total_size": "4.78 GB (4,784,963,159 B zip)",
+  "per_episode": "~3.2 MB per trial",
+  "partial_fetch": "HTTP range requests on https://opara.zih.tu-dresden.de/server/api/core/bitstreams/590f6dba-5f90-46b6-aca9-057a6651af7d/content: central directory, then single entries (done for trial data_2024_07_13_115223)"
+ },
+ "channels": [
+  {
+   "name": "touch_thumb_{0,1,12,2,3}.png, touch_middle_{0,1,12,2,3}.png",
+   "kind": "tactile_image",
+   "shape": "5 x (320, 240, 3) per finger",
+   "rate_hz": null,
+   "unit": "8-bit RGB",
+   "frame": "per DIGIT sensor (thumb, middle)",
+   "note": "one frame per phase: t0 before grasp, t1 initial grasp, t12 after releasing the initial grasp, t2 regrasp, t3 lift"
+  },
+  {
+   "name": "camera_rgb_{0,1,12,2,3}.png",
+   "kind": "camera",
+   "shape": "5 x (480, 640, 3)",
+   "rate_hz": null,
+   "unit": "8-bit RGB",
+   "frame": "RealSense D435i, fixed side view",
+   "note": "same 5 moments"
+  },
+  {
+   "name": "camera_depth_{0,1,12,2,3}.png",
+   "kind": "depth",
+   "shape": "5 x (480, 640, 3)",
+   "rate_hz": null,
+   "unit": "8-bit colour-mapped heat map (not metric)",
+   "frame": "RealSense D435i",
+   "note": "README: 'Depth Heat Maps'"
+  },
+  {
+   "name": "record_s2.wav",
+   "kind": "audio",
+   "shape": "stereo 16-bit, 3.0 s",
+   "rate_hz": 44100,
+   "unit": "PCM",
+   "frame": "microphone on the side of the hand",
+   "note": "recorded during the regrasp; the gentleness label thresholds its loudness"
+  },
+  {
+   "name": "action0_hand.npy, action1_hand.npy",
+   "kind": "action",
+   "shape": "(16,) float64",
+   "rate_hz": null,
+   "unit": "not stated (rad by range)",
+   "frame": "Allegro joints",
+   "note": "initial grasp pose and sampled regrasp pose"
+  },
+  {
+   "name": "action0_arm.npy, action1_arm.npy",
+   "kind": "action",
+   "shape": "(7,) float64",
+   "rate_hz": null,
+   "unit": "not stated (deg by range)",
+   "frame": "xArm7 joints",
+   "note": null
+  },
+  {
+   "name": "action1_regrasp_pose.npy",
+   "kind": "action",
+   "shape": "(4,) float64 dx, dy, dz, dyaw",
+   "rate_hz": null,
+   "unit": "not stated (mm, deg by range)",
+   "frame": "end effector, relative",
+   "note": "sampled from [-10, 10] mm and [-15, 15] deg (paper)"
+  },
+  {
+   "name": "hand_obs_before.npy, hand_obs_after.npy",
+   "kind": "joint_state",
+   "shape": "(16,) float32",
+   "rate_hz": null,
+   "unit": "not stated (rad by range)",
+   "frame": "Allegro joints",
+   "note": "observed before and after the regrasp"
+  },
+  {
+   "name": "labels.npy, labels_supervised.npy",
+   "kind": "other",
+   "shape": "(2,) int64 [stability, gentleness]",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "self-supervised and hand-corrected; process_data.py uses labels_supervised.npy"
+  }
+ ],
+ "episode_index": {
+  "where": "folder names in the zip central directory (data_<date>_<time>); no index file",
+  "count": 1500,
+  "fields": [
+   "timestamp (folder name)",
+   "labels [stability, gentleness]"
+  ],
+  "tasks": [
+   "grasp, regrasp and lift a sound-emitting toy"
+  ],
+  "scenes": [
+   "lab tabletop, 200 x 400 mm workspace"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC-ND 4.0 (OPARA dc.rights) allows sharing the material in whole or in part for non-commercial use; it does not forbid redistributing unmodified samples, and format conversion is a technical modification under Sec. 2(a)(4). Open download with range requests. Label the collection 'CC BY-NC-ND 4.0'.",
+  "prefix": "gg_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "data_2024_07_13_114803",
+    "task": "grasp-regrasp-lift",
+    "scene": "lab tabletop",
+    "subject": null,
+    "duration_s": null,
+    "window": null,
+    "labels_supervised": [
+     1,
+     1
+    ],
+    "why": "stable and gentle"
+   },
+   {
+    "id": "data_2024_07_15_174626",
+    "task": "grasp-regrasp-lift",
+    "scene": "lab tabletop",
+    "subject": null,
+    "duration_s": null,
+    "window": null,
+    "labels_supervised": [
+     1,
+     0
+    ],
+    "why": "stable but non-gentle (toy squeaked during the regrasp)"
+   },
+   {
+    "id": "data_2024_07_17_154543",
+    "task": "grasp-regrasp-lift",
+    "scene": "lab tabletop",
+    "subject": null,
+    "duration_s": null,
+    "window": null,
+    "labels_supervised": [
+     0,
+     1
+    ],
+    "why": "failed lift, gentle"
+   }
+  ],
+  "fetch_estimate": "~10 MB (3 trials x ~3.2 MB)",
+  "rules_applied": "1 task (<= 6), taken. With 3 tasks or fewer: 2-3 episodes per task, at least 3 in total; one object only, so the three trials differ by outcome (labels read from labels_supervised.npy of 15 trials spread over the release). Contact still to be checked on the t1/t2 DIGIT frames against t0.",
+  "deviations": [
+   "The 10-60 s length rule cannot be met: a trial holds 5 snapshots per camera and 3 s of audio, with no continuous stream. The viewer would show the 5 phases as steps."
+  ]
+ }
+}

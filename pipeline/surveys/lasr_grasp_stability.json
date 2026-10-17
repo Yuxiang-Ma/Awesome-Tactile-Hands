@@ -1,0 +1,372 @@
+{
+ "id": "lasr_grasp_stability",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "lasr_grasp_stability",
+  "name": "Dexterous Grasp Stability",
+  "title": "Temporal Visuo-Tactile Learning for Dexterous Grasp Stability",
+  "authors": "Ken Nakahara et al.",
+  "year": 2026,
+  "venue": "arXiv 2610.10283",
+  "summary": "Automated grasp-and-lift trials with a 16-DoF Tilburg Hand on an xArm7 carrying four Digit 360 fingertips (tactile images, stereo audio, IMU, pressure), filmed by a side RealSense D435i; 10,000 trials over 200 objects with manual stability labels.",
+  "embodiment": "robot",
+  "hand": "Tilburg Hand (16 DoF, 4 fingers, right) on xArm7",
+  "bimanual": false,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 4,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "One Digit 360 per fingertip (thumb, index, middle, ring). Per sensor: 690x690 JPEG tactile frames (30 Hz nominal, ~24.6 Hz in the checked trial), stereo 48 kHz WAV, pressure + temperature rows (Pa and degC by range, 5-15 rows/s), pressure_ap rows of 2 x 25 uint16 stored as hex strings (26-65 rows/s), raw IMU acc/gyro/mag/aux + quaternion (~11 Hz; absent for thumb and index in the checked trial). All streams carry host perf_time stamps on one clock.",
+   "maker": "Meta",
+   "model": "Digit 360",
+   "principle": "optical",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "depth",
+   "audio",
+   "imu",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 33.3,
+   "episodes": 10000,
+   "frames": null,
+   "tasks": 1,
+   "objects": 200,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab tabletop"
+   ],
+   "text": "10,000 grasp-and-lift trials of ~12 s (~33 h) over 200 objects (14-123 trials each, median 42); 4,712 stable by manual label"
+  },
+  "availability": "public",
+  "access": "OPARA (TU Dresden), DOI 10.25532/OPARA-1588, no login: 20 zip archives of 10 objects each (40-81 GB, 1.08 TB in total) plus toolkit.zip and object images; the server honours HTTP range requests, so single trials can be fetched from inside a zip.",
+  "license": "CC BY-NC-ND 4.0",
+  "caveats": [
+   "The release is 1.08 TB (OPARA size 1,078,004,133,457 B; README: about 1.2 TB), one HDF5 file of 100-137 MB per trial.",
+   "Recorded rates are below the nominal 30 Hz: in apple/20260415_112100 the tactile cameras run at ~24.6 Hz, the RealSense at ~26.7 Hz, Tilburg joint states at 25 Hz and Digit 360 pressure at 5-15 rows/s.",
+   "In the checked trial the thumb and index Digit 360 have no IMU files (pressure and pressure_ap only); the ring sensor has one dropout row (pressure 0, temperature 787).",
+   "pressure_ap channel_a and channel_b are hex strings (100 characters = 25 little-endian uint16 values per row); their meaning is not documented.",
+   "Units are not written in most tables: Digit 360 pressure reads ~84,000-108,000 (Pa by range), xArm F/T fx..mz read a few units (N, Nm by range), Tilburg and xArm joints are in degrees by column name and range.",
+   "Each trial carries a manual (ground-truth) and an automatic stability label; they agree on 92.34% of trials. Hand closing is open loop: touch does not change the commanded trajectory.",
+   "One task (grasp, lift 100 mm, hold 3 s) in one tabletop workspace; the hand never manipulates the object beyond the lift."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2610.10283",
+   "project": "https://lasr-lab.github.io/dexterous-grasp-stability/",
+   "data": "https://doi.org/10.25532/OPARA-1588",
+   "code": "https://github.com/lasr-lab/dexterous-grasp-stability"
+  },
+  "image": "https://lasr-lab.github.io/dexterous-grasp-stability/images/overview.svg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Intel RealSense D435i (held by a second xArm at a fixed pose)",
+     "type": "RGB-D",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Tilburg Hand 16 joint positions and velocities (deg, deg/s) + commanded joint targets",
+     "note": "~25 Hz observed, ~29 Hz commands in the checked trial; separate tables of rejected readings (tilburg_invalid_pos/vel)"
+    },
+    {
+     "target": "wrist",
+     "method": "robot_proprioception",
+     "system": "xArm7 joint positions/velocities, 6-D end-effector pose (mm, deg), cartesian and joint commands",
+     "note": "~27 Hz in the checked trial"
+    },
+    {
+     "target": "object",
+     "method": "vision_estimate",
+     "system": "SAM 3 mask + RealSense depth",
+     "note": "per-trial object position before the grasp and lift detection (grasp_positions.csv, detect_before_grasp.jpg, detect_after_lift.jpg); no per-frame object pose"
+    }
+   ],
+   "other": [
+    "xArm 6-axis wrist force/torque (fx, fy, fz, mx, my, mz) at ~27 Hz",
+    "Digit 360 stereo contact audio, 48 kHz",
+    "grasp phase boundaries (reach, grasp, lift, post_lift)",
+    "manual and automatic stability labels per trial",
+    "200 object reference images; per-object material, compliance, mass and size (dataset.csv)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/html/2610.10283 (v1, incl. appendix A and B)",
+   "https://lasr-lab.github.io/dexterous-grasp-stability/",
+   "https://opara.zih.tu-dresden.de/items/1bbbd8fe-fe36-47e7-9c46-334fcd7a5763 (DSpace REST: item metadata, bundles, bitstream list)",
+   "OPARA bitstreams README.md, archive_listing.txt, license.txt, toolkit.zip (src/README.md, src/data/dataset.csv, src/data/LICENSE)",
+   "OPARA data01.zip central directory via HTTP range requests, and the entry apple/20260415_112100.h5 (104 MB compressed) opened with h5py",
+   "https://api.github.com/repos/lasr-lab/dexterous-grasp-stability (repo metadata: MIT)"
+  ],
+  "unconfirmed": [
+   "hours=33.3 derived: 10,000 trials x ~12 s ('Each recording spans about 12 s', paper appendix A-C); the checked trial spans 12.4 s (perf_time 798.19-810.57).",
+   "Rates (tactile ~24.6 Hz, RealSense ~26.7 Hz, pressure 5.5-14.8 rows/s, pressure_ap 26-65 rows/s, IMU ~11 Hz, quaternion ~2.8 Hz, Tilburg 25 Hz, xArm ~27 Hz) are measured from one trial (apple/20260415_112100). Paper and README give 30 Hz for camera, tactile and proprioception.",
+   "IMU files missing for thumb and index were seen in one trial only; not checked across the release.",
+   "scenes=1: one 200 x 400 mm tabletop workspace; not stated as a count.",
+   "Units by range or column name only: pressure in Pa (~84-108 k), temperature in degC (~38-42), F/T in N and Nm (fx -4.0 to 2.7, mz -0.05 to 0.08 in the checked trial), joints in degrees.",
+   "OPARA metadata size 1,078,004,133,457 B; sum of the 10,000 uncompressed .h5 sizes in archive_listing.txt is 1.18 TB. The survey brief quoted ~445 GB, which matches neither.",
+   "Stable count 4,712 of 10,000 = sum of num_successful_trials in dataset.csv (README: 47.1% stable under manual labels)."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC-ND 4.0",
+  "redistribution": "allowed",
+  "quote": "A. reproduce and Share the Licensed Material, in whole or in part, for NonCommercial purposes only; and B. produce and reproduce, but not Share, Adapted Material for NonCommercial purposes only. [...] simply making modifications authorized by this Section 2(a)(4) never produces Adapted Material.",
+  "url": "https://opara.zih.tu-dresden.de/items/1bbbd8fe-fe36-47e7-9c46-334fcd7a5763"
+ },
+ "download": {
+  "where": "https://doi.org/10.25532/OPARA-1588",
+  "access": "open",
+  "format": "20 deflate zip archives, <object_name>/<timestamp>.h5 (one HDF5 per trial): compound-dtype tables (the original CSVs), JPEG frames and WAV as byte blobs, depth as (N, 480, 640) uint16 mm; toolkit.zip holds dataset.csv, data_viewer.py and resample.py",
+  "total_size": "1.08 TB (1,078,004,133,457 B; zips 40.5-81.2 GB)",
+  "per_episode": "~104 MB compressed; .h5 100-137 MB (median 118 MB)",
+  "partial_fetch": "HTTP range requests on https://opara.zih.tu-dresden.de/server/api/core/bitstreams/<uuid>/content: read the zip64 central directory from the tail, then fetch and inflate one entry (done for data01.zip apple/20260415_112100.h5)"
+ },
+ "channels": [
+  {
+   "name": "opentouch/digit360/<finger>/camera/frames + camera.csv",
+   "kind": "tactile_image",
+   "shape": "(N,) JPEG blobs, 690x690",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "per fingertip sensor; fingers thumb, index, middle, ring",
+   "note": "camera.csv: frame_idx, delta, time_perf, filename, width, height; 305-308 frames over 12.4 s (~24.6 Hz) in data01.zip apple/20260415_112100.h5"
+  },
+  {
+   "name": "opentouch/digit360/<finger>/audio/wav + chunks.csv + spectrogram.jpg",
+   "kind": "audio",
+   "shape": "stereo 16-bit WAV, ~10.6 s",
+   "rate_hz": 48000,
+   "unit": "PCM",
+   "frame": "per fingertip sensor (2 contact microphones)",
+   "note": "chunks.csv: 384-sample chunks with time_perf and peak; spectrogram.jpg is a rendered preview"
+  },
+  {
+   "name": "opentouch/digit360/<finger>/serial/pressure.csv",
+   "kind": "pressure_scalar",
+   "shape": "(N,) pressure, temperature (+ delta, time_perf, ts)",
+   "rate_hz": 15,
+   "unit": "not stated (Pa by range, ~84,000-108,000; temperature degC ~38-42)",
+   "frame": "per fingertip sensor",
+   "note": "5.5-14.8 rows/s in the checked trial; thumb rose ~2.8 kPa above rest during the grasp; ring has one 0 / 787 dropout row"
+  },
+  {
+   "name": "opentouch/digit360/<finger>/serial/pressure_ap.csv",
+   "kind": "other",
+   "shape": "(N,) channel_a, channel_b: hex strings of 25 uint16 each",
+   "rate_hz": 65,
+   "unit": "not stated (raw, ~1,960-2,140)",
+   "frame": "per fingertip sensor",
+   "note": "26-65 rows/s in the checked trial; meaning of 'pressure_ap' not documented"
+  },
+  {
+   "name": "opentouch/digit360/<finger>/serial/imu_raw_acc|gyro|mag|aux.csv, imu_quat.csv",
+   "kind": "imu",
+   "shape": "(N,) x, y, z (+ w, accuracy for quat)",
+   "rate_hz": 11,
+   "unit": "raw counts (quat unitless)",
+   "frame": "per fingertip sensor",
+   "note": "present for middle and ring only in the checked trial; quaternion ~2.8 Hz"
+  },
+  {
+   "name": "opentouch/digit360/<finger>/serial/gasht.csv",
+   "kind": "other",
+   "shape": "(1,) temperature, pressure, humidity, gas, gas_index",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "per sensor",
+   "note": "one row, ring only, in the checked trial"
+  },
+  {
+   "name": "opentouch/opentouch.csv",
+   "kind": "other",
+   "shape": "(4,) sensor_type, sensor_name, serial_id, destination, start_perf, start_iso",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "sensor-to-finger mapping with Digit 360 serial ids"
+  },
+  {
+   "name": "realsense/rgb/frames + rgb.csv",
+   "kind": "camera",
+   "shape": "(N,) JPEG blobs, 640x480",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "RealSense optical frame; extrinsics to the grasping-arm base in realsense_extrinsics.json",
+   "note": "331 frames over 12.4 s (~26.7 Hz) in the checked trial"
+  },
+  {
+   "name": "realsense/depth/raw_mm + depth.csv",
+   "kind": "depth",
+   "shape": "(N, 480, 640) uint16",
+   "rate_hz": 30,
+   "unit": "mm",
+   "frame": "RealSense optical frame",
+   "note": "same timestamps as RGB in the checked trial; depth.csv adds min/max/median mm"
+  },
+  {
+   "name": "realsense/realsense_intrinsics.json, realsense_extrinsics.json",
+   "kind": "other",
+   "shape": "fx, fy, ppx, ppy, width, height, depth_scale; T_Wb_Wc_mm and camera pose",
+   "rate_hz": null,
+   "unit": "pixels, mm",
+   "frame": "main_arm_base, camera_arm_base, realsense_optical",
+   "note": "online camera calibration per trial"
+  },
+  {
+   "name": "tilburg/tilburg_pos.csv, tilburg_vel.csv",
+   "kind": "joint_state",
+   "shape": "(N, 16) + perf_time",
+   "rate_hz": 25,
+   "unit": "deg, deg/s",
+   "frame": "Tilburg Hand joints finger_0..finger_15",
+   "note": "tilburg_invalid_pos/vel.csv hold rejected readings (e.g. values ~3.8e8) with an obs_fix tag"
+  },
+  {
+   "name": "tilburg/tilburg_action.csv",
+   "kind": "action",
+   "shape": "(N, 16) + perf_time",
+   "rate_hz": 29,
+   "unit": "deg",
+   "frame": "Tilburg Hand joints",
+   "note": "commanded joint targets"
+  },
+  {
+   "name": "xarm/xarm_jpos.csv, xarm_jvel.csv",
+   "kind": "joint_state",
+   "shape": "(N, 7) + perf_time",
+   "rate_hz": 27,
+   "unit": "deg (by range), deg/s",
+   "frame": "xArm7 joints",
+   "note": null
+  },
+  {
+   "name": "xarm/xarm_eepos.csv",
+   "kind": "other",
+   "shape": "(N, 6) x_mm, y_mm, z_mm, roll_deg, pitch_deg, yaw_deg",
+   "rate_hz": 27,
+   "unit": "mm, deg",
+   "frame": "grasping-arm base",
+   "note": "end-effector pose"
+  },
+  {
+   "name": "xarm/xarm_ft.csv",
+   "kind": "wrench",
+   "shape": "(N, 6) fx, fy, fz, mx, my, mz",
+   "rate_hz": 27,
+   "unit": "not stated (N, Nm by range)",
+   "frame": "xArm wrist F/T sensor (zeroed on connect per config.yaml)",
+   "note": "between hand and arm, not a fingertip sensor"
+  },
+  {
+   "name": "xarm/xarm_action.csv",
+   "kind": "action",
+   "shape": "(N,) action_type (cartesian | joint) + 6-D pose + 7 joints",
+   "rate_hz": 29,
+   "unit": "mm, deg",
+   "frame": "grasping-arm base",
+   "note": null
+  },
+  {
+   "name": "grasp/grasp_label.csv, grasp_phases.csv, grasp_positions.csv, detect_before_grasp.jpg, detect_after_lift.jpg",
+   "kind": "other",
+   "shape": "labels (automatic, manual), 4 phase start times, 5 target rows, 2 JPEGs",
+   "rate_hz": null,
+   "unit": "perf_time s; mm, deg",
+   "frame": "grasping-arm base",
+   "note": "phases reach, grasp, lift, post_lift"
+  },
+  {
+   "name": "metadata/config.yaml, hydra.yaml, overrides.yaml",
+   "kind": "other",
+   "shape": "text",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "collection configuration (arm poses, rates, PID gains)"
+  }
+ ],
+ "episode_index": {
+  "where": "toolkit.zip src/data/dataset.csv (per object) + archive_listing.txt (per trial file and zip); labels and phases live inside each .h5",
+  "count": 10000,
+  "fields": [
+   "object_name",
+   "primary_material",
+   "secondary_materials",
+   "compliance",
+   "weight_g",
+   "width_mm",
+   "depth_mm",
+   "height_mm",
+   "num_trials",
+   "num_successful_trials",
+   "success_rate"
+  ],
+  "tasks": [
+   "grasp, lift 100 mm and hold 3 s"
+  ],
+  "scenes": [
+   "lab tabletop, 200 x 400 mm workspace"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC-ND 4.0 lets anyone share the material 'in whole or in part' for non-commercial use; only sharing Adapted Material is excluded, and format changes are technical modifications under Sec. 2(a)(4), which never produce Adapted Material. The license does not forbid redistribution of unmodified samples. OPARA is open and supports range requests. Label the collection 'CC BY-NC-ND 4.0' and keep the content unchanged apart from format conversion and time windows.",
+  "prefix": "gs_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "data01.zip:apple/20260415_112100",
+    "task": "grasp and lift",
+    "scene": "lab tabletop",
+    "subject": null,
+    "object": "apple (rigid, food, 178 g)",
+    "duration_s": 12.4,
+    "window": null,
+    "label_manual": 0,
+    "why": "Already fetched and opened: all four tactile camera streams, audio and pressure present; thumb pressure ~2.8 kPa above rest for 2.65 s; unstable grasp (manual label 0)."
+   },
+   {
+    "id": "data20.zip:yellow_flower_shaped_sponge/<trial with manual label 1>",
+    "task": "grasp and lift",
+    "scene": "lab tabletop",
+    "subject": null,
+    "object": "yellow_flower_shaped_sponge (deformable sponge, 82 trials, 76% stable)",
+    "duration_s": null,
+    "window": null,
+    "why": "Deformable object with a high success rate, to show a stable grasp; trial to be chosen after fetching 2-3 candidates (labels are inside each .h5)."
+   },
+   {
+    "id": "data14.zip:tall_beer_can/<trial>",
+    "task": "grasp and lift",
+    "scene": "lab tabletop",
+    "subject": null,
+    "object": "tall_beer_can (metal, 14.6 g, 26 trials, 85% stable)",
+    "duration_s": null,
+    "window": null,
+    "why": "Rigid metal object; different material and shape from the other two; trial to be chosen after checking contact on at least two fingertips."
+   }
+  ],
+  "fetch_estimate": "~110 MB per trial; ~0.5-1 GB including 2-3 candidates per object",
+  "rules_applied": "1 task (<= 6), taken. With 3 tasks or fewer: 2-3 episodes per task and at least 3 in total, so 3 trials from different objects (rigid food, deformable sponge, metal can) and both labels. Trials are ~12 s, inside 10-60 s, so no window. Each must show a pressure rise above rest for >= 1 s on at least one fingertip and all four tactile camera streams present."
+ }
+}

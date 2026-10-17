@@ -1,0 +1,368 @@
+{
+ "id": "egotac_sc",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "egotac_sc",
+  "name": "EgoTac-SC",
+  "title": "EgoTac: In-the-wild Tactile Prediction from Egocentric Vision",
+  "authors": "Wenkang Zhang et al.",
+  "year": 2026,
+  "venue": "NeurIPS 2026 (arXiv 2608.15060)",
+  "summary": "Bimanual in-house motion-tactile gloves (60 finger + 72 palm force channels per hand, 11 nine-axis IMUs) with HTC VIVE wrist trackers and a head-mounted ZED 2i, in 857 clips (~36 h, 3.9M frames at 30 Hz) of 70+ household tasks in 24 environments; released with 224x224 egocentric RGB, glove forces, hand and wrist poses and MANO-mapped force and contact.",
+  "embodiment": "human",
+  "hand": "AetherGlove motion-tactile gloves on both hands (EgoTac paper: 'in-house'; release folder 'aether_v1')",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 132,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "Per hand: <side>_finger_tactile (T, 5, 12) + <side>_palm_tactile (T, 72) float64, force per channel (paper: calibrated force in N, contact threshold 0.05 N); 0.0-4.4 in the clips checked, 77-78% of values exactly 0. Raw streams were resampled to the 30 Hz camera timeline by linear interpolation. Five bend-related channels per glove and the IMU signals are not released. Also mano_tactile_<side> (T, 778) float32 force mapped onto MANO vertices and mano_contact_<side> (T, 778) uint8 (mapped force > 0.05 N).",
+   "maker": "Aether Embodied Technology (Beijing) Co., Ltd. (named in FTP-1's acknowledgments); the EgoTac paper calls the glove in-house",
+   "model": "AetherGlove (motion-tactile glove; 'aether' / 'ether' in the release names)",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": true
+  },
+  "modalities": [
+   "egocentric",
+   "hand_pose",
+   "segmentation"
+  ],
+  "scale": {
+   "hours": 36.1,
+   "episodes": 857,
+   "frames": 3896609,
+   "tasks": 70,
+   "objects": null,
+   "subjects": null,
+   "scenes": 24,
+   "scene_types": [
+    "kitchen",
+    "office",
+    "home"
+   ],
+   "text": "857 clips, 3,896,609 frames @30 Hz (~36.1 h), 70+ tasks (e.g. folding clothes, wiping tables, opening doors) in 24 environments; clips 5-632 s (median 137 s), recorded 2025-11-20 to 2025-12-30"
+  },
+  "availability": "public",
+  "access": "Hugging Face wkzhang/EgoTac-SC, ungated: 857 Zarr clips (458 GB) packed whole into 45 stored ZIP shards of ~10 GB with a manifest.json that maps clips to shards; linked from the project page and code README. A second repo, wkzhang/EgoTac-SC-OXT (created 2026-10-12), holds only a README.",
+  "license": "Apache-2.0",
+  "caveats": [
+   "Egocentric video is released only as 224x224 resized and cropped frames; the 1080p ZED 2i video, depth and point clouds, and the raw HDF5/SVO recordings are not released.",
+   "No task, environment or participant label per clip: each Zarr holds only data arrays and meta/episode_ends; clip names are millisecond timestamps.",
+   "Tactile units are not stated in the release; the paper evaluates EgoTac-SC force in newtons (error < 0.06 N, contact threshold 0.05 N). Bend channels and the 11 IMUs per glove are not released; hand pose is a processed 20-joint 6-D array.",
+   "MANO force and contact fields are interpolated from the 132 glove channels through predefined patches, not measured per vertex.",
+   "Glove-recoloured RGB and glove masks exist only in shards 1-16; shards 17-45 carry the plain RGB only.",
+   "Every clip sits inside a ~10 GB stored ZIP; one clip needs HTTP range reads of the central directory (Zip64) and its entries, or the whole shard.",
+   "Participants wear black gloves, so the RGB shows gloved hands (the paper discusses this visual-domain gap)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2608.15060",
+   "project": "https://egotac.github.io/",
+   "data": "https://huggingface.co/datasets/wkzhang/EgoTac-SC",
+   "code": "https://github.com/Mr-Zwkid/EgoTac"
+  },
+  "image": "https://egotac.github.io/assets/images/dataset.png",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Stereolabs ZED 2i",
+     "type": "RGB-D",
+     "resolution": "1920x1080 recorded; 224x224 released",
+     "fps": 30,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "imu",
+     "system": "11 nine-axis IMUs per in-house glove",
+     "note": "<side>_hand_pose_ether_dataset (T, 20, 6): 20 hand joint poses, position (m by range) + 3 rotation values"
+    },
+    {
+     "target": "wrist",
+     "method": "optical_tracker",
+     "system": "HTC VIVE Tracker per hand",
+     "note": "<side>_wrist_pose (T, 6)"
+    },
+    {
+     "target": "body",
+     "method": "other",
+     "system": "head_tracker_pose (T, 6)",
+     "note": "head pose; source device not stated"
+    }
+   ],
+   "other": [
+    "MANO-vertex force and binary contact per hand (778 vertices)",
+    "glove masks and glove-recoloured RGB (shards 1-16)",
+    "camera and unified timestamps (ms)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2608.15060",
+   "https://arxiv.org/html/2608.15060v1 (Sec. 3.3, Table 1, App. B)",
+   "https://egotac.github.io/",
+   "https://huggingface.co/datasets/wkzhang/EgoTac-SC (README.md, aether_v1/manifest.json, file listing, commit history; Zip64 central directories of all 45 shards; timestamps/.zarray of all 857 clips)",
+   "https://huggingface.co/datasets/wkzhang/EgoTac-SC aether_v1-part-0001.zip entries of clip 1763647052611.zarr (all arrays except RGB and masks; .zarray metadata of all arrays)",
+   "https://huggingface.co/datasets/wkzhang/EgoTac-SC tactile arrays and one RGB chunk of 8 clips from 8 recording days (parts 0001, 0002, 0003, 0005, 0014, 0023, 0032, 0041)",
+   "https://huggingface.co/datasets/wkzhang/EgoTac-SC-OXT (tree: .gitattributes + 28-byte README with license apache-2.0)",
+   "https://huggingface.co/wkzhang/EgoTac (model card)",
+   "https://github.com/Mr-Zwkid/EgoTac (README.md, docs/process_data_aether.md)",
+   "https://arxiv.org/html/2606.13102 (FTP-1: data-source table and acknowledgments naming AetherGlove and Aether Embodied Technology (Beijing) Co., Ltd.)"
+  ],
+  "unconfirmed": [
+   "hours=36.1 and frames=3,896,609: sum of the timestamps array lengths of all 857 clips (from each clip's .zarray) at 30 Hz; matches the paper's 3.9M frames. Clip lengths 152-18,960 frames (5.1-632 s).",
+   "calibrated=true and unit N rest on the paper (calibrated force prediction on EgoTac-SC, force MAE in N, contact = mapped force > 0.05 N); the dataset card and processing docs do not state units. Values are floats, 0 at rest on 77-78% of entries, peaks 0.4-4.4 in 9 clips checked.",
+   "tasks=70 is the paper's 'more than 70'; scenes=24 is the paper's '24 diverse environments'. Neither is labelled per clip. The clips span 24 recording days (2025-11-20 to 2025-12-30, from the millisecond clip names); frames checked show bedrooms, a kitchen, a living room and a dining table, hence scene_type 'home' in addition to the paper's 'kitchens, offices'.",
+   "Paper wording differs: '264 force sensors' (2 x 132) in Sec. 3.3, 'more than 120 sensing points' per glove in App. B. The release has 132 per hand.",
+   "coverage 'tip': each finger has one 12-channel block; where on the finger it sits is not stated.",
+   "The 5 x 12 finger + 72 palm channel counts match the TouchTronix v2 conductive-fabric glove SDK (4x3 per finger, 72 populated palm cells); the paper calls the glove in-house and names no vendor.",
+   "Hand pose layout (20 joints x [x, y, z, 3 rotation values]) is read from the data (positions up to 0.94 m, rotations within +-pi); the rotation convention is not documented.",
+   "head_tracker_pose source is not stated (the paper lists VIVE trackers only for the wrists).",
+   "Glove maker: FTP-1 (arXiv 2606.13102; its authors include EgoTac authors Wenkang Zhang, Chengbo Yuan, Zicheng Zhang and Yang Gao) thanks 'Aether Embodied Technology (Beijing) Co., Ltd. for the EgoTac egocentric human dataset and AetherGlove'; the EgoTac paper says 'in-house motion-tactile glove' and the code README says 'EgoTac-SC and Aether are the same dataset'."
+  ],
+  "used_by": [
+   {
+    "name": "FTP-1 (arXiv 2606.13102)",
+    "url": "https://arxiv.org/abs/2606.13102",
+    "note": "trains its tactile policy partly on EgoTac human data ('EgoTac-Open', 'EgoTac-Kitchen', 'EgoTac-Hotel', AetherGlove arrays, 17.5% of the mixture); whether these are subsets of the EgoTac-SC release is not stated"
+   }
+  ]
+ },
+ "license": {
+  "name": "Apache-2.0",
+  "redistribution": "allowed",
+  "quote": "license: apache-2.0",
+  "url": "https://huggingface.co/datasets/wkzhang/EgoTac-SC/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/wkzhang/EgoTac-SC",
+  "access": "open",
+  "format": "aether_v1/aether_v1-part-0001..0045.zip (stored ZIP64, ~10 GB each) holding whole <ms_timestamp>.zarr groups (Zarr v2, Blosc/Zstd): data/{ego_cam_rgb, ego_cam_rgb_recolored*, glove_mask*, ego_cam_real_timestamp, timestamps, head_tracker_pose, left/right_wrist_pose, left/right_hand_pose_ether_dataset, left/right_finger_tactile, left/right_palm_tactile, mano_tactile_left/right, mano_contact_left/right}, meta/episode_ends; aether_v1/manifest.json maps clips to shards with SHA-256 (* shards 1-16 only)",
+  "total_size": "458 GB (458,229,180,085 B in 102,413 files; HF usedStorage 458,249,247,847 B)",
+  "per_episode": "clip 1763647052611 (141.8 s): RGB ~455 MB + recoloured RGB ~432 MB + mask 1.8 MB + all other arrays ~18 MB",
+  "partial_fetch": "HTTP range requests on the shard resolve URL (redirects to a CDN): read the Zip64 end record and central directory (~0.4 MB per shard), then fetch single Zarr chunk entries by local-header offset (stored, no recompression). Tactile + pose arrays of one clip are ~3-20 MB; RGB chunks are ~7 MB per 64-67 frames."
+ },
+ "channels": [
+  {
+   "name": "data/ego_cam_rgb",
+   "kind": "camera",
+   "shape": "(T, 224, 224, 3) uint8",
+   "rate_hz": 30,
+   "unit": "RGB",
+   "frame": "head-mounted ZED 2i, resized and cropped",
+   "note": "chunks of 64-67 frames, ~7 MB each"
+  },
+  {
+   "name": "data/ego_cam_rgb_recolored, data/glove_mask",
+   "kind": "camera",
+   "shape": "(T, 224, 224, 3) uint8; (T, 224, 224) bool",
+   "rate_hz": 30,
+   "unit": "RGB; mask",
+   "frame": "same as ego_cam_rgb",
+   "note": "only in shards 1-16; recoloured gloves and glove segmentation"
+  },
+  {
+   "name": "data/left_finger_tactile, data/right_finger_tactile",
+   "kind": "tactile_grid",
+   "shape": "(T, 5, 12) float64",
+   "rate_hz": 30,
+   "unit": "force, N per the paper (not stated in the release)",
+   "frame": "5 fingers x 12 channels; finger order and channel layout not documented",
+   "note": "linear interpolation onto the camera timeline"
+  },
+  {
+   "name": "data/left_palm_tactile, data/right_palm_tactile",
+   "kind": "tactile_grid",
+   "shape": "(T, 72) float64",
+   "rate_hz": 30,
+   "unit": "force, N per the paper",
+   "frame": "palm, layout not documented",
+   "note": null
+  },
+  {
+   "name": "data/mano_tactile_left, data/mano_tactile_right",
+   "kind": "other",
+   "shape": "(T, 778) float32",
+   "rate_hz": 30,
+   "unit": "force, N per the paper",
+   "frame": "MANO vertices",
+   "note": "glove force distributed over MANO vertices by predefined patches and bilinear weights"
+  },
+  {
+   "name": "data/mano_contact_left, data/mano_contact_right",
+   "kind": "contact_flag",
+   "shape": "(T, 778) uint8",
+   "rate_hz": 30,
+   "unit": "0/1",
+   "frame": "MANO vertices",
+   "note": "mapped force > 0.05 N"
+  },
+  {
+   "name": "data/left_hand_pose_ether_dataset, data/right_hand_pose_ether_dataset",
+   "kind": "hand_pose",
+   "shape": "(T, 20, 6) float64",
+   "rate_hz": 30,
+   "unit": "m + rotation (convention not documented)",
+   "frame": "normalised camera/tracker convention (paper App. B.2)",
+   "note": "from the glove IMUs and VIVE tracker"
+  },
+  {
+   "name": "data/left_wrist_pose, data/right_wrist_pose",
+   "kind": "hand_pose",
+   "shape": "(T, 6) float64",
+   "rate_hz": 30,
+   "unit": "m + rotation",
+   "frame": "as above",
+   "note": "HTC VIVE Tracker"
+  },
+  {
+   "name": "data/head_tracker_pose",
+   "kind": "body_pose",
+   "shape": "(T, 6) float64",
+   "rate_hz": 30,
+   "unit": "m + rotation",
+   "frame": "as above",
+   "note": "source not stated"
+  },
+  {
+   "name": "data/timestamps, data/ego_cam_real_timestamp, meta/episode_ends",
+   "kind": "other",
+   "shape": "(T,) float64; (1,) int64",
+   "rate_hz": 30,
+   "unit": "UNIX ms",
+   "frame": null,
+   "note": "one episode per Zarr (episode_ends = [T])"
+  }
+ ],
+ "episode_index": {
+  "where": "aether_v1/manifest.json (clip -> shard) + per-clip meta/episode_ends; no task or scene index",
+  "count": 857,
+  "fields": [
+   "clip name (start time in UNIX ms)",
+   "shard"
+  ],
+  "tasks": [
+   "not labelled in the release; paper: 70+ tasks, e.g. folding clothes, wiping tables, opening doors"
+  ],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "Apache-2.0 (HF card YAML) allows redistribution with the license notice; the repo is public and ungated, and single clips can be range-read from the stored ZIP shards. Label the collection 'Apache-2.0'.",
+  "prefix": "ec_",
+  "tasks_total": 70,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "1763652906229.zarr",
+    "task": "bed / clothes handling on a bed (from the middle frame)",
+    "scene": "bedroom",
+    "subject": null,
+    "duration_s": 83.0,
+    "window": [
+     11,
+     71
+    ],
+    "why": "Recording day 2025-11-20 (part 0001). All 6 regions per hand above 0.05 for >= 1 s; peaks 1.43 (left) / 2.66 (right)."
+   },
+   {
+    "id": "1764075939376.zarr",
+    "task": "kitchen sink work (from the middle frame)",
+    "scene": "kitchen",
+    "subject": null,
+    "duration_s": 60.1,
+    "window": [
+     0,
+     60
+    ],
+    "why": "2025-11-25 (part 0002). All regions active on both hands; peaks 1.49 / 1.14."
+   },
+   {
+    "id": "1764749487143.zarr",
+    "task": "bedding / duvet handling (from the middle frame)",
+    "scene": "bedroom",
+    "subject": null,
+    "duration_s": 158.4,
+    "window": [
+     49,
+     109
+    ],
+    "why": "2025-12-03 (part 0003). All regions active; peaks 1.18 / 1.36."
+   },
+   {
+    "id": "1764935812958.zarr",
+    "task": "two-handed object handling at a dining table (from the middle frame)",
+    "scene": "dining room",
+    "subject": null,
+    "duration_s": 135.5,
+    "window": [
+     38,
+     98
+    ],
+    "why": "2025-12-05 (part 0005). All regions active; peaks 1.21 / 1.45."
+   },
+   {
+    "id": "1765269690469.zarr",
+    "task": "hanging clothes on hangers (from the middle frame)",
+    "scene": "living room",
+    "subject": null,
+    "duration_s": 86.7,
+    "window": [
+     13,
+     73
+    ],
+    "why": "2025-12-09 (part 0014). Light-force task: peaks 0.42 / 0.52, all regions active."
+   },
+   {
+    "id": "1765950149674.zarr",
+    "task": "countertop task with fruit and containers (from the middle frame)",
+    "scene": "kitchen",
+    "subject": null,
+    "duration_s": 97.4,
+    "window": [
+     19,
+     79
+    ],
+    "why": "2025-12-17 (part 0023, no recoloured RGB). Peaks 2.60 / 2.70, all regions active."
+   },
+   {
+    "id": "1766209621656.zarr",
+    "task": "window or wall cleaning with a tool (from the middle frame)",
+    "scene": "home",
+    "subject": null,
+    "duration_s": 139.6,
+    "window": [
+     40,
+     100
+    ],
+    "why": "2025-12-20 (part 0032). Highest right-hand peak among the 8 (3.19); all regions active."
+   },
+   {
+    "id": "1766555420130.zarr",
+    "task": "pillow / cushion handling (from the middle frame)",
+    "scene": "bedroom",
+    "subject": null,
+    "duration_s": 182.4,
+    "window": [
+     61,
+     121
+    ],
+    "why": "2025-12-24 (part 0041). Highest left-hand peak (4.36); right hand 5 of 6 regions active."
+   }
+  ],
+  "fetch_estimate": "~1.7 GB: per 60 s window ~27 RGB chunks x ~7 MB (~190 MB) plus tactile, pose and MANO arrays (~10-20 MB per clip, whole-clip chunks), via range reads from 8 shards. Re-hosted media: 224x224 frames encoded to H.264, ~1-2 MB per 60 s. Episode JSON: 60 s x 30 Hz x 264 channels = 475k numbers; round to 2 decimals (or 0.01 N integers) to stay under 2 MB; skip the 778-vertex MANO fields or show one hand per frame.",
+  "rules_applied": "Tasks: 70+ unlabelled tasks; 8 clips chosen from 8 different recording days across 8 shards, spanning bedroom, kitchen, dining and living-room scenes and different actions (judged from one middle RGB frame each, since no task labels exist). Episodes: one per chosen task, 8 in total. Each was screened on its full tactile arrays: all 5 finger blocks and the palm present on both hands, no NaN, reading above 0.05 for >= 1 s (above zero for most of the clip). Length: one 60.1 s clip cut to [0, 60]; the others to a 60 s window centred on the checked middle frame. Budget: ~1.7 GB of 20 GB.",
+  "deviations": [
+   "Task names are our description of one middle frame per clip; the release has no task labels."
+  ]
+ }
+}

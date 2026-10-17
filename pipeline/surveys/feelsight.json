@@ -1,0 +1,238 @@
+{
+ "id": "feelsight",
+ "surveyed": "2026-10-17",
+ "entry": {
+  "id": "feelsight",
+  "name": "FeelSight",
+  "title": "Neural feels with neural fields: Visuo-tactile perception for in-hand manipulation",
+  "authors": "Sudharshan Suresh et al.",
+  "year": 2024,
+  "venue": "Science Robotics 2024 (arXiv 2312.13469)",
+  "summary": "In-hand rotation of 6 objects by a proprioceptive RL policy on an Allegro hand (on a Franka Panda) with four DIGIT fingertips, filmed by three RealSense D435 RGB-D cameras; 30 real-world runs of 30 s, and the 40 simulated runs in the same release are not covered by this entry.",
+  "embodiment": "robot",
+  "hand": "Allegro Hand (16 DoF) on Franka Panda",
+  "bimanual": false,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 4,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "DIGIT RGB images, 240x320 (width x height) JPEG, one file per frame under allegro/<finger>/image/ for index, middle, ring and thumb; 30 Hz per the paper. Real runs have no tactile depth or contact masks (those exist only in the simulated part).",
+   "maker": "Meta (DIGIT, open hardware)",
+   "model": "DIGIT",
+   "principle": "optical",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "multiview_rgb",
+   "depth"
+  ],
+  "scale": {
+   "hours": 0.25,
+   "episodes": 30,
+   "frames": null,
+   "tasks": 1,
+   "objects": 6,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Real: 30 in-hand rotation runs of 30 s (6 objects x 5), 15 min. Simulated (not covered): 40 runs (8 objects x 5) plus an occlusion set"
+  },
+  "availability": "public",
+  "access": "Hugging Face suddhu/Feelsight, ungated: feelsight_real.tar.gz (13.6 GB) holds the real runs; feelsight.tar.gz (25.1 GB) and feelsight_occlusion.tar.gz (8.9 GB) are simulation; assets.tar.gz (1.2 GB) holds object meshes. The members of one run are spread through the archive, so one run needs the whole 13.6 GB stream.",
+  "license": "MIT",
+  "caveats": [
+   "One task (policy-driven in-hand rotation, 20 Hz commands, no teleoperation) and 30 s per run.",
+   "Files of all 30 real runs are interleaved in feelsight_real.tar.gz (the first 150 MB already holds members of every run), so extracting one run means reading the whole archive.",
+   "Real-world object pose is a pseudo-ground-truth from three-camera tracking with scanned meshes (paper); where it is stored in the release was not confirmed.",
+   "data.pkl is a dill pickle and was not opened; the official loader reads time, allegro.base_pose, allegro.joint_state, digit_info and realsense.<camera>.intrinsics/pose from it.",
+   "The paper notes that the real DIGIT gel is less sensitive than in simulation, giving sparser contact.",
+   "The release also has per-run camera videos (videos/<object>_<run>_<camera>.mp4, H.264), which the dataset card does not list."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2312.13469",
+   "project": "https://suddhu.github.io/neural-feels/",
+   "data": "https://huggingface.co/datasets/suddhu/Feelsight",
+   "code": "https://github.com/facebookresearch/neuralfeels"
+  },
+  "image": "https://suddhu.github.io/neural-feels/img/robot_cell.jpg",
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 3,
+     "model": "Intel RealSense D435 (front-left is the primary view; back-right and top-down add coverage)",
+     "type": "RGB-D",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Allegro 16 joint angles (data.pkl allegro.joint_state per the loader)",
+     "note": "not opened"
+    },
+    {
+     "target": "object",
+     "method": "vision_estimate",
+     "system": "three-camera pose tracking against Revopoint scans (pseudo-ground-truth)",
+     "note": "paper; location in the release not confirmed"
+    }
+   ],
+   "other": [
+    "object meshes from a Revopoint 3D scanner (assets.tar.gz)",
+    "camera intrinsics and extrinsics (ArUco hand-eye, Kalibr)",
+    "per-run camera videos"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/html/2312.13469 (v1)",
+   "https://huggingface.co/datasets/suddhu/Feelsight (README.md, API info, file tree)",
+   "https://huggingface.co/datasets/suddhu/Feelsight feelsight_real.tar.gz bytes 0-150,000,000 (573 members listed; one DIGIT JPEG, one RealSense JPEG, a depth.npz header and an mp4 header read)",
+   "https://github.com/facebookresearch/neuralfeels (README.md, data/README.md, neuralfeels/datasets/dataset.py, neuralfeels/modules/sensor.py, allegro.py, trainer.py, eval/feelsight_init.py, LICENSE metadata)"
+  ],
+  "unconfirmed": [
+   "hours=0.25 derived: 30 runs x 30 s (paper: '5 in-hand rotation trials each of 6 objects in the real-world', '30 seconds per trial').",
+   "Depth rate: rubiks_cube_small/01 back-right depth.npz is (819, 480, 640) uint16, i.e. ~27 Hz over 30 s; tactile and RGB frame counts per run were not counted.",
+   "Camera model: the paper names an Intel D435 for the primary camera and 'three such cameras'; folder names are front-left, back-right, top-down.",
+   "Finger folders seen: index, middle, ring, thumb.",
+   "Object names are the folder names in the archive; the paper gives sizes of 6-18 cm diagonal."
+  ]
+ },
+ "license": {
+  "name": "MIT",
+  "redistribution": "allowed",
+  "quote": "license: mit",
+  "url": "https://huggingface.co/datasets/suddhu/Feelsight/blob/main/README.md"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/suddhu/Feelsight",
+  "access": "open",
+  "format": "tar.gz of feelsight_real/<object>/<run>/: allegro/<finger>/image/<n>.jpg, realsense/<camera>/image/<n>.jpg, realsense/<camera>/depth.npz, videos/<object>_<run>_<camera>.mp4, data.pkl (dill)",
+  "total_size": "13.6 GB real (feelsight_real.tar.gz, 13,568,842,382 B); 48.8 GB for the whole repo",
+  "per_episode": "~450 MB (13.6 GB / 30 runs)",
+  "partial_fetch": "none useful: members of all runs are interleaved, so stream the full feelsight_real.tar.gz once and extract the chosen runs"
+ },
+ "channels": [
+  {
+   "name": "allegro/<finger>/image/<n>.jpg",
+   "kind": "tactile_image",
+   "shape": "(320, 240, 3) JPEG per frame",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "per DIGIT sensor: index, middle, ring, thumb",
+   "note": "~4-5 KB per frame"
+  },
+  {
+   "name": "realsense/<camera>/image/<n>.jpg",
+   "kind": "camera",
+   "shape": "(480, 640, 3) JPEG per frame",
+   "rate_hz": 30,
+   "unit": "8-bit RGB",
+   "frame": "front-left, back-right, top-down; extrinsics in data.pkl (loader)",
+   "note": null
+  },
+  {
+   "name": "realsense/<camera>/depth.npz",
+   "kind": "depth",
+   "shape": "depth (T, 480, 640) uint16 + depth_scale float64",
+   "rate_hz": 27,
+   "unit": "depth_scale x value (m per the loader)",
+   "frame": "per camera",
+   "note": "~60 MB compressed per camera per run"
+  },
+  {
+   "name": "videos/<object>_<run>_<camera>.mp4",
+   "kind": "camera",
+   "shape": "H.264 mp4",
+   "rate_hz": null,
+   "unit": null,
+   "frame": "per camera",
+   "note": "37.5 MB for pepper_grinder/03 back-right; not listed in the dataset card"
+  },
+  {
+   "name": "data.pkl",
+   "kind": "joint_state",
+   "shape": "dill pickle: time, allegro {base_pose, joint_state}, digit_info, realsense {<camera>: intrinsics, pose} (keys from the loader)",
+   "rate_hz": null,
+   "unit": "not checked",
+   "frame": "Allegro base frame",
+   "note": "not opened"
+  }
+ ],
+ "episode_index": {
+  "where": "folder tree feelsight_real/<object>/<00-04>",
+  "count": 30,
+  "fields": [
+   "object (folder)",
+   "run (00-04)"
+  ],
+  "tasks": [
+   "in-hand rotation by an RL policy"
+  ],
+  "scenes": [
+   "lab robot cell"
+  ],
+  "objects": [
+   "bell_pepper",
+   "large_dice",
+   "peach",
+   "pear",
+   "pepper_grinder",
+   "rubiks_cube_small"
+  ]
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "MIT (card YAML 'license: mit'; repository MIT) allows redistribution with the notice; public and ungated. Label the collection 'MIT'.",
+  "prefix": "fe_",
+  "tasks_total": 1,
+  "tasks_sampled": 1,
+  "episodes": [
+   {
+    "id": "feelsight_real/bell_pepper/00",
+    "task": "in-hand rotation",
+    "scene": "lab",
+    "subject": null,
+    "object": "bell pepper",
+    "duration_s": 30,
+    "window": null,
+    "why": "Shown in the paper and card as the real-world example."
+   },
+   {
+    "id": "feelsight_real/large_dice/00",
+    "task": "in-hand rotation",
+    "scene": "lab",
+    "subject": null,
+    "object": "large dice (rigid, flat faces)",
+    "duration_s": 30,
+    "window": null,
+    "why": "Rigid object with flat faces; shown in the paper's figure 4."
+   },
+   {
+    "id": "feelsight_real/pepper_grinder/00",
+    "task": "in-hand rotation",
+    "scene": "lab",
+    "subject": null,
+    "object": "pepper grinder (elongated)",
+    "duration_s": 30,
+    "window": null,
+    "why": "Elongated object, different contact pattern."
+   }
+  ],
+  "fetch_estimate": "13.6 GB streamed once (whole feelsight_real.tar.gz); ~1.4 GB kept for 3 runs",
+  "rules_applied": "1 task (<= 6), taken. With 3 tasks or fewer: 2-3 episodes per task from different objects, at least 3 in total. Runs are 30 s, inside 10-60 s, so no window. Contact check: DIGIT frames differ from the run's first frame for >= 1 s on at least one finger; swap a run if not."
+ }
+}
