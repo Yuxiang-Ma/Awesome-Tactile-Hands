@@ -1,0 +1,50 @@
+{
+ "id": "moxian",
+ "prefix": "mx_",
+ "group": "moxian",
+ "title": "EGO-PRO sample sessions",
+ "provider": "Moxian (墨现科技)",
+ "kind": "recording",
+ "status": {
+  "label": "License not stated",
+  "tone": "neutral"
+ },
+ "about": "Two tactile gloves, a head camera and two wrist cameras on a tabletop. The folder holds one session for each of 50 tasks (X001–X050); 8 are shown.",
+ "link": {
+  "label": "moxiantech.com",
+  "href": "https://www.moxiantech.com"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 370
+ },
+ "hardware": [
+  {
+   "k": "Gloves",
+   "v": "Moxian tactile gloves",
+   "d": "460 raw channels per hand, 370 placed: palm 14×15, finger strips 4×8 · model not named in the files"
+  },
+  {
+   "k": "Cameras",
+   "v": "Head + 2 wrist cameras",
+   "d": "Head 1920×1080, wrist 1280×960 wide-angle · JPEG on the 60 Hz frame index"
+  },
+  {
+   "k": "Tracking",
+   "v": "25-joint hand skeletons, head and wrist poses",
+   "d": "The provider's Foxglove layout names MANUS and Vive as sources"
+  },
+  {
+   "k": "Labels",
+   "v": "Subtasks, atomic actions",
+   "d": "Chinese captions with English type labels"
+  }
+ ],
+ "notes": "Shared as a Google Drive folder of annotated MCAP files (schema egopro 4.0) with a Foxglove layout and guide; no license or terms are included. Task names are Chinese in the files; the English titles are the catalog's translation.",
+ "order": 1
+}
