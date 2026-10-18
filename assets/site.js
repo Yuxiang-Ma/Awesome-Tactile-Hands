@@ -18,18 +18,36 @@ const LABEL = {
     other: 'Other', none: 'None'},
   wrist: {yes: 'Wrist camera(s)', no: 'No wrist camera', u: 'Not stated'},
   scenes: {multi: 'Several environments', single: 'One setting', u: 'Not stated'},
-  rank: {1: 'R1 · Open + checked', 2: 'R2 · Open', 3: 'R3 · Restricted', 4: 'R4 · Paper only'},
+  rank: {1: 'R1 · Open, checked', 2: 'R2 · Open, not checked', 3: 'R3 · Open, defects found', 4: 'R4 · Apply for access', 5: 'R5 · Sample only', 6: 'R6 · Paper only'},
+  license: {open: 'Allows commercial use', nc: 'Non-commercial only', ns: 'Not stated'},
+  checked: {passed: 'All checks passed', failed: 'A check failed', none: 'Not checked yet'},
 };
-// rank and quality are derived by scripts/build_readme.py (evidence ranking after the MIT CDFG survey)
-const RANK_TEXT = {1: 'Public download, license stated, sample episodes converted and checked in the viewer.',
-  2: 'Public download, but the license is not stated or the files have not been checked yet.',
-  3: 'Gated, on request, or only a partial sample released.', 4: 'Announced or described in a paper; no data released.'};
-const QUAL = {calibrated: 'Touch in physical units (N, kPa)', video: 'Synchronized camera video', hand_pose: 'Finger pose or joint tracking',
+// rank and contents are derived by scripts/build_readme.py: the rank from openness and the integrity checks, never the license
+const RANK_TEXT = {1: 'Public download; sample episodes opened in the viewer and every integrity check passed.',
+  2: 'Public download; the files have not been opened yet.', 3: 'Public download; sample episodes opened and at least one integrity check failed.',
+  4: 'The data downloads after a form, a Hugging Face gate or the authors\' approval.', 5: 'Only a sample or part of the data is released.',
+  6: 'Announced or described in a paper; no data released.'};
+const CHECKS = {files: ['Files open', 'Every sampled file opens in its documented format.'],
+  streams: ['Streams present', 'Tactile and every listed stream are in the files, none empty.'],
+  time: ['Time base', 'Timestamps or a stated rate align the streams.'],
+  tactile: ['Tactile intact', 'Tactile channels and frames are not lost or corrupted.']};
+const CHECK_RULE = 'A check fails when a fault affects more than 5% of a stream\'s recordings, channels or frames, or when the release has neither timestamps nor a stated rate; smaller faults are listed as minor.';
+const CONT = {calibrated: 'Touch in physical units (N, kPa)', video: 'Synchronized camera video', hand_pose: 'Finger pose or joint tracking',
   scale: '10 h or 1,000 episodes or more', diversity: '10 tasks or 5 environments or more'};
-const rankOf = d => d.rank ? d.rank.n : 4;
-const qbar = d => {const q = d.quality; if (!q) return ''; return `<span class="qbar" title="Quality ${q.score} of ${q.of}: ${Object.entries(q.flags).map(([k, v]) => `${QUAL[k]}: ${v ? 'yes' : 'no'}`).join('; ')}">${
-  Object.values(q.flags).map(v => `<i class="${v ? 'on' : ''}"></i>`).join('')}<b>Q${q.score}</b></span>`};
+const GATE = {hf_gate: 'Hugging Face gate', form: 'Access form', request: 'Request to the authors', purchase: 'Purchase'};
+const gateText = g => GATE[g.kind] + (g.approval !== 'not stated' ? `, ${g.approval} approval` : '');
+const rankOf = d => d.rank ? d.rank.n : 6;
+const checkedOf = d => ({passed: 'passed', failed: 'failed'})[d.rank?.integrity] || 'none';
+const licOf = d => {const l = d.license.toLowerCase(); return /^(not stated|unconfirmed|unclear)/.test(l) ? 'ns' : /\bnc\b|non-commercial/.test(l) ? 'nc' : 'open'};
+// the licence name without its parenthetical or second clause: "CC BY-NC-SA 4.0 (data); MIT (code)" -> "CC BY-NC-SA 4.0"
+const licShort = d => licOf(d) === 'ns' ? (d.license.startsWith('unconfirmed') ? 'License unconfirmed' : 'License not stated') : d.license.split(/ \(|; /)[0];
+const cbar = d => {const q = d.contents; if (!q) return ''; return `<span class="qbar" title="Contents ${q.score} of ${q.of}: ${Object.entries(q.flags).map(([k, v]) => `${CONT[k]}: ${v ? 'yes' : 'no'}`).join('; ')}">${
+  Object.values(q.flags).map(v => `<i class="${v ? 'on' : ''}"></i>`).join('')}<b>${q.score}/${q.of}</b></span>`};
 const rankBadge = (d, cls = 'badge') => `<span class="${cls} rk rk${rankOf(d)}" title="${esc(RANK_TEXT[rankOf(d)])}">${LABEL.rank[rankOf(d)]}</span>`;
+// license, application and failed checks as tags under the title; the rank itself never depends on the first
+const statusTags = d => [`<span class="tag lic${licOf(d) === 'ns' ? ' un' : ''}" title="License: ${esc(d.license)}">${esc(licShort(d))}</span>`,
+  d.gate ? `<span class="tag gate" title="${esc(d.gate.note || '')}">Apply: ${esc(gateText(d.gate))}</span>` : '',
+  ...(d.rank?.failed || []).map(c => `<span class="tag bad" title="${esc(d.integrity.faults.filter(f => f.check === c && f.severity === 'defect').map(f => f.text).join(' '))}">Failed: ${CHECKS[c][0]}</span>`)].join('');
 // short names for compact cells
 const TRACK_SHORT = {vision_estimate: 'Vision', optical_mocap: 'Optical mocap', optical_tracker: 'Vive tracker', imu: 'IMU', magnetic: 'Magnetic',
   bend_sensor: 'Bend sensors', exoskeleton: 'Exoskeleton', robot_proprioception: 'Joint encoders', teleop_glove: 'Teleop glove', other: 'Other'};
@@ -64,7 +82,9 @@ const sceneText = d => {const c = d.scale, n = c.scenes ?? (c.scene_types || [])
 const taxBucket = d => {const n = d.sensor.taxels_per_hand; return n == null ? 'u' : n < 100 ? 'a' : n < 300 ? 'b' : n < 1000 ? 'c' : 'd'};
 // each facet: values of a dataset, and whether several ticks must all match (all) or any (default)
 const FACETS = [
-  {key: 'rank', title: 'Rank', hint: 'How open and verified the data is', get: d => [String(rankOf(d))]},
+  {key: 'rank', title: 'Rank', hint: 'How open the data is and whether its files passed the integrity checks', get: d => [String(rankOf(d))]},
+  {key: 'checked', title: 'Integrity checks', hint: 'Run on sample episodes opened in the viewer', get: d => [checkedOf(d)]},
+  {key: 'license', title: 'License', get: d => [licOf(d)]},
   {key: 'embodiment', title: 'Hand', get: d => [d.embodiment]},
   {key: 'coverage', title: 'Tactile coverage', all: true, hint: 'Ticked regions must all be sensed', get: d => d.sensor.coverage},
   {key: 'taxels', title: 'Taxels per hand', get: d => [taxBucket(d)]},
@@ -76,10 +96,12 @@ const FACETS = [
   {key: 'hands', title: 'Hands', get: d => [d.bimanual ? 'two' : 'one']},
   {key: 'availability', title: 'Access', get: d => [d.availability]},
 ];
+const CHK_ORDER = {passed: 0, none: 1, failed: 2};
 // arXiv ids carry the month (YYMM.xxxxx); entries without one sort by year
 const when = d => {const m = /arxiv\.org\/abs\/(\d{2})(\d{2})\./.exec(d.links.paper || ''); return m ? (2000 + +m[1]) * 100 + +m[2] : d.year * 100};
 const SORTS = {
-  rank: (a, b) => rankOf(a) - rankOf(b) || (b.quality?.score ?? 0) - (a.quality?.score ?? 0) || when(b) - when(a),
+  rank: (a, b) => rankOf(a) - rankOf(b) || CHK_ORDER[checkedOf(a)] - CHK_ORDER[checkedOf(b)] || when(b) - when(a),
+  contents: (a, b) => (b.contents?.score ?? 0) - (a.contents?.score ?? 0) || rankOf(a) - rankOf(b) || when(b) - when(a),
   year: (a, b) => when(b) - when(a) || a.name.localeCompare(b.name),
   taxels: (a, b) => (b.sensor.taxels_per_hand ?? -1) - (a.sensor.taxels_per_hand ?? -1),
   hours: (a, b) => (b.scale.hours ?? -1) - (a.scale.hours ?? -1),
@@ -179,7 +201,7 @@ function facts(d) {
     ['Hand tracking', esc(d.setup ? trackSummary(d, true) || 'none' : '')]];
 }
 function cards(list) {
-  if (S.sort === 'rank') return [1, 2, 3, 4].map(n => list.filter(d => rankOf(d) === n)).map((g, k) => g.length ? `<section class="rgroup"><h2>${rankBadge(g[0], 'rh')}
+  if (S.sort === 'rank') return [1, 2, 3, 4, 5, 6].map(n => list.filter(d => rankOf(d) === n)).map((g, k) => g.length ? `<section class="rgroup"><h2>${rankBadge(g[0], 'rh')}
     <span>${esc(RANK_TEXT[k + 1])}</span><small>${g.length}</small></h2>${cardGrid(g)}</section>` : '').join('');
   return cardGrid(list);
 }
@@ -187,8 +209,9 @@ function cardGrid(list) {
   return `<div class="grid">${list.map(d => `<article class="card" data-id="${d.id}" tabindex="0" aria-label="${esc(d.name)}">
     <div class="thumb">${thumb(d)}${rankBadge(d)}</div>
     <div class="body">
-      <div class="ttl"><h3>${esc(d.name)}</h3>${qbar(d)}<span>${d.year}</span></div>
+      <div class="ttl"><h3>${esc(d.name)}</h3><span>${d.year}</span></div>
       ${zhLine(d)}<div class="src">${esc(d.venue)} · ${esc(d.authors)}</div>
+      <div class="tags">${statusTags(d)}</div>
       <p class="desc">${esc(d.summary)}</p>
       <div class="spec">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}<div><b>${sensorLine(d)}</b><span>${covText(d.sensor.coverage)} · ${esc(makerText(d))}</span></div></div>
       <dl class="facts">${facts(d).map(([k, v]) => `<div><dt>${k}</dt><dd>${v || '<i>not stated</i>'}</dd></div>`).join('')}</dl>
@@ -200,7 +223,7 @@ function table(list) {
   const num = (v, u = '') => v != null ? `${u === ' h' ? hrs(v) : fmt(v)}${u}` : '–', c = d => d.scale;
   const row = d => `<tr data-id="${d.id}">
     <td><b>${esc(d.name)}</b>${d.zh?.name ? `<span class="sub" lang="zh-CN">${esc(d.zh.name)}</span>` : ''}<span class="sub">${esc(d.venue)}</span></td>
-    <td>${rankBadge(d, 'rk-t')}<span class="sub">${qbar(d)}</span></td>
+    <td>${rankBadge(d, 'rk-t')}<span class="sub">${(d.rank?.failed || []).map(c => `Failed: ${CHECKS[c][0]}`).join(', ') || (d.contents ? `Contents ${cbar(d)}` : '')}</span></td>
     <td>${LABEL.embodiment[d.embodiment]}<span class="sub">${d.bimanual ? 'Bimanual' : 'Single hand'}</span></td>
     <td><span class="cov">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}${covText(d.sensor.coverage)}</span></td>
     <td class="num">${d.sensor.taxels_per_hand != null ? d.sensor.taxels_per_hand.toLocaleString('en-US') : d.sensor.sensors_per_hand ? `${d.sensor.sensors_per_hand} sensors` : '–'}</td>
@@ -212,8 +235,8 @@ function table(list) {
     <td class="num">${num(c(d).tasks)}</td>
     <td>${esc(sceneText(d) || '–')}<span class="sub">${esc((c(d).scene_types || []).slice(0, 4).join(', '))}</span></td>
     <td class="num">${num(c(d).subjects)}</td>
-    <td><span class="av-${d.availability}">${LABEL.availability[d.availability]}</span><span class="sub">${esc(d.license)}</span></td></tr>`;
-  return `<div class="tablewrap"><table><thead><tr><th data-s="name">Dataset</th><th data-s="rank">Rank · quality</th><th>Hand</th><th>Coverage</th><th data-s="taxels">Taxels / hand</th><th>Tactile sensor</th>
+    <td><span class="av-${d.availability}">${LABEL.availability[d.availability]}</span><span class="sub">${esc(licShort(d))}</span>${d.gate ? `<span class="sub">Apply: ${esc(gateText(d.gate))}</span>` : ''}</td></tr>`;
+  return `<div class="tablewrap"><table><thead><tr><th data-s="name">Dataset</th><th data-s="rank">Rank</th><th>Hand</th><th>Coverage</th><th data-s="taxels">Taxels / hand</th><th>Tactile sensor</th>
     <th>Cameras</th><th>Hand tracking</th><th data-s="hours">Hours</th><th>Episodes</th><th data-s="tasks">Tasks</th><th>Environments</th><th>People</th><th>Access</th></tr></thead>
     <tbody>${list.map(row).join('')}</tbody></table></div>`;
 }
@@ -259,6 +282,17 @@ function render() {
   document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === S.view)));
 }
 
+const ICON_YES = '<svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const ICON_NO = '<svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>';
+// the four checks with pass or fail, then every fault found (defects first); unchecked datasets say so
+function integrityBlock(d) {
+  if (!d.integrity) return `<b>Not checked</b><span class="sub">No sample episodes have been opened in the viewer yet.</span>`;
+  const faults = [...d.integrity.faults].sort((a, b) => (a.severity === 'defect' ? 0 : 1) - (b.severity === 'defect' ? 0 : 1));
+  const bad = new Set(faults.filter(f => f.severity === 'defect').map(f => f.check));
+  return `<ul class="ql chk">${Object.entries(CHECKS).map(([k, [lbl, what]]) => `<li class="${bad.has(k) ? 'no' : 'on'}" title="${esc(what)}">${bad.has(k) ? ICON_NO : ICON_YES}${lbl}<span class="vh">${bad.has(k) ? ' (failed)' : ' (passed)'}</span></li>`).join('')}</ul>
+    ${faults.length ? `<ul class="faults">${faults.map(f => `<li><b class="${f.severity === 'defect' ? 'fd' : 'fm'}">${f.severity === 'defect' ? 'Defect' : 'Minor'}</b> ${CHECKS[f.check][0]}: ${esc(f.text)}</li>`).join('')}</ul>` : '<span class="sub">No faults found.</span>'}
+    <span class="sub">${esc(CHECK_RULE)}</span>`;
+}
 function openDetail(id) {
   const d = D.find(x => x.id === id); if (!d) return;
   S.d = id; writeHash();
@@ -280,12 +314,15 @@ function openDetail(id) {
     <div class="scroll">${d.thumb ? `<img class="hero" src="${esc(d.thumb)}" alt="${esc(d.name)} overview figure">` : ''}
     <p>${esc(d.summary)}</p>
     ${d.caveats.length ? `<div class="warn"><ul>${d.caveats.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>` : ''}
-    <h4>Rank and quality</h4>${kvs([['Rank', `${rankBadge(d, 'rk-t')} ${esc(RANK_TEXT[rankOf(d)])}${d.rank ? `<span class="sub">${esc(d.rank.why.join(' · '))}</span>` : ''}`],
-      ['Quality', d.quality ? `<b>${d.quality.score} of ${d.quality.of}</b><ul class="ql">${Object.entries(d.quality.flags).map(([k, v]) => `<li class="${v ? 'on' : ''}">${v ? '<svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>' : '<svg class="qi" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7l10 10M17 7 7 17"/></svg>'}${QUAL[k]}<span class="vh">${v ? ' (yes)' : ' (no)'}</span></li>`).join('')}</ul>` : '']])}
+    <h4>Rank and integrity</h4>${kvs([['Rank', `${rankBadge(d, 'rk-t')} ${esc(RANK_TEXT[rankOf(d)])}${d.rank ? `<span class="sub">${esc(d.rank.why.join(' · '))}</span>` : ''}`],
+      ['Integrity', integrityBlock(d)],
+      ['Contents', d.contents ? `<b>${d.contents.score} of ${d.contents.of}</b><span class="sub">What the data holds; not part of the rank.</span><ul class="ql">${Object.entries(d.contents.flags).map(([k, v]) => `<li class="${v ? 'on' : ''}">${v ? ICON_YES : ICON_NO}${CONT[k]}<span class="vh">${v ? ' (yes)' : ' (no)'}</span></li>`).join('')}</ul>` : '']])}
     <h4>Data</h4>${scale}<h4>Tactile sensing</h4>${tactile}${hwOf(d).length ? `<h4>Hardware</h4><div class="dsl">${hwOf(d).map(([h, r]) =>
       `<a href="hardware.html#h=${esc(h.id)}">${h.thumb ? `<img src="${esc(h.thumb)}" alt="" style="object-fit:contain">` : ''}<div><b>${esc(h.name)}</b><span>${esc(r)} · ${esc(h.maker)}</span></div></a>`).join('')}</div>` : ''}<h4>Cameras</h4>${cams}<h4>Hand tracking</h4>${track}
     <h4>Also recorded</h4><p class="plain">${esc([...new Set(other)].join(', ') || 'Tactile only')}</p>
-    <h4>Access</h4>${kvs([['Availability', `${LABEL.availability[d.availability]} · ${esc(d.access)}`], ['License', esc(d.license)]])}
+    <h4>Access</h4>${kvs([['Availability', `${LABEL.availability[d.availability]} · ${esc(d.access)}`],
+      ['Apply', d.gate ? `<a href="${esc(d.gate.url)}" target="_blank" rel="noopener">${esc(gateText(d.gate))}</a>${d.gate.note ? `<span class="sub">${esc(d.gate.note)}</span>` : ''}${d.gate.checked ? `<span class="sub">Checked ${esc(d.gate.checked)}.</span>` : ''}` : ''],
+      ['License', `${esc(d.license)}<span class="sub">Shown for reuse; it does not change the rank.</span>`]])}
     ${(d.used_by || []).length ? `<h4>Used by</h4><ul class="usedby">${d.used_by.map(u => `<li><a href="${esc(u.url)}" target="_blank" rel="noopener">${esc(u.name)}</a>${u.note ? `: ${esc(u.note)}` : ''}</li>`).join('')}</ul>` : ''}
     <div class="links">${d.viewer ? `<a class="btn" href="viewer/#rec=${esc(d.viewer)}"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play samples in the viewer</a>` : ''}${linkRow(d).replace(/<a class="play"[^]*?<\/a>/, '')}</div>
     ${(d.sources || []).length ? `<details class="srcs"><summary>Sources${(d.unconfirmed || []).length ? ' and open points' : ''}</summary>

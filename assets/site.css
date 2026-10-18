@@ -67,7 +67,7 @@ button,select,input{font:inherit;color:var(--ink)}
 .thumb img{width:100%;height:100%;object-fit:cover;background:#fff}
 .thumb .glyph{width:38%;height:auto}
 .badge{position:absolute;left:10px;top:10px;font-size:11px;font-weight:650;padding:2px 8px;border-radius:999px;background:var(--panel);box-shadow:var(--shadow)}
-.rk{font-weight:650}.rk1{color:var(--ok)}.rk2{color:var(--accent)}.rk3{color:var(--warn)}.rk4{color:var(--bad)}
+.rk{font-weight:650}.rk1{color:var(--ok)}.rk2{color:var(--accent)}.rk3{color:var(--bad)}.rk4,.rk5{color:var(--warn)}.rk6{color:var(--muted)}
 .rk-t{font-size:12px;white-space:nowrap}
 .rgroup{margin:0 0 22px}.rgroup h2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:15px;margin:4px 0 10px}
 .rgroup h2 span:not(.rh){font-size:12.5px;font-weight:400;color:var(--muted)}.rgroup h2 small{font-size:12px;color:var(--muted);margin-left:auto}
@@ -89,6 +89,12 @@ button,select,input{font:inherit;color:var(--ink)}
 .tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:2px}
 .tag{font-size:11.5px;padding:1px 7px;border-radius:6px;background:var(--accent-soft);color:var(--ink2)}
 .tag.dim{background:var(--pre);color:var(--muted)}
+.tag.lic{background:var(--pre);color:var(--ink2)}.tag.lic.un{background:var(--warn-soft);color:var(--warn)}
+.tag.gate{background:var(--accent-soft);color:var(--ink2)}.tag.bad{background:var(--bad-soft);color:var(--bad)}
+.card .tags{margin-top:-2px}
+.ql.chk{display:flex;flex-wrap:wrap;gap:2px 14px;margin:0}.ql.chk li.on{color:var(--ok)}.ql.chk li.no{color:var(--bad);font-weight:600}
+.faults{list-style:none;margin:6px 0 4px;padding:0;font-size:13px;color:var(--ink2)}.faults li{margin:4px 0}
+.faults b{font-size:11px;font-weight:650;padding:0 6px;border-radius:4px;margin-right:4px}.fd{background:var(--bad-soft);color:var(--bad)}.fm{background:var(--pre);color:var(--muted)}
 .links{display:flex;flex-wrap:wrap;gap:2px 12px;padding:8px 14px 12px;border-top:1px solid var(--line2);font-size:12.5px}
 .links a{text-decoration:none;font-weight:550}
 .links a:hover{text-decoration:underline}

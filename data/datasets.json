@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-10-17"
+  "last_updated": "2026-10-18"
  },
  "datasets": [
   {
@@ -58,6 +58,12 @@
    },
    "availability": "gated",
    "access": "Gated on Hugging Face. 100 h / 15,324 episodes / 929 tasks (~1.08 TB) released so far; the rest is planned before November 2026.",
+   "gate": {
+    "kind": "hf_gate",
+    "approval": "automatic",
+    "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale",
+    "checked": "2026-10-18"
+   },
    "license": "CC BY-NC 4.0",
    "caveats": [
     "No hand-pose capture; the paper estimates pose with WiLoR."
@@ -124,13 +130,16 @@
     "Depth resolution: paper 640x480; card says depth_head.mkv is 1280x720 registered to head RGB."
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 4,
+    "label": "Apply for access",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "gated"
+     "download after an application: Hugging Face gate, automatic approval",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -206,6 +215,9 @@
    "image": "https://jianyi2004.github.io/TouchAnything-Website/static/figures/teaser.png",
    "thumb": "assets/thumbs/egotouch.jpg",
    "viewer": "eg_twist_bottle_cap_20260320_140403_874",
+   "integrity": {
+    "faults": []
+   },
    "setup": {
     "cameras": [
      {
@@ -275,23 +287,15 @@
     "Glove maker from a figure on the TouchAnything project page labelled 'JQ-Industries Fabric Tactile Glove'; the paper text says custom pressure gloves."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open, checked",
+    "integrity": "passed",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated"
+     "8 sample episodes opened in the viewer",
+     "all 4 integrity checks passed"
     ]
-   },
-   "quality": {
-    "score": 4,
-    "of": 5,
-    "flags": {
-     "calibrated": false,
-     "video": true,
-     "hand_pose": true,
-     "scale": true,
-     "diversity": true
-    }
    },
    "used_by": [
     {
@@ -304,7 +308,18 @@
      "url": "https://arxiv.org/abs/2609.34286",
      "note": "adapts a pretrained video model to EgoTouch, then to two robot hands"
     }
-   ]
+   ],
+   "contents": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
   },
   {
    "id": "tactidex",
@@ -403,13 +418,15 @@
     "Project page shows Code/Data as 'Coming Soon'."
    ],
    "rank": {
-    "n": 4,
+    "n": 6,
     "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "not released"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -547,16 +564,28 @@
     "Head ZED X Mini is a stereo camera but only its left monocular RGB stream is recorded."
    ],
    "viewer": "tr_ep001061",
+   "integrity": {
+    "faults": []
+   },
    "rank": {
     "n": 1,
-    "label": "Open + checked",
+    "label": "Open, checked",
+    "integrity": "passed",
+    "failed": [],
     "why": [
      "public download",
-     "license: MIT",
-     "samples checked in the viewer"
+     "5 sample episodes opened in the viewer",
+     "all 4 integrity checks passed"
     ]
    },
-   "quality": {
+   "used_by": [
+    {
+     "name": "DexTacWAM (arXiv 2609.24976)",
+     "url": "https://arxiv.org/abs/2609.24976",
+     "note": "its 488-episode pretraining corpus re-hosts trimmed T-Rex episodes (one checked frame-for-frame against T-Rex episode 3479); the paper does not say so"
+    }
+   ],
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -566,14 +595,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "used_by": [
-    {
-     "name": "DexTacWAM (arXiv 2609.24976)",
-     "url": "https://arxiv.org/abs/2609.24976",
-     "note": "its 488-episode pretraining corpus re-hosts trimmed T-Rex episodes (one checked frame-for-frame against T-Rex episode 3479); the paper does not say so"
-    }
-   ]
+   }
   },
   {
    "id": "opentouch",
@@ -640,6 +662,9 @@
    "image": "https://opentouch-tactile.github.io/assets/examples/ex1.png",
    "thumb": "assets/thumbs/opentouch.jpg",
    "viewer": "ot_hardware_homedepot_p1_demo_17",
+   "integrity": {
+    "faults": []
+   },
    "setup": {
     "cameras": [
      {
@@ -682,14 +707,24 @@
     "Paper is ambiguous on finger coverage: 'uniformly cover the fingers and palmar surface'."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open, checked",
+    "integrity": "passed",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated"
+     "6 sample episodes opened in the viewer",
+     "all 4 integrity checks passed"
     ]
    },
-   "quality": {
+   "used_by": [
+    {
+     "name": "EgoTac (arXiv 2608.15060)",
+     "url": "https://arxiv.org/abs/2608.15060",
+     "note": "out-of-domain evaluation only, no training"
+    }
+   ],
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -699,14 +734,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "used_by": [
-    {
-     "name": "EgoTac (arXiv 2608.15060)",
-     "url": "https://arxiv.org/abs/2608.15060",
-     "note": "out-of-domain evaluation only, no training"
-    }
-   ]
+   }
   },
   {
    "id": "egotactile",
@@ -764,6 +792,9 @@
    "image": "https://egotactile.github.io/assets/dataset_overview.png",
    "thumb": "assets/thumbs/egotactile.jpg",
    "viewer": "et_gloved_p007_screwdriver_r0",
+   "integrity": {
+    "faults": []
+   },
    "setup": {
     "cameras": [
      {
@@ -802,14 +833,16 @@
    ],
    "rank": {
     "n": 1,
-    "label": "Open + checked",
+    "label": "Open, checked",
+    "integrity": "passed",
+    "failed": [],
     "why": [
      "public download",
-     "license: CC BY-NC 4.0",
-     "samples checked in the viewer"
+     "6 sample episodes opened in the viewer",
+     "all 4 integrity checks passed"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -986,15 +1019,40 @@
     "Human success labels are null in the catalog (paper: all human trials succeed). Release success counts: Allegro 453/453, Inspire F1 423 true / 164 false / 5 null, Inspire DFTP 387 / 231, Robotiq grasp_result.json 474 / 81 (555 files)."
    ],
    "rank": {
-    "n": 1,
-    "label": "Open + checked",
+    "n": 3,
+    "label": "Open, defects found",
+    "integrity": "failed",
+    "failed": [
+     "streams"
+    ],
     "why": [
      "public download",
-     "license: CC BY-NC 4.0",
-     "samples checked in the viewer"
+     "3 sample episodes opened in the viewer",
+     "failed: Streams present",
+     "2 minor faults listed"
     ]
    },
-   "quality": {
+   "viewer": "hr_inspire_f1_brown_ramen_10",
+   "integrity": {
+    "faults": [
+     {
+      "check": "streams",
+      "severity": "defect",
+      "text": "tactile.npy is empty (0 elements) in all 618 Inspire RH56DFTP episodes, 23% of the 2,703 released sequences; only a 6-channel actuator force.npy is present."
+     },
+     {
+      "check": "files",
+      "severity": "minor",
+      "text": "33 Robotiq folders lack raw/ and 36 lack calibration files (about 1% of sequences)."
+     },
+     {
+      "check": "time",
+      "severity": "minor",
+      "text": "In a converted sequence 10 of 669 timestamp rows name frames past the end of the videos, and 2 frame times step backwards."
+     }
+    ]
+   },
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -1004,8 +1062,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "viewer": "hr_inspire_f1_brown_ramen_10"
+   }
   },
   {
    "id": "actionsense",
@@ -1170,14 +1227,27 @@
    ],
    "rank": {
     "n": 1,
-    "label": "Open + checked",
+    "label": "Open, checked",
+    "integrity": "passed",
+    "failed": [],
     "why": [
      "public download",
-     "license: CC BY-NC-SA 4.0",
-     "samples checked in the viewer"
+     "7 sample episodes opened in the viewer",
+     "all 4 integrity checks passed",
+     "1 minor fault listed"
     ]
    },
-   "quality": {
+   "viewer": "ac_S04_2022-06-14_16-38-43_act007",
+   "integrity": {
+    "faults": [
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "Up to 6 of the 1,364 placed crossings on the right glove toggle between rest and about 1,018 counts, an intermittent read-out fault; the viewer flags them per episode."
+     }
+    ]
+   },
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -1187,8 +1257,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "viewer": "ac_S04_2022-06-14_16-38-43_act007"
+   }
   },
   {
    "id": "stag",
@@ -1304,13 +1373,15 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 1,
     "of": 5,
     "flags": {
@@ -1418,14 +1489,28 @@
     "Xsens MVN is named in the Reporting Summary; 'imu' is inferred from the product."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 1,
+    "label": "Open, checked",
+    "integrity": "passed",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated"
+     "8 sample episodes opened in the viewer",
+     "all 4 integrity checks passed",
+     "1 minor fault listed"
     ]
    },
-   "quality": {
+   "viewer": "se_mug_1",
+   "integrity": {
+    "faults": [
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "Isolated cells read 1,023; the authors' code treats readings above 1,000 as artifacts and replaces them from neighbours. In the converted windows they are under 0.1% of glove readings."
+     }
+    ]
+   },
+   "contents": {
     "score": 1,
     "of": 5,
     "flags": {
@@ -1435,8 +1520,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "viewer": "se_mug_1"
+   }
   },
   {
    "id": "vtdexmanip",
@@ -1537,15 +1621,35 @@
     "Contact: 59.7% of frames have at least one pad >= 0.2 V (the authors' binarisation threshold)."
    ],
    "rank": {
-    "n": 1,
-    "label": "Open + checked",
+    "n": 3,
+    "label": "Open, defects found",
+    "integrity": "failed",
+    "failed": [
+     "time"
+    ],
     "why": [
      "public download",
-     "license: CC BY-NC-SA 4.0 (data); MIT (code)",
-     "samples checked in the viewer"
+     "8 sample episodes opened in the viewer",
+     "failed: Time base",
+     "1 minor fault listed"
     ]
    },
-   "quality": {
+   "viewer": "vt_502047",
+   "integrity": {
+    "faults": [
+     {
+      "check": "time",
+      "severity": "defect",
+      "text": "The release has no timestamps and no frame rate; tactile and video frames pair one to one, and the viewer assumes 30 fps."
+     },
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "54 of the 2,032 sequences contain negative voltages (minimum -5.07 V)."
+     }
+    ]
+   },
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -1555,8 +1659,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "viewer": "vt_502047"
+   }
   },
   {
    "id": "adl21",
@@ -1645,14 +1748,29 @@
    ],
    "rank": {
     "n": 1,
-    "label": "Open + checked",
+    "label": "Open, checked",
+    "integrity": "passed",
+    "failed": [],
     "why": [
      "public download",
-     "license: CC BY 4.0",
-     "samples checked in the viewer"
+     "8 sample episodes opened in the viewer",
+     "all 4 integrity checks passed",
+     "1 minor fault listed"
     ]
    },
-   "quality": {
+   "image": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/1a5e/8068022/2d7bc2af6d12/sensors-21-02594-g003.jpg",
+   "viewer": "ad_t04_s01",
+   "integrity": {
+    "faults": [
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "presRaw is unfiltered: it has single-frame spikes and unflagged readings above the 517 kPa sensor map (max 1,630 kPa); the paper median-filtered the data and discarded saturated sensels."
+     }
+    ]
+   },
+   "thumb": "assets/thumbs/adl21.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -1662,10 +1780,7 @@
      "scale": false,
      "diversity": true
     }
-   },
-   "image": "https://cdn.ncbi.nlm.nih.gov/pmc/blobs/1a5e/8068022/2d7bc2af6d12/sensors-21-02594-g003.jpg",
-   "viewer": "ad_t04_s01",
-   "thumb": "assets/thumbs/adl21.jpg"
+   }
   },
   {
    "id": "reachgrasp",
@@ -1791,15 +1906,37 @@
     "Paper Fig. 2 counts are 17 palm, 9 index, 8 middle, 8 ring, 9 pinky, 7 thumb; Supplementary Table 5 names give the same split (palm: 5 PalmWrist, 6 PalmThumb, 6 PalmFinger)."
    ],
    "rank": {
-    "n": 1,
-    "label": "Open + checked",
+    "n": 3,
+    "label": "Open, defects found",
+    "integrity": "failed",
+    "failed": [
+     "tactile"
+    ],
     "why": [
      "public download",
-     "license: CC BY 4.0",
-     "samples checked in the viewer"
+     "8 sample episodes opened in the viewer",
+     "failed: Tactile intact",
+     "1 minor fault listed"
     ]
    },
-   "quality": {
+   "image": "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41597-025-04552-5/MediaObjects/41597_2025_4552_Fig2_HTML.png",
+   "viewer": "re_sub-03_task-Sph",
+   "integrity": {
+    "faults": [
+     {
+      "check": "tactile",
+      "severity": "defect",
+      "text": "4 of the 58 taxels are faulty: ring-fingertip rdd, rdo and rdm malfunction (stated in the paper), and lmo reads 0 in all 158 tactile files."
+     },
+     {
+      "check": "files",
+      "severity": "minor",
+      "text": "sub-03 FroRea and ReaCyl have no tactile or CyberGlove files (EMG and Vicon only)."
+     }
+    ]
+   },
+   "thumb": "assets/thumbs/reachgrasp.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -1809,10 +1946,7 @@
      "scale": false,
      "diversity": true
     }
-   },
-   "image": "https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41597-025-04552-5/MediaObjects/41597_2025_4552_Fig2_HTML.png",
-   "viewer": "re_sub-03_task-Sph",
-   "thumb": "assets/thumbs/reachgrasp.jpg"
+   }
   },
   {
    "id": "hato",
@@ -1939,15 +2073,35 @@
     "The stationary third camera is a 'head-view' camera on a fixed mount, not robot- or operator-mounted, so it is listed as third_person."
    ],
    "viewer": "ha_stack_0309_235138",
-   "rank": {
-    "n": 2,
-    "label": "Open",
-    "why": [
-     "public download",
-     "license not stated"
+   "integrity": {
+    "faults": [
+     {
+      "check": "tactile",
+      "severity": "defect",
+      "text": "The right hand's middle fingertip (6 of the 60 touch sites) reads zero in all 3 converted episodes, and every wine-pouring episode sampled has the right hand's touch bytes corrupted in most steps."
+     },
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "In the other tasks single ticks arrive with corrupted touch bytes (1 of 182 and 1 of 303 ticks in two converted episodes); the viewer shows the last clean reading."
+     }
     ]
    },
-   "quality": {
+   "rank": {
+    "n": 3,
+    "label": "Open, defects found",
+    "integrity": "failed",
+    "failed": [
+     "tactile"
+    ],
+    "why": [
+     "public download",
+     "3 sample episodes opened in the viewer",
+     "failed: Tactile intact",
+     "1 minor fault listed"
+    ]
+   },
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -2096,14 +2250,40 @@
     "The tracking method vision_estimate for Holo-Dex follows from the paper's 'The headset returns a pose estimate for each finger' and the Fig. 2 'Oculus Headset'. The headset model is not named."
    ],
    "rank": {
-    "n": 2,
-    "label": "Open",
+    "n": 3,
+    "label": "Open, defects found",
+    "integrity": "failed",
+    "failed": [
+     "streams"
+    ],
     "why": [
      "public download",
-     "license not stated"
+     "6 sample episodes opened in the viewer",
+     "failed: Streams present",
+     "2 minor faults listed"
     ]
    },
-   "quality": {
+   "viewer": "td_bottle_cap_opening_8",
+   "integrity": {
+    "faults": [
+     {
+      "check": "streams",
+      "severity": "defect",
+      "text": "Depth files are empty (800-byte HDF5 with no datasets) in 5 of the 70 recordings: play 16, 19 and 21, book_opening 7 and 8."
+     },
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "One taxel reads constant zero on all three axes in each of two converted recordings (pad 9 taxel 14; pad 1 taxel 3)."
+     },
+     {
+      "check": "time",
+      "severity": "minor",
+      "text": "cam_1 AVIs hold one frame more than their timestamp lists, an offset of at most one frame (33 ms)."
+     }
+    ]
+   },
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -2113,8 +2293,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "viewer": "td_bottle_cap_opening_8"
+   }
   },
   {
    "id": "gist_vta",
@@ -2231,13 +2410,15 @@
     "No public release found (no link in paper/arXiv; HF search for the dataset found nothing)."
    ],
    "rank": {
-    "n": 4,
+    "n": 6,
     "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "not released"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -2375,13 +2556,15 @@
     "Rokoko glove model / sensing principle not named in paper, so method left null."
    ],
    "rank": {
-    "n": 4,
+    "n": 6,
     "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "release announced"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -2518,13 +2701,15 @@
     "wrist_cameras = 1 for each side (human and robot)."
    ],
    "rank": {
-    "n": 4,
+    "n": 6,
     "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "release announced"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -2680,13 +2865,21 @@
     "The project page's JSON-LD metadata carries \"license\": \"https://opensource.org/licenses/MIT\" for the page (ScholarlyArticle record) and the arXiv paper is CC BY 4.0; neither is stated for the data."
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 5,
+    "label": "Sample only",
+    "integrity": "passed",
+    "failed": [],
     "why": [
-     "partial"
+     "only a sample or part released",
+     "1 sample episode opened in the viewer",
+     "all 4 integrity checks passed"
     ]
    },
-   "quality": {
+   "viewer": "os_00",
+   "integrity": {
+    "faults": []
+   },
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -2696,8 +2889,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "viewer": "os_00"
+   }
   },
   {
    "id": "humanoid_everyday",
@@ -2840,15 +3032,29 @@
     "Raw per-task zips (with AVP head/wrist poses, tau_ff, sensor_type) are linked from a Google spreadsheet in the README; that sheet was not opened."
    ],
    "rank": {
-    "n": 1,
-    "label": "Open + checked",
+    "n": 3,
+    "label": "Open, defects found",
+    "integrity": "failed",
+    "failed": [
+     "tactile"
+    ],
     "why": [
      "public download",
-     "license: Apache-2.0",
-     "samples checked in the viewer"
+     "8 sample episodes opened in the viewer",
+     "failed: Tactile intact"
     ]
    },
-   "quality": {
+   "viewer": "hu_7997",
+   "integrity": {
+    "faults": [
+     {
+      "check": "tactile",
+      "severity": "defect",
+      "text": "observation.tactile.values is shifted by 13 values (a recording-code bug), so only 22 of the 66 Dex3-1 readings survive (12 left, 10 right); the viewer undoes the shift."
+     }
+    ]
+   },
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -2858,8 +3064,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "viewer": "hu_7997"
+   }
   },
   {
    "id": "robotacdex",
@@ -2979,13 +3184,15 @@
     "scenes left null: the 4 configurations are table distance x background variants of one lab setup. 23 skills are not a schema field (in text)."
    ],
    "rank": {
-    "n": 4,
+    "n": 6,
     "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "release announced"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -3107,13 +3314,15 @@
     "Release: the repository README says the data will be released upon publication; the paper promises an expanded dataset covering 10 object categories."
    ],
    "rank": {
-    "n": 4,
+    "n": 6,
     "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "release announced"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -3173,6 +3382,13 @@
    },
    "availability": "gated",
    "access": "Hugging Face ACERobotics/ACE-Data-0: the card defines a personal access form for non-commercial academic research (the gate was not enforced on 2026-10-16); glove data is under Table-scale/Tactile/ACE-Data-Tactile-{0..10}, and per-take parquet and mp4 files can be fetched one by one.",
+   "gate": {
+    "kind": "form",
+    "approval": "not stated",
+    "url": "https://huggingface.co/datasets/ACERobotics/ACE-Data-0",
+    "checked": "2026-10-18",
+    "note": "The dataset card asks for a personal access form for non-commercial academic research; the Hugging Face gate itself was off on 2026-10-16 and 2026-10-18."
+   },
    "license": "ACE-Data-0 Research License Agreement v1.0 (non-commercial academic research only, no redistribution)",
    "caveats": [
     "Only the Table-scale/Tactile shards (541 takes) carry glove data. Room-scale (1,131 takes), Table-scale/HOI (290 takes) and Table-scale/Hands (199 takes) have no tactile files.",
@@ -3254,13 +3470,17 @@
     "Chinese company name 大晓机器人 for ACE Robotics comes from press coverage of the release, not from the card, paper or license."
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 4,
+    "label": "Apply for access",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "gated"
+     "download after an application: access form",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/ace_data_0.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -3270,8 +3490,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/ace_data_0.jpg"
+   }
   },
   {
    "id": "daimon_datadex",
@@ -3430,13 +3649,16 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/daimon_datadex.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -3446,8 +3668,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/daimon_datadex.jpg"
+   }
   },
   {
    "id": "deco50",
@@ -3581,13 +3802,16 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/deco50.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -3597,8 +3821,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/deco50.jpg"
+   }
   },
   {
    "id": "dex_mptd",
@@ -3676,13 +3899,15 @@
     "v1 of the arXiv paper is titled '... in Dexterous Manipulation'; v2 and the workshop version use '... in Dexterous Hand'."
    ],
    "rank": {
-    "n": 4,
+    "n": 6,
     "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "release announced"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 0,
     "of": 5,
     "flags": {
@@ -3835,13 +4060,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/dextacwam.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -3851,8 +4079,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/dextacwam.jpg"
+   }
   },
   {
    "id": "dextraverse",
@@ -3992,13 +4219,15 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -4148,13 +4377,17 @@
     }
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 5,
+    "label": "Sample only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "partial"
+     "only a sample or part released",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/dexumi.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -4164,8 +4397,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/dexumi.jpg"
+   }
   },
   {
    "id": "egoexplorer",
@@ -4219,6 +4451,13 @@
    },
    "availability": "partial",
    "access": "Hugging Face InternRobotics/EgoExplorer, gated behind a Google form that is checked automatically (access in about a minute); it holds the 66-min mini release (18 recordings, 21.1 GB), and the full collection opens in stages through a waitlist.",
+   "gate": {
+    "kind": "hf_gate",
+    "approval": "manual",
+    "url": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+    "checked": "2026-10-18",
+    "note": "Hugging Face lists the gate as manual approval; the gate asks for a Google form that the project says is checked automatically, with access in about a minute. It covers the 66-min mini release; the full collection opens in stages through a waitlist."
+   },
    "license": "CC BY-NC 4.0",
    "caveats": [
     "Only the 66-min mini release (18 recordings) can be downloaded; the paper's 2,715 recordings (100 h) are opened in stages to waitlisted groups.",
@@ -4316,13 +4555,18 @@
     "note": "Shanghai AI Laboratory (InternRobotics org); no Chinese dataset name or title published; card, paper and project page in English, the access form adds one Chinese sentence"
    },
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 5,
+    "label": "Sample only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "partial"
+     "only a sample or part released",
+     "application: Hugging Face gate, manual approval",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/egoexplorer.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -4332,8 +4576,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/egoexplorer.jpg"
+   }
   },
   {
    "id": "egotac_sc",
@@ -4472,13 +4715,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/egotac_sc.jpg",
+   "contents": {
     "score": 5,
     "of": 5,
     "flags": {
@@ -4488,8 +4734,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/egotac_sc.jpg"
+   }
   },
   {
    "id": "feel_benchmark",
@@ -4596,13 +4841,15 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -4728,14 +4975,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/feel.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -4745,8 +4994,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/feel.jpg"
+   }
   },
   {
    "id": "feelsight",
@@ -4859,13 +5107,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/feelsight.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -4875,8 +5126,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/feelsight.jpg"
+   }
   },
   {
    "id": "ftp1_sharpa",
@@ -5019,13 +5269,16 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/ftp1_sharpa.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -5035,8 +5288,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/ftp1_sharpa.jpg"
+   }
   },
   {
    "id": "fusionx_sample",
@@ -5170,13 +5422,15 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -5233,6 +5487,12 @@
    },
    "availability": "gated",
    "access": "Google Form (name, affiliation, email); the download link is shown on the confirmation page after submitting.",
+   "gate": {
+    "kind": "form",
+    "approval": "immediate",
+    "url": "https://forms.gle/QzEPJ7ncuGHgi1gS9",
+    "note": "Google Form (name, affiliation, email); the download link appears on the confirmation page."
+   },
    "license": "not stated",
    "caveats": [
     "Tactile and IMU signals exist only for the glove session; bare-hand contact labels are manual binary per-fingertip annotations.",
@@ -5294,13 +5554,17 @@
     "Affiliations: paper lists Meta Reality Labs and Rutgers University (Abdeslam Boularias); first author worked on it during a Meta internship. The glove is called 'our research platform'; maker taken as Meta Reality Labs from that context."
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 4,
+    "label": "Apply for access",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "gated"
+     "download after an application: access form, immediate approval",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/glove2hand_handsense.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -5310,8 +5574,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/glove2hand_handsense.jpg"
+   }
   },
   {
    "id": "grasp_like_humans",
@@ -5403,14 +5666,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/grasp_like_humans.jpg",
+   "contents": {
     "score": 1,
     "of": 5,
     "flags": {
@@ -5420,8 +5685,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/grasp_like_humans.jpg"
+   }
   },
   {
    "id": "htac",
@@ -5576,13 +5840,17 @@
     "note": "paper, project page and dataset card are in English; the Chinese company name is from beingbeyond.com"
    },
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 5,
+    "label": "Sample only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "partial"
+     "only a sample or part released",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/htac.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -5592,8 +5860,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/htac.jpg"
+   }
   },
   {
    "id": "humantouch",
@@ -5754,13 +6021,16 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/humantouch.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -5770,8 +6040,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/humantouch.jpg"
+   }
   },
   {
    "id": "juqiao_glove_0929",
@@ -5885,13 +6154,15 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -5958,6 +6229,12 @@
    },
    "availability": "gated",
    "access": "ScienceDB, restricted: each download needs the authors' approval of a request giving name, organisation and purpose (DOI 10.57760/sciencedb.14937, V3, 1.42 TB, 3,602 files; an earlier 2.47 GB annotation-only record is DOI 10.57760/sciencedb.14901). The file list is public.",
+   "gate": {
+    "kind": "request",
+    "approval": "manual",
+    "url": "https://doi.org/10.57760/sciencedb.14937",
+    "note": "ScienceDB: each download needs the authors' approval of a request giving name, organisation and purpose."
+   },
    "license": "not stated",
    "caveats": [
     "Restricted access on ScienceDB: files are released only after the authors approve a request; both records list no license.",
@@ -6054,13 +6331,17 @@
     "note": "Paper and ScienceDB record are in English (the record's Chinese title field repeats 'Kaiwu Dataset'); ScienceDB gives the Chinese organisation name. Some folder names are Chinese: 标注结果 [annotation results], 过程文件 [process files], 手势分类.zip [gesture classification]."
    },
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 4,
+    "label": "Apply for access",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "gated"
+     "download after an application: request to the authors, manual approval",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/kaiwu.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -6070,8 +6351,7 @@
      "scale": false,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/kaiwu.jpg"
+   }
   },
   {
    "id": "lasr_gentle_grasping",
@@ -6185,13 +6465,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/lasr_gentle_grasping.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -6201,8 +6484,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/lasr_gentle_grasping.jpg"
+   }
   },
   {
    "id": "lasr_grasp_stability",
@@ -6330,13 +6612,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/lasr_grasp_stability.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -6346,8 +6631,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/lasr_grasp_stability.jpg"
+   }
   },
   {
    "id": "let_dex",
@@ -6492,13 +6776,15 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -6630,13 +6916,15 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -6765,13 +7053,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/opengraph_ego_tactile.jpg",
+   "contents": {
     "score": 1,
     "of": 5,
     "flags": {
@@ -6781,8 +7072,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/opengraph_ego_tactile.jpg"
+   }
   },
   {
    "id": "palmdex",
@@ -6914,13 +7204,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/palmdex.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -6930,8 +7223,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/palmdex.jpg"
+   }
   },
   {
    "id": "paxini_omnisharing",
@@ -6987,6 +7279,12 @@
    },
    "availability": "partial",
    "access": "The sample (1,000 HDF5 files, 0.29-4.1 GB each, 1.08 TB) is public on Hugging Face without login; the full OmniSharing DB is sold through the PaXini data mall (dataset-mall.paxini.com).",
+   "gate": {
+    "kind": "purchase",
+    "approval": "not stated",
+    "url": "https://dataset-mall.paxini.com",
+    "note": "The 1,000-episode sample is public; the full OmniSharing DB is sold through the PaXini data mall."
+   },
    "license": "CC BY-NC-SA 4.0",
    "caveats": [
     "The Hugging Face repo is a sample; raw data (DF-1) and the full database are commercial. The card's task table lists 9 tasks with 100 episodes each, while the files hold 10 task codes; the ice-scooping and flower-in-vase tasks found in the files are not in the table, and its 'Insert and Remove' task was not identified.",
@@ -7079,13 +7377,17 @@
     }
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 5,
+    "label": "Sample only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "partial"
+     "only a sample or part released",
+     "application: purchase",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -7194,14 +7496,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/pimforce.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -7211,8 +7515,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/pimforce.jpg"
+   }
   },
   {
    "id": "psibot_syndata_tactile",
@@ -7336,13 +7639,15 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -7466,13 +7771,15 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -7628,13 +7935,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/sharpadex.jpg",
+   "contents": {
     "score": 4,
     "of": 5,
     "flags": {
@@ -7644,8 +7954,7 @@
      "scale": true,
      "diversity": true
     }
-   },
-   "thumb": "assets/thumbs/sharpadex.jpg"
+   }
   },
   {
    "id": "sharpa_origami",
@@ -7691,6 +8000,13 @@
    },
    "availability": "gated",
    "access": "Official: Hugging Face SharpaIT/Robotic_Origami_Challenge, gated (HF login and agreeing to share contact information; HF lists the gate as automatic approval), ~1.91 TB of per-season LeRobot v3.0 + v2.1 folders. Ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons (595 episodes, 459 GB) merged into one LeRobot v3.0 root.",
+   "gate": {
+    "kind": "hf_gate",
+    "approval": "automatic",
+    "url": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge",
+    "checked": "2026-10-18",
+    "note": "The ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons."
+   },
    "license": "CC BY 4.0",
    "caveats": [
     "One task only: folding the same 6-fold paper airplane (15 x 15 cm, >= 60 gsm paper) in every episode; episodes run 175-418 s (mirror).",
@@ -7777,13 +8093,17 @@
     "The Get access link on the challenge page leads to a FrodoBots Google Form for info sessions and Discord sign-up (name, affiliation, role); it carries no data terms. The gate conditions text on Hugging Face is only shown after login and was not read."
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 4,
+    "label": "Apply for access",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "gated"
+     "download after an application: Hugging Face gate, automatic approval",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/sharpa_origami.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -7793,8 +8113,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/sharpa_origami.jpg"
+   }
   },
   {
    "id": "sharpa_roco",
@@ -7919,13 +8238,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/sharpa_roco.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -7935,8 +8257,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/sharpa_roco.jpg"
+   }
   },
   {
    "id": "sparsh_skin",
@@ -8047,14 +8368,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/sparsh_skin.jpg",
+   "contents": {
     "score": 1,
     "of": 5,
     "flags": {
@@ -8064,8 +8387,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/sparsh_skin.jpg"
+   }
   },
   {
    "id": "sparsh_x",
@@ -8192,13 +8514,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/sparsh_x.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -8208,8 +8533,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/sparsh_x.jpg"
+   }
   },
   {
    "id": "tacdex3d",
@@ -8349,14 +8673,15 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "license not stated",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -8502,13 +8827,15 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -8633,13 +8960,15 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -8769,13 +9098,17 @@
     "scenes=1: one Franka tabletop setup; not stated as a count."
    ],
    "rank": {
-    "n": 3,
-    "label": "Restricted",
+    "n": 5,
+    "label": "Sample only",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
-     "partial"
+     "only a sample or part released",
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/tactalign.jpg",
+   "contents": {
     "score": 1,
     "of": 5,
     "flags": {
@@ -8785,8 +9118,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/tactalign.jpg"
+   }
   },
   {
    "id": "uvta",
@@ -8927,13 +9259,16 @@
    ],
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/uvta.jpg",
+   "contents": {
     "score": 3,
     "of": 5,
     "flags": {
@@ -8943,8 +9278,7 @@
      "scale": true,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/uvta.jpg"
+   }
   },
   {
    "id": "vint6d",
@@ -9089,13 +9423,16 @@
    },
    "rank": {
     "n": 2,
-    "label": "Open",
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
     "why": [
      "public download",
-     "samples not checked yet"
+     "files not opened yet"
     ]
    },
-   "quality": {
+   "thumb": "assets/thumbs/vint6d.jpg",
+   "contents": {
     "score": 2,
     "of": 5,
     "flags": {
@@ -9105,8 +9442,7 @@
      "scale": false,
      "diversity": false
     }
-   },
-   "thumb": "assets/thumbs/vint6d.jpg"
+   }
   }
  ]
 }
