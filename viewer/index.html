@@ -454,7 +454,7 @@ function mountGrid(){
   const H=R.hands[R.hlist[0]];$('scale').innerHTML=`<span>Taxel value, ${esc(H.unit||'raw')}</span><span>0</span>`;$('scale').appendChild(colorbar());
   $('scale').insertAdjacentHTML('beforeend',`<span>${H.range}</span>`);
   const VH=R.hlist.map(h=>R.hands[h]).find(h=>h.vec);if(VH){const V=VH.vec;$('scale').insertAdjacentHTML('beforeend',`<label style="flex-basis:100%;display:flex;gap:6px;align-items:center"><input type="checkbox" id="vecOn" checked>
-    <span><svg class="ic" viewBox="0 0 16 16" style="fill:#d4a800" aria-hidden="true"><path d="M1.5 7h9.3L7.6 3.8 8.8 2.6 14.2 8l-5.4 5.4-1.2-1.2L10.8 9H1.5z"/></svg> ${esc(V.label||'vector')}: arrow = ${esc(V.axes||'x, y')}, ring = ${esc(V.zname||'z')} (dashed if negative); full block = ${V.range} ${esc(V.unit||'')}</span></label>`);$('vecOn').onchange=()=>render()}
+    <span><svg class="ic" viewBox="0 0 16 16" style="fill:#d4a800" aria-hidden="true"><path d="M1.5 7h9.3L7.6 3.8 8.8 2.6 14.2 8l-5.4 5.4-1.2-1.2L10.8 9H1.5z"/></svg> ${esc(V.label||'vector')}: arrow = ${esc(V.axes||'x, y')}${V.zname===null?'':`, ring = ${esc(V.zname||'z')} (dashed if negative)`}; full block = ${V.range} ${esc(V.unit||'')}</span></label>`);$('vecOn').onchange=()=>render()}
   $('notes').insertAdjacentHTML('beforeend',R.notes+'<p>Keys: <kbd>space</kbd> play/pause, <kbd>←</kbd><kbd>→</kbd> one frame, <kbd>shift</kbd>+arrows one second.</p>');
   buildPlots();drawScrub();
 }

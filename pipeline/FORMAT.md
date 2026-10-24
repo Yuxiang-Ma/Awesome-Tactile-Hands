@@ -40,6 +40,7 @@ In `~/src/human-mcap-viewer`, `python3 make_manifest.py --site site --originflow
                             "axes": "(Fx, Fy)", "zname": "Fz",
                             "items": [ {"region": "<region name>", "data": b64 Float32 n x 3} ]} } ],
                             // drawn at the region's centre: arrow = (x, y) with x right and y up, ring = |z| (dashed if z < 0)
+                            // "zname": null for vectors without a z component (store z = 0): no ring, and the legend omits it
                             // an item may give "cells": [indices into cells] instead of "region", to draw one vector per
                             // sensor pad inside a larger region (e.g. per XELA pad on a finger; see tdex.py)
   "series": [ {"title", "lines": [ {"name", "data": b64 Float32 (n), "col"?, "dash"?} ], "fixed"?: [lo, hi], "legendText"?} ],

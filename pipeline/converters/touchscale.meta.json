@@ -1,0 +1,45 @@
+{
+ "id": "touchscale",
+ "prefix": "ts_",
+ "group": "public",
+ "title": "TouchScale",
+ "provider": "Li et al. 2026 (2077AI Data Foundation)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY-NC 4.0",
+  "tone": "ok"
+ },
+ "about": "Two full-hand tactile gloves (880 taxels each), a head RGB-D camera and two wrist cameras; 15,324 episodes of 929 tasks in 22 scene types, 100 of a planned 500 hours. 8 episodes from 8 scenes are shown.",
+ "link": {
+  "label": "2077AIDataFoundation/TouchScale",
+  "href": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip",
+   "phalanx",
+   "palm"
+  ],
+  "taxels": 880
+ },
+ "hardware": [
+  {
+   "k": "Gloves",
+   "v": "Tachin glove × 2 (episode files: Tujian EI-G012)",
+   "d": "880 taxels on 15 pads per hand · normal force in N plus two tangential components per taxel · 30–100 Hz, timestamped"
+  },
+  {
+   "k": "Cameras",
+   "v": "Head Orbbec Gemini 345Lg + 2 wrist RealSense D405",
+   "d": "1280×720 · 30 fps · head depth registered to the head RGB, 16-bit mm"
+  },
+  {
+   "k": "Other",
+   "v": "Head IMU, instructions, object meshes",
+   "d": "About 200 Hz accelerometer and gyro · one English instruction per episode · 193 textured meshes"
+  }
+ ],
+ "notes": "Paper: arXiv 2610.10288. Released by 2077AI under CC BY-NC 4.0 (non-commercial use with attribution); gated on Hugging Face with automatic approval. Each episode is read out of the release's 2.5 GB WebDataset shards by byte range; its videos are re-encoded and hosted here, credited to the TouchScale authors.",
+ "order": 13
+}

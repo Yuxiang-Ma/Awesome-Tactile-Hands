@@ -1,0 +1,47 @@
+{
+ "id": "sharpa_origami",
+ "prefix": "ro_",
+ "group": "public",
+ "title": "Robotic Origami Challenge",
+ "provider": "Sharpa · Robotic Origami Challenge (IROS 2026)",
+ "kind": "recording",
+ "status": {
+  "label": "CC BY 4.0",
+  "tone": "ok"
+ },
+ "about": "Teleoperated bimanual robot with two Sharpa Wave hands folding a 6-fold paper airplane; five camera-based fingertip tactile sensors per hand. The official release lists 1,991 episodes in 143 seasons (2026-05-14 to 2026-07-18), 1,845 of them with data files.",
+ "link": {
+  "label": "SharpaIT/Robotic_Origami_Challenge",
+  "href": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge"
+ },
+ "sensor": {
+  "type": "coverage",
+  "coverage": [
+   "tip"
+  ]
+ },
+ "hardware": [
+  {
+   "k": "Hands",
+   "v": "2 × Sharpa Wave, 22 joints each",
+   "d": "5 fingertip tactile sensors per hand · raw image, deformation map, 6-axis signal · 30 Hz"
+  },
+  {
+   "k": "Robot",
+   "v": "Bimanual Sharpa rig (robot_type north_ces)",
+   "d": "2 × 7 arm joints, 7 torso/motor joints; 65-D state and action"
+  },
+  {
+   "k": "Cameras",
+   "v": "2 head + 2 wrist",
+   "d": "480×480 · 30 fps; camera models not stated"
+  },
+  {
+   "k": "Task",
+   "v": "Paper airplane, 15 × 15 cm paper",
+   "d": "One task in every episode; teleoperation device not stated"
+  }
+ ],
+ "notes": "Data © Sharpa, released under CC BY 4.0 for the Robotic Origami Challenge (https://robotic-origami-challenge.github.io/). The Hugging Face repository is gated: log in and agree to share your username and email with the authors (automatic approval). Each sample is a 45 s window of one episode, cut from the release's per-episode files and re-encoded for this page. All three tactile streams are shown: the fingertip deformation map pooled to 8 × 8 cells, the 6-axis fingertip signal (arrow, ring and plots), and both tactile videos as mosaics.",
+ "order": 14
+}

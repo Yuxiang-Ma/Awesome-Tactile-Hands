@@ -1,0 +1,558 @@
+{
+ "id": "touchscale",
+ "surveyed": "2026-10-24",
+ "entry": {
+  "id": "touchscale",
+  "name": "TouchScale",
+  "title": "TouchScale: 500 Hours of Human Vision and Touch for Visual-Tactile Learning",
+  "authors": "Dayou Li et al.",
+  "year": 2026,
+  "venue": "arXiv 2610.10288",
+  "summary": "Bimanual tactile gloves with 880 taxels per hand (normal force in N plus two tangential components per taxel), recorded with a head-mounted RGB-D camera and two wrist cameras; the released 100 h cover 929 tasks in 22 scene types.",
+  "embodiment": "human",
+  "hand": "Tachin glove x 2 (episode files name it Tujian EI-G012)",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 880,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": "30-100",
+   "note": "15 pads per hand stored as tactile_<k> (T, rows, cols), normal force per taxel in N: thumb tip 16x10, thumb middle 4x8, thenar 13x8; index, middle and ring 9x8 + 3x8 + 4x8; little 9x8 + 3x8; hypothenar 13x8. Every taxel also has tf_tactile_x / tf_tactile_y tangential components (unit not stated). Per-sample Unix timestamps; the per-episode rate is 30-100 Hz (metadata glove_rate_hz). 1.5 x 1.5 mm cells, spatial resolution below 2 mm (paper).",
+   "maker": "Tachin Technology (途见科技, Beijing)",
+   "model": "EI-G012 (Tachin Glove)",
+   "principle": "unspecified",
+   "range": "0.2-30 N/cm^2, resolution 0.05 N/cm^2 (paper)",
+   "calibrated": true
+  },
+  "modalities": [
+   "egocentric",
+   "depth",
+   "wrist_rgb",
+   "imu",
+   "language"
+  ],
+  "scale": {
+   "hours": 100.0,
+   "episodes": 15324,
+   "frames": 10800039,
+   "tasks": 929,
+   "objects": 905,
+   "subjects": 24,
+   "scenes": 22,
+   "scene_types": [
+    "laboratory",
+    "kitchen",
+    "workbench",
+    "office",
+    "bedroom",
+    "medical",
+    "packing"
+   ],
+   "text": "100 h released of 500 h planned: 15,324 episodes, 929 tasks, 22 scene types, 905+ objects, 24 participants (paper, full 500 h: ~87K episodes, ~2K tasks, 1.5K+ objects, ~20 participants)"
+  },
+  "availability": "gated",
+  "access": "Gated on Hugging Face with automatic approval (log in and agree to share username and email). 100 h are released as 430 WebDataset tar shards (1.06 TB), per-episode preview videos (26 GB) and 193 object meshes (2.3 GB); the full 500 h is planned before November 2026.",
+  "gate": {
+   "kind": "hf_gate",
+   "approval": "automatic",
+   "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale",
+   "checked": "2026-10-24"
+  },
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "No hand-pose files; the paper estimates pose with WiLoR.",
+   "Each episode's 17 files sit inside a ~2.5 GB tar shard; fetching one episode needs range reads over the tar headers or the whole shard.",
+   "Glove rate differs by session (30-100 Hz); the card says to use the per-sample timestamps. The glove's 8-bit frame counter skips values in most sessions, which the release does not explain.",
+   "Tactile unit: the card calls the values the glove's calibrated output in newtons; episode.h5 marks them 'newton_assumed_from_vendor_calibrated_output'. Tangential components have no stated unit.",
+   "Participants are predominantly male (95 of 15,324 episodes by female participants, per the card)."
+  ],
+  "links": {
+   "project": "https://touch-scale.github.io/",
+   "paper": "https://arxiv.org/abs/2610.10288",
+   "data": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale",
+   "code": "https://github.com/phai-lab/touchscale"
+  },
+  "image": "https://touch-scale.github.io/assets/images/hero-human-tubes-composite.webp",
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Orbbec Gemini 345Lg",
+     "type": "RGB-D",
+     "resolution": "1280x720 RGB; depth 640x480 native (paper), released registered to the RGB at 1280x720, 16-bit mm",
+     "fps": 30,
+     "mount": "head"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": "Intel RealSense D405",
+     "type": "RGB",
+     "resolution": "1280x720",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "WiLoR",
+     "note": "Paper runs WiLoR on auto-detected hand crops for its experiments; no pose file in the release and no hand-tracking hardware."
+    }
+   ],
+   "other": [
+    "head IMU (accelerometer m/s^2 + gyroscope rad/s, ~200 Hz, Orbbec Gemini 345Lg)",
+    "per-taxel tangential components (tf_tactile_x / tf_tactile_y)",
+    "English instruction, task name, object list and leading hand per episode",
+    "193 textured object meshes (Meshy reconstructions, scale not metric)",
+    "camera intrinsics, Kalibr RGB/depth/IMU calibration and per-episode glove calibration tables",
+    "per-episode preview video (960x540, 12 fps) with all streams composited"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/README.md (read with HF auth, revision 74914cc, last modified 2026-10-23)",
+   "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale file listing via the HF API at 74914cc: 16,353 files, 1.085 TB",
+   "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/metadata/episodes.parquet (15,324 rows)",
+   "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/metadata/glove_geometry_left.json and glove_geometry_right.json",
+   "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/assets/glove_layout.png",
+   "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale dataset page (gate text, read without login)",
+   "All 17 files of 9 episodes opened: shards data/train-00000, -00032, -00083, -00204, -00406, -00422 and -00429 of 430 (byte-range reads), plus previews/train/000/5a1ae97d-9456-479a-8a4e-4cd6c7f07773.mp4",
+   "https://arxiv.org/html/2610.10288",
+   "https://touch-scale.github.io/"
+  ],
+  "unconfirmed": [
+   "Maker: episode.h5 metadata attribute source_dataset reads 'Orbbec Gemini 345Lg; Intel RealSense D405; Tujian EI-G012'. Tujian is the pinyin of 途见 (Tachin Technology), whose EI-G series is the TachinGlove on tachin.com; the paper names only the 'Tachin Glove'. Paper: 'The data are purchased by Overfit Lab and captured by Noitom under our contracted data-collection process.'",
+   "hours=100.0 is the sum of duration_s and frames=10,800,039 the sum of num_frames (head camera, 30 fps) over metadata/episodes.parquet; the card says 100.0 h.",
+   "tasks=929 is the card's count; episodes.parquet has 953 distinct task_id and 920 distinct task_name values.",
+   "rate_hz 30-100: glove_rate_hz in episodes.parquet runs from 30.0 to 99.8 Hz (6,850 episodes at 35 Hz, 1,836 near 57 Hz, the rest 39-100 Hz). The card says 35-90 Hz and 'about 35, 57 or 65-90 Hz'; the paper gives 50 Hz over WiFi and 100 Hz over USB.",
+   "Glove frame counter (8-bit frame_numbers) in the 9 opened episodes: the 57 Hz session advances by 1 per stored sample; 35 Hz sessions advance by 1 or 2 alternately at even 28.6 ms steps; 53-91 Hz sessions store 10 ms steps with 20-62 ms gaps where the counter jumps by 2-4 (6-30% of counter values absent). Whether these are dropped packets is not stated.",
+   "Tangential components: unit not stated; the geometry file gives per-taxel dir_x / dir_y axes but does not say tf_tactile_x / _y follow them. The median ratio of tangential magnitude to normal force (taxels above 0.2 N) is 0.02-2.3% per glove file in the 8 sampled episodes.",
+   "calibrated=true rests on the card ('the glove's calibrated output in newtons') and the per-episode glove_<side>_calib.json (7 parts, each a 20-point nonlinearity curve and 1,024 gain pairs); episode.h5 marks the unit as assumed.",
+   "Positions that never read: in the 18 glove files opened, 116 of 880 positions never exceed 0.05 N in either glove, among them the same fingertip-end positions in every finger (distal pad row 8 columns 2-5, row 7 columns 1, 2 and 6) and most of the thumb tip pad's last four rows. The layout figure draws all 880; whether these positions sense is not stated.",
+   "Depth resolution: paper 640x480 native; the release's depth_head.mkv is 1280x720 FFV1 gray16le registered to the head RGB (kalibr T_depth_cam is identity).",
+   "subjects: the paper says about 20 participants for 500 h; the release card and episodes.parquet give 24 pseudonymous actor ids.",
+   "objects=905 is the card's '905+'; 193 of them have meshes.",
+   "scene_types are the 7 environment words of the card; scenes=22 counts the scene field of episodes.parquet (the paper's 9 high-level settings refer to the full 500 h).",
+   "imu.txt header says '#timestamp[ns]' but the first column holds Unix seconds (e.g. 1788249254.095250); measured rate 201.7-203.0 Hz in the 8 sampled episodes."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "TouchScale is released under CC BY-NC 4.0: free for non-commercial research and education with attribution. For commercial use, please contact 2077AI.",
+  "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale#license",
+  "gate": "Hugging Face gate, automatic approval: 'You need to agree to share your Hugging Face information to access this dataset' (shares username and email). The card defines no extra gate prompt or fields (no extra_gated_* keys), so the gate adds no terms beyond CC BY-NC 4.0."
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale",
+  "access": "login",
+  "format": "WebDataset tar shards data/train-NNNNN-of-00430.tar (~2.5 GB, 5-45 episodes each). Per episode 17 members keyed <episode_id>: json, rgb_head.mp4/.csv, depth_head.mkv/.csv, wrist_left.mp4/.csv, wrist_right.mp4/.csv, left_hand_data.npz, right_hand_data.npz, glove_left_calib.json, glove_right_calib.json, imu.txt, episode.h5, head_param.json, kalibr_parameters.yaml. Plus previews/train/NNN/<episode_id>.mp4 (one composite preview per episode), metadata/*.parquet, glove geometry JSON and objects/ meshes.",
+  "total_size": "1.085 TB (data 1,056.3 GB in 430 shards; previews 26.1 GB; objects 2.3 GB; assets 73 MB; metadata 6 MB)",
+  "per_episode": "52-85 MB for the 8 sampled episodes (all 17 files); depth_head.mkv is about half",
+  "partial_fetch": "metadata/episodes.parquet gives each episode's shard; the shard's tar headers (512 bytes each) are read with HTTP range requests on the resolved CDN URL until the episode's members appear, then only those byte ranges are read (about 0.2 s per header; one shard needed 392 headers). The datasets webdataset loader streams whole shards."
+ },
+ "channels": [
+  {
+   "name": "left_hand_data.npz / right_hand_data.npz: tactile_<k> (k = 0-5, 7-9, 11-13, 15, 16, 18)",
+   "kind": "tactile_grid",
+   "shape": "15 arrays (T, rows, cols) float64, 880 values per glove",
+   "rate_hz": "30-100 (per session; 35.0, 56.9, 58.8-90.9 in the sample)",
+   "unit": "N (card: the glove's calibrated output; episode.h5: newton_assumed_from_vendor_calibrated_output)",
+   "frame": "pad grid; flat palmar (x, y) per taxel in metadata/glove_geometry_<side>.json, row 0 at the proximal end",
+   "note": "thumb tip 16x10, thumb middle 4x8, thenar 13x8, index/middle/ring 9x8 + 3x8 + 4x8, little 9x8 + 3x8, hypothenar 13x8; values -0.27 to 4.1 N in the sample, small negative values at rest"
+  },
+  {
+   "name": "left_hand_data.npz / right_hand_data.npz: tf_tactile_x_<k>, tf_tactile_y_<k>",
+   "kind": "tactile_grid",
+   "shape": "2 x 15 arrays (T, rows, cols) float32",
+   "rate_hz": "same as tactile_<k>",
+   "unit": "not stated",
+   "frame": "per taxel; the geometry file's dir_x (along increasing stored column) / dir_y (toward the proximal end) are the likely axes, not stated",
+   "note": "card: 'tangential components'; -1.89 to 1.37 in the sample, exactly 0 on pads with no normal reading"
+  },
+  {
+   "name": "left_hand_data.npz / right_hand_data.npz: timestamps, frame_numbers",
+   "kind": "other",
+   "shape": "(T,) float64; (T,) int32",
+   "rate_hz": null,
+   "unit": "Unix s; 8-bit counter 0-255",
+   "frame": "shared clock with the camera csv files",
+   "note": "timestamps monotonic in all 16 sampled glove files; counter skips are not documented"
+  },
+  {
+   "name": "rgb_head.mp4 + rgb_head.csv",
+   "kind": "camera",
+   "shape": "(N, 720, 1280, 3)",
+   "rate_hz": 30,
+   "unit": "8-bit RGB, H.264 High yuv420p",
+   "frame": "head-mounted Orbbec Gemini 345Lg",
+   "note": "csv: frame_index, timestamp_s (Unix s); decoded frame count equals csv rows in all 8 sampled episodes; fx = fy = 477.4 px after registration, zero distortion"
+  },
+  {
+   "name": "depth_head.mkv + depth_head.csv",
+   "kind": "depth",
+   "shape": "(N, 720, 1280) uint16",
+   "rate_hz": 30,
+   "unit": "mm, FFV1 gray16le, 0 = no depth",
+   "frame": "registered to head RGB (kalibr T_depth_cam identity)",
+   "note": "same timestamps as rgb_head.csv in the sampled episodes"
+  },
+  {
+   "name": "wrist_left.mp4 / wrist_right.mp4 + csv",
+   "kind": "camera",
+   "shape": "(N, 720, 1280, 3)",
+   "rate_hz": 30,
+   "unit": "8-bit RGB, H.264 High yuv420p",
+   "frame": "Intel RealSense D405 on each wrist, palm side",
+   "note": "first frame within 24 ms of the head camera's in the sample; episode.h5 calls the files realsense/wrist_<side>.mp4"
+  },
+  {
+   "name": "imu.txt",
+   "kind": "imu",
+   "shape": "(M, 7): time, acc_x, acc_y, acc_z, gyr_x, gyr_y, gyr_z",
+   "rate_hz": 200,
+   "unit": "Unix s (header says timestamp[ns]), m/s^2, rad/s",
+   "frame": "Orbbec IMU; kalibr T_cam_imu gives the extrinsics",
+   "note": "201.7-203.0 Hz measured, no step above 5 ms"
+  },
+  {
+   "name": "episode.h5",
+   "kind": "other",
+   "shape": "time/timestamp_ns (N,); obs/video/<stream>/{epoch, src_idx}; obs/imu/{epoch_s, accel, gyro}; obs/tactile/raw/<hand>/{t_epoch, pad_<k>, shear_x_<k>, shear_y_<k>}; task/{name, task_id, steps, success, seg_start, seg_end}; calibration/*",
+   "rate_hz": 30,
+   "unit": "mixed",
+   "frame": null,
+   "note": "schema tacwam_episode 0.2; the tactile groups equal the NPZ values cast to float32 (max difference 1.2e-7 N), trimmed to the video span; task/steps holds the one instruction"
+  },
+  {
+   "name": "glove_left_calib.json / glove_right_calib.json",
+   "kind": "other",
+   "shape": "7 parts (four_finger_tips, thumb_tip, four_fingers_segment_2/3, palm_round, palm_1, palm_2): 20-point nonlinearity curve + 1,024 gain/offset pairs each",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "schema whole_hand_calibration.v1; the mapping of parts to pads is not documented"
+  },
+  {
+   "name": "head_param.json, kalibr_parameters.yaml",
+   "kind": "other",
+   "shape": "intrinsics, extrinsics",
+   "rate_hz": null,
+   "unit": "px, m",
+   "frame": null,
+   "note": "RGB and registered depth share intrinsics; IMU extrinsics and noise densities"
+  },
+  {
+   "name": "<episode_id>.json",
+   "kind": "language",
+   "shape": "metadata record",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "episode_id, task_id, task_name, scene, instruction (initial state, actions, completion state, suggested duration), items, primary_hand, duration_s, num_frames, collection_date, actor_id, actor_gender, glove_rate_hz, contact fractions, head_gyro_p95_rad_s, quality_score, shard, preview"
+  },
+  {
+   "name": "previews/train/NNN/<episode_id>.mp4",
+   "kind": "camera",
+   "shape": "(T, 540, 960, 3)",
+   "rate_hz": 12,
+   "unit": "H.264",
+   "frame": null,
+   "note": "the release's composite preview: head RGB, head depth, both wrists, total normal force per hand and both tactile maps"
+  }
+ ],
+ "episode_index": {
+  "where": "metadata/episodes.parquet (also previews/train/metadata.parquet)",
+  "count": 15324,
+  "fields": [
+   "episode_id",
+   "task_id",
+   "task_name",
+   "scene",
+   "instruction",
+   "items",
+   "primary_hand",
+   "duration_s",
+   "num_frames",
+   "collection_date",
+   "actor_id",
+   "actor_gender",
+   "glove_rate_hz",
+   "tactile_contact_frac_left",
+   "tactile_contact_frac_right",
+   "head_gyro_p95_rad_s",
+   "quality_score",
+   "shard",
+   "preview"
+  ],
+  "tasks": [
+   "929 tasks per the card; label field task_name (920 distinct values, 953 distinct task_id)"
+  ],
+  "scenes": [
+   "Laboratory",
+   "Lab Apparatus & Assembly Workbench",
+   "Break-Room Supply & Display Cabinet",
+   "Kitchen Prep Workbench",
+   "Medical / First Aid",
+   "Kitchen",
+   "Office",
+   "Parcel / Packing",
+   "Tool Bench",
+   "Bedroom",
+   "Test Tube & Beaker Workbench",
+   "Lab Assembly Station",
+   "Fragile Food & Portioning Station",
+   "Layered Materials & Filing Station",
+   "Bedroom / Laundry",
+   "Household Cleaning / Organizing",
+   "Tools & Continuous-Contact Workbench",
+   "Deformable Objects & Tactile Judgment Station",
+   "Kitchen Prep Counter",
+   "Insertion & Press-Fit Workbench",
+   "Break-Room Supply Cabinet",
+   "Lab Bench"
+  ],
+  "durations": "5.3-118.4 s, median 21.9 s; recorded 2026-07-16 to 2026-09-28"
+ },
+ "sample": {
+  "decision": "sample",
+  "reason": "CC BY-NC 4.0 permits non-commercial redistribution with attribution ('free for non-commercial research and education with attribution'), and the Hugging Face gate (automatic approval, already passed by this account) adds no terms. Videos are inside tar shards with no per-file URL, so the sampled episodes' videos are re-encoded and hosted with the label 'CC BY-NC 4.0', crediting the TouchScale authors and 2077AI.",
+  "prefix": "ts_",
+  "tasks_total": 929,
+  "tasks_sampled": 8,
+  "episodes": [
+   {
+    "id": "5a1ae97d-9456-479a-8a4e-4cd6c7f07773",
+    "viewer_id": "ts_5a1ae97d",
+    "task": "Wring out a wet cloth once with both hands",
+    "scene": "Kitchen",
+    "subject": "actor_04",
+    "duration_s": 13.9,
+    "window": null,
+    "why": "Two-handed squeeze and twist of a cloth, 90.9 Hz session. Total force above 3 N for 9.1 s (left, peak 85 N) and 7.5 s (right, peak 25 N); every finger and both palm pads above 1 N for at least 1 s on the left glove."
+   },
+   {
+    "id": "9dd1ac47-2e69-483f-8d01-6241d46ffef7",
+    "viewer_id": "ts_9dd1ac47",
+    "task": "Using both hands, unscrew the 50 mL centrifuge-tube cap counterclockwise ...",
+    "scene": "Laboratory",
+    "subject": "actor_01",
+    "duration_s": 24.0,
+    "window": [
+     1.0,
+     23.0
+    ],
+    "why": "Twist: left hand holds the tube, right hand turns the cap in regrasp cycles. The only 57 Hz session in the sample (counter advances by 1 per sample). Above 3 N for 17.6 s (left, peak 99 N) and 11.3 s (right). Window keeps all contact (above 3 N from 2.5 to 22.8 s)."
+   },
+   {
+    "id": "29029fe2-8f70-47f6-b53a-f8acb9691df7",
+    "viewer_id": "ts_29029fe2",
+    "task": "Insert the wooden dowel into the pre-drilled hole",
+    "scene": "Tool Bench",
+    "subject": "actor_06",
+    "duration_s": 21.2,
+    "window": null,
+    "why": "One-handed insertion (right): right thumb and index above 1 N for 13-14 s, left glove never above 0.2 N, which checks left/right against the video."
+   },
+   {
+    "id": "f8ee4864-9da9-4eec-9746-e2108b343032",
+    "viewer_id": "ts_f8ee4864",
+    "task": "Use a large stapler to staple three sheets of paper",
+    "scene": "Office",
+    "subject": "actor_01",
+    "duration_s": 17.8,
+    "window": null,
+    "why": "Press: right palm and fingers on the stapler, left index on the paper. Above 3 N for 6.7 s (left) and 8.2 s (right, peak 30 N)."
+   },
+   {
+    "id": "82a95f58-9d43-4f1a-842d-5d04c9b82526",
+    "viewer_id": "ts_82a95f58",
+    "task": "Peel off, one at a time, the four short strips of medical tape securing the corners of the gauze",
+    "scene": "Medical / First Aid",
+    "subject": "actor_05",
+    "duration_s": 31.0,
+    "window": [
+     7.9,
+     29.9
+    ],
+    "why": "Peel with the left thumb and index (above 1 N for 12-17 s) while the right palm holds the pad down for 27 s. Window of 22 s holds 81% of the episode's summed force; the first strip (2.7-7.9 s) is left out."
+   },
+   {
+    "id": "0aa25e44-1f3b-42bf-a17b-6892ea7eb0d4",
+    "viewer_id": "ts_0aa25e44",
+    "task": "Use a tape dispenser to seal the center seam on top of the carton",
+    "scene": "Parcel / Packing",
+    "subject": "actor_07",
+    "duration_s": 25.7,
+    "window": [
+     2.4,
+     24.4
+    ],
+    "why": "Tool use: right power grasp on the dispenser (thumb, palm, middle, ring, little above 1 N for 10-16 s), left index presses the flap. Window keeps all contact (above 3 N from 5.1 to 22.3 s)."
+   },
+   {
+    "id": "f830bf7d-9a33-488c-a0f4-188532cc25ce",
+    "viewer_id": "ts_f830bf7d",
+    "task": "Use a small teaspoon to scoop red beans into the narrow-mouth paper cup",
+    "scene": "Tools & Continuous-Contact Workbench",
+    "subject": "actor_02",
+    "duration_s": 20.0,
+    "window": null,
+    "why": "One-handed scoop (left): left thumb and index above 1 N for 7.5 s, right glove peak 1.0 N total. 35 Hz session."
+   },
+   {
+    "id": "84c882b0-39e7-44fc-a87d-1ebd4effd753",
+    "viewer_id": "ts_84c882b0",
+    "task": "Prepare a cup of water with the electric kettle",
+    "scene": "Kitchen Prep Workbench",
+    "subject": "actor_13",
+    "duration_s": 23.3,
+    "window": [
+     1.3,
+     23.3
+    ],
+    "why": "Pour: right power grasp on the kettle (all regions above 1 N for 12-13 s, peak 76 N), left fingertips hold the cup. 35 Hz session. Window keeps all contact (above 3 N from 4.1 to 21.3 s)."
+   }
+  ],
+  "fetch_estimate": "0.61 GB fetched in total: the 8 episodes 524 MB (52-85 MB each, all 17 files, by tar range reads), one more episode opened while surveying (86 MB), metadata, geometry, layout figure and one preview (8 MB).",
+  "rules_applied": "929 tasks, so 8 tasks with one episode each, from 8 of the 22 scene types (Kitchen, Laboratory, Tool Bench, Office, Medical / First Aid, Parcel / Packing, Tools & Continuous-Contact Workbench, Kitchen Prep Workbench). Actions: wring, unscrew, insert, staple (press), peel, tape-dispenser tool use, scoop, pour; objects: cloth, centrifuge tube, dowel, stapler, medical tape, tape dispenser, teaspoon, kettle. Two one-handed tasks (dowel, right; scoop, left), six two-handed. 7 participants; glove rates 35, 56.9, 58.8, 72.6, 76.5, 88.2 and 90.9 Hz. Within each task the 10-60 s episode with the highest quality_score, except peel (82a95f58, 7th, in the shard already indexed while surveying) and scoop (f830bf7d, 3rd, picked as a left-handed variant). Every episode has all 30 tactile arrays per glove pair, no NaN, and more than 3 N total force for at least 6.7 s on one glove. Four episodes longer than 22 s are cut to a 22 s window to keep the JSON under 2 MB (1.24-1.95 MB); media 3.6-6.2 MB per episode."
+ },
+ "visualization": [
+  {
+   "channel": "tactile_<k> (left_hand_data.npz, right_hand_data.npz)",
+   "shown_as": [
+    "grid",
+    "series"
+   ],
+   "detail": "880 squares per glove, one per taxel, each pad as its stored rows x columns placed at its (x, y) in the release's glove_geometry_<side>.json (flat palmar view, fingertips up, left glove thumb on the right); 46-row x 48/49-column grid. Latest sample at or before each 30 Hz head-camera tick; uint8 against a fixed 1.5 N (99.6th percentile of readings above 0.02 N in the sample). Plots: per-region sums (thumb, index, middle, ring, little, palm) per glove and total normal force per glove from the float values. Checked: decoded uint8 equals round(value / 1.5 x 255) of the NPZ at every tick, 0 steps of error.",
+   "reason": null
+  },
+  {
+   "channel": "tf_tactile_x_<k>, tf_tactile_y_<k>",
+   "shown_as": [
+    "vectors",
+    "series"
+   ],
+   "detail": "One arrow per pad (15 per glove) at the pad's centre: sum over the pad of tf_x along the geometry's dir_x and tf_y along dir_y, mapped to grid right/up; no ring (zname null). Full block = episode 99.5th percentile of the pad-sum magnitude rounded up to 0.05 (0.2-5.85). Plots per glove: |sum| per region.",
+   "reason": null
+  },
+  {
+   "channel": "timestamps, frame_numbers (NPZ)",
+   "shown_as": [
+    "not_shown"
+   ],
+   "detail": "timestamps are the time base for resampling; counter skips are reported in the notes",
+   "reason": "time base and packet counter, not touch signals"
+  },
+  {
+   "channel": "rgb_head.mp4",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "Re-encoded H.264 960x540 crf 28, one frame per 30 Hz tick (latest frame at or before each tick by rgb_head.csv); frame 0 and frame n/2 match the source frame at the same timestamp (checked by pixel difference).",
+   "reason": null
+  },
+  {
+   "channel": "wrist_left.mp4, wrist_right.mp4",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "Re-encoded H.264 640x360, frames picked by their own csv timestamps onto the head clock (offset up to 34 ms).",
+   "reason": null
+  },
+  {
+   "channel": "depth_head.mkv",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "16-bit mm colour-mapped (TURBO, 200 mm red to 1200 mm blue, 0 = black), H.264 640x360 on the head clock.",
+   "reason": null
+  },
+  {
+   "channel": "imu.txt",
+   "shown_as": [
+    "series"
+   ],
+   "detail": "|gyro| (rad/s), latest sample at each tick; acceleration not shown.",
+   "reason": null
+  },
+  {
+   "channel": "episode.h5",
+   "shown_as": [
+    "not_shown"
+   ],
+   "detail": "same glove values as float32 trimmed to the video span, plus a 30 Hz video index",
+   "reason": "duplicate of the NPZ and csv streams"
+  },
+  {
+   "channel": "glove_left_calib.json, glove_right_calib.json, head_param.json, kalibr_parameters.yaml",
+   "shown_as": [
+    "not_shown"
+   ],
+   "detail": null,
+   "reason": "calibration tables, not signals"
+  },
+  {
+   "channel": "<episode_id>.json",
+   "shown_as": [
+    "not_shown"
+   ],
+   "detail": "task name is the episode title; scene, participant, date and the full instruction are in the notes",
+   "reason": "text metadata; no time-stamped steps in the release"
+  },
+  {
+   "channel": "previews/train/*.mp4",
+   "shown_as": [
+    "not_shown"
+   ],
+   "detail": null,
+   "reason": "the release's composite preview of the same streams"
+  }
+ ],
+ "integrity": {
+  "checked": "2026-10-24",
+  "scope": "All 17 files of the 8 sampled episodes (524 MB) opened and decoded: every video counted frame by frame against its csv, both NPZ files, imu.txt, episode.h5, the calibration JSON and YAML; plus release-wide fields of metadata/episodes.parquet (15,324 rows). One more episode (09c143fb, shard 429) was opened while surveying.",
+  "faults": [
+   {
+    "check": "tactile",
+    "severity": "minor",
+    "text": "The glove's 8-bit frame_numbers counter skips values between stored samples in 7 of 8 episodes (6-38% of counter values per glove file; only the 57 Hz session advances by 1 every sample). 35 Hz sessions step evenly (28.6 ms); in the 53-91 Hz sessions 3-15% of steps are longer than twice the median, the longest 62 ms. The release does not say whether skipped values are dropped packets; if they are, more than 5% of glove frames are missing in those 7 episodes."
+   },
+   {
+    "check": "tactile",
+    "severity": "minor",
+    "text": "Taxels at 0 N for the whole episode while their 4 neighbours averaged above 0.2 N for over 1 s: 0-17 per glove file (at most 17 of 880 = 1.9%, kettle right glove and unscrew left glove). Named per episode in the viewer notes."
+   },
+   {
+    "check": "tactile",
+    "severity": "minor",
+    "text": "Taxels holding a maximum above 1 N exactly for over 0.5 s (flat top): 0-6 per glove file (unscrew left glove 6, tape-dispenser right glove 4); at most 0.25% of the shown values (kettle left glove) reach the 1.5 N colour limit."
+   },
+   {
+    "check": "tactile",
+    "severity": "minor",
+    "text": "116 of 880 positions never exceed 0.05 N in either glove across the 18 glove files opened, including the same fingertip-end positions in every finger and most of the thumb tip pad's last four rows (about 66 positions, 7.5%). They may be untouched or non-sensing; the release counts all 880 as taxels and does not say."
+   },
+   {
+    "check": "time",
+    "severity": "minor",
+    "text": "One head-camera step of 67 ms (one missing frame) in the peel episode (82a95f58); the depth stream has the same gap. Every other camera step in the sample is 33-34 ms."
+   }
+  ],
+  "passed": {
+   "files": "All 136 files of the 8 episodes open in their documented format: 32 videos decode with frame counts equal to their csv rows, 16 NPZ files load without pickle, 8 episode.h5 files open (46 tactile datasets per hand), JSON and YAML parse, imu.txt loads.",
+   "streams": "No empty file; all 15 tactile pads and 30 tangential arrays present in all 16 glove files; head, depth and both wrist streams present in every episode; glove files cover the whole video span.",
+   "time": "Every video frame, glove sample and IMU sample carries a Unix timestamp on one clock; timestamps are monotonic in all files; wrist and depth first frames within 24 ms of the head; IMU 201.7-203.0 Hz with no step above 5 ms.",
+   "tactile": "No NaN in any of the 16 glove files; values -0.27 to 4.1 N; every pad of each glove exceeds 0.05 N in at least one sampled episode; gaps no longer than 62 ms (the card's QC limit is 0.25 s)."
+  },
+  "scope_not_integrity": "400 of the 500 hours in the paper are not released yet (card: planned before November 2026)."
+ }
+}

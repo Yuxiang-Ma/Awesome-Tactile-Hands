@@ -2229,6 +2229,194 @@
      "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
     }
    ]
+  },
+  {
+   "id": "touchscale",
+   "group": "public",
+   "title": "TouchScale",
+   "provider": "Li et al. 2026 (2077AI Data Foundation)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY-NC 4.0",
+    "tone": "ok"
+   },
+   "about": "Two full-hand tactile gloves (880 taxels each), a head RGB-D camera and two wrist cameras; 15,324 episodes of 929 tasks in 22 scene types, 100 of a planned 500 hours. 8 episodes from 8 scenes are shown.",
+   "link": {
+    "label": "2077AIDataFoundation/TouchScale",
+    "href": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "taxels": 880
+   },
+   "hardware": [
+    {
+     "k": "Gloves",
+     "v": "Tachin glove \u00d7 2 (episode files: Tujian EI-G012)",
+     "d": "880 taxels on 15 pads per hand \u00b7 normal force in N plus two tangential components per taxel \u00b7 30\u2013100 Hz, timestamped"
+    },
+    {
+     "k": "Cameras",
+     "v": "Head Orbbec Gemini 345Lg + 2 wrist RealSense D405",
+     "d": "1280\u00d7720 \u00b7 30 fps \u00b7 head depth registered to the head RGB, 16-bit mm"
+    },
+    {
+     "k": "Other",
+     "v": "Head IMU, instructions, object meshes",
+     "d": "About 200 Hz accelerometer and gyro \u00b7 one English instruction per episode \u00b7 193 textured meshes"
+    }
+   ],
+   "notes": "Paper: arXiv 2610.10288. Released by 2077AI under CC BY-NC 4.0 (non-commercial use with attribution); gated on Hugging Face with automatic approval. Each episode is read out of the release's 2.5 GB WebDataset shards by byte range; its videos are re-encoded and hosted here, credited to the TouchScale authors.",
+   "items": [
+    {
+     "id": "ts_0aa25e44",
+     "title": "Use a tape dispenser to seal the center seam on top of the carton",
+     "label": "Parcel / Packing \u00b7 actor 07",
+     "sub": "22 s \u00b7 glove 88 Hz",
+     "poster": "media/ts_0aa25e44.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ts_29029fe2",
+     "title": "Insert the wooden dowel into the pre-drilled hole",
+     "label": "Tool Bench \u00b7 actor 06",
+     "sub": "21 s \u00b7 glove 59 Hz",
+     "poster": "media/ts_29029fe2.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ts_5a1ae97d",
+     "title": "Wring out a wet cloth once with both hands",
+     "label": "Kitchen \u00b7 actor 04",
+     "sub": "14 s \u00b7 glove 91 Hz",
+     "poster": "media/ts_5a1ae97d.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ts_82a95f58",
+     "title": "Peel off, one at a time, the four short strips of medical tape securing the corners of the gauze",
+     "label": "Medical / First Aid \u00b7 actor 05",
+     "sub": "22 s \u00b7 glove 73 Hz",
+     "poster": "media/ts_82a95f58.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ts_84c882b0",
+     "title": "Prepare a cup of water with the electric kettle",
+     "label": "Kitchen Prep Workbench \u00b7 actor 13",
+     "sub": "22 s \u00b7 glove 35 Hz",
+     "poster": "media/ts_84c882b0.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ts_9dd1ac47",
+     "title": "Using both hands, unscrew the 50 mL centrifuge-tube cap counterclockwise from its normally tightened position and move it, inside-up, to the clean tray, keeping the tube upright, fully separating the cap, and finishing with both hands not touching anything",
+     "label": "Laboratory \u00b7 actor 01",
+     "sub": "22 s \u00b7 glove 57 Hz",
+     "poster": "media/ts_9dd1ac47.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ts_f830bf7d",
+     "title": "Use a small teaspoon to scoop red beans into the narrow-mouth paper cup",
+     "label": "Tools & Continuous-Contact Workbench \u00b7 actor 02",
+     "sub": "20 s \u00b7 glove 35 Hz",
+     "poster": "media/ts_f830bf7d.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ts_f8ee4864",
+     "title": "Use a large stapler to staple three sheets of paper",
+     "label": "Office \u00b7 actor 01",
+     "sub": "18 s \u00b7 glove 76 Hz",
+     "poster": "media/ts_f8ee4864.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
+  },
+  {
+   "id": "sharpa_origami",
+   "group": "public",
+   "title": "Robotic Origami Challenge",
+   "provider": "Sharpa \u00b7 Robotic Origami Challenge (IROS 2026)",
+   "kind": "recording",
+   "status": {
+    "label": "CC BY 4.0",
+    "tone": "ok"
+   },
+   "about": "Teleoperated bimanual robot with two Sharpa Wave hands folding a 6-fold paper airplane; five camera-based fingertip tactile sensors per hand. The official release lists 1,991 episodes in 143 seasons (2026-05-14 to 2026-07-18), 1,845 of them with data files.",
+   "link": {
+    "label": "SharpaIT/Robotic_Origami_Challenge",
+    "href": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge"
+   },
+   "sensor": {
+    "type": "coverage",
+    "coverage": [
+     "tip"
+    ]
+   },
+   "hardware": [
+    {
+     "k": "Hands",
+     "v": "2 \u00d7 Sharpa Wave, 22 joints each",
+     "d": "5 fingertip tactile sensors per hand \u00b7 raw image, deformation map, 6-axis signal \u00b7 30 Hz"
+    },
+    {
+     "k": "Robot",
+     "v": "Bimanual Sharpa rig (robot_type north_ces)",
+     "d": "2 \u00d7 7 arm joints, 7 torso/motor joints; 65-D state and action"
+    },
+    {
+     "k": "Cameras",
+     "v": "2 head + 2 wrist",
+     "d": "480\u00d7480 \u00b7 30 fps; camera models not stated"
+    },
+    {
+     "k": "Task",
+     "v": "Paper airplane, 15 \u00d7 15 cm paper",
+     "d": "One task in every episode; teleoperation device not stated"
+    }
+   ],
+   "notes": "Data \u00a9 Sharpa, released under CC BY 4.0 for the Robotic Origami Challenge (https://robotic-origami-challenge.github.io/). The Hugging Face repository is gated: log in and agree to share your username and email with the authors (automatic approval). Each sample is a 45 s window of one episode, cut from the release's per-episode files and re-encoded for this page. All three tactile streams are shown: the fingertip deformation map pooled to 8 \u00d7 8 cells, the 6-axis fingertip signal (arrow, ring and plots), and both tactile videos as mosaics.",
+   "items": [
+    {
+     "id": "ro_poc22032_20260515_1643_ep4",
+     "title": "Fold a paper airplane",
+     "label": "POC22032 \u00b7 2026-05-15",
+     "sub": "45 s of 280 s \u00b7 season 16:43, episode 4",
+     "poster": "media/ro_poc22032_20260515_1643_ep4.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ro_poc22061_20260526_1355_ep4",
+     "title": "Fold a paper airplane",
+     "label": "POC22061 \u00b7 2026-05-26",
+     "sub": "45 s of 189 s \u00b7 season 13:55, episode 4",
+     "poster": "media/ro_poc22061_20260526_1355_ep4.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ro_poc22061_20260628_1347_ep5",
+     "title": "Fold a paper airplane",
+     "label": "POC22061 \u00b7 2026-06-28",
+     "sub": "45 s of 221 s \u00b7 season 13:47, episode 5",
+     "poster": "media/ro_poc22061_20260628_1347_ep5.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    },
+    {
+     "id": "ro_poc22061_20260717_1335_ep13",
+     "title": "Fold a paper airplane",
+     "label": "POC22061 \u00b7 2026-07-17",
+     "sub": "45 s of 143 s \u00b7 season 13:35, episode 13",
+     "poster": "media/ro_poc22061_20260717_1335_ep13.jpg",
+     "base": "https://huggingface.co/datasets/yxma/human-mcap-viewer-media/resolve/main/"
+    }
+   ]
   }
  ]
 }

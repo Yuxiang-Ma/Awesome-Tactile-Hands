@@ -1,6 +1,6 @@
 {
  "id": "sharpa_origami",
- "surveyed": "2026-10-16",
+ "surveyed": "2026-10-24",
  "entry": {
   "id": "sharpa_origami",
   "name": "Robotic Origami Challenge",
@@ -20,11 +20,11 @@
     "tip"
    ],
    "rate_hz": 30,
-   "note": "Five fingertip sensors per hand (Sharpa Wave built-in), no palm. Per frame: observation.tactile (60,) = (left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), unit not stated; observation.images.tactile_raw, one 480x1600 video tiling 10 grayscale 320x240 marker-dot images; observation.images.tactile_deform, one 480x1200 video tiling 10 240x240 deformation maps. Thumb and index carry most contact in folding.",
+   "note": "Five fingertip sensors per hand (Sharpa Wave built-in), no palm. Per frame: observation.tactile (60,) = (left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), named in every season's info.json, unit not stated; observation.images.tactile_raw, one 1600x480 video tiling 10 grayscale 320x240 marker-dot images; observation.images.tactile_deform, one 1200x480 video tiling 10 240x240 deformation maps. Tile order is not documented; in the data row 0 is the left hand and the columns run thumb to little. Thumb and index carry most contact in folding.",
    "maker": "Sharpa",
    "model": "Sharpa Wave fingertip tactile sensor (Dynamic Tactile Array)",
    "principle": "optical",
-   "range": "0-30 N (maker spec for SharpaWave W01; release peaks reach 47.8 on fz)",
+   "range": "0-30 N (maker spec for SharpaWave W01); release fz peaks reach 65.3 (unit not stated)",
    "calibrated": false
   },
   "modalities": [
@@ -33,27 +33,29 @@
    "robot_action"
   ],
   "scale": {
-   "hours": null,
+   "hours": 101.4,
    "episodes": 1845,
-   "frames": null,
+   "frames": 10950437,
    "tasks": 1,
    "objects": null,
    "subjects": null,
    "scenes": null,
    "scene_types": [],
-   "text": "Official repo: ~1,845 episodes in 131 collection seasons (2026-05-14 to 2026-07-18, counted from the file tree); its card still says 51 seasons, 682 episodes, 4,763,267 frames (44.1 h) @30 fps. Public mirror: 595 episodes, 4,091,138 frames (37.9 h). 1 task (paper airplane), episodes 175-418 s"
+   "text": "1,845 episodes with data files (10,950,437 frames, 101.4 h at 30 fps) in 131 collection seasons, 2026-05-14 to 2026-07-18; the 143 seasons' info.json files list 1,991 episodes (11,784,719 frames, 109.1 h), 146 of them without data files. The card still says 51 seasons, 682 episodes. 1 task (paper airplane); episodes 124-418 s, median 199 s"
   },
   "availability": "gated",
-  "access": "Official: Hugging Face SharpaIT/Robotic_Origami_Challenge, gated (HF login and agreeing to share contact information; HF lists the gate as automatic approval), ~1.91 TB of per-season LeRobot v3.0 + v2.1 folders. Ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons (595 episodes, 459 GB) merged into one LeRobot v3.0 root.",
+  "access": "Official: Hugging Face SharpaIT/Robotic_Origami_Challenge, gated (log in and agree to share your Hugging Face username and email with the authors; automatic approval), 1.91 TB in 143 season folders, each with a LeRobot v3.0 export (multi-episode files) and a LeRobot v2.1 export (one parquet and one mp4 per stream per episode). Ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons (595 episodes, 459 GB) merged into one LeRobot v3.0 root.",
   "license": "CC BY 4.0",
   "caveats": [
-   "One task only: folding the same 6-fold paper airplane (15 x 15 cm, >= 60 gsm paper) in every episode; episodes run 175-418 s (mirror).",
-   "The official card's statistics (51 seasons, 682 v3.0 episodes) are stale: the file tree on 2026-10-16 has 143 season folders, 131 with data (~1,845 episodes); 12 folders hold metadata only.",
-   "The public mirror iris-kaist/origami-v3-merged (and suveen013/origami-v3-merged, same 459 GB) is a third-party re-packaging of only the first 46 seasons (2026-05-14 to 2026-05-30); the later 85 seasons with data and the v2.1 copies are not in it. Its card states 'Original data © Sharpa — released under CC-BY-4.0'.",
-   "observation.tactile units are not stated; magnitudes fit N and N·m (fz peaks 25-48, torques below 0.6). The fingertip-to-tile order inside the two tactile videos is not documented.",
-   "observation.state.tcp (24) is all zero in all 595 mirror episodes, and the 7 torso/motor joint torques are zero.",
-   "Videos are a mix of AV1 and H.264 although info.json says av1; tactile_raw is ~600 MB per episode (median), up to ~1.4 GB.",
-   "Contact is concentrated on thumb and index: per-episode peak force on the left ring fingertip stays below 0.5 in 172 of 595 mirror episodes; every fingertip channel is live.",
+   "One task only: folding the same 6-fold paper airplane (15 x 15 cm, >= 60 gsm paper) in every episode; episodes run 124-418 s (median 199 s).",
+   "The card's statistics (51 seasons, 682 v3.0 episodes, 4,763,267 frames) are stale. The 143 season folders' info.json files list 1,991 episodes; 12 seasons (2026-07-07 to 2026-07-13, 145 episodes) hold metadata only, and v2.1 episode 0 of season 2026-07-09 13:37 has its six videos but no parquet, so 1,845 episodes have data.",
+   "Most seasons are stored twice: LeRobot v3.0 for 129 seasons (1,813 episodes) and v2.1 for 130 (1,827 episodes); 2 seasons exist only as v2.1 and 1 only as v3.0. The v2.1 copies of 4 seasons from 2026-05-23 to 2026-05-25 (56 episodes) lack observation.tactile, both tactile videos and head_right; their v3.0 copies have them.",
+   "Season 2026-07-12 19:06 (18 episodes, v3.0 only) has no wrist_right video files, and its head_right files cover 12 of the 18 episodes.",
+   "The public mirror iris-kaist/origami-v3-merged (and suveen013/origami-v3-merged, same 459 GB) re-packages only the first 46 official seasons (2026-05-14 to 2026-05-30): their v3.0 metadata total 595 episodes and 4,091,138 frames, the mirror's own totals. Its card states 'Original data © Sharpa — released under CC-BY-4.0'.",
+   "observation.tactile units and sensor frame are not stated; magnitudes fit N and N·m (fz peaks up to 65.3, torque components below 1.12 across the release). The tile order inside the two tactile videos is not documented.",
+   "observation.state.tcp (24 values) is zero in every frame of all 1,991 episodes' stats, and the 7 torso/motor joint torques are zero.",
+   "Video codec varies by season: info.json lists H.264 for 117 of 143 v3.0 exports and AV1 for 26 (v2.1: 134 H.264, 9 AV1), although the card calls v3.0 primarily AV1. tactile_raw is 199 MB per v2.1 episode (median; 126 MB to 1.54 GB).",
+   "Thumb and index carry most contact. Per-episode fz peaks stay below 0.5 on the left ring fingertip in 88% of the 1,845 episodes and on the left little in 65%; in the 945 July episodes the right middle, ring and little stay below 0.5 in 75%, 88% and 80%. Every one of the 60 channels varies in every episode.",
    "The teleoperation device is not stated.",
    "Same stations (POC22032, POC22061), schema and pipeline as SharpaDex v1.0, but no season is shared and SharpaDex has no origami task; a separate collection."
   ],
@@ -107,29 +109,38 @@
    ]
   },
   "sources": [
-   "https://robotic-origami-challenge.github.io/ (EN page incl. inline organizer list and schema.org data; ?lang=ja serves the same file)",
+   "https://robotic-origami-challenge.github.io/ (EN page incl. inline organizer list and schema.org data; ?lang=ja serves the same file; source index.html in github.com/robotic-origami-challenge/robotic-origami-challenge.github.io)",
    "https://forms.gle/Y46WUArricVAQPBv9 (the page's 'Get access' / registration Google Form)",
-   "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge (dataset card page and recursive file tree via the HF API; files not readable: gated, account not authorized)",
-   "https://huggingface.co/datasets/iris-kaist/origami-v3-merged (README.md, meta/info.json, meta/modality.json, meta/stats.json, meta/tasks.parquet, meta/episodes/chunk-000/file-000.parquet, full file tree)",
-   "https://huggingface.co/datasets/iris-kaist/origami-v3-merged data/chunk-000/file-000.parquet, file-029.parquet, file-044.parquet (tactile, timestamp, index columns by range read)",
-   "https://huggingface.co/datasets/iris-kaist/origami-v3-merged videos/*/chunk-000/file-000.mp4 (ffprobe of tactile_raw, tactile_deform, head_left, wrist_left; one frame each of tactile_raw, tactile_deform, head_left, wrist_right at 200 s)",
+   "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge (README.md at revision 8194af6, dataset page gate text, /api/datasets card data and gated flag, recursive file tree)",
+   "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge season_*/lerobot3.0/meta/ and season_*/lerobotv2.1/meta/ of all 143 seasons (info.json, modality.json, stats.json, tasks, episodes parquet / episodes.jsonl, episodes_stats.jsonl), assets/fold_plane_overview_manifest.json",
+   "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge lerobotv2.1 data/chunk-000/episode_*.parquet of 6 seasons (observation.tactile, timestamp, frame_index columns by range read; 4 whole files) and ffprobe of one tactile_raw and one tactile_deform file per export (511 files)",
+   "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge lerobotv2.1 videos of 4 episodes (windowed reads of all six streams; whole tactile_deform and head_left of season 2026-05-26 13:55 episode 4)",
+   "https://huggingface.co/datasets/iris-kaist/origami-v3-merged (README.md, meta/info.json, meta/modality.json, meta/stats.json, meta/tasks.parquet, meta/episodes/chunk-000/file-000.parquet, full file tree; read 2026-10-16)",
    "https://huggingface.co/api/datasets/suveen013/origami-v3-merged",
    "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 (README.md, task and season folder listing, nest_cups/season_POC22061_2026_05_22_10_57_48_train/lerobot_v3.0/meta/info.json)",
+   "https://github.com/sharpa-robotics (repository list; sharpa-wave-sdk and sharpawave-deform-encoder READMEs: no tile order or force units for this release)",
    "https://huggingface.co/datasets/zekaiwang/trex_dataset (meta/info.json)",
    "https://www.sharpa.com/pages/about"
   ],
   "unconfirmed": [
-   "episodes=1,845 counted from the official file tree: per season the larger of the lerobot3.0 tactile_raw mp4 count (one file per episode, as in the mirror) and the lerobotv2.1 episode parquet count; v3.0 alone gives 1,813 in 129 seasons, v2.1 alone 1,827 in 130. info.json files are behind the gate and were not read. The card says 682 episodes / 4,763,267 frames (51 seasons) and 555 v2.1 episodes / 3,893,595 frames (41 seasons).",
-   "hours not derived for the full release (no frame counts without the gated info.json). The mirror's 37.88 h is its info.json total_frames 4,091,138 / 30 fps; mirror episodes average 229 s, and later seasons are shorter (~210 s).",
-   "Mirror = first 46 official seasons: the sorted first 46 season folders hold 595 v3.0 tactile_raw files and 459.31 GB of lerobot3.0 files, against the mirror's 595 episodes and 458.96 GB; the mirror card says it merged 46 per-season v3.0 trees with no video re-encode. Byte identity of files not checked.",
+   "hours = frames / 30 fps: 10,950,437 frames of the 1,845 episodes with data files give 101.4 h; the 11,784,719 frames listed in all 143 info.json files give 109.1 h. Episodes with data: per season, the v3.0 meta/episodes rows when v3.0 data files exist (1,813 episodes in 129 seasons), else the v2.1 episodes.jsonl rows whose parquet exists (32 episodes in 2 seasons); lengths from the same metadata.",
+   "Tile order of tactile_raw and tactile_deform (row 0 left hand, row 1 right; columns thumb, index, middle, ring, little, the same order as observation.tactile) comes from correlating each tile's mean deformation value and raw-image change with the ten fingertip |F| series in 4 sampled 45 s windows: r 0.73-0.99 (median 0.92) for the 25 loaded tiles, each highest on its own fingertip. Not stated in the card, info.json or the Sharpa repositories.",
+   "In 19 of those 25 tiles the wrench correlates best with the deformation tile one frame earlier (wrench trails the images by ~33 ms); the gain over zero lag is a median correlation of +0.002.",
    "Hand identified as Sharpa Wave from 22 joints per hand in observation.state and the maker; the card and challenge page say 'Sharpa Hands' / 'dexterous hands'. robot_type 'north_ces' suggests Sharpa's North robot shown at CES 2026 (press coverage); not stated in the card.",
    "7-DoF arms from the state layout (left_arm_j0-j6) and the SharpaDex card (same rig family: 'two 7-DoF arms, two 22-DoF dexterous hands').",
-   "Tactile units not stated. Per-episode stats: fz peaks 25-48 (fz max 47.75 right index), torque components |t| < 0.6. Maker spec for SharpaWave W01: 0-30 N range, 50 N max load, 180 fps tactile; the release is sampled at 30 Hz.",
-   "tactile_raw layout read from one frame (episode 0, 200 s): 2 rows x 5 columns of 320x240 grayscale marker-dot images; tactile_deform: 2 x 5 tiles of 240x240, black except bright blobs at contact. Which row is which hand and the finger order of the columns are not documented.",
-   "Station ids POC22032 / POC22061 come from season folder names; the official seasons are 4 on POC22032 (2026-05-14/15) and the rest on POC22061. What a station is (robot unit or site) is not stated.",
+   "Tactile units not stated. Release-wide per-episode stats: fz max 65.25 (right index), torque components |t| <= 1.12. Maker spec for SharpaWave W01: 0-30 N range, 50 N max load, 180 fps tactile; the release is sampled at 30 Hz.",
+   "Station ids POC22032 / POC22061 come from season folder names: 4 seasons (24 episodes, 2026-05-14/15) on POC22032, 139 seasons (127 with data, 1,821 episodes) on POC22061. What a station is (robot unit or site) is not stated.",
    "Head cameras: head_left and head_right; whether they form a calibrated stereo pair is not stated. Camera models not stated.",
-   "The Get access link on the challenge page leads to a FrodoBots Google Form for info sessions and Discord sign-up (name, affiliation, role); it carries no data terms. The gate conditions text on Hugging Face is only shown after login and was not read."
-  ]
+   "The Get access link on the challenge page leads to a FrodoBots Google Form for info sessions and Discord sign-up (name, affiliation, role); it carries no data terms.",
+   "Mirror = first 46 official seasons: counts match (595 episodes, 4,091,138 frames); byte identity of files not checked."
+  ],
+  "gate": {
+   "kind": "hf_gate",
+   "approval": "automatic",
+   "url": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge",
+   "checked": "2026-10-24",
+   "note": "No extra terms: the card sets no gate prompt or form fields; the Hugging Face gate shares the username and email with the authors. The ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons."
+  }
  },
  "license": {
   "name": "CC BY 4.0",
@@ -140,10 +151,10 @@
  "download": {
   "where": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge",
   "access": "login",
-  "format": "One folder per collection season (season_<station>_<date>_train/) with lerobot3.0/ (data/chunk-000/file-*.parquet, videos/<key>/chunk-000/file-*.mp4, concatenated episodes) and, for most seasons, lerobotv2.1/ (one parquet and one mp4 per stream per episode). Mirror: one merged LeRobot v3.0 root.",
-  "total_size": "1.91 TB official (v3.0 0.94 TB + v2.1 0.97 TB); mirror 459 GB",
-  "per_episode": "~0.6-1.5 GB with all six videos (tactile_raw alone median ~600 MB, 0.2-1.4 GB); parquet ~6-8 MB per episode",
-  "partial_fetch": "Mirror: HTTP range reads of parquet column chunks (tactile column ~10 MB per data file of ~9-12 episodes) and ffmpeg seeking into the per-key mp4s using meta/episodes from/to timestamps. Official: per-season folders after accepting the gate (v2.1 has per-episode files)."
+  "format": "One folder per collection season (season_<station>_<date>_<time>_train/) with lerobot3.0/ (data/chunk-000/file-*.parquet and videos/<key>/chunk-000/file-*.mp4 holding several episodes, meta/episodes parquet with per-episode file pointers and stats) and lerobotv2.1/ (data/chunk-000/episode_*.parquet and videos/chunk-000/<key>/episode_*.mp4, one per episode; meta/episodes.jsonl, episodes_stats.jsonl).",
+  "total_size": "1.91 TB (v3.0 940.8 GB + v2.1 970.6 GB, summed from the file tree); mirror 459 GB",
+  "per_episode": "v2.1: six videos 0.43 GB median (0.27-2.33 GB), of which tactile_raw 199 MB median (126 MB-1.54 GB); parquet 5.9 MB median (3.8-10.8 MB)",
+  "partial_fetch": "v2.1 per-episode files: the parquet whole or by column chunks, and ffmpeg seeking into each per-stream mp4 by HTTP range requests on the signed file URL (a 45 s window of all six streams is ~100 MB, the window's share of the files). v3.0: parquet row groups plus from/to timestamps in meta/episodes."
  },
  "channels": [
   {
@@ -153,7 +164,7 @@
    "rate_hz": 30,
    "unit": "8-bit RGB",
    "frame": "left head camera",
-   "note": "AV1 or H.264 mp4 (yuv420p); v3.0 files concatenate episodes"
+   "note": "H.264 or AV1 mp4 (yuv420p) per season's info.json; v2.1 one file per episode, v3.0 files concatenate episodes"
   },
   {
    "name": "observation.images.head_right",
@@ -162,7 +173,7 @@
    "rate_hz": 30,
    "unit": "8-bit RGB",
    "frame": "right head camera",
-   "note": null
+   "note": "H.264 or AV1 mp4 (yuv420p) per season's info.json; v2.1 one file per episode, v3.0 files concatenate episodes"
   },
   {
    "name": "observation.images.wrist_left",
@@ -171,7 +182,7 @@
    "rate_hz": 30,
    "unit": "8-bit RGB",
    "frame": "left wrist camera",
-   "note": null
+   "note": "H.264 or AV1 mp4 (yuv420p) per season's info.json; v2.1 one file per episode, v3.0 files concatenate episodes"
   },
   {
    "name": "observation.images.wrist_right",
@@ -180,7 +191,7 @@
    "rate_hz": 30,
    "unit": "8-bit RGB",
    "frame": "right wrist camera",
-   "note": null
+   "note": "H.264 or AV1 mp4 (yuv420p) per season's info.json; v2.1 one file per episode, v3.0 files concatenate episodes"
   },
   {
    "name": "observation.images.tactile_raw",
@@ -188,8 +199,8 @@
    "shape": "(480, 1600, 3)",
    "rate_hz": 30,
    "unit": "8-bit grayscale stored as yuv420p",
-   "frame": "2 x 5 tiles of 320x240 fingertip camera images; hand/finger order of tiles not documented",
-   "note": "marker-dot elastomer images; one mp4 per episode in v3.0, median ~600 MB"
+   "frame": "2 x 5 tiles of 320x240 fingertip camera images; row 0 left hand, columns thumb to little (from correlation with observation.tactile; not documented)",
+   "note": "marker-dot elastomer images; v2.1 file per episode 199 MB median (126 MB-1.54 GB)"
   },
   {
    "name": "observation.images.tactile_deform",
@@ -197,17 +208,17 @@
    "shape": "(480, 1200, 3)",
    "rate_hz": 30,
    "unit": "8-bit intensity, scale not stated",
-   "frame": "2 x 5 tiles of 240x240 maps; tile order not documented",
-   "note": "black at rest, bright blobs at contact; ~30-55 MB per v3.0 file of ~10 episodes"
+   "frame": "2 x 5 tiles of 240x240 maps; row 0 left hand, columns thumb to little (from correlation with observation.tactile; not documented)",
+   "note": "black at rest, bright blobs at contact; 3-4 MB per v2.1 episode file"
   },
   {
    "name": "observation.tactile",
    "kind": "wrench",
    "shape": "(60,)",
    "rate_hz": 30,
-   "unit": "not stated (forces peak 25-48, torques |t| < 0.6; consistent with N and N·m)",
+   "unit": "not stated (fz peaks up to 65.3, torque components |t| <= 1.12 across the release; consistent with N and N·m)",
    "frame": "per fingertip sensor, not documented",
-   "note": "(left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), named in info.json; no NaN in 9 checked episodes"
+   "note": "(left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), named in info.json and the card; near zero at rest; no NaN and no constant channel in any of the 1,845 episodes' stats"
   },
   {
    "name": "observation.state",
@@ -225,7 +236,7 @@
    "rate_hz": 30,
    "unit": "not stated",
    "frame": "same joint order as observation.state",
-   "note": "motor_j0-6 torques are 0 throughout"
+   "note": "motor_j0-6 torques are 0 in every episode's stats"
   },
   {
    "name": "observation.state.tcp",
@@ -233,8 +244,8 @@
    "shape": "(24,)",
    "rate_hz": 30,
    "unit": null,
-   "frame": "left/right TCP pose 6 + forces 6",
-   "note": "all zero in every frame (mirror stats; the mirror card says upstream never populated it)"
+   "frame": "names: left_arm_tcp_pose, left_arm_tcp_forces, right_arm_tcp_pose, right_arm_tcp_forces (24 values)",
+   "note": "zero in every frame: min = max = 0 in all 1,991 episodes' stats"
   },
   {
    "name": "action",
@@ -252,18 +263,18 @@
    "rate_hz": 30,
    "unit": "s / count",
    "frame": null,
-   "note": "timestamp steps 0.0333 s; one task_index (0 = 'north ces task')"
+   "note": "timestamp = frame_index / 30 in every episode (stats of all 1,845 episodes with data); one task_index (0 = 'north ces task')"
   }
  ],
  "episode_index": {
-  "where": "Official: per-season lerobot3.0/meta (gated). Mirror: meta/episodes/chunk-000/file-000.parquet (595 rows: length, data/video file pointers, per-episode stats) + meta/tasks.parquet",
+  "where": "Per season: lerobot3.0/meta/episodes/chunk-000/file-000.parquet (129 seasons; length, data and video file pointers, per-episode stats) and lerobotv2.1/meta/episodes.jsonl + episodes_stats.jsonl (all 143 seasons).",
   "count": 1845,
   "fields": [
    "task",
    "length",
    "season (folder name: station id + start time)"
   ],
-  "note": "Mirror episode_index runs over the 46 seasons in sorted folder order (episode 0 = season_POC22032_2026_05_14_19_21_01_train episode 0). No subject, scene, object or success labels.",
+  "note": "1,845 episodes with data files out of 1,991 listed. Episode indices restart at 0 in every season, so an episode is named by season + index. No subject, scene, object or success labels.",
   "tasks": [
    "north ces task (fold a paper airplane)"
   ],
@@ -271,56 +282,197 @@
  },
  "sample": {
   "decision": "sample",
-  "reason": "The official card licenses the data CC BY 4.0 ('You may use, share, and adapt the dataset, including for commercial purposes, provided that you give appropriate attribution'). The official repo is gated and this account is not authorized, but the ungated mirror iris-kaist/origami-v3-merged re-publishes the first 46 seasons under the same license with videos carried over unchanged. Sample from the mirror and label the collection 'CC BY 4.0', crediting Sharpa and the Robotic Origami Challenge and naming the mirror as the download source.",
+  "reason": "The official card licenses the data CC BY 4.0 ('You may use, share, and adapt the dataset, including for commercial purposes, provided that you give appropriate attribution'), and this account has passed the Hugging Face gate, which adds no terms. Sample from the official repo at revision 8194af6 and label the collection 'CC BY 4.0', crediting Sharpa and the Robotic Origami Challenge.",
   "prefix": "ro_",
   "tasks_total": 1,
   "tasks_sampled": 1,
   "episodes": [
    {
-    "id": "7",
-    "release_id": "mirror episode_index 7 = official season_POC22032_2026_05_14_19_21_01_train, episode 7",
+    "id": "season_POC22032_2026_05_15_16_43_23_train/4",
+    "viewer_id": "ro_poc22032_20260515_1643_ep4",
     "task": "fold a paper airplane",
-    "scene": "station POC22032, 2026-05-14",
+    "scene": "station POC22032, 2026-05-15",
     "subject": null,
-    "duration_s": 377.3,
+    "duration_s": 280.5,
     "window": [
-     5,
-     65
+     3,
+     48
     ],
-    "why": "9 of 10 fingertips above rest (|F| > episode 5th percentile + 1) for >= 1 s in the window: L thumb 22 s, L index 22 s, R thumb 19 s, R index 17 s, R little 8.6 s, R ring 6.6 s; peak |F| 16.7 (R thumb). Only the left ring stays flat. From the first station (POC22032)."
+    "why": "7 fingertips >= 1 s above rest (|F| > episode 5th percentile + 1) in the window: R thumb 21.4 s, R index 20.0 s, L thumb 16.7 s, L index 15.8 s, R ring 12.2 s, R little 6.4 s, R middle 1.4 s; peak |F| 37.6 (R little). The only sampled station-POC22032 episode; its 4 seasons are the first two days."
    },
    {
-    "id": "294",
-    "release_id": "mirror episode_index 294 = official season_POC22061_2026_05_25_16_02_56_train, episode 5",
+    "id": "season_POC22061_2026_05_26_13_55_16_train/4",
+    "viewer_id": "ro_poc22061_20260526_1355_ep4",
     "task": "fold a paper airplane",
-    "scene": "station POC22061, 2026-05-25",
+    "scene": "station POC22061, 2026-05-26",
     "subject": null,
-    "duration_s": 259.6,
+    "duration_s": 188.8,
     "window": [
-     0,
-     60
+     4,
+     49
     ],
-    "why": "8 of 10 fingertips >= 1 s above rest in the window: R thumb 39 s, L index 33 s, R index 30 s, L thumb 28 s, R ring 4.3 s; peak |F| 19.5 (R ring). Second station, mid-collection."
+    "why": "7 fingertips >= 1 s above rest: L thumb 22.5 s, R thumb 21.0 s, R index 20.6 s, L index 15.7 s, R little 8.7 s, R ring 2.2 s, R middle 1.1 s; peak 17.5 (R thumb). Late May, within the mirror's range."
    },
    {
-    "id": "500",
-    "release_id": "mirror episode_index 500 = official season_POC22061_2026_05_29_10_19_22_train, episode 0",
+    "id": "season_POC22061_2026_06_28_13_47_21_train/5",
+    "viewer_id": "ro_poc22061_20260628_1347_ep5",
     "task": "fold a paper airplane",
-    "scene": "station POC22061, 2026-05-29",
+    "scene": "station POC22061, 2026-06-28",
     "subject": null,
-    "duration_s": 211.2,
+    "duration_s": 221.3,
     "window": [
-     0,
-     60
+     4,
+     49
     ],
-    "why": "8 of 10 fingertips >= 1 s above rest, including L little 8.8 s and L middle 5.6 s, which are rarely loaded; peak |F| 20.3 (R ring). Late season with the shorter (~210 s) folds."
+    "why": "8 fingertips >= 1 s above rest, the most in its season: L thumb 22.9 s, L index 22.6 s, R index 16.4 s, R thumb 12.5 s, R ring 4.1 s, R little 1.9 s, L little 1.5 s, R middle 1.4 s; peak 28.0 (L index). June collection, not in the mirror."
+   },
+   {
+    "id": "season_POC22061_2026_07_17_13_35_14_train/13",
+    "viewer_id": "ro_poc22061_20260717_1335_ep13",
+    "task": "fold a paper airplane",
+    "scene": "station POC22061, 2026-07-17",
+    "subject": null,
+    "duration_s": 142.9,
+    "window": [
+     63,
+     108
+    ],
+    "why": "6 fingertips >= 1 s above rest: R index 36.2 s, R thumb 35.9 s, L thumb 29.6 s, L index 22.0 s, L middle 16.0 s, L little 4.6 s; peak 45.4 (R index). July collection with the shorter (~140 s) folds; right middle, ring and little stay unloaded, as in 75-88% of July episodes."
    }
   ],
-  "fetch_estimate": "~0.6 GB with windowed reads: tactile columns from data files 000, 029, 044 (~10 MB each; ~66 MB if whole files), 60 s of each of the 6 video keys by ffmpeg HTTP seeking (tactile_raw ~200 MB for episode 7, ~60 MB each for 294 and 500; head/wrist ~15-25 MB per stream; deform a few MB). Whole files for the three episodes would be ~4 GB (tactile_raw 1.23 + 0.26 + 0.21 GB; head/wrist files 120-200 MB each). Re-hosted media: tactile_raw 1600x480 and tactile_deform 1200x480 must be re-encoded to H.264 (AV1 in these files) at reduced size to stay under ~30 MB per episode. Episode JSON: 1,800 frames x 60 floats, under 2 MB.",
-  "rules_applied": "Tasks: 1 task (<= 6), taken. Episodes: with <= 3 tasks, 2-3 per task from different subjects, scenes or objects and >= 3 in total: 3 episodes from both stations (POC22032, POC22061) and three dates; operators and scenes are not labelled. Contact: all 10 fingertip wrench channels present, no NaN; candidates scored by the number of fingertips with >= 1 s above rest in a 60 s window (episodes 0-8, 289-303, 500-514 scanned). Length: episodes are 175-418 s, so each is cut to a 60 s window holding the contact. Budget within 2 MB JSON, ~30 MB media per episode and 20 GB download.",
+  "fetch_estimate": "Done: ~0.8 GB in total. Metadata of all 143 seasons 121 MB; tactile columns of 85 v2.1 episodes in 6 seasons by range read (~130 MB); 4 whole episode parquets (25 MB); 45 s of each of the six streams per episode by ffmpeg range seeking (~100 MB per episode, estimated as the window's share of the six file sizes; bytes read were not logged); whole tactile_deform (3 MB) and head_left (55 MB) of one episode for verification; ffprobe headers of 511 tactile videos. Hosted output: episode JSON 1.59 MB each, re-encoded media 7.2-9.4 MB per episode.",
+  "rules_applied": "Tasks: 1 task (<= 6), taken. Episodes: with <= 3 tasks, 2-3 per task from different subjects, scenes or objects and >= 3 in total; operators and scenes are not labelled, so 4 episodes span both stations and the collection period (2026-05-15, 05-26, 06-28, 07-17). Candidates: all 85 v2.1 episodes of 6 seasons (05-14, 05-15, 05-26, 06-28, 07-08, 07-17), scored by the number of fingertips >= 1 s above rest in a 45 s window, ties broken by total contact time. Every tactile channel present (v2.1 seasons with tactile streams only), no NaN. Length: episodes are 143-281 s, so each is cut to a 45 s window holding the contact. Budget: JSON <= 2 MB, media <= 30 MB per episode, download far under 20 GB.",
   "deviations": [
-   "Prefix og_ (suggested) is taken by pipeline/surveys/opengraph_ego_tactile.json; ro_ used instead.",
-   "Sampled from the third-party mirror, so only seasons up to 2026-05-30 are eligible."
+   "Windows are 45 s rather than up to 60 s: the pooled deformation grid (2 x 5 x 8 x 8 cells), 10 wrench vectors and 30 plot lines at 30 Hz come to 1.59 MB for 45 s; 60 s would exceed 2 MB.",
+   "Prefix og_ (suggested in the first survey) is taken by pipeline/surveys/opengraph_ego_tactile.json; ro_ used.",
+   "Sampled from the official v2.1 export (per-episode files), not v3.0; per-episode stats of the two exports agree (tactile max identical in 1,757 episodes that have both)."
   ]
+ },
+ "visualization": [
+  {
+   "channel": "observation.tactile",
+   "shown_as": [
+    "vectors",
+    "series"
+   ],
+   "detail": "Per fingertip, (fx, fy) as an arrow and fz as a ring on its block of the hand panel (full block = window 99.5th percentile of |F| rounded up to an even number: 16-36); plots per hand of fz, |(fx, fy)| and |(tx, ty, tz)| per fingertip (6 plots). Values are the parquet's float32, unchanged, one row per 30 Hz frame.",
+   "reason": null
+  },
+  {
+   "channel": "observation.images.tactile_deform",
+   "shown_as": [
+    "grid",
+    "video"
+   ],
+   "detail": "Each 240x240 tile mean-pooled over 30x30 px into 8x8 cells, placed on a schematic hand (fingers in a row, thumb lower on the outside, left hand mirrored), uint8 against a fixed range = window 99.95th percentile rounded up to 5 (120-135 of 0-255); region sums plotted per finger. Also the whole video scaled to 960x384, H.264, as a full-width mosaic card. Fetched losslessly (x264 qp 0): the clip is bit-exact with an independent decode of the release file over all 1,350 window frames.",
+   "reason": null
+  },
+  {
+   "channel": "observation.images.tactile_raw",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "Whole 1600x480 mosaic scaled to 960x288, H.264 crf 23, full-width card; tiles already in viewer order (top left hand, thumb to little).",
+   "reason": null
+  },
+  {
+   "channel": "observation.images.head_left",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "480x480 H.264 crf 26, large card; poster from its middle frame.",
+   "reason": null
+  },
+  {
+   "channel": "observation.images.head_right",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "480x480 H.264 crf 26.",
+   "reason": null
+  },
+  {
+   "channel": "observation.images.wrist_left",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "480x480 H.264 crf 26.",
+   "reason": null
+  },
+  {
+   "channel": "observation.images.wrist_right",
+   "shown_as": [
+    "video"
+   ],
+   "detail": "480x480 H.264 crf 26.",
+   "reason": null
+  },
+  {
+   "channel": "observation.state",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "65 joint positions, not touch; named in the episode notes"
+  },
+  {
+   "channel": "action",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "65 joint targets, not touch; named in the episode notes"
+  },
+  {
+   "channel": "observation.state.joint_torque",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "joint torques, not touch (motor_j0-6 are zero); named in the episode notes"
+  },
+  {
+   "channel": "observation.state.tcp",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "zero in every frame of the release; stated in the episode notes"
+  },
+  {
+   "channel": "timestamp, frame_index, episode_index, index, task_index",
+   "shown_as": [
+    "not_shown"
+   ],
+   "reason": "the viewer clock: one row per 30 Hz frame, window frame f0 = t0 x 30"
+  }
+ ],
+ "integrity": {
+  "checked": "2026-10-24",
+  "scope": "4 sampled episodes (whole v2.1 parquets, 45 s of all six videos each) plus release-wide metadata: all 143 info.json files, 129 v3.0 episode tables, 143 v2.1 episodes.jsonl and episodes_stats.jsonl (1,991 episodes), and ffprobe of one tactile_raw and one tactile_deform file per export (511 files).",
+  "faults": [
+   {
+    "check": "streams",
+    "severity": "minor",
+    "text": "Season 2026-07-12 19:06 (18 episodes, stored only as v3.0) has no wrist_right video, and head_right covers 12 of its 18 episodes: 1.0% of the 1,845 episodes with data."
+   },
+   {
+    "check": "streams",
+    "severity": "minor",
+    "text": "Season 2026-07-09 13:37, v2.1 episode 0 has its six videos but no parquet (no state, action or tactile) and no v3.0 copy: 1 episode."
+   },
+   {
+    "check": "streams",
+    "severity": "minor",
+    "text": "The v2.1 copies of 4 seasons (56 episodes, 2026-05-23 to 05-25) lack observation.tactile, both tactile videos and head_right; the v3.0 copies of the same episodes have them."
+   },
+   {
+    "check": "streams",
+    "severity": "minor",
+    "text": "observation.state.tcp (24 values) is zero in every episode, and the 7 torso/motor joint torques are zero; neither is a tactile stream."
+   }
+  ],
+  "passed": {
+   "files": "All metadata files parse; 511 tactile videos (one per export and stream) open with the codec and size their info.json states; the 4 sampled parquets and 24 video windows decode, and every sampled video has as many frames as its parquet has rows.",
+   "time": "fps 30 in every info.json; timestamp = frame_index / 30 in all 1,845 episodes' stats; v3.0 video spans equal length / 30 for all 1,813 episodes; sampled windows cut at the parquet's frame f0 (deformation clip bit-exact with the release decode).",
+   "tactile": "No NaN, no constant channel and a tactile count equal to the episode length in all 1,845 episodes' stats; in the 4 sampled episodes no all-zero, stuck or saturated channel (largest share of frames at a channel's maximum 0.05%)."
+  },
+  "scope_not_integrity": "12 season folders (145 episodes, 828,819 frames) hold metadata only; recordings listed but not released, counted as scope."
  }
 }

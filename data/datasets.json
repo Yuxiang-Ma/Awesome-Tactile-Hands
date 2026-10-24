@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-10-18"
+  "last_updated": "2026-10-24"
  },
  "datasets": [
   {
@@ -12,9 +12,9 @@
    "authors": "Dayou Li et al.",
    "year": 2026,
    "venue": "arXiv 2610.10288",
-   "summary": "Bimanual tactile gloves with 880 taxels per hand, recorded with head-mounted RGB-D and two wrist cameras across about 2K everyday tasks.",
+   "summary": "Bimanual tactile gloves with 880 taxels per hand (normal force in N plus two tangential components per taxel), recorded with a head-mounted RGB-D camera and two wrist cameras; the released 100 h cover 929 tasks in 22 scene types.",
    "embodiment": "human",
-   "hand": "Tachin glove (commercial)",
+   "hand": "Tachin glove x 2 (episode files name it Tujian EI-G012)",
    "bimanual": true,
    "sensor": {
     "type": "unspecified",
@@ -24,28 +24,30 @@
      "phalanx",
      "palm"
     ],
-    "rate_hz": "35-90",
-    "note": "Normal pressure, 1.5 x 1.5 mm cells, 15 pads over five fingers and palm (palmar side), spatial resolution below 2 mm. Hardware spec 50 Hz WiFi / 100 Hz USB; released data is 35-90 Hz, timestamped per sample. Release NPZ also carries tangential (shear) components per pad.",
-    "model": "Tachin Glove",
+    "rate_hz": "30-100",
+    "note": "15 pads per hand stored as tactile_<k> (T, rows, cols), normal force per taxel in N: thumb tip 16x10, thumb middle 4x8, thenar 13x8; index, middle and ring 9x8 + 3x8 + 4x8; little 9x8 + 3x8; hypothenar 13x8. Every taxel also has tf_tactile_x / tf_tactile_y tangential components (unit not stated). Per-sample Unix timestamps; the per-episode rate is 30-100 Hz (metadata glove_rate_hz). 1.5 x 1.5 mm cells, spatial resolution below 2 mm (paper).",
+    "model": "EI-G012 (Tachin Glove)",
     "principle": "unspecified",
-    "range": "0.2-30 N/cm^2, resolution 0.05 N/cm^2",
-    "calibrated": null
+    "range": "0.2-30 N/cm^2, resolution 0.05 N/cm^2 (paper)",
+    "calibrated": true,
+    "maker": "Tachin Technology (途见科技, Beijing)"
    },
    "modalities": [
     "egocentric",
     "depth",
     "wrist_rgb",
+    "imu",
     "language"
    ],
    "scale": {
-    "hours": 500,
-    "episodes": 87000,
-    "tasks": 2000,
-    "objects": 1500,
-    "subjects": 20,
-    "text": "500 h, ~87K episodes, ~2K tasks, 1.5K+ objects, ~20 participants, 9 collection settings (800+ scene configurations)",
-    "frames": null,
-    "scenes": 9,
+    "hours": 100.0,
+    "episodes": 15324,
+    "tasks": 929,
+    "objects": 905,
+    "subjects": 24,
+    "text": "100 h released of 500 h planned: 15,324 episodes, 929 tasks, 22 scene types, 905+ objects, 24 participants (paper, full 500 h: ~87K episodes, ~2K tasks, 1.5K+ objects, ~20 participants)",
+    "frames": 10800039,
+    "scenes": 22,
     "scene_types": [
      "laboratory",
      "kitchen",
@@ -57,16 +59,20 @@
     ]
    },
    "availability": "gated",
-   "access": "Gated on Hugging Face. 100 h / 15,324 episodes / 929 tasks (~1.08 TB) released so far; the rest is planned before November 2026.",
+   "access": "Gated on Hugging Face with automatic approval (log in and agree to share username and email). 100 h are released as 430 WebDataset tar shards (1.06 TB), per-episode preview videos (26 GB) and 193 object meshes (2.3 GB); the full 500 h is planned before November 2026.",
    "gate": {
     "kind": "hf_gate",
     "approval": "automatic",
     "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale",
-    "checked": "2026-10-18"
+    "checked": "2026-10-24"
    },
    "license": "CC BY-NC 4.0",
    "caveats": [
-    "No hand-pose capture; the paper estimates pose with WiLoR."
+    "No hand-pose files; the paper estimates pose with WiLoR.",
+    "Each episode's 17 files sit inside a ~2.5 GB tar shard; fetching one episode needs range reads over the tar headers or the whole shard.",
+    "Glove rate differs by session (30-100 Hz); the card says to use the per-sample timestamps. The glove's 8-bit frame counter skips values in most sessions, which the release does not explain.",
+    "Tactile unit: the card calls the values the glove's calibrated output in newtons; episode.h5 marks them 'newton_assumed_from_vendor_calibrated_output'. Tangential components have no stated unit.",
+    "Participants are predominantly male (95 of 15,324 episodes by female participants, per the card)."
    ],
    "links": {
     "project": "https://touch-scale.github.io/",
@@ -83,7 +89,7 @@
       "count": 1,
       "model": "Orbbec Gemini 345Lg",
       "type": "RGB-D",
-      "resolution": "1280x720 RGB; depth 640x480 native (released registered to RGB at 1280x720)",
+      "resolution": "1280x720 RGB; depth 640x480 native (paper), released registered to the RGB at 1280x720, 16-bit mm",
       "fps": 30,
       "mount": "head"
      },
@@ -104,51 +110,96 @@
       "target": "fingers",
       "method": "vision_estimate",
       "system": "WiLoR",
-      "note": "Paper runs WiLoR on auto-detected hand crops for its experiments; no pose file in the release file list and no hand-tracking hardware."
+      "note": "Paper runs WiLoR on auto-detected hand crops for its experiments; no pose file in the release and no hand-tracking hardware."
      }
     ],
     "other": [
-     "head IMU (~200 Hz, from Gemini 345Lg)",
-     "per-taxel tangential force components",
-     "language instructions",
-     "reconstructed 3D object models",
-     "camera intrinsics + Kalibr calibration"
+     "head IMU (accelerometer m/s^2 + gyroscope rad/s, ~200 Hz, Orbbec Gemini 345Lg)",
+     "per-taxel tangential components (tf_tactile_x / tf_tactile_y)",
+     "English instruction, task name, object list and leading hand per episode",
+     "193 textured object meshes (Meshy reconstructions, scale not metric)",
+     "camera intrinsics, Kalibr RGB/depth/IMU calibration and per-episode glove calibration tables",
+     "per-episode preview video (960x540, 12 fps) with all streams composited"
     ]
    },
    "sources": [
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/README.md (read with HF auth, revision 74914cc, last modified 2026-10-23)",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale file listing via the HF API at 74914cc: 16,353 files, 1.085 TB",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/metadata/episodes.parquet (15,324 rows)",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/metadata/glove_geometry_left.json and glove_geometry_right.json",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale/blob/74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e/assets/glove_layout.png",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale dataset page (gate text, read without login)",
+    "All 17 files of 9 episodes opened: shards data/train-00000, -00032, -00083, -00204, -00406, -00422 and -00429 of 430 (byte-range reads), plus previews/train/000/5a1ae97d-9456-479a-8a4e-4cd6c7f07773.mp4",
     "https://arxiv.org/html/2610.10288",
-    "https://touch-scale.github.io/",
-    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale (README, read with HF auth)"
+    "https://touch-scale.github.io/"
    ],
    "unconfirmed": [
-    "Glove maker not named; paper calls it the 'Tachin Glove' (product name only). Data were captured by vendor Noitom for Overfit Lab.",
-    "Transduction principle not stated (paper: 'flexible tactile sensing gloves', normal pressure).",
-    "scenes=9 is the paper's 'high-level collection settings' for the full 500 h; the 100 h HF release lists 22 finer scene types. scene_types are the 7 environments the paper names (of 9).",
-    "subjects: paper says ~20; the 100 h release card says 24 pseudonymous participants.",
-    "Release status: 100 h / 15,324 episodes / 929 tasks / 905+ objects on HF; 500 h planned before Nov 2026.",
-    "Paper says the glove records normal pressure only, but the release NPZ includes tf_tactile_x/y 'tangential components'.",
-    "Depth resolution: paper 640x480; card says depth_head.mkv is 1280x720 registered to head RGB."
+    "Maker: episode.h5 metadata attribute source_dataset reads 'Orbbec Gemini 345Lg; Intel RealSense D405; Tujian EI-G012'. Tujian is the pinyin of 途见 (Tachin Technology), whose EI-G series is the TachinGlove on tachin.com; the paper names only the 'Tachin Glove'. Paper: 'The data are purchased by Overfit Lab and captured by Noitom under our contracted data-collection process.'",
+    "hours=100.0 is the sum of duration_s and frames=10,800,039 the sum of num_frames (head camera, 30 fps) over metadata/episodes.parquet; the card says 100.0 h.",
+    "tasks=929 is the card's count; episodes.parquet has 953 distinct task_id and 920 distinct task_name values.",
+    "rate_hz 30-100: glove_rate_hz in episodes.parquet runs from 30.0 to 99.8 Hz (6,850 episodes at 35 Hz, 1,836 near 57 Hz, the rest 39-100 Hz). The card says 35-90 Hz and 'about 35, 57 or 65-90 Hz'; the paper gives 50 Hz over WiFi and 100 Hz over USB.",
+    "Glove frame counter (8-bit frame_numbers) in the 9 opened episodes: the 57 Hz session advances by 1 per stored sample; 35 Hz sessions advance by 1 or 2 alternately at even 28.6 ms steps; 53-91 Hz sessions store 10 ms steps with 20-62 ms gaps where the counter jumps by 2-4 (6-30% of counter values absent). Whether these are dropped packets is not stated.",
+    "Tangential components: unit not stated; the geometry file gives per-taxel dir_x / dir_y axes but does not say tf_tactile_x / _y follow them. The median ratio of tangential magnitude to normal force (taxels above 0.2 N) is 0.02-2.3% per glove file in the 8 sampled episodes.",
+    "calibrated=true rests on the card ('the glove's calibrated output in newtons') and the per-episode glove_<side>_calib.json (7 parts, each a 20-point nonlinearity curve and 1,024 gain pairs); episode.h5 marks the unit as assumed.",
+    "Positions that never read: in the 18 glove files opened, 116 of 880 positions never exceed 0.05 N in either glove, among them the same fingertip-end positions in every finger (distal pad row 8 columns 2-5, row 7 columns 1, 2 and 6) and most of the thumb tip pad's last four rows. The layout figure draws all 880; whether these positions sense is not stated.",
+    "Depth resolution: paper 640x480 native; the release's depth_head.mkv is 1280x720 FFV1 gray16le registered to the head RGB (kalibr T_depth_cam is identity).",
+    "subjects: the paper says about 20 participants for 500 h; the release card and episodes.parquet give 24 pseudonymous actor ids.",
+    "objects=905 is the card's '905+'; 193 of them have meshes.",
+    "scene_types are the 7 environment words of the card; scenes=22 counts the scene field of episodes.parquet (the paper's 9 high-level settings refer to the full 500 h).",
+    "imu.txt header says '#timestamp[ns]' but the first column holds Unix seconds (e.g. 1788249254.095250); measured rate 201.7-203.0 Hz in the 8 sampled episodes."
    ],
    "rank": {
     "n": 4,
     "label": "Apply for access",
-    "integrity": "not checked",
+    "integrity": "passed",
     "failed": [],
     "why": [
      "download after an application: Hugging Face gate, automatic approval",
-     "files not opened yet"
+     "8 sample episodes opened in the viewer",
+     "all 4 integrity checks passed",
+     "5 minor faults listed"
     ]
    },
    "contents": {
-    "score": 4,
+    "score": 5,
     "of": 5,
     "flags": {
-     "calibrated": false,
+     "calibrated": true,
      "video": true,
      "hand_pose": true,
      "scale": true,
      "diversity": true
     }
+   },
+   "viewer": "ts_84c882b0",
+   "integrity": {
+    "faults": [
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "The glove's 8-bit frame_numbers counter skips values between stored samples in 7 of 8 episodes (6-38% of counter values per glove file; only the 57 Hz session advances by 1 every sample). 35 Hz sessions step evenly (28.6 ms); in the 53-91 Hz sessions 3-15% of steps are longer than twice the median, the longest 62 ms. The release does not say whether skipped values are dropped packets; if they are, more than 5% of glove frames are missing in those 7 episodes."
+     },
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "Taxels at 0 N for the whole episode while their 4 neighbours averaged above 0.2 N for over 1 s: 0-17 per glove file (at most 17 of 880 = 1.9%, kettle right glove and unscrew left glove). Named per episode in the viewer notes."
+     },
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "Taxels holding a maximum above 1 N exactly for over 0.5 s (flat top): 0-6 per glove file (unscrew left glove 6, tape-dispenser right glove 4); at most 0.25% of the shown values (kettle left glove) reach the 1.5 N colour limit."
+     },
+     {
+      "check": "tactile",
+      "severity": "minor",
+      "text": "116 of 880 positions never exceed 0.05 N in either glove across the 18 glove files opened, including the same fingertip-end positions in every finger and most of the thumb tip pad's last four rows (about 66 positions, 7.5%). They may be untouched or non-sensing; the release counts all 880 as taxels and does not say."
+     },
+     {
+      "check": "time",
+      "severity": "minor",
+      "text": "One head-camera step of 67 ms (one missing frame) in the peel episode (82a95f58); the depth stream has the same gap. Every other camera step in the sample is 33-34 ms."
+     }
+    ]
    }
   },
   {
@@ -7975,11 +8026,11 @@
      "tip"
     ],
     "rate_hz": 30,
-    "note": "Five fingertip sensors per hand (Sharpa Wave built-in), no palm. Per frame: observation.tactile (60,) = (left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), unit not stated; observation.images.tactile_raw, one 480x1600 video tiling 10 grayscale 320x240 marker-dot images; observation.images.tactile_deform, one 480x1200 video tiling 10 240x240 deformation maps. Thumb and index carry most contact in folding.",
+    "note": "Five fingertip sensors per hand (Sharpa Wave built-in), no palm. Per frame: observation.tactile (60,) = (left, right) x (thumb, index, middle, ring, little) x (fx, fy, fz, tx, ty, tz), named in every season's info.json, unit not stated; observation.images.tactile_raw, one 1600x480 video tiling 10 grayscale 320x240 marker-dot images; observation.images.tactile_deform, one 1200x480 video tiling 10 240x240 deformation maps. Tile order is not documented; in the data row 0 is the left hand and the columns run thumb to little. Thumb and index carry most contact in folding.",
     "maker": "Sharpa",
     "model": "Sharpa Wave fingertip tactile sensor (Dynamic Tactile Array)",
     "principle": "optical",
-    "range": "0-30 N (maker spec for SharpaWave W01; release peaks reach 47.8 on fz)",
+    "range": "0-30 N (maker spec for SharpaWave W01); release fz peaks reach 65.3 (unit not stated)",
     "calibrated": false
    },
    "modalities": [
@@ -7988,34 +8039,36 @@
     "robot_action"
    ],
    "scale": {
-    "hours": null,
+    "hours": 101.4,
     "episodes": 1845,
-    "frames": null,
+    "frames": 10950437,
     "tasks": 1,
     "objects": null,
     "subjects": null,
     "scenes": null,
     "scene_types": [],
-    "text": "Official repo: ~1,845 episodes in 131 collection seasons (2026-05-14 to 2026-07-18, counted from the file tree); its card still says 51 seasons, 682 episodes, 4,763,267 frames (44.1 h) @30 fps. Public mirror: 595 episodes, 4,091,138 frames (37.9 h). 1 task (paper airplane), episodes 175-418 s"
+    "text": "1,845 episodes with data files (10,950,437 frames, 101.4 h at 30 fps) in 131 collection seasons, 2026-05-14 to 2026-07-18; the 143 seasons' info.json files list 1,991 episodes (11,784,719 frames, 109.1 h), 146 of them without data files. The card still says 51 seasons, 682 episodes. 1 task (paper airplane); episodes 124-418 s, median 199 s"
    },
    "availability": "gated",
-   "access": "Official: Hugging Face SharpaIT/Robotic_Origami_Challenge, gated (HF login and agreeing to share contact information; HF lists the gate as automatic approval), ~1.91 TB of per-season LeRobot v3.0 + v2.1 folders. Ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons (595 episodes, 459 GB) merged into one LeRobot v3.0 root.",
+   "access": "Official: Hugging Face SharpaIT/Robotic_Origami_Challenge, gated (log in and agree to share your Hugging Face username and email with the authors; automatic approval), 1.91 TB in 143 season folders, each with a LeRobot v3.0 export (multi-episode files) and a LeRobot v2.1 export (one parquet and one mp4 per stream per episode). Ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons (595 episodes, 459 GB) merged into one LeRobot v3.0 root.",
    "gate": {
     "kind": "hf_gate",
     "approval": "automatic",
     "url": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge",
-    "checked": "2026-10-18",
-    "note": "The ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons."
+    "checked": "2026-10-24",
+    "note": "No extra terms: the card sets no gate prompt or form fields; the Hugging Face gate shares the username and email with the authors. The ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons."
    },
    "license": "CC BY 4.0",
    "caveats": [
-    "One task only: folding the same 6-fold paper airplane (15 x 15 cm, >= 60 gsm paper) in every episode; episodes run 175-418 s (mirror).",
-    "The official card's statistics (51 seasons, 682 v3.0 episodes) are stale: the file tree on 2026-10-16 has 143 season folders, 131 with data (~1,845 episodes); 12 folders hold metadata only.",
-    "The public mirror iris-kaist/origami-v3-merged (and suveen013/origami-v3-merged, same 459 GB) is a third-party re-packaging of only the first 46 seasons (2026-05-14 to 2026-05-30); the later 85 seasons with data and the v2.1 copies are not in it. Its card states 'Original data © Sharpa — released under CC-BY-4.0'.",
-    "observation.tactile units are not stated; magnitudes fit N and N·m (fz peaks 25-48, torques below 0.6). The fingertip-to-tile order inside the two tactile videos is not documented.",
-    "observation.state.tcp (24) is all zero in all 595 mirror episodes, and the 7 torso/motor joint torques are zero.",
-    "Videos are a mix of AV1 and H.264 although info.json says av1; tactile_raw is ~600 MB per episode (median), up to ~1.4 GB.",
-    "Contact is concentrated on thumb and index: per-episode peak force on the left ring fingertip stays below 0.5 in 172 of 595 mirror episodes; every fingertip channel is live.",
+    "One task only: folding the same 6-fold paper airplane (15 x 15 cm, >= 60 gsm paper) in every episode; episodes run 124-418 s (median 199 s).",
+    "The card's statistics (51 seasons, 682 v3.0 episodes, 4,763,267 frames) are stale. The 143 season folders' info.json files list 1,991 episodes; 12 seasons (2026-07-07 to 2026-07-13, 145 episodes) hold metadata only, and v2.1 episode 0 of season 2026-07-09 13:37 has its six videos but no parquet, so 1,845 episodes have data.",
+    "Most seasons are stored twice: LeRobot v3.0 for 129 seasons (1,813 episodes) and v2.1 for 130 (1,827 episodes); 2 seasons exist only as v2.1 and 1 only as v3.0. The v2.1 copies of 4 seasons from 2026-05-23 to 2026-05-25 (56 episodes) lack observation.tactile, both tactile videos and head_right; their v3.0 copies have them.",
+    "Season 2026-07-12 19:06 (18 episodes, v3.0 only) has no wrist_right video files, and its head_right files cover 12 of the 18 episodes.",
+    "The public mirror iris-kaist/origami-v3-merged (and suveen013/origami-v3-merged, same 459 GB) re-packages only the first 46 official seasons (2026-05-14 to 2026-05-30): their v3.0 metadata total 595 episodes and 4,091,138 frames, the mirror's own totals. Its card states 'Original data © Sharpa — released under CC-BY-4.0'.",
+    "observation.tactile units and sensor frame are not stated; magnitudes fit N and N·m (fz peaks up to 65.3, torque components below 1.12 across the release). The tile order inside the two tactile videos is not documented.",
+    "observation.state.tcp (24 values) is zero in every frame of all 1,991 episodes' stats, and the 7 torso/motor joint torques are zero.",
+    "Video codec varies by season: info.json lists H.264 for 117 of 143 v3.0 exports and AV1 for 26 (v2.1: 134 H.264, 9 AV1), although the card calls v3.0 primarily AV1. tactile_raw is 199 MB per v2.1 episode (median; 126 MB to 1.54 GB).",
+    "Thumb and index carry most contact. Per-episode fz peaks stay below 0.5 on the left ring fingertip in 88% of the 1,845 episodes and on the left little in 65%; in the 945 July episodes the right middle, ring and little stay below 0.5 in 75%, 88% and 80%. Every one of the 60 channels varies in every episode.",
     "The teleoperation device is not stated.",
     "Same stations (POC22032, POC22061), schema and pipeline as SharpaDex v1.0, but no season is shared and SharpaDex has no origami task; a separate collection."
    ],
@@ -8069,37 +8122,41 @@
     ]
    },
    "sources": [
-    "https://robotic-origami-challenge.github.io/ (EN page incl. inline organizer list and schema.org data; ?lang=ja serves the same file)",
+    "https://robotic-origami-challenge.github.io/ (EN page incl. inline organizer list and schema.org data; ?lang=ja serves the same file; source index.html in github.com/robotic-origami-challenge/robotic-origami-challenge.github.io)",
     "https://forms.gle/Y46WUArricVAQPBv9 (the page's 'Get access' / registration Google Form)",
-    "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge (dataset card page and recursive file tree via the HF API; files not readable: gated, account not authorized)",
-    "https://huggingface.co/datasets/iris-kaist/origami-v3-merged (README.md, meta/info.json, meta/modality.json, meta/stats.json, meta/tasks.parquet, meta/episodes/chunk-000/file-000.parquet, full file tree)",
-    "https://huggingface.co/datasets/iris-kaist/origami-v3-merged data/chunk-000/file-000.parquet, file-029.parquet, file-044.parquet (tactile, timestamp, index columns by range read)",
-    "https://huggingface.co/datasets/iris-kaist/origami-v3-merged videos/*/chunk-000/file-000.mp4 (ffprobe of tactile_raw, tactile_deform, head_left, wrist_left; one frame each of tactile_raw, tactile_deform, head_left, wrist_right at 200 s)",
+    "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge (README.md at revision 8194af6, dataset page gate text, /api/datasets card data and gated flag, recursive file tree)",
+    "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge season_*/lerobot3.0/meta/ and season_*/lerobotv2.1/meta/ of all 143 seasons (info.json, modality.json, stats.json, tasks, episodes parquet / episodes.jsonl, episodes_stats.jsonl), assets/fold_plane_overview_manifest.json",
+    "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge lerobotv2.1 data/chunk-000/episode_*.parquet of 6 seasons (observation.tactile, timestamp, frame_index columns by range read; 4 whole files) and ffprobe of one tactile_raw and one tactile_deform file per export (511 files)",
+    "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge lerobotv2.1 videos of 4 episodes (windowed reads of all six streams; whole tactile_deform and head_left of season 2026-05-26 13:55 episode 4)",
+    "https://huggingface.co/datasets/iris-kaist/origami-v3-merged (README.md, meta/info.json, meta/modality.json, meta/stats.json, meta/tasks.parquet, meta/episodes/chunk-000/file-000.parquet, full file tree; read 2026-10-16)",
     "https://huggingface.co/api/datasets/suveen013/origami-v3-merged",
     "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0 (README.md, task and season folder listing, nest_cups/season_POC22061_2026_05_22_10_57_48_train/lerobot_v3.0/meta/info.json)",
+    "https://github.com/sharpa-robotics (repository list; sharpa-wave-sdk and sharpawave-deform-encoder READMEs: no tile order or force units for this release)",
     "https://huggingface.co/datasets/zekaiwang/trex_dataset (meta/info.json)",
     "https://www.sharpa.com/pages/about"
    ],
    "unconfirmed": [
-    "episodes=1,845 counted from the official file tree: per season the larger of the lerobot3.0 tactile_raw mp4 count (one file per episode, as in the mirror) and the lerobotv2.1 episode parquet count; v3.0 alone gives 1,813 in 129 seasons, v2.1 alone 1,827 in 130. info.json files are behind the gate and were not read. The card says 682 episodes / 4,763,267 frames (51 seasons) and 555 v2.1 episodes / 3,893,595 frames (41 seasons).",
-    "hours not derived for the full release (no frame counts without the gated info.json). The mirror's 37.88 h is its info.json total_frames 4,091,138 / 30 fps; mirror episodes average 229 s, and later seasons are shorter (~210 s).",
-    "Mirror = first 46 official seasons: the sorted first 46 season folders hold 595 v3.0 tactile_raw files and 459.31 GB of lerobot3.0 files, against the mirror's 595 episodes and 458.96 GB; the mirror card says it merged 46 per-season v3.0 trees with no video re-encode. Byte identity of files not checked.",
+    "hours = frames / 30 fps: 10,950,437 frames of the 1,845 episodes with data files give 101.4 h; the 11,784,719 frames listed in all 143 info.json files give 109.1 h. Episodes with data: per season, the v3.0 meta/episodes rows when v3.0 data files exist (1,813 episodes in 129 seasons), else the v2.1 episodes.jsonl rows whose parquet exists (32 episodes in 2 seasons); lengths from the same metadata.",
+    "Tile order of tactile_raw and tactile_deform (row 0 left hand, row 1 right; columns thumb, index, middle, ring, little, the same order as observation.tactile) comes from correlating each tile's mean deformation value and raw-image change with the ten fingertip |F| series in 4 sampled 45 s windows: r 0.73-0.99 (median 0.92) for the 25 loaded tiles, each highest on its own fingertip. Not stated in the card, info.json or the Sharpa repositories.",
+    "In 19 of those 25 tiles the wrench correlates best with the deformation tile one frame earlier (wrench trails the images by ~33 ms); the gain over zero lag is a median correlation of +0.002.",
     "Hand identified as Sharpa Wave from 22 joints per hand in observation.state and the maker; the card and challenge page say 'Sharpa Hands' / 'dexterous hands'. robot_type 'north_ces' suggests Sharpa's North robot shown at CES 2026 (press coverage); not stated in the card.",
     "7-DoF arms from the state layout (left_arm_j0-j6) and the SharpaDex card (same rig family: 'two 7-DoF arms, two 22-DoF dexterous hands').",
-    "Tactile units not stated. Per-episode stats: fz peaks 25-48 (fz max 47.75 right index), torque components |t| < 0.6. Maker spec for SharpaWave W01: 0-30 N range, 50 N max load, 180 fps tactile; the release is sampled at 30 Hz.",
-    "tactile_raw layout read from one frame (episode 0, 200 s): 2 rows x 5 columns of 320x240 grayscale marker-dot images; tactile_deform: 2 x 5 tiles of 240x240, black except bright blobs at contact. Which row is which hand and the finger order of the columns are not documented.",
-    "Station ids POC22032 / POC22061 come from season folder names; the official seasons are 4 on POC22032 (2026-05-14/15) and the rest on POC22061. What a station is (robot unit or site) is not stated.",
+    "Tactile units not stated. Release-wide per-episode stats: fz max 65.25 (right index), torque components |t| <= 1.12. Maker spec for SharpaWave W01: 0-30 N range, 50 N max load, 180 fps tactile; the release is sampled at 30 Hz.",
+    "Station ids POC22032 / POC22061 come from season folder names: 4 seasons (24 episodes, 2026-05-14/15) on POC22032, 139 seasons (127 with data, 1,821 episodes) on POC22061. What a station is (robot unit or site) is not stated.",
     "Head cameras: head_left and head_right; whether they form a calibrated stereo pair is not stated. Camera models not stated.",
-    "The Get access link on the challenge page leads to a FrodoBots Google Form for info sessions and Discord sign-up (name, affiliation, role); it carries no data terms. The gate conditions text on Hugging Face is only shown after login and was not read."
+    "The Get access link on the challenge page leads to a FrodoBots Google Form for info sessions and Discord sign-up (name, affiliation, role); it carries no data terms.",
+    "Mirror = first 46 official seasons: counts match (595 episodes, 4,091,138 frames); byte identity of files not checked."
    ],
    "rank": {
     "n": 4,
     "label": "Apply for access",
-    "integrity": "not checked",
+    "integrity": "passed",
     "failed": [],
     "why": [
      "download after an application: Hugging Face gate, automatic approval",
-     "files not opened yet"
+     "4 sample episodes opened in the viewer",
+     "all 4 integrity checks passed",
+     "4 minor faults listed"
     ]
    },
    "thumb": "assets/thumbs/sharpa_origami.jpg",
@@ -8113,6 +8170,31 @@
      "scale": true,
      "diversity": false
     }
+   },
+   "viewer": "ro_poc22061_20260526_1355_ep4",
+   "integrity": {
+    "faults": [
+     {
+      "check": "streams",
+      "severity": "minor",
+      "text": "Season 2026-07-12 19:06 (18 episodes, stored only as v3.0) has no wrist_right video, and head_right covers 12 of its 18 episodes: 1.0% of the 1,845 episodes with data."
+     },
+     {
+      "check": "streams",
+      "severity": "minor",
+      "text": "Season 2026-07-09 13:37, v2.1 episode 0 has its six videos but no parquet (no state, action or tactile) and no v3.0 copy: 1 episode."
+     },
+     {
+      "check": "streams",
+      "severity": "minor",
+      "text": "The v2.1 copies of 4 seasons (56 episodes, 2026-05-23 to 05-25) lack observation.tactile, both tactile videos and head_right; the v3.0 copies of the same episodes have them."
+     },
+     {
+      "check": "streams",
+      "severity": "minor",
+      "text": "observation.state.tcp (24 values) is zero in every episode, and the 7 torso/motor joint torques are zero; neither is a tactile stream."
+     }
+    ]
    }
   },
   {
