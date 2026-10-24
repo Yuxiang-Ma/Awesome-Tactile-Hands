@@ -63,11 +63,12 @@ button,select,input{font:inherit;color:var(--ink)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px}
 .card{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:border-color .15s,transform .15s}
 .card:hover{border-color:var(--accent);transform:translateY(-1px)}
-.thumb{position:relative;aspect-ratio:16/9;background:var(--pre);display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--line2)}
-.thumb img{width:100%;height:100%;object-fit:cover;background:#fff}
-.thumb .glyph{width:38%;height:auto}
-.badge{position:absolute;left:10px;top:10px;font-size:11px;font-weight:650;padding:2px 8px;border-radius:999px;background:var(--panel);box-shadow:var(--shadow)}
-.rk{font-weight:650}.rk1{color:var(--ok)}.rk2{color:var(--accent)}.rk3{color:var(--bad)}.rk4,.rk5{color:var(--warn)}.rk6{color:var(--muted)}
+/* the whole figure shows: contained, never cropped; common.js fills the bands with the edge colour */
+.thumb{aspect-ratio:2/1;background:var(--pre);display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--line2)}
+.thumb img{width:100%;height:100%;object-fit:contain;background:#fff}
+.thumb .glyph{height:72%;width:auto}
+.rk{font-weight:650}.rk1,.tag.rk1{color:var(--ok)}.rk2,.tag.rk2{color:var(--accent)}.rk3,.tag.rk3{color:var(--bad)}.rk4,.rk5,.tag.rk4,.tag.rk5{color:var(--warn)}.rk6,.tag.rk6{color:var(--muted)}
+.tag.rk-tag{background:var(--pre)}
 .rk-t{font-size:12px;white-space:nowrap}
 .rgroup{margin:0 0 22px}.rgroup h2{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;font-size:15px;margin:4px 0 10px}
 .rgroup h2 span:not(.rh){font-size:12.5px;font-weight:400;color:var(--muted)}.rgroup h2 small{font-size:12px;color:var(--muted);margin-left:auto}
@@ -82,7 +83,7 @@ button,select,input{font:inherit;color:var(--ink)}
 .ttl span{font-size:12px;color:var(--muted);white-space:nowrap}
 .src{font-size:12px;color:var(--muted);margin-top:-4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .desc{margin:0;font-size:13px;color:var(--ink2);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.spec{display:flex;align-items:center;gap:10px;margin-top:4px;padding:8px 10px;background:var(--bg);border-radius:9px}
+.spec{display:flex;align-items:center;gap:10px;margin-top:4px;padding:8px 0 2px;border-top:1px solid var(--line2)}
 .spec .glyph{width:34px;height:auto;flex:none}
 .spec b{display:block;font-size:13px}
 .spec span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;font-size:12px;color:var(--muted)}

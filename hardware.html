@@ -8,10 +8,9 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a6c73'/%3E%3Cg fill='%23fff'%3E%3Crect x='9' y='5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='13.4' y='3.5' width='3.2' height='13' rx='1.6'/%3E%3Crect x='17.8' y='4.5' width='3.2' height='12' rx='1.6'/%3E%3Crect x='22.2' y='7' width='3.2' height='10' rx='1.6'/%3E%3Crect x='8' y='15' width='17.6' height='12' rx='3'/%3E%3C/g%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-/* hardware cards: product photo on white, kind + availability badges */
-.hw .thumb{aspect-ratio:4/3;background:#fff}
-.hw .thumb img{object-fit:contain;padding:6px}
-.badge.kind{left:auto;right:10px}
+/* hardware cards: product photo, whole, in a 4:3 frame */
+.hw .thumb{aspect-ratio:4/3}
+.tag.av{background:var(--pre);font-weight:600}
 .av-commercial{color:var(--ok)}.av-open_hardware{color:var(--accent)}.av-research{color:var(--muted)}.av-announced{color:var(--warn)}.av-discontinued{color:var(--bad)}
 .specs{margin:2px 0 0;padding-left:16px;font-size:12.5px;color:var(--ink2)}
 .specs li{margin:1px 0}

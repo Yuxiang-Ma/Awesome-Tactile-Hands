@@ -43,7 +43,7 @@ const licOf = d => {const l = d.license.toLowerCase(); return /^(not stated|unco
 const licShort = d => licOf(d) === 'ns' ? (d.license.startsWith('unconfirmed') ? 'License unconfirmed' : 'License not stated') : d.license.split(/ \(|; /)[0];
 const cbar = d => {const q = d.contents; if (!q) return ''; return `<span class="qbar" title="Contents ${q.score} of ${q.of}: ${Object.entries(q.flags).map(([k, v]) => `${CONT[k]}: ${v ? 'yes' : 'no'}`).join('; ')}">${
   Object.values(q.flags).map(v => `<i class="${v ? 'on' : ''}"></i>`).join('')}<b>${q.score}/${q.of}</b></span>`};
-const rankBadge = (d, cls = 'badge') => `<span class="${cls} rk rk${rankOf(d)}" title="${esc(RANK_TEXT[rankOf(d)])}">${LABEL.rank[rankOf(d)]}</span>`;
+const rankBadge = (d, cls) => `<span class="${cls} rk rk${rankOf(d)}" title="${esc(RANK_TEXT[rankOf(d)])}">${LABEL.rank[rankOf(d)]}</span>`;
 // license, application and failed checks as tags under the title; the rank itself never depends on the first
 const statusTags = d => [`<span class="tag lic${licOf(d) === 'ns' ? ' un' : ''}" title="License: ${esc(d.license)}">${esc(licShort(d))}</span>`,
   d.gate ? `<span class="tag gate" title="${esc(d.gate.note || '')}">Apply: ${esc(gateText(d.gate))}</span>` : '',
@@ -207,11 +207,11 @@ function cards(list) {
 }
 function cardGrid(list) {
   return `<div class="grid">${list.map(d => `<article class="card" data-id="${d.id}" tabindex="0" aria-label="${esc(d.name)}">
-    <div class="thumb">${thumb(d)}${rankBadge(d)}</div>
+    <div class="thumb">${thumb(d)}</div>
     <div class="body">
       <div class="ttl"><h3>${esc(d.name)}</h3><span>${d.year}</span></div>
       ${zhLine(d)}<div class="src">${esc(d.venue)} · ${esc(d.authors)}</div>
-      <div class="tags">${statusTags(d)}</div>
+      <div class="tags">${S.sort === 'rank' ? '' : rankBadge(d, 'tag rk-tag')}${statusTags(d)}</div>
       <p class="desc">${esc(d.summary)}</p>
       <div class="spec">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}<div><b>${sensorLine(d)}</b><span>${covText(d.sensor.coverage)} · ${esc(makerText(d))}</span></div></div>
       <dl class="facts">${facts(d).map(([k, v]) => `<div><dt>${k}</dt><dd>${v || '<i>not stated</i>'}</dd></div>`).join('')}</dl>

@@ -25,3 +25,25 @@ function glyph(cov, label) {
     `<rect class="r${on('palm')}" x="13.6" y="22.6" width="22.4" height="17" rx="3"/>`);
   return `<svg class="glyph" viewBox="5 4 33 37" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title>${o.join('')}</svg>`;
 }
+
+/* ---------- figure fit: card and dialog images are shown whole (object-fit: contain); the empty bands beside a figure take
+   the colour of the image edge they touch, so a figure with a white or dark border runs on into the frame ---------- */
+const FILL = new Map();
+function edgeFill(img) {
+  if (!img.naturalWidth || !img.clientHeight) return;
+  const wide = img.naturalWidth / img.naturalHeight > img.clientWidth / img.clientHeight, key = `${img.currentSrc} ${wide}`;
+  if (!FILL.has(key)) {
+    const w = 48, h = Math.max(2, Math.round(w * img.naturalHeight / img.naturalWidth)), c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const x = c.getContext('2d', {willReadFrequently: true});
+    x.drawImage(img, 0, 0, w, h);
+    let px; try {px = x.getImageData(0, 0, w, h).data} catch {return}
+    // median per channel along one edge, so a stray line or label at the border does not tint the band
+    const med = ix => `rgb(${[0, 1, 2].map(k => ix.map(i => px[i * 4 + k]).sort((a, b) => a - b)[ix.length >> 1]).join(' ')})`;
+    const row = y => Array.from({length: w}, (_, i) => y * w + i), col = v => Array.from({length: h}, (_, j) => j * w + v);
+    const [a, b] = wide ? [med(row(0)), med(row(h - 1))] : [med(col(0)), med(col(w - 1))];
+    FILL.set(key, a === b ? a : `linear-gradient(${wide ? 'to bottom' : 'to right'}, ${a} 50%, ${b} 50%)`);
+  }
+  img.style.background = FILL.get(key);
+}
+document.addEventListener('load', e => {if (e.target.matches?.('.thumb img, img.hero')) edgeFill(e.target)}, true);

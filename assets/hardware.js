@@ -93,7 +93,7 @@ const covText = c => !c || !c.length ? '' : c.length === 3 ? 'Fingers and palm' 
 const density = (h, full) => h.taxels == null ? (h.kind === 'tracker' ? 'No touch sensing' : 'Taxel count not stated')
   : `${h.taxels.toLocaleString('en-US')} taxels${h.taxels_note && (full || h.taxels_note.length <= 24) ? ` ${full ? '· ' : ''}${h.taxels_note}` : ''}`;
 const specLine = h => [covText(h.coverage), h.principle && h.principle !== 'unspecified' ? HL.principle[h.principle].toLowerCase() : '', h.rate_hz ? `${h.rate_hz} Hz` : '', h.dof ? `${h.dof} DoF` : ''].filter(Boolean).join(' · ');
-const avBadge = (h, cls = 'badge') => `<span class="${cls} av-${h.availability}" title="${esc(AV_TEXT[h.availability])}">${HL.availability[h.availability]}</span>`;
+const avBadge = (h, cls) => `<span class="${cls} av-${h.availability}" title="${esc(AV_TEXT[h.availability])}">${HL.availability[h.availability]}</span>`;
 const dsLink = x => {const d = DS[x.id]; return d ? `<a href="./#d=${esc(x.id)}" title="${esc(`${d.name} (${x.role})`)}">${esc(d.name)}</a>` : ''};
 const used = h => h.datasets.length ? `<div class="used">Used in ${h.datasets.map(dsLink).join('')}</div>` : '';
 const linkRow = h => {
@@ -106,10 +106,11 @@ const metaLine = h => [h.maker, HL.region[h.region], h.price].filter(Boolean).ma
 
 function cardGrid(list) {
   return `<div class="grid">${list.map(h => `<article class="card hw" data-id="${h.id}" tabindex="0" aria-label="${esc(h.name)}">
-    <div class="thumb">${photo(h)}${avBadge(h)}</div>
+    <div class="thumb">${photo(h)}</div>
     <div class="body">
       <div class="ttl"><h3>${esc(h.name)}</h3><span>${h.year ?? ''}</span></div>
       ${zhLine(h)}<div class="src">${metaLine(h)}</div>
+      <div class="tags">${avBadge(h, 'tag av')}</div>
       <div class="spec">${glyph(h.coverage || [], covText(h.coverage) || 'coverage not stated')}<div><b>${esc(density(h))}</b><span>${esc(specLine(h) || HL.kind[h.kind])}</span></div></div>
       ${(h.specs || []).length ? `<ul class="specs">${h.specs.slice(0, 4).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
       ${used(h)}
