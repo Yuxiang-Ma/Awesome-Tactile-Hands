@@ -21,6 +21,7 @@ Found by the nightly checks ([pipeline/NIGHTLY.md](pipeline/NIGHTLY.md)); newest
 - 2026-10-25: Ego2Contact: predicts both hands' 21x21 tactile fields from egocentric RGB, trained on EgoTouch and adapted on EgoTactile and a BrainCo Revo 2 hand; no code or weights statement.
 - 2026-10-25: ViTaM: reconstructs held rigid and deformable objects from a 1,152-channel stretchable glove and a top-down RGB-D camera (Nature Communications 2024); code on GitHub, no checkpoint.
 - 2026-10-25: TouchScale: the publisher's FTP-1 zarr conversion of the 100 h release (TouchScale-OXT, 15,088 trajectories at 10 Hz, ~1.01 TB, Hugging Face gate with manual approval) is now linked from the entry.
+- 2026-10-25: TACROSS: the dataset is still unreleased (project page: 'Planned release, download link to follow'; software 'coming soon'); only hardware v1 (BOM, PCB Gerber files, pick-and-place coordinates, tacross_v1.zip, GitHub release of 2026-10-15) can be downloaded. Availability stays announced.
 
 ## Ranks
 

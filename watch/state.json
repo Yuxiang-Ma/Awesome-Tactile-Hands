@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-25T20:41:35Z",
+ "updated": "2026-10-25T21:06:37Z",
  "urls": {
   "http://stag.csail.mit.edu/": {
    "kind": "page",
@@ -45,17 +45,11 @@
   "https://1drv.ms/f/c/9054151f0ba654c9/EsZlIVlJEudEpYT2Ofl7tj8BbNErfoJZdkgG5PnZ5j6_hg": {
    "kind": "page",
    "status": 200,
-   "length": "322925",
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA": {
    "kind": "page",
    "status": 200,
-   "length": "68266",
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://3dtacdex.github.io/": {
@@ -168,8 +162,7 @@
    "text_sha": "fe03d2f9a706eb66",
    "text_len": 5678,
    "links": [
-    "https://github.com/facebookresearch/sparsh-multisensory-touch",
-    "https://huggingface.co/collections/carohiguera/sparsh-x-68a02683b28a46ccae83cf77"
+    "https://github.com/facebookresearch/sparsh-multisensory-touch"
    ],
    "phrases": [],
    "seen": "2026-10-25"
@@ -561,6 +554,24 @@
    "comment": "Project page: internrobotics.github.io/egoexplorer.github.io/",
    "seen": "2026-10-25"
   },
+  "https://arxiv.org/abs/2610.22342": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-10-15",
+   "journal_ref": null,
+   "comment": "Website: https://xsparkai.com/Spark-0",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2610.22932": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-10-16",
+   "journal_ref": null,
+   "comment": "8 pages, 6 figures",
+   "seen": "2026-10-25"
+  },
   "https://baai-humanoid.github.io/DECO-webpage/": {
    "kind": "page",
    "status": 200,
@@ -599,50 +610,39 @@
    "links": [
     "https://github.com/dextacwam/DexTacWAM",
     "https://github.com/eliahuhorwitz/Academic-project-page-template",
-    "https://github.com/nerfies/nerfies.github.io",
-    "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc"
+    "https://github.com/nerfies/nerfies.github.io"
    ],
    "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.1038/s41467-024-53654-y": {
+   "kind": "page",
+   "status": 200,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.1038/s41586-019-1234-z": {
    "kind": "page",
    "status": 200,
-   "length": "3038",
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.1038/s41597-025-04552-5": {
    "kind": "page",
    "status": 200,
-   "length": "3038",
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.1038/s41928-021-00558-0": {
    "kind": "page",
    "status": 200,
-   "length": "3038",
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.25532/OPARA-1588": {
    "kind": "page",
    "status": 200,
-   "length": "561993",
-   "etag": "W/\"89349-ziooJNjTs2Qs/zrOQExVKsaYzFc\"",
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.25532/OPARA-787": {
    "kind": "page",
    "status": 200,
-   "length": "395390",
-   "etag": "W/\"6087e-B8FVGKmAODbp0cGRqjrF5/y3Mao\"",
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.3390/s21082594": {
@@ -653,41 +653,26 @@
   "https://doi.org/10.48557/L6OWMM": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.57760/sciencedb.14937": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": "\"c2877-ijBzeTeXaPP8AAxV2DyZ2FNXDzs\"",
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://drive.google.com/file/d/1G52ihW7EbE5eSe04jnxGpo7cc1jxYWHw/view": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://egotac.github.io/": {
@@ -719,9 +704,6 @@
   "https://forms.gle/QzEPJ7ncuGHgi1gS9": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://ftp1-policy.github.io/": {
@@ -905,6 +887,18 @@
    "release": null,
    "seen": "2026-10-25"
   },
+  "https://github.com/XsparkAI/Spark-0": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "XsparkAI/Spark-0",
+   "pushed_at": "2026-10-24T03:03:54Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 3604,
+   "readme_sha": "bd9b7c03bae6f834c1f579081fbd2d00c47578e6",
+   "release": null,
+   "seen": "2026-10-25"
+  },
   "https://github.com/YunzhuLi/senstextile": {
    "kind": "gh",
    "status": 200,
@@ -987,6 +981,18 @@
    "size_kb": 607,
    "readme_sha": "875eb3e39ae34695523d2cc3b10ccbb1b432e7f5",
    "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/jeffsonyu/ViTaM": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "jeffsonyu/ViTaM",
+   "pushed_at": "2024-09-30T09:35:00Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 179246,
+   "readme_sha": "9630be612b3604707808ced30ccd9c78cc20acec",
+   "release": "v1.0.0 2024-09-30",
    "seen": "2026-10-25"
   },
   "https://github.com/jessicayin/osmo_tactile_glove": {
@@ -1173,8 +1179,6 @@
    "kind": "page",
    "status": 200,
    "length": "21185342",
-   "etag": "\"68c22c33-143433e\"",
-   "modified": "Thu, 11 Sep 2025 01:56:03 GMT",
    "seen": "2026-10-25"
   },
   "https://hci-tech-lab.github.io/PiMForce/": {
@@ -1241,6 +1245,19 @@
    "files": 96,
    "seen": "2026-10-25"
   },
+  "https://huggingface.co/TianxingChen/Spark-0": {
+   "kind": "hf",
+   "status": 200,
+   "id": "TianxingChen/Spark-0",
+   "sha": "0cd36312f9c8f153a5bfcd9fa50082ff09987225",
+   "last_modified": "2026-10-17T05:50:01.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 4,
+   "seen": "2026-10-25"
+  },
   "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc": {
    "kind": "page",
    "status": 200,
@@ -1249,18 +1266,8 @@
    "links": [
     "https://cdn-avatars.huggingface.co/v1/production/uploads/649e31b4ed3107c9bd1fc7eb/MN9Hh84P87vpTpawPl-mJ.jpeg",
     "https://cdn-avatars.huggingface.co/v1/production/uploads/no-auth/lKP9PoghnhdtMgz4M60TF.png",
-    "https://discuss.huggingface.co",
-    "https://huggingface.co",
-    "https://huggingface.co/Chi-Shan",
-    "https://huggingface.co/JadeCong",
-    "https://huggingface.co/JensenYuan",
     "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder",
     "https://huggingface.co/avatars/99518d595e6895a3f8997197d9a052f4.svg",
-    "https://huggingface.co/blog",
-    "https://huggingface.co/chat",
-    "https://huggingface.co/collections",
-    "https://huggingface.co/collections/JensenYuan/dextacwam",
-    "https://huggingface.co/datasets",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_488_diverse_episodes",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_cube_handover",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_pick_place_cube",
@@ -1268,9 +1275,6 @@
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_unscrew_bottle_cap",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_unstack_bowl",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_wipe_whiteboard",
-    "https://huggingface.co/docs",
-    "https://huggingface.co/docs/hub/collections",
-    "https://huggingface.co/enterprise",
     "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-400-normal.woff2",
     "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-600-normal.woff2",
     "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-700-normal.woff2",
@@ -1278,29 +1282,8 @@
     "https://huggingface.co/front/build/kube-184263b/index.js",
     "https://huggingface.co/front/build/kube-184263b/katex.css",
     "https://huggingface.co/front/build/kube-184263b/style.css",
-    "https://huggingface.co/hardware",
-    "https://huggingface.co/huggingface",
-    "https://huggingface.co/inference-endpoints",
     "https://huggingface.co/inference/models",
-    "https://huggingface.co/join",
-    "https://huggingface.co/join/discord",
-    "https://huggingface.co/js/script.js",
-    "https://huggingface.co/languages",
-    "https://huggingface.co/learn",
-    "https://huggingface.co/login",
-    "https://huggingface.co/login?next=%2Fcollections%2FJensenYuan%2Fdextacwam",
-    "https://huggingface.co/models",
-    "https://huggingface.co/organizations",
-    "https://huggingface.co/papers",
-    "https://huggingface.co/posts",
-    "https://huggingface.co/pricing",
-    "https://huggingface.co/privacy",
-    "https://huggingface.co/pro",
-    "https://huggingface.co/spaces",
-    "https://huggingface.co/storage",
-    "https://huggingface.co/support",
-    "https://huggingface.co/tasks",
-    "https://huggingface.co/terms-of-service"
+    "https://huggingface.co/js/script.js"
    ],
    "phrases": [],
    "seen": "2026-10-25"
@@ -1860,8 +1843,7 @@
    "text_len": 11424,
    "links": [
     "https://github.com/InternRobotics/EgoExplorer",
-    "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
-    "https://huggingface.co/papers/2610.18872"
+    "https://huggingface.co/datasets/InternRobotics/EgoExplorer"
    ],
    "phrases": [
     "18872}, } The dataset, the capture toolkit and the reconstruction code will be released"
@@ -1973,10 +1955,7 @@
   "https://openreview.net/forum?id=olvz0gAdGOX": {
    "kind": "page",
    "status": 200,
-   "text_sha": "baaae8d0fbed82d3",
-   "text_len": 282,
-   "links": [],
-   "phrases": [],
+   "length": null,
    "seen": "2026-10-25"
   },
   "https://opentouch-tactile.github.io/": {
@@ -2003,16 +1982,12 @@
    "kind": "page",
    "status": 200,
    "length": "8677836",
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://real.stanford.edu/dexumi/sample_data.zip": {
    "kind": "page",
    "status": 200,
    "length": "544417783",
-   "etag": "\"207327f7-63642410531aa\"",
-   "modified": "Thu, 29 May 2025 08:40:46 GMT",
    "seen": "2026-10-25"
   },
   "https://research.beingbeyond.com/ttp": {
@@ -2045,9 +2020,6 @@
    "text_sha": "5adad2a5224b0d16",
    "text_len": 4139,
    "links": [
-    "https://docs.google.com/document/d/1dYp-3dmC89N7HWRckPcNiuhEUxSLgmTkmIfu8nnVSfE/mobilebasic?pli=1",
-    "https://docs.google.com/forms/d/e/1FAIpQLSd0eMP20_mwSkO6-KRKvtwKpPdqyTUDdi-Zf9aJSjdY2QcHEw/viewform",
-    "https://docs.google.com/forms/d/e/1FAIpQLSflInmaLlA9AgMlULyXQbyVjuDThKn1gDROZGzxTRpF7OwgKg/viewform",
     "https://forms.gle/d2NKNAE7dqSfYZB87"
    ],
    "phrases": [],
@@ -2094,7 +2066,6 @@
     "https://github.com/facebookresearch/tacto",
     "https://github.com/facebookresearch/theseus",
     "https://github.com/isl-org/DPT",
-    "https://huggingface.co/collections/suddhu/neuralfeels-673184a97ddcac2df69ff489",
     "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
    ],
    "phrases": [],
@@ -2203,44 +2174,27 @@
   "https://www.cs.umd.edu/~edessale/feel": {
    "kind": "page",
    "status": 200,
-   "text_sha": "66c0cd26d29a09cc",
-   "text_len": 2570,
-   "links": [
-    "https://huggingface.co/datasets/edessa/feel"
-   ],
-   "phrases": [],
+   "length": null,
    "seen": "2026-10-25"
   },
   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/AAszkuRRMYwZ6OtmPWPlRxs/Codes?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADrSa2qEfM-GUzzrE35r5Sk/Codes/Checkpoints?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0": {
    "kind": "page",
    "status": 200,
-   "length": null,
-   "etag": null,
-   "modified": null,
    "seen": "2026-10-25"
   },
   "https://www.jessicayin.com/osmo_tactile_glove/": {
@@ -2296,13 +2250,26 @@
    "text_sha": "49e4462e0fbcd23d",
    "text_len": 4651,
    "links": [
-    "https://docs.google.com/document/d/1-36bv3bknBpNO5oNesyfJNyjbbuHoA_ExJmM0CZ6fQs/edit?tab=t.0",
     "https://github.com/eliahuhorwitz/Academic-project-page-template",
     "https://github.com/xitong-c/DexViTac_Code",
     "https://huggingface.co/datasets/xitong-c/DexViTac_Dataset",
     "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
    ],
    "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://xsparkai.com/Spark-0": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "422b1cfdf6878b5c",
+   "text_len": 12517,
+   "links": [
+    "https://github.com/XPolicyLab/XPolicyLab/tree/main/policy/Spark_0",
+    "https://github.com/XsparkAI/Spark-0"
+   ],
+   "phrases": [
+    "2 3 4 5 * Equal contribution § Project leads † Corresponding authors Paper Code Code (XPolicyLab) Code (SparkArena-Sim) Coming soon BibTeX 01 Overview Generalist robot policies benefit from large-scal"
+   ],
    "seen": "2026-10-25"
   },
   "https://xsparkai.com/sparklab/humantouch/": {
@@ -2334,101 +2301,7 @@
   "https://zenodo.org/records/4607289": {
    "kind": "page",
    "status": 200,
-   "text_sha": "a988f6d4dc8f545d",
-   "text_len": 3160,
-   "links": [
-    "https://about.zenodo.org",
-    "https://about.zenodo.org/contact",
-    "https://about.zenodo.org/cookie-policy",
-    "https://about.zenodo.org/infrastructure",
-    "https://about.zenodo.org/policies",
-    "https://about.zenodo.org/principles",
-    "https://about.zenodo.org/privacy-policy",
-    "https://about.zenodo.org/projects",
-    "https://about.zenodo.org/roadmap",
-    "https://about.zenodo.org/terms",
-    "https://blog.zenodo.org",
-    "https://developers.zenodo.org",
-    "https://github.com/zenodo/zenodo-rdm",
-    "https://help.zenodo.org",
-    "https://support.zenodo.org/help",
-    "https://zenodo.org",
-    "https://zenodo.org/badge/DOI/10.5281/zenodo.4607289.svg",
-    "https://zenodo.org/communities",
-    "https://zenodo.org/donate",
-    "https://zenodo.org/help/statistics",
-    "https://zenodo.org/login?next=/records/4607289",
-    "https://zenodo.org/me/uploads",
-    "https://zenodo.org/records/4607289/files/Dataset%20description.pdf",
-    "https://zenodo.org/records/4607289/files/Dataset%20description.pdf?download=1",
-    "https://zenodo.org/records/4607289/files/dataset.mat",
-    "https://zenodo.org/records/4607289/files/dataset.mat?download=1",
-    "https://zenodo.org/records/4607289/files/sensor.png",
-    "https://zenodo.org/records/4607289/files/sensor.png?download=1",
-    "https://zenodo.org/records/4607289/preview/Dataset%20description.pdf?include_deleted=0",
-    "https://zenodo.org/records/4607289/preview/sensor.png?include_deleted=0",
-    "https://zenodo.org/search?q=&f=resource_type%3Adataset",
-    "https://zenodo.org/search?q=metadata.creators.person_or_org.name:%22Antonio+P%C3%A9rez-Gonz%C3%A1lez%22",
-    "https://zenodo.org/search?q=metadata.creators.person_or_org.name:%22Javier+Cepria-Bernal%22",
-    "https://zenodo.org/search?q=metadata.subjects.subject:%22Human+grasping,+Tactile+signatures+in+ADL,+Pressure+sensor,+Dataset%22",
-    "https://zenodo.org/signup",
-    "https://zenodo.org/static/apple-touch-icon-120.png",
-    "https://zenodo.org/static/apple-touch-icon-152.png",
-    "https://zenodo.org/static/apple-touch-icon-167.png",
-    "https://zenodo.org/static/apple-touch-icon-180.png",
-    "https://zenodo.org/static/dist/css/6874.190253af05cded53.css",
-    "https://zenodo.org/static/dist/js/1030.2bd7ba0097a92ffb.js",
-    "https://zenodo.org/static/dist/js/1242.e6c7a37fd9c1d834.js",
-    "https://zenodo.org/static/dist/js/1246.b396fa28f0972a35.js",
-    "https://zenodo.org/static/dist/js/1273.0e9a1e369533175f.js",
-    "https://zenodo.org/static/dist/js/1514.21769a54699f6711.js",
-    "https://zenodo.org/static/dist/js/1930.a74559fb3ee11c3d.js",
-    "https://zenodo.org/static/dist/js/1947.988c4158df45a81f.js",
-    "https://zenodo.org/static/dist/js/2028.06cef4fb71d62607.js",
-    "https://zenodo.org/static/dist/js/2129.447d2fbedd1ee9c8.js",
-    "https://zenodo.org/static/dist/js/2210.927045c5842e144f.js",
-    "https://zenodo.org/static/dist/js/240.a771ab8d945631f9.js",
-    "https://zenodo.org/static/dist/js/2620.cf785df0e2426647.js",
-    "https://zenodo.org/static/dist/js/2716.f8086db402b2cfd3.js",
-    "https://zenodo.org/static/dist/js/2766.1b99024cbed716f7.js",
-    "https://zenodo.org/static/dist/js/3536.86076ba3bc3b1b39.js",
-    "https://zenodo.org/static/dist/js/3646.f9960a96ae80e501.js",
-    "https://zenodo.org/static/dist/js/4505.ab7a1eca17d759c0.js",
-    "https://zenodo.org/static/dist/js/4993.9b6c5ad959265314.js",
-    "https://zenodo.org/static/dist/js/5250.40ef85abdffada44.js",
-    "https://zenodo.org/static/dist/js/5261.76aa1779083cb6e9.js",
-    "https://zenodo.org/static/dist/js/6437.71df7d82b290cac2.js",
-    "https://zenodo.org/static/dist/js/6555.29e4b8a5876fdd5d.js",
-    "https://zenodo.org/static/dist/js/6874.62964fb23ef06a36.js",
-    "https://zenodo.org/static/dist/js/700.9df83bd2e46c12ab.js",
-    "https://zenodo.org/static/dist/js/7954.70fdbe77932d6bf9.js",
-    "https://zenodo.org/static/dist/js/8193.1d01fea3d1edd6f4.js",
-    "https://zenodo.org/static/dist/js/8357.57c5c846196d7762.js",
-    "https://zenodo.org/static/dist/js/8397.cfb5fcd1f9045cd0.js",
-    "https://zenodo.org/static/dist/js/8532.4c319e0b8377b195.js",
-    "https://zenodo.org/static/dist/js/8646.9c4236586d5d39ca.js",
-    "https://zenodo.org/static/dist/js/9150.a1df7bd0283c1788.js",
-    "https://zenodo.org/static/dist/js/9516.bc0a99f010b76af1.js",
-    "https://zenodo.org/static/dist/js/9530.c929789152b8afde.js",
-    "https://zenodo.org/static/dist/js/base-theme-rdm.aefaeeadffed1a17.js",
-    "https://zenodo.org/static/dist/js/i18n_app.1236e0b632f0b16b.js",
-    "https://zenodo.org/static/dist/js/invenio-app-rdm-landing-page-theme.d297449c9bc62233.js",
-    "https://zenodo.org/static/dist/js/invenio-app-rdm-landing-page.37af3b753704bb31.js",
-    "https://zenodo.org/static/dist/js/manifest.74af14a633682ed0.js",
-    "https://zenodo.org/static/dist/js/overridable-registry.547d03a537181eef.js",
-    "https://zenodo.org/static/dist/js/previewer_theme.acc158ceaae454a2.js",
-    "https://zenodo.org/static/dist/js/theme.baaff2a62f570ec3.js",
-    "https://zenodo.org/static/dist/js/zenodo-rdm-citations.ea10f4c3b5878dd5.js",
-    "https://zenodo.org/static/favicon.ico",
-    "https://zenodo.org/static/icons/licenses/cc-by-icon.svg",
-    "https://zenodo.org/static/images/cern.png",
-    "https://zenodo.org/static/images/eu.png",
-    "https://zenodo.org/static/images/invenio-rdm.svg",
-    "https://zenodo.org/static/images/openaire.png",
-    "https://zenodo.org/static/images/openaire.svg",
-    "https://zenodo.org/static/images/orcid.svg"
-   ],
-   "phrases": [],
+   "length": null,
    "seen": "2026-10-25"
   }
  },

@@ -1,78 +1,150 @@
 {
- "generated": "2026-10-25T20:41:35Z",
+ "generated": "2026-10-25T21:06:37Z",
  "baseline": false,
- "urls_checked": 204,
- "seconds": 130,
+ "urls_checked": 211,
+ "seconds": 136,
  "signals": [
   {
    "kind": "dataset",
-   "id": "grasp_like_humans",
-   "name": "Grasp Like Humans",
-   "url": "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip",
-   "priority": 2,
-   "type": "file_etag",
-   "detail": "\"68c22c34-143433e\" -> \"68c22c33-143433e\"",
+   "id": "actionsense",
+   "name": "ActionSense",
+   "url": "https://openreview.net/forum?id=olvz0gAdGOX",
+   "priority": 3,
+   "type": "page_text",
+   "detail": "text length 282 -> None",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "grasp_like_humans",
-   "name": "Grasp Like Humans",
-   "url": "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip",
-   "priority": 2,
-   "type": "file_modified",
-   "detail": "Thu, 11 Sep 2025 01:56:04 GMT -> Thu, 11 Sep 2025 01:56:03 GMT",
+   "id": "adl21",
+   "name": "ADL-21",
+   "url": "https://zenodo.org/records/4607289",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://about.zenodo.org https://about.zenodo.org/contact https://about.zenodo.org/cookie-policy https://about.zenodo.org/infrastructure https://about.zenodo.org/policies https://about.zenodo.org/principles https://about.zenodo.org/privacy-policy https://about.zenodo.org/projects https://about.zenodo.org/roadmap https://about.zenodo.org/terms https://blog.zenodo.org https://developers.zenodo.org",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "kaiwu",
-   "name": "Kaiwu",
-   "url": "https://doi.org/10.57760/sciencedb.14937",
-   "priority": 2,
-   "type": "file_etag",
-   "detail": "\"c2877-AenItz8s/3SHABGIo2nI4vUb/LA\" -> \"c2877-ijBzeTeXaPP8AAxV2DyZ2FNXDzs\"",
-   "availability": "gated"
-  },
-  {
-   "kind": "dataset",
-   "id": "lasr_gentle_grasping",
-   "name": "Gentle Grasping (LASR)",
-   "url": "https://doi.org/10.25532/OPARA-787",
-   "priority": 2,
-   "type": "file_length",
-   "detail": "394807 -> 395390",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://discuss.huggingface.co https://huggingface.co https://huggingface.co/Chi-Shan https://huggingface.co/JadeCong https://huggingface.co/JensenYuan https://huggingface.co/blog https://huggingface.co/chat https://huggingface.co/collections https://huggingface.co/collections/JensenYuan/dextacwam https://huggingface.co/datasets https://huggingface.co/docs https://huggingface.co/docs/hub/collections",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "lasr_gentle_grasping",
-   "name": "Gentle Grasping (LASR)",
-   "url": "https://doi.org/10.25532/OPARA-787",
-   "priority": 2,
-   "type": "file_etag",
-   "detail": "W/\"60637-rsJS/d9Ctk5kiUPyVp0lJ9+jK28\" -> W/\"6087e-B8FVGKmAODbp0cGRqjrF5/y3Mao\"",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://dextacwam.github.io/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "lasr_grasp_stability",
-   "name": "Dexterous Grasp Stability",
-   "url": "https://doi.org/10.25532/OPARA-1588",
-   "priority": 2,
-   "type": "file_etag",
-   "detail": "W/\"89349-HK7uSB+hsJ5fQktEfJAV8nEKqxI\" -> W/\"89349-ziooJNjTs2Qs/zrOQExVKsaYzFc\"",
+   "id": "dexvitac",
+   "name": "DexViTac",
+   "url": "https://xitong-c.github.io/DexViTac/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://docs.google.com/document/d/1-36bv3bknBpNO5oNesyfJNyjbbuHoA_ExJmM0CZ6fQs/edit?tab=t.0",
+   "availability": "announced"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoexplorer",
+   "name": "EgoExplorer",
+   "url": "https://internrobotics.github.io/egoexplorer.github.io/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/papers/2610.18872",
+   "availability": "partial"
+  },
+  {
+   "kind": "dataset",
+   "id": "feel",
+   "name": "FEEL",
+   "url": "https://www.cs.umd.edu/~edessale/feel",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/datasets/edessa/feel",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "vtdexmanip",
-   "name": "VTDexManip",
-   "url": "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA",
-   "priority": 2,
-   "type": "file_length",
-   "detail": "68264 -> 68266",
+   "id": "feelsight",
+   "name": "FeelSight",
+   "url": "https://suddhu.github.io/neural-feels/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/collections/suddhu/neuralfeels-673184a97ddcac2df69ff489",
    "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "sharpa_roco",
+   "name": "RoCo Task Board Assembly",
+   "url": "https://rocochallenge.github.io/RoCo-IROS2026/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://docs.google.com/document/d/1dYp-3dmC89N7HWRckPcNiuhEUxSLgmTkmIfu8nnVSfE/mobilebasic?pli=1 https://docs.google.com/forms/d/e/1FAIpQLSd0eMP20_mwSkO6-KRKvtwKpPdqyTUDdi-Zf9aJSjdY2QcHEw/viewform https://docs.google.com/forms/d/e/1FAIpQLSflInmaLlA9AgMlULyXQbyVjuDThKn1gDROZGzxTRpF7OwgKg/viewform",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "sparsh_x",
+   "name": "Sparsh-X dataset (Allegro part)",
+   "url": "https://akashsharma02.github.io/sparsh-x-ssl/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/collections/carohiguera/sparsh-x-68a02683b28a46ccae83cf77",
+   "availability": "public"
+  },
+  {
+   "kind": "model",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://dextacwam.github.io/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "GitHub dextacwam/DexTacWAM README 'Release' lists training and offline inference code for all three stages, configs for the six tasks and ablations, and deployment code. Hugging Face JensenYuan/DexTacWAM_multi_finger_tactile_encoder holds the stage 1 tactile encoder (866 MB, step 53000). README: 'Not included: stage 2 world models and stage 3 action experts.' Code and weights are linked from the project page."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "neuralfeels",
+   "name": "NeuralFeels",
+   "url": "https://suddhu.github.io/neural-feels/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/collections/suddhu/neuralfeels-673184a97ddcac2df69ff489",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/facebookresearch/neuralfeels (MIT). Weights: Hugging Face suddhu/tactile_transformer (dpt_real.p, dpt_sim.p; license tag mit), which the README says to clone under 'Download models'. The object field is optimized online for each run, so no per-object weights exist. Checked 2026-10-25."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "sparsh_x",
+   "name": "Sparsh-X",
+   "url": "https://akashsharma02.github.io/sparsh-x-ssl/",
+   "priority": 3,
+   "type": "links_removed",
+   "detail": "https://huggingface.co/collections/carohiguera/sparsh-x-68a02683b28a46ccae83cf77",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/facebookresearch/sparsh-multisensory-touch (CC BY-NC 4.0). Weights: Hugging Face facebook/sparsh-x-all (d360_sparshx_img_mic_imu_pressure_base.pth) and facebook/sparsh-x-img (d360_sparshx_img_base.pth), both license tag cc-by-nc-4.0. Checked 2026-10-25."
+   }
   }
  ],
  "deep_check_tonight": [
@@ -106,17 +178,21 @@
   },
   {
    "kind": "model",
-   "id": "tacross"
+   "id": "egopressureformer"
   },
   {
    "kind": "model",
-   "id": "tk_stgn"
+   "id": "tactiskill"
   },
   {
    "kind": "model",
-   "id": "touchworld"
+   "id": "touchsight"
+  },
+  {
+   "kind": "model",
+   "id": "vint_net"
   }
  ],
- "not_fully_released": 31,
+ "not_fully_released": 33,
  "errors": []
 }

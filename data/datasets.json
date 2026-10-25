@@ -2636,14 +2636,16 @@
     ]
    },
    "availability": "announced",
-   "access": "Release planned by the authors.",
+   "access": "Release planned by the authors. The project page (checked 2026-10-25) lists the dataset as 'Planned release, download link to follow' and the software as 'coming soon'; only hardware v1 (BOM, PCB Gerber files, pick-and-place coordinates; tacross_v1.zip, GitHub release hardware-v1 of 2026-10-15) can be downloaded.",
    "license": "not stated",
    "links": {
     "project": "https://tacross-touch-project.github.io/",
     "paper": "https://arxiv.org/abs/2610.11945"
    },
    "image": "https://tacross-touch-project.github.io/assets/slide1-animation.jpg",
-   "caveats": [],
+   "caveats": [
+    "No tactile recordings are downloadable yet. The hardware v1 release holds design files only (per the project page; the zip was not opened), and no license is stated for it."
+   ],
    "thumb": "assets/thumbs/tacross.jpg",
    "setup": {
     "cameras": [
@@ -2700,7 +2702,8 @@
    "sources": [
     "https://arxiv.org/abs/2610.11945",
     "https://arxiv.org/pdf/2610.11945",
-    "https://tacross-touch-project.github.io/"
+    "https://tacross-touch-project.github.io/",
+    "https://github.com/tacross-touch-project/tacross-touch-project.github.io/releases/tag/hardware-v1"
    ],
    "unconfirmed": [
     "episodes = 24,913 recorded (human+robot); valid = 22,486. Current entry's 21,412 is valid HUMAN demos only.",
