@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-10-24"
+  "last_updated": "2026-10-25"
  },
  "datasets": [
   {
@@ -131,7 +131,8 @@
     "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale dataset page (gate text, read without login)",
     "All 17 files of 9 episodes opened: shards data/train-00000, -00032, -00083, -00204, -00406, -00422 and -00429 of 430 (byte-range reads), plus previews/train/000/5a1ae97d-9456-479a-8a4e-4cd6c7f07773.mp4",
     "https://arxiv.org/html/2610.10288",
-    "https://touch-scale.github.io/"
+    "https://touch-scale.github.io/",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale-OXT (dataset page and HF API metadata, read without login, 2026-10-25)"
    ],
    "unconfirmed": [
     "Maker: episode.h5 metadata attribute source_dataset reads 'Orbbec Gemini 345Lg; Intel RealSense D405; Tujian EI-G012'. Tujian is the pinyin of 途见 (Tachin Technology), whose EI-G series is the TachinGlove on tachin.com; the paper names only the 'Tachin Glove'. Paper: 'The data are purchased by Overfit Lab and captured by Noitom under our contracted data-collection process.'",
@@ -207,6 +208,18 @@
      "url": "https://arxiv.org/abs/2605.13083",
      "note": "Third-party: the TouchScale paper (arXiv 2610.10288, Sec. 4.1) retrains TouchAnything on a 16 h TouchScale subset, on fractions of TouchScale and on the full set.",
      "model": "touchanything"
+    },
+    {
+     "name": "2077AIDataFoundation/TouchScale-OXT (Hugging Face dataset)",
+     "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale-OXT",
+     "note": "derived release by the same publisher: the 100 h converted to FTP-1 zarr for Open-X-Tactile, 15,088 trajectories (236 dropped for failed head-pose checks), 920 per-task zarr.zip files, 10 Hz, 224x224 RGB, 21 MANO joint angles per hand estimated from the head camera, ~1.01 TB; Hugging Face gate, manual approval per the HF API (2026-10-25); CC BY-NC 4.0; files not opened"
+    }
+   ],
+   "used_by_other": [
+    {
+     "name": "2077AIDataFoundation/TouchScale-OXT (Hugging Face dataset)",
+     "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale-OXT",
+     "note": "derived release by the same publisher: the 100 h converted to FTP-1 zarr for Open-X-Tactile, 15,088 trajectories (236 dropped for failed head-pose checks), 920 per-task zarr.zip files, 10 Hz, 224x224 RGB, 21 MANO joint angles per hand estimated from the head camera, ~1.01 TB; Hugging Face gate, manual approval per the HF API (2026-10-25); CC BY-NC 4.0; files not opened"
     }
    ]
   },
@@ -373,6 +386,12 @@
      "url": "https://arxiv.org/abs/2609.34286",
      "note": "All training and evaluation data, from the Hugging Face release zhouzhoujy/EgoTouch. 1,926 of the 1,933 episodes in the authors' copy (20.21 h) are cut into 43,604 clips of 49 frames; LoRA fine-tuning runs one epoch over 38,600 clips (17.51 h, 1,338 episodes, 174 tasks), and evaluation uses 3,000 clips from held-out recording sessions (2,728 in-distribution, 272 out-of-distribution). No robot data.",
      "model": "dtwm"
+    },
+    {
+     "name": "Ego2Contact, arXiv 2610.22932",
+     "url": "https://arxiv.org/abs/2610.22932",
+     "note": "Human training data, with a seen-object test set of 179 episodes and an unseen-object test set of 85 episodes; compared against TouchAnything, which the authors reproduce.",
+     "model": "ego2contact"
     },
     {
      "name": "TouchAnything, arXiv 2605.13083",
@@ -946,6 +965,12 @@
     }
    },
    "used_by": [
+    {
+     "name": "Ego2Contact, arXiv 2610.22932",
+     "url": "https://arxiv.org/abs/2610.22932",
+     "note": "Second human domain for cross-dataset adaptation, evaluated on an object-held-out test set of 55 episodes; training episode count not stated.",
+     "model": "ego2contact"
+    },
     {
      "name": "EgoPressureDiff, ICML 2026 (arXiv 2606.09243)",
      "url": "https://arxiv.org/abs/2606.09243",
@@ -6261,6 +6286,12 @@
      "url": "https://arxiv.org/abs/2609.20649",
      "note": "World-model pretraining on about 100 h of HumanTouch-system recordings over 50 bimanual tasks (Moxian gloves under MANUS MetaGloves, 320 of 360 taxels per hand kept), together with 5 h of robot data over 6 tasks; adding 100 h of human data raised held-out robot Contact-F1 from 0.55 to 0.71. The public HumanTouch release covers 10 tasks, so this corpus is a different task set.",
      "model": "dextouch_wm"
+    },
+    {
+     "name": "Spark-0, arXiv 2610.22342",
+     "url": "https://arxiv.org/abs/2610.22342",
+     "note": "1,000 h of HumanTouch recordings (100+ tasks, 32 operators, Moxian gloves under MANUS Metagloves, 320 observed taxels per hand, 60 Hz) make up 35% of a 1.9k h, 7-source pretraining mixture with touch in 44% of samples; keeping the touch raised vision-only success on the Ego Humanoid benchmark from 52.5% to 71.7% and SparkArena-Real success from 44.0% to 52.0%. The public HumanTouch release holds about 132.8 h over 10 tasks (catalog humantouch entry), so most of this corpus is not public.",
+     "model": "spark_0"
     },
     {
      "name": "TouchSight, arXiv 2609.20414",

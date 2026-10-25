@@ -1,9 +1,80 @@
 {
- "generated": "2026-10-25T20:19:33Z",
- "baseline": true,
- "urls_checked": 182,
- "seconds": 120,
- "signals": [],
+ "generated": "2026-10-25T20:41:35Z",
+ "baseline": false,
+ "urls_checked": 204,
+ "seconds": 130,
+ "signals": [
+  {
+   "kind": "dataset",
+   "id": "grasp_like_humans",
+   "name": "Grasp Like Humans",
+   "url": "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip",
+   "priority": 2,
+   "type": "file_etag",
+   "detail": "\"68c22c34-143433e\" -> \"68c22c33-143433e\"",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "grasp_like_humans",
+   "name": "Grasp Like Humans",
+   "url": "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip",
+   "priority": 2,
+   "type": "file_modified",
+   "detail": "Thu, 11 Sep 2025 01:56:04 GMT -> Thu, 11 Sep 2025 01:56:03 GMT",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "kaiwu",
+   "name": "Kaiwu",
+   "url": "https://doi.org/10.57760/sciencedb.14937",
+   "priority": 2,
+   "type": "file_etag",
+   "detail": "\"c2877-AenItz8s/3SHABGIo2nI4vUb/LA\" -> \"c2877-ijBzeTeXaPP8AAxV2DyZ2FNXDzs\"",
+   "availability": "gated"
+  },
+  {
+   "kind": "dataset",
+   "id": "lasr_gentle_grasping",
+   "name": "Gentle Grasping (LASR)",
+   "url": "https://doi.org/10.25532/OPARA-787",
+   "priority": 2,
+   "type": "file_length",
+   "detail": "394807 -> 395390",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "lasr_gentle_grasping",
+   "name": "Gentle Grasping (LASR)",
+   "url": "https://doi.org/10.25532/OPARA-787",
+   "priority": 2,
+   "type": "file_etag",
+   "detail": "W/\"60637-rsJS/d9Ctk5kiUPyVp0lJ9+jK28\" -> W/\"6087e-B8FVGKmAODbp0cGRqjrF5/y3Mao\"",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "lasr_grasp_stability",
+   "name": "Dexterous Grasp Stability",
+   "url": "https://doi.org/10.25532/OPARA-1588",
+   "priority": 2,
+   "type": "file_etag",
+   "detail": "W/\"89349-HK7uSB+hsJ5fQktEfJAV8nEKqxI\" -> W/\"89349-ziooJNjTs2Qs/zrOQExVKsaYzFc\"",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "vtdexmanip",
+   "name": "VTDexManip",
+   "url": "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA",
+   "priority": 2,
+   "type": "file_length",
+   "detail": "68264 -> 68266",
+   "availability": "public"
+  }
+ ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
@@ -28,8 +99,24 @@
   {
    "kind": "dataset",
    "id": "touchscale"
+  },
+  {
+   "kind": "model",
+   "id": "dtwm"
+  },
+  {
+   "kind": "model",
+   "id": "tacross"
+  },
+  {
+   "kind": "model",
+   "id": "tk_stgn"
+  },
+  {
+   "kind": "model",
+   "id": "touchworld"
   }
  ],
- "not_fully_released": 18,
+ "not_fully_released": 31,
  "errors": []
 }

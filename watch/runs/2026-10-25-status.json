@@ -1,0 +1,46 @@
+{
+ "flow": "status",
+ "date": "2026-10-25",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 7,
+ "added": {
+  "datasets": 0,
+  "models": 0,
+  "hardware": 0
+ },
+ "updated": 0,
+ "queue_left": 0,
+ "searches": [
+  "TACROSS tactile dataset code release Revo2 glove github",
+  "TouchWorld predictive reactive tactile foundation model code weights",
+  "Dexterous Tactile World Model DTWM weights checkpoint Hugging Face",
+  "TK-STGN Grasp Like Humans code tactile-kinesthetic spatio-temporal graph network github",
+  "Dex-MPTD dataset tactile dexterous download",
+  "EgoExplorer tactile dataset release",
+  "HTAC tactile glove dataset human robot hand release",
+  "PaXini OmniSharing tactile dataset release",
+  "TouchScale tactile dataset dexterous hand"
+ ],
+ "for_the_owner": [
+  "Validation not run: this session had no shell access, so python3 scripts/build_readme.py --validate and python3 scripts/nightly_guard.py were not executed. No catalog file was edited, so only this report is new. Run both before publishing."
+ ],
+ "notes": [
+  "No catalog change tonight. The scan returned 7 priority 2 signals on 5 datasets (204 URLs checked) and none changed a catalogued fact, so there is no data/changes file.",
+  "Grasp Like Humans (grasp_like_humans): the zip's ETag and Last-Modified moved by one second (2025-09-11 01:56:04 to 01:56:03) and the size part of the ETag (143433e) is unchanged; read as a re-upload of the same file. The zip contents were not opened.",
+  "Gentle Grasping (lasr_gentle_grasping): the OPARA landing page grew from 394,807 to 395,390 bytes. The record page lists published 2025-03-11, CC BY-NC-ND 4.0, data_gentle_grasping.zip (4.46 GiB, matching the 4.78 GB in the entry) and README.md, with no version history, so the change is page markup. Entry left as is.",
+  "Dexterous Grasp Stability (lasr_grasp_stability), Kaiwu (kaiwu) and VTDexManip (vtdexmanip): ETag changes on a DOI landing page, or a 2-byte length change on the OneDrive folder page. The pages were not opened and the catalog entries were not touched.",
+  "Deep check found no code, weights or data release for dex_mptd, egoexplorer, htac, paxini_omnisharing, tacross (dataset and model), touchscale, dtwm, tk_stgn or touchworld. One WebSearch each; the project pages, GitHub and Hugging Face organisations were not opened, and nightly_tool.py could not be run.",
+  "The search for TACROSS repeated the paper's statement that software and a 150-hour tactile dataset are planned for release. The entry already records this.",
+  "The paper-summary page for the htac search describes H-Tac as 160 hours, 300+ tasks and 135k+ episodes (emergentmind.com/papers/2607.01067). That is a secondary summary and was not compared with the htac entry.",
+  "The models dtwm, tacross, tk_stgn and touchworld already carry checked 2026-10-25 from an earlier run, and no fact changed, so their dates are unchanged."
+ ],
+ "started": "2026-10-25T20:45:21Z",
+ "finished": "2026-10-25T20:49:31Z",
+ "ok": false,
+ "review_exit": 0,
+ "guard": "- scripts/nightly_local.sh: outside the paths a nightly run may change",
+ "guard_output": [
+  "nightly guard failed:",
+  "- scripts/nightly_local.sh: outside the paths a nightly run may change"
+ ]
+}

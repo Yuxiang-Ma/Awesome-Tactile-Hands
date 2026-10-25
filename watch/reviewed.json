@@ -1,0 +1,15 @@
+{
+ "arxiv:2610.22342": {"decision": "model", "id": "spark_0", "reason": "VTLA policy pretrained on 1,000 h of HumanTouch glove data; HumanTouch already catalogued", "date": "2026-10-25"},
+ "arxiv:2610.22932": {"decision": "model", "id": "ego2contact", "reason": "predicts bimanual tactile fields from egocentric video; trained on EgoTouch, adapted on EgoTactile", "date": "2026-10-25"},
+ "doi:10.1038/s41467-024-53654-y": {"decision": "model", "id": "vitam", "reason": "ViTaM: object reconstruction from a 1,152-channel glove plus RGB-D; evaluated on real glove recordings, data not released", "date": "2026-10-25"},
+ "hf:datasets/2077aidatafoundation/touchscale-oxt": {"decision": "duplicate", "id": "touchscale", "reason": "FTP-1 zarr conversion of the TouchScale 100 h release; linked under touchscale used_by_other and sources", "date": "2026-10-25"},
+ "gh:jyotishmannnnn/tactile-glove-benchmark": {"decision": "lead", "id": null, "reason": "benchmark repo with no recordings; its two data-audited systems (TouchTronix FusionX, OpenGraph Labs) are already catalogued as fusionx_sample and opengraph_ego_tactile", "date": "2026-10-25"},
+ "doi:10.1145/3586182.3616704": {"decision": "reject", "id": null, "reason": "doctoral research summary, no new data or model", "date": "2026-10-25"},
+ "hf:models/liang-zx/dexhanddiff-adroitdoor": {"decision": "reject", "id": null, "reason": "simulated Adroit hand on D4RL, no touch", "date": "2026-10-25"},
+ "arxiv:2610.23438": {"decision": "reject", "id": null, "reason": "no named model and no released data; sim-to-real RL study with binary tactile on Shadow Hand Lite", "date": "2026-10-25"},
+ "arxiv:2610.14926": {"decision": "reject", "id": null, "reason": "no touch sensing (joint angles and actuator load only)", "date": "2026-10-25"},
+ "arxiv:2109.04378": {"decision": "reject", "id": null, "reason": "no named model (project page calls it the tactile model); no data release on the project page", "date": "2026-10-25"},
+ "gh:motahoun/visual-tactile_dataset": {"decision": "reject", "id": null, "reason": "tactile data generated kinematically, not recorded", "date": "2026-10-25"},
+ "hf:models/mit-media-lab/egotouch-tactile-encoder-p1-v1": {"decision": "later", "id": null, "reason": "tactile-pose encoder trained on EgoTouch with weights released but no paper; in scope as a model once a paper appears", "date": "2026-10-25"},
+ "hf:models/acerobotics/puffin-world": {"decision": "reject", "id": null, "reason": "camera-centric vision world model, no touch", "date": "2026-10-25"}
+}
