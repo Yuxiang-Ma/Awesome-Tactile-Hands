@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-25T20:19:33Z",
+ "updated": "2026-10-25T20:41:35Z",
  "urls": {
   "http://stag.csail.mit.edu/": {
    "kind": "page",
@@ -42,10 +42,18 @@
    "phrases": [],
    "seen": "2026-10-25"
   },
+  "https://1drv.ms/f/c/9054151f0ba654c9/EsZlIVlJEudEpYT2Ofl7tj8BbNErfoJZdkgG5PnZ5j6_hg": {
+   "kind": "page",
+   "status": 200,
+   "length": "322925",
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
   "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA": {
    "kind": "page",
    "status": 200,
-   "length": "68264",
+   "length": "68266",
    "etag": null,
    "modified": null,
    "seen": "2026-10-25"
@@ -129,6 +137,29 @@
     "n) [unavailable] [unavailable] Split 1 videos: C01 | C02 | C03 | C04 | C05 Split 1 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 S02 YouTube Spl",
     "t 1 Split 2 Split 3 Split 1 Split 2 Split 3 [coming soon] [coming soon] [coming soon] Body measurements for all subjects XLSX file of body measurements and procedures Data for Subject S00 Note: Chapte"
    ],
+   "seen": "2026-10-25"
+  },
+  "https://adonis-galaxy.github.io/dtwm-project-page/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "0863216a2b662abf",
+   "text_len": 3896,
+   "links": [
+    "https://github.com/Adonis-galaxy/Dexterous-Tactile-World-Model"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://akashsharma02.github.io/sparsh-skin-ssl/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "2885a60b8c1e967d",
+   "text_len": 5001,
+   "links": [
+    "https://github.com/facebookresearch/sparsh-multisensory-touch",
+    "https://huggingface.co/datasets/facebook/sparsh-skin-dataset"
+   ],
+   "phrases": [],
    "seen": "2026-10-25"
   },
   "https://akashsharma02.github.io/sparsh-x-ssl/": {
@@ -404,6 +435,15 @@
    "comment": "The first two authors contribute equally. Orders are decided by flipping a coin",
    "seen": "2026-10-25"
   },
+  "https://arxiv.org/abs/2607.07287": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-07-09",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
   "https://arxiv.org/abs/2607.09190": {
    "kind": "arxiv",
    "status": 200,
@@ -431,6 +471,24 @@
    "comment": "NeurIPS 2026 Accepted. Project Page: https://egotac.github.io/",
    "seen": "2026-10-25"
   },
+  "https://arxiv.org/abs/2609.20414": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-09-17",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2609.20649": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-09-18",
+   "journal_ref": null,
+   "comment": "Accept to IROS 2026 Workshop RoBoWoMo (Lightning Talk)",
+   "seen": "2026-10-25"
+  },
   "https://arxiv.org/abs/2609.24976": {
    "kind": "arxiv",
    "status": 200,
@@ -447,6 +505,15 @@
    "updated": "2026-09-29",
    "journal_ref": null,
    "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2609.34286": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-09-28",
+   "journal_ref": null,
+   "comment": "Project page: https://adonis-galaxy.github.io/dtwm-project-page/",
    "seen": "2026-10-25"
   },
   "https://arxiv.org/abs/2610.05180": {
@@ -566,15 +633,15 @@
    "kind": "page",
    "status": 200,
    "length": "561993",
-   "etag": "W/\"89349-HK7uSB+hsJ5fQktEfJAV8nEKqxI\"",
+   "etag": "W/\"89349-ziooJNjTs2Qs/zrOQExVKsaYzFc\"",
    "modified": null,
    "seen": "2026-10-25"
   },
   "https://doi.org/10.25532/OPARA-787": {
    "kind": "page",
    "status": 200,
-   "length": "394807",
-   "etag": "W/\"60637-rsJS/d9Ctk5kiUPyVp0lJ9+jK28\"",
+   "length": "395390",
+   "etag": "W/\"6087e-B8FVGKmAODbp0cGRqjrF5/y3Mao\"",
    "modified": null,
    "seen": "2026-10-25"
   },
@@ -595,7 +662,7 @@
    "kind": "page",
    "status": 200,
    "length": null,
-   "etag": "\"c2877-AenItz8s/3SHABGIo2nI4vUb/LA\"",
+   "etag": "\"c2877-ijBzeTeXaPP8AAxV2DyZ2FNXDzs\"",
    "modified": null,
    "seen": "2026-10-25"
   },
@@ -608,6 +675,14 @@
    "seen": "2026-10-25"
   },
   "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://drive.google.com/file/d/1G52ihW7EbE5eSe04jnxGpo7cc1jxYWHw/view": {
    "kind": "page",
    "status": 200,
    "length": null,
@@ -660,6 +735,18 @@
     "https://www.modelscope.cn/datasets/Eureka1064/FTP-1-Dataset"
    ],
    "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://github.com/Adonis-galaxy/Dexterous-Tactile-World-Model": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "Adonis-galaxy/Dexterous-Tactile-World-Model",
+   "pushed_at": "2026-09-29T04:14:42Z",
+   "archived": false,
+   "license": "Apache-2.0",
+   "size_kb": 332,
+   "readme_sha": "99870d2e8daeff78eb80f13664974894e5cf2d8c",
+   "release": null,
    "seen": "2026-10-25"
   },
   "https://github.com/BAAI-Humanoid/DECO": {
@@ -1034,6 +1121,18 @@
    "release": null,
    "seen": "2026-10-25"
   },
+  "https://github.com/tianhaowuhz/3dtacdex/tree/main/ckpts": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "tianhaowuhz/3dtacdex",
+   "pushed_at": "2025-06-10T02:51:03Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 76407,
+   "readme_sha": "de5c1a9acdadceba3f32328e3be9235471373d2d",
+   "release": null,
+   "seen": "2026-10-25"
+  },
   "https://github.com/toruowo/hato": {
    "kind": "gh",
    "status": 200,
@@ -1074,8 +1173,8 @@
    "kind": "page",
    "status": 200,
    "length": "21185342",
-   "etag": "\"68c22c34-143433e\"",
-   "modified": "Thu, 11 Sep 2025 01:56:04 GMT",
+   "etag": "\"68c22c33-143433e\"",
+   "modified": "Thu, 11 Sep 2025 01:56:03 GMT",
    "seen": "2026-10-25"
   },
   "https://hci-tech-lab.github.io/PiMForce/": {
@@ -1088,6 +1187,58 @@
     "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0"
    ],
    "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/BAAI-Humanoid/DECO_sim": {
+   "kind": "hf",
+   "status": 200,
+   "id": "BAAI-Humanoid/DECO_sim",
+   "sha": "1fff4781fa6a518e9f418838a355c82beec3af03",
+   "last_modified": "2026-08-14T10:56:09.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 8,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/BeingBeyond/TTP": {
+   "kind": "hf",
+   "status": 200,
+   "id": "BeingBeyond/TTP",
+   "sha": "6137c7bd42fe4a8f42d91afd10a8ef155d84bca4",
+   "last_modified": "2026-07-07T06:54:18.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 43,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder": {
+   "kind": "hf",
+   "status": 200,
+   "id": "JensenYuan/DexTacWAM_multi_finger_tactile_encoder",
+   "sha": "17243e046b4555ca629eb7e105e31d531171c320",
+   "last_modified": "2026-09-30T05:35:46.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 5,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/MJJJJ1064/ftp1_v0426_50kstep": {
+   "kind": "hf",
+   "status": 200,
+   "id": "MJJJJ1064/ftp1_v0426_50kstep",
+   "sha": "d6e5b73e473d3e70fb5f53132a2b1c35b5031156",
+   "last_modified": "2026-06-13T12:22:53.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 96,
    "seen": "2026-10-25"
   },
   "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc": {
@@ -1613,6 +1764,58 @@
    "files": 22897,
    "seen": "2026-10-25"
   },
+  "https://huggingface.co/facebook/sparsh-skin": {
+   "kind": "hf",
+   "status": 200,
+   "id": "facebook/sparsh-skin",
+   "sha": "6a164d442e92eed7f7fadd651125c552759d81ca",
+   "last_modified": "2025-08-19T17:14:33.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 4,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/facebook/sparsh-x-all": {
+   "kind": "hf",
+   "status": 200,
+   "id": "facebook/sparsh-x-all",
+   "sha": "48233603d8997cfd8653e1f0fc9ec9d98eeda146",
+   "last_modified": "2025-08-15T16:12:08.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 4,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6": {
+   "kind": "hf",
+   "status": 200,
+   "id": "miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6",
+   "sha": "62efb3bcb45a3df0e088c8909d759b582cfb98af",
+   "last_modified": "2026-05-31T11:02:50.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "mit",
+   "files": 15,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/suddhu/tactile_transformer": {
+   "kind": "hf",
+   "status": 200,
+   "id": "suddhu/tactile_transformer",
+   "sha": "b05cfe1df2c90d3d91f8378633173b26de5a2d2c",
+   "last_modified": "2024-11-13T03:46:45.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "mit",
+   "files": 4,
+   "seen": "2026-10-25"
+  },
   "https://huggingface.co/velvet-pine-22/PULSE-code": {
    "kind": "hf",
    "status": 200,
@@ -1624,6 +1827,19 @@
    "disabled": false,
    "license": "mit",
    "files": 131,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/wkzhang/EgoTac": {
+   "kind": "hf",
+   "status": 200,
+   "id": "wkzhang/EgoTac",
+   "sha": "fd2a5b12ed64aef699046d56e235c8201914ea58",
+   "last_modified": "2026-10-20T06:11:43.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 6,
    "seen": "2026-10-25"
   },
   "https://humanoideveryday.github.io/": {
@@ -1771,6 +1987,15 @@
    "links": [
     "https://github.com/OpenTouch-MIT/opentouch"
    ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://phanes-lab.github.io/TouchWorld-website/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "c7086863d1f680c6",
+   "text_len": 10097,
+   "links": [],
    "phrases": [],
    "seen": "2026-10-25"
   },
@@ -1986,7 +2211,23 @@
    "phrases": [],
    "seen": "2026-10-25"
   },
+  "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/AAszkuRRMYwZ6OtmPWPlRxs/Codes?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADrSa2qEfM-GUzzrE35r5Sk/Codes/Checkpoints?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0": {
    "kind": "page",
    "status": 200,
    "length": null,
