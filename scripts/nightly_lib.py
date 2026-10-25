@@ -210,8 +210,8 @@ def data_link(u: str) -> bool:
     host, path = (s.hostname or "").lower(), s.path
     if DATA_EXT.search(u):
         return True
-    if host.startswith(("about.", "help.", "docs.", "blog.", "status.", "support.", "developers.")):
-        return False
+    if host.startswith(("about.", "help.", "docs.", "blog.", "status.", "support.", "developers.")) and host != "docs.google.com":
+        return False  # docs.google.com carries access forms and data documents
     if "huggingface.co" in host or host == "hf.co":
         return hf_repo(u) is not None and not re.search(r"/(discussions|commits|blame)(/|$)", path)
     if host == "github.com":
