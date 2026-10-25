@@ -62,6 +62,9 @@ else MODEL=sonnet; FALLBACK=opus; LIMIT=100m; INPUT=watch/signals.json; fi
 DOY=$((10#$(TZ=America/New_York date +%j)))
 QUERIES="$(( DOY % 12 )), $(( (DOY + 1) % 12 )), $(( (DOY + 2) % 12 )), $(( (DOY + 3) % 12 ))"
 EXTRA=""; [[ $FLOW == discovery ]] && EXTRA=" Tonight's search sweep uses queries $QUERIES of the list in NIGHTLY.md."
+# a shorter run for tests: NIGHTLY_LIMIT=15 caps the candidates decided (and the entries added at a third of that)
+[[ ${NIGHTLY_LIMIT:-} =~ ^[0-9]+$ ]] && EXTRA="$EXTRA This is a short test run: decide at most $NIGHTLY_LIMIT candidates or deep checks, \
+add at most $(( (NIGHTLY_LIMIT + 2) / 3 )) datasets and $(( (NIGHTLY_LIMIT + 2) / 3 )) models, and skip the search sweep."
 PROMPT="Tonight's Taxel Atlas nightly run. Flow: $FLOW. Date: $DATE (America/New_York).$EXTRA You are in a checkout of the catalog \
 repository on branch $BRANCH. The scan for tonight has run and written $INPUT. Read pipeline/NIGHTLY.md, then follow its \
 'Rules for every run', 'Scope' and 'Flow: $FLOW' sections, and write data/changes/$DATE-$FLOW.json (only if something changed) \

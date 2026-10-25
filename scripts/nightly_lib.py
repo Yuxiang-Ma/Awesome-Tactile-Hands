@@ -203,6 +203,24 @@ PHRASE = re.compile(r"[^.!?\n]{0,120}\b(coming soon|to be released|will be (?:ma
                     r"code and (?:data|dataset|models?) will|is being prepared|TBA|TBD)\b[^.!?\n]{0,120}", re.I)
 
 
+def data_link(u: str) -> bool:
+    """A link that can lead to data, code or weights: a repository on Hugging Face or GitHub, a record on a data host, or a
+    file with a data extension. Navigation on those hosts (about, help, login, issues) is not one."""
+    s = urllib.parse.urlsplit(u)
+    host, path = (s.hostname or "").lower(), s.path
+    if DATA_EXT.search(u):
+        return True
+    if host.startswith(("about.", "help.", "docs.", "blog.", "status.", "support.", "developers.")):
+        return False
+    if "huggingface.co" in host or host == "hf.co":
+        return hf_repo(u) is not None and not re.search(r"/(discussions|commits|blame)(/|$)", path)
+    if host == "github.com":
+        return gh_repo(u) is not None and not re.search(r"^/[^/]+/?$|/(issues|pulls|stargazers|forks?|network|graphs|actions|wiki)(/|$)", path)
+    if "zenodo.org" in host:
+        return bool(re.match(r"/(records?|doi)/", path))
+    return any(d in host for d in DATA_HOSTS)
+
+
 class _Page(HTMLParser):
     def __init__(self):
         super().__init__(convert_charrefs=True)
@@ -236,10 +254,9 @@ def page_print(url: str, body: bytes) -> dict:
         h = urllib.parse.urljoin(url, href.strip())
         if not h.startswith("http"):
             continue
-        host = (urllib.parse.urlsplit(h).hostname or "").lower()
-        if any(d in host for d in DATA_HOSTS) or DATA_EXT.search(h):
+        if data_link(h):
             n = norm_url(h)
-            if n.rstrip("/") != norm_url(url).rstrip("/") and not re.search(r"github\.com/[^/]+/?$|/(issues|pulls|stargazers|fork)", n):
+            if n.rstrip("/") != norm_url(url).rstrip("/"):
                 links.add(n)
     phrases = sorted({m.group(0).strip()[:200] for m in PHRASE.finditer(text)})
     return {"text_sha": hashlib.sha1(text.lower().encode()).hexdigest()[:16], "text_len": len(text),
