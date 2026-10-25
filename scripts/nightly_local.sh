@@ -24,8 +24,10 @@ mkdir -p "$LOGS"
 exec > >(tee -a "$LOG.log") 2>&1
 echo "== $STARTED nightly $FLOW for $DATE"
 
-exec 9>"$HOME_DIR/.lock"
-flock -w 7200 9 || { echo "another nightly run holds the lock"; exit 1; }
+if [[ -z ${NIGHTLY_LOCKED:-} ]]; then  # launch.sh already holds the lock on fd 9
+  exec 9>"$HOME_DIR/.lock"
+  flock -w 7200 9 || { echo "another nightly run holds the lock"; exit 1; }
+fi
 
 git_auth() { git -c credential.helper= -c "credential.helper=!f() { echo username=x-access-token; echo password=\$(gh auth token); }; f" "$@"; }
 
@@ -46,8 +48,9 @@ git_auth fetch -q origin || fail "git fetch failed"
 git reset -q --hard && git clean -qfd
 if git rev-parse -q --verify "origin/$BRANCH" >/dev/null; then git checkout -q -B "$BRANCH" "origin/$BRANCH"; else git checkout -q -B "$BRANCH" origin/main; fi
 git merge -q --no-edit origin/main || { git merge --abort; fail "claude/nightly does not merge cleanly with main; resolve by hand"; }
+BASE=$(git rev-parse origin/main)  # every comparison below uses this commit, whatever happens to the refs meanwhile
 # the scripts that run below must be main's
-git diff --quiet origin/main -- scripts pipeline/merge_entry.py pipeline/publish.py .github assets '*.html' ':!assets/thumbs' ':!assets/hw' \
+git diff --quiet "$BASE" -- scripts pipeline/merge_entry.py pipeline/publish.py .github assets '*.html' ':!assets/thumbs' ':!assets/hw' \
   || fail "scripts or pages on claude/nightly differ from main"
 
 # 2. scan (the GitHub token is given to the scan scripts only, never to the review session)
@@ -95,17 +98,17 @@ except Exception as e:
 EOF
 
 # 4. figures of new entries, then the guard
-NEW=$($PY - <<'EOF'
-import json, subprocess
+NEW=$($PY - "$BASE" <<'EOF'
+import json, subprocess, sys
 ids = []
 for f, k in (("data/datasets.json", "datasets"), ("data/hardware.json", "hardware")):
-    old = {x["id"] for x in json.loads(subprocess.run(["git", "show", f"origin/main:{f}"], capture_output=True, text=True).stdout)[k]}
+    old = {x["id"] for x in json.loads(subprocess.run(["git", "show", f"{sys.argv[1]}:{f}"], capture_output=True, text=True).stdout)[k]}
     ids += [x["id"] for x in json.load(open(f))[k] if x["id"] not in old and x.get("image")]
 print(",".join(ids))
 EOF
 )
 [[ -n $NEW ]] && { $PY scripts/fetch_thumbs.py --only="$NEW" || true; }
-GUARD=$($PY scripts/nightly_guard.py --base=origin/main 2>&1); GUARD_RC=$?
+GUARD=$($PY scripts/nightly_guard.py --base="$BASE" 2>&1); GUARD_RC=$?
 echo "$GUARD"
 OK=true; [[ $RC -ne 0 || $GUARD_RC -ne 0 ]] && OK=false
 if [[ $GUARD_RC -ne 0 ]]; then  # keep the rejected work for a person, then drop it
