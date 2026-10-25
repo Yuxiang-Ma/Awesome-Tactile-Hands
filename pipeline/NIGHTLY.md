@@ -198,3 +198,33 @@ python3 scripts/discover.py --dry-run         # the discovery scan alone, printi
 
 The wrapper keeps its own clone in `~/taxel-nightly/Awesome-Tactile-Hands` and its logs in `~/taxel-nightly/logs/`.
 The publish job can be started by hand from the Actions tab ("Publish nightly", Run workflow).
+
+## Installing on a machine
+
+The runs need the `claude` CLI logged in to an account, `gh` logged in with push access to this repository, Python 3
+and ffmpeg. `~/taxel-nightly/launch.sh` takes the lock before it fetches, so a waiting run never moves the refs under a
+running one, then runs main's copy of the wrapper:
+
+```
+#!/usr/bin/env bash
+set -u
+D=$HOME/taxel-nightly
+R=$D/Awesome-Tactile-Hands
+exec 9>"$D/.lock"
+flock -w 7200 9 || exit 1
+[[ -d $R/.git ]] || git clone -q https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands.git "$R" || exit 1
+git -C "$R" fetch -q origin main || exit 1
+git -C "$R" show origin/main:scripts/nightly_local.sh > "$D/nightly_local.sh.new" && mv "$D/nightly_local.sh.new" "$D/nightly_local.sh" || exit 1
+NIGHTLY_LOCKED=1 exec /bin/bash "$D/nightly_local.sh" "$@"
+```
+
+crontab (the machine's time zone is America/New_York):
+
+```
+30 1 * * * $HOME/taxel-nightly/launch.sh discovery >> $HOME/taxel-nightly/logs/cron.log 2>&1
+30 4 * * * $HOME/taxel-nightly/launch.sh status >> $HOME/taxel-nightly/logs/cron.log 2>&1
+```
+
+Cloud routines (claude.ai/code) were tried on 2026-10-25 and could not run these flows: the Claude GitHub App had no
+access to this repository, so pushes failed, and the cloud environments' network blocked arXiv, Hugging Face, OpenAlex
+and project pages. Both would need changing before the runs could move there.
