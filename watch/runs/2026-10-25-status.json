@@ -34,9 +34,13 @@
   "The paper-summary page for the htac search describes H-Tac as 160 hours, 300+ tasks and 135k+ episodes (emergentmind.com/papers/2607.01067). That is a secondary summary and was not compared with the htac entry.",
   "The models dtwm, tacross, tk_stgn and touchworld already carry checked 2026-10-25 from an earlier run, and no fact changed, so their dates are unchanged."
  ],
- "started": "2026-10-25T20:39:24Z",
- "finished": "2026-10-25T20:42:43Z",
- "ok": true,
+ "started": "2026-10-25T20:45:21Z",
+ "finished": "2026-10-25T20:49:31Z",
+ "ok": false,
  "review_exit": 0,
- "guard": "nightly guard passed: 3 changed files, 0 new entries"
+ "guard": "- scripts/nightly_local.sh: outside the paths a nightly run may change",
+ "guard_output": [
+  "nightly guard failed:",
+  "- scripts/nightly_local.sh: outside the paths a nightly run may change"
+ ]
 }
