@@ -8,13 +8,15 @@ come from the source and not from a page summary. Nothing is written.
     python3 scripts/nightly_tool.py page <URL>                           links to data hosts, release phrases, text
     python3 scripts/nightly_tool.py find <text>                          catalog entries that cite or name it
     python3 scripts/nightly_tool.py key <URL>                            the key a URL is recorded under in watch/reviewed.json
+    python3 scripts/nightly_tool.py queue <start> <count>                candidates from watch/candidates.json, compact
+    python3 scripts/nightly_tool.py signals                              tonight's signals and deep checks, compact
 """
 import json
 import re
 import sys
 import xml.etree.ElementTree as ET
 
-from nightly_lib import arxiv_id, catalog, fetch, get_json, gh_repo, hf_repo, page_print, url_key, urls_in
+from nightly_lib import ROOT, arxiv_id, catalog, fetch, get_json, gh_repo, hf_repo, page_print, url_key, urls_in
 
 SAFE = re.compile(r"^[\w.\-/:?=&%#~+@,]+$")
 
@@ -144,7 +146,35 @@ def cmd_find(text: str) -> None:
     print(f"{hits} match{'es' * (hits != 1)}")
 
 
+def cmd_queue(start: int, count: int) -> None:
+    c = json.loads((ROOT / "watch" / "candidates.json").read_text())
+    items = c["candidates"]
+    print(f"{len(items)} candidates in the queue (generated {c.get('generated')}); showing {start}-{min(len(items), start + count) - 1}")
+    for i, x in enumerate(items[start:start + count], start):
+        print(f"\n[{i}] {x['key']}  score {x['score']}  {x.get('date') or ''}  hints: {','.join(x.get('hints') or []) or '-'}")
+        print(f"    {x['title']}  ({x.get('authors') or '?'})  {x['url']}")
+        print(f"    found by: {'; '.join(x.get('found_by') or [])}")
+        if x.get("abstract"):
+            print(f"    {x['abstract'][:700]}")
+
+
+def cmd_signals() -> None:
+    s = json.loads((ROOT / "watch" / "signals.json").read_text())
+    print(f"{len(s['signals'])} signals from {s.get('urls_checked')} URLs (generated {s.get('generated')})")
+    for x in s["signals"]:
+        print(f"P{x['priority']} {x['kind']} {x['id']} ({x['name']}): {x['type']} at {x['url']}\n    {x['detail'][:400]}")
+    print(f"deep check tonight ({len(s['deep_check_tonight'])} of {s.get('not_fully_released')} not fully released): "
+          + ", ".join(f"{d['kind']} {d['id']}" for d in s["deep_check_tonight"]))
+    if s.get("errors"):
+        print("unreachable: " + ", ".join(e["url"] for e in s["errors"]))
+
+
 def main() -> None:
+    if len(sys.argv) >= 2 and sys.argv[1] == "signals":
+        return cmd_signals()
+    if len(sys.argv) >= 2 and sys.argv[1] == "queue":
+        a = [int(x) for x in sys.argv[2:4] if x.isdigit()]
+        return cmd_queue(a[0] if a else 0, a[1] if len(a) > 1 else 20)
     if len(sys.argv) < 3 or not SAFE.match(sys.argv[2]) and sys.argv[1] != "find":
         sys.exit(__doc__)
     cmd, arg, model = sys.argv[1], sys.argv[2], "--model" in sys.argv

@@ -47,6 +47,20 @@ the sample pipeline, which a person runs.
 **Never remove an entry.** If a release disappears (two scans in a row returned an error), set `availability` to
 `unclear`, add a caveat with the date and what was seen, and log it as `withdrawn`.
 
+**Shell access.** The review session may run exactly these commands, each on its own, as written:
+
+```
+python3 scripts/nightly_tool.py <command> ...     (hf, hf-commits, gh, arxiv, page, find, key, queue, signals)
+python3 pipeline/merge_entry.py pipeline/surveys/<id>.json
+python3 scripts/build_readme.py --validate
+python3 scripts/nightly_guard.py
+git status    git status --short    git diff    git diff --stat
+```
+
+Anything else is refused by design: `cd`, `&&` or `;` chains, pipes, `python3 -c`, `cat`, `ls`. A refused command does
+not mean the shell is off; run the listed commands as written. Read files with the Read, Glob and Grep tools, and use
+`nightly_tool.py queue` and `nightly_tool.py signals` for the two large scan files.
+
 **Check before you finish:** `python3 scripts/build_readme.py --validate` and `python3 scripts/nightly_guard.py` must
 both pass. Fix what they report. Do not run git; the wrapper commits.
 

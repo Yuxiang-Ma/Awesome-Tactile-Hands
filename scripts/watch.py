@@ -9,6 +9,7 @@ Fingerprints: Hugging Face repos (commit sha, gate, license, file count), GitHub
 license, last push), arXiv papers (version, journal reference, comment) and web pages (links to data hosts, release
 phrases such as "coming soon", a hash of the visible text).
 """
+import re
 import sys
 import time
 import xml.etree.ElementTree as ET
@@ -83,13 +84,18 @@ def probe_gh(owner: str, repo: str) -> dict:
 
 
 def probe_page(url: str) -> dict:
+    """A web page: its data links, release phrases and text. A data file: its size only, because ETag and Last-Modified
+    differ between the CDN nodes that answer (GitHub Pages, Zenodo). Redirect and sharing hosts: the status only."""
     status, headers, body = fetch(url)
     fp = {"kind": "page", "status": status}
     host = url.split("/")[2].lower()
-    if status == 200 and body and not any(h in host for h in STATUS_ONLY):
+    ctype = headers.get("Content-Type", "")
+    if status == 200 and any(h in host for h in STATUS_ONLY):
+        pass
+    elif status == 200 and body and re.search(r"html|xml|text", ctype):
         fp.update(page_print(url, body))
-    elif status == 200:
-        fp.update(length=headers.get("Content-Length"), etag=headers.get("ETag"), modified=headers.get("Last-Modified"))
+    elif status == 200 and not re.search(r"html|json|xml|text", ctype):
+        fp["length"] = headers.get("Content-Length")
     return fp
 
 
@@ -150,9 +156,8 @@ def diff(old: dict, new: dict, open_: bool) -> list:
             out.append((3, "phrase_added", " | ".join(new_ph[:4])))
         if not out and old.get("text_sha") and old.get("text_sha") != new.get("text_sha"):
             out.append((3, "page_text", f"text length {old.get('text_len')} -> {new.get('text_len')}"))
-        for f in ("length", "etag", "modified"):
-            if old.get(f) and old.get(f) != new.get(f):
-                out.append((2, f"file_{f}", f"{old.get(f)} -> {new.get(f)}"))
+        if old.get("length") and new.get("length") and old["length"] != new["length"]:
+            out.append((2, "file_size", f"{old['length']} -> {new['length']} bytes"))
     return out
 
 

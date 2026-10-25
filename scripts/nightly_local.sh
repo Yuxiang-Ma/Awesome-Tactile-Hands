@@ -66,8 +66,9 @@ PROMPT="Tonight's Taxel Atlas nightly run. Flow: $FLOW. Date: $DATE (America/New
 repository on branch $BRANCH. The scan for tonight has run and written $INPUT. Read pipeline/NIGHTLY.md, then follow its \
 'Rules for every run', 'Scope' and 'Flow: $FLOW' sections, and write data/changes/$DATE-$FLOW.json (only if something changed) \
 and watch/runs/$DATE-$FLOW.json as its 'Formats' section describes. Before you finish, run python3 scripts/build_readme.py \
---validate and python3 scripts/nightly_guard.py and fix what they report. Do not run any other git command than git status \
-and git diff; this wrapper commits after you finish. End with a short plain summary of what you changed."
+--validate and python3 scripts/nightly_guard.py and fix what they report. The shell accepts only the commands listed under \
+'Shell access' in NIGHTLY.md, each run on its own exactly as written (no cd, no && or ; chains, no python3 -c); if one is \
+refused, the listed ones still work. This wrapper commits after you finish. End with a short plain summary of what you changed."
 # exact commands only: a prefix rule on git would also allow options that write files (git diff --output=...)
 ALLOW=(Read Edit Write Glob Grep WebFetch WebSearch "Bash(python3 scripts/nightly_tool.py:*)" "Bash(python3 scripts/build_readme.py --validate)"
        "Bash(python3 scripts/nightly_guard.py)" "Bash(python3 pipeline/merge_entry.py pipeline/surveys/:*)" "Bash(git status)"
