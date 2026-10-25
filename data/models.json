@@ -1226,6 +1226,131 @@
     "The README does not mention tactile_encoder.zip, and which task or play run the two BYOL checkpoints come from is not stated; the catalog survey of the same folder lists only the two data zips."
    ],
    "checked": "2026-10-25"
+  },
+  {
+   "id": "spark_0",
+   "name": "Spark-0",
+   "title": "Spark-0: Scaling Spatially Aligned Tactile Pretraining for Robot Dexterous Manipulation",
+   "authors": "Tianxing Chen et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.22342",
+   "kind": "policy",
+   "summary": "Vision-tactile-language-action model (Qwen3-VL-4B with a 36-layer flow-matching action expert) that takes head and two wrist RGB views, an instruction, state and 24 tokens of regional force and 3D taxel states from both hands and outputs 50-step action chunks for two Wuji Hand 2 hands on Marvin M6S arms; glove contact maps supervise the visual tokens during training only, so one checkpoint also runs without touch.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "humantouch",
+     "role": "pretraining",
+     "note": "1,000 h of HumanTouch recordings (100+ tasks, 32 operators, Moxian gloves under MANUS Metagloves, 320 observed taxels per hand, 60 Hz) make up 35% of a 1.9k h, 7-source pretraining mixture with touch in 44% of samples; keeping the touch raised vision-only success on the Ego Humanoid benchmark from 52.5% to 71.7% and SparkArena-Real success from 44.0% to 52.0%. The public HumanTouch release holds about 132.8 h over 10 tasks (catalog humantouch entry), so most of this corpus is not public."
+    }
+   ],
+   "own_data": "Same-glove robot data on two Wuji Hand 2 hands wearing the HumanTouch gloves (amount not read), plus SparkArena-Real, 5 tactile real-robot tasks; release of these recordings not stated. The other mixture sources (EgoDex, Fourier ActionNet, AgiBot World, simulation) carry no hand touch.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/XsparkAI/Spark-0 (MIT, created 2026-10-16, last push 2026-10-24), linked from the project page, plus a Spark_0 policy in XPolicyLab. Weights: the README's Model Zoo links huggingface.co/TianxingChen/Spark-0, which holds pretrain_spark_0/ (10.2 GB, not gated, card states no license), read via the HF API on 2026-10-25. The project page marks SparkArena-Sim code 'Coming soon'."
+   },
+   "license": "MIT (code); weights not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.22342",
+    "project": "https://xsparkai.com/Spark-0",
+    "code": "https://github.com/XsparkAI/Spark-0",
+    "weights": "https://huggingface.co/TianxingChen/Spark-0"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.22342 (abstract page via arXiv API)",
+    "https://xsparkai.com/Spark-0 (project page: HumanTouch, Method, SparkArena, Results)",
+    "https://github.com/XsparkAI/Spark-0 (repository metadata, README Model Zoo)",
+    "https://huggingface.co/TianxingChen/Spark-0 (HF API metadata and top-level listing)"
+   ],
+   "unconfirmed": [
+    "The paper HTML and PDF were not read (HTML returned 404, PDF exceeded the fetch limit); facts come from the abstract, project page and README.",
+    "The project page assigns 35% to HumanTouch and 39% to EgoDex; the 9%, 5% and 5% shares of the remaining sources are not labelled.",
+    "Whether the 1,000 h HumanTouch corpus includes the 132.8 h public release is not stated."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "ego2contact",
+   "name": "Ego2Contact",
+   "title": "Ego2Contact: Predicting Touch from Egocentric Human Video for Contact-Rich Robot Manipulation",
+   "authors": "Qianqian Yang et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.22932",
+   "kind": "estimation",
+   "summary": "Rectified-flow diffusion transformer that takes an 8-frame RGB clip (frozen DINOv2 scene tokens and WiLoR hand-crop features) and predicts both hands' tactile fields on a 21x21 grid (217 valid cells), trained on human glove data and adapted to robot hands through anatomical region correspondences; its predictions feed PPO policies in Isaac Gym and an N0-VTLA policy on a BrainCo Revo 2 hand.",
+   "embodiment": "both",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "egotouch",
+     "role": "training",
+     "note": "Human training data, with a seen-object test set of 179 episodes and an unseen-object test set of 85 episodes; compared against TouchAnything, which the authors reproduce."
+    },
+    {
+     "id": "egotactile",
+     "role": "fine-tuning",
+     "note": "Second human domain for cross-dataset adaptation, evaluated on an object-held-out test set of 55 episodes; training episode count not stated."
+    }
+   ],
+   "own_data": "Paired video and glove data on a BrainCo Revo 2 hand (880-taxel glove per hand) on an xArm6 over 5 tasks, about 123k frames, plus about 50 demonstrations each for 2 real-robot tasks; simulated contact data in Isaac Gym (2,258 episodes). Release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The paper (HTML v1) has no code, weights or data statement and no project page (read 2026-10-25). GitHub and Hugging Face were not searched."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.22932"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.22932 (abstract page via arXiv API)",
+    "https://arxiv.org/html/2610.22932v1 (HTML v1: datasets, robot setup, predictor, baselines, policy experiments)"
+   ],
+   "unconfirmed": [
+    "The maker of the 880-taxel glove worn by the Revo 2 hand is not given in the parts read.",
+    "Role for egotactile set to fine-tuning because the paper fine-tunes on it for cross-dataset adaptation; whether EgoTactile also enters base training is not stated."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "vitam",
+   "name": "ViTaM",
+   "title": "Capturing forceful interaction with deformable objects using a deep learning-powered stretchable tactile array",
+   "authors": "Chunpeng Jiang et al.",
+   "year": 2024,
+   "venue": "Nature Communications 15, 9513 (2024)",
+   "kind": "estimation",
+   "summary": "Takes a top-down RGB-D view (Photoneo MotionCam M+) and a stretchable piezoresistive glove's force readings (up to 1,152 channels, 456 units in the prototype, 13 Hz) and reconstructs the held object's geometry frame by frame as a winding-number field, for rigid and deformable objects in a human hand; 1.8 cm average reconstruction error over 24 objects in 6 categories.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Training set simulated in RFUniverse (FEM): 7,680 visual-tactile samples over 24 objects in 6 categories (20 touches x 16 camera views each). Real-world test recordings of one operator wearing the glove, count not stated. Only figure source data (Data/Source_Data.xlsx) is on GitHub.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "Paper code availability: 'available from GitHub at https://github.com/jeffsonyu/ViTaM. DOI identifier: 10.5281/zenodo.13860422.' The repository (release v1.0.0, 2024-09-30) holds ViTaM_Algorithm/, a glove VR interface on RFUniverse and Data/Source_Data.xlsx; the README mentions no checkpoint and GitHub shows no license (read 2026-10-25)."
+   },
+   "license": "not stated (no license on the GitHub repository)",
+   "links": {
+    "paper": "https://doi.org/10.1038/s41467-024-53654-y",
+    "code": "https://github.com/jeffsonyu/ViTaM"
+   },
+   "sources": [
+    "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11535439/fullTextXML (open-access full text, first 100,000 of 137,115 characters)",
+    "https://github.com/jeffsonyu/ViTaM (repository metadata, README)",
+    "https://github.com/jeffsonyu/ViTaM/tree/main/Data (folder listing)"
+   ],
+   "unconfirmed": [
+    "The 1.8 cm error is from the abstract; the body compares methods by chamfer distance and does not say the 1.8 cm figure is chamfer distance.",
+    "The text says the learning model is adapted from the authors' earlier VTacO work, which is not in the catalog.",
+    "The last 37,115 characters of the full text (methods tail, references) were not read."
+   ],
+   "checked": "2026-10-25"
   }
  ]
 }

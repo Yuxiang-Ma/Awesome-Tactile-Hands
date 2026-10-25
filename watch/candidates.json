@@ -1,15 +1,15 @@
 {
- "generated": "2026-10-25T20:34:16Z",
+ "generated": "2026-10-25T20:52:12Z",
  "log": [
   "arXiv recent (2026-10-04 to 2026-10-25): 28 new",
-  "arXiv backfill 2015-04 (2015-04-01 to 2015-07-01): 0 new",
-  "OpenAlex: 43 catalog papers, 7 new from recent citations, 78 from the full sets of 1/10 of them",
-  "Hugging Face: 604 new from name searches, 162 new from publishers of catalog entries",
+  "arXiv backfill 2015-07 (2015-07-01 to 2015-10-01): 0 new",
+  "OpenAlex: 47 catalog papers, 7 new from recent citations, 13 from the full sets of 1/10 of them",
+  "Hugging Face: 297 new from name searches, 204 new from publishers of catalog entries",
   "GitHub: 15 new"
  ],
  "new_tonight": 400,
  "queued": 400,
- "dropped_low_score": 509,
+ "dropped_low_score": 299,
  "candidates": [
   {
    "key": "arxiv:2610.22342",
@@ -44,6 +44,23 @@
    ],
    "found_by": [
     "openalex cites dataset:tdex"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "doi:10.1126/scirobotics.ady2869",
+   "title": "Visual-tactile pretraining and online multitask learning for humanlike manipulation dexterity",
+   "date": "2026-01-28",
+   "url": "https://doi.org/10.1126/scirobotics.ady2869",
+   "authors": "Qi Ye et al.",
+   "abstract": "Achieving humanlike dexterity with anthropomorphic multifingered robotic hands requires precise finger coordination. However, dexterous manipulation remains highly challenging because of high-dimensional action-observation spaces, complex hand-object contact dynamics, and frequent occlusions. To address this, we drew inspiration from the human learning paradigm of observation and practice and propose a two-stage learning framework by learning visual-tactile integration representations via self-supervised learning from human demonstrations. We trained a unified multitask policy through reinforcement learning and online imitation learning. This decoupled learning enabled the robot to acquire generalizable manipulation skills using only monocular images and simple binary tactile signals. With the unified policy, we built a multifingered hand manipulation system that performs multiple complicated tasks with low-cost sensing. It achieved an 85% success rate across five complex tasks and 25 objects and further generalized to three unseen tasks that share similar hand-object coordination patterns with the training tasks.",
+   "score": 9.5,
+   "hints": [
+    "hand",
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:hato"
    ],
    "first_seen": "2026-10-25"
   },
@@ -422,6 +439,20 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:datasets/jensenyuan/vtam_xarm_gelsight",
+   "title": "JensenYuan/VTAM_xArm_GelSight",
+   "url": "https://huggingface.co/datasets/JensenYuan/VTAM_xArm_GelSight",
+   "date": "2026-09-24",
+   "authors": "JensenYuan",
+   "abstract": "license:cc-by-4.0 robotics tactile visuo-tactile open-x-tactile ftp-1",
+   "score": 6.5,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "doi:10.1016/j.cej.2026.181577",
    "title": "Bio-inspired hierarchical flexible fabric glove enables low-cost full-palm tactile sensing",
    "date": "2026-09-04",
@@ -431,9 +462,9 @@
    "score": 6.5,
    "hints": [],
    "found_by": [
+    "openalex cites dataset:adl21",
     "openalex cites dataset:feelsight",
-    "openalex cites dataset:stag",
-    "openalex cites dataset:adl21"
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-10-25"
   },
@@ -517,6 +548,23 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "doi:10.1109/tmech.2025.3532653",
+   "title": "DIH-Tele: Dexterous In-Hand Teleoperation Framework for Learning Multiobjects Manipulation With Tactile Sensing",
+   "date": "2025-02-21",
+   "url": "https://doi.org/10.1109/tmech.2025.3532653",
+   "authors": "Junda Huang et al.",
+   "abstract": "In daily life, the human hand exhibits remarkable abilities, such as fine in-hand manipulation and multimodal sensing, which are crucial for complex tasks like multiobject manipulation. However, current robotic dexterous hands have not yet achieved this level of proficiency due to limitations in hardware, perception algorithms, control strategies, and data collection. In this work, we present a dexterous in-hand teleoperation framework, DIH-Tele, designed to enable such complex tasks. The framework includes the tactile dexterous hand (T-DexCo hand), an accurate dexterous teleoperation system, multimodal data collection, and an imitation learning algorithm based on discrete control space and fused training. The in-hand counting task is selected as a common example of multiobject manipulation, which involves counting a set of objects held in hand and selectively removing a specified number of them by in-hand manipulation. Our experimental results demonstrate that the DIH-Tele framework effectively leverages multimodal perception to perform multiobject manipulation tasks with a success rate approaching that of human teleoperation. Additionally, the learned fingertip behaviors are highly versatile, often utilizing every degree of freedom of the dexterous hand. Finally, ablation studies confirm the significant impact of multimodal perception and fused training on enhancing multiobject manipulation tasks.",
+   "score": 6.5,
+   "hints": [
+    "hand",
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:hato"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "doi:10.1109/jsen.2024.3456487",
    "title": "Multibranch Fusion Method for Similar Object Recognition Based on Smart Tactile Glove",
    "date": "2024-09-13",
@@ -590,8 +638,8 @@
    "score": 6.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -876,8 +924,8 @@
    "score": 6.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -1039,8 +1087,8 @@
    "score": 6.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -1342,8 +1390,8 @@
    "score": 6.0,
    "hints": [],
    "found_by": [
-    "hf models 'visuotactile'",
-    "hf models 'visuo-tactile'"
+    "hf models 'visuo-tactile'",
+    "hf models 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -1574,6 +1622,22 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "doi:10.1109/iros60139.2025.11247770",
+   "title": "AirTouch: A Low-Cost Versatile Visuotactile Feedback System for Enhanced Robotic Teleoperation",
+   "date": "2025-10-19",
+   "url": "https://doi.org/10.1109/iros60139.2025.11247770",
+   "authors": "Shoujie Li et al.",
+   "abstract": "Vision-based teleoperation systems are widely used due to their cost-effectiveness and intuitive operation. However, these systems often suffer from challenges such as hand occlusions, environmental variability, and the lack of tactile feedback, limiting their precision and applicability in complex tasks. To address these limitations, we present Air-Touch, a novel, low-cost visuotactile teleoperation system that integrates air pressure-based tactile feedback with lightweight hand pose estimation. AirTouch features an inflatable tactile bubble that provides adjustable feedback through closed-loop pneumatic control, enhancing the operator’s sense of interaction with remote environments. The system’s robust hand-tracking algorithm ensures accurate control even under dynamic and occlusion-prone conditions, while its hardware design eliminates the need for wearable devices, enabling intuitive operation. AirTouch supports a wide range of robotic end-effectors, including dexterous hands, parallel grippers, and suction cups, demonstrating versatility across multiple platforms. Extensive experiments validate AirTouch’s performance, achieving high precision in hand pose estimation and a 91% success rate in complex teleoperation tasks, all with a hardware cost as low as $39. These results highlight AirTouch as a scalable and practical solution for enhancing robotic teleoperation across industrial, medical, and hazardous scenarios.",
+   "score": 6.0,
+   "hints": [
+    "hand"
+   ],
+   "found_by": [
+    "openalex cites dataset:hato"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:datasets/internrobotics/iros-2025-challenge-nav",
    "title": "InternRobotics/IROS-2025-Challenge-Nav",
    "url": "https://huggingface.co/datasets/InternRobotics/IROS-2025-Challenge-Nav",
@@ -1702,6 +1766,22 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/minifranka/agentic-wam-pretrain-yamego3k-soup-e1",
+   "title": "miniFranka/agentic-wam-pretrain-yamego3k-soup-e1",
+   "url": "https://huggingface.co/miniFranka/agentic-wam-pretrain-yamego3k-soup-e1",
+   "date": "2026-10-08",
+   "authors": "miniFranka",
+   "abstract": "agenticwam robotics world-model vision-language-action code-as-policy license:bsd-2-clause",
+   "score": 5.5,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:models/jogarulfop/policy_2026-09-23_plug_cable_iolite_no_tactile",
    "title": "jogarulfop/policy_2026-09-23_plug_cable_iolite_no_tactile",
    "url": "https://huggingface.co/jogarulfop/policy_2026-09-23_plug_cable_iolite_no_tactile",
@@ -1764,6 +1844,39 @@
    ],
    "found_by": [
     "openalex cites dataset:senstextile"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "doi:10.1109/iros60139.2025.11246476",
+   "title": "Adaptive Visuo-Tactile Fusion with Predictive Force Attention for Dexterous Manipulation",
+   "date": "2025-10-19",
+   "url": "https://doi.org/10.1109/iros60139.2025.11246476",
+   "authors": "Jinzhou Li et al.",
+   "abstract": "Effectively utilizing multi-sensory data is important for robots to generalize across diverse tasks. However, the heterogeneous nature of these modalities makes fusion challenging. Existing methods propose strategies to obtain comprehensively fused features but often ignore the fact that each modality requires different levels of attention at different manipulation stages. To address this, we propose a force-guided attention fusion module that adaptively adjusts the weights of visual and tactile features without human labeling. We also introduce a self-supervised future force prediction auxiliary task to reinforce the tactile modality, improve data imbalance, and encourage proper adjustment. Our method achieves an average success rate of 93% across three fine-grained, contact-rich tasks in real-world experiments. Further analysis shows that our policy appropriately adjusts attention to each modality at different manipulation stages. The videos can be viewed at https://adaptac-dex.github.io/.",
+   "score": 5.5,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:hato"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "arxiv:2407.03162",
+   "title": "Bunny-VisionPro: Real-Time Bimanual Dexterous Teleoperation for Imitation Learning",
+   "date": "2025-10-19",
+   "url": "https://arxiv.org/abs/2407.03162",
+   "authors": "Runyu Ding et al.",
+   "abstract": "Teleoperation is a crucial tool for collecting human demonstrations, but controlling robots with bimanual dexterous hands remains a challenge. Existing teleoperation systems struggle to handle the complexity of coordinating two hands for intricate manipulations. We introduce Bunny-VisionPro, a real-time bimanual dexterous teleoperation system that leverages a VR headset. Unlike previous vision-based teleoperation systems, we design novel low-cost devices to provide haptic feedback to the operator, enhancing immersion. Our system prioritizes safety by incorporating collision and singularity avoidance while maintaining real-time performance through innovative designs. Bunny-VisionPro outperforms prior systems on a standard task suite, achieving higher success rates and reduced task completion times. Moreover, the high-quality teleoperation demonstrations improve downstream imitation learning performance, leading to better generalizability. Notably, Bunny-VisionPro enables imitation learning with challenging multi-stage, long-horizon dexterous manipulation tasks, which have rarely been addressed in previous work. Our system’s ability to handle bimanual manipulations while prioritizing safety and real-time performance makes it a powerful tool for advancing dexterous manipulation and imitation learning. Our web page is available at https://dingry.github.io/projects/bunny_visionpro.",
+   "score": 5.5,
+   "hints": [
+    "hand",
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:hato"
    ],
    "first_seen": "2026-10-25"
   },
@@ -1855,8 +1968,8 @@
    "score": 5.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -1927,6 +2040,34 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/jensenyuan/vtam_cucumber_peel_noforce_ablation",
+   "title": "JensenYuan/VTAM_cucumber_peel_noforce_ablation",
+   "url": "https://huggingface.co/JensenYuan/VTAM_cucumber_peel_noforce_ablation",
+   "date": "2026-09-30",
+   "authors": "JensenYuan",
+   "abstract": "diffusers safetensors robotics tactile VTAM ablation license:apache-2.0",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:models/jensenyuan/vtam_hard_wipe_noforce_ablation",
+   "title": "JensenYuan/VTAM_hard_wipe_noforce_ablation",
+   "url": "https://huggingface.co/JensenYuan/VTAM_hard_wipe_noforce_ablation",
+   "date": "2026-09-30",
+   "authors": "JensenYuan",
+   "abstract": "diffusers safetensors robotics tactile VTAM ablation license:apache-2.0",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:datasets/eternpoler/tactile_teleoperation_dataset",
    "title": "eternpoler/tactile_teleoperation_dataset",
    "url": "https://huggingface.co/datasets/eternpoler/tactile_teleoperation_dataset",
@@ -1937,22 +2078,6 @@
    "hints": [],
    "found_by": [
     "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/jensenyuan/dextacwam_multi_finger_tactile_encoder",
-   "title": "JensenYuan/DexTacWAM_multi_finger_tactile_encoder",
-   "url": "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder",
-   "date": "2026-09-28",
-   "authors": "JensenYuan",
-   "abstract": "pytorch robotics tactile dexterous-manipulation DexTacWAM arxiv:2609.24976 license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -1969,6 +2094,23 @@
    ],
    "found_by": [
     "hf models 'tactile'"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:models/jensenyuan/vtam_tactile_latefuse_ablation",
+   "title": "JensenYuan/VTAM_tactile_latefuse_ablation",
+   "url": "https://huggingface.co/JensenYuan/VTAM_tactile_latefuse_ablation",
+   "date": "2026-09-21",
+   "authors": "JensenYuan",
+   "abstract": "diffusers safetensors robotics manipulation tactile world-model ablation diffusion-policy license:apache-2.0",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf models 'tactile'",
+    "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-25"
   },
@@ -2021,6 +2163,22 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/minifranka/wla_pretrain_diff_codefront_vit_yam_egozed_3k_11k",
+   "title": "miniFranka/wla_pretrain_diff_codefront_ViT_yam_egozed_3k_11k",
+   "url": "https://huggingface.co/miniFranka/wla_pretrain_diff_codefront_ViT_yam_egozed_3k_11k",
+   "date": "2026-09-02",
+   "authors": "miniFranka",
+   "abstract": "pytorch robotics world-model video-language-action diffusion code-generation",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:models/aryankakad/act_tactile_charger_inserting_20ep",
    "title": "aryankakad/act_tactile_charger_inserting_20ep",
    "url": "https://huggingface.co/aryankakad/act_tactile_charger_inserting_20ep",
@@ -2037,12 +2195,12 @@
    "first_seen": "2026-10-25"
   },
   {
-   "key": "hf:models/baai-humanoid/deco_sim",
-   "title": "BAAI-Humanoid/DECO_sim",
-   "url": "https://huggingface.co/BAAI-Humanoid/DECO_sim",
-   "date": "2026-08-12",
-   "authors": "BAAI-Humanoid",
-   "abstract": "robotics bimanual-manipulation dexterous-manipulation imitation-learning diffusion-transformer tactile-sensing en arxiv:2602.05513 license:apache-2.0",
+   "key": "hf:datasets/jensenyuan/dextacwam_wipe_whiteboard",
+   "title": "JensenYuan/DexTacWAM_wipe_whiteboard",
+   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_wipe_whiteboard",
+   "date": "2026-08-08",
+   "authors": "JensenYuan",
+   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
    "score": 5.0,
    "hints": [],
    "found_by": [
@@ -2063,6 +2221,20 @@
    ],
    "found_by": [
     "hf models 'tactile'"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/dextacwam_cube_handover",
+   "title": "JensenYuan/DexTacWAM_cube_handover",
+   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_cube_handover",
+   "date": "2026-08-07",
+   "authors": "JensenYuan",
+   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-25"
   },
@@ -2093,6 +2265,34 @@
    "hints": [],
    "found_by": [
     "hf datasets 'haptic'"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/dextacwam_place_with_tongs",
+   "title": "JensenYuan/DexTacWAM_place_with_tongs",
+   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_place_with_tongs",
+   "date": "2026-08-01",
+   "authors": "JensenYuan",
+   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/dextacwam_unstack_bowl",
+   "title": "JensenYuan/DexTacWAM_unstack_bowl",
+   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_unstack_bowl",
+   "date": "2026-08-01",
+   "authors": "JensenYuan",
+   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-25"
   },
@@ -2129,6 +2329,21 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:datasets/tachintech/tactile_gesture_language",
+   "title": "Tachintech/Tactile_Gesture_Language",
+   "url": "https://huggingface.co/datasets/Tachintech/Tactile_Gesture_Language",
+   "date": "2026-07-28",
+   "authors": "Tachintech",
+   "abstract": "license:gpl-3.0 Tactile",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf datasets 'tactile'",
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:datasets/trae1oung/swe-touch",
    "title": "Trae1ounG/SWE-Touch",
    "url": "https://huggingface.co/datasets/Trae1ounG/SWE-Touch",
@@ -2157,6 +2372,21 @@
    ],
    "found_by": [
     "hf models 'tactile'"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:datasets/tachintech/tactile-deformation-response",
+   "title": "Tachintech/tactile-deformation-response",
+   "url": "https://huggingface.co/datasets/Tachintech/tactile-deformation-response",
+   "date": "2026-07-22",
+   "authors": "Tachintech",
+   "abstract": "task_categories:robotics language:en license:gpl-3.0 tactile-sensing electronic-skin deformation-response tactile-time-series time-series-classification inary-classification npz robotics",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf datasets 'tactile'",
+    "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-25"
   },
@@ -2913,6 +3143,38 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/minifranka/last0_pretrain_ae_chunk8_epoch3",
+   "title": "miniFranka/LaST0_Pretrain_AE_chunk8_epoch3",
+   "url": "https://huggingface.co/miniFranka/LaST0_Pretrain_AE_chunk8_epoch3",
+   "date": "2026-04-19",
+   "authors": "miniFranka",
+   "abstract": "safetensors license:mit",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:models/minifranka/last0_pretrain_ae_chunk16_epoch2",
+   "title": "miniFranka/LaST0_Pretrain_AE_chunk16_epoch2",
+   "url": "https://huggingface.co/miniFranka/LaST0_Pretrain_AE_chunk16_epoch2",
+   "date": "2026-04-19",
+   "authors": "miniFranka",
+   "abstract": "safetensors license:mit",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:models/jusj7/hapticllama",
    "title": "JusJ7/HapticLLaMA",
    "url": "https://huggingface.co/JusJ7/HapticLLaMA",
@@ -3345,6 +3607,22 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/minifranka/last0_pretrain_ae_chunk16",
+   "title": "miniFranka/LaST0_Pretrain_AE_chunk16",
+   "url": "https://huggingface.co/miniFranka/LaST0_Pretrain_AE_chunk16",
+   "date": "2026-03-19",
+   "authors": "miniFranka",
+   "abstract": "safetensors license:mit",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:models/eunjuri/smolvla_pick_and_place_only_action_head_tactile_t_shirt",
    "title": "eunjuri/smolvla_pick_and_place_only_action_head_tactile_T_shirt",
    "url": "https://huggingface.co/eunjuri/smolvla_pick_and_place_only_action_head_tactile_T_shirt",
@@ -3615,6 +3893,22 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/minifranka/last0_pretrain_ae_chunk8",
+   "title": "miniFranka/LaST0_Pretrain_AE_chunk8",
+   "url": "https://huggingface.co/miniFranka/LaST0_Pretrain_AE_chunk8",
+   "date": "2026-02-01",
+   "authors": "miniFranka",
+   "abstract": "safetensors license:mit",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:models/oordonez/bimanual_anyskin_tactile_fixed_pos",
    "title": "oordonez/bimanual_anyskin_tactile_fixed_pos",
    "url": "https://huggingface.co/oordonez/bimanual_anyskin_tactile_fixed_pos",
@@ -3677,6 +3971,22 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/minifranka/mla_pretrain",
+   "title": "miniFranka/MLA_pretrain",
+   "url": "https://huggingface.co/miniFranka/MLA_pretrain",
+   "date": "2025-11-03",
+   "authors": "miniFranka",
+   "abstract": "arxiv:2509.26642 license:mit",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:models/beingbeyond/beingvl-vq-8k",
    "title": "BeingBeyond/BeingVL-VQ-8K",
    "url": "https://huggingface.co/BeingBeyond/BeingVL-VQ-8K",
@@ -3693,6 +4003,22 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "arxiv:2408.06481",
+   "title": "UniT: Data Efficient Tactile Representation With Generalization to Unseen Objects",
+   "date": "2025-04-10",
+   "url": "https://arxiv.org/abs/2408.06481",
+   "authors": "Zhengtong Xu et al.",
+   "abstract": "UniT is an approach to tactile representation learning, using VQGAN to learn a compact latent space and serve as the tactile representation. It uses tactile images obtained from a single simple object to train the representation with generalizability. This tactile representation can be zero-shot transferred to various downstream tasks, including perception tasks and manipulation policy learning. Our benchmarkings on in-hand 3D pose and 6D pose estimation tasks and a tactile classification task show that UniT outperforms existing visual and tactile representation learning methods. Additionally, UniT's effectiveness in policy learning is demonstrated across three real-world tasks involving diverse manipulated objects and complex robot-object-environment interactions. Through extensive experimentation, UniT is shown to be a simple-to-train, plug-and-play, yet widely effective method for tactile representation learning. For more details, please refer to our open-source repository https://github.com/ZhengtongXu/UniT and the project website https://zhengtongxu.github.io/unit-website/.",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:hato"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:datasets/garysue/eval_act_grasping_cylinder_visuotactile_dropout_weight",
    "title": "garySue/eval_act_grasping_cylinder_visuotactile_dropout_weight",
    "url": "https://huggingface.co/datasets/garySue/eval_act_grasping_cylinder_visuotactile_dropout_weight",
@@ -3702,8 +4028,8 @@
    "score": 5.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -3717,8 +4043,8 @@
    "score": 5.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -3732,8 +4058,8 @@
    "score": 5.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -3747,8 +4073,8 @@
    "score": 5.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -3847,22 +4173,6 @@
    "first_seen": "2026-10-25"
   },
   {
-   "key": "hf:models/jensenyuan/vtam_tactile_latefuse_ablation",
-   "title": "JensenYuan/VTAM_tactile_latefuse_ablation",
-   "url": "https://huggingface.co/JensenYuan/VTAM_tactile_latefuse_ablation",
-   "date": "2026-09-21",
-   "authors": "JensenYuan",
-   "abstract": "diffusers safetensors robotics manipulation tactile world-model ablation diffusion-policy license:apache-2.0",
-   "score": 4.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
    "key": "hf:datasets/armteam/hapticwam-rollouts",
    "title": "armteam/hapticwam-rollouts",
    "url": "https://huggingface.co/datasets/armteam/hapticwam-rollouts",
@@ -3930,8 +4240,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "hf datasets 'glove'",
-    "hf datasets 'dexterous'"
+    "hf datasets 'dexterous'",
+    "hf datasets 'glove'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -3952,36 +4262,6 @@
    "first_seen": "2026-10-25"
   },
   {
-   "key": "hf:datasets/tachintech/tactile_gesture_language",
-   "title": "Tachintech/Tactile_Gesture_Language",
-   "url": "https://huggingface.co/datasets/Tachintech/Tactile_Gesture_Language",
-   "date": "2026-07-28",
-   "authors": "Tachintech",
-   "abstract": "license:gpl-3.0 Tactile",
-   "score": 4.5,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'",
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/tachintech/tactile-deformation-response",
-   "title": "Tachintech/tactile-deformation-response",
-   "url": "https://huggingface.co/datasets/Tachintech/tactile-deformation-response",
-   "date": "2026-07-22",
-   "authors": "Tachintech",
-   "abstract": "task_categories:robotics language:en license:gpl-3.0 tactile-sensing electronic-skin deformation-response tactile-time-series time-series-classification inary-classification npz robotics",
-   "score": 4.5,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'",
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
    "key": "hf:datasets/krisyoung/smolvla-dexhand-tactile-data",
    "title": "KrisYoung/SmolVLA-DexHand-Tactile-Data",
    "url": "https://huggingface.co/datasets/KrisYoung/SmolVLA-DexHand-Tactile-Data",
@@ -3991,8 +4271,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "hf datasets 'tactile'",
-    "hf datasets 'dexhand'"
+    "hf datasets 'dexhand'",
+    "hf datasets 'tactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -4006,8 +4286,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "hf models 'tactile'",
-    "hf models 'dexhand'"
+    "hf models 'dexhand'",
+    "hf models 'tactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -4560,6 +4840,20 @@
    "hints": [],
    "found_by": [
     "hf datasets 'tactile'"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:datasets/minifranka/trex_gateway_tong_transfer_sf_norawtac_20260820",
+   "title": "miniFranka/trex_gateway_tong_transfer_sf_norawtac_20260820",
+   "url": "https://huggingface.co/datasets/miniFranka/trex_gateway_tong_transfer_sf_norawtac_20260820",
+   "date": "2026-10-04",
+   "authors": "miniFranka",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-25"
   },
@@ -5365,6 +5659,62 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:datasets/jensenyuan/dextacwam_pick_cube_in_a_bag_raw",
+   "title": "JensenYuan/DexTacWAM_pick_cube_in_a_bag_raw",
+   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_pick_cube_in_a_bag_raw",
+   "date": "2026-08-11",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/dextacwam_pick_cherry_tomato_with_tong_raw",
+   "title": "JensenYuan/DexTacWAM_pick_cherry_tomato_with_tong_raw",
+   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_pick_cherry_tomato_with_tong_raw",
+   "date": "2026-08-09",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/dextacwam_pick_cube_right_hand_raw",
+   "title": "JensenYuan/DexTacWAM_pick_cube_right_hand_raw",
+   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_pick_cube_right_hand_raw",
+   "date": "2026-08-09",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
+   "key": "hf:models/jensenyuan/usb_v1_relative_nostate_rmsnorm_40k_20k",
+   "title": "JensenYuan/usb_v1_relative_nostate_rmsnorm_40K_20K",
+   "url": "https://huggingface.co/JensenYuan/usb_v1_relative_nostate_rmsnorm_40K_20K",
+   "date": "2026-08-05",
+   "authors": "JensenYuan",
+   "abstract": "diffusers safetensors",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:models/dongkkka/task_80011_jelly_pick_place_act_tactile_encoder",
    "title": "Dongkkka/Task_80011_Jelly_Pick_Place_ACT_tactile_encoder",
    "url": "https://huggingface.co/Dongkkka/Task_80011_Jelly_Pick_Place_ACT_tactile_encoder",
@@ -5521,6 +5871,20 @@
    "first_seen": "2026-10-25"
   },
   {
+   "key": "hf:models/jensenyuan/hanoi_v2_relative_rms_40k_30k",
+   "title": "JensenYuan/hanoi_v2_relative_rms_40K_30K",
+   "url": "https://huggingface.co/JensenYuan/hanoi_v2_relative_rms_40K_30K",
+   "date": "2026-07-09",
+   "authors": "JensenYuan",
+   "abstract": "diffusers safetensors",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-25"
+  },
+  {
    "key": "hf:datasets/acerobotics/puffin-16m",
    "title": "ACERobotics/Puffin-16M",
    "url": "https://huggingface.co/datasets/ACERobotics/Puffin-16M",
@@ -5541,20 +5905,6 @@
    "date": "2026-07-06",
    "authors": "ACERobotics",
    "abstract": "transformers safetensors qwen3_vl image-text-to-text conversational arxiv:2607.04426 base_model:ACERobotics/ACE-Brain-0.5-8B base_model:finetune:ACERobotics/ACE-Brain-0.5-8B endpoints_compatible",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/beingbeyond/ttp",
-   "title": "BeingBeyond/TTP",
-   "url": "https://huggingface.co/BeingBeyond/TTP",
-   "date": "2026-07-06",
-   "authors": "BeingBeyond",
-   "abstract": "safetensors arxiv:2607.01067",
    "score": 4.0,
    "hints": [],
    "found_by": [
@@ -5689,12 +6039,12 @@
    "first_seen": "2026-10-25"
   },
   {
-   "key": "hf:models/mjjjj1064/ftp1_univtac_finetune",
-   "title": "MJJJJ1064/ftp1_univtac_finetune",
-   "url": "https://huggingface.co/MJJJJ1064/ftp1_univtac_finetune",
-   "date": "2026-06-12",
-   "authors": "MJJJJ1064",
-   "abstract": "safetensors",
+   "key": "hf:models/jensenyuan/hanoi_v1_40k_20k",
+   "title": "JensenYuan/hanoi_v1_40K_20K",
+   "url": "https://huggingface.co/JensenYuan/hanoi_v1_40K_20K",
+   "date": "2026-06-18",
+   "authors": "JensenYuan",
+   "abstract": "diffusers safetensors",
    "score": 4.0,
    "hints": [],
    "found_by": [
@@ -5703,12 +6053,12 @@
    "first_seen": "2026-10-25"
   },
   {
-   "key": "hf:models/mjjjj1064/ftp1_v0426_50kstep",
-   "title": "MJJJJ1064/ftp1_v0426_50kstep",
-   "url": "https://huggingface.co/MJJJJ1064/ftp1_v0426_50kstep",
-   "date": "2026-06-12",
-   "authors": "MJJJJ1064",
-   "abstract": "safetensors",
+   "key": "hf:datasets/minifranka/vlabench-openvla-collect",
+   "title": "miniFranka/vlabench-openvla-collect",
+   "url": "https://huggingface.co/datasets/miniFranka/vlabench-openvla-collect",
+   "date": "2026-06-13",
+   "authors": "miniFranka",
+   "abstract": "license:mit",
    "score": 4.0,
    "hints": [],
    "found_by": [
@@ -5821,332 +6171,6 @@
    "date": "2026-05-20",
    "authors": "ACERobotics",
    "abstract": "license:mit",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/acerobotics/physxverse",
-   "title": "ACERobotics/PhysXVerse",
-   "url": "https://huggingface.co/datasets/ACERobotics/PhysXVerse",
-   "date": "2026-05-20",
-   "authors": "ACERobotics",
-   "abstract": "task_categories:image-to-3d language:en license:cc-by-nc-4.0 Physical 3D Generation 3D Vision 3D",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/witneyww/tactile-vae",
-   "title": "WitneyWW/tactile-vae",
-   "url": "https://huggingface.co/WitneyWW/tactile-vae",
-   "date": "2026-05-18",
-   "authors": "WitneyWW",
-   "abstract": "",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/allenbi21/tactile-act-checkpoints",
-   "title": "AllenBi21/tactile-act-checkpoints",
-   "url": "https://huggingface.co/AllenBi21/tactile-act-checkpoints",
-   "date": "2026-05-18",
-   "authors": "AllenBi21",
-   "abstract": "",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "doi:10.1109/ccdc69976.2026.11559719",
-   "title": "Hierarchical Multi-Array Tactile Representation Learning and Diffusion Policy for Real-World Dexterous Placement Tasks",
-   "date": "2026-05-15",
-   "url": "https://doi.org/10.1109/ccdc69976.2026.11559719",
-   "authors": "Jie Yang et al.",
-   "abstract": "",
-   "score": 4.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/axiboai/piper-stack-act-tactile-v0",
-   "title": "axiboai/piper-stack-act-tactile-v0",
-   "url": "https://huggingface.co/datasets/axiboai/piper-stack-act-tactile-v0",
-   "date": "2026-05-15",
-   "authors": "axiboai",
-   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/jingyi-z/so101-tactile-pick-place-v1_20260514_211037",
-   "title": "Jingyi-Z/so101-tactile-pick-place-v1_20260514_211037",
-   "url": "https://huggingface.co/datasets/Jingyi-Z/so101-tactile-pick-place-v1_20260514_211037",
-   "date": "2026-05-15",
-   "authors": "Jingyi-Z",
-   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/lykycy123/tactile_world_pretrain_v4_slot_5_10",
-   "title": "lykycy123/tactile_world_pretrain_v4_slot_5_10",
-   "url": "https://huggingface.co/lykycy123/tactile_world_pretrain_v4_slot_5_10",
-   "date": "2026-05-10",
-   "authors": "lykycy123",
-   "abstract": "safetensors Emu3 license:apache-2.0",
-   "score": 4.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/anonymous-submission-hf/tactile-mnist-wrench",
-   "title": "anonymous-submission-hf/tactile-mnist-wrench",
-   "url": "https://huggingface.co/datasets/anonymous-submission-hf/tactile-mnist-wrench",
-   "date": "2026-05-05",
-   "authors": "anonymous-submission-hf",
-   "abstract": "task_categories:other language:en license:cc-by-2.0 Mesh",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/anonymous-submission-hf/tactile-mnist-mnist3d",
-   "title": "anonymous-submission-hf/tactile-mnist-mnist3d",
-   "url": "https://huggingface.co/datasets/anonymous-submission-hf/tactile-mnist-mnist3d",
-   "date": "2026-05-05",
-   "authors": "anonymous-submission-hf",
-   "abstract": "task_categories:other language:en license:cc-by-2.0 Mesh Classification Mesh Classification",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/anonymous-submission-hf/tactile-mnist-starstruck",
-   "title": "anonymous-submission-hf/tactile-mnist-starstruck",
-   "url": "https://huggingface.co/datasets/anonymous-submission-hf/tactile-mnist-starstruck",
-   "date": "2026-05-05",
-   "authors": "anonymous-submission-hf",
-   "abstract": "task_categories:other language:en license:cc-by-2.0 Mesh Classification Mesh Classification",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/jjang318/psi0-tactile",
-   "title": "jjang318/Psi0-tactile",
-   "url": "https://huggingface.co/jjang318/Psi0-tactile",
-   "date": "2026-05-02",
-   "authors": "jjang318",
-   "abstract": "safetensors",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/hcisbmm/bimanual-yam-tactile-vision-demo",
-   "title": "hcisbmm/bimanual-yam-tactile-vision-demo",
-   "url": "https://huggingface.co/datasets/hcisbmm/bimanual-yam-tactile-vision-demo",
-   "date": "2026-04-30",
-   "authors": "hcisbmm",
-   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/hcisbmm/bimanual-yam-tactile-demo",
-   "title": "hcisbmm/bimanual-yam-tactile-demo",
-   "url": "https://huggingface.co/datasets/hcisbmm/bimanual-yam-tactile-demo",
-   "date": "2026-04-30",
-   "authors": "hcisbmm",
-   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/internrobotics/ebench-xvla-generalist",
-   "title": "InternRobotics/EBench-XVLA-Generalist",
-   "url": "https://huggingface.co/InternRobotics/EBench-XVLA-Generalist",
-   "date": "2026-04-29",
-   "authors": "InternRobotics",
-   "abstract": "safetensors xvla custom_code license:apache-2.0",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/jschnepel/amr-tactile-preprocessed",
-   "title": "jschnepel/amr-tactile-preprocessed",
-   "url": "https://huggingface.co/datasets/jschnepel/amr-tactile-preprocessed",
-   "date": "2026-04-21",
-   "authors": "jschnepel",
-   "abstract": "",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/internrobotics/g2vlm-qwen2-vl-2b",
-   "title": "InternRobotics/G2VLM-Qwen2-VL-2B",
-   "url": "https://huggingface.co/InternRobotics/G2VLM-Qwen2-VL-2B",
-   "date": "2026-04-18",
-   "authors": "InternRobotics",
-   "abstract": "transformers safetensors multimodal image-text-to-text en arxiv:2511.21688 base_model:Qwen/Qwen2-VL-2B base_model:finetune:Qwen/Qwen2-VL-2B license:apache-2.0 endpoints_compatible",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/edessa/emg",
-   "title": "edessa/EMG",
-   "url": "https://huggingface.co/datasets/edessa/EMG",
-   "date": "2026-04-07",
-   "authors": "edessa",
-   "abstract": "",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/internrobotics/ebench-assets",
-   "title": "InternRobotics/EBench-Assets",
-   "url": "https://huggingface.co/datasets/InternRobotics/EBench-Assets",
-   "date": "2026-04-06",
-   "authors": "InternRobotics",
-   "abstract": "",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/ntumars/rf-matid",
-   "title": "ntumars/RF-MatID",
-   "url": "https://huggingface.co/datasets/ntumars/RF-MatID",
-   "date": "2026-04-05",
-   "authors": "ntumars",
-   "abstract": "license:bsd-3-clause",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/2077aidatafoundation/chartnet_realworldchart",
-   "title": "2077AIDataFoundation/ChartNet_RealWorldChart",
-   "url": "https://huggingface.co/datasets/2077AIDataFoundation/ChartNet_RealWorldChart",
-   "date": "2026-04-03",
-   "authors": "2077AIDataFoundation",
-   "abstract": "task_categories:image-to-text task_categories:visual-question-answering license:cc-by-4.0",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/internrobotics/sim1_dataset",
-   "title": "InternRobotics/Sim1_Dataset",
-   "url": "https://huggingface.co/datasets/InternRobotics/Sim1_Dataset",
-   "date": "2026-03-31",
-   "authors": "InternRobotics",
-   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2604.08544 lerobot embodied-ai robotic-manipulation imitation-learning",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/internrobotics/sim1_assets",
-   "title": "InternRobotics/Sim1_Assets",
-   "url": "https://huggingface.co/InternRobotics/Sim1_Assets",
-   "date": "2026-03-31",
-   "authors": "InternRobotics",
-   "abstract": "arxiv:2604.08544 license:mit",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/acerobotics/kairos-sensenova-robot-4b-480p",
-   "title": "ACERobotics/kairos-sensenova-robot-4B-480P",
-   "url": "https://huggingface.co/ACERobotics/kairos-sensenova-robot-4B-480P",
-   "date": "2026-03-23",
-   "authors": "ACERobotics",
-   "abstract": "diffusion worldmodel video-generation text-to-video zh en license:apache-2.0 eval-results",
    "score": 4.0,
    "hints": [],
    "found_by": [

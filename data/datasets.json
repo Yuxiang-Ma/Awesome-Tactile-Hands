@@ -131,7 +131,8 @@
     "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale dataset page (gate text, read without login)",
     "All 17 files of 9 episodes opened: shards data/train-00000, -00032, -00083, -00204, -00406, -00422 and -00429 of 430 (byte-range reads), plus previews/train/000/5a1ae97d-9456-479a-8a4e-4cd6c7f07773.mp4",
     "https://arxiv.org/html/2610.10288",
-    "https://touch-scale.github.io/"
+    "https://touch-scale.github.io/",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale-OXT (dataset page and HF API metadata, read without login, 2026-10-25)"
    ],
    "unconfirmed": [
     "Maker: episode.h5 metadata attribute source_dataset reads 'Orbbec Gemini 345Lg; Intel RealSense D405; Tujian EI-G012'. Tujian is the pinyin of 途见 (Tachin Technology), whose EI-G series is the TachinGlove on tachin.com; the paper names only the 'Tachin Glove'. Paper: 'The data are purchased by Overfit Lab and captured by Noitom under our contracted data-collection process.'",
@@ -207,6 +208,13 @@
      "url": "https://arxiv.org/abs/2605.13083",
      "note": "Third-party: the TouchScale paper (arXiv 2610.10288, Sec. 4.1) retrains TouchAnything on a 16 h TouchScale subset, on fractions of TouchScale and on the full set.",
      "model": "touchanything"
+    }
+   ],
+   "used_by_other": [
+    {
+     "name": "2077AIDataFoundation/TouchScale-OXT (Hugging Face dataset)",
+     "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale-OXT",
+     "note": "derived release by the same publisher: the 100 h converted to FTP-1 zarr for Open-X-Tactile, 15,088 trajectories (236 dropped for failed head-pose checks), 920 per-task zarr.zip files, 10 Hz, 224x224 RGB, 21 MANO joint angles per hand estimated from the head camera, ~1.01 TB; Hugging Face gate, manual approval per the HF API (2026-10-25); CC BY-NC 4.0; files not opened"
     }
    ]
   },
