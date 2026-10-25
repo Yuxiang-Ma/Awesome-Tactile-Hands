@@ -1,0 +1,5 @@
+{"date": "2026-10-25", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "tacross",
+   "text": "TACROSS: the dataset is still unreleased (project page: 'Planned release, download link to follow'; software 'coming soon'); only hardware v1 (BOM, PCB Gerber files, pick-and-place coordinates, tacross_v1.zip, GitHub release of 2026-10-15) can be downloaded. Availability stays announced.",
+   "source": "https://github.com/tacross-touch-project/tacross-touch-project.github.io/releases/tag/hardware-v1"}
+]}

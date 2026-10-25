@@ -2,45 +2,34 @@
  "flow": "status",
  "date": "2026-10-25",
  "model": "claude-sonnet-5-5",
- "reviewed": 7,
+ "reviewed": 24,
  "added": {
   "datasets": 0,
   "models": 0,
   "hardware": 0
  },
- "updated": 0,
+ "updated": 1,
  "queue_left": 0,
  "searches": [
-  "TACROSS tactile dataset code release Revo2 glove github",
-  "TouchWorld predictive reactive tactile foundation model code weights",
-  "Dexterous Tactile World Model DTWM weights checkpoint Hugging Face",
-  "TK-STGN Grasp Like Humans code tactile-kinesthetic spatio-temporal graph network github",
-  "Dex-MPTD dataset tactile dexterous download",
-  "EgoExplorer tactile dataset release",
-  "HTAC tactile glove dataset human robot hand release",
-  "PaXini OmniSharing tactile dataset release",
-  "TouchScale tactile dataset dexterous hand"
+  "TouchSight TwinTouch-20H code dataset release",
+  "TactiDex TactiSkill code dataset release github",
+  "EgoPressureFormer EgoTactile code weights",
+  "Dexterous Tactile World Model DTWM checkpoint weights Hugging Face",
+  "VinT-6D VinT-Net benchmark code github",
+  "Dex-MPTD TacCompress dataset download"
  ],
- "for_the_owner": [
-  "Validation not run: this session had no shell access, so python3 scripts/build_readme.py --validate and python3 scripts/nightly_guard.py were not executed. No catalog file was edited, so only this report is new. Run both before publishing."
- ],
+ "for_the_owner": [],
  "notes": [
-  "No catalog change tonight. The scan returned 7 priority 2 signals on 5 datasets (204 URLs checked) and none changed a catalogued fact, so there is no data/changes file.",
-  "Grasp Like Humans (grasp_like_humans): the zip's ETag and Last-Modified moved by one second (2025-09-11 01:56:04 to 01:56:03) and the size part of the ETag (143433e) is unchanged; read as a re-upload of the same file. The zip contents were not opened.",
-  "Gentle Grasping (lasr_gentle_grasping): the OPARA landing page grew from 394,807 to 395,390 bytes. The record page lists published 2025-03-11, CC BY-NC-ND 4.0, data_gentle_grasping.zip (4.46 GiB, matching the 4.78 GB in the entry) and README.md, with no version history, so the change is page markup. Entry left as is.",
-  "Dexterous Grasp Stability (lasr_grasp_stability), Kaiwu (kaiwu) and VTDexManip (vtdexmanip): ETag changes on a DOI landing page, or a 2-byte length change on the OneDrive folder page. The pages were not opened and the catalog entries were not touched.",
-  "Deep check found no code, weights or data release for dex_mptd, egoexplorer, htac, paxini_omnisharing, tacross (dataset and model), touchscale, dtwm, tk_stgn or touchworld. One WebSearch each; the project pages, GitHub and Hugging Face organisations were not opened, and nightly_tool.py could not be run.",
-  "The search for TACROSS repeated the paper's statement that software and a 150-hour tactile dataset are planned for release. The entry already records this.",
-  "The paper-summary page for the htac search describes H-Tac as 160 hours, 300+ tasks and 135k+ episodes (emergentmind.com/papers/2607.01067). That is a secondary summary and was not compared with the htac entry.",
-  "The models dtwm, tacross, tk_stgn and touchworld already carry checked 2026-10-25 from an earlier run, and no fact changed, so their dates are unchanged."
+  "Scan: 13 signals on 211 URLs, all priority 3. Eleven were on fully released entries (actionsense, adl21, dextacwam dataset and model, feel, feelsight, sharpa_roco, sparsh_x dataset and model, neuralfeels), so they were not reviewed for edits. DexTacWAM was opened anyway: its Hugging Face collection (weights and 7 datasets) is live under both URL forms, and the catalog link still resolves. The two on entries that are not fully released (dexvitac, egoexplorer) changed no catalogued fact.",
+  "Changed: tacross (dataset). The project page now lists hardware v1 as downloadable and the dataset as a planned release; access, caveats and sources were updated. Availability stays announced. The tacross model entry already carried the same facts from the discovery run.",
+  "Deep check, no change: dex_mptd (Hugging Face and arXiv v2 unchanged, no release), egoexplorer (mini release only; GitHub toolkit already linked), htac (card still says the whole H-Tac set is coming soon), paxini_omnisharing (only README uploads on 2026-10-19), touchscale, dexvitac (Hugging Face repo and code repo are still stubs), and models dtwm, egopressureformer, tactiskill, touchsight and vint_net. The model checked dates were already 2026-10-25 and were left as they are.",
+  "Limits: the Hugging Face commit lists for EgoExplorer and TouchScale returned HTTP 401 (gated), so their cards and the 2026-10-22 and 2026-10-23 changes were not read. The TouchScale gate was checked on 2026-10-24 and the repository still shows the 100 h release.",
+  "Unverified lead for dex_mptd: Hugging Face jackliaaa/mpt-tactile-dataset (train/val/test archives, 275 MB, apache-2.0, created 2026-08-02). The card names no authors and no paper, so it was not linked. Someone could ask the TacCompress authors whether it is theirs.",
+  "A previous status attempt tonight (20:45 UTC) failed the guard on scripts/nightly_local.sh and wrote a report that says no shell was available. This run replaces that report."
  ],
- "started": "2026-10-25T20:45:21Z",
- "finished": "2026-10-25T20:49:31Z",
- "ok": false,
+ "started": "2026-10-25T21:04:21Z",
+ "finished": "2026-10-25T21:10:00Z",
+ "ok": true,
  "review_exit": 0,
- "guard": "- scripts/nightly_local.sh: outside the paths a nightly run may change",
- "guard_output": [
-  "nightly guard failed:",
-  "- scripts/nightly_local.sh: outside the paths a nightly run may change"
- ]
+ "guard": "nightly guard passed: 5 changed files, 0 new entries"
 }
