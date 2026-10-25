@@ -8,6 +8,7 @@ rejects the change set. After a publish, claude/nightly is reset to the new main
 """
 import datetime
 import json
+import os
 import subprocess
 import sys
 import time
@@ -16,6 +17,8 @@ from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parent.parent
 BRANCH = "claude/nightly"
+BOT = {"GIT_AUTHOR_NAME": "github-actions[bot]", "GIT_AUTHOR_EMAIL": "41898282+github-actions[bot]@users.noreply.github.com",
+       "GIT_COMMITTER_NAME": "github-actions[bot]", "GIT_COMMITTER_EMAIL": "41898282+github-actions[bot]@users.noreply.github.com"}
 IGNORED = {"rank", "contents", "used_by", "checked"}  # derived fields, and the date a model was last looked at
 GENERATED = {"README.md", "data/changes.json", "data/status.json"}
 
@@ -49,6 +52,7 @@ def content(path: str, ref: str = None):
 
 def main() -> None:
     dry = "--dry-run" in sys.argv
+    os.environ.update(BOT)  # the runner has no git identity, and even a --no-commit merge needs one
     today = datetime.datetime.now(ZoneInfo("America/New_York")).date().isoformat()
     sh("git", "fetch", "-q", "origin", "main")
     if subprocess.run(["git", "fetch", "-q", "origin", BRANCH], cwd=ROOT).returncode:
@@ -91,8 +95,7 @@ def main() -> None:
     counts = {k: sum(c["kind"] == k for c in fresh) for k in ("added", "released", "updated", "withdrawn")}
     head = ", ".join(f"{v} {k}" for k, v in counts.items() if v) or "checks only, no catalog changes"
     body = "\n".join(f"- {c['text']}" for c in fresh[:25]) + (f"\n- and {len(fresh) - 25} more" if len(fresh) > 25 else "")
-    sh("git", "-c", "user.name=github-actions[bot]", "-c", "user.email=41898282+github-actions[bot]@users.noreply.github.com",
-       "commit", "-q", "-m", f"Publish nightly checks {today}: {head}", *(["-m", body] if body else []))
+    sh("git", "commit", "-q", "-m", f"Publish nightly checks {today}: {head}", *(["-m", body] if body else []))
     print(sh("git", "log", "--stat", "-1"))
     if dry:
         print("dry run: not pushed")
