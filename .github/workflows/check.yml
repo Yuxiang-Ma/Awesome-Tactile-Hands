@@ -1,5 +1,9 @@
 name: Check catalog
-on: [push, pull_request]
+# claude/nightly is checked by scripts/nightly_guard.py before each commit and rebuilt at publish time, so it is not checked here
+on:
+  push:
+    branches: [main]
+  pull_request:
 jobs:
   check:
     runs-on: ubuntu-latest

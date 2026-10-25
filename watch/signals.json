@@ -1,0 +1,35 @@
+{
+ "generated": "2026-10-25T20:19:33Z",
+ "baseline": true,
+ "urls_checked": 182,
+ "seconds": 120,
+ "signals": [],
+ "deep_check_tonight": [
+  {
+   "kind": "dataset",
+   "id": "dex_mptd"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoexplorer"
+  },
+  {
+   "kind": "dataset",
+   "id": "htac"
+  },
+  {
+   "kind": "dataset",
+   "id": "paxini_omnisharing"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacross"
+  },
+  {
+   "kind": "dataset",
+   "id": "touchscale"
+  }
+ ],
+ "not_fully_released": 18,
+ "errors": []
+}

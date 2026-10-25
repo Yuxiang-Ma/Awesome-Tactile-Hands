@@ -1,0 +1,37 @@
+name: Publish nightly
+# Merges the night's work on claude/nightly into main at 09:00 New York time; GitHub Pages then serves it.
+# Two schedules cover daylight saving time (cron here is UTC): 12:57 UTC is 08:57 EDT, 13:57 UTC is 08:57 EST.
+# The run waits until 09:00 local, and a run with nothing new on the branch does nothing.
+on:
+  schedule:
+    - cron: "57 12 * * *"
+    - cron: "57 13 * * *"
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  issues: write
+  pages: write
+concurrency:
+  group: publish-nightly
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Wait for 09:00 in New York
+        if: github.event_name == 'schedule'
+        run: |
+          hour=$(TZ=America/New_York date +%-H)
+          if [ "$hour" -lt 8 ]; then echo "07:57 local: the other schedule covers today"; echo "SKIP=1" >> "$GITHUB_ENV"; exit 0; fi
+          wait=$(( $(TZ=America/New_York date -d 'today 09:00' +%s) - $(date +%s) ))
+          if [ "$wait" -gt 0 ]; then sleep "$wait"; fi
+      - name: Merge claude/nightly into main
+        if: env.SKIP != '1'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 scripts/publish_nightly.py

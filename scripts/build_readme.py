@@ -1,11 +1,16 @@
-"""Check data/datasets.json and data/hardware.json, derive each dataset's rank and contents score, and regenerate the dataset
-and hardware lists in README.md.
+"""Check data/datasets.json, data/models.json and data/hardware.json, derive each dataset's rank, contents score and
+used_by list, and regenerate the dataset, model and hardware lists in README.md.
 
-Usage: python3 scripts/build_readme.py [--check]   (--check exits 1 if README.md or the derived fields are stale; used in CI)
+Usage: python3 scripts/build_readme.py [--check | --validate]
+  --check     exit 1 if README.md or a derived file is stale (CI)
+  --validate  run every check and derivation without writing anything (nightly runs)
 
-"rank" and "contents" in datasets.json are derived here from the other fields; do not edit them by hand. "integrity" (faults
-found in the sample episodes converted for the viewer) and "gate" (how to apply for access) are written by hand.
+"rank", "contents" and "used_by" in datasets.json are derived here; do not edit them by hand ("used_by" comes from the
+models in data/models.json plus a dataset's hand-written "used_by_other"). "integrity" (faults found in the sample
+episodes converted for the viewer) and "gate" (how to apply for access) are written by hand. data/changes.json (the
+change log) and data/status.json (the last nightly runs) are collected from data/changes/*.json and watch/runs/*.json.
 """
+import datetime
 import json
 import re
 import sys
@@ -124,6 +129,116 @@ def validate(ds: list) -> list:
                 if x is not None and x not in allowed:
                     errs.append(f"{tag}: {key} = {x!r} not in {sorted(allowed)}")
     return errs
+
+
+M_REQUIRED = ["id", "name", "title", "authors", "year", "venue", "kind", "summary", "embodiment", "touch", "uses", "release",
+              "license", "links", "sources", "checked"]
+M_KIND = {"world_model": "world model", "policy": "policy", "representation": "tactile representation", "estimation": "estimation",
+          "generation": "touch generation", "other": "other"}
+M_SECTIONS = {"world_model": "World models", "policy": "Policies", "representation": "Tactile representations",
+              "estimation": "Estimation (touch from other signals, or state from touch)", "generation": "Touch generation", "other": "Other"}
+M_ROLE = ("pretraining", "training", "fine-tuning", "evaluation")
+M_RELEASE = {"released": "released", "announced": "announced", "not_released": "not released"}
+CHANGE_KIND = ("added", "updated", "released", "withdrawn")
+DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
+
+
+def validate_models(ms: list, dataset_ids: set) -> list:
+    errs, seen = [], set()
+    for m in ms:
+        tag = f"model {m.get('id', '?')}"
+        errs += [f"{tag}: missing {k}" for k in M_REQUIRED if k not in m]
+        if not re.fullmatch(r"[a-z0-9_]+", str(m.get("id"))) or m.get("id") in seen:
+            errs.append(f"{tag}: id must be unique and [a-z0-9_]+")
+        seen.add(m.get("id"))
+        for key, allowed in (("kind", M_KIND), ("embodiment", ("human", "robot", "both")), ("touch", ("input", "output", "both"))):
+            if m.get(key) not in allowed:
+                errs.append(f"{tag}: {key} = {m.get(key)!r} not in {sorted(allowed)}")
+        r, L = m.get("release") or {}, m.get("links") or {}
+        for k in ("code", "weights"):
+            if r.get(k) not in M_RELEASE:
+                errs.append(f"{tag}: release.{k} = {r.get(k)!r} not in {sorted(M_RELEASE)}")
+            elif r[k] == "released" and not L.get(k):
+                errs.append(f"{tag}: release.{k} is released, so links.{k} must point at it")
+        for u in m.get("uses") or []:
+            if u.get("id") not in dataset_ids or u.get("role") not in M_ROLE:
+                errs.append(f"{tag}: uses needs a catalog dataset id and a role in {list(M_ROLE)}: {u}")
+        if m.get("dataset") is not None and m["dataset"] not in dataset_ids:
+            errs.append(f"{tag}: dataset {m['dataset']!r} is not in the catalog")
+        if not DATE.fullmatch(str(m.get("checked"))):
+            errs.append(f"{tag}: checked must be YYYY-MM-DD")
+    return errs
+
+
+def change_files() -> list:
+    return sorted((ROOT / "data" / "changes").glob("*.json"))
+
+
+def validate_changes(ids: dict) -> list:
+    """ids: {"dataset": {...}, "model": {...}, "hardware": {...}}. One file per run: data/changes/<date>-<flow>.json."""
+    errs = []
+    for f in change_files():
+        try:
+            c = json.loads(f.read_text())
+        except ValueError as e:
+            errs.append(f"data/changes/{f.name}: {e}")
+            continue
+        m = re.fullmatch(r"(\d{4}-\d{2}-\d{2})-(discovery|status|manual)", f.stem)
+        if not m or c.get("date") != m[1] or c.get("flow") != m[2]:
+            errs.append(f"data/changes/{f.name}: name must be <date>-<discovery|status|manual>.json and match its date and flow")
+        for x in c.get("changes", []):
+            if x.get("kind") not in CHANGE_KIND or x.get("id") not in ids.get(x.get("target"), ()) or not x.get("text"):
+                errs.append(f"data/changes/{f.name}: a change needs kind in {list(CHANGE_KIND)}, target dataset|model|hardware, "
+                            f"an id in the catalog and text: {x}")
+    return errs
+
+
+def collect_changes() -> dict:
+    """Every change, newest first, from data/changes/*.json."""
+    out = []
+    for f in change_files():
+        c = json.loads(f.read_text())
+        out += [dict(x, date=c["date"], flow=c["flow"]) for x in c.get("changes", [])]
+    out.sort(key=lambda x: x["date"], reverse=True)
+    return {"changes": out}
+
+
+def collect_runs() -> dict:
+    """The newest run report of each nightly flow, from watch/runs/<date>-<flow>.json."""
+    runs = {}
+    for f in sorted((ROOT / "watch" / "runs").glob("*.json")):
+        try:
+            r = json.loads(f.read_text())
+        except ValueError:
+            continue
+        runs[r.get("flow", f.stem[11:])] = r
+    return {"runs": runs}
+
+
+def derive_used_by(ds: list, ms: list) -> None:
+    """used_by of each dataset: the models in data/models.json that use it, then its hand-written used_by_other."""
+    by = {}
+    for m in sorted(ms, key=lambda m: (-m["year"], m["name"].lower())):
+        L = m["links"]
+        for u in m["uses"]:
+            by.setdefault(u["id"], []).append({"name": f"{m['name']}, {m['venue']}", "url": L.get("paper") or L.get("project") or L.get("code"),
+                                               "note": u.get("note"), "model": m["id"], **({"own": True} if m.get("dataset") == u["id"] else {})})
+    for d in ds:
+        ub = by.get(d["id"], []) + d.get("used_by_other", [])
+        if ub:
+            d["used_by"] = ub
+        else:
+            d.pop("used_by", None)
+
+
+def model_line(m: dict, names: dict) -> str:
+    L, r = m["links"], m["release"]
+    url = L.get("project") or L.get("paper") or L.get("code")
+    head = (f"[{m['name']}]({url})" if url else m["name"])
+    uses = ", ".join(f"{names[u['id']]} ({u['role']})" for u in m["uses"])
+    links = ", ".join(f"[{k}]({L[k]})" for k in ("paper", "code", "weights") if L.get(k))
+    return (f"- {head} - {M_KIND[m['kind']]}. {m['summary']} Uses {uses or 'no catalog dataset'}; code {M_RELEASE[r['code']]}, "
+            f"weights {M_RELEASE[r['weights']]}. {m['venue']}{f' ({links})' if links else ''}.")
 
 
 # The rank depends on two things only: how open the data is (availability, plus the gate in front of it) and whether
@@ -246,14 +361,27 @@ def main() -> None:
     hw_path = ROOT / "data" / "hardware.json"
     hw_cat = json.loads(hw_path.read_text())
     hw = hw_cat["hardware"]
-    errs = validate(ds) + validate_hw(hw, {d["id"] for d in ds})
+    m_path = ROOT / "data" / "models.json"
+    m_cat = json.loads(m_path.read_text()) if m_path.exists() else {"metadata": {}, "models": []}
+    ms = m_cat["models"]
+    ids = {"dataset": {d["id"] for d in ds}, "model": {m["id"] for m in ms}, "hardware": {h["id"] for h in hw}}
+    errs = validate(ds) + validate_hw(hw, ids["dataset"]) + validate_models(ms, ids["dataset"]) + validate_changes(ids)
     if errs:
         sys.exit("\n".join(errs))
     episodes = viewer_episodes()
     for d in ds:
         d.pop("quality", None)
         d["rank"], d["contents"] = rank(d, episodes), contents(d)
-    out = [f"**{len(ds)}** datasets · updated {cat['metadata']['last_updated']}", "", "## Ranks", "",
+    derive_used_by(ds, ms)
+    changes, runs = collect_changes(), collect_runs()
+    out = [f"**{len(ds)}** datasets and **{len(ms)}** models · updated {cat['metadata']['last_updated']}", ""]
+    if changes["changes"]:
+        newest = changes["changes"][0]["date"]
+        cut = (datetime.date.fromisoformat(newest) - datetime.timedelta(days=30)).isoformat()
+        recent = [x for x in changes["changes"] if x["date"] >= cut][:30]
+        out += ["## Recent changes", "", "Found by the nightly checks ([pipeline/NIGHTLY.md](pipeline/NIGHTLY.md)); newest first.", ""]
+        out += [f"- {x['date']}: {x['text']}" for x in recent] + [""]
+    out += ["## Ranks", "",
            "The rank follows how open the data is and whether its files passed four integrity checks. "
            "The license does not change the rank; each entry states it separately.", "",
            "| rank | meaning | datasets |", "|---|---|---|"]
@@ -278,6 +406,16 @@ def main() -> None:
         if rows:
             out += [f"## {title}", ""] + [line(d) for d in rows] + [""]
     names = {d["id"]: d["name"] for d in ds}
+    if ms:
+        code = sum(m["release"]["code"] == "released" for m in ms)
+        wts = sum(m["release"]["weights"] == "released" for m in ms)
+        out += ["## Models", "", f"**{len(ms)}** models trained or evaluated on touch recorded across a hand; {code} released code and "
+                f"{wts} released weights. Filters and the datasets each one uses are on the "
+                "[models page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/models.html).", ""]
+        for kind, title in M_SECTIONS.items():
+            rows = sorted((m for m in ms if m["kind"] == kind), key=lambda m: (-m["year"], m["name"].lower()))
+            if rows:
+                out += [f"### {title}", ""] + [model_line(m, names) for m in rows] + [""]
     out += ["## Hardware", "", f"**{len(hw)}** devices, {sum(1 for h in hw if h['datasets'])} of them used by the datasets above. "
             "Photos, specs and a hardware-to-dataset map are on the [hardware page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/hardware.html).", ""]
     for kind, title in HW_SECTIONS:
@@ -289,13 +427,20 @@ def main() -> None:
     readme = ROOT / "README.md"
     text = readme.read_text()
     new = re.sub(r"(<!-- BEGIN LIST -->\n).*?(<!-- END LIST -->)", lambda m: m[1] + "\n".join(out) + "\n" + m[2], text, flags=re.S)
+    dump = lambda x: json.dumps(x, indent=1, ensure_ascii=False) + "\n"
+    outputs = {readme: new, cat_path: new_cat, hw_path: dump(hw_cat), ROOT / "data" / "changes.json": dump(changes),
+               ROOT / "data" / "status.json": dump(runs)}
+    if m_path.exists():
+        outputs[m_path] = dump(m_cat)
+    if "--validate" in sys.argv:
+        print(f"valid: {len(ds)} datasets, {len(ms)} models, {len(hw)} devices, {len(changes['changes'])} logged changes")
+        return
     if "--check" in sys.argv:
-        stale = new != text or new_cat != cat_path.read_text() or json.dumps(hw_cat, indent=1, ensure_ascii=False) + "\n" != hw_path.read_text()
-        sys.exit("README.md or the derived rank/contents fields are stale: run python3 scripts/build_readme.py" if stale else 0)
-    readme.write_text(new)
-    cat_path.write_text(new_cat)
-    hw_path.write_text(json.dumps(hw_cat, indent=1, ensure_ascii=False) + "\n")
-    print(f"{len(ds)} datasets, {len(hw)} devices")
+        stale = [p.relative_to(ROOT).as_posix() for p, t in outputs.items() if not p.exists() or p.read_text() != t]
+        sys.exit(f"stale: {', '.join(stale)}; run python3 scripts/build_readme.py" if stale else 0)
+    for p, t in outputs.items():
+        p.write_text(t)
+    print(f"{len(ds)} datasets, {len(ms)} models, {len(hw)} devices, {len(changes['changes'])} logged changes")
 
 
 if __name__ == "__main__":

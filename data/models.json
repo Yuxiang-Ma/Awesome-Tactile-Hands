@@ -1,0 +1,1231 @@
+{
+ "metadata": {
+  "title": "Tactile hand models",
+  "scope": "Models trained or evaluated on touch recorded across a hand, with the catalog datasets each one uses and whether its code and weights are released.",
+  "last_updated": "2026-10-25"
+ },
+ "models": [
+  {
+   "id": "deco",
+   "name": "DECO",
+   "title": "DECO: Decoupled Multimodal Diffusion Transformer for Bimanual Dexterous Manipulation with a Plugin Tactile Adapter",
+   "authors": "Xukun Li et al.",
+   "year": 2026,
+   "venue": "ICML 2026 (arXiv 2602.05513)",
+   "kind": "policy",
+   "summary": "80M-parameter diffusion transformer with separate conditioning paths for vision, proprioception and touch, plus a tactile adapter that tunes under 10% of the weights; head-camera images, joint states and the 1,062-taxel readings of each Inspire RH56DFTP hand go in, and bimanual action chunks for a Unitree H1-2 come out.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "deco50",
+     "role": "training",
+     "note": "Trained separately on each of the 4 DECO-50 tasks (50 h, 28 sub-tasks, 8K+ trajectories, 5M+ frames); more than 2,000 real rollouts, 72.25% average success, and the tactile adapter adds 10.25 points on average."
+    }
+   ],
+   "own_data": null,
+   "dataset": "deco50",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/BAAI-Humanoid/DECO (Apache-2.0; models/deco/deco.py, train.py, H1 deployment). Weights: Hugging Face BAAI-Humanoid/DECO_sim (license tag apache-2.0) holds simulation checkpoints only: libero.pth, dexjoco.pth, univtac.pth, univtac-p.pth (vision policy plus tactile adapter) and robotwin.pth. No checkpoint trained on DECO-50 is listed. Checked 2026-10-25."
+   },
+   "license": "Apache-2.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2602.05513",
+    "project": "https://baai-humanoid.github.io/DECO-webpage/",
+    "code": "https://github.com/BAAI-Humanoid/DECO",
+    "weights": "https://huggingface.co/BAAI-Humanoid/DECO_sim"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2602.05513",
+    "https://arxiv.org/html/2602.05513",
+    "https://github.com/BAAI-Humanoid/DECO (README, LICENSE, file tree, repo description '[ICML2026]')",
+    "https://huggingface.co/BAAI-Humanoid/DECO_sim (README and file list)"
+   ],
+   "unconfirmed": [
+    "The project page renders with JavaScript and was not read; the ICML 2026 venue comes from the repository description and the catalog entry."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "title": "DexTacWAM: A Visuo-Tactile World-Action Model for Dexterous Manipulation",
+   "authors": "Haoran Yuan et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.24976",
+   "kind": "policy",
+   "summary": "Takes head and wrist RGB, per-finger gel images (5 per hand) and hand pose from two 22-DoF Sharpa Wave hands, jointly denoises future visual and tactile latents in a 2B Genie Envisioner video model, and outputs actions (relative end-effector pose, hand targets and 60 fingertip wrench values) from a 160M action expert.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "trex",
+     "role": "pretraining",
+     "note": "Stage 1 trains the tactile encoder's adapter and compressor (frozen LTX-Video VAE) on the 488-episode 'diverse-488' corpus (episodes 0-463; 464-487 held out for contact-recall tests). The catalog matched that corpus to trimmed T-Rex episodes (corpus episode 200 equals T-Rex episode 3479 frame for frame); the paper does not name T-Rex as its source."
+    },
+    {
+     "id": "dextacwam",
+     "role": "training",
+     "note": "In the paper's own release, 96-100 teleoperated demonstrations for each of 6 tasks (595 episodes) fine-tune the video world model (stage 2) and train the action expert from scratch (stage 3); the 488-episode stage 1 corpus is in the same release."
+    }
+   ],
+   "own_data": "488-episode bimanual corpus (paper: roughly 4 h; code README: 3.5 h) and 96-100 demonstrations for each of 6 tasks on two Sharpa Wave hands; released on Hugging Face under Apache-2.0.",
+   "dataset": "dextacwam",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "GitHub dextacwam/DexTacWAM README 'Release' lists training and offline inference code for all three stages, configs for the six tasks and ablations, and deployment code. Hugging Face JensenYuan/DexTacWAM_multi_finger_tactile_encoder holds the stage 1 tactile encoder (866 MB, step 53000). README: 'Not included: stage 2 world models and stage 3 action experts.' Code and weights are linked from the project page."
+   },
+   "license": "Code: Apache-2.0 for original DexTacWAM files, CC BY-NC-SA 4.0 for files derived from Genie-Envisioner; tactile-encoder checkpoint: Apache-2.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.24976",
+    "project": "https://dextacwam.github.io/",
+    "code": "https://github.com/dextacwam/DexTacWAM",
+    "weights": "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.24976 (abstract page)",
+    "https://arxiv.org/html/2609.24976 (HTML v1: Sec. 1-6, App. A.2, A.5, references)",
+    "https://dextacwam.github.io/",
+    "https://github.com/dextacwam/DexTacWAM (README: Release, Installation, Checkpoints and data, License)",
+    "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder (API metadata, file list)",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_488_diverse_episodes (README)",
+    "https://huggingface.co/api/models?author=JensenYuan"
+   ],
+   "unconfirmed": [
+    "T-Rex as the source of the 488-episode corpus is the catalog's check (trex and dextacwam entries: 48 of 48 sampled corpus episodes lie inside T-Rex episodes; corpus episode 200 equals T-Rex episode 3479 in all 555 frames). The paper, README and dataset card do not name T-Rex; the paper cites it only as related work.",
+    "kind 'policy' because the headline result is real-robot task score (70.6 vs 38.0 over 6 tasks); the paper calls DexTacWAM a world-action model, and its world model also predicts future visual and tactile latents.",
+    "Corpus duration: the paper and project page say roughly four hours; the code README's dataset table says 3.5 h.",
+    "weights 'released' covers the stage 1 tactile encoder only; the stage 2 world models and stage 3 action experts are trained per task from the public Genie Envisioner GE_base_fast_v0.1 checkpoint and are not released."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "dextouch_wm",
+   "name": "DexTouch-WM",
+   "title": "DexTouch-WM: Learning Action-Conditioned Tactile World Models from Human Touch for Dexterous Robot Manipulation",
+   "authors": "Yan Qin et al.",
+   "year": 2026,
+   "venue": "IROS 2026 Workshop RoBoWoMo (arXiv 2609.20649)",
+   "kind": "world_model",
+   "summary": "Takes an initial RGB frame, both hands' 320-taxel pressure maps, a language instruction and a 67-D future pose sequence (wrists, two 20-DoF hand configurations retargeted to the Wuji hand, head camera) and predicts future RGB frames and tactile maps, for human hands and a Wuji robot hand wearing the same glove layout.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "humantouch",
+     "role": "pretraining",
+     "note": "World-model pretraining on about 100 h of HumanTouch-system recordings over 50 bimanual tasks (Moxian gloves under MANUS MetaGloves, 320 of 360 taxels per hand kept), together with 5 h of robot data over 6 tasks; adding 100 h of human data raised held-out robot Contact-F1 from 0.55 to 0.71. The public HumanTouch release covers 10 tasks, so this corpus is a different task set."
+    }
+   ],
+   "own_data": "About 100 h of human recordings over 50 tasks plus human demonstrations for 4 downstream tasks; 5 h of robot data over 6 tasks and 300 trajectories for each of 4 downstream tasks on a Tianji arm with a 20-DoF Wuji hand wearing the same glove; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The paper (HTML v2) has no code, weights or data statement and no project page. No repository or model found on GitHub (searches for 'DexTouch-WM' and 'DexTouch', XsparkAI organization) or Hugging Face (2026-10-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.20649"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.20649 (abstract page, comments)",
+    "https://arxiv.org/html/2609.20649 (HTML v2: all sections, Tables I-V, references)",
+    "https://xsparkai.com/sparklab/humantouch/ (no mention of DexTouch-WM)",
+    "https://api.github.com/search/repositories?q=DexTouch-WM and ?q=DexTouch",
+    "https://api.github.com/users/XsparkAI/repos",
+    "https://huggingface.co/api/models?search=DexTouch and https://huggingface.co/api/datasets?search=DexTouch"
+   ],
+   "unconfirmed": [
+    "The paper calls its human corpus HumanTouch (Sec. III-C; 'HumanTouch scaling corpus' in Sec. IV-D) and cites no release. The public HumanTouch release has 10 tasks and the paper's corpus 50, so their overlap is not known.",
+    "dataset null: the paper does not describe the public HumanTouch release as its data, although the authors overlap (HumanTouch's first author Chuqiao Lyu is a co-author). The release's 10-task and 17,608-episode counts used here come from the catalog's humantouch entry.",
+    "Venue from the arXiv comment 'Accept to IROS 2026 Workshop RoBoWoMo (Lightning Talk)'."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "dtwm",
+   "name": "DTWM",
+   "title": "Dexterous Tactile World Model",
+   "authors": "Ziyao Zeng et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.34286",
+   "kind": "world_model",
+   "summary": "Takes 13 egocentric RGB frames, rendered hand skeletons, both gloves' pressure and flexion readings and a task instruction and predicts the next 36 frames (1.2 s) of human bimanual manipulation video, using Wan2.2-Fun-5B-InP with LoRA and each hand's touch added to the video tokens at that hand's image location.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "egotouch",
+     "role": "training",
+     "note": "All training and evaluation data, from the Hugging Face release zhouzhoujy/EgoTouch. 1,926 of the 1,933 episodes in the authors' copy (20.21 h) are cut into 43,604 clips of 49 frames; LoRA fine-tuning runs one epoch over 38,600 clips (17.51 h, 1,338 episodes, 174 tasks), and evaluation uses 3,000 clips from held-out recording sessions (2,728 in-distribution, 272 out-of-distribution). No robot data."
+    }
+   ],
+   "own_data": null,
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "GitHub Adonis-galaxy/Dexterous-Tactile-World-Model (Apache-2.0), linked from the project page: commit 'Release DTWM training, inference and evaluation code' (2026-09-28), with the paper's split lists. Paper ethics statement: the release covers 'code, configurations, split lists and per-clip scores rather than imagery'. No checkpoint in the README or on Hugging Face (2026-10-25)."
+   },
+   "license": "Apache-2.0 (code)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.34286",
+    "project": "https://adonis-galaxy.github.io/dtwm-project-page/",
+    "code": "https://github.com/Adonis-galaxy/Dexterous-Tactile-World-Model"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.34286 (abstract page)",
+    "https://arxiv.org/html/2609.34286 (HTML v1: Sec. 1-5, ethics and reproducibility statements, App. A-C)",
+    "https://adonis-galaxy.github.io/dtwm-project-page/",
+    "https://github.com/Adonis-galaxy/Dexterous-Tactile-World-Model (README, file tree, commits, releases)",
+    "https://huggingface.co/api/models?search=DTWM and ?search=Dexterous-Tactile"
+   ],
+   "unconfirmed": [
+    "Weights: the README writes checkpoints from local training (outputs/<date>/<run>/checkpoint-<step>) and links none; none found on Hugging Face.",
+    "Venue: arXiv only; the paper's AI-use statement refers to 'the conference policy' without naming a venue.",
+    "The paper counts 1,933 episode directories in its copy of EgoTouch; the catalog's egotouch entry lists 1,891 episodes. Not reconciled.",
+    "The TouchWorld, VT-WM and FeelWorld rows in the paper's comparison re-implement only their tactile conditioning on DTWM's backbone and EgoTouch clips (App. C.3); they are not the original systems."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "egopressurediff",
+   "name": "EgoPressureDiff",
+   "title": "EgoTactile: Learning Grasp Pressure for Everyday Objects from Egocentric Video",
+   "authors": "Yuan Zeng et al.",
+   "year": 2026,
+   "venue": "ICML 2026 (arXiv 2606.09243)",
+   "kind": "estimation",
+   "summary": "Conditional video diffusion model adapted from Stable Video Diffusion img2vid-xt; an egocentric RGB clip, contact hint masks, a text prompt with object and subject attributes such as weight and material, and a hand-pressure prototype go in, and a pressure heatmap sequence for the human hand comes out, convertible to the glove's 162 sensors.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "egotactile",
+     "role": "training",
+     "note": "Trained and tested on the gloved set (object-held-out 638 / 55 clips, subject-held-out 630 / 63 clips); the bare-hand set (60 train / 15 test clips, 3 subjects) tests transfer to bare hands."
+    },
+    {
+     "id": "ace_data_0",
+     "role": "evaluation",
+     "note": "Third-party: ACE-Data-0 (arXiv 2607.28625, Table 3) tests it on its table-scale tactile takes: temporal accuracy 0.2912, contact IoU 0.0197, volumetric IoU 0.0025."
+    }
+   ],
+   "own_data": "A 30-clip gloved test set in 10 everyday scenes (kitchen, bathroom sink, office desk and others) with cluttered backgrounds; whether it is in the Hugging Face release was not checked.",
+   "dataset": "egotactile",
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "Code: github.com/Russell-Zeng/EgoTactile (train_hand.py, inference_hand.py, core/), linked from the project page; the repository has no LICENSE file. Weights: the README 'Pretrained Weights' section lists only the SVD img2vid-xt backbone and the OpenCLIP text encoder; command_infer.sh expects ./checkpoints/checkpoint-40000/mask_net-40000.pth and unet-40000.pth with no download link; no Hugging Face model was found. Checked 2026-10-25."
+   },
+   "license": "not stated (no LICENSE file in the repository)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.09243",
+    "project": "https://egotactile.github.io/",
+    "code": "https://github.com/Russell-Zeng/EgoTactile"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2606.09243",
+    "https://arxiv.org/html/2606.09243",
+    "https://egotactile.github.io/",
+    "https://github.com/Russell-Zeng/EgoTactile (README, file tree, command_infer.sh)",
+    "https://huggingface.co/api/models?search=egopressure",
+    "https://huggingface.co/api/datasets/HustleHard/EgoTactile (file list, no checkpoints)",
+    "https://arxiv.org/html/2607.28625 (ACE-Data-0, Table 3)"
+   ],
+   "unconfirmed": [
+    "ACE-Data-0 (arXiv 2607.28625) says it evaluated EgoPressureDiff 'using their released pre-trained weights'; no public checkpoint was found."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "egopressureformer",
+   "name": "EgoPressureFormer",
+   "title": "EgoTactile: Learning Grasp Pressure for Everyday Objects from Egocentric Video",
+   "authors": "Yuan Zeng et al.",
+   "year": 2026,
+   "venue": "ICML 2026 (arXiv 2606.09243)",
+   "kind": "estimation",
+   "summary": "Discriminative baseline on a TimeSformer backbone; a 16-frame egocentric RGB clip goes in, learnable sensor queries attend to the video tokens, and the 162-sensor pressure sequence of the gloved human hand comes out, trained with per-sensor classification and a frame-level contact gate.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "egotactile",
+     "role": "training",
+     "note": "Trained and tested on the gloved set (768 clips, 5.82 h, 63 objects, 12 subjects): object-held-out split 638 train / 55 test clips, subject-held-out split 630 / 63 clips."
+    }
+   ],
+   "own_data": null,
+   "dataset": "egotactile",
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The project's repository github.com/Russell-Zeng/EgoTactile holds EgoPressureDiff code only; none of its 146 tree entries is TimeSformer or EgoPressureFormer code, and no checkpoint is linked. Checked 2026-10-25."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.09243",
+    "project": "https://egotactile.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2606.09243",
+    "https://arxiv.org/html/2606.09243",
+    "https://egotactile.github.io/",
+    "https://github.com/Russell-Zeng/EgoTactile (README, file tree)"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "egotac",
+   "name": "EgoTac",
+   "title": "EgoTac: In-the-wild Tactile Prediction from Egocentric Vision",
+   "authors": "Wenkang Zhang et al.",
+   "year": 2026,
+   "venue": "NeurIPS 2026 (arXiv 2608.15060)",
+   "kind": "estimation",
+   "summary": "Takes 4 egocentric RGB frames (1 in the image variant) and predicts per-vertex force and contact on the 778-vertex MANO mesh of each human hand, using a DINOv2 encoder, temporal cross-attention and an AdaLN transformer decoder.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "egotac_sc",
+     "role": "training",
+     "note": "EgoTac-SC (857 clips, 3.9M frames, glove force mapped to MANO vertices) is the only force-supervised source; it is split 9:1 and trained together with 5 contact-only datasets (HOI4D, H2O, HOT3D, ARCTIC, TACO). Force MAE on active vertices is 0.056 N on the held-out 10%."
+    },
+    {
+     "id": "opentouch",
+     "role": "evaluation",
+     "note": "Out-of-domain force-dynamics benchmark only (force cosine, rise and fall F1 after normalizing to [0, 1]); not used for training. Converted to MANO with OpenTouch's own processing instructions."
+    }
+   ],
+   "own_data": "EgoTac-SC: 857 clips (3.9M frames at 30 Hz) of 70+ tasks in 24 environments, recorded with in-house motion-tactile gloves (132 force channels per hand), VIVE wrist trackers and a ZED 2i head camera; released on Hugging Face (Apache-2.0).",
+   "dataset": "egotac_sc",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "GitHub Mr-Zwkid/EgoTac (inference, dataset conversion and training code; created 2026-10-05) and Hugging Face wkzhang/EgoTac (egotac_base_h4.pt, 4-frame model; egotac_base_h1.pt, image-only), both linked from the project page and the README."
+   },
+   "license": "Weights: Apache-2.0 (Hugging Face card); code: not stated (no license file in the repository)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2608.15060",
+    "project": "https://egotac.github.io/",
+    "code": "https://github.com/Mr-Zwkid/EgoTac",
+    "weights": "https://huggingface.co/wkzhang/EgoTac"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2608.15060 (abstract page, comments)",
+    "https://arxiv.org/html/2608.15060 (HTML v2: Table 1, Sec. 3, 4.4, 5.1-5.5, App. B-E)",
+    "https://egotac.github.io/",
+    "https://github.com/Mr-Zwkid/EgoTac (README, file tree, repo metadata)",
+    "https://huggingface.co/wkzhang/EgoTac (model card, API file list)"
+   ],
+   "unconfirmed": [
+    "Sec. 3.4 lists OpenTouch among the integrated datasets, but Sec. 5.1 trains on EgoTac-SC plus HOI4D, H2O, HOT3D, ARCTIC and TACO and uses OpenTouch, OAKINK2 and FPHA for out-of-domain evaluation 'without further splitting'; the README provides the OpenTouch converter 'for evaluation and data preparation'.",
+    "Code license: the repository has no license file and GitHub reports none.",
+    "The README says to run 'hf auth login' before downloading; the Hugging Face API reports the model repo as public and not gated."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "ftp1",
+   "name": "FTP-1",
+   "title": "FTP-1: A Generalist Foundation Tactile Policy Across Tactile Sensors for Contact-Rich Manipulation",
+   "authors": "Chengbo Yuan et al.",
+   "year": 2026,
+   "venue": "arXiv 2606.13102",
+   "kind": "policy",
+   "summary": "Takes language, multi-view RGB, proprioception and touch from image, array or state sensors (21 sensor types in pretraining) mapped to 24 functional-area tokens and outputs action chunks in a unified action space; built on pi0.5 with a 300M-parameter tactile expert, pretrained on about 3,000 h of human-glove, dexterous-hand and gripper data and fine-tuned on 5 hardware setups.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "egotac_sc",
+     "role": "pretraining",
+     "note": "'EgoTac-Open' (8.2%), 'EgoTac-Kitchen' (5.5%) and 'EgoTac-Hotel' (3.8%) make up 17.5% of the resampled pretraining mix, with AetherGlove as an array-type sensor. The paper does not say whether these are the EgoTac-SC release; the checkpoint stores them as AetherData_20260331, AetherData_260204_7.5H_v0211 and AetherData_260121_5H_v0211."
+    },
+    {
+     "id": "ftp1_sharpa",
+     "role": "pretraining",
+     "note": "The paper's own Sharpa North-FTP-1 data, with Sharpa DTC fingertip images, is 9.0% of the mix. The checkpoint's statistics list 9,328 trajectories, the count the catalog's ftp1_sharpa entry cites from Open-X-Tactile for the release."
+    },
+    {
+     "id": "humanoid_everyday",
+     "role": "pretraining",
+     "note": "Unitree Dex3 hand pressure as a state-type sensor, 6.0% of the mix. The checkpoint's statistics list 3,892 trajectories over 120 tasks; the release's tactile G1 part has 4,064 episodes over 124 tasks."
+    },
+    {
+     "id": "let_dex",
+     "role": "pretraining",
+     "note": "Listed as 'OpenLETDex' with Linker Hand L6 touch arrays, 6.0% of the mix; the paper gives no citation or link. The checkpoint's statistics list 713 trajectories over 4 tasks (838,591 frames), against LET-Dex's 714 bags over 4 tasks (~7.8 h)."
+    },
+    {
+     "id": "dexumi",
+     "role": "pretraining",
+     "note": "'DexumiInspire' (3.0%) and 'DexumiXHand' (2.4%), both as state-type sensors. The checkpoint's statistics list 888 Inspire and 363 XHand trajectories; the public DexUMI sample holds 3 XHand episodes, and the paper cites DexUMI without saying how it obtained the rest."
+    },
+    {
+     "id": "opentouch",
+     "role": "pretraining",
+     "note": "OpenTouch glove as an array-type sensor, 1.5% of the mix. The checkpoint's statistics list 2,958 trajectories over 26 tasks; OpenTouch releases about 2,900 annotated clips."
+    },
+    {
+     "id": "paxini_omnisharing",
+     "role": "pretraining",
+     "note": "'OmniSharingDB' human data with the PaXini glove as a state-type sensor, 1.0% of the mix. The paper thanks PaXini 'for the OmniSharingDB human data'; the checkpoint's statistics list 175 trajectories over 2 tasks, while the public sample holds 1,000 episodes over 10 tasks."
+    }
+   ],
+   "own_data": "Sharpa North-FTP-1: about 4,000 long-horizon demonstrations on Sharpa North with two Sharpa Wave hands, released in FTP-1-Dataset (catalog ftp1_sharpa). Fine-tuning demonstrations on the real setups (250-400 across 3 Sharpa North tasks, 100 per task for 2 Sharpa&Dexmate tasks, plus FlexivXense and TactileUMI); release not stated. UniVTAC fine-tuning uses its 50 official demonstrations per task.",
+   "dataset": "ftp1_sharpa",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "GitHub michaelyuancb/ftp1-policy (fine-tuning and pretraining code, built on openpi). Hugging Face MJJJJ1064/ftp1_v0426_50kstep (50k-step pretrained checkpoint) and MJJJJ1064/ftp1_univtac_finetune (6 UniVTAC task checkpoints), mirrored on ModelScope. Abstract: 'Pretrained models, datasets, training code and more visualization at' the project page, which links the code, the pretrained checkpoint and the dataset."
+   },
+   "license": "Code: Apache-2.0 (GitHub); weights: not stated on Hugging Face, MIT on the ModelScope listing",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.13102",
+    "project": "https://ftp1-policy.github.io/",
+    "code": "https://github.com/michaelyuancb/ftp1-policy",
+    "weights": "https://huggingface.co/MJJJJ1064/ftp1_v0426_50kstep"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2606.13102 (abstract page)",
+    "https://arxiv.org/html/2606.13102 (HTML v3: Sec. 1-2.4, App. C Table 7, App. D, App. E Table 8, acknowledgements)",
+    "https://ftp1-policy.github.io/",
+    "https://github.com/michaelyuancb/ftp1-policy (README, file tree, data_processing/parse_data_module/parse_data_aether.py, data_processing/parse_data_scripts/parse_data_aether.sh)",
+    "https://huggingface.co/MJJJJ1064/ftp1_v0426_50kstep (README, file list, normalization/dataset_stats.json, normalization/<source>/train_val_split.json for 10 sources)",
+    "https://huggingface.co/MJJJJ1064/ftp1_univtac_finetune (API file list)",
+    "https://www.modelscope.cn/api/v1/models/michaelyuancb/ftp1_v0426_50kstep (license field)",
+    "https://github.com/Mr-Zwkid/EgoTac (README: 'EgoTac-SC and Aether are the same dataset')"
+   ],
+   "unconfirmed": [
+    "Per-source trajectory and task counts come from normalization/dataset_stats.json in the released checkpoint (train plus validation, one full copy per source), not from the paper. Its per-source sampling scales match Table 7 (OpenTouch 11.08 vs 11.09, OpenLETDex 14.14, DexumiXHand 56.02, HumanoidEveryday 13.94 vs 13.97).",
+    "OpenLETDex = LET-Dex is inferred from 713 trajectories over 4 tasks and 838,591 frames (7.8 h at 30 Hz) against LET-Dex's 714 bags over 4 tasks (~7.8 h), and from a 6x12 'LinkerHandL6Touch' tokenizer matching LET-Dex's 12x6 fingertip arrays.",
+    "EgoTac subsets map to checkpoint domains by sample scale: EgoTac-Open (0.89) = AetherData_20260331 (43,540 sampled trajectories, 490 tasks), EgoTac-Kitchen (1.63) = AetherData_260204_7.5H_v0211 (17,851 trajectories, 179 tasks), EgoTac-Hotel (2.82) = AetherData_260121_5H_v0211 (7,232 trajectories, 73 tasks). EgoTac's README says 'EgoTac-SC and Aether are the same dataset'; whether these domains are the 857-clip EgoTac-SC release is not stated.",
+    "Sharpa North-FTP-1 provenance: Sec. 2.4 says 'we collect Sharpa North-FTP-1'; the acknowledgements thank Sharpa Pte Ltd. for 'the Sharpa North-FTP-1 dataset'.",
+    "The released sharpa/ archive has sessions named drawOnBalloon_V2 and fixSharpaHandModel_V2 (catalog ftp1_sharpa entry), matching the Draw Balloon and Fix Hand fine-tuning tasks; whether fine-tuning demonstrations are in the release is not stated.",
+    "Weights license differs by mirror: the Hugging Face card states none, the ModelScope model page says MIT.",
+    "Release-side counts used for comparison (Humanoid Everyday G1 part, LET-Dex bags, OpenTouch clips, OmniSharing sample, DexUMI sample, Open-X-Tactile's Sharpa count) come from the catalog's own entries and were not re-checked here.",
+    "MotionTrans (Inspire hand actuator force, 3.6%) and 16 gripper or UMI sources are also in the mix; none of them is a catalog dataset."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "trex",
+   "name": "T-Rex",
+   "title": "T-Rex: Tactile-Reactive Dexterous Manipulation",
+   "authors": "Dantong Niu et al.",
+   "year": 2026,
+   "venue": "arXiv 2606.17055",
+   "kind": "policy",
+   "summary": "Vision-language-action model on a Qwen3-VL-2B backbone with latent, action and tactile experts; head and wrist RGB, language and temporal VQ-VAE codes of the ten fingertip deformation and force streams go in, and joint actions for two Sharpa Wave hands on a Dexmate Vega-1 come out, with action chunks at about 5 Hz refined by touch at about 20 Hz.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "trex",
+     "role": "training",
+     "note": "Tactile mid-training on the 100 h T-Rex teleoperation set (22 motor primitives, 200+ objects, 7,700+ trajectories), of which about 50 h is public; post-training uses about 100 demonstrations per task on 12 tasks."
+    },
+    {
+     "id": "uvta",
+     "role": "fine-tuning",
+     "note": "Third-party: the UVTA paper (arXiv 2609.34182, Table 1) post-trains T-Rex as a baseline on its 5 Sharpa Wave tasks with the same robot demonstrations, wrist RGB and per-finger touch; stage-wise success averages 29% against 70% for UVTA."
+    }
+   ],
+   "own_data": "Pretraining on 22,889 h of egocentric human video without touch, following EgoScale; the video source is not named in the text read, and the release status of the 12-task post-training demonstrations was not checked.",
+   "dataset": "trex",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/ZhuoyangLiu2005/T-Rex (MIT); the main branch has post-training and inference code, and the full-pipeline branch adds scripts/pretrain.py and scripts/midtrain.py. Weights: Hugging Face miniFranka/T-Rex_pretrain_mecka22k_epoch1 and miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6 (model.pt, license tag mit); README: 'We release the pretrained and midtrained checkpoints'. No post-trained task checkpoints are listed. Checked 2026-10-25."
+   },
+   "license": "MIT (code and checkpoints)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.17055",
+    "project": "https://tactile-rex.github.io/",
+    "code": "https://github.com/ZhuoyangLiu2005/T-Rex",
+    "weights": "https://huggingface.co/miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2606.17055",
+    "https://arxiv.org/html/2606.17055",
+    "https://tactile-rex.github.io/",
+    "https://github.com/ZhuoyangLiu2005/T-Rex (README, LICENSE, main and full-pipeline trees)",
+    "https://huggingface.co/miniFranka/T-Rex_pretrain_mecka22k_epoch1",
+    "https://huggingface.co/miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6",
+    "https://arxiv.org/html/2609.34182 (UVTA, baselines and Table 1)"
+   ],
+   "unconfirmed": [
+    "The README says the pretrain and midtrain corpora 'are not part of this release'; the public T-Rex dataset on Hugging Face is the ~50 h subset of the 100 h mid-training set."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "tacross",
+   "name": "TACROSS",
+   "title": "TACROSS: An Efficient and Low-Cost Scalable Human Touch System Across Heterogeneous Tactile Sensors for Dexterous Robot Learning",
+   "authors": "Bo Chen et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.11945",
+   "kind": "policy",
+   "summary": "Canonicalizers, per-sensor residual adapters and a shared temporal transformer map a 285-point piezoresistive glove and the capacitive Revo2 robot hand into a 256-D contact latent; an ACT policy takes the robot's touch latent, RGB and state and outputs arm and Revo2 hand actions, while human demonstrations train the tactile encoder and add confidence-weighted auxiliary targets.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "tacross",
+     "role": "training",
+     "note": "Main setting per task: 30 robot and 150 human demonstrations on 4 tasks, mean success 91.9% against 51.3% with robot data only; the project page counts 159.09 h of human and 24.86 h of robot recordings in the full corpus."
+    }
+   ],
+   "own_data": null,
+   "dataset": "tacross",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "tacross-touch-project.github.io: 'Software release coming soon' and 'Software and the dataset are planned for release'; only hardware v1 files (BOM, PCB Gerbers, pick-and-place) are on a GitHub release. No checkpoint is mentioned. Checked 2026-10-25."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.11945",
+    "project": "https://tacross-touch-project.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.11945",
+    "https://arxiv.org/html/2610.11945",
+    "https://tacross-touch-project.github.io/",
+    "https://github.com/tacross-touch-project/tacross-touch-project.github.io/releases/tag/hardware-v1",
+    "https://github.com/search?q=TACROSS&type=repositories"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "tactalign",
+   "name": "TactAlign",
+   "title": "TactAlign: Human-to-Robot Policy Transfer via Tactile Alignment",
+   "authors": "Youngsun Wi et al.",
+   "year": 2026,
+   "venue": "arXiv 2602.13579",
+   "kind": "policy",
+   "summary": "Human touch (OSMO glove, 3-axis magnetic fingertip) and robot touch (30-taxel Xela fingertip on an Allegro hand) are encoded by separately pretrained JEPA-style encoders and mapped into a shared latent by a rectified flow trained on pseudo-pairs from unpaired demonstrations; human and robot data then co-train an Allegro-on-Franka policy.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "tactalign",
+     "role": "training",
+     "note": "Encoders use ~10 min of play data plus the alignment set of 100 robot (kinesthetic) and 200 human demonstrations for pivoting and insertion; policy co-training uses 140-160 human and 50 robot demonstrations per task (pivoting, insertion, lid closing); light-bulb screwing uses 20 human demonstrations only."
+    }
+   ],
+   "own_data": "Per the catalog entry, lid closing, light-bulb screwing, the human-only object demos, the force-labelled F/T set, glove play data and all camera images are not in the Hugging Face release.",
+   "dataset": "tactalign",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "yswi.github.io/tactalign: the GitHub button reads 'Coming Soon' and links github.com/google/tactalign, which returned 404 on 2026-10-25. The Hugging Face account youngw has 4 datasets and no models."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2602.13579",
+    "project": "https://yswi.github.io/tactalign/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2602.13579",
+    "https://arxiv.org/html/2602.13579",
+    "https://yswi.github.io/tactalign/ (page HTML)",
+    "https://api.github.com/repos/google/tactalign (404)",
+    "https://huggingface.co/api/models?author=youngw",
+    "https://huggingface.co/api/datasets?author=youngw"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "tactiskill",
+   "name": "TactiSkill",
+   "title": "TactiDex: A Real-World Tactile-Guided Benchmark for Human-Like Dexterous Manipulation",
+   "authors": "Suting Ni et al.",
+   "year": 2026,
+   "venue": "ACM MM 2026 (arXiv 2607.09190)",
+   "kind": "policy",
+   "summary": "PPO residual policy on top of a frozen kinematic imitation policy that tracks TactiDex human hand-object sequences with simulated Inspire hands; proprioception, an object point-set code, five fingertip contact targets derived from the human glove and future reference kinematics go in, residual joint targets come out, and training uses a three-part tactile reward.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "tactidex",
+     "role": "training",
+     "note": "Human reference sequences with whole-hand glove pressure, mapped per finger to simulated contact force; evaluated on 73 single-hand and bimanual sequences of the 700+ in TactiDex (5.1M frames)."
+    }
+   ],
+   "own_data": null,
+   "dataset": "tactidex",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "tactidex.github.io shows 'Code (Coming Soon)' and 'Data (Coming Soon)' buttons with no link; GitHub search for TactiDex and TactiSkill finds only the page repo tactidex/tactidex.github.io; weights are not mentioned. Checked 2026-10-25."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2607.09190",
+    "project": "https://tactidex.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2607.09190",
+    "https://arxiv.org/html/2607.09190",
+    "https://tactidex.github.io/ (page HTML, BibTeX note 'Accepted to ACM Multimedia (ACM MM) 2026')",
+    "https://github.com/search?q=TactiDex&type=repositories",
+    "https://github.com/search?q=TactiSkill&type=repositories"
+   ],
+   "unconfirmed": [
+    "Real-robot runs on two Franka arms with Inspire hands map the simulated policy's commands open loop (Appendix C.3); the paper lists on-robot fine-tuning with real tactile feedback as future work, so the real hands' touch sensors are not read at deployment as far as the text says."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "touchanything",
+   "name": "TouchAnything",
+   "title": "TouchAnything: A Dataset and Framework for Bimanual Tactile Estimation from Egocentric Video",
+   "authors": "Jianyi Zhou et al.",
+   "year": 2026,
+   "venue": "arXiv 2605.13083",
+   "kind": "estimation",
+   "summary": "An 8-frame egocentric RGB clip, optional left and right wrist views and 42 WiLoR hand joints go in, and a 21x21 pressure map for each human hand comes out; wrist views are dropped at random in training so it also runs on the egocentric view alone.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "egotouch",
+     "role": "training",
+     "note": "Trained and tested on EgoTouch: 1,891 episodes split 80/10/10 by episode, with the test set divided into seen and unseen objects; 25 epochs on a frozen DINOv2 ViT-B/14."
+    },
+    {
+     "id": "touchscale",
+     "role": "training",
+     "note": "Third-party: the TouchScale paper (arXiv 2610.10288, Sec. 4.1) retrains TouchAnything on a 16 h TouchScale subset, on fractions of TouchScale and on the full set."
+    },
+    {
+     "id": "egotactile",
+     "role": "evaluation",
+     "note": "Third-party: in the TouchScale paper, TouchAnything trained on the 16.2 h EgoTouch split reaches zero-shot contact IoU 0.134 on EgoTactile; trained on 16 h of TouchScale 0.181, on the full TouchScale 0.383."
+    },
+    {
+     "id": "ace_data_0",
+     "role": "evaluation",
+     "note": "Third-party: ACE-Data-0 (arXiv 2607.28625, Table 3) tests it on its table-scale tactile takes: temporal accuracy 0.7095, contact IoU 0.1646, volumetric IoU 0.1357."
+    }
+   ],
+   "own_data": null,
+   "dataset": "egotouch",
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "Code: github.com/Jianyi2004/TouchAnything (MIT) holds src/models/touch_anything.py, scripts/core/train.py and inference scripts; README news '[2026-05] Code release'. Weights: no checkpoint link in the README or on the project page; scripts/run_inference.sh points at a local path ('/data_all/intern10/tmp/TouchAnything-Dev/checkpoints/.../best_model.pth'); GitHub issue #3 'Request for pretrained TouchAnything checkpoint / model weights', opened 2026-05-20, has no author reply. Checked 2026-10-25."
+   },
+   "license": "MIT (code)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2605.13083",
+    "project": "https://jianyi2004.github.io/TouchAnything-Website/",
+    "code": "https://github.com/Jianyi2004/TouchAnything"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2605.13083",
+    "https://arxiv.org/html/2605.13083",
+    "https://jianyi2004.github.io/TouchAnything-Website/",
+    "https://github.com/Jianyi2004/TouchAnything (README, file tree, LICENSE, scripts/run_inference.sh, scripts/core/inference_from_video.py)",
+    "https://github.com/Jianyi2004/TouchAnything/issues/3",
+    "https://huggingface.co/api/models?search=touchanything",
+    "https://huggingface.co/api/datasets/zhouzhoujy/EgoTouch (file list, no checkpoints)",
+    "https://arxiv.org/html/2610.10288 (TouchScale, Sec. 4.1 and Table 2)",
+    "https://arxiv.org/html/2607.28625 (ACE-Data-0, Sec. 5.1.1 and Table 3)"
+   ],
+   "unconfirmed": [
+    "ACE-Data-0 (arXiv 2607.28625) says it evaluated TouchAnything 'using their released pre-trained weights'; no public checkpoint was found on GitHub, the project page or Hugging Face.",
+    "Hugging Face repos named Grange007/touchanything-* (simulation data and a 'tactile-geometry-model' best_model.pth) are not linked from the TouchAnything repo or page and were not attributed to this model."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "touchsight",
+   "name": "TouchSight",
+   "title": "TouchSight: Bare-Handed Tactile Prediction from Egocentric Video via Generative Visual Augmentation",
+   "authors": "Danyan Zhou et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.20414",
+   "kind": "estimation",
+   "summary": "Takes 8 egocentric RGB frames and predicts force on 275 glove taxels per hand plus palmar MANO contact for both human hands, from frozen DINOv3 and VGGT features decoded by 10 region queries per hand, with no hand reconstruction at inference.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "humantouch",
+     "role": "training",
+     "note": "Force supervision from 500 h of HumanTouch glove recordings (54,931 episodes split 8:1:1 by episode; 60% of the training mix), with test results on held-out episodes. A 10 h sample over 52 tasks is re-rendered as bare-hand video for TwinTouch-20H (15% of the mix). The public release holds 17,608 episodes (~132.8 h) over 10 tasks, so most of this data is not in it."
+    }
+   ],
+   "own_data": "TwinTouch-20H: 10 h of HumanTouch glove recordings (52 tasks) re-rendered with Seedance 2.0 as bare hands in new scenes, paired with the 10 h source recordings and their measured taxel labels; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The paper (HTML v1) has no code, weights or data statement and no project page. No repository, model or TwinTouch-20H dataset found on GitHub (searches for 'TouchSight' and 'TwinTouch', XsparkAI organization) or Hugging Face (2026-10-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.20414"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.20414 (abstract page)",
+    "https://arxiv.org/html/2609.20414 (HTML v1: all sections, Tables I-VI, App. A)",
+    "https://xsparkai.com/sparklab/humantouch/ (no mention of TouchSight)",
+    "https://api.github.com/search/repositories?q=TouchSight and ?q=TwinTouch",
+    "https://github.com/53wei/Touchsight (same name, unrelated education app)",
+    "https://api.github.com/users/XsparkAI/repos",
+    "https://huggingface.co/api/models?search=TouchSight and ?search=TwinTouch (models and datasets)"
+   ],
+   "unconfirmed": [
+    "TouchSight cites HumanTouch as a website [12] and uses 54,931 episodes (500 h); the public release holds 17,608 episodes (~132.8 h) over 10 tasks (catalog humantouch entry), and TwinTouch alone covers 52 tasks. Which episodes are in the release is not stated.",
+    "TwinTouch-20H counts 10 h of generated bare-hand video plus the 10 h of source recordings (Sec. III-A); the abstract calls it '20 hours of paired data'.",
+    "Force values are raw glove units (active-taxel threshold 5 units, contact threshold 1 unit), not newtons."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "touchworld",
+   "name": "TouchWorld",
+   "title": "TouchWorld: A Predictive and Reactive Tactile Foundation Model for Dexterous Manipulation",
+   "authors": "Jianyi Zhou et al.",
+   "year": 2026,
+   "venue": "arXiv 2607.07287",
+   "kind": "policy",
+   "summary": "Takes head and wrist camera images, tactile-glove pressure rendered as images, proprioception and a task instruction on a humanoid with two Wuji hands and outputs 32-step action chunks, guided by 17-frame visual-tactile subgoals from a Wan2.2-TI2V-5B tactile world model and corrected by a residual transformer that reads recent touch.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "egotouch",
+     "role": "pretraining",
+     "note": "The tactile world model (Wan2.2-TI2V-5B with LoRA) is pretrained on EgoTouch egocentric and wrist video, hand pose and bilateral palm pressure maps, converted to visual-tactile goal grids, then fine-tuned on 10 h of the authors' Wuji-hand robot data. The amount of EgoTouch used is not stated."
+    }
+   ],
+   "own_data": "200 teleoperated training trajectories for each of 6 tasks on two Wuji hands with a JQ-Industries tactile glove, and 10 h (about 1.08M frames at 30 FPS) of robot demonstrations for world-model fine-tuning; not released.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The paper links only its project page, and the project page links only the arXiv PDF; neither states a code or weights release (2026-10-25). An unlinked repository by co-author Feiyang Hong, github.com/flyingGH/TouchWorld-Tactile_World_Model (Apache-2.0 DiffSynth-Studio fork; commit 'Initial TouchWorld tactile world model implementation', 2026-07-03), holds Wan2.2 world-model training and inference scripts for the robot data only. It has no planner, VLA policy, refinement policy, EgoTouch pretraining script or checkpoint. No TouchWorld model on Hugging Face."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2607.07287",
+    "project": "https://phanes-lab.github.io/TouchWorld-website/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2607.07287 (abstract page, submission history)",
+    "https://arxiv.org/html/2607.07287 (HTML v2: Sec. 2, 3.2, 4.1, 5, 8, references)",
+    "https://phanes-lab.github.io/TouchWorld-website/ (page text, links, script bundle)",
+    "https://phanes-lab.github.io/TouchWorld-website/touchworld/demos/manifest.json",
+    "https://phanes-lab.github.io/TouchWorld-website/touchworld/twm_demos/manifest.json",
+    "https://github.com/flyingGH/TouchWorld-Tactile_World_Model (repo metadata, README, commit a9830071 file list, docs/wan22_ti2v_robot_subgoal_plan.md, runs/commands/wan22_rollout17_v001/usage.md, run_summary.md, expanded_data_usage_min.md, scripts/build_wuji_stage2_wan_manifest.py, scripts/infer_wan22_ti2v_lora_sample.py, diffsynth/core/data/wuji_stage2.py)",
+    "https://api.github.com/users/phanes-lab/repos",
+    "https://api.github.com/users/Jianyi2004/repos",
+    "https://api.github.com/search/repositories?q=TouchWorld+tactile",
+    "https://huggingface.co/api/models?search=TouchWorld and https://huggingface.co/api/datasets?search=TouchWorld",
+    "https://huggingface.co/api/datasets?author=zhouzhoujy"
+   ],
+   "unconfirmed": [
+    "The amount of EgoTouch used for pretraining is not stated; the paper says 'large-scale EgoTouch human interaction video data'.",
+    "Whether the 10 h world-model fine-tuning set is the same data as the 6 x 200 policy-training trajectories is not stated.",
+    "The flyingGH repository is attributed to co-author Feiyang Hong by its commit author name (FeiyangHong) and its description ('The tactile world model component of TouchWorld'); neither the paper nor the project page links it.",
+    "kind 'policy': the paper calls TouchWorld a tactile foundation model implemented as a hierarchical manipulation policy, with the tactile world model as one of four modules. embodiment 'both' because human touch enters only through the world model's EgoTouch pretraining.",
+    "TouchWorld and EgoTouch share first author Jianyi Zhou and corresponding author Shuo Yang; whether the pretraining used the public EgoTouch release or internal recordings is not stated.",
+    "Venue: arXiv only; no conference is named on the abstract page or the project page."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "ttp",
+   "name": "TTP",
+   "title": "Human-Centric Transferable Tactile Pre-Training for Dexterous Robotic Manipulation",
+   "authors": "Chi Zhang et al.",
+   "year": 2026,
+   "venue": "arXiv 2607.01067",
+   "kind": "policy",
+   "summary": "Transferable Tactile Pre-Training extends the Being-H0.5 vision-language-action model with touch in a 351-taxel MANO-surface space shared by human and robot hands and a tactile expert that predicts future touch; pretrained on 160 h of human and simulated data with glove-measured or derived contact, then post-trained on Inspire hands, DexBotic hands and DM-Tac grippers.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "htac",
+     "role": "pretraining",
+     "note": "DeskTask-Tac, the measured-glove part of H-Tac (37.2 h, 947 episodes, ~4M frames at 30 Hz), is one of three pretraining sources; H-Tac totals 160 h and 135k+ episodes."
+    }
+   ],
+   "own_data": "The other H-Tac parts carry no measured hand touch: HOI-Tac (~106 h, 124.8K sequences, contact from hand-object mesh distance in 14 public datasets) and InternData-Tac (17.8 h, 9,563 episodes of simulated gripper contact). Post-training covers 9 real tasks on Franka and Realman arms plus LIBERO, LIBERO-plus and RoboCasa in simulation.",
+   "dataset": "htac",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/BeingBeyond/TTP (Apache-2.0; BeingH/train/pretrain.py, scripts/train/train_human_tactile.sh, configs/posttrain/tactile). Weights: Hugging Face BeingBeyond/TTP holds four model.safetensors checkpoints: pretrained ('Base vision-language-action model (preview)' in the README), libero, libero-plus and robocasa. No real-robot tactile post-trained checkpoint is listed, and the Hugging Face repo has no license tag. Checked 2026-10-25."
+   },
+   "license": "Apache-2.0 (code); the Hugging Face checkpoints carry no license tag",
+   "links": {
+    "paper": "https://arxiv.org/abs/2607.01067",
+    "project": "https://research.beingbeyond.com/ttp",
+    "code": "https://github.com/BeingBeyond/TTP",
+    "weights": "https://huggingface.co/BeingBeyond/TTP"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2607.01067",
+    "https://arxiv.org/html/2607.01067",
+    "https://research.beingbeyond.com/ttp",
+    "https://github.com/BeingBeyond/TTP (README, file tree)",
+    "https://huggingface.co/BeingBeyond/TTP (file list)"
+   ],
+   "unconfirmed": [
+    "The arXiv HTML links https://beingbeyond.github.io/TTP/, which returned 404 on 2026-10-25; the project page used here is the one in the catalog entry."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "uvta",
+   "name": "UVTA",
+   "title": "Unified Visual-Tactile-Action Modeling from Human Demonstrations for Dexterous Manipulation",
+   "authors": "Wenqiao Li et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.34182",
+   "kind": "policy",
+   "summary": "Diffusion policy (ViT-S/8 visual encoder, U-Net denoiser) that puts exoskeleton-glove and Sharpa Wave robot demonstrations in shared touch and action spaces; wrist RGB and 20 fingertip-region touch values go in, and 16-step chunks of 9-D wrist and 22-D hand actions plus future touch come out, with only robot actions executed on a Sharpa North right arm.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "uvta",
+     "role": "training",
+     "note": "1,000 human and 150 robot demonstrations per task for 5 tasks; 70% average stage-wise success over 10 trials per task, against 29% for the strongest baseline, T-Rex."
+    }
+   ],
+   "own_data": null,
+   "dataset": "uvta",
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "Code: github.com/uni-vta/UVTA (MIT; scripts/train.py, uvta/diffusion_policy, real-robot rollout). Weights: README: 'Datasets and checkpoints are not included in this repository'; no checkpoint link, and the Hugging Face account Chopper233 hosts the dataset only. Checked 2026-10-25."
+   },
+   "license": "MIT (code)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.34182",
+    "project": "https://uni-vta.github.io/",
+    "code": "https://github.com/uni-vta/UVTA"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.34182",
+    "https://arxiv.org/html/2609.34182",
+    "https://uni-vta.github.io/",
+    "https://github.com/uni-vta/UVTA (README, LICENSE, file tree)",
+    "https://huggingface.co/api/models?author=Chopper233",
+    "https://huggingface.co/api/datasets/Chopper233/UVTA/tree/main"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "tacdex3d",
+   "name": "3DTacDex",
+   "title": "Canonical Representation and Force-Based Pretraining of 3D Tactile for Dexterous Visuo-Tactile Policy Learning",
+   "authors": "Tianhao Wu et al.",
+   "year": 2025,
+   "venue": "ICRA 2025 (arXiv 2409.17549)",
+   "kind": "representation",
+   "summary": "Graph encoder (GraphMAE backbone) for 3D tactile data; taxel positions and 3-axis forces from 8 PaXini pads on a LEAP hand, in a canonical hand-frame representation, go in, it is pretrained on play data by masked local-force and net-force prediction, and its features condition a diffusion policy.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "tacdex3d",
+     "role": "training",
+     "note": "Encoder pretraining on the authors' play data and diffusion-policy training on demonstrations for 4 tasks (open box, reorientation, flip, assembly), 78% average success. The paper gives no demonstration counts; the catalog release holds 8,814 play frames at 5 Hz plus open-box, flip and assembly demos."
+    }
+   ],
+   "own_data": null,
+   "dataset": "tacdex3d",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "github.com/tianhaowuhz/3dtacdex (MIT) holds the encoder pretraining code and checkpoints ckpts/encoder.pt (148 KB, for downstream tasks) and ckpts/all.pt (59 MB); README: 'This repo only contain the pretrain code of tactile encoder'. The diffusion-policy code is not in it. Checked 2026-10-25."
+   },
+   "license": "MIT",
+   "links": {
+    "paper": "https://arxiv.org/abs/2409.17549",
+    "project": "https://3dtacdex.github.io/",
+    "code": "https://github.com/tianhaowuhz/3dtacdex",
+    "weights": "https://github.com/tianhaowuhz/3dtacdex/tree/main/ckpts"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2409.17549",
+    "https://arxiv.org/html/2409.17549",
+    "https://3dtacdex.github.io/",
+    "https://github.com/tianhaowuhz/3dtacdex (README, LICENSE, file tree)"
+   ],
+   "unconfirmed": [
+    "The name 3DTacDex comes from the project page title and the README ('official implementation of ICRA 2025 paper, 3DTacDex'); the paper text calls the method 'ours'."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "sparsh_skin",
+   "name": "Sparsh-skin",
+   "title": "Self-supervised perception for tactile skin covered dexterous hands",
+   "authors": "Akash Sharma et al.",
+   "year": 2025,
+   "venue": "CoRL 2025 (arXiv 2505.11420)",
+   "kind": "representation",
+   "summary": "Encoder pretrained by self-distillation for the 18 Xela uSkin pads on an Allegro hand; a short history of 3-axis magnetic readings and 3D sensor positions goes in, and a full-hand tactile embedding comes out, tested on force, joystick-state and object-pose estimation and a plug-insertion policy.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "sparsh_skin",
+     "role": "pretraining",
+     "note": "Pretrained on ~4 h of teleoperated play with 14 objects (11 sequences of ~2 min per object; the release has 10 per object, 140); downstream tasks use labelled sets from the same rig."
+    }
+   ],
+   "own_data": null,
+   "dataset": "sparsh_skin",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/facebookresearch/sparsh-multisensory-touch, whose README says it 'contains training and evaluation code for Sparsh-X and Sparsh-Skin' (LICENSE.md is CC BY-NC 4.0). Weights: Hugging Face facebook/sparsh-skin (xela_sparshskin_tiny.pth and .ckpt, license tag cc-by-nc-4.0). Checked 2026-10-25."
+   },
+   "license": "CC BY-NC 4.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2505.11420",
+    "project": "https://akashsharma02.github.io/sparsh-skin-ssl/",
+    "code": "https://github.com/facebookresearch/sparsh-multisensory-touch",
+    "weights": "https://huggingface.co/facebook/sparsh-skin"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2505.11420",
+    "https://arxiv.org/html/2505.11420",
+    "https://akashsharma02.github.io/sparsh-skin-ssl/",
+    "https://github.com/facebookresearch/sparsh-multisensory-touch (README, LICENSE.md)",
+    "https://huggingface.co/facebook/sparsh-skin"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "sparsh_x",
+   "name": "Sparsh-X",
+   "title": "Tactile Beyond Pixels: Multisensory Touch Representations for Robot Manipulation",
+   "authors": "Carolina Higuera et al.",
+   "year": 2025,
+   "venue": "CoRL 2025 (arXiv 2506.14754)",
+   "kind": "representation",
+   "summary": "Transformer encoder pretrained by self-supervision on ~1M Digit 360 contact interactions that fuses tactile image, contact audio, IMU and pressure into one embedding; tested in plug-insertion imitation learning and in-hand rotation on an Allegro hand with four Digit 360 fingertips, and on object-action, material-quantity and force estimation.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "sparsh_x",
+     "role": "pretraining",
+     "note": "The Allegro part (4.5 of the 18.6 h pretraining set, dipping into trays of LEGO bricks and marbles) is this catalog entry."
+    }
+   ],
+   "own_data": "14.1 h from a handheld two-finger picker with the same sensor (in the same Hugging Face dataset, outside this entry); 100 kinesthetic plug-insertion demonstrations and 50 rollouts of the Hora in-hand rotation policy for the downstream tasks.",
+   "dataset": "sparsh_x",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/facebookresearch/sparsh-multisensory-touch (CC BY-NC 4.0). Weights: Hugging Face facebook/sparsh-x-all (d360_sparshx_img_mic_imu_pressure_base.pth) and facebook/sparsh-x-img (d360_sparshx_img_base.pth), both license tag cc-by-nc-4.0. Checked 2026-10-25."
+   },
+   "license": "CC BY-NC 4.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2506.14754",
+    "project": "https://akashsharma02.github.io/sparsh-x-ssl/",
+    "code": "https://github.com/facebookresearch/sparsh-multisensory-touch",
+    "weights": "https://huggingface.co/facebook/sparsh-x-all"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2506.14754",
+    "https://arxiv.org/html/2506.14754",
+    "https://akashsharma02.github.io/sparsh-x-ssl/ ('Accepted as Oral at CoRL 2025')",
+    "https://github.com/facebookresearch/sparsh-multisensory-touch (README, LICENSE.md)",
+    "https://huggingface.co/facebook/sparsh-x-all",
+    "https://huggingface.co/facebook/sparsh-x-img"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "tk_stgn",
+   "name": "TK-STGN",
+   "title": "Grasp Like Humans: Learning Generalizable Multi-Fingered Grasping from Human Proprioceptive Sensorimotor Integration",
+   "authors": "Ce Guo et al.",
+   "year": 2025,
+   "venue": "IEEE T-RO (accepted; arXiv 2509.08354)",
+   "kind": "policy",
+   "summary": "Tactile-Kinesthetic Spatio-Temporal Graph Network; readings of a data glove's 25 force-sensitive pads and joint angles, encoded as a graph in polar coordinates, go in, and per-joint states come out, which force-position hybrid control turns into robot-hand commands; the same glove is worn by human demonstrators and by the robot hands.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "grasp_like_humans",
+     "role": "training",
+     "note": "Trained on human grasp demonstrations of 5 seen objects (the release has 150 ten-second trials from 2 demonstrators); tested on 15 unseen objects and on 6 robot-hand configurations wearing the glove."
+    }
+   ],
+   "own_data": "Robot-hand grasp trials with the glove and the 15 unseen test objects are not in the release.",
+   "dataset": "grasp_like_humans",
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "No code or weights link in the paper; grasplikehuman.github.io offers only the dataset zip (150 CSVs and a readme.pdf); GitHub search for TK-STGN returns nothing. Checked 2026-10-25."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2509.08354",
+    "project": "https://grasplikehuman.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2509.08354",
+    "https://arxiv.org/html/2509.08354",
+    "https://grasplikehuman.github.io/",
+    "https://github.com/search?q=TK-STGN&type=repositories"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "vt_jointpretrain",
+   "name": "VT-JointPretrain",
+   "title": "VTDexManip: A Dataset and Benchmark for Visual-tactile Pretraining and Dexterous Manipulation with Reinforcement Learning",
+   "authors": "Qingtao Liu et al.",
+   "year": 2025,
+   "venue": "ICLR 2025",
+   "kind": "representation",
+   "summary": "Masked-reconstruction transformer pretrained on human egocentric frames paired with 20-pad glove readings; an image and 20 tactile values go in, and its CLS feature conditions an RL policy for a Shadow Hand fitted with 20 matching force sensors, on 6 Isaac Gym tasks and a real Shadow Hand test.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "vtdexmanip",
+     "role": "pretraining",
+     "note": "Pretrained on the human visual-tactile set (565k frames, 10 tasks, 182 objects); the release holds 2,032 sequences from 5 subjects."
+    }
+   ],
+   "own_data": "Downstream data is generated by RL in Isaac Gym on 6 tasks; real-world tests use a Shadow Hand with 20 piezoresistive sensors and an Azure Kinect.",
+   "dataset": "vtdexmanip",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Benchmark code github.com/LQTS/VTDexManip (MIT; model name vt_all_cls) and pretraining code github.com/LQTS/VTDexManipPretraining (no LICENSE file). README: 'All pretrained models can be downloaded from this url', a OneDrive folder. Checked 2026-10-25."
+   },
+   "license": "MIT (benchmark code); the pretraining repository has no LICENSE file",
+   "links": {
+    "paper": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+    "project": "https://lqts.github.io/VTDexManip/",
+    "code": "https://github.com/LQTS/VTDexManip",
+    "weights": "https://1drv.ms/f/c/9054151f0ba654c9/EsZlIVlJEudEpYT2Ofl7tj8BbNErfoJZdkgG5PnZ5j6_hg"
+   },
+   "sources": [
+    "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+    "https://github.com/LQTS/VTDexManip (README, LICENSE)",
+    "https://github.com/LQTS/VTDexManipPretraining (file tree)",
+    "https://1drv.ms/f/c/9054151f0ba654c9/EsZlIVlJEudEpYT2Ofl7tj8BbNErfoJZdkgG5PnZ5j6_hg (redirect to a OneDrive folder)"
+   ],
+   "unconfirmed": [
+    "The OneDrive model link resolves to a folder, but its contents could not be listed from a script (HTTP 403), so the checkpoint files were not seen."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "neuralfeels",
+   "name": "NeuralFeels",
+   "title": "Neural feels with neural fields: Visuo-tactile perception for in-hand manipulation",
+   "authors": "Sudharshan Suresh et al.",
+   "year": 2024,
+   "venue": "Science Robotics 2024 (arXiv 2312.13469)",
+   "kind": "estimation",
+   "summary": "Online visuo-tactile SLAM for an Allegro hand with four DIGIT fingertips; segmented RGB-D depth, DIGIT images converted to contact depth by a pretrained tactile transformer, and joint proprioception go in, and the held object's pose and a neural-field shape come out.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "feelsight",
+     "role": "evaluation",
+     "note": "Evaluated on FeelSight's 70 runs: 30 real in-hand rotations of 6 objects (30 s each, this catalog entry) and 40 simulated runs in the same release."
+    }
+   ],
+   "own_data": "The tactile transformer (DPT on a small ViT) is trained on 10K simulated TACTO interactions on each of 40 YCB objects, with backgrounds from 25 DIGIT sensors.",
+   "dataset": "feelsight",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/facebookresearch/neuralfeels (MIT). Weights: Hugging Face suddhu/tactile_transformer (dpt_real.p, dpt_sim.p; license tag mit), which the README says to clone under 'Download models'. The object field is optimized online for each run, so no per-object weights exist. Checked 2026-10-25."
+   },
+   "license": "MIT",
+   "links": {
+    "paper": "https://arxiv.org/abs/2312.13469",
+    "project": "https://suddhu.github.io/neural-feels/",
+    "code": "https://github.com/facebookresearch/neuralfeels",
+    "weights": "https://huggingface.co/suddhu/tactile_transformer"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2312.13469",
+    "https://arxiv.org/html/2312.13469 (incl. supplementary S2 Tactile transformer)",
+    "https://github.com/facebookresearch/neuralfeels (README, LICENSE, file tree)",
+    "https://huggingface.co/suddhu/tactile_transformer"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "pimforce",
+   "name": "PiMForce",
+   "title": "Posture-Informed Muscular Force Learning for Robust Hand Pressure Estimation",
+   "authors": "Kyungjin Seo et al.",
+   "year": 2024,
+   "venue": "NeurIPS 2024 (arXiv 2410.23629)",
+   "kind": "estimation",
+   "summary": "8-channel forearm sEMG and a 3D hand pose (MANUS glove in training, a single-RGB hand-pose estimate in qualitative tests) go in, and pressure from 0 to 20 N for nine regions of the human right hand comes out, supervised by a 65-node pressure glove and five fingertip sensors.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "pimforce",
+     "role": "training",
+     "note": "21 participants, 3 sessions each, 22 press, pinch and grasp postures held for 30 s; cross-user tests on participants left out of training."
+    }
+   ],
+   "own_data": null,
+   "dataset": "pimforce",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "The project page's 'Code & Data' Dropbox share holds Codes/ (models.py, main_ours.py; Codes/README.md: 'This project is licensed under the MIT License') and Codes/Checkpoints/ with checkpoint-all-model25_EMG3D_9.pth (265.7 MB), checkpoint-all-model40_only3Dhand_9.pth, checkpoint-all-model49_EMGAngles_9.pth, two EMG-only checkpoints and regression_model.sav; folders listed 2026-10-25."
+   },
+   "license": "MIT (Codes/LICENSE); no separate license for the checkpoints",
+   "links": {
+    "paper": "https://arxiv.org/abs/2410.23629",
+    "project": "https://hci-tech-lab.github.io/PiMForce/",
+    "code": "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/AAszkuRRMYwZ6OtmPWPlRxs/Codes?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0",
+    "weights": "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADrSa2qEfM-GUzzrE35r5Sk/Codes/Checkpoints?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2410.23629",
+    "https://arxiv.org/html/2410.23629",
+    "https://hci-tech-lab.github.io/PiMForce/",
+    "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0 (root, Codes and Codes/Checkpoints listings; Codes/README.md)"
+   ],
+   "unconfirmed": [
+    "Which checkpoint is the paper's final model is not labelled; model25_EMG3D matches its sEMG plus 3D-pose input by file name only."
+   ],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "vint_net",
+   "name": "VinT-Net",
+   "title": "VinT-6D: A Large-Scale Object-in-hand Dataset from Vision, Touch and Proprioception",
+   "authors": "Zhaoliang Wan et al.",
+   "year": 2024,
+   "venue": "ICML 2024 (arXiv 2501.00510)",
+   "kind": "estimation",
+   "summary": "Baseline for in-hand 6D object pose on Tencent's TRX-Hand; RGB-D images, touch points from the hand's tactile skin and finger proprioception are fused by a sensing-aggregation module, and a 3D keypoint module with least-squares fitting outputs the held object's pose.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "vint6d",
+     "role": "training",
+     "note": "Trained and evaluated on VinT-Sim (2M simulated samples) and VinT-Real (0.1M real samples); split sizes were not found in the text read."
+    }
+   ],
+   "own_data": "Paper data missing from the public release: 6 of the 10 real objects and all Allegro-skin data (simulated and real).",
+   "dataset": "vint6d",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "vint-6d.github.io announces the 'release of the VinT-6D dataset and benchmark code'; the dataset is on Hugging Face, but no code link appears and GitHub search finds only the page repo VinT-6D/vint-6d.github.io. Checked 2026-10-25."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2501.00510",
+    "project": "https://vint-6d.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2501.00510",
+    "https://arxiv.org/html/2501.00510",
+    "https://vint-6d.github.io/",
+    "https://github.com/search?q=VinT-6D&type=repositories",
+    "https://huggingface.co/api/datasets/vint6d/vint6d/tree/main"
+   ],
+   "unconfirmed": [],
+   "checked": "2026-10-25"
+  },
+  {
+   "id": "tdex",
+   "name": "T-Dex",
+   "title": "Dexterity from Touch: Self-Supervised Pre-Training of Tactile Representations with Robotic Play",
+   "authors": "Irmak Guzey et al.",
+   "year": 2023,
+   "venue": "CoRL 2023 (arXiv 2303.12076)",
+   "kind": "policy",
+   "summary": "Two-phase method for an Allegro hand with 15 XELA uSkin pads on a Kinova Jaco arm; a tactile encoder pretrained with BYOL on robot play data embeds the tactile image, and a nearest-neighbour policy combines it with camera features to retrieve robot actions from 6 demonstrations per task.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "tdex",
+     "role": "training",
+     "note": "Encoder pretraining on 2.5 h of play data (the release holds 1.29 h, 449,188 tactile samples); 6 demonstrations per task for the policy on 5 tasks."
+    },
+    {
+     "id": "tacdex3d",
+     "role": "training",
+     "note": "Third-party: the 3DTacDex paper (arXiv 2409.17549, Table I) trains a T-Dex-style baseline (tactile as 2D images, BYOL pretraining) on its own play data inside the same diffusion policy; 63% average success over 4 tasks against 78% for 3DTacDex."
+    },
+    {
+     "id": "sparsh_skin",
+     "role": "training",
+     "note": "Third-party: the Sparsh-skin paper (arXiv 2505.11420) reproduces T-Dex's BYOL pretraining as 'BYOL*' on the Sparsh-skin play data with Xela signals formatted as images."
+    }
+   ],
+   "own_data": null,
+   "dataset": "tdex",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/irmakguzey/tactile-dexterity (BYOL and VICReg encoder training, VINN and BC deployers); GitHub reports no license. Weights: the Google Drive folder linked from the README as the data link holds tactile_encoder.zip (1.26 GB) next to play_data.zip and evaluation.zip; its central directory lists tactile_encoder/models/byol_encoder_best.pt and byol_encoder_latest.pt (674 MB each), read by range request on 2026-10-25."
+   },
+   "license": "not stated (no LICENSE file in the repository)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2303.12076",
+    "project": "https://tactile-dexterity.github.io/",
+    "code": "https://github.com/irmakguzey/tactile-dexterity",
+    "weights": "https://drive.google.com/file/d/1G52ihW7EbE5eSe04jnxGpo7cc1jxYWHw/view"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2303.12076",
+    "https://arxiv.org/html/2303.12076",
+    "https://github.com/irmakguzey/tactile-dexterity (README, file tree)",
+    "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL (folder page)",
+    "https://drive.usercontent.google.com/download?id=1G52ihW7EbE5eSe04jnxGpo7cc1jxYWHw (tactile_encoder.zip size and central directory by range request)",
+    "https://arxiv.org/html/2409.17549 (3DTacDex, baselines and Table I)",
+    "https://arxiv.org/html/2505.11420 (Sparsh-skin, model comparisons)"
+   ],
+   "unconfirmed": [
+    "The README does not mention tactile_encoder.zip, and which task or play run the two BYOL checkpoints come from is not stated; the catalog survey of the same folder lists only the two data zips."
+   ],
+   "checked": "2026-10-25"
+  }
+ ]
+}

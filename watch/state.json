@@ -1,0 +1,2244 @@
+{
+ "version": 1,
+ "updated": "2026-10-25T20:19:33Z",
+ "urls": {
+  "http://stag.csail.mit.edu/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "9cb1a82956a9ad1b",
+   "text_len": 5358,
+   "links": [
+    "http://stag.csail.mit.edu/datasets/blindfolded.zip",
+    "http://stag.csail.mit.edu/datasets/blindfolded_lite.zip",
+    "http://stag.csail.mit.edu/datasets/classification.zip",
+    "http://stag.csail.mit.edu/datasets/classification_lite.zip",
+    "http://stag.csail.mit.edu/datasets/handposes.zip",
+    "http://stag.csail.mit.edu/datasets/handposes_lite.zip",
+    "http://stag.csail.mit.edu/datasets/weights.zip",
+    "http://stag.csail.mit.edu/datasets/weights_lite.zip",
+    "http://stag.csail.mit.edu/files/circuit-gerber.zip",
+    "https://github.com/Erkil1452/touch"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "http://stag.csail.mit.edu/#data": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "9cb1a82956a9ad1b",
+   "text_len": 5358,
+   "links": [
+    "http://stag.csail.mit.edu/datasets/blindfolded.zip",
+    "http://stag.csail.mit.edu/datasets/blindfolded_lite.zip",
+    "http://stag.csail.mit.edu/datasets/classification.zip",
+    "http://stag.csail.mit.edu/datasets/classification_lite.zip",
+    "http://stag.csail.mit.edu/datasets/handposes.zip",
+    "http://stag.csail.mit.edu/datasets/handposes_lite.zip",
+    "http://stag.csail.mit.edu/datasets/weights.zip",
+    "http://stag.csail.mit.edu/datasets/weights_lite.zip",
+    "http://stag.csail.mit.edu/files/circuit-gerber.zip",
+    "https://github.com/Erkil1452/touch"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA": {
+   "kind": "page",
+   "status": 200,
+   "length": "68264",
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://3dtacdex.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "c73315eef4ee1921",
+   "text_len": 2940,
+   "links": [
+    "https://github.com/tianhaowuhz/3dtacdex"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://ace-data-engine.github.io/ACE-Data-0/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "af1cf59b61fd2537",
+   "text_len": 22131,
+   "links": [
+    "https://huggingface.co/datasets/ACERobotics/ACE-Data-0"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://action-sense.csail.mit.edu/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "23eb20c2fea2e7f3",
+   "text_len": 10470,
+   "links": [
+    "https://github.com/delpreto/ActionNet"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://action-sense.csail.mit.edu/data.html": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "ad49ce2c34281f9b",
+   "text_len": 17728,
+   "links": [
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-07_experiment_S00/2022-06-07_17-13-37_actionNet-microphone_S00/2022-06-07_17-13-41_streamLog_actionNet-microphone_S00.hdf5",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-07_experiment_S00/2022-06-07_18-11-00_actionNet-microphone_S00/2022-06-07_18-11-04_streamLog_actionNet-microphone_S00.hdf5",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-13_experiment_S01/2022-06-13_18-06-48_actionNet-microphone_S01/2022-06-13_18-06-52_streamLog_actionNet-microphone_S01.hdf5",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-13_experiment_S02/2022-06-13_21-36-27_actionNet-microphone_S02/2022-06-13_21-36-31_streamLog_actionNet-microphone_S02.hdf5",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-13_experiment_S02/2022-06-13_23-16-07_actionNet-microphone_S02/2022-06-13_23-16-11_streamLog_actionNet-microphone_S02.hdf5",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-14_experiment_S03/2022-06-14_12-50-55_actionNet-microphone_S03/2022-06-14_12-50-59_streamLog_actionNet-microphone_S03.hdf5",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-14_experiment_S04/2022-06-14_16-36-56_actionNet-microphone_S04/2022-06-14_16-37-01_streamLog_actionNet-microphone_S04.hdf5",
+    "https://data.csail.mit.edu/ActionNet/external_data/2022-06-14_experiment_S05/2022-06-14_20-35-28_actionNet-microphone_S05/2022-06-14_20-35-32_streamLog_actionNet-microphone_S05.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-07_experiment_S00/2022-06-07_17-18-17_actionNet-wearables_S00/2022-06-07_17-18-46_streamLog_actionNet-wearables_S00.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-07_experiment_S00/2022-06-07_18-10-55_actionNet-wearables_S00/2022-06-07_18-11-37_streamLog_actionNet-wearables_S00.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-13_experiment_S01_recordingStopped/2022-06-13_18-13-12_actionNet-wearables_S01/2022-06-13_18-14-59_streamLog_actionNet-wearables_S01.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-13_experiment_S02/2022-06-13_21-39-50_actionNet-wearables_S02/2022-06-13_21-40-16_streamLog_actionNet-wearables_S02.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-13_experiment_S02/2022-06-13_21-47-57_actionNet-wearables_S02/2022-06-13_21-48-24_streamLog_actionNet-wearables_S02.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-13_experiment_S02/2022-06-13_22-34-45_actionNet-wearables_S02/2022-06-13_22-35-11_streamLog_actionNet-wearables_S02.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-13_experiment_S02/2022-06-13_23-22-21_actionNet-wearables_S02/2022-06-13_23-22-44_streamLog_actionNet-wearables_S02.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S03/2022-06-14_13-11-44_actionNet-wearables_S03/2022-06-14_13-12-07_streamLog_actionNet-wearables_S03.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S03/2022-06-14_13-52-21_actionNet-wearables_S03/2022-06-14_13-52-57_streamLog_actionNet-wearables_S03.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S04/2022-06-14_16-38-18_actionNet-wearables_S04/2022-06-14_16-38-43_streamLog_actionNet-wearables_S04.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S05/2022-06-14_20-36-27_actionNet-wearables_S05/2022-06-14_20-36-54_streamLog_actionNet-wearables_S05.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-06-14_experiment_S05/2022-06-14_20-45-43_actionNet-wearables_S05/2022-06-14_20-46-12_streamLog_actionNet-wearables_S05.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-07-12_experiment_S06/2022-07-12_14-30-38_actionNet-wearables_S06/2022-07-12_14-31-04_streamLog_actionNet-wearables_S06.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-07-12_experiment_S06/2022-07-12_15-07-50_actionNet-wearables_S06/2022-07-12_15-08-08_streamLog_actionNet-wearables_S06.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-07-13_experiment_S07/2022-07-13_11-01-18_actionNet-wearables_S07/2022-07-13_11-02-03_streamLog_actionNet-wearables_S07.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-07-13_experiment_S08/2022-07-13_14-15-03_actionNet-wearables_S08/2022-07-13_14-15-26_streamLog_actionNet-wearables_S08.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-07-14_experiment_S09/2022-07-14_09-47-52_actionNet-wearables_S09/2022-07-14_09-48-44_streamLog_actionNet-wearables_S09.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-07-14_experiment_S09/2022-07-14_09-58-40_actionNet-wearables_S09/2022-07-14_09-59-00_streamLog_actionNet-wearables_S09.hdf5",
+    "https://data.csail.mit.edu/ActionNet/wearable_data/2022-07-14_experiment_S09/2022-07-14_11-13-55_actionNet-wearables_S09/2022-07-14_11-14-21_streamLog_actionNet-wearables_S09.hdf5",
+    "https://github.com/delpreto/ActionNet",
+    "https://github.com/delpreto/ActionNet/tree/master/parsing_data"
+   ],
+   "phrases": [
+    "1 videos: C01 | C02 | C03 | C04 | C05 Split 1 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 S06 YouTube Split 1 Split 2 Split 1 Split 2 Split 1 ",
+    "3 | C04 | C05 Split 1 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 S05 YouTube Split 1 Split 2 Split 1 Split 2 Split 1 Split 2 Split",
+    ": C01 | C02 | C03 | C04 | C05 Split 2 videos: C01 | C02 | C03 | C04 | C05 Split 2 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 S04 YouTube Spli",
+    ": C01 | C02 | C03 | C04 | C05 Split 2 videos: C01 | C02 | C03 | C04 | C05 Split 2 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 Split 2 audio: M",
+    ": C01 | C02 | C03 | C04 | C05 Split 3 videos: C01 | C02 | C03 | C04 | C05 Split 3 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 Split 2 audio: M",
+    "g soon] [coming soon] [coming soon] S07 YouTube Split 1 Split 1 Split 1 [coming soon] [coming soon] [coming soon] S08 YouTube Split 1 Split 1 Split 1 [coming soon] [coming soon] [coming soon] S09 YouT",
+    "n) [unavailable] [unavailable] Split 1 videos: C01 | C02 | C03 | C04 | C05 Split 1 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 S02 YouTube Spl",
+    "t 1 Split 2 Split 3 Split 1 Split 2 Split 3 [coming soon] [coming soon] [coming soon] Body measurements for all subjects XLSX file of body measurements and procedures Data for Subject S00 Note: Chapte"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://akashsharma02.github.io/sparsh-x-ssl/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "fe03d2f9a706eb66",
+   "text_len": 5678,
+   "links": [
+    "https://github.com/facebookresearch/sparsh-multisensory-touch",
+    "https://huggingface.co/collections/carohiguera/sparsh-x-68a02683b28a46ccae83cf77"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2303.12076": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2023-03-21",
+   "journal_ref": null,
+   "comment": "Video and code can be accessed here: https://tactile-dexterity.github.io/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2312.13469": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2023-12-20",
+   "journal_ref": null,
+   "comment": "43 pages, 20 figures, 1 table; https://suddhu.github.io/neural-feels/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2404.16823": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2024-05-22",
+   "journal_ref": null,
+   "comment": "Code and Project Website: https://toruowo.github.io/hato/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2409.17549": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2025-06-16",
+   "journal_ref": null,
+   "comment": "Accepted to ICRA 2025",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2410.23629": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2024-11-01",
+   "journal_ref": null,
+   "comment": "Accepted to NeurIPS 2024. Project Page Link: https://pimforce.hcitech.org/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2501.00510": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2025-01-06",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2503.05231": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2025-06-03",
+   "journal_ref": "IEEE Robotics and Automation Letters, vol. 10, no. 11, pp. 11482-11489, Nov. 2025",
+   "comment": "8 pages, 5 figures, Submitted to IEEE Robotics and Automation Letters (RAL)",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2503.07926": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2025-07-24",
+   "journal_ref": null,
+   "comment": "8 pages. Accepted by 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2505.11420": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2025-05-16",
+   "journal_ref": null,
+   "comment": "18 pages, 15 figures",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2505.16289": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2025-08-28",
+   "journal_ref": null,
+   "comment": "9 pages, 10 figures, 2 tables",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2505.21864": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2025-10-02",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2506.14754": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2025-06-17",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2509.08354": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2025-09-10",
+   "journal_ref": null,
+   "comment": "20 pages, 19 figures, accepted by IEEE Transactions on Robotics",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2510.08807": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2026-07-04",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2510.25725": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2025-11-13",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2512.08920": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2025-12-09",
+   "journal_ref": null,
+   "comment": "Project website: https://jessicayin.github.io/osmo_tactile_glove/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2512.16842": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2025-12-18",
+   "journal_ref": null,
+   "comment": "https://opentouch-tactile.github.io/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2602.05513": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 4,
+   "updated": "2026-08-17",
+   "journal_ref": null,
+   "comment": "25 pages, 8 figures. Project Page: https://baai-humanoid.github.io/DECO-webpage/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2602.13579": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-02-14",
+   "journal_ref": null,
+   "comment": "Website: https://yswi.github.io/tactalign/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2603.15847": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-03-16",
+   "journal_ref": null,
+   "comment": "14 pages, 7 figures",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2603.17851": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-03-18",
+   "journal_ref": null,
+   "comment": "9 pages, 9 figures.Project page: https://xitong-c.github.io/DexViTac/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2603.20850": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-06-08",
+   "journal_ref": null,
+   "comment": "CVPR 2026 Highlight. This version includes the motion retarget process in the appendix",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2604.14944": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2026-10-06",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2605.13083": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-05-13",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2606.09243": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-06-08",
+   "journal_ref": null,
+   "comment": "Accepted to ICML2026 spotlight",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2606.13102": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2026-10-13",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2606.17055": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-06-18",
+   "journal_ref": null,
+   "comment": "Project page: https://tactile-rex.github.io/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2606.31836": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-06-30",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2607.01067": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-07-01",
+   "journal_ref": null,
+   "comment": "The first two authors contribute equally. Orders are decided by flipping a coin",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2607.09190": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-07-10",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2607.28625": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-07-30",
+   "journal_ref": null,
+   "comment": "Project Page: https://ace-data-engine.github.io/ACE-Data-0/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2608.15060": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-10-16",
+   "journal_ref": null,
+   "comment": "NeurIPS 2026 Accepted. Project Page: https://egotac.github.io/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2609.24976": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-09-21",
+   "journal_ref": null,
+   "comment": "22 pages. Project website: https://dextacwam.github.io/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2609.34182": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-09-29",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2610.05180": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-10-14",
+   "journal_ref": null,
+   "comment": "9 pages, 6 figures, 4 tables",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2610.10283": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-10-07",
+   "journal_ref": null,
+   "comment": "12 Pages. Website: https://lasr-lab.github.io/dexterous-grasp-stability/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2610.10288": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-10-08",
+   "journal_ref": null,
+   "comment": "Project page: https://touch-scale.github.io/",
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2610.11945": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-10-08",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-25"
+  },
+  "https://arxiv.org/abs/2610.18872": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-10-13",
+   "journal_ref": null,
+   "comment": "Project page: internrobotics.github.io/egoexplorer.github.io/",
+   "seen": "2026-10-25"
+  },
+  "https://baai-humanoid.github.io/DECO-webpage/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "a086bce9deaf5015",
+   "text_len": 4,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://dataset-mall.paxini.com": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "cff431c82aff0612",
+   "text_len": 8,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://dex-umi.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "6dfe0c6c7ea0b4ac",
+   "text_len": 8963,
+   "links": [
+    "https://github.com/eliahuhorwitz/Academic-project-page-template",
+    "https://github.com/real-stanford/DexUMI"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://dextacwam.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "638137e0453fbc8f",
+   "text_len": 23597,
+   "links": [
+    "https://github.com/dextacwam/DexTacWAM",
+    "https://github.com/eliahuhorwitz/Academic-project-page-template",
+    "https://github.com/nerfies/nerfies.github.io",
+    "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.1038/s41586-019-1234-z": {
+   "kind": "page",
+   "status": 200,
+   "length": "3038",
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.1038/s41597-025-04552-5": {
+   "kind": "page",
+   "status": 200,
+   "length": "3038",
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.1038/s41928-021-00558-0": {
+   "kind": "page",
+   "status": 200,
+   "length": "3038",
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.25532/OPARA-1588": {
+   "kind": "page",
+   "status": 200,
+   "length": "561993",
+   "etag": "W/\"89349-HK7uSB+hsJ5fQktEfJAV8nEKqxI\"",
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.25532/OPARA-787": {
+   "kind": "page",
+   "status": 200,
+   "length": "394807",
+   "etag": "W/\"60637-rsJS/d9Ctk5kiUPyVp0lJ9+jK28\"",
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.3390/s21082594": {
+   "kind": "page",
+   "status": 403,
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.48557/L6OWMM": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://doi.org/10.57760/sciencedb.14937": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": "\"c2877-AenItz8s/3SHABGIo2nI4vUb/LA\"",
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://egotac.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "4ba851acd0089548",
+   "text_len": 3673,
+   "links": [
+    "https://github.com/Mr-Zwkid/EgoTac",
+    "https://github.com/egotac/egotac.github.io",
+    "https://huggingface.co/datasets/wkzhang/EgoTac-SC",
+    "https://huggingface.co/wkzhang/EgoTac"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://egotactile.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "6d91f59fe3409c2d",
+   "text_len": 9886,
+   "links": [
+    "https://github.com/Russell-Zeng/EgoTactile",
+    "https://huggingface.co/datasets/HustleHard/EgoTactile"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://forms.gle/QzEPJ7ncuGHgi1gS9": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://ftp1-policy.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "33c355068846c216",
+   "text_len": 12404,
+   "links": [
+    "https://github.com/michaelyuancb/ftp1-policy",
+    "https://huggingface.co/MJJJJ1064/ftp1_v0426_50kstep",
+    "https://www.modelscope.cn/datasets/Eureka1064/FTP-1-Dataset"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://github.com/BAAI-Humanoid/DECO": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "BAAI-Humanoid/DECO",
+   "pushed_at": "2026-08-17T09:49:32Z",
+   "archived": false,
+   "license": "Apache-2.0",
+   "size_kb": 48966,
+   "readme_sha": "ffda2ee4362dc521e648835241c0a32f8735f01c",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/BeingBeyond/TTP": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "BeingBeyond/TTP",
+   "pushed_at": "2026-07-07T02:08:49Z",
+   "archived": false,
+   "license": "Apache-2.0",
+   "size_kb": 316,
+   "readme_sha": "5059a0519163f4941fde661106803298b8a8018a",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/DarioDiDomenico/SData_ReachGrasp": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "DarioDiDomenico/SData_ReachGrasp",
+   "pushed_at": "2025-04-24T09:10:02Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 5835,
+   "readme_sha": "d73406559dc43d2f4b0c5dfc9731662e24a0f0fc",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/Erkil1452/touch": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "erkil1452/touch",
+   "pushed_at": "2023-03-21T18:37:39Z",
+   "archived": true,
+   "license": "NOASSERTION",
+   "size_kb": 29,
+   "readme_sha": "79189aa0dbaa0b45c9a92ec7c7ecb6dd2e4d0fe8",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/InternRobotics/EgoExplorer": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "InternRobotics/EgoExplorer",
+   "pushed_at": "2026-10-23T05:52:55Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 62377,
+   "readme_sha": "937866902c16905ada84a3fcc4b32eb0d44c8bd7",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/Jianyi2004/TouchAnything": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "Jianyi2004/TouchAnything",
+   "pushed_at": "2026-05-21T08:29:33Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 134494,
+   "readme_sha": "902ef3d7d51f62dacc9f4d2ce4616b22dc734369",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/LQTS/VTDexManip": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "LQTS/VTDexManip",
+   "pushed_at": "2025-07-07T06:42:21Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 58564,
+   "readme_sha": "b7597ea817a380c3dfdfd856212fd0f202f8e12f",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/LejuRobotics/kuavo_data_challenge": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "LejuRobotics/kuavo_data_challenge",
+   "pushed_at": "2026-08-10T04:46:10Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 2192,
+   "readme_sha": "b5e92cadafef3cc67c6c9b198e81b22b80183e7c",
+   "release": "v1.0.2 2026-02-25",
+   "seen": "2026-10-25"
+  },
+  "https://github.com/Mr-Zwkid/EgoTac": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "Mr-Zwkid/EgoTac",
+   "pushed_at": "2026-10-05T08:48:00Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 30976,
+   "readme_sha": "e0a43156846a75243adad52feaf6f7af67ce79fe",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/OpenTouch-MIT/opentouch": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "OpenTouch-MIT/opentouch",
+   "pushed_at": "2026-03-18T21:01:52Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 4023,
+   "readme_sha": "35f4b34c2fa6751709b914330777b9159a0ba096",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/Russell-Zeng/EgoTactile": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "Russell-Zeng/EgoTactile",
+   "pushed_at": "2026-06-29T04:33:23Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 3953,
+   "readme_sha": "9376e694f8280b2b2b3f897525e4377ec4afacc4",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/TouchTronix-Robotics/FusionX-DataCollection": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "TouchTronix-Robotics/FusionX-DataCollection",
+   "pushed_at": "2026-10-16T02:49:52Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 6005,
+   "readme_sha": "e0cefc1f1c0c16269a41e0984a52b1c37f9f0c74",
+   "release": "v3.0.0 2026-10-12",
+   "seen": "2026-10-25"
+  },
+  "https://github.com/VICON-dataset/dataset": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "VICON-dataset/dataset",
+   "pushed_at": "2026-09-16T03:41:07Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 1,
+   "readme_sha": "1173c4329071de627854ad7b859044d0c5fbbe2e",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/YunzhuLi/senstextile": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "YunzhuLi/senstextile",
+   "pushed_at": "2021-03-23T21:17:42Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 200529,
+   "readme_sha": "45af6b518644ca89b9c2d424dbd36890fe57a147",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/ZhuoyangLiu2005/T-Rex": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "ZhuoyangLiu2005/T-Rex",
+   "pushed_at": "2026-10-08T22:32:48Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 145516,
+   "readme_sha": "ad43c9657ea5a013a3865473d3395e56e7c1d3a7",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/delpreto/ActionNet": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "delpreto/ActionNet",
+   "pushed_at": "2026-10-12T12:05:42Z",
+   "archived": false,
+   "license": "NOASSERTION",
+   "size_kb": 58958,
+   "readme_sha": "e1860f1c0a15c347e3ffc4cf8bb42f96c5f49f9c",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/dextacwam/DexTacWAM": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "dextacwam/DexTacWAM",
+   "pushed_at": "2026-09-30T08:00:32Z",
+   "archived": false,
+   "license": "Apache-2.0",
+   "size_kb": 3075,
+   "readme_sha": "f437e88a5bf7d13333a0e3cfcb3fe772559a4633",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/facebookresearch/neuralfeels": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "facebookresearch/neuralfeels",
+   "pushed_at": "2024-11-13T03:29:38Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 6056,
+   "readme_sha": "ca8011a3f993641c14370e60d7343065233b9e07",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/facebookresearch/sparsh-multisensory-touch": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "facebookresearch/sparsh-multisensory-touch",
+   "pushed_at": "2025-08-20T14:34:49Z",
+   "archived": false,
+   "license": "NOASSERTION",
+   "size_kb": 14980,
+   "readme_sha": "0fabbdfb5be66b1c966afef2ce32f4b79f8b8235",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/irmakguzey/tactile-dexterity": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "irmakguzey/tactile-dexterity",
+   "pushed_at": "2024-02-09T15:56:14Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 607,
+   "readme_sha": "875eb3e39ae34695523d2cc3b10ccbb1b432e7f5",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/jessicayin/osmo_tactile_glove": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "jessicayin/osmo_tactile_glove",
+   "pushed_at": "2026-10-09T19:09:18Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 238077,
+   "readme_sha": "221c8418966fe54cffc6e15fda3f69f19d6af01e",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/lasr-lab/dexterous-grasp-stability": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "lasr-lab/dexterous-grasp-stability",
+   "pushed_at": "2026-10-08T15:59:14Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 12508,
+   "readme_sha": "d38d1d9b3d14e759cf57f3dddd75c8d6306d8989",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/linker-bot/UMI-Dex": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "linker-bot/umi-dex",
+   "pushed_at": "2026-06-11T09:05:37Z",
+   "archived": false,
+   "license": "Apache-2.0",
+   "size_kb": 66071,
+   "readme_sha": "c8c7b5bae73851a366629f805ce0ab9317d01db2",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/michaelyuancb/ftp1-policy": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "michaelyuancb/ftp1-policy",
+   "pushed_at": "2026-07-15T03:39:58Z",
+   "archived": false,
+   "license": "Apache-2.0",
+   "size_kb": 85825,
+   "readme_sha": "57799e021b577908a9bf8c2df00d7fcf3fdfd467",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/nolann030628/OXT-QC": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "nolann030628/OXT-QC",
+   "pushed_at": "2026-09-07T04:03:30Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 103239,
+   "readme_sha": "05b4e548f396e6facf9eb4b5fff307ddf210fe04",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/phai-lab/touchscale": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "phai-lab/touchscale",
+   "pushed_at": "2026-10-16T18:36:07Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 383490,
+   "readme_sha": "125d1f91794bc099f6da6e2d6d8443fb84ff2f66",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/physical-superintelligence-lab/Humanoid-Everyday": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "physical-superintelligence-lab/Humanoid-Everyday",
+   "pushed_at": "2026-06-21T07:07:56Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 7306,
+   "readme_sha": "e8485d24754f208feac00dbd8fa3307e96ed2145",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/px-DataCollection/px_omnisharing_dataprocess_kit": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "px-DataCollection/px_omnisharing_dataprocess_kit",
+   "pushed_at": "2026-10-19T04:19:04Z",
+   "archived": false,
+   "license": "NOASSERTION",
+   "size_kb": 190018,
+   "readme_sha": "c8cb83369a273265b9e71df6617c7986df0a90c9",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/real-stanford/DexUMI": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "real-stanford/DexUMI",
+   "pushed_at": "2026-04-18T23:04:19Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 17136,
+   "readme_sha": "3caaa440365b8719ac7c410d0f6a55c321c1181d",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/snuvclab/HRDexDB": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "snuvclab/HRDexDB",
+   "pushed_at": "2026-10-11T13:32:19Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 404319,
+   "readme_sha": "fec1a2030be65aae271a1276142bdbf7409fbd71",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/tianhaowuhz/3dtacdex": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "tianhaowuhz/3dtacdex",
+   "pushed_at": "2025-06-10T02:51:03Z",
+   "archived": false,
+   "license": "MIT",
+   "size_kb": 76407,
+   "readme_sha": "de5c1a9acdadceba3f32328e3be9235471373d2d",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/toruowo/hato": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "ToruOwO/hato",
+   "pushed_at": "2024-05-27T06:45:26Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 6351,
+   "readme_sha": "05d343810865f4311782d96097b56cc70ec817ce",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://github.com/uni-vta/UVTA": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "uni-vta/UVTA",
+   "pushed_at": "2026-09-30T02:43:27Z",
+   "archived": false,
+   "license": "NOASSERTION",
+   "size_kb": 1939,
+   "readme_sha": "0b1d136900162031a4807e0af4a19e192d1442d8",
+   "release": null,
+   "seen": "2026-10-25"
+  },
+  "https://grasplikehuman.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "5245b07a51514be8",
+   "text_len": 2598,
+   "links": [
+    "https://github.com/nerfies/nerfies.github.io",
+    "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip": {
+   "kind": "page",
+   "status": 200,
+   "length": "21185342",
+   "etag": "\"68c22c34-143433e\"",
+   "modified": "Thu, 11 Sep 2025 01:56:04 GMT",
+   "seen": "2026-10-25"
+  },
+  "https://hci-tech-lab.github.io/PiMForce/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "e004d9a60542424a",
+   "text_len": 2285,
+   "links": [
+    "https://github.com/eliahuhorwitz/Academic-project-page-template",
+    "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "593b65e7090f47d5",
+   "text_len": 1552,
+   "links": [
+    "https://cdn-avatars.huggingface.co/v1/production/uploads/649e31b4ed3107c9bd1fc7eb/MN9Hh84P87vpTpawPl-mJ.jpeg",
+    "https://cdn-avatars.huggingface.co/v1/production/uploads/no-auth/lKP9PoghnhdtMgz4M60TF.png",
+    "https://discuss.huggingface.co",
+    "https://huggingface.co",
+    "https://huggingface.co/Chi-Shan",
+    "https://huggingface.co/JadeCong",
+    "https://huggingface.co/JensenYuan",
+    "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder",
+    "https://huggingface.co/avatars/99518d595e6895a3f8997197d9a052f4.svg",
+    "https://huggingface.co/blog",
+    "https://huggingface.co/chat",
+    "https://huggingface.co/collections",
+    "https://huggingface.co/collections/JensenYuan/dextacwam",
+    "https://huggingface.co/datasets",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_488_diverse_episodes",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_cube_handover",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_pick_place_cube",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_place_with_tongs",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_unscrew_bottle_cap",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_unstack_bowl",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_wipe_whiteboard",
+    "https://huggingface.co/docs",
+    "https://huggingface.co/docs/hub/collections",
+    "https://huggingface.co/enterprise",
+    "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-400-normal.woff2",
+    "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-600-normal.woff2",
+    "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-700-normal.woff2",
+    "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
+    "https://huggingface.co/front/build/kube-184263b/index.js",
+    "https://huggingface.co/front/build/kube-184263b/katex.css",
+    "https://huggingface.co/front/build/kube-184263b/style.css",
+    "https://huggingface.co/hardware",
+    "https://huggingface.co/huggingface",
+    "https://huggingface.co/inference-endpoints",
+    "https://huggingface.co/inference/models",
+    "https://huggingface.co/join",
+    "https://huggingface.co/join/discord",
+    "https://huggingface.co/js/script.js",
+    "https://huggingface.co/languages",
+    "https://huggingface.co/learn",
+    "https://huggingface.co/login",
+    "https://huggingface.co/login?next=%2Fcollections%2FJensenYuan%2Fdextacwam",
+    "https://huggingface.co/models",
+    "https://huggingface.co/organizations",
+    "https://huggingface.co/papers",
+    "https://huggingface.co/posts",
+    "https://huggingface.co/pricing",
+    "https://huggingface.co/privacy",
+    "https://huggingface.co/pro",
+    "https://huggingface.co/spaces",
+    "https://huggingface.co/storage",
+    "https://huggingface.co/support",
+    "https://huggingface.co/tasks",
+    "https://huggingface.co/terms-of-service"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale": {
+   "kind": "hf",
+   "status": 200,
+   "id": "2077AIDataFoundation/TouchScale",
+   "sha": "74914cc2e11d0a7f37ddbe5d57db4fe4e14a0a7e",
+   "last_modified": "2026-10-23T23:18:27.000Z",
+   "gated": "auto",
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 16353,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/ACERobotics/ACE-Data-0": {
+   "kind": "hf",
+   "status": 200,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50": {
+   "kind": "hf",
+   "status": 200,
+   "id": "BAAI-Humanoid/DECO-50",
+   "sha": "86650c87ffa1baee29f0be0bb8a2d9e40c03ff0b",
+   "last_modified": "2026-02-18T07:29:35.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 8179,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample": {
+   "kind": "hf",
+   "status": 200,
+   "id": "BeingBeyond/H-Tac_Sample",
+   "sha": "dfdf7abb989408504e9f944ac38d3bf5c0aade4d",
+   "last_modified": "2026-07-06T07:26:20.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 319,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/Chopper233/UVTA": {
+   "kind": "hf",
+   "status": 200,
+   "id": "Chopper233/UVTA",
+   "sha": "2c6f691a46482be6be51d876d3d5bc79194f1aa1",
+   "last_modified": "2026-09-29T13:12:45.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 60,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark": {
+   "kind": "hf",
+   "status": 200,
+   "id": "FeelAuthors/FEEL-Benchmark",
+   "sha": "7cba9f8ef9e0eae28205a2bf3c52060452d06ba6",
+   "last_modified": "2026-08-12T13:38:15.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 7056,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/HRDexDB/HRDexDB": {
+   "kind": "hf",
+   "status": 200,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/HustleHard/EgoTactile": {
+   "kind": "hf",
+   "status": 200,
+   "id": "HustleHard/EgoTactile",
+   "sha": "bdc81fb73f8c9697f40796d6f01d291c87ca67b1",
+   "last_modified": "2026-07-25T08:23:03.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 1539,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/InternRobotics/EgoExplorer": {
+   "kind": "hf",
+   "status": 200,
+   "id": "InternRobotics/EgoExplorer",
+   "sha": "96b8de2dbf0ff4dae90987d8c1129aea8b7ce5d1",
+   "last_modified": "2026-10-22T09:09:13.000Z",
+   "gated": "manual",
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 164,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset": {
+   "kind": "hf",
+   "status": 200,
+   "id": "LejuRobotics/LET-Dex-Dataset",
+   "sha": "3b9920b46c1fb24350ee1fb95dbddb11f0247650",
+   "last_modified": "2026-03-23T03:28:40.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-sa-4.0",
+   "files": 745,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/MJJJJ1064/FTP-1-Dataset": {
+   "kind": "hf",
+   "status": 200,
+   "id": "MJJJJ1064/FTP-1-Dataset",
+   "sha": "d287c9c532514a08b2eb29bf1259997bb32f4f3b",
+   "last_modified": "2026-06-15T12:26:56.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 89,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation": {
+   "kind": "hf",
+   "status": 200,
+   "id": "OpenGraphLabs-Research/ego-tactile-manipulation",
+   "sha": "90c4e304b8e3a9578d5bb938992206358db1a660",
+   "last_modified": "2026-06-28T15:07:44.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 612,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/PsiBotAI/SynData": {
+   "kind": "hf",
+   "status": 200,
+   "id": "PsiBotAI/SynData",
+   "sha": "f53bdde8be5de425c9c42028b3960415b573ad4c",
+   "last_modified": "2026-09-29T08:26:06.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 4039,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/PsiBotAI/SynData/tree/main/tools/syndata_render": {
+   "kind": "hf",
+   "status": 200,
+   "id": "PsiBotAI/SynData",
+   "sha": "f53bdde8be5de425c9c42028b3960415b573ad4c",
+   "last_modified": "2026-09-29T08:26:06.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 4039,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/Rimbot/PalmDex": {
+   "kind": "hf",
+   "status": 200,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0": {
+   "kind": "hf",
+   "status": 200,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly": {
+   "kind": "hf",
+   "status": 200,
+   "id": "SharpaIT/RoCo_TaskBoardAssembly",
+   "sha": "07432c3ecb3a97a067ca653dcfa751b15f6d8181",
+   "last_modified": "2026-09-20T17:20:54.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 29819,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge": {
+   "kind": "hf",
+   "status": 200,
+   "id": "SharpaIT/Robotic_Origami_Challenge",
+   "sha": "8194af6b9341dac7686c2f29704ff893e6f2f95e",
+   "last_modified": "2026-07-24T03:33:54.000Z",
+   "gated": "auto",
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 18849,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset": {
+   "kind": "hf",
+   "status": 200,
+   "id": "Tachintech/Fixed_Viewpoint_Tactile_Dataset",
+   "sha": "96e67db61cf74faeccb07732e9698af7def9f9e8",
+   "last_modified": "2026-06-28T21:33:05.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 159,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01": {
+   "kind": "hf",
+   "status": 200,
+   "id": "Tachin-TachinTech/TachinGlove_Standard",
+   "sha": "2eb0e45e6d2103f33a7329c657a161c067d516c9",
+   "last_modified": "2026-08-21T01:40:09.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "gpl-3.0",
+   "files": 279,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday": {
+   "kind": "hf",
+   "status": 200,
+   "id": "USC-PSI-Lab/humanoid-everyday",
+   "sha": "71f6210e91c2a7e8b8e4d47db0147444a1a0640e",
+   "last_modified": "2026-06-02T07:18:30.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 26869,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch": {
+   "kind": "hf",
+   "status": 200,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity": {
+   "kind": "hf",
+   "status": 200,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/edessa/feel": {
+   "kind": "hf",
+   "status": 200,
+   "id": "edessa/feel",
+   "sha": "0f8179649b50afcfd684c87784c67787871db361",
+   "last_modified": "2026-08-10T16:08:00.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 101,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/facebook/sparsh-skin-dataset": {
+   "kind": "hf",
+   "status": 200,
+   "id": "facebook/sparsh-skin-dataset",
+   "sha": "fc1d66893d775293d8bd7a411cdcda1339c2b810",
+   "last_modified": "2025-08-28T19:43:23.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 5869,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/facebook/sparsh-x-dataset": {
+   "kind": "hf",
+   "status": 200,
+   "id": "facebook/sparsh-x-dataset",
+   "sha": "9f05fe1d4982fb64c310c06fb99a85dde81b1930",
+   "last_modified": "2025-08-16T01:05:59.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 8,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/kingchou007/3dtacdex": {
+   "kind": "hf",
+   "status": 200,
+   "id": "kingchou007/3dtacdex",
+   "sha": "adbae883b6a86a14f18803317227e4218bbbfe58",
+   "last_modified": "2026-09-28T06:02:07.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 547,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929": {
+   "kind": "hf",
+   "status": 200,
+   "id": "lilfiiiiish/juqiao-glove-0929",
+   "sha": "ffb94574c367127d0f9cc1363b7bdd8005297b52",
+   "last_modified": "2026-10-22T04:20:12.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 14,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/ntumars/DextraVerse": {
+   "kind": "hf",
+   "status": 200,
+   "id": "ntumars/DextraVerse",
+   "sha": "b36b2488a2a75f401b554408847cb36fbfa9dba9",
+   "last_modified": "2026-10-08T03:10:10.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 47,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/paxini/Omnisharing_DB_SampleData": {
+   "kind": "hf",
+   "status": 200,
+   "id": "paxini/Omnisharing_DB_SampleData",
+   "sha": "9aeecd74411dd3acdfdab4e03cecf28b52f0e208",
+   "last_modified": "2026-10-19T06:17:39.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 1002,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/suddhu/Feelsight": {
+   "kind": "hf",
+   "status": 200,
+   "id": "suddhu/Feelsight",
+   "sha": "c08a7381fc164e9f0c48bfe4656f1bd3e23e729f",
+   "last_modified": "2024-11-11T04:41:26.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "mit",
+   "files": 6,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V3": {
+   "kind": "hf",
+   "status": 200,
+   "id": "touchtronix/FusionX-Multimodal-Sample-Data-V3",
+   "sha": "51392e3b05d8566b29ad8fe9f78478e8fef4971b",
+   "last_modified": "2026-05-19T03:36:57.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-4.0",
+   "files": 47383,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/velvet-pine-22/PULSE": {
+   "kind": "hf",
+   "status": 200,
+   "id": "velvet-pine-22/PULSE",
+   "sha": "5c87906a11f9735af472c80dad67aac4392ca331",
+   "last_modified": "2026-10-18T02:44:09.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "cc-by-nc-4.0",
+   "files": 3623,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/vint6d/vint6d": {
+   "kind": "hf",
+   "status": 200,
+   "id": "vint6d/vint6d",
+   "sha": "d8b38fbd339994fb8282f7bbba1bd9b0adcee7bf",
+   "last_modified": "2025-01-05T16:44:31.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "mit",
+   "files": 29,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/wkzhang/EgoTac-SC": {
+   "kind": "hf",
+   "status": 200,
+   "id": "wkzhang/EgoTac-SC",
+   "sha": "3506c3e11e3134e77d4328edbaf9fd219b0ee0a3",
+   "last_modified": "2026-10-06T00:56:40.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "apache-2.0",
+   "files": 48,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/xitong-c/DexViTac_Dataset": {
+   "kind": "hf",
+   "status": 200,
+   "id": "xitong-c/DexViTac_Dataset",
+   "sha": "e294ad01d08654e66e8549b698720fae6917c072",
+   "last_modified": "2026-03-17T08:01:57.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 2,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/youngw/tactile_align_encoder_pretrain_glove": {
+   "kind": "hf",
+   "status": 200,
+   "id": "youngw/tactile_align_encoder_pretrain_glove",
+   "sha": "6b080ce461add948163dcd894855ed228bcf2099",
+   "last_modified": "2026-05-29T00:13:37.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 14,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/zekaiwang/trex_dataset": {
+   "kind": "hf",
+   "status": 200,
+   "id": "zekaiwang/trex_dataset",
+   "sha": "8b478400a9167d59ede0fdbfea616cb5e9791885",
+   "last_modified": "2026-10-05T17:17:51.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "mit",
+   "files": 7903,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/datasets/zhouzhoujy/EgoTouch": {
+   "kind": "hf",
+   "status": 200,
+   "id": "zhouzhoujy/EgoTouch",
+   "sha": "cfdbb0ac31cc2af4247943820aa250575e7e6637",
+   "last_modified": "2026-05-16T12:08:42.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": null,
+   "files": 22897,
+   "seen": "2026-10-25"
+  },
+  "https://huggingface.co/velvet-pine-22/PULSE-code": {
+   "kind": "hf",
+   "status": 200,
+   "id": "velvet-pine-22/PULSE-code",
+   "sha": "65ab6557b86ef6459d7d1888b52b10d2f15b0e29",
+   "last_modified": "2026-10-17T03:48:48.000Z",
+   "gated": false,
+   "private": false,
+   "disabled": false,
+   "license": "mit",
+   "files": 131,
+   "seen": "2026-10-25"
+  },
+  "https://humanoideveryday.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "74808553a66c0051",
+   "text_len": 3493,
+   "links": [],
+   "phrases": [
+    "Coming Soon BibTeX @misc{zhao2025humanoideverydaycomprehensiverobotic, title={Humanoid Everyday: A Comprehensive Robotic Dataset fo"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://internrobotics.github.io/egoexplorer.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "3ce316cad0664009",
+   "text_len": 11424,
+   "links": [
+    "https://github.com/InternRobotics/EgoExplorer",
+    "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+    "https://huggingface.co/papers/2610.18872"
+   ],
+   "phrases": [
+    "18872}, } The dataset, the capture toolkit and the reconstruction code will be released"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://jianyi2004.github.io/TouchAnything-Website/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "f87cdc9bb6eb8063",
+   "text_len": 10710,
+   "links": [
+    "https://github.com/Jianyi2004/TouchAnything",
+    "https://huggingface.co/datasets/zhouzhoujy/EgoTouch/tree/main"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://lasr-lab.github.io/dexterous-grasp-stability/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "a9de0dbcd08e96c8",
+   "text_len": 8480,
+   "links": [
+    "https://github.com/lasr-lab/dexterous-grasp-stability",
+    "https://github.com/lasr-lab/dexterous-grasp-stability/tree/main/docs"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://lasr.org/research/gentle-grasping": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "e6bd4dd7459ec973",
+   "text_len": 5843,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://lqts.github.io/VTDexManip/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "40f14e127404641c",
+   "text_len": 2697,
+   "links": [
+    "https://github.com/LQTS/VTDexManip"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://mlzxy.github.io/glove2hand": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "848a879b89e020fb",
+   "text_len": 2228,
+   "links": [
+    "https://forms.gle/QzEPJ7ncuGHgi1gS9",
+    "https://github.com/eliahuhorwitz/Academic-project-page-template"
+   ],
+   "phrases": [
+    "Stay tuned — larger dataset releases and updates about our multi-modal sensing gloves are on the way"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "2fa8e428e1a2ae5b",
+   "text_len": 53,
+   "links": [
+    "https://modelscope.cn/opensearch.xml",
+    "https://www.modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset",
+    "https://www.modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset.md"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://modelscope.cn/datasets/daimonrobotics/Daimon-Infinity-Lite": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "45e3dec28dc031d8",
+   "text_len": 38,
+   "links": [
+    "https://modelscope.cn/opensearch.xml",
+    "https://www.modelscope.cn/datasets/daimonrobotics/Daimon-Infinity-Lite",
+    "https://www.modelscope.cn/datasets/daimonrobotics/Daimon-Infinity-Lite.md"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://omnisharingdb.paxini.com/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "d5122fac892b22e9",
+   "text_len": 2887,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://open-x-tactile.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "d2eb8390b910582e",
+   "text_len": 761,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://openreview.net/forum?id=olvz0gAdGOX": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "baaae8d0fbed82d3",
+   "text_len": 282,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://opentouch-tactile.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "099571f2a4295869",
+   "text_len": 6449,
+   "links": [
+    "https://github.com/OpenTouch-MIT/opentouch"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf": {
+   "kind": "page",
+   "status": 200,
+   "length": "8677836",
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://real.stanford.edu/dexumi/sample_data.zip": {
+   "kind": "page",
+   "status": 200,
+   "length": "544417783",
+   "etag": "\"207327f7-63642410531aa\"",
+   "modified": "Thu, 29 May 2025 08:40:46 GMT",
+   "seen": "2026-10-25"
+  },
+  "https://research.beingbeyond.com/ttp": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "c7bc15bc86415bc3",
+   "text_len": 6195,
+   "links": [
+    "https://github.com/BeingBeyond/TTP",
+    "https://huggingface.co/BeingBeyond/TTP",
+    "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://robotic-origami-challenge.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "c2559be28f276d33",
+   "text_len": 5561,
+   "links": [
+    "https://forms.gle/Y46WUArricVAQPBv9"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://rocochallenge.github.io/RoCo-IROS2026/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "5adad2a5224b0d16",
+   "text_len": 4139,
+   "links": [
+    "https://docs.google.com/document/d/1dYp-3dmC89N7HWRckPcNiuhEUxSLgmTkmIfu8nnVSfE/mobilebasic?pli=1",
+    "https://docs.google.com/forms/d/e/1FAIpQLSd0eMP20_mwSkO6-KRKvtwKpPdqyTUDdi-Zf9aJSjdY2QcHEw/viewform",
+    "https://docs.google.com/forms/d/e/1FAIpQLSflInmaLlA9AgMlULyXQbyVjuDThKn1gDROZGzxTRpF7OwgKg/viewform",
+    "https://forms.gle/d2NKNAE7dqSfYZB87"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://senstextile.csail.mit.edu/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "1d9798b75a1e8734",
+   "text_len": 3119,
+   "links": [
+    "https://github.com/YunzhuLi/senstextile",
+    "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://snuvclab.github.io/HRDexDB/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "7ae94ea0f1671515",
+   "text_len": 3412,
+   "links": [
+    "https://github.com/nerfies/nerfies.github.io",
+    "https://github.com/shunzh/project_website",
+    "https://github.com/snuvclab/HRDexDB",
+    "https://huggingface.co/datasets/HRDexDB/HRDexDB"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://suddhu.github.io/neural-feels/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "952273adb04d0a96",
+   "text_len": 6948,
+   "links": [
+    "https://github.com/HaozhiQi/hora",
+    "https://github.com/Jianghanxiao/Helper3D",
+    "https://github.com/antocad/FocusOnDepth",
+    "https://github.com/facebookresearch/iSDF",
+    "https://github.com/facebookresearch/neuralfeels",
+    "https://github.com/facebookresearch/segment-anything",
+    "https://github.com/facebookresearch/tacto",
+    "https://github.com/facebookresearch/theseus",
+    "https://github.com/isl-org/DPT",
+    "https://huggingface.co/collections/suddhu/neuralfeels-673184a97ddcac2df69ff489",
+    "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://tacross-touch-project.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "6f454ed9a80e0d81",
+   "text_len": 9697,
+   "links": [
+    "https://github.com/tacross-touch-project/tacross-touch-project.github.io/releases/download/hardware-v1/tacross_v1.zip",
+    "https://github.com/tacross-touch-project/tacross-touch-project.github.io/releases/tag/hardware-v1"
+   ],
+   "phrases": [
+    "Download hardware v1 ZIP ↓ View GitHub release ↗ Software release coming soon"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://tactidex.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "b281780caa956ddf",
+   "text_len": 6335,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://tactile-dexterity.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "c353e69470b529b3",
+   "text_len": 2878,
+   "links": [
+    "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL?usp=sharing",
+    "https://github.com/irmakguzey/tactile-dexterity"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://tactile-rex.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "9ecc34b126c0b951",
+   "text_len": 3523,
+   "links": [
+    "https://github.com/ZhuoyangLiu2005/T-Rex",
+    "https://github.com/doorman-humanoid/doorman-humanoid.github.io",
+    "https://huggingface.co/datasets/Beakerman0101/trex-visualizer/resolve/main/overview/trex_overview.mp4",
+    "https://huggingface.co/datasets/Beakerman0101/trex-visualizer/resolve/main/task_demos_speed/flip_page_3_final_5x.mp4"
+   ],
+   "phrases": [
+    "Citation to be released The design of this project page was adapted from the Doorman Humanoid project page template — many thanks to the origin"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://toruowo.github.io/hato/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "f931115d78a76b60",
+   "text_len": 3528,
+   "links": [
+    "https://berkeley.app.box.com/s/379cf57zqm1akvr00vdcloxqxi3ucb9g?sortColumn=name&sortDirection=ASC",
+    "https://github.com/toruowo/hato"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://touch-scale.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "5ff24350265634ec",
+   "text_len": 3467,
+   "links": [
+    "https://github.com/phai-lab/touchscale",
+    "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://uni-vta.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "ea09309836be1ab9",
+   "text_len": 4610,
+   "links": [
+    "https://github.com/uni-vta/UVTA",
+    "https://huggingface.co/datasets/Chopper233/UVTA"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://vint-6d.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "5a6698aa35ad2288",
+   "text_len": 3234,
+   "links": [
+    "https://huggingface.co/datasets/vint6d/vint6d"
+   ],
+   "phrases": [
+    "iversity 2 Tencent 3 UC Merced 4 Chinese Academic of Sciences, Automation Institute [Paper] [Dataset] [Poster] [Video] (Coming Soon) This paper addresses the scarcity of large-scale datasets for accur"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://www.cs.umd.edu/~edessale/feel": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "66c0cd26d29a09cc",
+   "text_len": 2570,
+   "links": [
+    "https://huggingface.co/datasets/edessa/feel"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0": {
+   "kind": "page",
+   "status": 200,
+   "length": null,
+   "etag": null,
+   "modified": null,
+   "seen": "2026-10-25"
+  },
+  "https://www.jessicayin.com/osmo_tactile_glove/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "6a9ac93898203b28",
+   "text_len": 11072,
+   "links": [
+    "https://github.com/eliahuhorwitz/Academic-project-page-template",
+    "https://github.com/geopavlakos/hamer",
+    "https://github.com/jessicayin/osmo_tactile_glove",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/website/hardware_guides/bom.md",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/website/hardware_guides/glove_assembly.md",
+    "https://github.com/jessicayin/osmo_tactile_glove/blob/website/hardware_guides/sensor_assembly.md",
+    "https://github.com/jessicayin/osmo_tactile_glove/tree/main/firmware",
+    "https://github.com/jessicayin/osmo_tactile_glove/tree/main/hardware/ros2",
+    "https://github.com/jessicayin/osmo_tactile_glove/tree/main/pcb/mcu_board",
+    "https://github.com/jessicayin/osmo_tactile_glove/tree/main/pcb/sensor_boards"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://www.opengraphlabs.com/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "3e5a8d44be343b70",
+   "text_len": 2212,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://www.sharpa.com/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "261543f323f2876a",
+   "text_len": 5899,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://www.tachin.com/en": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "9636b8290cc0365a",
+   "text_len": 3627,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://xitong-c.github.io/DexViTac/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "49e4462e0fbcd23d",
+   "text_len": 4651,
+   "links": [
+    "https://docs.google.com/document/d/1-36bv3bknBpNO5oNesyfJNyjbbuHoA_ExJmM0CZ6fQs/edit?tab=t.0",
+    "https://github.com/eliahuhorwitz/Academic-project-page-template",
+    "https://github.com/xitong-c/DexViTac_Code",
+    "https://huggingface.co/datasets/xitong-c/DexViTac_Dataset",
+    "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://xsparkai.com/sparklab/humantouch/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "a137006baa8cffc8",
+   "text_len": 29890,
+   "links": [
+    "https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch",
+    "https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  },
+  "https://yswi.github.io/tactalign/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "6c16dff627b75c35",
+   "text_len": 5408,
+   "links": [
+    "https://github.com/google/tactalign",
+    "https://github.com/nerfies/nerfies.github.io"
+   ],
+   "phrases": [
+    "arXiv Coming Soon Abstract We present TactAlign , a cross-sensor tactile alignment method for cross-embodiment human-to-robot policy tran"
+   ],
+   "seen": "2026-10-25"
+  },
+  "https://zenodo.org/records/4607289": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "a988f6d4dc8f545d",
+   "text_len": 3160,
+   "links": [
+    "https://about.zenodo.org",
+    "https://about.zenodo.org/contact",
+    "https://about.zenodo.org/cookie-policy",
+    "https://about.zenodo.org/infrastructure",
+    "https://about.zenodo.org/policies",
+    "https://about.zenodo.org/principles",
+    "https://about.zenodo.org/privacy-policy",
+    "https://about.zenodo.org/projects",
+    "https://about.zenodo.org/roadmap",
+    "https://about.zenodo.org/terms",
+    "https://blog.zenodo.org",
+    "https://developers.zenodo.org",
+    "https://github.com/zenodo/zenodo-rdm",
+    "https://help.zenodo.org",
+    "https://support.zenodo.org/help",
+    "https://zenodo.org",
+    "https://zenodo.org/badge/DOI/10.5281/zenodo.4607289.svg",
+    "https://zenodo.org/communities",
+    "https://zenodo.org/donate",
+    "https://zenodo.org/help/statistics",
+    "https://zenodo.org/login?next=/records/4607289",
+    "https://zenodo.org/me/uploads",
+    "https://zenodo.org/records/4607289/files/Dataset%20description.pdf",
+    "https://zenodo.org/records/4607289/files/Dataset%20description.pdf?download=1",
+    "https://zenodo.org/records/4607289/files/dataset.mat",
+    "https://zenodo.org/records/4607289/files/dataset.mat?download=1",
+    "https://zenodo.org/records/4607289/files/sensor.png",
+    "https://zenodo.org/records/4607289/files/sensor.png?download=1",
+    "https://zenodo.org/records/4607289/preview/Dataset%20description.pdf?include_deleted=0",
+    "https://zenodo.org/records/4607289/preview/sensor.png?include_deleted=0",
+    "https://zenodo.org/search?q=&f=resource_type%3Adataset",
+    "https://zenodo.org/search?q=metadata.creators.person_or_org.name:%22Antonio+P%C3%A9rez-Gonz%C3%A1lez%22",
+    "https://zenodo.org/search?q=metadata.creators.person_or_org.name:%22Javier+Cepria-Bernal%22",
+    "https://zenodo.org/search?q=metadata.subjects.subject:%22Human+grasping,+Tactile+signatures+in+ADL,+Pressure+sensor,+Dataset%22",
+    "https://zenodo.org/signup",
+    "https://zenodo.org/static/apple-touch-icon-120.png",
+    "https://zenodo.org/static/apple-touch-icon-152.png",
+    "https://zenodo.org/static/apple-touch-icon-167.png",
+    "https://zenodo.org/static/apple-touch-icon-180.png",
+    "https://zenodo.org/static/dist/css/6874.190253af05cded53.css",
+    "https://zenodo.org/static/dist/js/1030.2bd7ba0097a92ffb.js",
+    "https://zenodo.org/static/dist/js/1242.e6c7a37fd9c1d834.js",
+    "https://zenodo.org/static/dist/js/1246.b396fa28f0972a35.js",
+    "https://zenodo.org/static/dist/js/1273.0e9a1e369533175f.js",
+    "https://zenodo.org/static/dist/js/1514.21769a54699f6711.js",
+    "https://zenodo.org/static/dist/js/1930.a74559fb3ee11c3d.js",
+    "https://zenodo.org/static/dist/js/1947.988c4158df45a81f.js",
+    "https://zenodo.org/static/dist/js/2028.06cef4fb71d62607.js",
+    "https://zenodo.org/static/dist/js/2129.447d2fbedd1ee9c8.js",
+    "https://zenodo.org/static/dist/js/2210.927045c5842e144f.js",
+    "https://zenodo.org/static/dist/js/240.a771ab8d945631f9.js",
+    "https://zenodo.org/static/dist/js/2620.cf785df0e2426647.js",
+    "https://zenodo.org/static/dist/js/2716.f8086db402b2cfd3.js",
+    "https://zenodo.org/static/dist/js/2766.1b99024cbed716f7.js",
+    "https://zenodo.org/static/dist/js/3536.86076ba3bc3b1b39.js",
+    "https://zenodo.org/static/dist/js/3646.f9960a96ae80e501.js",
+    "https://zenodo.org/static/dist/js/4505.ab7a1eca17d759c0.js",
+    "https://zenodo.org/static/dist/js/4993.9b6c5ad959265314.js",
+    "https://zenodo.org/static/dist/js/5250.40ef85abdffada44.js",
+    "https://zenodo.org/static/dist/js/5261.76aa1779083cb6e9.js",
+    "https://zenodo.org/static/dist/js/6437.71df7d82b290cac2.js",
+    "https://zenodo.org/static/dist/js/6555.29e4b8a5876fdd5d.js",
+    "https://zenodo.org/static/dist/js/6874.62964fb23ef06a36.js",
+    "https://zenodo.org/static/dist/js/700.9df83bd2e46c12ab.js",
+    "https://zenodo.org/static/dist/js/7954.70fdbe77932d6bf9.js",
+    "https://zenodo.org/static/dist/js/8193.1d01fea3d1edd6f4.js",
+    "https://zenodo.org/static/dist/js/8357.57c5c846196d7762.js",
+    "https://zenodo.org/static/dist/js/8397.cfb5fcd1f9045cd0.js",
+    "https://zenodo.org/static/dist/js/8532.4c319e0b8377b195.js",
+    "https://zenodo.org/static/dist/js/8646.9c4236586d5d39ca.js",
+    "https://zenodo.org/static/dist/js/9150.a1df7bd0283c1788.js",
+    "https://zenodo.org/static/dist/js/9516.bc0a99f010b76af1.js",
+    "https://zenodo.org/static/dist/js/9530.c929789152b8afde.js",
+    "https://zenodo.org/static/dist/js/base-theme-rdm.aefaeeadffed1a17.js",
+    "https://zenodo.org/static/dist/js/i18n_app.1236e0b632f0b16b.js",
+    "https://zenodo.org/static/dist/js/invenio-app-rdm-landing-page-theme.d297449c9bc62233.js",
+    "https://zenodo.org/static/dist/js/invenio-app-rdm-landing-page.37af3b753704bb31.js",
+    "https://zenodo.org/static/dist/js/manifest.74af14a633682ed0.js",
+    "https://zenodo.org/static/dist/js/overridable-registry.547d03a537181eef.js",
+    "https://zenodo.org/static/dist/js/previewer_theme.acc158ceaae454a2.js",
+    "https://zenodo.org/static/dist/js/theme.baaff2a62f570ec3.js",
+    "https://zenodo.org/static/dist/js/zenodo-rdm-citations.ea10f4c3b5878dd5.js",
+    "https://zenodo.org/static/favicon.ico",
+    "https://zenodo.org/static/icons/licenses/cc-by-icon.svg",
+    "https://zenodo.org/static/images/cern.png",
+    "https://zenodo.org/static/images/eu.png",
+    "https://zenodo.org/static/images/invenio-rdm.svg",
+    "https://zenodo.org/static/images/openaire.png",
+    "https://zenodo.org/static/images/openaire.svg",
+    "https://zenodo.org/static/images/orcid.svg"
+   ],
+   "phrases": [],
+   "seen": "2026-10-25"
+  }
+ },
+ "openalex": {
+  "arxiv:2303.12076": "W4353111822",
+  "arxiv:2312.13469": "W4404307277",
+  "arxiv:2404.16823": "W4413925671",
+  "arxiv:2409.17549": "W4413917566",
+  "arxiv:2410.23629": "W4415796323",
+  "arxiv:2501.00510": "W4406031687",
+  "arxiv:2503.05231": "W7081952017",
+  "arxiv:2503.07926": "W4414566363",
+  "arxiv:2505.11420": "W4417094346",
+  "arxiv:2505.16289": "W4415546699",
+  "arxiv:2505.21864": "W4416623172",
+  "arxiv:2506.14754": "W4415312740",
+  "arxiv:2509.08354": "W7083025838",
+  "arxiv:2510.08807": "W4417117116",
+  "arxiv:2510.25725": "W7102605627",
+  "arxiv:2512.08920": "W7114764815",
+  "arxiv:2512.16842": "W4417531147",
+  "arxiv:2602.05513": "W7127967073",
+  "arxiv:2602.13579": "W7129649225",
+  "arxiv:2603.15847": "W7138989735",
+  "arxiv:2603.17851": "W7138860344",
+  "arxiv:2603.20850": "W7140197902",
+  "arxiv:2604.14944": "W7154698055",
+  "arxiv:2605.13083": "W7161158104",
+  "arxiv:2606.09243": "W7164047794",
+  "arxiv:2606.13102": "W7164573771",
+  "arxiv:2606.17055": "W7164883918",
+  "arxiv:2606.31836": "W7166866874",
+  "arxiv:2607.01067": "W7167082311",
+  "arxiv:2607.09190": "W7168140577",
+  "arxiv:2607.28625": "W7172019695",
+  "arxiv:2608.15060": "W7203712593",
+  "arxiv:2609.24976": "W7214037125",
+  "arxiv:2609.34182": "W7214802118",
+  "arxiv:2610.05180": "W7220675347",
+  "arxiv:2610.10283": "W7220946873",
+  "arxiv:2610.10288": "W7220988033",
+  "arxiv:2610.11945": "W7221101670",
+  "arxiv:2610.18872": "W7221798123",
+  "doi:10.1038/s41586-019-1234-z": "W2947434510",
+  "doi:10.1038/s41597-025-04552-5": "W4407241362",
+  "doi:10.1038/s41928-021-00558-0": "W3138965819",
+  "doi:10.3390/s21082594": "W3149077676"
+ },
+ "cursor": {
+  "arxiv_backfill": "2015-07",
+  "openalex_rotation": 2,
+  "hf_backfilled": true
+ }
+}

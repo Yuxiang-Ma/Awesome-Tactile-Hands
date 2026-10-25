@@ -1,4 +1,4 @@
-// Helpers shared by the dataset catalog (site.js) and the hardware page (hardware.js).
+// Helpers shared by the dataset catalog (site.js), the models page (models.js) and the hardware page (hardware.js).
 const REPO = 'https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands';
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -47,3 +47,44 @@ function edgeFill(img) {
   img.style.background = FILL.get(key);
 }
 document.addEventListener('load', e => {if (e.target.matches?.('.thumb img, img.hero')) edgeFill(e.target)}, true);
+
+/* ---------- nightly checks (pipeline/NIGHTLY.md): footer status, the change log in the dialog, and New tags for entries
+   added in the last 14 days. Each page sets PAGE_TARGET ('dataset' | 'model' | 'hardware') and defines openDetail(id). ---------- */
+const NIGHTLY = {changes: [], runs: {}, added: new Set()};
+const TARGET_URL = {dataset: id => `./#d=${encodeURIComponent(id)}`, model: id => `models.html#m=${encodeURIComponent(id)}`,
+  hardware: id => `hardware.html#h=${encodeURIComponent(id)}`};
+const CHANGE_WORD = {added: 'Added', released: 'Released', updated: 'Updated', withdrawn: 'Withdrawn'};
+const newTag = (target, id) => NIGHTLY.added.has(`${target}:${id}`) ? '<span class="tag new" title="Added by the nightly check in the last 14 days">New</span>' : '';
+async function loadNightly() {
+  const want = /(^|&)changes(&|$)/.test(location.hash.slice(1));  // #changes opens the change log once the page has rendered
+  try {
+    const [c, s] = await Promise.all(['data/changes.json', 'data/status.json'].map(async u => {const r = await fetch(u); return r.ok ? r.json() : {}}));
+    NIGHTLY.changes = c.changes || []; NIGHTLY.runs = s.runs || {};
+  } catch {return}
+  if (want) setTimeout(() => openChanges(), 0);
+  const cut = new Date(Date.now() - 14 * 864e5).toISOString().slice(0, 10);
+  for (const x of NIGHTLY.changes) if (x.kind === 'added' && x.date >= cut) NIGHTLY.added.add(`${x.target}:${x.id}`);
+  const upd = $('upd'), runs = Object.values(NIGHTLY.runs);
+  if (!upd || !runs.length) return;
+  const last = runs.map(r => r.date).sort().pop(), bad = runs.filter(r => r.date === last && r.ok === false).map(r => r.flow);
+  upd.innerHTML = `Checked every night; last check ${esc(last)}${bad.length ? ` (the ${esc(bad.join(' and '))} run did not finish)` : ''}.` +
+    (NIGHTLY.changes.length ? ` <a href="#" id="chglink">Recent changes</a>` : '');
+  $('chglink')?.addEventListener('click', e => {e.preventDefault(); openChanges()});
+}
+function openChanges() {
+  const by = new Map();
+  for (const x of NIGHTLY.changes.slice(0, 80)) (by.get(x.date) || by.set(x.date, []).get(x.date)).push(x);
+  const runs = Object.values(NIGHTLY.runs).sort((a, b) => (a.flow > b.flow) - (a.flow < b.flow));
+  $('dlg').innerHTML = `<div class="dl"><header><div><h2 id="dlgTitle">Recent changes</h2><p>Found by the nightly checks, newest first.
+    New papers and repositories are reviewed at 01:30 and catalogued links rechecked at 04:30 (New York time); the site updates at 09:00.</p></div>
+    <button class="x" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
+    <div class="scroll">${runs.length ? `<dl class="kv">${runs.map(r => `<dt>${r.flow === 'discovery' ? 'Discovery' : 'Status check'}</dt><dd>${esc(r.date)}${r.ok === false ? ' · did not finish' : ''}${
+      r.reviewed != null ? ` · ${r.reviewed} reviewed` : ''}${r.added ? ` · ${Object.entries(r.added).filter(([, v]) => v).map(([k, v]) => `${v} ${k} added`).join(', ') || 'nothing added'}` : ''}</dd>`).join('')}</dl>` : ''}
+    ${[...by].map(([date, xs]) => `<h4>${esc(date)}</h4><ul class="chg">${xs.map(x => `<li><b class="ck ck-${esc(x.kind)}">${CHANGE_WORD[x.kind] || esc(x.kind)}</b><span><a href="${TARGET_URL[x.target]?.(x.id) || '#'}" data-t="${esc(x.target)}" data-i="${esc(x.id)}">${esc(x.text)}</a>${
+      x.source ? ` <a class="srcl" href="${esc(x.source)}" target="_blank" rel="noopener">source</a>` : ''}</span></li>`).join('')}</ul>`).join('') || '<p class="src">No changes logged yet.</p>'}</div></div>`;
+  $('dlg').querySelector('.x').onclick = () => $('dlg').close();
+  $('dlg').querySelectorAll('a[data-t]').forEach(a => a.onclick = e => {
+    if (typeof PAGE_TARGET !== 'undefined' && a.dataset.t === PAGE_TARGET && typeof openDetail === 'function') {e.preventDefault(); openDetail(a.dataset.i)}
+  });
+  if (!$('dlg').open) $('dlg').showModal();
+}

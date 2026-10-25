@@ -1,5 +1,6 @@
 // Taxel Atlas: faceted catalog over data/datasets.json. No build step; the page state lives in the URL hash.
-// shared helpers (REPO, $, esc, fmt, glyph) are in common.js
+// shared helpers (REPO, $, esc, fmt, glyph, the nightly change log) are in common.js
+const PAGE_TARGET = 'dataset';
 
 const LABEL = {
   embodiment: {human: 'Human glove', robot: 'Robot hand', both: 'Human + robot'},
@@ -109,7 +110,7 @@ const SORTS = {
   name: (a, b) => a.name.localeCompare(b.name),
 };
 
-let D = [], HW = [], META = {}, S = {q: '', f: {}, y0: null, y1: null, view: 'cards', sort: 'rank', d: null};
+let D = [], HW = [], MD = {}, META = {}, S = {q: '', f: {}, y0: null, y1: null, view: 'cards', sort: 'rank', d: null};
 
 const makerModel = s => s.model && s.maker && s.model.toLowerCase().startsWith(s.maker.split(/[ (]/)[0].toLowerCase()) ? s.model : [s.maker, s.model].filter(Boolean).join(' ');
 const makerText = d => {const s = d.sensor, m = shortSys(makerModel(s) || '');
@@ -211,7 +212,7 @@ function cardGrid(list) {
     <div class="body">
       <div class="ttl"><h3>${esc(d.name)}</h3><span>${d.year}</span></div>
       ${zhLine(d)}<div class="src">${esc(d.venue)} · ${esc(d.authors)}</div>
-      <div class="tags">${S.sort === 'rank' ? '' : rankBadge(d, 'tag rk-tag')}${statusTags(d)}</div>
+      <div class="tags">${S.sort === 'rank' ? '' : rankBadge(d, 'tag rk-tag')}${statusTags(d)}${newTag('dataset', d.id)}</div>
       <p class="desc">${esc(d.summary)}</p>
       <div class="spec">${glyph(d.sensor.coverage, covText(d.sensor.coverage))}<div><b>${sensorLine(d)}</b><span>${covText(d.sensor.coverage)} · ${esc(makerText(d))}</span></div></div>
       <dl class="facts">${facts(d).map(([k, v]) => `<div><dt>${k}</dt><dd>${v || '<i>not stated</i>'}</dd></div>`).join('')}</dl>
@@ -293,6 +294,13 @@ function integrityBlock(d) {
     ${faults.length ? `<ul class="faults">${faults.map(f => `<li><b class="${f.severity === 'defect' ? 'fd' : 'fm'}">${f.severity === 'defect' ? 'Defect' : 'Minor'}</b> ${CHECKS[f.check][0]}: ${esc(f.text)}</li>`).join('')}</ul>` : '<span class="sub">No faults found.</span>'}
     <span class="sub">${esc(CHECK_RULE)}</span>`;
 }
+// a model from data/models.json links to the models page and says what it released; other users link out
+const REL = {released: 'released', announced: 'announced', not_released: 'not released'};
+function usedItem(u) {
+  const m = u.model && MD[u.model];
+  const rel = m ? ` <span class="sub">${u.own ? 'Released with this dataset. ' : ''}Code ${REL[m.release.code]}, weights ${REL[m.release.weights]}.</span>` : '';
+  return `<li><a href="${m ? `models.html#m=${esc(m.id)}` : esc(u.url)}"${m ? '' : ' target="_blank" rel="noopener"'}>${esc(u.name)}</a>${u.note ? `: ${esc(u.note)}` : ''}${rel}</li>`;
+}
 function openDetail(id) {
   const d = D.find(x => x.id === id); if (!d) return;
   S.d = id; writeHash();
@@ -323,7 +331,7 @@ function openDetail(id) {
     <h4>Access</h4>${kvs([['Availability', `${LABEL.availability[d.availability]} · ${esc(d.access)}`],
       ['Apply', d.gate ? `<a href="${esc(d.gate.url)}" target="_blank" rel="noopener">${esc(gateText(d.gate))}</a>${d.gate.note ? `<span class="sub">${esc(d.gate.note)}</span>` : ''}${d.gate.checked ? `<span class="sub">Checked ${esc(d.gate.checked)}.</span>` : ''}` : ''],
       ['License', `${esc(d.license)}<span class="sub">Shown for reuse; it does not change the rank.</span>`]])}
-    ${(d.used_by || []).length ? `<h4>Used by</h4><ul class="usedby">${d.used_by.map(u => `<li><a href="${esc(u.url)}" target="_blank" rel="noopener">${esc(u.name)}</a>${u.note ? `: ${esc(u.note)}` : ''}</li>`).join('')}</ul>` : ''}
+    ${(d.used_by || []).length ? `<h4>Used by</h4><ul class="usedby">${d.used_by.map(usedItem).join('')}</ul>` : ''}
     <div class="links">${d.viewer ? `<a class="btn" href="viewer/#rec=${esc(d.viewer)}"><svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>Play samples in the viewer</a>` : ''}${linkRow(d).replace(/<a class="play"[^]*?<\/a>/, '')}</div>
     ${(d.sources || []).length ? `<details class="srcs"><summary>Sources${(d.unconfirmed || []).length ? ' and open points' : ''}</summary>
       ${(d.unconfirmed || []).length ? `<p>Derived or not confirmed:</p><ul>${d.unconfirmed.map(x => `<li>${esc(x)}</li>`).join('')}</ul><p>Read:</p>` : ''}
@@ -339,6 +347,8 @@ async function main() {
   const j = await (await fetch('data/datasets.json')).json();
   D = j.datasets; META = j.metadata;
   try {HW = (await (await fetch('data/hardware.json')).json()).hardware} catch {HW = []}
+  try {MD = Object.fromEntries((await (await fetch('data/models.json')).json()).models.map(m => [m.id, m]))} catch {MD = {}}
+  await loadNightly();
   $('sum').textContent = `${D.length} datasets · updated ${META.last_updated}`;
   $('gh').href = REPO; $('contrib').href = `${REPO}/issues/new?template=add_dataset.yml`;
   readHash(); $('q').value = S.q; $('sort').value = S.sort;

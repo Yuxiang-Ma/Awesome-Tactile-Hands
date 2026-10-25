@@ -1,4 +1,5 @@
 // Taxel Atlas hardware page: faceted list over data/hardware.json, linked both ways to data/datasets.json.
+const PAGE_TARGET = 'hardware';
 const HL = {
   kind: {glove: 'Tactile glove', robot_hand: 'Tactile robot hand', sensor: 'Add-on tactile sensor', tracker: 'Hand-tracking glove'},
   kindPlural: {glove: 'Tactile gloves', robot_hand: 'Tactile robot hands', sensor: 'Add-on tactile sensors', tracker: 'Hand-tracking gloves (no touch)'},
@@ -110,7 +111,7 @@ function cardGrid(list) {
     <div class="body">
       <div class="ttl"><h3>${esc(h.name)}</h3><span>${h.year ?? ''}</span></div>
       ${zhLine(h)}<div class="src">${metaLine(h)}</div>
-      <div class="tags">${avBadge(h, 'tag av')}</div>
+      <div class="tags">${avBadge(h, 'tag av')}${newTag('hardware', h.id)}</div>
       <div class="spec">${glyph(h.coverage || [], covText(h.coverage) || 'coverage not stated')}<div><b>${esc(density(h))}</b><span>${esc(specLine(h) || HL.kind[h.kind])}</span></div></div>
       ${(h.specs || []).length ? `<ul class="specs">${h.specs.slice(0, 4).map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
       ${used(h)}
@@ -233,6 +234,7 @@ async function main() {
   H = hj.hardware; META = hj.metadata; DS = Object.fromEntries(dj.datasets.map(d => [d.id, d]));
   $('sum').textContent = `${H.length} devices · ${H.filter(h => h.datasets.length).length} used in catalog datasets · updated ${META.last_updated}`;
   $('gh').href = REPO; $('contrib').href = `${REPO}/issues/new?title=${encodeURIComponent('Hardware: ')}`;
+  await loadNightly();
   readHash(); $('q').value = S.q; $('sort').value = S.sort;
   $('q').oninput = e => {S.q = e.target.value; writeHash(); renderFacets(); renderChips(); render()};
   $('sort').onchange = e => {S.sort = e.target.value; update()};

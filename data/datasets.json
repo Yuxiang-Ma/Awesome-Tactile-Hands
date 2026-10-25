@@ -200,7 +200,15 @@
       "text": "One head-camera step of 67 ms (one missing frame) in the peel episode (82a95f58); the depth stream has the same gap. Every other camera step in the sample is 33-34 ms."
      }
     ]
-   }
+   },
+   "used_by": [
+    {
+     "name": "TouchAnything, arXiv 2605.13083",
+     "url": "https://arxiv.org/abs/2605.13083",
+     "note": "Third-party: the TouchScale paper (arXiv 2610.10288, Sec. 4.1) retrains TouchAnything on a 16 h TouchScale subset, on fractions of TouchScale and on the full set.",
+     "model": "touchanything"
+    }
+   ]
   },
   {
    "id": "egotouch",
@@ -348,18 +356,6 @@
      "all 4 integrity checks passed"
     ]
    },
-   "used_by": [
-    {
-     "name": "TouchWorld (arXiv 2607.07287)",
-     "url": "https://arxiv.org/abs/2607.07287",
-     "note": "pretrains its tactile world model on EgoTouch, then fine-tunes on 10 h of its own Wuji-hand data (not released)"
-    },
-    {
-     "name": "Dexterous Tactile World Model (arXiv 2609.34286)",
-     "url": "https://arxiv.org/abs/2609.34286",
-     "note": "adapts a pretrained video model to EgoTouch, then to two robot hands"
-    }
-   ],
    "contents": {
     "score": 4,
     "of": 5,
@@ -370,7 +366,28 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "DTWM, arXiv 2609.34286",
+     "url": "https://arxiv.org/abs/2609.34286",
+     "note": "All training and evaluation data, from the Hugging Face release zhouzhoujy/EgoTouch. 1,926 of the 1,933 episodes in the authors' copy (20.21 h) are cut into 43,604 clips of 49 frames; LoRA fine-tuning runs one epoch over 38,600 clips (17.51 h, 1,338 episodes, 174 tasks), and evaluation uses 3,000 clips from held-out recording sessions (2,728 in-distribution, 272 out-of-distribution). No robot data.",
+     "model": "dtwm"
+    },
+    {
+     "name": "TouchAnything, arXiv 2605.13083",
+     "url": "https://arxiv.org/abs/2605.13083",
+     "note": "Trained and tested on EgoTouch: 1,891 episodes split 80/10/10 by episode, with the test set divided into seen and unseen objects; 25 epochs on a frozen DINOv2 ViT-B/14.",
+     "model": "touchanything",
+     "own": true
+    },
+    {
+     "name": "TouchWorld, arXiv 2607.07287",
+     "url": "https://arxiv.org/abs/2607.07287",
+     "note": "The tactile world model (Wan2.2-TI2V-5B with LoRA) is pretrained on EgoTouch egocentric and wrist video, hand pose and bilateral palm pressure maps, converted to visual-tactile goal grids, then fine-tuned on 10 h of the authors' Wuji-hand robot data. The amount of EgoTouch used is not stated.",
+     "model": "touchworld"
+    }
+   ]
   },
   {
    "id": "tactidex",
@@ -487,7 +504,16 @@
      "scale": true,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "TactiSkill, ACM MM 2026 (arXiv 2607.09190)",
+     "url": "https://arxiv.org/abs/2607.09190",
+     "note": "Human reference sequences with whole-hand glove pressure, mapped per finger to simulated contact force; evaluated on 73 single-hand and bimanual sequences of the 700+ in TactiDex (5.1M frames).",
+     "model": "tactiskill",
+     "own": true
+    }
+   ]
   },
   {
    "id": "trex",
@@ -629,13 +655,6 @@
      "all 4 integrity checks passed"
     ]
    },
-   "used_by": [
-    {
-     "name": "DexTacWAM (arXiv 2609.24976)",
-     "url": "https://arxiv.org/abs/2609.24976",
-     "note": "its 488-episode pretraining corpus re-hosts trimmed T-Rex episodes (one checked frame-for-frame against T-Rex episode 3479); the paper does not say so"
-    }
-   ],
    "contents": {
     "score": 4,
     "of": 5,
@@ -646,7 +665,22 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "DexTacWAM, arXiv 2609.24976",
+     "url": "https://arxiv.org/abs/2609.24976",
+     "note": "Stage 1 trains the tactile encoder's adapter and compressor (frozen LTX-Video VAE) on the 488-episode 'diverse-488' corpus (episodes 0-463; 464-487 held out for contact-recall tests). The catalog matched that corpus to trimmed T-Rex episodes (corpus episode 200 equals T-Rex episode 3479 frame for frame); the paper does not name T-Rex as its source.",
+     "model": "dextacwam"
+    },
+    {
+     "name": "T-Rex, arXiv 2606.17055",
+     "url": "https://arxiv.org/abs/2606.17055",
+     "note": "Tactile mid-training on the 100 h T-Rex teleoperation set (22 motor primitives, 200+ objects, 7,700+ trajectories), of which about 50 h is public; post-training uses about 100 demonstrations per task on 12 tasks.",
+     "model": "trex",
+     "own": true
+    }
+   ]
   },
   {
    "id": "opentouch",
@@ -768,13 +802,6 @@
      "all 4 integrity checks passed"
     ]
    },
-   "used_by": [
-    {
-     "name": "EgoTac (arXiv 2608.15060)",
-     "url": "https://arxiv.org/abs/2608.15060",
-     "note": "out-of-domain evaluation only, no training"
-    }
-   ],
    "contents": {
     "score": 4,
     "of": 5,
@@ -785,7 +812,21 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "EgoTac, NeurIPS 2026 (arXiv 2608.15060)",
+     "url": "https://arxiv.org/abs/2608.15060",
+     "note": "Out-of-domain force-dynamics benchmark only (force cosine, rise and fall F1 after normalizing to [0, 1]); not used for training. Converted to MANO with OpenTouch's own processing instructions.",
+     "model": "egotac"
+    },
+    {
+     "name": "FTP-1, arXiv 2606.13102",
+     "url": "https://arxiv.org/abs/2606.13102",
+     "note": "OpenTouch glove as an array-type sensor, 1.5% of the mix. The checkpoint's statistics list 2,958 trajectories over 26 tasks; OpenTouch releases about 2,900 annotated clips.",
+     "model": "ftp1"
+    }
+   ]
   },
   {
    "id": "egotactile",
@@ -903,7 +944,29 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "EgoPressureDiff, ICML 2026 (arXiv 2606.09243)",
+     "url": "https://arxiv.org/abs/2606.09243",
+     "note": "Trained and tested on the gloved set (object-held-out 638 / 55 clips, subject-held-out 630 / 63 clips); the bare-hand set (60 train / 15 test clips, 3 subjects) tests transfer to bare hands.",
+     "model": "egopressurediff",
+     "own": true
+    },
+    {
+     "name": "EgoPressureFormer, ICML 2026 (arXiv 2606.09243)",
+     "url": "https://arxiv.org/abs/2606.09243",
+     "note": "Trained and tested on the gloved set (768 clips, 5.82 h, 63 objects, 12 subjects): object-held-out split 638 train / 55 test clips, subject-held-out split 630 / 63 clips.",
+     "model": "egopressureformer",
+     "own": true
+    },
+    {
+     "name": "TouchAnything, arXiv 2605.13083",
+     "url": "https://arxiv.org/abs/2605.13083",
+     "note": "Third-party: in the TouchScale paper, TouchAnything trained on the 16.2 h EgoTouch split reaches zero-shot contact IoU 0.134 on EgoTactile; trained on 16 h of TouchScale 0.181, on the full TouchScale 0.383.",
+     "model": "touchanything"
+    }
+   ]
   },
   {
    "id": "hrdexdb",
@@ -1710,7 +1773,16 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "VT-JointPretrain, ICLR 2025",
+     "url": "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf",
+     "note": "Pretrained on the human visual-tactile set (565k frames, 10 tasks, 182 objects); the release holds 2,032 sequences from 5 subjects.",
+     "model": "vt_jointpretrain",
+     "own": true
+    }
+   ]
   },
   {
    "id": "adl21",
@@ -2344,7 +2416,16 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "T-Dex, CoRL 2023 (arXiv 2303.12076)",
+     "url": "https://arxiv.org/abs/2303.12076",
+     "note": "Encoder pretraining on 2.5 h of play data (the release holds 1.29 h, 449,188 tactile samples); 6 demonstrations per task for the policy on 5 tasks.",
+     "model": "tdex",
+     "own": true
+    }
+   ]
   },
   {
    "id": "gist_vta",
@@ -2625,7 +2706,16 @@
      "scale": true,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "TACROSS, arXiv 2610.11945",
+     "url": "https://arxiv.org/abs/2610.11945",
+     "note": "Main setting per task: 30 robot and 150 human demonstrations on 4 tasks, mean success 91.9% against 51.3% with robot data only; the project page counts 159.09 h of human and 24.86 h of robot recordings in the full corpus.",
+     "model": "tacross",
+     "own": true
+    }
+   ]
   },
   {
    "id": "dexvitac",
@@ -3115,7 +3205,15 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "FTP-1, arXiv 2606.13102",
+     "url": "https://arxiv.org/abs/2606.13102",
+     "note": "Unitree Dex3 hand pressure as a state-type sensor, 6.0% of the mix. The checkpoint's statistics list 3,892 trajectories over 120 tasks; the release's tactile G1 part has 4,064 episodes over 124 tasks.",
+     "model": "ftp1"
+    }
+   ]
   },
   {
    "id": "robotacdex",
@@ -3541,7 +3639,21 @@
      "scale": true,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "EgoPressureDiff, ICML 2026 (arXiv 2606.09243)",
+     "url": "https://arxiv.org/abs/2606.09243",
+     "note": "Third-party: ACE-Data-0 (arXiv 2607.28625, Table 3) tests it on its table-scale tactile takes: temporal accuracy 0.2912, contact IoU 0.0197, volumetric IoU 0.0025.",
+     "model": "egopressurediff"
+    },
+    {
+     "name": "TouchAnything, arXiv 2605.13083",
+     "url": "https://arxiv.org/abs/2605.13083",
+     "note": "Third-party: ACE-Data-0 (arXiv 2607.28625, Table 3) tests it on its table-scale tactile takes: temporal accuracy 0.7095, contact IoU 0.1646, volumetric IoU 0.1357.",
+     "model": "touchanything"
+    }
+   ]
   },
   {
    "id": "daimon_datadex",
@@ -3872,7 +3984,16 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "DECO, ICML 2026 (arXiv 2602.05513)",
+     "url": "https://arxiv.org/abs/2602.05513",
+     "note": "Trained separately on each of the 4 DECO-50 tasks (50 h, 28 sub-tasks, 8K+ trajectories, 5M+ frames); more than 2,000 real rollouts, 72.25% average success, and the tactile adapter adds 10.25 points on average.",
+     "model": "deco",
+     "own": true
+    }
+   ]
   },
   {
    "id": "dex_mptd",
@@ -4130,7 +4251,16 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "DexTacWAM, arXiv 2609.24976",
+     "url": "https://arxiv.org/abs/2609.24976",
+     "note": "In the paper's own release, 96-100 teleoperated demonstrations for each of 6 tasks (595 episodes) fine-tune the video world model (stage 2) and train the action expert from scratch (stage 3); the 488-episode stage 1 corpus is in the same release.",
+     "model": "dextacwam",
+     "own": true
+    }
+   ]
   },
   {
    "id": "dextraverse",
@@ -4420,13 +4550,6 @@
     "scene_types from the task list (tabletop cube, egg carton, tea picking; a kitchen task with knob, pan and salt); scene count not stated.",
     "Data license: the zip has no license file; the MIT license is the GitHub repository's and is not stated to cover the data."
    ],
-   "used_by": [
-    {
-     "name": "FTP-1 (arXiv 2606.13102)",
-     "url": "https://arxiv.org/abs/2606.13102",
-     "note": "trains its tactile policy partly on DexUMI Inspire and XHand data ('DexumiInspire', 'DexumiXHand', 5.4% of the mixture, sensor type listed as state); the Inspire data are not in the public sample"
-    }
-   ],
    "rank": {
     "n": 5,
     "label": "Sample only",
@@ -4448,7 +4571,15 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "FTP-1, arXiv 2606.13102",
+     "url": "https://arxiv.org/abs/2606.13102",
+     "note": "'DexumiInspire' (3.0%) and 'DexumiXHand' (2.4%), both as state-type sensors. The checkpoint's statistics list 888 Inspire and 363 XHand trajectories; the public DexUMI sample holds 3 XHand episodes, and the paper cites DexUMI without saying how it obtained the rest.",
+     "model": "ftp1"
+    }
+   ]
   },
   {
    "id": "egoexplorer",
@@ -4757,13 +4888,6 @@
     "head_tracker_pose source is not stated (the paper lists VIVE trackers only for the wrists).",
     "Glove maker: FTP-1 (arXiv 2606.13102; its authors include EgoTac authors Wenkang Zhang, Chengbo Yuan, Zicheng Zhang and Yang Gao) thanks 'Aether Embodied Technology (Beijing) Co., Ltd. for the EgoTac egocentric human dataset and AetherGlove'; the EgoTac paper says 'in-house motion-tactile glove' and the code README says 'EgoTac-SC and Aether are the same dataset'."
    ],
-   "used_by": [
-    {
-     "name": "FTP-1 (arXiv 2606.13102)",
-     "url": "https://arxiv.org/abs/2606.13102",
-     "note": "trains its tactile policy partly on EgoTac human data ('EgoTac-Open', 'EgoTac-Kitchen', 'EgoTac-Hotel', AetherGlove arrays, 17.5% of the mixture); whether these are subsets of the EgoTac-SC release is not stated"
-    }
-   ],
    "rank": {
     "n": 2,
     "label": "Open, not checked",
@@ -4785,7 +4909,22 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "EgoTac, NeurIPS 2026 (arXiv 2608.15060)",
+     "url": "https://arxiv.org/abs/2608.15060",
+     "note": "EgoTac-SC (857 clips, 3.9M frames, glove force mapped to MANO vertices) is the only force-supervised source; it is split 9:1 and trained together with 5 contact-only datasets (HOI4D, H2O, HOT3D, ARCTIC, TACO). Force MAE on active vertices is 0.056 N on the held-out 10%.",
+     "model": "egotac",
+     "own": true
+    },
+    {
+     "name": "FTP-1, arXiv 2606.13102",
+     "url": "https://arxiv.org/abs/2606.13102",
+     "note": "'EgoTac-Open' (8.2%), 'EgoTac-Kitchen' (5.5%) and 'EgoTac-Hotel' (3.8%) make up 17.5% of the resampled pretraining mix, with AetherGlove as an array-type sensor. The paper does not say whether these are the EgoTac-SC release; the checkpoint stores them as AetherData_20260331, AetherData_260204_7.5H_v0211 and AetherData_260121_5H_v0211.",
+     "model": "ftp1"
+    }
+   ]
   },
   {
    "id": "feel_benchmark",
@@ -5177,7 +5316,16 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "NeuralFeels, Science Robotics 2024 (arXiv 2312.13469)",
+     "url": "https://arxiv.org/abs/2312.13469",
+     "note": "Evaluated on FeelSight's 70 runs: 30 real in-hand rotations of 6 objects (30 s each, this catalog entry) and 40 simulated runs in the same release.",
+     "model": "neuralfeels",
+     "own": true
+    }
+   ]
   },
   {
    "id": "ftp1_sharpa",
@@ -5339,7 +5487,16 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "FTP-1, arXiv 2606.13102",
+     "url": "https://arxiv.org/abs/2606.13102",
+     "note": "The paper's own Sharpa North-FTP-1 data, with Sharpa DTC fingertip images, is 9.0% of the mix. The checkpoint's statistics list 9,328 trajectories, the count the catalog's ftp1_sharpa entry cites from Open-X-Tactile for the release.",
+     "model": "ftp1",
+     "own": true
+    }
+   ]
   },
   {
    "id": "fusionx_sample",
@@ -5736,7 +5893,16 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "TK-STGN, IEEE T-RO (accepted; arXiv 2509.08354)",
+     "url": "https://arxiv.org/abs/2509.08354",
+     "note": "Trained on human grasp demonstrations of 5 seen objects (the release has 150 ten-second trials from 2 demonstrators); tested on 15 unseen objects and on 6 robot-hand configurations wearing the glove.",
+     "model": "tk_stgn",
+     "own": true
+    }
+   ]
   },
   {
    "id": "htac",
@@ -5911,7 +6077,16 @@
      "scale": true,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "TTP, arXiv 2607.01067",
+     "url": "https://arxiv.org/abs/2607.01067",
+     "note": "DeskTask-Tac, the measured-glove part of H-Tac (37.2 h, 947 episodes, ~4M frames at 30 Hz), is one of three pretraining sources; H-Tac totals 160 h and 135k+ episodes.",
+     "model": "ttp",
+     "own": true
+    }
+   ]
   },
   {
    "id": "humantouch",
@@ -6051,18 +6226,6 @@
     "Camera models are not stated; head intrinsics fx = 679.6 px at 1920 px width (pinhole + 5 distortion coefficients) imply a ~110 deg horizontal field of view.",
     "In 24 checked episodes 6-248 of the 360 mapped cells per hand stay at 0 for the whole episode; whether these are dead cells or untouched areas is not documented."
    ],
-   "used_by": [
-    {
-     "name": "DexTouch-WM (arXiv 2609.20649)",
-     "url": "https://arxiv.org/abs/2609.20649",
-     "note": "pretrains its tactile world model on ~100 h of HumanTouch recordings over 50 bimanual tasks (a task set different from the 10-task release), plus 5 h of robot data"
-    },
-    {
-     "name": "TouchSight (arXiv 2609.20414)",
-     "url": "https://arxiv.org/abs/2609.20414",
-     "note": "trains full-hand force prediction from egocentric video on 500 h of HumanTouch glove recordings and re-renders 10 h of them as bare hands (TwinTouch-20H)"
-    }
-   ],
    "zh": {
     "name": null,
     "title": null,
@@ -6091,7 +6254,21 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "DexTouch-WM, IROS 2026 Workshop RoBoWoMo (arXiv 2609.20649)",
+     "url": "https://arxiv.org/abs/2609.20649",
+     "note": "World-model pretraining on about 100 h of HumanTouch-system recordings over 50 bimanual tasks (Moxian gloves under MANUS MetaGloves, 320 of 360 taxels per hand kept), together with 5 h of robot data over 6 tasks; adding 100 h of human data raised held-out robot Contact-F1 from 0.55 to 0.71. The public HumanTouch release covers 10 tasks, so this corpus is a different task set.",
+     "model": "dextouch_wm"
+    },
+    {
+     "name": "TouchSight, arXiv 2609.20414",
+     "url": "https://arxiv.org/abs/2609.20414",
+     "note": "Force supervision from 500 h of HumanTouch glove recordings (54,931 episodes split 8:1:1 by episode; 60% of the training mix), with test results on held-out episodes. A 10 h sample over 52 tasks is re-rendered as bare-hand video for TwinTouch-20H (15% of the mix). The public release holds 17,608 episodes (~132.8 h) over 10 tasks, so most of this data is not in it.",
+     "model": "touchsight"
+    }
+   ]
   },
   {
    "id": "juqiao_glove_0929",
@@ -6845,7 +7022,15 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "FTP-1, arXiv 2606.13102",
+     "url": "https://arxiv.org/abs/2606.13102",
+     "note": "Listed as 'OpenLETDex' with Linker Hand L6 touch arrays, 6.0% of the mix; the paper gives no citation or link. The checkpoint's statistics list 713 trajectories over 4 tasks (838,591 frames), against LET-Dex's 714 bags over 4 tasks (~7.8 h).",
+     "model": "ftp1"
+    }
+   ]
   },
   {
    "id": "linkerbot_umi_dex_l6",
@@ -7420,13 +7605,6 @@
     "en": "official",
     "note": "Card and dataset name are English (PX OmniSharing DB); task attributes and spoken instructions inside each HDF5 are Chinese only. 36Kr calls the product 全模态具身智能数据集产品 OmniSharing DB [omni-modal embodied-AI dataset product]."
    },
-   "used_by": [
-    {
-     "name": "FTP-1 (arXiv 2606.13102)",
-     "url": "https://arxiv.org/abs/2606.13102",
-     "note": "pretraining mix includes OmniSharingDB human data with the PaXini glove as a state-type sensor (1.0% of the final mix); the paper thanks PaXini for providing the data, so it may not be the public sample"
-    }
-   ],
    "rank": {
     "n": 5,
     "label": "Sample only",
@@ -7448,7 +7626,15 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "FTP-1, arXiv 2606.13102",
+     "url": "https://arxiv.org/abs/2606.13102",
+     "note": "'OmniSharingDB' human data with the PaXini glove as a state-type sensor, 1.0% of the mix. The paper thanks PaXini 'for the OmniSharingDB human data'; the checkpoint's statistics list 175 trajectories over 2 tasks, while the public sample holds 1,000 episodes over 10 tasks.",
+     "model": "ftp1"
+    }
+   ]
   },
   {
    "id": "pimforce",
@@ -7566,7 +7752,16 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "PiMForce, NeurIPS 2024 (arXiv 2410.23629)",
+     "url": "https://arxiv.org/abs/2410.23629",
+     "note": "21 participants, 3 sessions each, 22 press, pinch and grasp postures held for 30 s; cross-user tests on participants left out of training.",
+     "model": "pimforce",
+     "own": true
+    }
+   ]
   },
   {
    "id": "psibot_syndata_tactile",
@@ -8469,7 +8664,22 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "Sparsh-skin, CoRL 2025 (arXiv 2505.11420)",
+     "url": "https://arxiv.org/abs/2505.11420",
+     "note": "Pretrained on ~4 h of teleoperated play with 14 objects (11 sequences of ~2 min per object; the release has 10 per object, 140); downstream tasks use labelled sets from the same rig.",
+     "model": "sparsh_skin",
+     "own": true
+    },
+    {
+     "name": "T-Dex, CoRL 2023 (arXiv 2303.12076)",
+     "url": "https://arxiv.org/abs/2303.12076",
+     "note": "Third-party: the Sparsh-skin paper (arXiv 2505.11420) reproduces T-Dex's BYOL pretraining as 'BYOL*' on the Sparsh-skin play data with Xela signals formatted as images.",
+     "model": "tdex"
+    }
+   ]
   },
   {
    "id": "sparsh_x",
@@ -8615,7 +8825,16 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "Sparsh-X, CoRL 2025 (arXiv 2506.14754)",
+     "url": "https://arxiv.org/abs/2506.14754",
+     "note": "The Allegro part (4.5 of the 18.6 h pretraining set, dipping into trays of LEGO bricks and marbles) is this catalog entry.",
+     "model": "sparsh_x",
+     "own": true
+    }
+   ]
   },
   {
    "id": "tacdex3d",
@@ -8773,7 +8992,22 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "3DTacDex, ICRA 2025 (arXiv 2409.17549)",
+     "url": "https://arxiv.org/abs/2409.17549",
+     "note": "Encoder pretraining on the authors' play data and diffusion-policy training on demonstrations for 4 tasks (open box, reorientation, flip, assembly), 78% average success. The paper gives no demonstration counts; the catalog release holds 8,814 play frames at 5 Hz plus open-box, flip and assembly demos.",
+     "model": "tacdex3d",
+     "own": true
+    },
+    {
+     "name": "T-Dex, CoRL 2023 (arXiv 2303.12076)",
+     "url": "https://arxiv.org/abs/2303.12076",
+     "note": "Third-party: the 3DTacDex paper (arXiv 2409.17549, Table I) trains a T-Dex-style baseline (tactile as 2D images, BYOL pretraining) on its own play data inside the same diffusion policy; 63% average success over 4 tasks against 78% for 3DTacDex.",
+     "model": "tdex"
+    }
+   ]
   },
   {
    "id": "tachin_demo01",
@@ -8895,13 +9129,6 @@
     "Units of tf_tactile_x/y not stated; values -1.34 to 1.04 in the checked raw session.",
     "The video shows brown or orange outer gloves with a module on the back of the hand; segment descriptions call them '棕色工作手套' [brown work gloves] or '橙色手套' [orange gloves]. Whether the tactile glove is worn under an outer glove is not stated."
    ],
-   "used_by": [
-    {
-     "name": "MIT-Media-Lab/tachin-annotations-v1 (Hugging Face dataset)",
-     "url": "https://huggingface.co/datasets/MIT-Media-Lab/tachin-annotations-v1",
-     "note": "derived annotation set: re-cuts the 102 segments into 2,422 per-hand VITRA-style episodes with MANO fits, dense tactile and generated instructions; frames are not redistributed"
-    }
-   ],
    "zh": {
     "maker": "途见科技",
     "en": "official",
@@ -8927,7 +9154,21 @@
      "scale": false,
      "diversity": true
     }
-   }
+   },
+   "used_by_other": [
+    {
+     "name": "MIT-Media-Lab/tachin-annotations-v1 (Hugging Face dataset)",
+     "url": "https://huggingface.co/datasets/MIT-Media-Lab/tachin-annotations-v1",
+     "note": "derived annotation set: re-cuts the 102 segments into 2,422 per-hand VITRA-style episodes with MANO fits, dense tactile and generated instructions; frames are not redistributed"
+    }
+   ],
+   "used_by": [
+    {
+     "name": "MIT-Media-Lab/tachin-annotations-v1 (Hugging Face dataset)",
+     "url": "https://huggingface.co/datasets/MIT-Media-Lab/tachin-annotations-v1",
+     "note": "derived annotation set: re-cuts the 102 segments into 2,422 per-hand VITRA-style episodes with MANO fits, dense tactile and generated instructions; frames are not redistributed"
+    }
+   ]
   },
   {
    "id": "tachin_fixed_view",
@@ -9200,7 +9441,16 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "TactAlign, arXiv 2602.13579",
+     "url": "https://arxiv.org/abs/2602.13579",
+     "note": "Encoders use ~10 min of play data plus the alignment set of 100 robot (kinesthetic) and 200 human demonstrations for pivoting and insertion; policy co-training uses 140-160 human and 50 robot demonstrations per task (pivoting, insertion, lid closing); light-bulb screwing uses 20 human demonstrations only.",
+     "model": "tactalign",
+     "own": true
+    }
+   ]
   },
   {
    "id": "uvta",
@@ -9360,7 +9610,22 @@
      "scale": true,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "T-Rex, arXiv 2606.17055",
+     "url": "https://arxiv.org/abs/2606.17055",
+     "note": "Third-party: the UVTA paper (arXiv 2609.34182, Table 1) post-trains T-Rex as a baseline on its 5 Sharpa Wave tasks with the same robot demonstrations, wrist RGB and per-finger touch; stage-wise success averages 29% against 70% for UVTA.",
+     "model": "trex"
+    },
+    {
+     "name": "UVTA, arXiv 2609.34182",
+     "url": "https://arxiv.org/abs/2609.34182",
+     "note": "1,000 human and 150 robot demonstrations per task for 5 tasks; 70% average stage-wise success over 10 trials per task, against 29% for the strongest baseline, T-Rex.",
+     "model": "uvta",
+     "own": true
+    }
+   ]
   },
   {
    "id": "vint6d",
@@ -9524,7 +9789,16 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "VinT-Net, ICML 2024 (arXiv 2501.00510)",
+     "url": "https://arxiv.org/abs/2501.00510",
+     "note": "Trained and evaluated on VinT-Sim (2M simulated samples) and VinT-Real (0.1M real samples); split sizes were not found in the text read.",
+     "model": "vint_net",
+     "own": true
+    }
+   ]
   }
  ]
 }

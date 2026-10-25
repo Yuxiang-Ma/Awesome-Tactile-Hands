@@ -105,3 +105,34 @@ Tracking methods: `vision_estimate` = pose estimated from video afterwards (WiLo
 cameras; `optical_mocap` = marker-based (Vicon, OptiTrack); `optical_tracker` = Vive lighthouse; `magnetic` = EMF
 (Polhemus, Manus Quantum); `bend_sensor` = resistive flex (CyberGlove). Robot datasets: `subjects` null; cameras are the
 robot's; tracking is usually `robot_proprioception`, plus how demonstrations were teleoperated as a second entry.
+
+## Model entry (`data/models.json`)
+
+One record per named model that is trained or evaluated on touch recorded across a hand. Scope and the nightly checks
+that keep `release` current are in [NIGHTLY.md](NIGHTLY.md). The models listed here fill each dataset's derived
+`used_by` (with `note` from `uses`); a dataset's other users (a derived dataset, for example) go in its hand-written
+`used_by_other`, same shape as `used_by`.
+
+```
+{
+  "id": "touchworld",                  // lowercase [a-z0-9_]; may equal a dataset id when it is the same paper
+  "name": "TouchWorld", "title": "full paper title", "authors": "First Author et al.", "year": 2026,
+  "venue": "arXiv 2607.07287",         // or "CoRL 2026 (arXiv 2607.07287)" once accepted
+  "kind": "world_model" | "policy" | "representation" | "estimation" | "generation" | "other",
+       // world_model: predicts future touch and/or video; policy: outputs actions using touch; representation: tactile
+       // encoder or pretrained features; estimation: touch from other signals, or pose/state from touch; generation: synthesizes touch
+  "summary": "one sentence: what goes in, what comes out, on which hand(s)",
+  "embodiment": "human" | "robot" | "both",   // whose hands the touch comes from
+  "touch": "input" | "output" | "both",
+  "uses": [{"id": "egotouch", "role": "pretraining" | "training" | "fine-tuning" | "evaluation", "note": "what it used, with numbers"}],
+  "own_data": "10 h of Wuji-hand teleoperation; not released",   // or null; data of its own that is not a catalog entry
+  "dataset": "dextacwam",              // or null; the catalog entry of the data released with this model
+  "release": {"code": "released" | "announced" | "not_released", "weights": "released" | "announced" | "not_released",
+              "note": "the evidence, with where and when it was seen"},
+  "license": "MIT" | "not stated",     // of the released code or weights
+  "links": {"paper": "...", "project": "...", "code": "...", "weights": "..."},   // only links that exist; "released" needs the link
+  "sources": ["URLs actually read"],
+  "unconfirmed": ["anything derived or not confirmed, and how"],
+  "checked": "2026-10-25"              // the date the release status was last confirmed
+}
+```
