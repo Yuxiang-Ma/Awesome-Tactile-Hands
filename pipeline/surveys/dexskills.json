@@ -1,0 +1,168 @@
+{
+ "id": "dexskills",
+ "surveyed": "2026-10-26",
+ "entry": {
+  "id": "dexskills",
+  "name": "DexSkills",
+  "title": "DexSkills: Skill Segmentation Using Haptic Data for Learning Autonomous Long-Horizon Robotic Manipulation Tasks",
+  "authors": "Xiaofeng Mao et al.",
+  "year": 2024,
+  "venue": "arXiv 2405.03476",
+  "summary": "Allegro hand on a UR5 arm with a custom magnetic tactile sensor on each of its 4 fingertips, teleoperated through Virtuose 6D and HGlove leader devices; released as preprocessed haptic feature tensors for 20 primitive skills and 20 long-horizon tasks with a sponge, a carton and a bottle, with no camera stream.",
+  "embodiment": "robot",
+  "hand": "Allegro Hand (16 DoF) on a UR5 arm",
+  "bimanual": false,
+  "sensor": {
+   "type": "magnetic",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 4,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "note": "One custom magnetic sensor per fingertip (paper cites the authors' earlier sensor design). The paper's features per fingertip are the norm of (Fx, Fy, Fz) and a binary contact flag; the release keys state_input (raw haptic data) and feature_input (features) inside .pt batches. Files not opened.",
+   "maker": "custom (cited as the authors' earlier work)",
+   "model": null,
+   "principle": "magnetic",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "robot_action"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": null,
+   "tasks": 40,
+   "objects": 3,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "20 primitive skills (10 demonstrations each for most, 20 for Touch, Wipe Back and Grasp) and 20 long-horizon tasks; 3 objects (sponge, tomato-passata carton, liquid bottle); 71 shuffled training batch files plus 20 long-horizon files"
+  },
+  "availability": "public",
+  "access": "In the GitHub repository ARQ-CRISP/DexSkills under DexSkill_dataset/: dataset/ (71 shuffled training .pt files, 96 MB), LH_dataset/ (20 long-horizon .pt files, 42 MB), json_file/LH_final.json (human segmentation labels) and trained_policy/ (18 checkpoints, 180 MB); no login.",
+  "license": "not stated",
+  "caveats": [
+   "Preprocessed features only: the training files are shuffled batches of 256 samples, so individual demonstrations cannot be recovered from them; only the 20 long-horizon files keep time order.",
+   "No video, depth or object pose; haptic data means fingertip touch plus arm and hand proprioception.",
+   "Touch is 4 fingertip sensors, summarised in the paper as force norm and contact per fingertip.",
+   "PyTorch .pt pickles; load them with weights_only or in a sandbox.",
+   "The page in the repository says 60 training files; the repository holds 71 (data_0.pt to data_70.pt, the last two smaller).",
+   "No LICENSE file in the repository."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2405.03476",
+   "code": "https://github.com/ARQ-CRISP/DexSkills",
+   "data": "https://github.com/ARQ-CRISP/DexSkills/tree/main/DexSkill_dataset"
+  },
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "Allegro Hand joint states and fingertip positions; UR5 end-effector pose and velocity",
+     "note": "16 hand joints, fingertip position and velocity (3 each per finger), end-effector pose and velocity (6 each)"
+    },
+    {
+     "target": "fingers",
+     "method": "exoskeleton",
+     "system": "HGlove (hand) and Virtuose 6D (arm) leader devices",
+     "note": "teleoperation with haptic feedback from the follower robot"
+    }
+   ],
+   "other": []
+  },
+  "sources": [
+   "https://arxiv.org/abs/2405.03476",
+   "https://arxiv.org/html/2405.03476v1 (setup, skills, features, release statement)",
+   "https://github.com/ARQ-CRISP/DexSkills (repository metadata, dataset description page)",
+   "https://api.github.com/repos/ARQ-CRISP/DexSkills/git/trees/main?recursive=1 (file list and sizes)"
+  ],
+  "unconfirmed": [
+   "tasks = 40: 20 primitive skills plus 20 long-horizon tasks (A-T), as the paper lists them.",
+   "scenes = 1: one lab setup is described; not stated as a count.",
+   "Per-skill demonstration counts are from the paper text; the total was not counted from the files.",
+   "The arXiv record has no venue; OpenAlex dates the work 2024-10-14, which may be a conference version not checked."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": "no LICENSE file in the repository",
+  "url": "https://github.com/ARQ-CRISP/DexSkills"
+ },
+ "download": {
+  "where": "https://github.com/ARQ-CRISP/DexSkills/tree/main/DexSkill_dataset",
+  "access": "open",
+  "format": "PyTorch .pt files with keys state_input, feature_input, state_output, features_output, label (training batches); one unshuffled .pt per long-horizon task plus LH_final.json",
+  "total_size": "318 MB (dataset 96 MB, LH_dataset 42 MB, trained_policy 180 MB)",
+  "per_episode": "1.0-5.0 MB per long-horizon task file",
+  "partial_fetch": "per-file download from GitHub"
+ },
+ "channels": [
+  {
+   "name": "state_input",
+   "kind": "other",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": null,
+   "note": "raw haptic data (fingertip touch and proprioception) per the repository page; files not opened"
+  },
+  {
+   "name": "feature_input",
+   "kind": "other",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": null,
+   "note": "the paper's features: fingertip force norm and contact, end-effector pose and velocity, hand joint and fingertip states; files not opened"
+  },
+  {
+   "name": "label",
+   "kind": "language",
+   "shape": null,
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "skill name per sample; from the repository page"
+  }
+ ],
+ "episode_index": {
+  "where": "DexSkill_dataset/json_file/LH_final.json (long-horizon segmentation); training batches carry per-sample skill labels",
+  "count": null,
+  "fields": [
+   "skill"
+  ],
+  "tasks": [
+   "Reach",
+   "Setup Position",
+   "PreTouch",
+   "Touch",
+   "Flip",
+   "Wipe Forth",
+   "Wipe Back",
+   "PreGrasp",
+   "Grasp",
+   "Lift with Grasp",
+   "Transport Forward",
+   "Place",
+   "PreRotate",
+   "Rotate",
+   "Shake Up",
+   "Shake Down",
+   "Twist",
+   "Vertical Place",
+   "Pour",
+   "Release"
+  ],
+  "scenes": []
+ }
+}

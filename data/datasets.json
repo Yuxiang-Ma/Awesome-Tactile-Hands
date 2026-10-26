@@ -2896,7 +2896,7 @@
    "title": "OSMO: Open-Source Tactile Glove for Human-to-Robot Skill Transfer",
    "authors": "Jessica Yin et al.",
    "year": 2025,
-   "venue": "arXiv 2512.08920",
+   "venue": "IEEE RA-L 2026 (arXiv 2512.08920)",
    "summary": "Open-source glove with 12 three-axis magnetic taxels on fingertips and palm; ~2 h of right-hand whiteboard-wiping demonstrations with a static RealSense D435 (RGB + IR stereo), of which one 8.4 s sample is released.",
    "embodiment": "human",
    "hand": "human right hand wearing the OSMO glove (the same glove is worn by a Psyonic Ability Hand at robot deployment)",
@@ -3001,6 +3001,7 @@
    "sources": [
     "https://arxiv.org/abs/2512.08920",
     "https://arxiv.org/html/2512.08920",
+    "https://doi.org/10.1109/lra.2026.3692034 (IEEE RA-L version, published 2026-05-11 per OpenAlex)",
     "https://www.jessicayin.com/osmo_tactile_glove/",
     "https://github.com/jessicayin/osmo_tactile_glove",
     "https://github.com/jessicayin/osmo_tactile_glove/blob/main/README.md",
@@ -9832,6 +9833,181 @@
      "model": "vint_net",
      "own": true
     }
+   ]
+  },
+  {
+   "id": "m2vtp_bottlecap",
+   "name": "M2VTP BottleCap",
+   "title": "Masked Visual-Tactile Pre-training for Robot Manipulation",
+   "authors": "Qingtao Liu et al.",
+   "year": 2024,
+   "venue": "ICRA 2024",
+   "summary": "Human bottle-cap turning recorded with a low-cost Zhejiang University glove giving 20 binary touch signals and egocentric HoloLens 2 video, released as per-sequence PNG frame folders with one tactile pickle per sequence; sequence count not published in the sources read.",
+   "embodiment": "human",
+   "hand": "Custom low-cost tactile glove (Zhejiang University), 20 sensors",
+   "bimanual": null,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 20,
+    "sensors_per_hand": 20,
+    "coverage": [],
+    "rate_hz": null,
+    "note": "Abstract and project page: '20 sparse binary tactile signals sensing touch states'. The pretraining code loads tactile/<vid>.pkl per sequence and marks a frame as touching when any value reaches a threshold argument, so the files may hold raw values before binarisation. Sensor placement, principle and rate not read; files not opened.",
+    "maker": "custom (Zhejiang University)",
+    "model": null,
+    "principle": "unspecified",
+    "range": null,
+    "calibrated": null
+   },
+   "modalities": [
+    "egocentric"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": null,
+    "frames": null,
+    "tasks": 1,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [],
+    "text": "one task (bottle-cap turning); sequence, frame, object and subject counts not published in the sources read"
+   },
+   "availability": "public",
+   "access": "One OneDrive file linked from the Pretraining_for_M2VTP README ('Please download the dataset from the following link'), no password or form mentioned; it unpacks to data/raw/BottleCap with labels/, tactile/ and videos/. Size not visible to a script; download not tested.",
+   "license": "not stated (code repositories are MIT)",
+   "caveats": [
+    "Files not opened: the OneDrive share page returns no file listing to a script, so size, sequence count and tactile value range are unknown.",
+    "Touch is 20 discrete signals that the paper treats as binary touch states, not a pressure map.",
+    "Video is per-frame PNG folders (videos/<vid>/*.png, ordered by the number after the last '='), as read by the authors' preprocessing code; no timestamps were seen.",
+    "One task only (bottle-cap turning); the later VTDexManip release from the same group covers 10 tasks with a 20-pad glove, and whether it contains these sequences was not checked.",
+    "The paper is not open access; IEEE Xplore returned an empty page and ResearchGate returned 403, so the entry rests on the abstract, the project page and the two READMEs."
+   ],
+   "links": {
+    "paper": "https://ieeexplore.ieee.org/document/10610933/",
+    "project": "https://lqts.github.io/M2VTP/",
+    "data": "https://1drv.ms/u/c/9054151f0ba654c9/EbYX2-fmQ6pDiCf2vF3yYawBLC8lpGQBZWM4L_r3VXBQFw",
+    "code": "https://github.com/LQTS/Pretraining_for_M2VTP"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "egocentric",
+      "count": 1,
+      "model": "Microsoft HoloLens 2",
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "head"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [],
+    "other": []
+   },
+   "sources": [
+    "https://lqts.github.io/M2VTP/ (abstract, BibTeX)",
+    "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/ICRA57147.2024.10610933 (abstract, authors, closed access)",
+    "https://github.com/LQTS/Pretraining_for_M2VTP (README: dataset link and folder layout; LICENSE MIT)",
+    "https://github.com/LQTS/Pretraining_for_M2VTP/blob/main/vitac/preprocessing/core.py (how videos/ and tactile/ are read)",
+    "https://github.com/LQTS/M2VTP (README: ShadowHand downstream task, weights links; LICENSE MIT)"
+   ],
+   "unconfirmed": [
+    "A search-result summary of a later paper describes M2VTP's data as 120 bottle-cap-turning sequences from a glove of 20 binary contact sensors; that paper was not identified or read, so the count is not used.",
+    "tasks = 1 from the abstract ('a dataset of turning bottle caps') and the single BottleCap folder in the README.",
+    "availability public: the README gives a direct OneDrive link with no password, unlike VTDexManip's; whether it downloads without sign-in was not tested."
+   ]
+  },
+  {
+   "id": "dexskills",
+   "name": "DexSkills",
+   "title": "DexSkills: Skill Segmentation Using Haptic Data for Learning Autonomous Long-Horizon Robotic Manipulation Tasks",
+   "authors": "Xiaofeng Mao et al.",
+   "year": 2024,
+   "venue": "arXiv 2405.03476",
+   "summary": "Allegro hand on a UR5 arm with a custom magnetic tactile sensor on each of its 4 fingertips, teleoperated through Virtuose 6D and HGlove leader devices; released as preprocessed haptic feature tensors for 20 primitive skills and 20 long-horizon tasks with a sponge, a carton and a bottle, with no camera stream.",
+   "embodiment": "robot",
+   "hand": "Allegro Hand (16 DoF) on a UR5 arm",
+   "bimanual": false,
+   "sensor": {
+    "type": "magnetic",
+    "taxels_per_hand": null,
+    "sensors_per_hand": 4,
+    "coverage": [
+     "tip"
+    ],
+    "rate_hz": null,
+    "note": "One custom magnetic sensor per fingertip (paper cites the authors' earlier sensor design). The paper's features per fingertip are the norm of (Fx, Fy, Fz) and a binary contact flag; the release keys state_input (raw haptic data) and feature_input (features) inside .pt batches. Files not opened.",
+    "maker": "custom (cited as the authors' earlier work)",
+    "model": null,
+    "principle": "magnetic",
+    "range": null,
+    "calibrated": null
+   },
+   "modalities": [
+    "robot_action"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": null,
+    "frames": null,
+    "tasks": 40,
+    "objects": 3,
+    "subjects": null,
+    "scenes": 1,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "20 primitive skills (10 demonstrations each for most, 20 for Touch, Wipe Back and Grasp) and 20 long-horizon tasks; 3 objects (sponge, tomato-passata carton, liquid bottle); 71 shuffled training batch files plus 20 long-horizon files"
+   },
+   "availability": "public",
+   "access": "In the GitHub repository ARQ-CRISP/DexSkills under DexSkill_dataset/: dataset/ (71 shuffled training .pt files, 96 MB), LH_dataset/ (20 long-horizon .pt files, 42 MB), json_file/LH_final.json (human segmentation labels) and trained_policy/ (18 checkpoints, 180 MB); no login.",
+   "license": "not stated",
+   "caveats": [
+    "Preprocessed features only: the training files are shuffled batches of 256 samples, so individual demonstrations cannot be recovered from them; only the 20 long-horizon files keep time order.",
+    "No video, depth or object pose; haptic data means fingertip touch plus arm and hand proprioception.",
+    "Touch is 4 fingertip sensors, summarised in the paper as force norm and contact per fingertip.",
+    "PyTorch .pt pickles; load them with weights_only or in a sandbox.",
+    "The page in the repository says 60 training files; the repository holds 71 (data_0.pt to data_70.pt, the last two smaller).",
+    "No LICENSE file in the repository."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2405.03476",
+    "code": "https://github.com/ARQ-CRISP/DexSkills",
+    "data": "https://github.com/ARQ-CRISP/DexSkills/tree/main/DexSkill_dataset"
+   },
+   "setup": {
+    "cameras": [],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "robot_proprioception",
+      "system": "Allegro Hand joint states and fingertip positions; UR5 end-effector pose and velocity",
+      "note": "16 hand joints, fingertip position and velocity (3 each per finger), end-effector pose and velocity (6 each)"
+     },
+     {
+      "target": "fingers",
+      "method": "exoskeleton",
+      "system": "HGlove (hand) and Virtuose 6D (arm) leader devices",
+      "note": "teleoperation with haptic feedback from the follower robot"
+     }
+    ],
+    "other": []
+   },
+   "sources": [
+    "https://arxiv.org/abs/2405.03476",
+    "https://arxiv.org/html/2405.03476v1 (setup, skills, features, release statement)",
+    "https://github.com/ARQ-CRISP/DexSkills (repository metadata, dataset description page)",
+    "https://api.github.com/repos/ARQ-CRISP/DexSkills/git/trees/main?recursive=1 (file list and sizes)"
+   ],
+   "unconfirmed": [
+    "tasks = 40: 20 primitive skills plus 20 long-horizon tasks (A-T), as the paper lists them.",
+    "scenes = 1: one lab setup is described; not stated as a count.",
+    "Per-skill demonstration counts are from the paper text; the total was not counted from the files.",
+    "The arXiv record has no venue; OpenAlex dates the work 2024-10-14, which may be a conference version not checked."
    ]
   }
  ]

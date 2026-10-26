@@ -1351,6 +1351,250 @@
     "The last 37,115 characters of the full text (methods tail, references) were not read."
    ],
    "checked": "2026-10-25"
+  },
+  {
+   "id": "m2vtp",
+   "name": "M2VTP",
+   "title": "Masked Visual-Tactile Pre-training for Robot Manipulation",
+   "authors": "Qingtao Liu et al.",
+   "year": 2024,
+   "venue": "ICRA 2024",
+   "kind": "representation",
+   "summary": "Visual-tactile fusion transformer pretrained with masking on human bottle-cap turning; egocentric HoloLens 2 frames and 20 binary glove touch signals (tokenized by a tactile module) go in, and the pretrained features are embedded in an RL policy for a ShadowHand turning a bottle cap; the abstract reports over 60% higher success than without pretraining and over 50% higher than visual-only pretraining.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "m2vtp_bottlecap",
+     "role": "pretraining",
+     "note": "Pretrained on the authors' bottle-cap turning recordings (glove with 20 binary touch signals plus HoloLens 2 video); sequence count not published in the sources read."
+    }
+   ],
+   "own_data": "Downstream RL runs a ShadowHand in simulation (the README sets MuJoCo environment variables); robot touch there is simulated.",
+   "dataset": "m2vtp_bottlecap",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Downstream code github.com/LQTS/M2VTP (MIT) and pretraining code github.com/LQTS/Pretraining_for_M2VTP (MIT). The M2VTP README links 'Pre-trained models' (weights and config files, a OneDrive folder) and a 'Pre-trained policy' (a OneDrive file), with checkpoint vt20t-reall-tmr05-bin-ft+dataset-BottleCap.pt named in the instructions; OneDrive contents not listed. Checked 2026-10-26."
+   },
+   "license": "MIT (code)",
+   "links": {
+    "paper": "https://ieeexplore.ieee.org/document/10610933/",
+    "project": "https://lqts.github.io/M2VTP/",
+    "code": "https://github.com/LQTS/M2VTP",
+    "weights": "https://1drv.ms/f/c/9054151f0ba654c9/EmdvA3bTnsNErIH6P5rsvlwBm-K3KRsRZKDm99xcYqoROA"
+   },
+   "sources": [
+    "https://lqts.github.io/M2VTP/ (abstract)",
+    "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/ICRA57147.2024.10610933 (abstract, authors)",
+    "https://github.com/LQTS/M2VTP (README, LICENSE)",
+    "https://github.com/LQTS/Pretraining_for_M2VTP (README, LICENSE, file tree)"
+   ],
+   "unconfirmed": [
+    "The paper is not open access and was not read; the ShadowHand and the simulator come from the downstream README, not the paper.",
+    "The pretraining README says the model starts from Voltron's v-cond ViT-Small checkpoint."
+   ],
+   "checked": "2026-10-26"
+  },
+  {
+   "id": "scs",
+   "name": "SCS",
+   "title": "Human-taught sensory-control synergy for universal robotic grasping",
+   "authors": "Caise Wei et al.",
+   "year": 2025,
+   "venue": "National Science Review (2025)",
+   "kind": "estimation",
+   "summary": "Sensory-control synergy: an LSTM maps 8 channels of fingertip touch (stacked interface and pressure sensors on thermo-sensation Pt elements, 50 Hz) from a glove worn in human grasping demonstrations to stable or slightly, moderately or highly unstable grasp states, and a fuzzy controller turns them into grip-force changes on a robot dexterous hand with matching fingertip sensors; 95.2% success over 29 demonstrated objects.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "One subject's glove grasps of 23 training objects plus 6 unseen objects (grasp count not stated) and one further user for cross-user tests; robot tests 10 grasps per object. Data statement: 'available from the corresponding author upon reasonable request'.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The open-access article (PMC12875117) has a data statement offering data on request and no code availability statement (read 2026-10-26). GitHub and Hugging Face were not searched."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://doi.org/10.1093/nsr/nwaf583"
+   },
+   "sources": [
+    "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1093/nsr/nwaf583 (abstract, identifiers)",
+    "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC12875117/fullTextXML (open-access full text: glove, network, robot tests, data statement)"
+   ],
+   "unconfirmed": [
+    "The robot hand is called 'robotic dexterous hand' without a make or model in the text read.",
+    "The number of tactile sensing units is not stated; the 8 input channels and the Figure 2a labels for five fingertips are what the text gives.",
+    "Kind set to estimation because the learned network outputs grasp states; the grip-force control is a hand-built fuzzy controller."
+   ],
+   "checked": "2026-10-26"
+  },
+  {
+   "id": "adaptac_dex",
+   "name": "AdapTac-Dex",
+   "title": "Adaptive Visuo-Tactile Fusion with Predictive Force Attention for Dexterous Manipulation",
+   "authors": "Jinzhou Li et al.",
+   "year": 2025,
+   "venue": "IROS 2025 (arXiv 2505.13982)",
+   "kind": "policy",
+   "summary": "Diffusion policy built on RISE for a customized 16-DoF LEAP hand on a Flexiv Rizon 4; a point cloud, 120x12 tactile input from 8 PaXini pads (fingertip and finger pad on 4 fingers, 3x5 three-axis taxels each) encoded by the 3DTacDex encoder, and the observed net force go in, a predicted future net force sets attention weights between vision and touch, and 25-D actions (wrist translation, 6D rotation, 16 joints) come out; 93% average success on box opening, cup reorientation and sponge flipping.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "tacdex3d",
+     "role": "pretraining",
+     "note": "Uses the pretrained 3DTacDex tactile encoder (paper cites Wu et al. 2024); 3DTacDex-P is also a baseline (40% average success against 93%)."
+    }
+   ],
+   "own_data": "About 30 teleoperated demonstrations per task (HaMeR hand tracking from a RealSense D415) for 3 tasks. The README's 'Data' link is a Google Drive file named example_data.zip; not opened.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code: github.com/kingchou007/adaptac-dex (README: 'released under the MIT License'; GitHub shows NOASSERTION). Weights: the README's TODO marks 'Released the pre-trained code and checkpoint' and links huggingface.co/kingchou007/3dTacDex, which holds only tactile_pretrain.pt (144.6 KB, card: 'official checkpoint for AdapTac-Dex', MIT); no trained policy checkpoint was seen, and the README recommends training your own. Checked 2026-10-26."
+   },
+   "license": "MIT",
+   "links": {
+    "paper": "https://arxiv.org/abs/2505.13982",
+    "project": "https://adaptac-dex.github.io/",
+    "code": "https://github.com/kingchou007/adaptac-dex",
+    "weights": "https://huggingface.co/kingchou007/3dTacDex"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2505.13982",
+    "https://arxiv.org/html/2505.13982v2 (hardware, inputs, outputs, demonstrations, baselines)",
+    "https://adaptac-dex.github.io/",
+    "https://github.com/kingchou007/adaptac-dex (repository metadata, README)",
+    "https://huggingface.co/kingchou007/3dTacDex (model card, file listing)"
+   ],
+   "unconfirmed": [
+    "uses tacdex3d: the paper takes the encoder from 3DTacDex but does not say what data it was pretrained on; the catalog's 3DTacDex entry pretrains its encoder on the tacdex3d play data, and tactile_pretrain.pt (144.6 KB) is close in size to 3DTacDex's ckpts/encoder.pt (148 KB).",
+    "8 pads: two sensors on each of four fingers, matching the 120-taxel input; the paper does not state the total."
+   ],
+   "checked": "2026-10-26"
+  },
+  {
+   "id": "rlhnd",
+   "name": "RLHND",
+   "title": "RLHND: Video Foundation Models as Physically Grounded Hand Trackers for Robot Learning",
+   "authors": "Seungjun Moon et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.09455",
+   "kind": "estimation",
+   "summary": "Cosmos 3 video-diffusion backbone used as a clip feature extractor; monocular egocentric RGB goes in, MANO hand pose comes out of a pose stream, and a separately trained tactile expert stream predicts dense per-vertex contact and force over the human hand surface; outputs are retargeted for robot learning.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "opentouch",
+     "role": "training",
+     "note": "Tactile expert trained on 1,469 OpenTouch clips, the 16x16 glove grid mapped to 205 of 778 MANO vertices; OpenTouch test: contact F1 0.696, AUROC 0.980, force MAE 0.489 kPa, RMSE 2.508 kPa."
+    },
+    {
+     "id": "hrdexdb",
+     "role": "training",
+     "note": "Contact head only, with labels computed from hand and object meshes (5 mm signed distance); HRDexDB's tactile readings are not used."
+    }
+   ],
+   "own_data": "No data of its own. Other training sources are outside the catalog: PressureVisionDB (bare hand on a capacitive pad) for force, and geometric contact labels from ARCTIC, HOT3D, DexYCB, HO3D and OakInk2.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "announced",
+    "note": "Abstract: 'The code will be publicly available at https://seungjun-moon.github.io/rlhnd/'; reproducibility statement: the authors 'will release the implementation of RLHND, along with the pre-trained weights' (arXiv v1, read 2026-10-26). Project page not opened."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.09455",
+    "project": "https://seungjun-moon.github.io/rlhnd/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.09455 (abstract via arXiv API)",
+    "https://arxiv.org/html/2610.09455v1 (first 100,000 of 152,859 characters: training data, Table 2, release statements)"
+   ],
+   "unconfirmed": [
+    "The OpenTouch clips are selected by an allowlist the paper attributes to HOPE, which was not checked.",
+    "The last 52,859 characters of the HTML (appendix) were not read."
+   ],
+   "checked": "2026-10-26"
+  },
+  {
+   "id": "dexskills",
+   "name": "DexSkills",
+   "title": "DexSkills: Skill Segmentation Using Haptic Data for Learning Autonomous Long-Horizon Robotic Manipulation Tasks",
+   "authors": "Xiaofeng Mao et al.",
+   "year": 2024,
+   "venue": "arXiv 2405.03476",
+   "kind": "policy",
+   "summary": "Skill segmentation and execution for an Allegro hand with 4 magnetic fingertip sensors on a UR5; a temporal autoencoder takes three frames of haptic features (fingertip force norm and contact, hand and arm proprioception) and outputs the current primitive skill out of 20, and one behaviour-cloned MLP per skill outputs end-effector and fingertip position changes, so a long-horizon demonstration is segmented and replayed in one shot.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "dexskills",
+     "role": "training",
+     "note": "Trained on the 20 primitive skills (10 demonstrations each for most, 20 for Touch, Wipe Back and Grasp) and evaluated on segmenting 20 long-horizon tasks against human labels."
+    }
+   ],
+   "own_data": null,
+   "dataset": "dexskills",
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Paper: 'we open-sourced our code' at github.com/ARQ-CRISP/DexSkills. The repository holds code/ and DexSkill_dataset/trained_policy/ with 18 checkpoints (9 AE_*.pth autoencoders of 16.5-18.6 MB and 9 Seg_*.pth of 1.7 MB); no LICENSE file. Checked 2026-10-26."
+   },
+   "license": "not stated (no LICENSE file in the repository)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2405.03476",
+    "code": "https://github.com/ARQ-CRISP/DexSkills",
+    "weights": "https://github.com/ARQ-CRISP/DexSkills/tree/main/DexSkill_dataset/trained_policy"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2405.03476",
+    "https://arxiv.org/html/2405.03476v1",
+    "https://github.com/ARQ-CRISP/DexSkills (repository metadata)",
+    "https://api.github.com/repos/ARQ-CRISP/DexSkills/git/trees/main?recursive=1 (file list and sizes)"
+   ],
+   "unconfirmed": [
+    "Which checkpoint pair is the paper's final model is not labelled; AE_20skills_0.1s.pth and Seg_20skills_0.1s.pth match the 20-skill, 0.1 s setting by file name only."
+   ],
+   "checked": "2026-10-26"
+  },
+  {
+   "id": "tactile_gat",
+   "name": "Tactile-GAT",
+   "title": "Tactile-GAT: tactile graph attention networks for robot tactile perception classification",
+   "authors": "Lun Chen et al.",
+   "year": 2024,
+   "venue": "Scientific Reports 14 (2024)",
+   "kind": "estimation",
+   "summary": "Graph attention network over a 22-channel glove time series (16 FSR402 pressure sensors on the palm and fingers, 6 flex sensors on the back, about 220 Hz) in 400-sample windows, combining a graph from the sensor layout with a learned latent graph; outputs which of 19 grasped objects is held, 89.58% accuracy.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Glove recordings of grasping and holding 19 object types in different poses (sample and subject counts not stated); data statement: 'available upon request from the corresponding author'.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "Data statement: code 'will be available at' github.com/alanchancl/Tactile-GAT. The repository exists (created 2023-02-23, last push 2024-04-26) with main.py, train.py, test.py, models/ and datasets/; no license. Whether data/ holds recordings or weights was not checked. Checked 2026-10-26."
+   },
+   "license": "not stated (no license on the GitHub repository)",
+   "links": {
+    "paper": "https://doi.org/10.1038/s41598-024-78764-x",
+    "code": "https://github.com/alanchancl/Tactile-GAT"
+   },
+   "sources": [
+    "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11555220/fullTextXML (open-access full text, first 200,000 of 209,699 characters)",
+    "https://github.com/alanchancl/Tactile-GAT (repository metadata, top-level listing)"
+   ],
+   "unconfirmed": [
+    "embodiment human: the text records 'the pressure distribution and curvature degree of the hand when grasping 19 different types of objects' with a glove and mentions no robot hand; who wore the glove is not stated.",
+    "The split of the 16 pressure sensors between fingertips and palm is only in Figure 2, which was not read."
+   ],
+   "checked": "2026-10-26"
   }
  ]
 }

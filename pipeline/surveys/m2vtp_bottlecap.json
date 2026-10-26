@@ -1,0 +1,140 @@
+{
+ "id": "m2vtp_bottlecap",
+ "surveyed": "2026-10-26",
+ "entry": {
+  "id": "m2vtp_bottlecap",
+  "name": "M2VTP BottleCap",
+  "title": "Masked Visual-Tactile Pre-training for Robot Manipulation",
+  "authors": "Qingtao Liu et al.",
+  "year": 2024,
+  "venue": "ICRA 2024",
+  "summary": "Human bottle-cap turning recorded with a low-cost Zhejiang University glove giving 20 binary touch signals and egocentric HoloLens 2 video, released as per-sequence PNG frame folders with one tactile pickle per sequence; sequence count not published in the sources read.",
+  "embodiment": "human",
+  "hand": "Custom low-cost tactile glove (Zhejiang University), 20 sensors",
+  "bimanual": null,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 20,
+   "sensors_per_hand": 20,
+   "coverage": [],
+   "rate_hz": null,
+   "note": "Abstract and project page: '20 sparse binary tactile signals sensing touch states'. The pretraining code loads tactile/<vid>.pkl per sequence and marks a frame as touching when any value reaches a threshold argument, so the files may hold raw values before binarisation. Sensor placement, principle and rate not read; files not opened.",
+   "maker": "custom (Zhejiang University)",
+   "model": null,
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "egocentric"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": null,
+   "tasks": 1,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "one task (bottle-cap turning); sequence, frame, object and subject counts not published in the sources read"
+  },
+  "availability": "public",
+  "access": "One OneDrive file linked from the Pretraining_for_M2VTP README ('Please download the dataset from the following link'), no password or form mentioned; it unpacks to data/raw/BottleCap with labels/, tactile/ and videos/. Size not visible to a script; download not tested.",
+  "license": "not stated (code repositories are MIT)",
+  "caveats": [
+   "Files not opened: the OneDrive share page returns no file listing to a script, so size, sequence count and tactile value range are unknown.",
+   "Touch is 20 discrete signals that the paper treats as binary touch states, not a pressure map.",
+   "Video is per-frame PNG folders (videos/<vid>/*.png, ordered by the number after the last '='), as read by the authors' preprocessing code; no timestamps were seen.",
+   "One task only (bottle-cap turning); the later VTDexManip release from the same group covers 10 tasks with a 20-pad glove, and whether it contains these sequences was not checked.",
+   "The paper is not open access; IEEE Xplore returned an empty page and ResearchGate returned 403, so the entry rests on the abstract, the project page and the two READMEs."
+  ],
+  "links": {
+   "paper": "https://ieeexplore.ieee.org/document/10610933/",
+   "project": "https://lqts.github.io/M2VTP/",
+   "data": "https://1drv.ms/u/c/9054151f0ba654c9/EbYX2-fmQ6pDiCf2vF3yYawBLC8lpGQBZWM4L_r3VXBQFw",
+   "code": "https://github.com/LQTS/Pretraining_for_M2VTP"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Microsoft HoloLens 2",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [],
+   "other": []
+  },
+  "sources": [
+   "https://lqts.github.io/M2VTP/ (abstract, BibTeX)",
+   "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1109/ICRA57147.2024.10610933 (abstract, authors, closed access)",
+   "https://github.com/LQTS/Pretraining_for_M2VTP (README: dataset link and folder layout; LICENSE MIT)",
+   "https://github.com/LQTS/Pretraining_for_M2VTP/blob/main/vitac/preprocessing/core.py (how videos/ and tactile/ are read)",
+   "https://github.com/LQTS/M2VTP (README: ShadowHand downstream task, weights links; LICENSE MIT)"
+  ],
+  "unconfirmed": [
+   "A search-result summary of a later paper describes M2VTP's data as 120 bottle-cap-turning sequences from a glove of 20 binary contact sensors; that paper was not identified or read, so the count is not used.",
+   "tasks = 1 from the abstract ('a dataset of turning bottle caps') and the single BottleCap folder in the README.",
+   "availability public: the README gives a direct OneDrive link with no password, unlike VTDexManip's; whether it downloads without sign-in was not tested."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": "Pretraining_for_M2VTP README links an MIT license for the code; no statement covers the dataset",
+  "url": "https://github.com/LQTS/Pretraining_for_M2VTP"
+ },
+ "download": {
+  "where": "https://1drv.ms/u/c/9054151f0ba654c9/EbYX2-fmQ6pDiCf2vF3yYawBLC8lpGQBZWM4L_r3VXBQFw",
+  "access": "open",
+  "format": "BottleCap.zip unpacking to labels/, tactile/<vid>.pkl (one pickle per sequence) and videos/<vid>/*.png (per-frame images)",
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": "not known; a single OneDrive file"
+ },
+ "channels": [
+  {
+   "name": "tactile/<vid>.pkl",
+   "kind": "contact_flag",
+   "shape": "per frame, 20 values (from the paper's 20 signals; not seen)",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "glove sensors; placement not read",
+   "note": "from the README and preprocessing code; files not opened"
+  },
+  {
+   "name": "videos/<vid>/*.png",
+   "kind": "camera",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "RGB images",
+   "frame": "HoloLens 2 egocentric",
+   "note": "from the README and preprocessing code; files not opened"
+  },
+  {
+   "name": "labels/",
+   "kind": "other",
+   "shape": null,
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "folder named in the README; contents not described"
+  }
+ ],
+ "episode_index": {
+  "where": "folder names under tactile/ and videos/ (sequence ids); labels/ not described",
+  "count": null,
+  "fields": [],
+  "tasks": [
+   "bottle-cap turning"
+  ],
+  "scenes": []
+ }
+}

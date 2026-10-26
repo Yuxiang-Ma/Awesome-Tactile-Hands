@@ -2352,11 +2352,16 @@
   "arxiv:2607.07287": "W7167798204",
   "arxiv:2609.20414": "W7213598404",
   "arxiv:2609.20649": "W7213606063",
-  "arxiv:2609.34286": "W7214726706"
+  "arxiv:2609.34286": "W7214726706",
+  "arxiv:2610.22342": "W7222620123",
+  "arxiv:2610.22932": "W7222961405",
+  "doi:10.1038/s41467-024-53654-y": "W4404020317"
  },
  "cursor": {
-  "arxiv_backfill": "2015-10",
-  "openalex_rotation": 3,
-  "hf_backfilled": true
+  "arxiv_backfill": "2016-01",
+  "hf_backfilled": true,
+  "arxiv_recent_ok": "2026-10-26",
+  "openalex_recent_ok": "2026-10-26",
+  "openalex_backfill": "2015-04"
  }
 }
