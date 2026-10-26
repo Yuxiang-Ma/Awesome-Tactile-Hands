@@ -6,7 +6,7 @@ Two unattended runs keep the catalog current, and one job publishes their work a
 |---|---|---|---|
 | 01:30 | **discovery**: find datasets and models the catalog does not have yet, including ones earlier passes missed | `scripts/nightly_local.sh discovery` on the workstation (cron) | new entries, `watch/reviewed.json` |
 | 04:30 | **status**: check every catalogued dataset and model for updates and for data, code or weights released since the last check | `scripts/nightly_local.sh status` (cron) | updated entries |
-| 09:00 | **publish**: check the night's commits, rebuild the README and derived fields, merge into `main` (GitHub Pages then serves it) | `.github/workflows/publish.yml` | `main` |
+| 09:00 | **publish**: check the night's commits, rebuild the README and derived fields, merge into `main` (GitHub Pages then serves it) | `.github/workflows/publish.yml`, started by the workstation at 08:59 (cron) | `main` |
 
 Both runs work on the branch `claude/nightly`. Each run starts with a scan script (no model involved) that writes what to
 look at, then a Claude Code session in restricted mode reviews it and edits the data files, then the wrapper checks the
@@ -207,6 +207,12 @@ python3 scripts/discover.py --dry-run         # the discovery scan alone, printi
 The wrapper keeps its own clone in `~/taxel-nightly/Awesome-Tactile-Hands` and its logs in `~/taxel-nightly/logs/`.
 The publish job can be started by hand from the Actions tab ("Publish nightly", Run workflow).
 
+GitHub starts scheduled workflows late when Actions is busy: the first scheduled publish, due at 08:57 on 2026-10-26,
+started at 14:59. So the workstation starts the workflow at 08:59 with `gh workflow run`, after waiting for any nightly
+run that still holds the lock; the run begins within seconds and Pages serves the result about a minute later. The
+workflow's own two schedules stay as the fallback for days the workstation is off, and a schedule that fires after the
+08:59 run finds nothing new and does nothing.
+
 ## Installing on a machine
 
 The runs need the `claude` CLI logged in to an account, `gh` logged in with push access to this repository, Python 3 and
@@ -227,11 +233,24 @@ git -C "$R" show origin/main:scripts/nightly_local.sh > "$D/nightly_local.sh.new
 NIGHTLY_LOCKED=1 exec /bin/bash "$D/nightly_local.sh" "$@"
 ```
 
+`~/taxel-nightly/publish.sh` starts the publish workflow:
+
+```
+#!/usr/bin/env bash
+set -u
+D=$HOME/taxel-nightly
+export PATH=/snap/bin:/usr/local/bin:/usr/bin:/bin
+exec 9>"$D/.lock"
+flock -w 3600 9 || echo "$(date -u +%FT%TZ) a nightly run still holds the lock after 1 h; publishing what is pushed"
+gh workflow run publish.yml -R Yuxiang-Ma/Awesome-Tactile-Hands --ref main
+```
+
 crontab (the machine's time zone is America/New_York):
 
 ```
 30 1 * * * $HOME/taxel-nightly/launch.sh discovery >> $HOME/taxel-nightly/logs/cron.log 2>&1
 30 4 * * * $HOME/taxel-nightly/launch.sh status >> $HOME/taxel-nightly/logs/cron.log 2>&1
+59 8 * * * $HOME/taxel-nightly/publish.sh >> $HOME/taxel-nightly/logs/cron.log 2>&1
 ```
 
 Cloud routines (claude.ai/code) were tried on 2026-10-25 and could not run these flows: the Claude GitHub App had no
