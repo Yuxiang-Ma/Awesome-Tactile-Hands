@@ -1,0 +1,40 @@
+{
+ "flow": "status",
+ "date": "2026-10-26",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 15,
+ "added": {
+  "datasets": 0,
+  "models": 0,
+  "hardware": 0
+ },
+ "updated": 1,
+ "queue_left": 0,
+ "searches": [
+  "https://api.github.com/search/repositories?q=Ego2Contact",
+  "https://huggingface.co/api/models?search=Ego2Contact",
+  "https://huggingface.co/api/datasets?search=Ego2Contact",
+  "https://huggingface.co/api/models?author=qqyang",
+  "https://huggingface.co/api/datasets?author=qqyang",
+  "https://api.github.com/search/repositories?q=TK-STGN",
+  "https://huggingface.co/api/datasets?search=TouchWorld",
+  "https://huggingface.co/api/datasets?search=RoboTacDex",
+  "https://api.github.com/search/repositories?q=RoboTacDex",
+  "https://huggingface.co/api/datasets?author=youngw",
+  "https://huggingface.co/api/models?author=youngw"
+ ],
+ "for_the_owner": [
+  "Judgment call: Hugging Face user qqyang holds public repos named for Ego2Contact, including .pth checkpoints (e2c-archive-ckpt, e2c-downstream-eval) with no model card or license. The paper does not link them and no page ties the account to the authors. The catalog keeps weights as not_released and describes the repos in release.note; promote them to a weights link only if the authors confirm."
+ ],
+ "notes": [
+  "Scan: 3 signals on 230 URLs. dexvitac (priority 1): the project page now links a Google Doc (the 'Hardware Guide' button), which needs JavaScript and could not be read; the Hugging Face dataset repo still holds only a 102-byte README ('near future') and the code repo DexViTac_Code is a stub with an empty README, so availability stays announced. sharpa_roco (priority 1): the new links are registration forms and a Google Doc on the challenge page; the Hugging Face repo is ungated, unchanged since 2026-09-20 and the entry already describes it, so no edit. dextacwam (priority 3): page text length unchanged (1552) and the entry is public, so not reviewed further.",
+  "Deep check, no change beyond the checked date: models tactalign (project page still says 'Coming Soon', github.com/google/tactalign still returns 404, no models under youngw), touchworld (flyingGH repository unchanged, no Hugging Face repo), tk_stgn (GitHub search returns nothing), vitam (code repository unchanged since 2024-09-30), rlhnd (the repository named on the project page, seungjun-moon/rlhnd, holds only the project page files, so code is still announced; release.note updated). Checked dates on tactalign, touchworld, tk_stgn and vitam were set to 2026-10-26.",
+  "Deep check, no change: datasets vicon_glove (VICON-dataset/dataset is a README stub, 'release upon publication'), dexumi (GitHub repository last pushed 2026-04-18, sample zip only), gist_vta and robotacdex (arXiv pages unchanged, 'open-sourced soon' for robotacdex; no Hugging Face or GitHub hit for either name), tactalign dataset (same four youngw repos, last modified 2026-05-31).",
+  "Limits: kaiwu (ScienceDB request gate) was not reopened. Deep-check searches used the Hugging Face and GitHub APIs through nightly_tool.py; no WebSearch queries were run. The Hugging Face model repo qqyang/ego2contact-demo-videos returned HTTP 401 and was not read."
+ ],
+ "started": "2026-10-26T08:30:01Z",
+ "finished": "2026-10-26T08:38:05Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 13 changed files, 7 new entries"
+}

@@ -1,0 +1,4 @@
+{"date": "2026-10-26", "flow": "status", "changes": [
+  {"kind": "updated", "target": "model", "id": "ego2contact",
+   "text": "Ego2Contact: found unlinked Hugging Face repos under the user qqyang (datasets ego2contact-viz and ego2contact-sim-viz, model repos ego2contact-demo-videos, e2c-archive-ckpt and e2c-downstream-eval with .pth checkpoint files, no model card or license); the paper links no release, so code and weights stay not_released.",
+   "source": "https://huggingface.co/datasets/qqyang/ego2contact-sim-viz"}]}

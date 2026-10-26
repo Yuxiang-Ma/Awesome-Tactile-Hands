@@ -546,7 +546,7 @@
     "https://huggingface.co/api/datasets?author=youngw"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-25"
+   "checked": "2026-10-26"
   },
   {
    "id": "tactiskill",
@@ -749,7 +749,7 @@
     "TouchWorld and EgoTouch share first author Jianyi Zhou and corresponding author Shuo Yang; whether the pretraining used the public EgoTouch release or internal recordings is not stated.",
     "Venue: arXiv only; no conference is named on the abstract page or the project page."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-26"
   },
   {
    "id": "ttp",
@@ -1002,7 +1002,7 @@
     "https://github.com/search?q=TK-STGN&type=repositories"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-25"
+   "checked": "2026-10-26"
   },
   {
    "id": "vt_jointpretrain",
@@ -1300,7 +1300,7 @@
    "release": {
     "code": "not_released",
     "weights": "not_released",
-    "note": "The paper (HTML v1) has no code, weights or data statement and no project page (read 2026-10-25). GitHub and Hugging Face were not searched."
+    "note": "The paper (HTML v1) has no code, weights or data statement and no project page (read 2026-10-25). On 2026-10-26 GitHub repository search for Ego2Contact returned nothing. The Hugging Face user qqyang holds repos named for Ego2Contact that the paper does not link: the datasets ego2contact-viz (71.7 GB of prediction renders) and ego2contact-sim-viz (MIT, 52 MB), and the model repos ego2contact-demo-videos (MIT), e2c-archive-ckpt and e2c-downstream-eval, which list .pth checkpoint files (e.g. robot_finetune/ckpt_dual42_806272/best_model.pth) and have no model card or license. The paper's authors have not announced them as a release, so code and weights stay not_released here."
    },
    "license": "not stated",
    "links": {
@@ -1308,13 +1308,19 @@
    },
    "sources": [
     "https://arxiv.org/abs/2610.22932 (abstract page via arXiv API)",
-    "https://arxiv.org/html/2610.22932v1 (HTML v1: datasets, robot setup, predictor, baselines, policy experiments)"
+    "https://arxiv.org/html/2610.22932v1 (HTML v1: datasets, robot setup, predictor, baselines, policy experiments)",
+    "https://api.github.com/search/repositories?q=Ego2Contact (0 results)",
+    "https://huggingface.co/api/models?author=qqyang",
+    "https://huggingface.co/api/datasets?author=qqyang",
+    "https://huggingface.co/datasets/qqyang/ego2contact-sim-viz (README)",
+    "https://huggingface.co/api/models/qqyang/e2c-archive-ckpt and https://huggingface.co/api/models/qqyang/e2c-downstream-eval (file lists)"
    ],
    "unconfirmed": [
     "The maker of the 880-taxel glove worn by the Revo 2 hand is not given in the parts read.",
-    "Role for egotactile set to fine-tuning because the paper fine-tunes on it for cross-dataset adaptation; whether EgoTactile also enters base training is not stated."
+    "Role for egotactile set to fine-tuning because the paper fine-tunes on it for cross-dataset adaptation; whether EgoTactile also enters base training is not stated.",
+    "That the Hugging Face user qqyang is the paper's first author Qianqian Yang is inferred from the user name and the Ego2Contact repo names and README; no page links the account to the paper. The checkpoint files were not downloaded or opened, so what each one contains is not confirmed."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-26"
   },
   {
    "id": "vitam",
@@ -1350,7 +1356,7 @@
     "The text says the learning model is adapted from the authors' earlier VTacO work, which is not in the catalog.",
     "The last 37,115 characters of the full text (methods tail, references) were not read."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-26"
   },
   {
    "id": "m2vtp",
@@ -1503,7 +1509,7 @@
    "release": {
     "code": "announced",
     "weights": "announced",
-    "note": "Abstract: 'The code will be publicly available at https://seungjun-moon.github.io/rlhnd/'; reproducibility statement: the authors 'will release the implementation of RLHND, along with the pre-trained weights' (arXiv v1, read 2026-10-26). Project page not opened."
+    "note": "Abstract: 'The code will be publicly available at https://seungjun-moon.github.io/rlhnd/'; reproducibility statement: the authors 'will release the implementation of RLHND, along with the pre-trained weights' (arXiv v1, read 2026-10-26). The project page repeats 'Code will be released at github.com/seungjun-moon/rlhnd'; that repository (created 2026-10-07, last push 2026-10-08) holds only README.md, index.html, logo.svg and videos/ (read 2026-10-26)."
    },
    "license": "not stated",
    "links": {
