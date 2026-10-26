@@ -6,13 +6,18 @@ the catalog does not have yet, for the discovery review (pipeline/NIGHTLY.md, fl
 Sources, every night:
 - arXiv: 16 queries over the last 21 days, plus one backfill slice (3 months, moving from 2015 to today and starting
   over), so papers that earlier passes missed come up again;
-- OpenAlex: works citing any catalog paper, published in the last 60 days, plus the full citing set of one tenth of
-  the catalog papers in rotation;
+- OpenAlex: 5 title-and-abstract searches over the last 30 days and over a backfill slice of its own (this finds
+  journal and conference papers that are not on arXiv), and every work that cites a catalog paper and was published in
+  the last 60 days or mentions touch;
 - Hugging Face: datasets and models whose names match touch terms (broad terms such as "glove" need a second hand
   or touch word), and the newest repos of every organisation that published a catalog dataset or model;
 - GitHub: repositories matching tactile-hand searches.
 Candidates already in the catalog (any cited URL) or already reviewed (watch/reviewed.json) are left out. The rest are
 scored by keywords and merged into the queue watch/candidates.json, which keeps unreviewed items from earlier nights.
+
+A window that a source did not fully answer is asked again by the next run: the recent window then reaches back to
+the last night every query was answered, and the backfill cursor stays where it was. Unanswered requests are listed
+under "problems" in the queue file, and the wrapper copies them into the run report.
 """
 import json
 import re
@@ -21,7 +26,8 @@ import time
 import urllib.parse
 import xml.etree.ElementTree as ET
 
-from nightly_lib import WATCH, arxiv_id, catalog, dump_json, fetch, get_json, hf_repo, known_keys, load_json, now_iso, url_key, urls_in
+from nightly_lib import (ARXIV_WAITS, WATCH, arxiv_id, catalog, dump_json, fetch, get_json, hf_repo, known_keys, load_json, now_iso,
+                         url_key, urls_in)
 
 QUERIES = [
     'abs:"tactile glove"',
@@ -57,10 +63,24 @@ POS = [(r"tactile glove|sensing glove|pressure glove|haptic glove|smart glove|fo
 NEG = [(r"parallel[- ]jaw|two-finger(ed)? gripper|\bgripper", -1.5), (r"prosthe", -1), (r"braille", -2),
        (r"haptic feedback|vibrotactile|haptic rendering|haptic display", -1.5), (r"surgical|surgery", -1),
        (r"texture classification|material classification|material recognition", -1), (r"\blidar\b|autonomous driving", -2)]
+OA_QUERIES = [
+    '"tactile glove" OR "pressure glove" OR "sensing glove" OR "smart glove" OR "force glove" OR "haptic glove"',
+    'tactile AND (dexterous OR "multi-fingered" OR multifingered OR "robot hand" OR "robotic hand" OR "anthropomorphic hand")',
+    '(visuotactile OR "visuo-tactile" OR "visual-tactile" OR "vision-tactile") AND hand',
+    '("electronic skin" OR "e-skin" OR "tactile skin" OR "tactile array") AND hand AND (grasp OR grasping OR manipulation OR dataset)',
+    '(tactile OR touch OR pressure) AND hand AND (dataset OR benchmark) AND (manipulation OR grasp OR grasping)',
+]
+OA_SELECT = "id,ids,display_name,publication_date,primary_location,locations,authorships,abstract_inverted_index"
 GH_QUERIES = ["tactile glove", "tactile dexterous dataset", "tactile hand dataset", "visuotactile dexterous", "tactile world model hand"]
 OWN = ("gh:yuxiang-ma/", "hf:datasets/yxma/", "hf:models/yxma/", "hf:spaces/yxma/")  # this catalog's own repositories
 QUEUE_MAX = 400
 MIN_SCORE = 2.0
+MISSED: dict = {}  # source -> requests it did not answer tonight
+TRUNCATED: list = []  # OpenAlex lists that stopped at the page limit
+
+
+def missed(source: str) -> None:
+    MISSED[source] = MISSED.get(source, 0) + 1
 
 
 def score(text: str, bonus: float = 0.0, base: float = None):
@@ -81,18 +101,21 @@ def score(text: str, bonus: float = 0.0, base: float = None):
 
 
 # ---------- arXiv ----------
-def arxiv_search(query: str, d0: str, d1: str) -> list:
+def arxiv_search(query: str, d0: str, d1: str = None):
+    """(papers, answered) for one query over submissions from d0 to d1 (to now when d1 is None)."""
+    d1 = d1 or time.strftime("%Y-%m-%d", time.gmtime())
     q = f"({query}) AND submittedDate:[{d0.replace('-', '')}0000 TO {d1.replace('-', '')}2359]"
     url = "https://export.arxiv.org/api/query?" + urllib.parse.urlencode(
         {"search_query": q, "sortBy": "submittedDate", "sortOrder": "descending", "max_results": 200})
-    status, _, body = fetch(url)
-    if status != 200:
-        return []
+    status, _, body = fetch(url, waits=ARXIV_WAITS)
     ns = {"a": "http://www.w3.org/2005/Atom"}
     try:
-        root = ET.fromstring(body)
+        root = ET.fromstring(body) if status == 200 else None
     except ET.ParseError:
-        return []
+        root = None
+    if root is None:
+        missed("arXiv")
+        return [], False
     out = []
     for e in root.findall("a:entry", ns):
         aid = arxiv_id(e.findtext("a:id", "", ns) or "")
@@ -103,7 +126,7 @@ def arxiv_search(query: str, d0: str, d1: str) -> list:
                     "url": f"https://arxiv.org/abs/{aid}", "date": (e.findtext("a:published", "", ns) or "")[:10],
                     "authors": (authors[0] + (" et al." if len(authors) > 1 else "")) if authors else None,
                     "abstract": " ".join((e.findtext("a:summary", "", ns) or "").split())})
-    return out
+    return out, True
 
 
 def month_add(ym: str, n: int) -> str:
@@ -144,23 +167,35 @@ def oa_resolve(key: str, cache: dict):
     wid = j["id"].rsplit("/", 1)[-1] if status == 200 and j else None
     if status in (200, 404):
         cache[key] = wid
+    else:
+        missed("OpenAlex")
     return wid
 
 
-def oa_citing(wid: str, since: str = None) -> list:
-    flt = f"cites:{wid}" + (f",from_publication_date:{since}" if since else ",title_and_abstract.search:tactile|touch|haptic|glove")
-    out, cursor = [], "*"
-    for _ in range(5):
+def oa_list(flt: str, pages: int, select: str = OA_SELECT):
+    """(works, every page answered) for an OpenAlex filter, 200 a page. Without an API key OpenAlex gives the machine's
+    IP $0.10 a day, a list request costs $0.001, and cursor paging is refused, so pages are numbered and the whole scan
+    keeps to about 20 requests."""
+    out = []
+    for page in range(1, pages + 1):
         status, j = get_json("https://api.openalex.org/works?" + urllib.parse.urlencode(
-            {"filter": flt, "per-page": 200, "cursor": cursor,
-             "select": "id,ids,display_name,publication_date,primary_location,locations,authorships,abstract_inverted_index"}))
+            {"filter": flt, "per-page": 200, "page": page, "select": select}), max_body=32 << 20)
         if status != 200 or not j:
-            break
-        out += [oa_item(w) for w in j.get("results", [])]
-        cursor = (j.get("meta") or {}).get("next_cursor")
-        if not cursor:
-            break
-    return out
+            missed("OpenAlex")
+            return out, False
+        res = j.get("results") or []
+        out += res
+        count = (j.get("meta") or {}).get("count") or 0
+        if len(res) < 200 or len(out) >= count:
+            return out, True
+    TRUNCATED.append(f"{flt[:80]} ({len(out)} of {count})")
+    return out, True
+
+
+def oa_search(query: str, d0: str, d1: str = None):
+    """(works, answered) whose title or abstract match query, published from d0 to d1 (no end when d1 is None)."""
+    works, ok = oa_list(f"title_and_abstract.search:{query},from_publication_date:{d0}" + (f",to_publication_date:{d1}" if d1 else ""), 3)
+    return [oa_item(w) for w in works], ok
 
 
 # ---------- Hugging Face, GitHub ----------
@@ -186,6 +221,7 @@ def hf_list(kind: str, params: dict, pages: int = 1) -> list:
     for _ in range(pages):
         status, headers, body = fetch(url, accept="application/json")
         if status != 200:
+            missed("Hugging Face")
             break
         try:
             out += json.loads(body)
@@ -236,6 +272,8 @@ def gh_search(q: str) -> list:
     """Repositories whose name, description or topics also mention data or learning; hardware-only glove projects are left out."""
     status, j = get_json("https://api.github.com/search/repositories?" + urllib.parse.urlencode(
         {"q": q, "sort": "updated", "order": "desc", "per_page": 50}))
+    if status != 200:
+        missed("GitHub")
     out = []
     for r in ((j or {}).get("items") or []) if status == 200 else []:
         text = " ".join(filter(None, [r["full_name"], r.get("description") or "", " ".join(r.get("topics") or [])]))
@@ -256,7 +294,7 @@ def main() -> None:
     state = load_json(WATCH / "state.json", {"version": 1, "urls": {}})
     cur = state.setdefault("cursor", {})
     cache = state.setdefault("openalex", {})
-    found, log = {}, []
+    found, log, problems = {}, [], []
 
     def add(items: list, source: str, bonus: float = 0.0):
         n = 0
@@ -275,36 +313,63 @@ def main() -> None:
                 n += 1
         return n
 
-    # arXiv: recent window and backfill slices
-    windows = [("recent", ago(21), today)]
-    start = cur.get("arxiv_backfill", "2015-01")
-    for _ in range(slices):
-        end = month_add(start, 3)
-        windows.append((f"backfill {start}", f"{start}-01", time.strftime("%Y-%m-%d", time.strptime(f"{end}-01", "%Y-%m-%d"))))
-        start = end if end <= today[:7] else "2015-01"
-    for label, d0, d1 in windows:
-        n = sum(add(arxiv_search(q, d0, d1), f"arxiv {label}") for q in QUERIES)
-        log.append(f"arXiv {label} ({d0} to {d1}): {n} new")
-    cur["arxiv_backfill"] = start
+    def windows(name: str, days: int) -> list:
+        """(label, from, to, cursor after it) for the recent window and tonight's backfill slices of one source. The
+        recent window reaches back to the last night the source answered every query (at most 120 days)."""
+        out = [("recent", max(min(ago(days), cur.get(f"{name}_recent_ok") or today), ago(120)), None, None)]
+        start = cur.get(f"{name}_backfill", "2015-01")
+        for _ in range(slices):
+            end = month_add(start, 3)
+            out.append((f"backfill {start}", f"{start}-01", f"{end}-01", end if end <= today[:7] else "2015-01"))
+            start = out[-1][3]
+        return out
 
-    # OpenAlex: works citing catalog papers
-    papers = {}
+    def sweep(name: str, title: str, days: int, search, queries: list) -> None:
+        for label, d0, d1, after in windows(name, days):
+            n = miss = 0
+            for q in queries:
+                items, ok = search(q, d0, d1)
+                miss += not ok
+                n += add(items, f"{name} {label}")
+            log.append(f"{title} {label} ({d0} to {d1 or today}): {n} new" + (f"; {miss} of {len(queries)} queries not answered" if miss else ""))
+            if miss:
+                problems.append(f"{title}: {miss} of {len(queries)} queries for {d0} to {d1 or today} not answered; the next run asks again")
+                if after:
+                    break  # the cursor stays on this slice
+            else:
+                cur[f"{name}_backfill" if after else f"{name}_recent_ok"] = after or today
+
+    sweep("arxiv", "arXiv", 21, arxiv_search, QUERIES)
+    sweep("openalex", "OpenAlex search", 30, oa_search, OA_QUERIES)
+
+    # OpenAlex: works citing catalog papers, one filter per 50 papers: those published in the last 60 days, and all
+    # those whose title or abstract mention touch
+    papers, unresolved = {}, 0
     for kind, items in (("dataset", cat["datasets"]), ("model", cat["models"])):
         for x in items:
             k = url_key((x.get("links") or {}).get("paper") or "")
             if k and k.startswith(("arxiv:", "doi:")):
-                papers.setdefault(k, f"{kind}:{x['id']}")
-    rot = cur.get("openalex_rotation", 0)
-    n_recent = n_full = 0
-    for i, (k, owner) in enumerate(sorted(papers.items())):
-        wid = oa_resolve(k, cache)
-        if not wid:
-            continue
-        n_recent += add(oa_citing(wid, since=ago(60)), f"openalex cites {owner}", bonus=1.5)
-        if i % 10 == rot % 10:
-            n_full += add(oa_citing(wid), f"openalex cites {owner}", bonus=1.5)
-    cur["openalex_rotation"] = rot + 1
-    log.append(f"OpenAlex: {len(papers)} catalog papers, {n_recent} new from recent citations, {n_full} from the full sets of 1/10 of them")
+                if wid := oa_resolve(k, cache):
+                    papers.setdefault(wid, f"{kind}:{x['id']}")
+                elif k not in cache:
+                    unresolved += 1
+    wids, n, lists, miss = sorted(papers), 0, 0, 0
+    for i in range(0, len(wids), 50):
+        cites = "cites:" + "|".join(wids[i:i + 50])
+        for flt in (f"{cites},from_publication_date:{ago(60)}", f"{cites},title_and_abstract.search:tactile|touch|haptic|glove"):
+            works, ok = oa_list(flt, 10, OA_SELECT + ",referenced_works")
+            lists, miss = lists + 1, miss + (not ok)
+            for w in works:
+                item = oa_item(w)
+                for ref in w.get("referenced_works") or []:
+                    if owner := papers.get(ref.rsplit("/", 1)[-1]):
+                        n += add([dict(item)], f"openalex cites {owner}", bonus=1.5)
+    cur.pop("openalex_rotation", None)
+    log.append(f"OpenAlex citations of {len(papers)} catalog papers: {n} new" + (f"; {unresolved} papers not looked up" if unresolved else ""))
+    if miss or unresolved:
+        problems.append(f"OpenAlex citations: {miss} of {lists} lists and {unresolved} paper lookups not answered; the next run asks again")
+    if TRUNCATED:
+        log.append(f"OpenAlex lists cut at the page limit: {'; '.join(TRUNCATED)}")
 
     pages = 1 if cur.get("hf_backfilled") else 5  # the first night reads deeper into the older repos
     n = sum(add(hf_search(kind, t, pages if t in HF_SPECIFIC else 1), f"hf {kind} '{t}'") for kind in ("datasets", "models")
@@ -329,9 +394,14 @@ def main() -> None:
     ranked = ranked[:QUEUE_MAX]
     for c in ranked:
         c["abstract"] = (c.get("abstract") or "")[:1500]
-    out = {"generated": now_iso(), "log": log, "new_tonight": sum(1 for c in ranked if c.get("first_seen") == today),
-           "queued": len(ranked), "dropped_low_score": len(dropped), "candidates": ranked}
-    print("\n".join(log) + f"\nqueue: {len(ranked)} ({out['new_tonight']} new tonight, {len(dropped)} dropped below the cap)")
+    for source, k in sorted(MISSED.items()):
+        if not any(p.startswith(source) for p in problems):
+            problems.append(f"{source}: {k} requests not answered; tonight's results from it are incomplete")
+    # a source counts as not reached when it missed three requests (the point where fetch stops asking it)
+    out = {"generated": now_iso(), "log": log, "problems": problems, "sources_failed": sorted(k for k, v in MISSED.items() if v >= 3),
+           "new_tonight": sum(1 for c in ranked if c.get("first_seen") == today), "queued": len(ranked),
+           "dropped_low_score": len(dropped), "candidates": ranked}
+    print("\n".join(log + problems) + f"\nqueue: {len(ranked)} ({out['new_tonight']} new tonight, {len(dropped)} dropped below the cap)")
     if "--dry-run" in sys.argv:
         for c in ranked[:40]:
             print(f"  {c['score']:4.1f} {c['key']:<34} {c['title'][:90]}")

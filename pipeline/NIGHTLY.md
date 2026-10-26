@@ -13,13 +13,20 @@ look at, then a Claude Code session in restricted mode reviews it and edits the 
 result with `scripts/nightly_guard.py` and commits. The session cannot run git, change scripts or pages, or read outside
 its checkout.
 
+When a source does not answer (arXiv's API returns 429 while it is overloaded; OpenAlex gives a machine without an API
+key $0.10 a day, shared with its IP, at $0.001 a list request), the scan retries, stops asking that host after three
+failed requests, and lists what went unanswered under `problems` and `sources_failed` in its output. The next run asks
+for the same windows again: the backfill cursor stays, and the recent window reaches back to the last night that was
+fully answered. The wrapper copies both fields into the run report, the site shows "not reached" next to that run, and a
+source missing from three runs in a row opens a GitHub issue. The review session has nothing to do about them.
+
 ## Files
 
 | file | written by | content |
 |---|---|---|
 | `watch/state.json` | `scripts/watch.py`, `scripts/discover.py` | fingerprints of every catalogued link; discovery cursors |
-| `watch/signals.json` | `scripts/watch.py` | tonight's changes per entry, priority 1-3, and the entries due for a deep check |
-| `watch/candidates.json` | `scripts/discover.py` | the review queue: papers and repos not in the catalog, scored, kept across nights |
+| `watch/signals.json` | `scripts/watch.py` | tonight's changes per entry, priority 1-3, the entries due for a deep check; `errors`, `problems` |
+| `watch/candidates.json` | `scripts/discover.py` | the review queue: papers and repos not in the catalog, scored, kept across nights; `problems` |
 | `watch/reviewed.json` | discovery run | every candidate decided, so it is not reviewed again |
 | `data/changes/<date>-<flow>.json` | both runs | the change log shown on the site and in the README |
 | `watch/runs/<date>-<flow>.json` | both runs | the run report: counts, and what needs a person |
@@ -185,7 +192,8 @@ with the entry's name; it is shown as written.
  "notes": ["anything else a person should know, one line each"]}
 ```
 
-The wrapper adds `started`, `finished`, `ok` and the guard result.
+The wrapper adds `started`, `finished`, `ok`, the guard result, and `sources_failed` and `scan_problems` when the scan
+could not reach a source.
 
 ## Running by hand
 
@@ -201,9 +209,10 @@ The publish job can be started by hand from the Actions tab ("Publish nightly", 
 
 ## Installing on a machine
 
-The runs need the `claude` CLI logged in to an account, `gh` logged in with push access to this repository, Python 3
-and ffmpeg. `~/taxel-nightly/launch.sh` takes the lock before it fetches, so a waiting run never moves the refs under a
-running one, then runs main's copy of the wrapper:
+The runs need the `claude` CLI logged in to an account, `gh` logged in with push access to this repository, Python 3 and
+ffmpeg. Optional: a free OpenAlex API key (openalex.org/settings/api) in `~/taxel-nightly/openalex.key` gives the
+discovery scan its own $1 a day; it uses about 20 list requests a night. `~/taxel-nightly/launch.sh` takes the lock
+before it fetches, so a waiting run never moves the refs under a running one, then runs main's copy of the wrapper:
 
 ```
 #!/usr/bin/env bash

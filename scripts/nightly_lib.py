@@ -2,6 +2,7 @@
 
 Standard library only, so the scan runs on a bare GitHub Actions runner and in a cloud session alike.
 """
+import email.utils
 import hashlib
 import ipaddress
 import json
@@ -19,8 +20,12 @@ ROOT = Path(__file__).resolve().parent.parent
 WATCH = ROOT / "watch"
 UA = "taxel-atlas-watch/1.0 (+https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands)"
 GAP = {"export.arxiv.org": 3.2, "arxiv.org": 1.0, "api.openalex.org": 0.15, "api.github.com": 0.4, "huggingface.co": 0.25}
+ARXIV_WAITS = (20, 60, 150)  # export.arxiv.org answers 429 or nothing while it is overloaded; the scans wait that out
+RETRY = (429, 500, 502, 503, 504)
+DOWN_AFTER = 3  # a host that failed this many requests in a row is not asked again in the same run
 MAX_BODY = 4 << 20
 _last: dict = {}
+_fails: dict = {}
 
 
 def public_url(url: str) -> bool:
@@ -46,13 +51,29 @@ class _PublicRedirects(urllib.request.HTTPRedirectHandler):
 _OPENER = urllib.request.build_opener(_PublicRedirects)
 
 
-def fetch(url: str, accept: str = "", timeout: int = 30, tries: int = 3, text_only: bool = True, max_body: int = MAX_BODY):
+def _retry_after(headers) -> float:
+    """Seconds asked for by a Retry-After header (a number or an HTTP date); 0 when there is none."""
+    v = (headers.get("Retry-After") if headers else None) or ""
+    try:
+        return max(0.0, float(v))
+    except ValueError:
+        try:
+            return max(0.0, email.utils.parsedate_to_datetime(v).timestamp() - time.time())
+        except (TypeError, ValueError):
+            return 0.0
+
+
+def fetch(url: str, accept: str = "", timeout: int = 30, waits=(5, 10), text_only: bool = True, max_body: int = MAX_BODY):
     """GET url -> (status | None, headers, body bytes). Bodies are read only for text, HTML and JSON, capped at 4 MB, so a
     link to a data archive costs one request and no download. status is None when the host could not be reached or is
-    not a public address."""
+    not a public address. No answer, 429 or a 5xx is retried after each of `waits` seconds (longer if the host sends
+    Retry-After; not at all if it asks for more than 5 minutes). A host that failed DOWN_AFTER requests in a row is
+    skipped for the rest of the run, so an outage costs minutes, not the night."""
     if not public_url(url):
         return None, {}, b"not a public http(s) address"
     host = urllib.parse.urlsplit(url).hostname or ""
+    if _fails.get(host, 0) >= DOWN_AFTER:
+        return None, {}, f"not asked: {host} failed {DOWN_AFTER} requests in a row".encode()
     headers = {"User-Agent": UA}
     if accept:
         headers["Accept"] = accept
@@ -62,8 +83,11 @@ def fetch(url: str, accept: str = "", timeout: int = 30, tries: int = 3, text_on
             headers["Authorization"] = f"Bearer {os.environ['GITHUB_TOKEN']}"
     if host == "huggingface.co" and os.environ.get("HF_TOKEN"):
         headers["Authorization"] = f"Bearer {os.environ['HF_TOKEN']}"
+    if host == "api.openalex.org" and os.environ.get("OPENALEX_API_KEY"):
+        url += ("&" if "?" in url else "?") + urllib.parse.urlencode({"api_key": os.environ["OPENALEX_API_KEY"]})
     err = ""
-    for k in range(tries):
+    for k in range(len(waits) + 1):
+        retry_in = waits[k] if k < len(waits) else None
         wait = _last.get(host, 0) + GAP.get(host, 0.5) - time.time()
         if wait > 0:
             time.sleep(wait)
@@ -71,11 +95,15 @@ def fetch(url: str, accept: str = "", timeout: int = 30, tries: int = 3, text_on
             with _OPENER.open(urllib.request.Request(url, headers=headers), timeout=timeout) as r:
                 ctype = r.headers.get("Content-Type", "")
                 body = r.read(max_body) if not text_only or re.search(r"text|html|json|xml", ctype) else b""
-                return r.status, dict(r.headers), body
+                status, got = r.status, dict(r.headers)
+            _fails[host] = 0
+            return status, got, body
         except urllib.error.HTTPError as e:
-            if e.code in (429, 500, 502, 503, 504) and k < tries - 1:
-                time.sleep(float(e.headers.get("Retry-After") or 0) or 5 * (k + 1))
+            asked = _retry_after(e.headers)
+            if e.code in RETRY and retry_in is not None and asked <= 300:
+                time.sleep(max(asked, retry_in))
                 continue
+            _fails[host] = _fails.get(host, 0) + 1 if e.code in RETRY else 0
             try:
                 body = e.read(65536)
             except Exception:
@@ -83,10 +111,11 @@ def fetch(url: str, accept: str = "", timeout: int = 30, tries: int = 3, text_on
             return e.code, dict(e.headers or {}), body
         except Exception as e:  # DNS, TLS, timeout, reset
             err = f"{type(e).__name__}: {e}"
-            if k < tries - 1:
-                time.sleep(4 * (k + 1))
+            if retry_in is not None:
+                time.sleep(retry_in)
         finally:
             _last[host] = time.time()
+    _fails[host] = _fails.get(host, 0) + 1
     return None, {}, err.encode()
 
 

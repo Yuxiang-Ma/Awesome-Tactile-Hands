@@ -79,7 +79,8 @@ function openChanges() {
     New papers and repositories are reviewed at 01:30 and catalogued links rechecked at 04:30 (New York time); the site updates at 09:00.</p></div>
     <button class="x" aria-label="Close"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></header>
     <div class="scroll">${runs.length ? `<dl class="kv">${runs.map(r => `<dt>${r.flow === 'discovery' ? 'Discovery' : 'Status check'}</dt><dd>${esc(r.date)}${r.ok === false ? ' · did not finish' : ''}${
-      r.reviewed != null ? ` · ${r.reviewed} reviewed` : ''}${r.added ? ` · ${Object.entries(r.added).filter(([, v]) => v).map(([k, v]) => `${v} ${k} added`).join(', ') || 'nothing added'}` : ''}</dd>`).join('')}</dl>` : ''}
+      r.reviewed != null ? ` · ${r.reviewed} reviewed` : ''}${r.added ? ` · ${Object.entries(r.added).filter(([, v]) => v).map(([k, v]) => `${v} ${k} added`).join(', ') || 'nothing added'}` : ''}${
+      r.sources_failed?.length ? ` · ${esc(r.sources_failed.join(', '))} not reached` : ''}</dd>`).join('')}</dl>` : ''}
     ${[...by].map(([date, xs]) => `<h4>${esc(date)}</h4><ul class="chg">${xs.map(x => `<li><b class="ck ck-${esc(x.kind)}">${CHANGE_WORD[x.kind] || esc(x.kind)}</b><span><a href="${TARGET_URL[x.target]?.(x.id) || '#'}" data-t="${esc(x.target)}" data-i="${esc(x.id)}">${esc(x.text)}</a>${
       x.source ? ` <a class="srcl" href="${esc(x.source)}" target="_blank" rel="noopener">source</a>` : ''}</span></li>`).join('')}</ul>`).join('') || '<p class="src">No changes logged yet.</p>'}</div></div>`;
   $('dlg').querySelector('.x').onclick = () => $('dlg').close();

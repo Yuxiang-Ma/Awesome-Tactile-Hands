@@ -98,6 +98,9 @@ def cmd_arxiv(arg: str) -> None:
         sys.exit(f"not an arXiv id: {arg}")
     status, _, body = fetch(f"https://export.arxiv.org/api/query?id_list={aid}")
     print(f"HTTP {status}")
+    if status != 200:
+        print(f"The arXiv API did not answer. Read https://arxiv.org/abs/{aid} with WebFetch instead.")
+        return
     ns = {"a": "http://www.w3.org/2005/Atom", "x": "http://arxiv.org/schemas/atom"}
     try:
         e = ET.fromstring(body).find("a:entry", ns)

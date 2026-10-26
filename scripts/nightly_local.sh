@@ -55,13 +55,20 @@ git diff --quiet "$BASE" -- scripts pipeline/merge_entry.py pipeline/publish.py 
 
 # 2. scan (the GitHub token is given to the scan scripts only, never to the review session)
 TOKEN=$(gh auth token 2>/dev/null)
-if [[ $FLOW == discovery ]]; then GITHUB_TOKEN=$TOKEN $PY scripts/discover.py || fail "discover.py failed"
-else GITHUB_TOKEN=$TOKEN $PY scripts/watch.py || fail "watch.py failed"; fi
-unset TOKEN
+OAKEY=$(cat "$HOME_DIR/openalex.key" 2>/dev/null)  # optional: a free OpenAlex key raises its daily budget from $0.10 to $1
+if [[ $FLOW == discovery ]]; then SCAN=watch/candidates.json; GITHUB_TOKEN=$TOKEN OPENALEX_API_KEY=$OAKEY $PY scripts/discover.py || fail "discover.py failed"
+else SCAN=watch/signals.json; GITHUB_TOKEN=$TOKEN $PY scripts/watch.py || fail "watch.py failed"; fi
+unset TOKEN OAKEY
+# the sources the scan could not reach go into the run report; kept outside the clone, so a rejected run reports them too
+rm -f "$LOG.scan.json"; $PY - "$SCAN" "$LOG.scan.json" <<'EOF' || true
+import json, sys
+j = json.load(open(sys.argv[1]))
+json.dump({"sources_failed": j.get("sources_failed") or [], "scan_problems": j.get("problems") or []}, open(sys.argv[2], "w"))
+EOF
 
 # 3. review
-if [[ $FLOW == discovery ]]; then MODEL=opus; FALLBACK=sonnet; LIMIT=150m; INPUT=watch/candidates.json
-else MODEL=sonnet; FALLBACK=opus; LIMIT=100m; INPUT=watch/signals.json; fi
+if [[ $FLOW == discovery ]]; then MODEL=opus; FALLBACK=sonnet; LIMIT=150m
+else MODEL=sonnet; FALLBACK=opus; LIMIT=100m; fi
 DOY=$((10#$(TZ=America/New_York date +%j)))
 QUERIES="$(( DOY % 12 )), $(( (DOY + 1) % 12 )), $(( (DOY + 2) % 12 )), $(( (DOY + 3) % 12 ))"
 EXTRA=""; [[ $FLOW == discovery ]] && EXTRA=" Tonight's search sweep uses queries $QUERIES of the list in NIGHTLY.md."
@@ -69,7 +76,7 @@ EXTRA=""; [[ $FLOW == discovery ]] && EXTRA=" Tonight's search sweep uses querie
 [[ ${NIGHTLY_LIMIT:-} =~ ^[0-9]+$ ]] && EXTRA="$EXTRA This is a short test run: decide at most $NIGHTLY_LIMIT candidates or deep checks, \
 add at most $(( (NIGHTLY_LIMIT + 2) / 3 )) datasets and $(( (NIGHTLY_LIMIT + 2) / 3 )) models, and skip the search sweep."
 PROMPT="Tonight's Taxel Atlas nightly run. Flow: $FLOW. Date: $DATE (America/New_York).$EXTRA You are in a checkout of the catalog \
-repository on branch $BRANCH. The scan for tonight has run and written $INPUT. Read pipeline/NIGHTLY.md, then follow its \
+repository on branch $BRANCH. The scan for tonight has run and written $SCAN. Read pipeline/NIGHTLY.md, then follow its \
 'Rules for every run', 'Scope' and 'Flow: $FLOW' sections, and write data/changes/$DATE-$FLOW.json (only if something changed) \
 and watch/runs/$DATE-$FLOW.json as its 'Formats' section describes. Before you finish, run python3 scripts/build_readme.py \
 --validate and python3 scripts/nightly_guard.py and fix what they report. The shell accepts only the commands listed under \
@@ -82,7 +89,7 @@ ALLOW=(Read Edit Write Glob Grep WebFetch WebSearch "Bash(python3 scripts/nightl
 DENY=("Edit(scripts/**)" "Write(scripts/**)" "Edit(pipeline/*.py)" "Write(pipeline/*.py)" "Edit(pipeline/converters/**)" "Write(pipeline/converters/**)"
       "Edit(.github/**)" "Write(.github/**)" "Edit(.claude/**)" "Write(.claude/**)" "Edit(assets/**)" "Write(assets/**)" "Edit(viewer/**)" "Write(viewer/**)"
       "Edit(*.html)" "Write(*.html)" "Edit(README.md)" "Write(README.md)" "Edit(.git/**)" "Write(.git/**)")
-env -u GITHUB_TOKEN -u GH_TOKEN -u HF_TOKEN timeout "$LIMIT" "$CLAUDE" -p "$PROMPT" --restricted --model "$MODEL" --fallback-model "$FALLBACK" --effort high \
+env -u GITHUB_TOKEN -u GH_TOKEN -u HF_TOKEN DISABLE_AUTOUPDATER=1 timeout "$LIMIT" "$CLAUDE" -p "$PROMPT" --restricted --model "$MODEL" --fallback-model "$FALLBACK" --effort high \
   --permission-mode dontAsk --permission-prompts none --tools "Read,Edit,Write,Glob,Grep,WebFetch,WebSearch,Bash" \
   --allowedTools "${ALLOW[@]}" --disallowedTools "${DENY[@]}" --output-format json > "$LOG.result.json"
 RC=$?
@@ -117,10 +124,10 @@ if [[ $GUARD_RC -ne 0 ]]; then  # keep the rejected work for a person, then drop
 fi
 
 # 5. run report, commit, push
-$PY - "$FLOW" "$DATE" "$STARTED" "$OK" "$RC" "$GUARD" "$MODEL" <<'EOF'
+$PY - "$FLOW" "$DATE" "$STARTED" "$OK" "$RC" "$GUARD" "$MODEL" "$LOG.scan.json" <<'EOF'
 import json, sys, time
 from pathlib import Path
-flow, date, started, ok, rc, guard, model = sys.argv[1:]
+flow, date, started, ok, rc, guard, model, scan = sys.argv[1:]
 p = Path(f"watch/runs/{date}-{flow}.json")
 try:
     r = json.loads(p.read_text())
@@ -128,6 +135,15 @@ except Exception:
     r = {"flow": flow, "date": date}
 r.update(flow=flow, date=date, started=started, finished=time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), ok=ok == "true",
          review_exit=int(rc), guard=guard.strip().splitlines()[-1] if guard.strip() else "", model=r.get("model") or model)
+try:
+    scan = json.loads(Path(scan).read_text())
+except Exception:
+    scan = {}
+for k in ("sources_failed", "scan_problems"):
+    if scan.get(k):
+        r[k] = scan[k]
+    else:
+        r.pop(k, None)
 if ok != "true":
     r["guard_output"] = guard.strip().splitlines()[:30]
 p.parent.mkdir(parents=True, exist_ok=True)
@@ -151,4 +167,18 @@ if [[ $PUSH == 1 ]]; then
   git_auth push -q origin "$BRANCH" || { git_auth fetch -q origin && git rebase -q "origin/$BRANCH" && git_auth push -q origin "$BRANCH"; } || fail "push failed"
 fi
 [[ $OK == true ]] || fail "review exit $RC; guard: $(echo "$GUARD" | tail -3 | tr '\n' ' ')"
+# one night without arXiv is routine; a source missing from the last three runs of this flow needs a person
+STREAK=$($PY - "$FLOW" <<'EOF'
+import json, sys
+from pathlib import Path
+sets = []
+for p in sorted(Path("watch/runs").glob(f"*-{sys.argv[1]}.json"))[-3:]:
+    try:
+        sets.append(set(json.loads(p.read_text()).get("sources_failed") or []))
+    except ValueError:
+        sets.append(set())
+print(", ".join(sorted(set.intersection(*sets))) if len(sets) == 3 else "")
+EOF
+)
+[[ -z $STREAK ]] || fail "not reached on the last three $FLOW runs: $STREAK (scan_problems in watch/runs/ says what failed)"
 echo "== done $(date -u +%H:%M:%SZ): $SUMMARY"

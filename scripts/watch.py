@@ -12,10 +12,11 @@ phrases such as "coming soon", a hash of the visible text).
 import re
 import sys
 import time
+import urllib.parse
 import xml.etree.ElementTree as ET
 
-from nightly_lib import (WATCH, arxiv_id, catalog, dump_json, fetch, get_json, gh_repo, hf_repo, load_json, now_iso,
-                         page_print)
+from nightly_lib import (ARXIV_WAITS, WATCH, arxiv_id, catalog, dump_json, fetch, get_json, gh_repo, hf_repo, load_json,
+                         now_iso, page_print)
 
 STATUS_ONLY = ("drive.google.com", "docs.google.com", "forms.gle", "doi.org", "pan.baidu.com", "1drv.ms", "onedrive.live.com",
                "sharepoint.com", "dropbox.com", "mega.nz")
@@ -39,7 +40,7 @@ def probe_arxiv(ids: list) -> dict:
     out, ns = {}, {"a": "http://www.w3.org/2005/Atom", "x": "http://arxiv.org/schemas/atom"}
     for i in range(0, len(ids), 50):
         chunk = ids[i:i + 50]
-        status, _, body = fetch(f"https://export.arxiv.org/api/query?id_list={','.join(chunk)}&max_results={len(chunk)}")
+        status, _, body = fetch(f"https://export.arxiv.org/api/query?id_list={','.join(chunk)}&max_results={len(chunk)}", waits=ARXIV_WAITS)
         if status != 200:
             continue
         try:
@@ -97,6 +98,16 @@ def probe_page(url: str) -> dict:
     elif status == 200 and not re.search(r"html|json|xml|text", ctype):
         fp["length"] = headers.get("Content-Length")
     return fp
+
+
+def source_of(url: str) -> str:
+    if arxiv_id(url):
+        return "arXiv"
+    if hf_repo(url):
+        return "Hugging Face"
+    if gh_repo(url) and "github.io" not in url:
+        return "GitHub"
+    return urllib.parse.urlsplit(url).hostname or url
 
 
 def probe(url: str, arx: dict) -> dict:
@@ -201,10 +212,20 @@ def main() -> None:
     day = int(time.strftime("%j", time.gmtime()))
     tonight = [{"kind": k, "id": i} for n, (k, i) in enumerate(pending) if n % ROTATION == day % ROTATION]
     signals.sort(key=lambda s: (s["priority"], s["kind"], s["id"]))
+    # a source that left three or more links unanswered is reported; one slow project page is not
+    by = {}
+    for e in errors:
+        by.setdefault(source_of(e["url"]), []).append(e["url"])
+    failed = sorted(src for src, us in by.items() if len(us) >= 3)
+    problems = [f"{src}: {len(by[src])} links not checked tonight (no answer, 429 or a 5xx); their last fingerprints are kept"
+                for src in failed]
     out = {"generated": now_iso(), "baseline": not state["urls"], "urls_checked": len(urls), "seconds": round(time.time() - t0),
-           "signals": signals, "deep_check_tonight": tonight, "not_fully_released": len(pending), "errors": errors}
+           "signals": signals, "deep_check_tonight": tonight, "not_fully_released": len(pending), "errors": errors,
+           "problems": problems, "sources_failed": failed}
     print(f"{len(urls)} URLs, {len(signals)} signals ({sum(s['priority'] == 1 for s in signals)} priority 1), {len(errors)} errors, "
           f"{len(tonight)} of {len(pending)} unreleased entries for a deep check, {out['seconds']} s")
+    for line in problems:
+        print(f"  {line}")
     if "--dry-run" in sys.argv:
         for s in signals:
             print(f"  P{s['priority']} {s['kind']} {s['id']}: {s['type']} {s['detail'][:140]}")
