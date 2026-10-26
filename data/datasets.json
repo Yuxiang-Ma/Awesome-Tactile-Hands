@@ -862,7 +862,7 @@
    "venue": "ICML 2026",
    "summary": "Full-hand 162-sensor pressure glove with egocentric video of grasps on 63 everyday objects, plus a bare-hand test set.",
    "embodiment": "human",
-   "hand": "162-sensor pressure glove",
+   "hand": "JQ G1 Tactile Glove, 162 points",
    "bimanual": false,
    "sensor": {
     "type": "unspecified",
@@ -873,10 +873,12 @@
      "palm"
     ],
     "rate_hz": "17",
-    "note": "162-sensor glove (raw 256-channel vector), 0-350 N; resampled with sample-and-hold to a 15 Hz synchronized timeline. Layout per the code: 4x3 block per fingertip, a 6-sensor group on each finger's middle/proximal segments (averaged), and the palm.",
+    "note": "Glove identified from the channel map in the release code; the paper does not name it. 162 sensors from a raw 256-channel vector, 0-350 N; resampled with sample-and-hold to a 15 Hz synchronized timeline. Layout per the code: 4x3 block per fingertip, one channel per finger spread over a six-sensor group on the middle/proximal segments (the vendor viewer reads these five channels as finger bend), and a 72-channel palm.",
     "principle": "unspecified",
     "range": "0-350 N",
-    "calibrated": true
+    "calibrated": true,
+    "maker": "JQ Industries (矩侨工业)",
+    "model": "G1 Tactile Glove"
    },
    "modalities": [
     "egocentric"
@@ -938,11 +940,12 @@
     "https://egotactile.github.io/",
     "https://huggingface.co/datasets/HustleHard/EgoTactile (README + file listing)",
     "https://github.com/Russell-Zeng/EgoTactile (local copy ~/data/ext/egotactile/code/repo: scripts/raw_to_training.py, scripts/denoise.py)",
-    "local: ~/data/ext/egotactile (card README, sample clip data.json + video.mp4)"
+    "local: ~/data/ext/egotactile (card README, sample clip data.json + video.mp4)",
+    "https://github.com/RoboticsCenter/G1-Tactile-Glove (linux/linker_glove_agent.py: channel maps)"
    ],
    "unconfirmed": [
     "Camera captures at 30 fps; released clips are 15 fps (ffprobe and card). Paper uses both head and neck mounts; the card says head-mounted.",
-    "Glove maker not named. A co-author is affiliated with JQ Industries (Qingdao), and TactiDex reports a glove with the same spec (162 elements, ~17 Hz) as piezoresistive; neither establishes maker or principle here.",
+    "Glove: the paper, project page, card and README do not name it. The channel tables in scripts/denoise.py are identical to Robotics Center's maps for the 'Juqiao G1 tactile glove' (JQ Industries, 矩侨工业; https://github.com/RoboticsCenter/G1-Tactile-Glove), and 162 sensors and 0-350 N match that glove's listing. Co-author Yaqi Qin is listed at JQ Industries, Qingdao. All 137 distinct channels the code maps per hand also carry signal in EgoTouch's raw JQ glove streams.",
     "episodes/hours are the paper's gloved-hand totals (768 clips, 5.82 h). The bare-hand set adds 75 clips / 0.61 h. HF currently has 692 gloved clips (11 subjects, 63 objects) and 75 bare-hand clips (3 subjects, 25 objects).",
     "frames=319k from paper Table 1.",
     "Segmentation masks are used as model conditions in the paper but are not listed in the release card.",

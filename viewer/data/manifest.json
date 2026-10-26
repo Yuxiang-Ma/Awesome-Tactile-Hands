@@ -1022,7 +1022,7 @@
    "hardware": [
     {
      "k": "Glove",
-     "v": "162-location pressure glove",
+     "v": "JQ G1 Tactile Glove, 162 points",
      "d": "4\u00d73 fingertip pads, one strip per finger, 72-taxel palm \u00b7 0\u2013350 N \u00b7 about 17 Hz, held on a 15 Hz clock"
     },
     {
@@ -1036,7 +1036,7 @@
      "d": "Plus participant sex and hand length"
     }
    ],
-   "notes": "Paper: arXiv 2606.09243 \u00b7 project egotactile.github.io \u00b7 code github.com/Russell-Zeng/EgoTactile. Videos are re-encoded to H.264 and redistributed under CC BY-NC 4.0 with attribution; the release ships MPEG-4 Part 2, which browsers cannot play. The glove model is not named in the paper. In the bare-hand subset the pressure comes from a synchronized off-camera gloved grasp.",
+   "notes": "Paper: arXiv 2606.09243 \u00b7 project egotactile.github.io \u00b7 code github.com/Russell-Zeng/EgoTactile. Videos are re-encoded to H.264 and redistributed under CC BY-NC 4.0 with attribution; the release ships MPEG-4 Part 2, which browsers cannot play. The paper does not name the glove; the channel map in its code is that of JQ Industries' G1 Tactile Glove. In the bare-hand subset the pressure comes from a synchronized off-camera gloved grasp.",
    "items": [
     {
      "id": "et_bare_p002_banana_r0",

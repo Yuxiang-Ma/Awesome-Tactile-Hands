@@ -205,7 +205,7 @@ Failed checks:
 
 ## Hardware
 
-**109** devices, 41 of them used by the datasets above. Photos, specs and a hardware-to-dataset map are on the [hardware page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/hardware.html).
+**108** devices, 41 of them used by the datasets above. Photos, specs and a hardware-to-dataset map are on the [hardware page](https://yuxiang-ma.github.io/Awesome-Tactile-Hands/hardware.html).
 
 ### Tactile gloves
 
@@ -213,8 +213,8 @@ Failed checks:
 - [Fabric Tactile Glove](https://jq-industries.com/precision/glove) - JQ Industries (矩侨工业, Weihai), 2025; commercial; 256 taxels raw channels per hand as streamed in EgoTouch (16 x 16); the release maps about 123 pressure taxels plus 15-24 finger bend sensors. JQ lists 139 sensing points for the glove in its Unitree G1 skin set.. Used in: EgoTouch, juqiao glove 0929.
 - [OSMO tactile glove](https://shop.wowrobo.com/products/osmo-tactile-glove) - Meta FAIR, 2025; open hardware; 12 taxels per glove: 12 three-axis taxels (5 fingertips + 7 on the palm in three sections); magnetic. Used in: OSMO, TactAlign.
 - [ActionSense tactile glove](https://action-sense.csail.mit.edu/) - MIT CSAIL (Matusik lab), 2022; research only; 682 taxels per hand, computed from the stated grids (23x19 palm + 5x9 thumb + 11x4 little finger + 3 x 13x4 other fingers); raw readout is a 32x32 matrix; piezoresistive. Used in: ActionSense.
-- [EgoTactile pressure glove (162-sensor)](https://egotactile.github.io/) - not named (EgoTactile authors, Tsinghua SIGS; a co-author is affiliated with JQ Industries), 2026; research only; 162 taxels per glove (raw 256-channel vector, 162 used). Used in: EgoTactile.
 - [Fabric Tactile Data-Acquisition Glove](https://www.moxiantech.com/product-specification) (织物触觉数采手套) - Moxian Technology (Dongguan), 2026; commercial; 360 taxels per hand, vendor standard configuration: 16 fingertip + 8 middle-segment points per finger, 16 x 15 palm matrix; piezoresistive. Used in: HumanTouch.
+- [G1 Tactile Glove](https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove) - JQ Industries (矩侨工业, Weihai), sold in the US by Robotics Center of Silicon Valley as the RC G1 Tactile Glove; commercial; 162 taxels per hand (fingers + palm), as listed; EgoTactile's code reads 60 fingertip and 72 palm channels plus one finger-segment channel per finger counted as six sensors. Used in: EgoTactile.
 - [Glove2Hand sensing glove](https://mlzxy.github.io/glove2hand) - Meta Reality Labs with Rutgers University, 2026; research only; 5 taxels per glove, one capacitive channel per fingertip; capacitive. Used in: HandSense (Glove2Hand).
 - [Knitted tactile glove (tactile textiles)](https://senstextile.csail.mit.edu/) - MIT CSAIL (Matusik lab), 2021; research only; 722 taxels per glove (722 sensors over 160 cm2); piezoresistive. Used in: Tactile textiles.
 - [OpenTouch Glove](https://wiresens-gloves.vercel.app/) - MIT CSAIL (Matusik lab), 2025; open hardware; 169 taxels per hand (16 x 16 electrode grid routed into 169 taxels, palmar side); piezoresistive. Used in: OpenTouch.
@@ -240,7 +240,6 @@ Failed checks:
 - [ProGlove Gen 1](https://www.proception.ai/product/pro-glove/gen1) - Proception, 2026; announced.
 - [PXCap III](https://www.paxini.com/en/ax/pxcap3) - PaXini; commercial; magnetic.
 - [PXCap Pro](https://www.paxini.com/en/ax/pxcapProp) - PaXini; commercial; 1,743 taxels tactile signals per glove (vendor count).
-- [RC G1 Tactile Glove](https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove) - Robotics Center (RCSV); commercial; 162 taxels per hand (fingers + palm).
 - [RigidCore Tactile (FPC Tactile Data-Acquisition Glove)](https://www.moxiantech.com/product-specification) (FPC 触觉数采手套) - Moxian Technology (Dongguan), 2026; commercial; 842 taxels per hand (vendor manual): 374 finger points + 468 palm points.
 - [Skin](https://6thsense.dev/products) - 6thSense, 2026; announced; 464 taxels sensing channels per hand.
 - Tacknit Glove G1 - Yaole Technology, 2026; commercial; 216 taxels per glove.

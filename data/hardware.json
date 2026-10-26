@@ -135,6 +135,7 @@
    "unconfirmed": [
     "Maker comes from the TouchAnything project-page figure, not the paper text (paper: 'custom pressure-sensing gloves'; raw file jq_pressure.json).",
     "Which JQ glove configuration EgoTouch used, and its native sample rate, are not stated; EgoTouch resamples everything to 30 Hz.",
+    "EgoTouch's raw streams carry signal on every channel the G1 Tactile Glove map binds (rcsv_rc_g1_tactile_glove; 137 per hand in EgoTactile's code) and use the same 921600-baud serial link; no source says whether it is the same model.",
     "Sensing principle: JQ calls it 'flexible fiber sensing'; its foot sensor page says resistance change, the glove page does not say.",
     "Price not published (vendor: contact sales).",
     "year=2025: the glove is reported as part of JQ's Unitree G1 skin set in May 2025 funding news.",
@@ -186,63 +187,10 @@
    ],
    "unconfirmed": [
     "The paper does not name the glove's maker; it says the authors 'redesigned the structure of tactile gloves and wearing configuration', which implies an existing glove was modified. Availability 'research' reflects the modified glove; the base product may be commercial.",
-    "Same headline figures as the EgoTactile glove (162 sensors, ~17 Hz) and as the Robotics Center 'RC G1 Tactile Glove' (162 points, 0.01 N, 350 N max; https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove). No source says these are the same product, so they are kept separate.",
+    "Same headline figures (162 elements, ~17 Hz) as the glove EgoTactile used, which EgoTactile's code identifies as JQ Industries' G1 Tactile Glove (rcsv_rc_g1_tactile_glove: 162 points, 0.01 N, 350 N max). TactiDex does not name its glove, so the entries are kept separate.",
     "Image is a paper figure (Fig. 7) showing the tactile glove, the Metagloves Pro and the combined dual glove."
    ],
    "thumb": "assets/hw/tactidex_glove.jpg"
-  },
-  {
-   "id": "egotactile_glove",
-   "name": "EgoTactile pressure glove (162-sensor)",
-   "maker": "not named (EgoTactile authors, Tsinghua SIGS; a co-author is affiliated with JQ Industries)",
-   "kind": "glove",
-   "availability": "research",
-   "region": "CN",
-   "year": 2026,
-   "principle": "unspecified",
-   "taxels": 162,
-   "taxels_note": "per glove (raw 256-channel vector, 162 used)",
-   "coverage": [
-    "tip",
-    "phalanx",
-    "palm"
-   ],
-   "rate_hz": 17,
-   "dof": null,
-   "price": null,
-   "specs": [
-    "162 sensors, 0-350 N range, sampled at ~17 Hz",
-    "Layout per the release code: 4 x 3 block on each fingertip, a 6-sensor group on each finger's middle/proximal segments, and a palm grid",
-    "Raw stream is a 256-channel vector; resampled to a 15 Hz timeline with sample-and-hold",
-    "Black textile glove worn on the grasping hand"
-   ],
-   "image": "https://egotactile.github.io/assets/dataset_overview.png",
-   "image_page": "https://egotactile.github.io/",
-   "links": {
-    "paper": "https://arxiv.org/abs/2606.09243",
-    "project": "https://egotactile.github.io/",
-    "code": "https://github.com/Russell-Zeng/EgoTactile"
-   },
-   "datasets": [
-    {
-     "id": "egotactile",
-     "role": "tactile glove"
-    }
-   ],
-   "sources": [
-    "https://arxiv.org/html/2606.09243 (Sec. 4.1, App. A.1.4, A.2.2, author affiliations)",
-    "https://egotactile.github.io/",
-    "local copy of https://github.com/Russell-Zeng/EgoTactile (scripts/raw_to_training.py) via the catalog entry",
-    "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove",
-    "https://jq-industries.com/precision/glove"
-   ],
-   "unconfirmed": [
-    "Maker not named in the paper. Co-author Yaqi Qin is listed at 'JQ Industries, Qingdao', and JQ Industries sells a fabric tactile glove (EgoTouch's figure names a JQ glove), but no source says the EgoTactile glove is a JQ product; JQ's own pages give 139 points for its glove, not 162.",
-    "Same headline figures as the TactiDex glove (162 elements, ~17 Hz) and as the Robotics Center 'RC G1 Tactile Glove' (brand RCSV; 162 points per hand, 4 x 6 mm resolution, 0.01 N, 350 N max single-point pressure, 30 Hz Bluetooth / 100 Hz serial, USD 3,625). No source states they are the same product, so the entries are kept separate.",
-    "Principle not stated by EgoTactile; TactiDex calls its 162-element glove piezoresistive.",
-    "Image is a paper/project-page collage (Fig. 2); the gloves appear in panel (a) and the sensor layout in the heatmap panels. No standalone glove photo was found."
-   ],
-   "thumb": "assets/hw/egotactile_glove.jpg"
   },
   {
    "id": "opentouch_glove",
@@ -1216,15 +1164,15 @@
   },
   {
    "id": "rcsv_rc_g1_tactile_glove",
-   "name": "RC G1 Tactile Glove",
-   "maker": "Robotics Center (RCSV)",
+   "name": "G1 Tactile Glove",
+   "maker": "JQ Industries (矩侨工业, Weihai), sold in the US by Robotics Center of Silicon Valley as the RC G1 Tactile Glove",
    "kind": "glove",
    "availability": "commercial",
-   "region": "US",
+   "region": "CN",
    "year": null,
    "principle": "unspecified",
    "taxels": 162,
-   "taxels_note": "per hand (fingers + palm)",
+   "taxels_note": "per hand (fingers + palm), as listed; EgoTactile's code reads 60 fingertip and 72 palm channels plus one finger-segment channel per finger counted as six sensors",
    "coverage": [
     "tip",
     "phalanx",
@@ -1232,25 +1180,40 @@
    ],
    "rate_hz": 100,
    "dof": null,
-   "price": "USD 3,625 (list)",
+   "price": "USD 3,625 (Robotics Center list price)",
    "specs": [
     "162 sensing points per hand over a 179 x 145 mm area; 4 x 6 mm sensing resolution",
     "0.01 N recognition accuracy, max single-point pressure 350 N, repeatability +-8%",
     "100 Hz over serial (USB), 30 Hz over Bluetooth; per-finger bend sensing; 6-axis IMU at 120 Hz",
-    "35.4 g per glove, skin <=2.33 mm; companion app exports CSV"
+    "35.4 g per glove, skin <=2.33 mm; companion app exports CSV",
+    "Per Robotics Center's viewer: serial at 921600 baud, each frame 256 8-bit pressure values (16 x 16) plus an IMU quaternion",
+    "In EgoTactile: one glove on the grasping hand, read at about 17 Hz, 0-350 N range (paper)"
    ],
    "image": "https://hynhxfggrgpuxdvtnvch.supabase.co/storage/v1/object/public/product_media/derived/b1fa146d802a5b7670c8d650/w-128.webp",
    "image_page": "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove",
    "links": {
-    "product": "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove"
+    "product": "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove",
+    "code": "https://github.com/RoboticsCenter/G1-Tactile-Glove"
    },
-   "datasets": [],
+   "datasets": [
+    {
+     "id": "egotactile",
+     "role": "tactile glove"
+    }
+   ],
    "sources": [
-    "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove"
+    "https://www.roboticscenter.ai/store/product/rc-g1-tactile-glove",
+    "https://github.com/RoboticsCenter/G1-Tactile-Glove (README; linux/linker_glove_agent.py: BEND_INDEX_MAP, REGION_INDEX_MAP, serial frame)",
+    "https://arxiv.org/html/2606.09243 (Sec. 4.1, App. 'Finger-segment stabilization', author affiliations)",
+    "https://github.com/Russell-Zeng/EgoTactile (scripts/denoise.py, scripts/raw_to_training.py)",
+    "https://jq-industries.com/precision/glove"
    ],
    "unconfirmed": [
+    "Maker: Robotics Center's viewer repo calls this the 'Juqiao G1 tactile glove'; Juqiao is the pinyin of 矩侨 (JQ Industries). JQ's own site lists no 162-point glove; it gives 139 sensing points for the glove in its Unitree G1 skin set.",
+    "EgoTactile does not name its glove. It is linked here because the channel tables in its release code (scripts/denoise.py) match the viewer's maps channel for channel and in the same order (fingertip and finger-segment channels of both hands, and the 12-channel palm row the viewer reads), and the paper's 162 sensors and 0-350 N match this listing. Co-author Yaqi Qin is listed at JQ Industries, Qingdao.",
+    "Finger segments: Robotics Center lists per-finger bend sensing, and its viewer reads channels 35-47 (right glove) and 210-222 (left) as finger bend. EgoTactile's code names the same channels BENDS, while its paper treats each as the mean of a six-sensor pressure group on the finger's middle and proximal segments.",
+    "EgoTactile read the glove at about 17 Hz, below the listed 100 Hz serial rate; the paper does not say how it was connected.",
     "the only product image the store serves is 128 px wide",
-    "original manufacturer not named; the 162-point / 0.01 N / 350 N figures match the 162-sensor glove described for the TactiDex and EgoTactile datasets, so it may be a rebadged OEM glove (inference, not stated)",
     "coverage from 'fingers + palm'"
    ],
    "thumb": "assets/hw/rcsv_rc_g1_tactile_glove.jpg"
@@ -3650,7 +3613,7 @@
    ],
    "unconfirmed": [
     "Vendor says 'full-palm'; whether the fingers are covered is not stated, so coverage lists palm only.",
-    "162 points, 0.01 N and +-8% match the RC G1 Tactile Glove (rcsv_rc_g1_tactile_glove) and the 162-sensor TactiDex and EgoTactile gloves; a shared OEM glove skin is possible (inference).",
+    "162 points, 0.01 N and +-8% match JQ Industries' G1 Tactile Glove (rcsv_rc_g1_tactile_glove, used by EgoTactile) and the 162-sensor TactiDex glove; a shared OEM glove skin is possible (inference).",
     "Press calls it 'LivUMI Dex'. year 2026 from its showing at WRC 2026. Sold through contact sales; price and tactile rate not published."
    ],
    "thumb": "assets/hw/livsyn_livdex.jpg"
