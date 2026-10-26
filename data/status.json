@@ -2,40 +2,47 @@
  "runs": {
   "discovery": {
    "flow": "discovery",
-   "date": "2026-10-25",
+   "date": "2026-10-26",
    "model": "claude-opus-5-5",
-   "reviewed": 13,
+   "reviewed": 56,
    "added": {
-    "datasets": 0,
-    "models": 3,
+    "datasets": 2,
+    "models": 6,
     "hardware": 0
    },
    "updated": 1,
-   "queue_left": 387,
-   "searches": [],
+   "queue_left": 345,
+   "searches": [
+    "tactile foundation model multi-finger hand open source",
+    "tactile glove dataset dexterous manipulation",
+    "full-hand tactile dataset release Hugging Face",
+    "visuo-tactile dexterous hand dataset 2026"
+   ],
    "for_the_owner": [
-    "Judgment call: arxiv:2109.04378 (Dynamic Modeling of Hand-Object Interactions via Tactile Sensing, IROS 2021, MIT STAG glove) and arxiv:2610.23438 (blind Baoding rotation on Shadow Hand Lite with binary tactile) were rejected only because neither names its model; both are otherwise in scope. Reopen them in watch/reviewed.json if unnamed models should count.",
-    "Apply for access if wanted: TouchScale-OXT (Hugging Face gate, manual approval per the HF API) https://huggingface.co/datasets/2077AIDataFoundation/TouchScale-OXT"
+    "Judgment call: arxiv:2610.02338 (SoTa, Stanford, 202-taxel capacitive skin worn by human and robot hands, FTP-1-based co-training) was rejected because the policy has no name of its own and no data release is stated; reopen it in watch/reviewed.json if it should count as a model, and the SoTa skin would then qualify as hardware.",
+    "Judgment call: doi:10.1109/tmech.2025.3532653 (DIH-Tele, T-DexCo tactile hand, imitation learning for multi-object counting) and arxiv:2408.06265 (EyeSight Hand, vision-based tactile hand with imitation policies) were rejected as unnamed models with no data release, following the 2026-10-25 rule for unnamed models.",
+    "AdapTac-Dex's README links example_data.zip on Google Drive (https://drive.google.com/file/d/1F6mV1sTDIK1wW3m17eX2PGON7JJenPq3/view); it was not opened and may qualify as a partial dataset for a LEAP hand with PaXini pads on a Flexiv arm."
    ],
    "notes": [
-    "Short test run: search sweep skipped as instructed (queries 10, 11, 0, 1 not run). 13 candidates decided of the top 19 in the queue.",
-    "Left in the queue undecided: doi:10.1109/icra57147.2024.10610933 (Masked Visual-Tactile Pre-training, ICRA 2024; IEEE Xplore returned an empty page and no open copy was found) and doi:10.1126/scirobotics.ady2869 (Science Robotics 2026, Qi Ye et al.; science.org returned 403 and one search found no arXiv copy). Both look in scope as models from the VTDexManip group.",
-    "Left in the queue undecided: gh:chang-xinhai/awesome-dexterous-manipulation, doi:10.1007/s44245-026-00275-y (review of 115 studies) and gh:cyanhaze/awesome-dexterous-hands are leads whose named items were not checked tonight; hf:datasets/armteam/hapticwam-teleop-dataset (HapticWAM, optical gel fingertip sensors; hand type not confirmed) and gh:mr-dawn17/tactile-glove were not opened.",
-    "Spark-0's paper HTML returned 404 and the PDF exceeded the fetch size; the entry rests on the abstract, project page, README and HF listing.",
-    "MIT-Media-Lab also publishes egotouch-annotations-v1 and egotouch-clean-atomic-p1-cache-v1, datasets derived from EgoTouch (named in the encoder card). Not checked against the egotouch entry; they may belong in its used_by_other.",
-    "watch/reviewed.json did not exist in this checkout and was created tonight."
+    "python3 pipeline/merge_entry.py was refused by the shell tonight; the two survey entries (m2vtp_bottlecap, dexskills) were appended to data/datasets.json by hand, identical to their survey files' entry objects.",
+    "OSMO's survey file pipeline/surveys/osmo.json got the same venue change as the catalog, so a later merge does not revert it.",
+    "Left in the queue undecided: doi:10.1109/tii.2026.3665344 (AET-TacNet, touch from EMG and kinematics; the ground-truth sensor is not in the abstract and IEEE Xplore returned an empty page), doi:10.1126/scirobotics.ady2869 (Qi Ye et al., Science Robotics 2026; no open copy; github.com/LQTS/unified-vt-manip, created 2025-12-19, has only a title README and may become its code), doi:10.1109/ccdc69976.2026.11559719 (CCDC 2026 multi-array tactile diffusion policy, no abstract in OpenAlex), doi:10.1109/toh.2024.3506791 (DT-Transformer, 'two publicly available haptic datasets' not named in the abstract) and doi:10.1007/s44245-026-00275-y (review of 115 studies, items not extracted).",
+    "Lead gh:chang-xinhai/awesome-dexterous-manipulation (first 100,000 of 187,192 characters read) names these items that find returned no match for: Feel the Force arXiv 2506.01944, Pose-Aware tactile gloves 2607.22964, ACTS 2610.24285, TacOT 2610.04363, VisTacAlign 2609.30959, Dex-X 2609.07747, DeCAL 2609.09119, OccluDex 2609.39017, Contact-Grounded Policy 2603.05687, ReTouch 2608.01824, TacWAM 2607.28391, WM-Craftnet 2609.07002, ViTacFormer 2506.15953, plus DexTaG 2609.33882, PTLD 2603.04531, VibeAct 2606.27344, FBI 2508.14441, PP-Tac 2504.16649, Robot Synesthesia 2312.01853, TacGNN 2304.00736 and Learning In-Hand Translation Using Tactile Skin 2407.07885 (these last eight not yet run through find).",
+    "Lead gh:cyanhaze/awesome-dexterous-hands adds HT-Bench 2606.19161 and Tactile Genesis 2606.22332 (no catalog match), plus Tactile SoftHand-A 2406.12731, Touch Dexterity 2303.10880, All the Feels / DManus 2210.15658 and FingerEye 2604.20689 (not yet run through find).",
+    "Search sweep hits not reviewed tonight: AdvDex / OmniShare arXiv 2608.14028 (human glove dataset with a Hall-effect tactile array; check against paxini_omnisharing), DexMani 2608.00554 (human rotations with a 256-channel piezoresistive glove), N0-Foundation / OpenNeoData 2608.29601 (5,000 h open visuo-tactile subset; embodiments may be grippers and UMI), SmartHand 2203.15069 (hand-shaped sensor array dataset of daily objects), and VTAO-BiManip 2501.03606 (Zhejiang bimanual glove pretraining, found while checking M2VTP). huggingface.co/datasets/AllenBi21/TactileFusion returned HTTP 401.",
+    "Semantic Scholar returned 429 after three requests; abstracts for closed-access DOIs came from OpenAlex where it had them."
    ],
-   "started": "2026-10-25T20:45:43Z",
-   "finished": "2026-10-25T21:00:34Z",
+   "started": "2026-10-26T05:30:01Z",
+   "finished": "2026-10-26T05:51:00Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 9 changed files, 3 new entries"
+   "guard": "nightly guard passed: 10 changed files, 7 new entries"
   },
   "status": {
    "flow": "status",
-   "date": "2026-10-25",
+   "date": "2026-10-26",
    "model": "claude-sonnet-5-5",
-   "reviewed": 24,
+   "reviewed": 15,
    "added": {
     "datasets": 0,
     "models": 0,
@@ -44,27 +51,32 @@
    "updated": 1,
    "queue_left": 0,
    "searches": [
-    "TouchSight TwinTouch-20H code dataset release",
-    "TactiDex TactiSkill code dataset release github",
-    "EgoPressureFormer EgoTactile code weights",
-    "Dexterous Tactile World Model DTWM checkpoint weights Hugging Face",
-    "VinT-6D VinT-Net benchmark code github",
-    "Dex-MPTD TacCompress dataset download"
+    "https://api.github.com/search/repositories?q=Ego2Contact",
+    "https://huggingface.co/api/models?search=Ego2Contact",
+    "https://huggingface.co/api/datasets?search=Ego2Contact",
+    "https://huggingface.co/api/models?author=qqyang",
+    "https://huggingface.co/api/datasets?author=qqyang",
+    "https://api.github.com/search/repositories?q=TK-STGN",
+    "https://huggingface.co/api/datasets?search=TouchWorld",
+    "https://huggingface.co/api/datasets?search=RoboTacDex",
+    "https://api.github.com/search/repositories?q=RoboTacDex",
+    "https://huggingface.co/api/datasets?author=youngw",
+    "https://huggingface.co/api/models?author=youngw"
    ],
-   "for_the_owner": [],
+   "for_the_owner": [
+    "Judgment call: Hugging Face user qqyang holds public repos named for Ego2Contact, including .pth checkpoints (e2c-archive-ckpt, e2c-downstream-eval) with no model card or license. The paper does not link them and no page ties the account to the authors. The catalog keeps weights as not_released and describes the repos in release.note; promote them to a weights link only if the authors confirm."
+   ],
    "notes": [
-    "Scan: 13 signals on 211 URLs, all priority 3. Eleven were on fully released entries (actionsense, adl21, dextacwam dataset and model, feel, feelsight, sharpa_roco, sparsh_x dataset and model, neuralfeels), so they were not reviewed for edits. DexTacWAM was opened anyway: its Hugging Face collection (weights and 7 datasets) is live under both URL forms, and the catalog link still resolves. The two on entries that are not fully released (dexvitac, egoexplorer) changed no catalogued fact.",
-    "Changed: tacross (dataset). The project page now lists hardware v1 as downloadable and the dataset as a planned release; access, caveats and sources were updated. Availability stays announced. The tacross model entry already carried the same facts from the discovery run.",
-    "Deep check, no change: dex_mptd (Hugging Face and arXiv v2 unchanged, no release), egoexplorer (mini release only; GitHub toolkit already linked), htac (card still says the whole H-Tac set is coming soon), paxini_omnisharing (only README uploads on 2026-10-19), touchscale, dexvitac (Hugging Face repo and code repo are still stubs), and models dtwm, egopressureformer, tactiskill, touchsight and vint_net. The model checked dates were already 2026-10-25 and were left as they are.",
-    "Limits: the Hugging Face commit lists for EgoExplorer and TouchScale returned HTTP 401 (gated), so their cards and the 2026-10-22 and 2026-10-23 changes were not read. The TouchScale gate was checked on 2026-10-24 and the repository still shows the 100 h release.",
-    "Unverified lead for dex_mptd: Hugging Face jackliaaa/mpt-tactile-dataset (train/val/test archives, 275 MB, apache-2.0, created 2026-08-02). The card names no authors and no paper, so it was not linked. Someone could ask the TacCompress authors whether it is theirs.",
-    "A previous status attempt tonight (20:45 UTC) failed the guard on scripts/nightly_local.sh and wrote a report that says no shell was available. This run replaces that report."
+    "Scan: 3 signals on 230 URLs. dexvitac (priority 1): the project page now links a Google Doc (the 'Hardware Guide' button), which needs JavaScript and could not be read; the Hugging Face dataset repo still holds only a 102-byte README ('near future') and the code repo DexViTac_Code is a stub with an empty README, so availability stays announced. sharpa_roco (priority 1): the new links are registration forms and a Google Doc on the challenge page; the Hugging Face repo is ungated, unchanged since 2026-09-20 and the entry already describes it, so no edit. dextacwam (priority 3): page text length unchanged (1552) and the entry is public, so not reviewed further.",
+    "Deep check, no change beyond the checked date: models tactalign (project page still says 'Coming Soon', github.com/google/tactalign still returns 404, no models under youngw), touchworld (flyingGH repository unchanged, no Hugging Face repo), tk_stgn (GitHub search returns nothing), vitam (code repository unchanged since 2024-09-30), rlhnd (the repository named on the project page, seungjun-moon/rlhnd, holds only the project page files, so code is still announced; release.note updated). Checked dates on tactalign, touchworld, tk_stgn and vitam were set to 2026-10-26.",
+    "Deep check, no change: datasets vicon_glove (VICON-dataset/dataset is a README stub, 'release upon publication'), dexumi (GitHub repository last pushed 2026-04-18, sample zip only), gist_vta and robotacdex (arXiv pages unchanged, 'open-sourced soon' for robotacdex; no Hugging Face or GitHub hit for either name), tactalign dataset (same four youngw repos, last modified 2026-05-31).",
+    "Limits: kaiwu (ScienceDB request gate) was not reopened. Deep-check searches used the Hugging Face and GitHub APIs through nightly_tool.py; no WebSearch queries were run. The Hugging Face model repo qqyang/ego2contact-demo-videos returned HTTP 401 and was not read."
    ],
-   "started": "2026-10-25T21:04:21Z",
-   "finished": "2026-10-25T21:10:00Z",
+   "started": "2026-10-26T08:30:01Z",
+   "finished": "2026-10-26T08:38:05Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 5 changed files, 0 new entries"
+   "guard": "nightly guard passed: 13 changed files, 7 new entries"
   }
  }
 }

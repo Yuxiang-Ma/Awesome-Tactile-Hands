@@ -7,7 +7,7 @@
     "title": "OSMO: Open-Source Tactile Glove for Human-to-Robot Skill Transfer",
     "authors": "Jessica Yin et al.",
     "year": 2025,
-    "venue": "arXiv 2512.08920",
+    "venue": "IEEE RA-L 2026 (arXiv 2512.08920)",
     "summary": "Open-source glove with 12 three-axis magnetic taxels on fingertips and palm; ~2 h of right-hand whiteboard-wiping demonstrations with a static RealSense D435 (RGB + IR stereo), of which one 8.4 s sample is released.",
     "embodiment": "human",
     "hand": "human right hand wearing the OSMO glove (the same glove is worn by a Psyonic Ability Hand at robot deployment)",

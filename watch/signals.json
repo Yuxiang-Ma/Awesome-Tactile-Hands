@@ -1,27 +1,27 @@
 {
- "generated": "2026-10-25T21:06:37Z",
+ "generated": "2026-10-26T08:34:49Z",
  "baseline": false,
- "urls_checked": 211,
- "seconds": 136,
+ "urls_checked": 230,
+ "seconds": 287,
  "signals": [
   {
    "kind": "dataset",
-   "id": "actionsense",
-   "name": "ActionSense",
-   "url": "https://openreview.net/forum?id=olvz0gAdGOX",
-   "priority": 3,
-   "type": "page_text",
-   "detail": "text length 282 -> None",
-   "availability": "public"
+   "id": "dexvitac",
+   "name": "DexViTac",
+   "url": "https://xitong-c.github.io/DexViTac/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://docs.google.com/document/d/1-36bv3bknBpNO5oNesyfJNyjbbuHoA_ExJmM0CZ6fQs/edit?tab=t.0",
+   "availability": "announced"
   },
   {
    "kind": "dataset",
-   "id": "adl21",
-   "name": "ADL-21",
-   "url": "https://zenodo.org/records/4607289",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://about.zenodo.org https://about.zenodo.org/contact https://about.zenodo.org/cookie-policy https://about.zenodo.org/infrastructure https://about.zenodo.org/policies https://about.zenodo.org/principles https://about.zenodo.org/privacy-policy https://about.zenodo.org/projects https://about.zenodo.org/roadmap https://about.zenodo.org/terms https://blog.zenodo.org https://developers.zenodo.org",
+   "id": "sharpa_roco",
+   "name": "RoCo Task Board Assembly",
+   "url": "https://rocochallenge.github.io/RoCo-IROS2026/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://docs.google.com/document/d/1dYp-3dmC89N7HWRckPcNiuhEUxSLgmTkmIfu8nnVSfE/mobilebasic?pli=1 https://docs.google.com/forms/d/e/1FAIpQLSd0eMP20_mwSkO6-KRKvtwKpPdqyTUDdi-Zf9aJSjdY2QcHEw/viewform https://docs.google.com/forms/d/e/1FAIpQLSflInmaLlA9AgMlULyXQbyVjuDThKn1gDROZGzxTRpF7OwgKg/viewform",
    "availability": "public"
   },
   {
@@ -30,169 +30,63 @@
    "name": "DexTacWAM",
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
-   "type": "links_removed",
-   "detail": "https://discuss.huggingface.co https://huggingface.co https://huggingface.co/Chi-Shan https://huggingface.co/JadeCong https://huggingface.co/JensenYuan https://huggingface.co/blog https://huggingface.co/chat https://huggingface.co/collections https://huggingface.co/collections/JensenYuan/dextacwam https://huggingface.co/datasets https://huggingface.co/docs https://huggingface.co/docs/hub/collections",
+   "type": "page_text",
+   "detail": "text length 1552 -> 1552",
    "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "dextacwam",
-   "name": "DexTacWAM",
-   "url": "https://dextacwam.github.io/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "dexvitac",
-   "name": "DexViTac",
-   "url": "https://xitong-c.github.io/DexViTac/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://docs.google.com/document/d/1-36bv3bknBpNO5oNesyfJNyjbbuHoA_ExJmM0CZ6fQs/edit?tab=t.0",
-   "availability": "announced"
-  },
-  {
-   "kind": "dataset",
-   "id": "egoexplorer",
-   "name": "EgoExplorer",
-   "url": "https://internrobotics.github.io/egoexplorer.github.io/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/papers/2610.18872",
-   "availability": "partial"
-  },
-  {
-   "kind": "dataset",
-   "id": "feel",
-   "name": "FEEL",
-   "url": "https://www.cs.umd.edu/~edessale/feel",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/datasets/edessa/feel",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "feelsight",
-   "name": "FeelSight",
-   "url": "https://suddhu.github.io/neural-feels/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/collections/suddhu/neuralfeels-673184a97ddcac2df69ff489",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "sharpa_roco",
-   "name": "RoCo Task Board Assembly",
-   "url": "https://rocochallenge.github.io/RoCo-IROS2026/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://docs.google.com/document/d/1dYp-3dmC89N7HWRckPcNiuhEUxSLgmTkmIfu8nnVSfE/mobilebasic?pli=1 https://docs.google.com/forms/d/e/1FAIpQLSd0eMP20_mwSkO6-KRKvtwKpPdqyTUDdi-Zf9aJSjdY2QcHEw/viewform https://docs.google.com/forms/d/e/1FAIpQLSflInmaLlA9AgMlULyXQbyVjuDThKn1gDROZGzxTRpF7OwgKg/viewform",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "sparsh_x",
-   "name": "Sparsh-X dataset (Allegro part)",
-   "url": "https://akashsharma02.github.io/sparsh-x-ssl/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/collections/carohiguera/sparsh-x-68a02683b28a46ccae83cf77",
-   "availability": "public"
-  },
-  {
-   "kind": "model",
-   "id": "dextacwam",
-   "name": "DexTacWAM",
-   "url": "https://dextacwam.github.io/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
-   "availability": {
-    "code": "released",
-    "weights": "released",
-    "note": "GitHub dextacwam/DexTacWAM README 'Release' lists training and offline inference code for all three stages, configs for the six tasks and ablations, and deployment code. Hugging Face JensenYuan/DexTacWAM_multi_finger_tactile_encoder holds the stage 1 tactile encoder (866 MB, step 53000). README: 'Not included: stage 2 world models and stage 3 action experts.' Code and weights are linked from the project page."
-   }
-  },
-  {
-   "kind": "model",
-   "id": "neuralfeels",
-   "name": "NeuralFeels",
-   "url": "https://suddhu.github.io/neural-feels/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/collections/suddhu/neuralfeels-673184a97ddcac2df69ff489",
-   "availability": {
-    "code": "released",
-    "weights": "released",
-    "note": "Code: github.com/facebookresearch/neuralfeels (MIT). Weights: Hugging Face suddhu/tactile_transformer (dpt_real.p, dpt_sim.p; license tag mit), which the README says to clone under 'Download models'. The object field is optimized online for each run, so no per-object weights exist. Checked 2026-10-25."
-   }
-  },
-  {
-   "kind": "model",
-   "id": "sparsh_x",
-   "name": "Sparsh-X",
-   "url": "https://akashsharma02.github.io/sparsh-x-ssl/",
-   "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/collections/carohiguera/sparsh-x-68a02683b28a46ccae83cf77",
-   "availability": {
-    "code": "released",
-    "weights": "released",
-    "note": "Code: github.com/facebookresearch/sparsh-multisensory-touch (CC BY-NC 4.0). Weights: Hugging Face facebook/sparsh-x-all (d360_sparshx_img_mic_imu_pressure_base.pth) and facebook/sparsh-x-img (d360_sparshx_img_base.pth), both license tag cc-by-nc-4.0. Checked 2026-10-25."
-   }
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "dex_mptd"
+   "id": "dexumi"
   },
   {
    "kind": "dataset",
-   "id": "egoexplorer"
+   "id": "gist_vta"
   },
   {
    "kind": "dataset",
-   "id": "htac"
+   "id": "kaiwu"
   },
   {
    "kind": "dataset",
-   "id": "paxini_omnisharing"
+   "id": "robotacdex"
   },
   {
    "kind": "dataset",
-   "id": "tacross"
+   "id": "tactalign"
   },
   {
    "kind": "dataset",
-   "id": "touchscale"
+   "id": "vicon_glove"
   },
   {
    "kind": "model",
-   "id": "dtwm"
+   "id": "ego2contact"
   },
   {
    "kind": "model",
-   "id": "egopressureformer"
+   "id": "rlhnd"
   },
   {
    "kind": "model",
-   "id": "tactiskill"
+   "id": "tactalign"
   },
   {
    "kind": "model",
-   "id": "touchsight"
+   "id": "tk_stgn"
   },
   {
    "kind": "model",
-   "id": "vint_net"
+   "id": "touchworld"
+  },
+  {
+   "kind": "model",
+   "id": "vitam"
   }
  ],
- "not_fully_released": 33,
- "errors": []
+ "not_fully_released": 36,
+ "errors": [],
+ "problems": [],
+ "sources_failed": []
 }

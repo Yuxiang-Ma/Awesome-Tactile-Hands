@@ -1,0 +1,38 @@
+{
+ "flow": "discovery",
+ "date": "2026-10-26",
+ "model": "claude-opus-5-5",
+ "reviewed": 56,
+ "added": {
+  "datasets": 2,
+  "models": 6,
+  "hardware": 0
+ },
+ "updated": 1,
+ "queue_left": 345,
+ "searches": [
+  "tactile foundation model multi-finger hand open source",
+  "tactile glove dataset dexterous manipulation",
+  "full-hand tactile dataset release Hugging Face",
+  "visuo-tactile dexterous hand dataset 2026"
+ ],
+ "for_the_owner": [
+  "Judgment call: arxiv:2610.02338 (SoTa, Stanford, 202-taxel capacitive skin worn by human and robot hands, FTP-1-based co-training) was rejected because the policy has no name of its own and no data release is stated; reopen it in watch/reviewed.json if it should count as a model, and the SoTa skin would then qualify as hardware.",
+  "Judgment call: doi:10.1109/tmech.2025.3532653 (DIH-Tele, T-DexCo tactile hand, imitation learning for multi-object counting) and arxiv:2408.06265 (EyeSight Hand, vision-based tactile hand with imitation policies) were rejected as unnamed models with no data release, following the 2026-10-25 rule for unnamed models.",
+  "AdapTac-Dex's README links example_data.zip on Google Drive (https://drive.google.com/file/d/1F6mV1sTDIK1wW3m17eX2PGON7JJenPq3/view); it was not opened and may qualify as a partial dataset for a LEAP hand with PaXini pads on a Flexiv arm."
+ ],
+ "notes": [
+  "python3 pipeline/merge_entry.py was refused by the shell tonight; the two survey entries (m2vtp_bottlecap, dexskills) were appended to data/datasets.json by hand, identical to their survey files' entry objects.",
+  "OSMO's survey file pipeline/surveys/osmo.json got the same venue change as the catalog, so a later merge does not revert it.",
+  "Left in the queue undecided: doi:10.1109/tii.2026.3665344 (AET-TacNet, touch from EMG and kinematics; the ground-truth sensor is not in the abstract and IEEE Xplore returned an empty page), doi:10.1126/scirobotics.ady2869 (Qi Ye et al., Science Robotics 2026; no open copy; github.com/LQTS/unified-vt-manip, created 2025-12-19, has only a title README and may become its code), doi:10.1109/ccdc69976.2026.11559719 (CCDC 2026 multi-array tactile diffusion policy, no abstract in OpenAlex), doi:10.1109/toh.2024.3506791 (DT-Transformer, 'two publicly available haptic datasets' not named in the abstract) and doi:10.1007/s44245-026-00275-y (review of 115 studies, items not extracted).",
+  "Lead gh:chang-xinhai/awesome-dexterous-manipulation (first 100,000 of 187,192 characters read) names these items that find returned no match for: Feel the Force arXiv 2506.01944, Pose-Aware tactile gloves 2607.22964, ACTS 2610.24285, TacOT 2610.04363, VisTacAlign 2609.30959, Dex-X 2609.07747, DeCAL 2609.09119, OccluDex 2609.39017, Contact-Grounded Policy 2603.05687, ReTouch 2608.01824, TacWAM 2607.28391, WM-Craftnet 2609.07002, ViTacFormer 2506.15953, plus DexTaG 2609.33882, PTLD 2603.04531, VibeAct 2606.27344, FBI 2508.14441, PP-Tac 2504.16649, Robot Synesthesia 2312.01853, TacGNN 2304.00736 and Learning In-Hand Translation Using Tactile Skin 2407.07885 (these last eight not yet run through find).",
+  "Lead gh:cyanhaze/awesome-dexterous-hands adds HT-Bench 2606.19161 and Tactile Genesis 2606.22332 (no catalog match), plus Tactile SoftHand-A 2406.12731, Touch Dexterity 2303.10880, All the Feels / DManus 2210.15658 and FingerEye 2604.20689 (not yet run through find).",
+  "Search sweep hits not reviewed tonight: AdvDex / OmniShare arXiv 2608.14028 (human glove dataset with a Hall-effect tactile array; check against paxini_omnisharing), DexMani 2608.00554 (human rotations with a 256-channel piezoresistive glove), N0-Foundation / OpenNeoData 2608.29601 (5,000 h open visuo-tactile subset; embodiments may be grippers and UMI), SmartHand 2203.15069 (hand-shaped sensor array dataset of daily objects), and VTAO-BiManip 2501.03606 (Zhejiang bimanual glove pretraining, found while checking M2VTP). huggingface.co/datasets/AllenBi21/TactileFusion returned HTTP 401.",
+  "Semantic Scholar returned 429 after three requests; abstracts for closed-access DOIs came from OpenAlex where it had them."
+ ],
+ "started": "2026-10-26T05:30:01Z",
+ "finished": "2026-10-26T05:51:00Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 10 changed files, 7 new entries"
+}
