@@ -1,28 +1,28 @@
 {
- "generated": "2026-10-26T08:34:49Z",
+ "generated": "2026-10-27T08:32:54Z",
  "baseline": false,
- "urls_checked": 230,
- "seconds": 287,
+ "urls_checked": 238,
+ "seconds": 173,
  "signals": [
   {
    "kind": "dataset",
-   "id": "dexvitac",
-   "name": "DexViTac",
-   "url": "https://xitong-c.github.io/DexViTac/",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://docs.google.com/document/d/1-36bv3bknBpNO5oNesyfJNyjbbuHoA_ExJmM0CZ6fQs/edit?tab=t.0",
-   "availability": "announced"
+   "detail": "https://huggingface.co/front/build/kube-1f487ab/index.js https://huggingface.co/front/build/kube-1f487ab/katex.css https://huggingface.co/front/build/kube-1f487ab/style.css",
+   "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "sharpa_roco",
-   "name": "RoCo Task Board Assembly",
-   "url": "https://rocochallenge.github.io/RoCo-IROS2026/",
+   "id": "osmo",
+   "name": "OSMO",
+   "url": "https://github.com/jessicayin/osmo_tactile_glove",
    "priority": 1,
-   "type": "links_added",
-   "detail": "https://docs.google.com/document/d/1dYp-3dmC89N7HWRckPcNiuhEUxSLgmTkmIfu8nnVSfE/mobilebasic?pli=1 https://docs.google.com/forms/d/e/1FAIpQLSd0eMP20_mwSkO6-KRKvtwKpPdqyTUDdi-Zf9aJSjdY2QcHEw/viewform https://docs.google.com/forms/d/e/1FAIpQLSflInmaLlA9AgMlULyXQbyVjuDThKn1gDROZGzxTRpF7OwgKg/viewform",
-   "availability": "public"
+   "type": "gh_readme",
+   "detail": "README changed",
+   "availability": "partial"
   },
   {
    "kind": "dataset",
@@ -30,15 +30,19 @@
    "name": "DexTacWAM",
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
-   "type": "page_text",
-   "detail": "text length 1552 -> 1552",
+   "type": "links_removed",
+   "detail": "https://huggingface.co/front/build/kube-184263b/index.js https://huggingface.co/front/build/kube-184263b/katex.css https://huggingface.co/front/build/kube-184263b/style.css",
    "availability": "public"
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "dexumi"
+   "id": "ace_data_0"
+  },
+  {
+   "kind": "dataset",
+   "id": "dexvitac"
   },
   {
    "kind": "dataset",
@@ -62,7 +66,11 @@
   },
   {
    "kind": "model",
-   "id": "ego2contact"
+   "id": "dtwm"
+  },
+  {
+   "kind": "model",
+   "id": "egopressureformer"
   },
   {
    "kind": "model",
@@ -82,10 +90,10 @@
   },
   {
    "kind": "model",
-   "id": "vitam"
+   "id": "vint_net"
   }
  ],
- "not_fully_released": 36,
+ "not_fully_released": 41,
  "errors": [],
  "problems": [],
  "sources_failed": []

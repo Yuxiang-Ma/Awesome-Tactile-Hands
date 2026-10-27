@@ -190,7 +190,7 @@
     "The paper counts 1,933 episode directories in its copy of EgoTouch; the catalog's egotouch entry lists 1,891 episodes. Not reconciled.",
     "The TouchWorld, VT-WM and FeelWorld rows in the paper's comparison re-implement only their tactile conditioning on DTWM's backbone and EgoTouch clips (App. C.3); they are not the original systems."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-27"
   },
   {
    "id": "egopressurediff",
@@ -279,7 +279,7 @@
     "https://github.com/Russell-Zeng/EgoTactile (README, file tree)"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-25"
+   "checked": "2026-10-27"
   },
   {
    "id": "egotac",
@@ -513,7 +513,7 @@
    "title": "TactAlign: Human-to-Robot Policy Transfer via Tactile Alignment",
    "authors": "Youngsun Wi et al.",
    "year": 2026,
-   "venue": "arXiv 2602.13579",
+   "venue": "RSS 2026 (arXiv 2602.13579)",
    "kind": "policy",
    "summary": "Human touch (OSMO glove, 3-axis magnetic fingertip) and robot touch (30-taxel Xela fingertip on an Allegro hand) are encoded by separately pretrained JEPA-style encoders and mapped into a shared latent by a rectified flow trained on pseudo-pairs from unpaired demonstrations; human and robot data then co-train an Allegro-on-Franka policy.",
    "embodiment": "both",
@@ -540,13 +540,14 @@
    "sources": [
     "https://arxiv.org/abs/2602.13579",
     "https://arxiv.org/html/2602.13579",
+    "https://www.roboticsproceedings.org/rss22/p006.html (RSS XXII, DOI 10.15607/RSS.2026.XXII.006; venue)",
     "https://yswi.github.io/tactalign/ (page HTML)",
     "https://api.github.com/repos/google/tactalign (404)",
     "https://huggingface.co/api/models?author=youngw",
     "https://huggingface.co/api/datasets?author=youngw"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-26"
+   "checked": "2026-10-27"
   },
   {
    "id": "tactiskill",
@@ -749,7 +750,7 @@
     "TouchWorld and EgoTouch share first author Jianyi Zhou and corresponding author Shuo Yang; whether the pretraining used the public EgoTouch release or internal recordings is not stated.",
     "Venue: arXiv only; no conference is named on the abstract page or the project page."
    ],
-   "checked": "2026-10-26"
+   "checked": "2026-10-27"
   },
   {
    "id": "ttp",
@@ -1002,7 +1003,7 @@
     "https://github.com/search?q=TK-STGN&type=repositories"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-26"
+   "checked": "2026-10-27"
   },
   {
    "id": "vt_jointpretrain",
@@ -1169,7 +1170,7 @@
     "https://huggingface.co/api/datasets/vint6d/vint6d/tree/main"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-25"
+   "checked": "2026-10-27"
   },
   {
    "id": "tdex",
@@ -1524,7 +1525,7 @@
     "The OpenTouch clips are selected by an allowlist the paper attributes to HOPE, which was not checked.",
     "The last 52,859 characters of the HTML (appendix) were not read."
    ],
-   "checked": "2026-10-26"
+   "checked": "2026-10-27"
   },
   {
    "id": "dexskills",

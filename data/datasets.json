@@ -9383,7 +9383,7 @@
    "title": "TactAlign: Human-to-Robot Policy Transfer via Tactile Alignment",
    "authors": "Youngsun Wi et al.",
    "year": 2026,
-   "venue": "arXiv 2602.13579",
+   "venue": "RSS 2026 (arXiv 2602.13579)",
    "summary": "Unpaired pivoting and insertion demonstrations from a human wearing the OSMO magnetic tactile glove (index-fingertip 3-axis signal) and from an Allegro hand with XELA 30-taxel fingertip sensors on a Franka arm, released as fingertip tactile, fingertip/wrist state, estimated object pose and actions at 10 Hz.",
    "embodiment": "both",
    "hand": "Human hand in the OSMO tactile glove; Wonik Allegro Hand (16 DoF) with XELA fingertip sensors on a Franka Emika Panda",
@@ -9477,6 +9477,7 @@
    "sources": [
     "https://arxiv.org/abs/2602.13579",
     "https://arxiv.org/html/2602.13579v1 (Sec. IV-A, IV-B, App. A, B-A, B-B, D, E)",
+    "https://www.roboticsproceedings.org/rss22/p006.html (RSS XXII, DOI 10.15607/RSS.2026.XXII.006; venue)",
     "https://yswi.github.io/tactalign/ (page text and HTML source: code link 'Coming Soon' to github.com/google/tactalign, commented-out data link)",
     "https://github.com/google/tactalign (404) and https://github.com/yswi/tactalign (project-page source only)",
     "https://huggingface.co/api/users/youngw/overview (full name 'youngsun wi', 4 datasets)",
