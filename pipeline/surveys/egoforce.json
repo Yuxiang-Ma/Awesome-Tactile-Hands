@@ -1,0 +1,206 @@
+{
+ "id": "egoforce",
+ "surveyed": "2026-10-27",
+ "entry": {
+  "id": "egoforce",
+  "name": "EgoForce",
+  "title": "FACT: A Multimodal Force-Action-Track Foundation Model for Human-to-Robot Dexterity",
+  "authors": "Zhi Cao et al.",
+  "year": 2026,
+  "venue": "arXiv 2610.19155",
+  "summary": "About 2,000 h of bimanual human demonstrations (40k episodes, 1,000 tasks, 120 scenes, 1,000 demonstrators) with two TouchTronix conductive-textile gloves (5 x 12 fingertip taxels + 60 palm taxels per hand, ~200 Hz, calibrated to newtons), a head-mounted stereo pair and two wrist RGB cameras; release announced.",
+  "embodiment": "human",
+  "hand": "TouchTronix tactile gloves, both hands (FusionX multimodal data collection system)",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 120,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 200,
+   "note": "Per hand: a piezoresistive conductive-textile array with 12 taxels on every fingertip (5 x 12) and 60 taxels on the palm, one bend sensor per finger and an orientation IMU, all sampled at about 200 Hz. Taxel readings are converted to force in newtons with a pneumatic calibration rig (pressure x effective area). Described in the paper; no files released.",
+   "maker": "TouchTronix Robotics",
+   "model": "tactile glove of the FusionX multimodal data collection system (model name not given)",
+   "principle": "piezoresistive",
+   "range": null,
+   "calibrated": true
+  },
+  "modalities": [
+   "egocentric",
+   "wrist_rgb",
+   "hand_pose",
+   "imu"
+  ],
+  "scale": {
+   "hours": 2000,
+   "episodes": 40000,
+   "frames": null,
+   "tasks": 1000,
+   "objects": null,
+   "subjects": 1000,
+   "scenes": 120,
+   "scene_types": [],
+   "text": "~2,000 h, ~40k episodes, ~1,000 tasks, ~120 scenes, ~1,000 demonstrators (paper and project page); not released"
+  },
+  "availability": "announced",
+  "access": "Project page fact-1-0.github.io shows 'Data (Coming Soon)' and 'Code (Coming Soon)' (2026-10-27); the paper has no release, license or dataset URL statement.",
+  "license": "not stated",
+  "caveats": [
+   "Not released: the numbers come from the paper and project page, and no file was seen.",
+   "Hand pose is estimated from video (ViTPose keypoints and HaMeR MANO meshes on the left stereo view, scaled with stereo depth), refined with the glove bend sensors and IMU when the hand is occluded; no motion capture.",
+   "Fingertip and palm only: 12 taxels per fingertip, none on the other phalanges.",
+   "Task categories are named (deformable manipulation, assembly, storage, other fine manipulation); objects are not counted."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2610.19155",
+   "project": "https://fact-1-0.github.io/"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Arducam AR0234 global-shutter stereo pair",
+     "type": "stereo",
+     "resolution": "1920x1200",
+     "fps": 30,
+     "mount": "head"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": "1920x1080",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "ViTPose hand keypoints and HaMeR MANO meshes on the left stereo view",
+     "note": "smoothed and scaled with stereo depth; glove bend sensors and IMU refine finger flexion under occlusion"
+    },
+    {
+     "target": "fingers",
+     "method": "bend_sensor",
+     "system": "glove bend sensor, one per finger",
+     "note": null
+    },
+    {
+     "target": "wrist",
+     "method": "imu",
+     "system": "glove orientation IMU (quaternion)",
+     "note": "orientation only"
+    }
+   ],
+   "other": [
+    "200 Hz IMU in the head stereo camera and an IMU in each wrist camera"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2610.19155 (abstract via arXiv API, v1 2026-10-13)",
+   "https://arxiv.org/html/2610.19155v1 (dataset section, appendix on the glove and cameras, acknowledgments)",
+   "https://fact-1-0.github.io/ (dataset figures, 'Data (Coming Soon)')"
+  ],
+  "unconfirmed": [
+   "taxels_per_hand = 120 = 5 x 12 fingertip + 60 palm, summed from the paper's appendix; the layout matches the conductive-fabric glove in the catalog's fusionx_sample release (4x3 per finger, 4x15 palm), but the paper does not name the glove generation.",
+   "subjects = 1,000 is the paper's count of demonstrators; whether these are distinct people is not stated.",
+   "Who collected the data and where is not stated; the acknowledgments say it was 'collected with the FusionX multimodal data collection system (TouchTronix Robotics, NY, USA)'.",
+   "The modality 'egocentric' is the head-mounted stereo pair; 'wrist_rgb' the two 1920x1080 wrist cameras."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://fact-1-0.github.io/"
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [
+  {
+   "name": "tactile (per paper; no release)",
+   "kind": "tactile_grid",
+   "shape": "per hand: 5 x 12 fingertip + 60 palm",
+   "rate_hz": 200,
+   "unit": "N (pneumatic calibration)",
+   "frame": "per taxel",
+   "note": "described in the paper, not checked against files"
+  },
+  {
+   "name": "finger bend (per paper)",
+   "kind": "joint_state",
+   "shape": "(5,) per hand",
+   "rate_hz": 200,
+   "unit": "not stated",
+   "frame": "one per finger",
+   "note": null
+  },
+  {
+   "name": "glove orientation (per paper)",
+   "kind": "imu",
+   "shape": "quaternion per hand",
+   "rate_hz": 200,
+   "unit": null,
+   "frame": "glove IMU",
+   "note": null
+  },
+  {
+   "name": "head stereo pair (per paper)",
+   "kind": "camera",
+   "shape": "2 x 1920x1200",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": "head",
+   "note": "Arducam AR0234 global shutter, with a 200 Hz IMU"
+  },
+  {
+   "name": "wrist cameras (per paper)",
+   "kind": "camera",
+   "shape": "2 x 1920x1080",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": "left and right wrist",
+   "note": "each with an IMU"
+  },
+  {
+   "name": "hand pose (per paper)",
+   "kind": "hand_pose",
+   "shape": "MANO",
+   "rate_hz": null,
+   "unit": null,
+   "frame": "left stereo camera, scaled with stereo depth",
+   "note": "ViTPose + HaMeR estimate"
+  }
+ ],
+ "episode_index": {
+  "where": null,
+  "count": null,
+  "fields": [],
+  "tasks": [],
+  "scenes": []
+ },
+ "sample": {
+  "decision": "catalog_only",
+  "reason": "No data released: the project page shows 'Data (Coming Soon)' on 2026-10-27.",
+  "prefix": "ef_",
+  "tasks_total": 1000,
+  "tasks_sampled": 0,
+  "episodes": [],
+  "fetch_estimate": "0 (nothing to fetch)",
+  "rules_applied": "catalog_only: announced, not released."
+ }
+}

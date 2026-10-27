@@ -1,0 +1,34 @@
+{
+ "flow": "status",
+ "date": "2026-10-27",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 16,
+ "added": {
+  "datasets": 0,
+  "models": 0,
+  "hardware": 0
+ },
+ "updated": 2,
+ "queue_left": 0,
+ "searches": [
+  "RoboTacDex dataset Unitree G1 BrainCo Revo2 tactile release Hugging Face",
+  "RLHND code weights seungjun-moon release",
+  "TouchWorld tactile foundation model dexterous manipulation code weights",
+  "TactAlign tactile alignment human-to-robot code release github",
+  "Humanoid visual-tactile-action dataset deformable soft objects Kwon Kim dataset release",
+  "Dexterous Tactile World Model DTWM checkpoint weights"
+ ],
+ "for_the_owner": [],
+ "notes": [
+  "Scan: 3 signals on 238 URLs. dextacwam (priority 1 links_added, priority 3 links_removed): the changed links are Hugging Face front-end build files (kube-*/index.js, katex.css, style.css), not dataset links; the entry is already public, so no edit. osmo (priority 1 gh_readme): the top-level README now carries the DIY kit note (WowRobo shop link), which the entry already records; data/README.md still offers only the single Google Drive sample (updated 12/21/25) and ends with 'TODO: set up longer-term host for data and data download script', so availability stays partial.",
+  "TactAlign: the RSS XXII proceedings page (roboticsproceedings.org/rss22/p006.html) lists the paper at RSS 2026; venue updated in the dataset and model entries. The arXiv record still shows v1 with no journal reference. Of the four youngw Hugging Face dataset repos only the glove repo was reopened (last modified 2026-05-29, unchanged), and github.com/google/tactalign still returns 404.",
+  "Deep check, no change beyond the checked date: models dtwm (repo last pushed 2026-09-29, no checkpoint found), egopressureformer (EgoTactile repo last pushed 2026-06-29), rlhnd (seungjun-moon/rlhnd last pushed 2026-10-08, project page files only), tk_stgn (project page still offers only the dataset zip), touchworld (project page names no code; flyingGH repo last pushed 2026-07-03), vint_net (project page still has no code link). Checked dates on these six and on tactalign were set to 2026-10-27.",
+  "Deep check, no change: datasets dexvitac (Hugging Face repo still holds a 102-byte README, 'near future'; DexViTac_Code is a README stub), vicon_glove (VICON-dataset/dataset is a README stub, 'release upon publication'; arXiv v2 of 2026-10-14 repeats the plan to release), ace_data_0 (Hugging Face repo last modified 2026-10-14, card still says 'Data Files Coming Soon' next to the gate form), gist_vta and robotacdex (arXiv pages unchanged, 'open-sourced soon' for robotacdex; the WebSearch queries found no release link for either).",
+  "Limits: kaiwu (ScienceDB request gate) was not reopened. The searches for RLHND, TouchWorld, DTWM and TactAlign returned no release page. nightly_tool.py hf accepts only a repo id, so author listings for youngw and ACERobotics were not run tonight."
+ ],
+ "started": "2026-10-27T08:30:01Z",
+ "finished": "2026-10-27T08:36:49Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 11 changed files, 5 new entries"
+}

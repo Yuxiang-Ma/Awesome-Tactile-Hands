@@ -3,6 +3,96 @@
   {
    "kind": "added",
    "target": "dataset",
+   "id": "egoforce",
+   "text": "EgoForce: about 2,000 h of bimanual human demonstrations (40k episodes, 1,000 tasks, 1,000 demonstrators) with TouchTronix gloves of 5 x 12 fingertip and 60 palm taxels per hand, calibrated to newtons, plus head stereo and two wrist cameras; data marked 'Coming Soon' on the project page.",
+   "source": "https://fact-1-0.github.io/",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "fact",
+   "text": "FACT: force-action-track policy for two Sharpa Wave hands that predicts future fingertip force while refining actions, pretrained on EgoForce and 100 h of T-Rex; code announced.",
+   "source": "https://arxiv.org/abs/2610.19155",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "physword",
+   "text": "PhysWord: NVIDIA policy that predicts atomic action words aligned with future visual and tactile latents, with one tactile token per Sharpa Wave hand, pretrained with T-Rex Sharpa data in a 7,400 h mix; code announced.",
+   "source": "https://arxiv.org/abs/2610.26854",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "transdex",
+   "text": "TransDex: visuo-tactile diffusion policy for a 16-DoF hand with PaXini 12x6 fingertip and 10x6 pad arrays, pretrained to reconstruct transparent-object point clouds, 83% average on 3 tasks (RA-L 2026); code on GitHub without a license.",
+   "source": "https://arxiv.org/abs/2603.13869",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "aet_tacnet",
+   "text": "AET-TacNet: autoencoder-transformer that infers hand touch from EMG and kinematics (NRMSE 0.032) on reaching, pouring, screwing and feeding (IEEE TII 2026); closed access, no code statement.",
+   "source": "https://doi.org/10.1109/tii.2026.3665344",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "egotactile",
+   "text": "EgoTactile: Open-X-Tactile conversion HustleHard/EgoTactile-OXT (767 clips, 314,100 frames, 63 object zarr archives, 3.5 GB, CC BY-NC 4.0) linked as a derived release.",
+   "source": "https://huggingface.co/datasets/HustleHard/EgoTactile-OXT",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "egoexplorer",
+   "text": "EgoExplorer: second repository InternRobotics/EgoExplorer-oxt (zarr, 25.5 GB, manual Hugging Face gate) linked as a derived release.",
+   "source": "https://huggingface.co/datasets/InternRobotics/EgoExplorer-oxt",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "paxini_omnisharing",
+   "text": "PX OmniSharing DB: AdvDex paper added to sources; it describes OmniShare (over 10k h, 168k trajectories, 721 objects, 14 views, Hall-effect tactile glove), which matches the sample's glove and cameras but states no release.",
+   "source": "https://arxiv.org/abs/2608.14028",
+   "date": "2026-10-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "tactalign",
+   "text": "TactAlign: venue arXiv -> RSS 2026 (Robotics: Science and Systems XXII, DOI 10.15607/RSS.2026.XXII.006); the proceedings page lists no code or data link.",
+   "source": "https://www.roboticsproceedings.org/rss22/p006.html",
+   "date": "2026-10-27",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "tactalign",
+   "text": "TactAlign: venue arXiv -> RSS 2026 (Robotics: Science and Systems XXII, DOI 10.15607/RSS.2026.XXII.006); code is still announced (project page 'Coming Soon', github.com/google/tactalign returns 404).",
+   "source": "https://www.roboticsproceedings.org/rss22/p006.html",
+   "date": "2026-10-27",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
    "id": "m2vtp_bottlecap",
    "text": "M2VTP BottleCap: human bottle-cap turning with a Zhejiang University glove of 20 binary touch signals and egocentric HoloLens 2 video (ICRA 2024); one OneDrive file linked from the pretraining README, files not opened, sequence count not published.",
    "source": "https://github.com/LQTS/Pretraining_for_M2VTP",

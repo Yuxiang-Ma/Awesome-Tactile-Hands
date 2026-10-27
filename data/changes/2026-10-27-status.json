@@ -1,0 +1,7 @@
+{"date": "2026-10-27", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "tactalign",
+   "text": "TactAlign: venue arXiv -> RSS 2026 (Robotics: Science and Systems XXII, DOI 10.15607/RSS.2026.XXII.006); the proceedings page lists no code or data link.",
+   "source": "https://www.roboticsproceedings.org/rss22/p006.html"},
+  {"kind": "updated", "target": "model", "id": "tactalign",
+   "text": "TactAlign: venue arXiv -> RSS 2026 (Robotics: Science and Systems XXII, DOI 10.15607/RSS.2026.XXII.006); code is still announced (project page 'Coming Soon', github.com/google/tactalign returns 404).",
+   "source": "https://www.roboticsproceedings.org/rss22/p006.html"}]}

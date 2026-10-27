@@ -2,81 +2,77 @@
  "runs": {
   "discovery": {
    "flow": "discovery",
-   "date": "2026-10-26",
+   "date": "2026-10-27",
    "model": "claude-opus-5-5",
-   "reviewed": 56,
+   "reviewed": 59,
    "added": {
-    "datasets": 2,
-    "models": 6,
+    "datasets": 1,
+    "models": 4,
     "hardware": 0
    },
-   "updated": 1,
-   "queue_left": 345,
+   "updated": 3,
+   "queue_left": 343,
    "searches": [
-    "tactile foundation model multi-finger hand open source",
     "tactile glove dataset dexterous manipulation",
     "full-hand tactile dataset release Hugging Face",
-    "visuo-tactile dexterous hand dataset 2026"
+    "visuo-tactile dexterous hand dataset 2026",
+    "tactile world model dexterous hand"
    ],
    "for_the_owner": [
-    "Judgment call: arxiv:2610.02338 (SoTa, Stanford, 202-taxel capacitive skin worn by human and robot hands, FTP-1-based co-training) was rejected because the policy has no name of its own and no data release is stated; reopen it in watch/reviewed.json if it should count as a model, and the SoTa skin would then qualify as hardware.",
-    "Judgment call: doi:10.1109/tmech.2025.3532653 (DIH-Tele, T-DexCo tactile hand, imitation learning for multi-object counting) and arxiv:2408.06265 (EyeSight Hand, vision-based tactile hand with imitation policies) were rejected as unnamed models with no data release, following the 2026-10-25 rule for unnamed models.",
-    "AdapTac-Dex's README links example_data.zip on Google Drive (https://drive.google.com/file/d/1F6mV1sTDIK1wW3m17eX2PGON7JJenPq3/view); it was not opened and may qualify as a partial dataset for a LEAP hand with PaXini pads on a Flexiv arm."
+    "Hardware: EgoForce's TouchTronix glove (12 taxels per fingertip, 60 on the palm, one bend sensor per finger) has the conductive-fabric layout seen in fusionx_sample, not the thin-film glove in hardware entry touchtronix_fusionx_v3. No hardware entry was added or linked; a separate entry for the conductive-fabric FusionX glove would cover both datasets.",
+    "Judgment call: AET-TacNet (doi:10.1109/tii.2026.3665344) was added from the abstract alone. Its evaluation data is probably Reach&Grasp (same tasks and modalities, cited in its references) but is not linked in uses because the abstract does not name it.",
+    "Judgment call: ME-Dex 1.0 (arXiv 2609.21449, Li Auto) was rejected because its touch is simulated (RoboTwin, DexJoCo, ManiFeel) and the Xynova Flex2 hand run is qualitative only; code is at github.com/MachEmbodied/ME-Dex-1.0. Reopen it in watch/reviewed.json if a real-hand demo should count.",
+    "Judgment call: arXiv 2608.14028 (AdvDex) was recorded as a duplicate of paxini_omnisharing because its OmniShare dataset matches the sample's 29-joint glove and 14 cameras; the paper never names OmniSharing DB."
    ],
    "notes": [
-    "python3 pipeline/merge_entry.py was refused by the shell tonight; the two survey entries (m2vtp_bottlecap, dexskills) were appended to data/datasets.json by hand, identical to their survey files' entry objects.",
-    "OSMO's survey file pipeline/surveys/osmo.json got the same venue change as the catalog, so a later merge does not revert it.",
-    "Left in the queue undecided: doi:10.1109/tii.2026.3665344 (AET-TacNet, touch from EMG and kinematics; the ground-truth sensor is not in the abstract and IEEE Xplore returned an empty page), doi:10.1126/scirobotics.ady2869 (Qi Ye et al., Science Robotics 2026; no open copy; github.com/LQTS/unified-vt-manip, created 2025-12-19, has only a title README and may become its code), doi:10.1109/ccdc69976.2026.11559719 (CCDC 2026 multi-array tactile diffusion policy, no abstract in OpenAlex), doi:10.1109/toh.2024.3506791 (DT-Transformer, 'two publicly available haptic datasets' not named in the abstract) and doi:10.1007/s44245-026-00275-y (review of 115 studies, items not extracted).",
-    "Lead gh:chang-xinhai/awesome-dexterous-manipulation (first 100,000 of 187,192 characters read) names these items that find returned no match for: Feel the Force arXiv 2506.01944, Pose-Aware tactile gloves 2607.22964, ACTS 2610.24285, TacOT 2610.04363, VisTacAlign 2609.30959, Dex-X 2609.07747, DeCAL 2609.09119, OccluDex 2609.39017, Contact-Grounded Policy 2603.05687, ReTouch 2608.01824, TacWAM 2607.28391, WM-Craftnet 2609.07002, ViTacFormer 2506.15953, plus DexTaG 2609.33882, PTLD 2603.04531, VibeAct 2606.27344, FBI 2508.14441, PP-Tac 2504.16649, Robot Synesthesia 2312.01853, TacGNN 2304.00736 and Learning In-Hand Translation Using Tactile Skin 2407.07885 (these last eight not yet run through find).",
-    "Lead gh:cyanhaze/awesome-dexterous-hands adds HT-Bench 2606.19161 and Tactile Genesis 2606.22332 (no catalog match), plus Tactile SoftHand-A 2406.12731, Touch Dexterity 2303.10880, All the Feels / DManus 2210.15658 and FingerEye 2604.20689 (not yet run through find).",
-    "Search sweep hits not reviewed tonight: AdvDex / OmniShare arXiv 2608.14028 (human glove dataset with a Hall-effect tactile array; check against paxini_omnisharing), DexMani 2608.00554 (human rotations with a 256-channel piezoresistive glove), N0-Foundation / OpenNeoData 2608.29601 (5,000 h open visuo-tactile subset; embodiments may be grippers and UMI), SmartHand 2203.15069 (hand-shaped sensor array dataset of daily objects), and VTAO-BiManip 2501.03606 (Zhejiang bimanual glove pretraining, found while checking M2VTP). huggingface.co/datasets/AllenBi21/TactileFusion returned HTTP 401.",
-    "Semantic Scholar returned 429 after three requests; abstracts for closed-access DOIs came from OpenAlex where it had them."
+    "python3 pipeline/merge_entry.py was refused by the shell again; the egoforce entry was appended to data/datasets.json by hand, identical to the entry object in pipeline/surveys/egoforce.json.",
+    "Left in the queue undecided: hf:datasets/lejurobotics/let-kuavo-vla-1.0-dataset (1.3 TB, automatic gate, card behind the gate; whether it carries LET-Dex's Linker L6 tactile streams was not checked) and the two anonymous-submission-hf tactile-mnist-abc datasets (not opened).",
+    "Search sweep hit not reviewed (budget): DexMani arXiv 2608.00554 (human rotation demonstrations with a 256-channel piezoresistive glove and Manus tracking turned into a contact-conditioned manipulability prior for RL; check whether touch is a model input).",
+    "Search sweep hits already in the catalog: TactiDex, Humanoid VTA (gist_vta), DexViTac, UVTA, OpenTouch, DexTouch-WM, DexTacWAM, TouchWorld. Bench2Dex (arXiv 2609.15726) is a simulation benchmark; Daimon-TWM has only product pages.",
+    "PhysWord pretrains on OpenNeoData (5,000+ h, marked tactile in its Table 3), which is not in the catalog; last night's note lists it under N0-Foundation (arXiv 2608.29601) with embodiments possibly grippers and UMI.",
+    "FACT's 90 human fine-tuning demonstrations per task were recorded with a Wuji tactile glove; they are described only in the paper and folded into the model's own_data.",
+    "Still pending from the 2026-10-26 notes and not reviewed tonight: the chang-xinhai and cyanhaze awesome-list items, VTAO-BiManip 2501.03606, N0-Foundation / OpenNeoData 2608.29601 and SmartHand 2203.15069.",
+    "The review doi:10.1007/s44245-026-00275-y was recorded as a lead; the items it names were not extracted."
    ],
-   "started": "2026-10-26T05:30:01Z",
-   "finished": "2026-10-26T05:51:00Z",
+   "started": "2026-10-27T05:30:02Z",
+   "finished": "2026-10-27T05:46:09Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 10 changed files, 7 new entries"
+   "guard": "nightly guard passed: 8 changed files, 5 new entries"
   },
   "status": {
    "flow": "status",
-   "date": "2026-10-26",
+   "date": "2026-10-27",
    "model": "claude-sonnet-5-5",
-   "reviewed": 15,
+   "reviewed": 16,
    "added": {
     "datasets": 0,
     "models": 0,
     "hardware": 0
    },
-   "updated": 1,
+   "updated": 2,
    "queue_left": 0,
    "searches": [
-    "https://api.github.com/search/repositories?q=Ego2Contact",
-    "https://huggingface.co/api/models?search=Ego2Contact",
-    "https://huggingface.co/api/datasets?search=Ego2Contact",
-    "https://huggingface.co/api/models?author=qqyang",
-    "https://huggingface.co/api/datasets?author=qqyang",
-    "https://api.github.com/search/repositories?q=TK-STGN",
-    "https://huggingface.co/api/datasets?search=TouchWorld",
-    "https://huggingface.co/api/datasets?search=RoboTacDex",
-    "https://api.github.com/search/repositories?q=RoboTacDex",
-    "https://huggingface.co/api/datasets?author=youngw",
-    "https://huggingface.co/api/models?author=youngw"
+    "RoboTacDex dataset Unitree G1 BrainCo Revo2 tactile release Hugging Face",
+    "RLHND code weights seungjun-moon release",
+    "TouchWorld tactile foundation model dexterous manipulation code weights",
+    "TactAlign tactile alignment human-to-robot code release github",
+    "Humanoid visual-tactile-action dataset deformable soft objects Kwon Kim dataset release",
+    "Dexterous Tactile World Model DTWM checkpoint weights"
    ],
-   "for_the_owner": [
-    "Judgment call: Hugging Face user qqyang holds public repos named for Ego2Contact, including .pth checkpoints (e2c-archive-ckpt, e2c-downstream-eval) with no model card or license. The paper does not link them and no page ties the account to the authors. The catalog keeps weights as not_released and describes the repos in release.note; promote them to a weights link only if the authors confirm."
-   ],
+   "for_the_owner": [],
    "notes": [
-    "Scan: 3 signals on 230 URLs. dexvitac (priority 1): the project page now links a Google Doc (the 'Hardware Guide' button), which needs JavaScript and could not be read; the Hugging Face dataset repo still holds only a 102-byte README ('near future') and the code repo DexViTac_Code is a stub with an empty README, so availability stays announced. sharpa_roco (priority 1): the new links are registration forms and a Google Doc on the challenge page; the Hugging Face repo is ungated, unchanged since 2026-09-20 and the entry already describes it, so no edit. dextacwam (priority 3): page text length unchanged (1552) and the entry is public, so not reviewed further.",
-    "Deep check, no change beyond the checked date: models tactalign (project page still says 'Coming Soon', github.com/google/tactalign still returns 404, no models under youngw), touchworld (flyingGH repository unchanged, no Hugging Face repo), tk_stgn (GitHub search returns nothing), vitam (code repository unchanged since 2024-09-30), rlhnd (the repository named on the project page, seungjun-moon/rlhnd, holds only the project page files, so code is still announced; release.note updated). Checked dates on tactalign, touchworld, tk_stgn and vitam were set to 2026-10-26.",
-    "Deep check, no change: datasets vicon_glove (VICON-dataset/dataset is a README stub, 'release upon publication'), dexumi (GitHub repository last pushed 2026-04-18, sample zip only), gist_vta and robotacdex (arXiv pages unchanged, 'open-sourced soon' for robotacdex; no Hugging Face or GitHub hit for either name), tactalign dataset (same four youngw repos, last modified 2026-05-31).",
-    "Limits: kaiwu (ScienceDB request gate) was not reopened. Deep-check searches used the Hugging Face and GitHub APIs through nightly_tool.py; no WebSearch queries were run. The Hugging Face model repo qqyang/ego2contact-demo-videos returned HTTP 401 and was not read."
+    "Scan: 3 signals on 238 URLs. dextacwam (priority 1 links_added, priority 3 links_removed): the changed links are Hugging Face front-end build files (kube-*/index.js, katex.css, style.css), not dataset links; the entry is already public, so no edit. osmo (priority 1 gh_readme): the top-level README now carries the DIY kit note (WowRobo shop link), which the entry already records; data/README.md still offers only the single Google Drive sample (updated 12/21/25) and ends with 'TODO: set up longer-term host for data and data download script', so availability stays partial.",
+    "TactAlign: the RSS XXII proceedings page (roboticsproceedings.org/rss22/p006.html) lists the paper at RSS 2026; venue updated in the dataset and model entries. The arXiv record still shows v1 with no journal reference. Of the four youngw Hugging Face dataset repos only the glove repo was reopened (last modified 2026-05-29, unchanged), and github.com/google/tactalign still returns 404.",
+    "Deep check, no change beyond the checked date: models dtwm (repo last pushed 2026-09-29, no checkpoint found), egopressureformer (EgoTactile repo last pushed 2026-06-29), rlhnd (seungjun-moon/rlhnd last pushed 2026-10-08, project page files only), tk_stgn (project page still offers only the dataset zip), touchworld (project page names no code; flyingGH repo last pushed 2026-07-03), vint_net (project page still has no code link). Checked dates on these six and on tactalign were set to 2026-10-27.",
+    "Deep check, no change: datasets dexvitac (Hugging Face repo still holds a 102-byte README, 'near future'; DexViTac_Code is a README stub), vicon_glove (VICON-dataset/dataset is a README stub, 'release upon publication'; arXiv v2 of 2026-10-14 repeats the plan to release), ace_data_0 (Hugging Face repo last modified 2026-10-14, card still says 'Data Files Coming Soon' next to the gate form), gist_vta and robotacdex (arXiv pages unchanged, 'open-sourced soon' for robotacdex; the WebSearch queries found no release link for either).",
+    "Limits: kaiwu (ScienceDB request gate) was not reopened. The searches for RLHND, TouchWorld, DTWM and TactAlign returned no release page. nightly_tool.py hf accepts only a repo id, so author listings for youngw and ACERobotics were not run tonight."
    ],
-   "started": "2026-10-26T08:30:01Z",
-   "finished": "2026-10-26T08:38:05Z",
+   "started": "2026-10-27T08:30:01Z",
+   "finished": "2026-10-27T08:36:49Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 13 changed files, 7 new entries"
+   "guard": "nightly guard passed: 11 changed files, 5 new entries"
   }
  }
 }
