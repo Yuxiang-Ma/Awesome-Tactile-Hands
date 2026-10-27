@@ -1601,6 +1601,165 @@
     "The split of the 16 pressure sensors between fingertips and palm is only in Figure 2, which was not read."
    ],
    "checked": "2026-10-26"
+  },
+  {
+   "id": "fact",
+   "name": "FACT",
+   "title": "FACT: A Multimodal Force-Action-Track Foundation Model for Human-to-Robot Dexterity",
+   "authors": "Zhi Cao et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.19155",
+   "kind": "policy",
+   "summary": "Two-stage robot foundation model for two Sharpa Wave hands (22 joints each, a 6-axis wrench per fingertip) on a bimanual YAM station: images, robot state, instruction, visual-track history and tactile history go in; a Track-Guided Coarse Planner predicts actions, future video and visual tracks, and a Force-Action Joint Refiner predicts future fingertip force and outputs a refined 16-step, 20 Hz action chunk (62-D); pretrained on 2,000 h of EgoForce human glove data plus 100 h of T-Rex teleoperation.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "egoforce",
+     "role": "pretraining",
+     "note": "About 2,000 h of human demonstrations with TouchTronix glove force; pretraining on the human data without force lowers results on 9 of the 10 tasks (open test-tube cap 80% to 0%; multi-object grasp unchanged at 40%)."
+    },
+    {
+     "id": "trex",
+     "role": "pretraining",
+     "note": "100 h of T-Rex robot teleoperation (Sharpa Wave hands on Dexmate Vega-1) co-trained with EgoForce; T-Rex is also the baseline, beaten by up to 60 percentage points."
+    }
+   ],
+   "own_data": "Fine-tuning data for ten tasks (lab pipetting, test-tube and flip caps, shoelaces, card shuffling, multi-object grasp, screwdriver, harp, xylophone, pipette volume): 10 robot trajectories per task teleoperated with Manus gloves and VIVE Tracker 3.0 wrist trackers, plus 90 human demonstrations per task recorded with a Wuji tactile glove; release not stated.",
+   "dataset": "egoforce",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.19155",
+    "project": "https://fact-1-0.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.19155 (abstract via arXiv API)",
+    "https://arxiv.org/html/2610.19155v1 (method, hardware appendix, pretraining data, fine-tuning data, acknowledgments)",
+    "https://fact-1-0.github.io/ (release buttons, ablation tables)"
+   ],
+   "unconfirmed": [
+    "embodiment 'both': human glove force (taxels in N) in pretraining and robot fingertip wrenches at fine-tuning and test; how the two force representations are mapped onto each other was not read in detail.",
+    "The T-Rex hours are the paper's (100 h); the public T-Rex release in the catalog holds about 50 h, so FACT may have used data beyond the public release."
+   ],
+   "checked": "2026-10-27"
+  },
+  {
+   "id": "physword",
+   "name": "PhysWord",
+   "title": "Physical Words: A Vocabulary for Structuring Latent Reasoning in Robot Manipulation",
+   "authors": "Jiaming Liu et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.26854",
+   "kind": "policy",
+   "summary": "Reasoning-before-acting foundation model that predicts upcoming atomic action words (a 16-word vocabulary) before acting and aligns each word's hidden state with latent targets of future visual or tactile observations; on Sharpa Wave hands (Tianji arms) five fingertip tactile observations are encoded with a T3 encoder initialized from FTP-1 into one 2,048-D token per hand, and actions come out; Pick Paper 93.3% and Shuttlecock Insert 60.0% success against FTP-1's 66.7% and 56.7%.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "trex",
+     "role": "pretraining",
+     "note": "'Sharpa data' (100+ h, tactile) in the 7,400+ h pretraining mix, which the text says comes from T-Rex; the mix also holds 2,000+ h of human-hand video without touch, 350 h of DROID and 5,000+ h of OpenNeoData with touch."
+    }
+   ],
+   "own_data": "100 teleoperated demonstrations per real-world task on Tianji arms with Sharpa Wave hands and on an i7 robot with Xense fingertip sensors on its gripper; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page nvidia-isaac.github.io/video_to_data/physicalword/: 'Code coming soon' (read 2026-10-27). The arXiv v3 HTML has no code, weights or data statement."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.26854",
+    "project": "https://nvidia-isaac.github.io/video_to_data/physicalword/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.26854 (abstract via arXiv API, v3 2026-10-21)",
+    "https://arxiv.org/html/2610.26854v3 (Table 3 pretraining data, Appendix B.1 hardware, tactile encoder, real-world results; read in two parts)",
+    "https://nvidia-isaac.github.io/video_to_data/physicalword/"
+   ],
+   "unconfirmed": [
+    "touch 'both': tactile observations go in, and the tactile variant of each Physical Word is supervised to predict future tactile latents; raw touch is not decoded.",
+    "Table 3 labels the robot hand data 'Sharpa data' without naming T-Rex; the link to T-Rex is from the text. Co-author Dantong Niu is also T-Rex's first author.",
+    "OpenNeoData (5,000+ h with touch) is not in the catalog; its embodiments were not checked."
+   ],
+   "checked": "2026-10-27"
+  },
+  {
+   "id": "transdex",
+   "name": "TransDex",
+   "title": "TransDex: Pre-training Visuo-Tactile Policy with Point Cloud Reconstruction for Dexterous Manipulation of Transparent Objects",
+   "authors": "Fengguan Li et al.",
+   "year": 2026,
+   "venue": "IEEE RA-L 2026 (arXiv 2603.13869)",
+   "kind": "policy",
+   "summary": "Visuo-tactile policy for a 16-DoF cable-driven hand on a 7-DoF arm with PaXini 3-axis arrays on every fingertip (12x6) and finger pad (10x6); a global point cloud, a hand-object point cloud, tactile points placed by forward kinematics, a tactile force image and 22-D proprioception go in, an encoder pretrained to reconstruct masked, noisy transparent-object point clouds feeds an MLP arm head (6-D pose) and a diffusion hand head (16-D); 83% average success on pouring, flask shaking and cup rotation against 47% for 3DTacDex-P.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Teleoperated demonstrations (Manus Metaglove with OptiTrack) for three transparent-object tasks; demonstration count not stated; pretraining point clouds simulated in PyBullet with ClearPose and other objects; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/LFGfg/TransDex (linked from transdex.github.io; created 2025-12-11, last push 2026-10-03) holds README.md, policy_ws/ and requirements.txt; no license, README empty; no checkpoint seen. The paper has no release statement. Checked 2026-10-27."
+   },
+   "license": "not stated (no license on the GitHub repository)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2603.13869",
+    "project": "https://transdex.github.io/",
+    "code": "https://github.com/LFGfg/TransDex"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2603.13869 (abstract via arXiv API, v2 2026-07-21)",
+    "https://arxiv.org/html/2603.13869v2 (hardware, inputs and outputs, pretraining, Table I)",
+    "https://transdex.github.io/ ('Accepted by IEEE RA-L', code link)",
+    "https://github.com/LFGfg/TransDex (repository metadata, top-level listing)",
+    "https://api.openalex.org/works/doi:10.1109/lra.2026.3732837 (RA-L record: vol. 11, no. 11, pp. 12671-12678, 2026-09-10)"
+   ],
+   "unconfirmed": [
+    "The RA-L record (doi:10.1109/lra.2026.3732837) has the title 'TransDex: Interaction Geometry Enables Robust Visuo-Tactile Dexterous Manipulation of Transparent Objects' with the same five authors; the published text (closed access) was not read, so the catalog follows the arXiv v2 title and content.",
+    "Hand model not named; 16 DoF and cable-driven per the paper. PaXini array model not named. Success rates over 10 trials per task are implied by the percentages."
+   ],
+   "checked": "2026-10-27"
+  },
+  {
+   "id": "aet_tacnet",
+   "name": "AET-TacNet",
+   "title": "Decoding Human Touch Noninvasively: Tactile Inference From EMG and Kinematics Using AET-TacNet",
+   "authors": "Huiming Pan et al.",
+   "year": 2026,
+   "venue": "IEEE Transactions on Industrial Informatics (2026)",
+   "kind": "estimation",
+   "summary": "Autoencoder-transformer network that takes human arm and hand kinematics and EMG, compresses each modality with its own autoencoder and predicts the hand's tactile signals with a transformer, so touch can be inferred without a glove; on reaching, pouring, screwing and feeding tasks it reports NRMSE 0.032, MAE 0.015 and SMAPE 13.4%.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [],
+   "own_data": "Evaluated on 'a dataset of human manipulation activities' (frontal reaching, pouring, screwing, feeding) with kinematics, EMG and touch recorded together; the dataset is not named in the abstract.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "Closed access; the abstract (OpenAlex) states no code, weights or data release, and no repository was found by a web search for the name (2026-10-27)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://doi.org/10.1109/tii.2026.3665344"
+   },
+   "sources": [
+    "https://api.openalex.org/works/doi:10.1109/tii.2026.3665344 (abstract, references)"
+   ],
+   "unconfirmed": [
+    "Only the abstract was read; IEEE Xplore returned an empty page on 2026-10-26 and OpenAlex lists no open copy.",
+    "The evaluation data is probably Reach&Grasp (catalog reachgrasp: Bielefeld 58-taxel glove, CyberGlove, Vicon and EMG, with Pour, Screw and frontal-reach tasks), which OpenAlex lists among the paper's references; the abstract does not name it, so it is not linked in uses.",
+    "Where the ground-truth touch was measured (glove or object) is not stated in the abstract."
+   ],
+   "checked": "2026-10-27"
   }
  ]
 }
