@@ -1,0 +1,4 @@
+{"date": "2026-10-28", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "pulse",
+   "text": "PULSE: scene-camera and eye-tracking MP4s (scene_cam.mp4, eye_tracking_overlay.mp4, 60-109 MB each) are now in the main Hugging Face repository under data/vN/sM/videos/ for the 3 recordings checked (v1/s1, v25/s2, v39/s4); used storage 78.8 GB, up from the 22.0 GB CSV-only tree on 2026-10-17. Video coverage of the other recordings was not counted.",
+   "source": "https://huggingface.co/datasets/velvet-pine-22/PULSE"}]}
