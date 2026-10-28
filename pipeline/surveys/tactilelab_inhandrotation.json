@@ -1,0 +1,174 @@
+{
+ "id": "tactilelab_inhandrotation",
+ "surveyed": "2026-10-28",
+ "entry": {
+  "id": "tactilelab_inhandrotation",
+  "name": "TactileLab In-Hand Rotation",
+  "title": "TactileLab: Efficient Shear-Sensitive Tactile Simulation for Sim-to-Real Multi-Finger Dexterous Manipulation",
+  "authors": "Yijiong Lin et al.",
+  "year": 2026,
+  "venue": "ICRA 2026 Workshop on Dexterity with Multifingered Hands",
+  "summary": "20 real-world rollouts (30 s each at 10 Hz, 6,000 steps) of sim-to-real RL in-hand rotation policies on a palm-up 4-finger hand built from LEAP Hand finger modules, with a TacTip-family marker-based optical sensor on each fingertip; each step holds four raw 224x224 tactile images, 16 joint positions and one fixed external RGB view.",
+  "embodiment": "robot",
+  "hand": "Custom palm-up 4-finger hand from LEAP Hand finger modules (16 DoF), Bristol Robotics Laboratory",
+  "bimanual": false,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 4,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 10,
+   "note": "One TacTip-family marker-based optical sensor per fingertip; right_tactile_data_fingertips holds 4 x 224x224x3 raw tactile camera images per step (sensor tag 'TacTipFingertip', type 'image'), stored at the 10 Hz control rate. From the dataset card; files not opened.",
+   "maker": "custom (Bristol Robotics Laboratory, Lepora lab)",
+   "model": "TacTip-family fingertip (card: 'TacTipFingertip')",
+   "principle": "optical",
+   "range": null,
+   "calibrated": false
+  },
+  "modalities": [
+   "rgb",
+   "language"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 20,
+   "frames": 6000,
+   "tasks": 1,
+   "objects": 10,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "20 episodes (10 household objects x 2 policy variants), 300 steps each at 10 Hz, 6,000 steps; one task (counterclockwise in-hand rotation)"
+  },
+  "availability": "public",
+  "access": "Hugging Face dataset Kitval/TactileLab_InHandRotation, not gated; 20 per-episode zarr zips (1.9 GB in total).",
+  "license": "not stated",
+  "caveats": [
+   "These are rollouts of policies trained in simulation, not teleoperated demonstrations; the card lists no action stream, only joint positions.",
+   "Two policy variants per object: 'full' (proprioception + tactile depth + tactile flow) and 'depth' (proprioception + tactile depth); the stored tactile data are the raw camera images either way.",
+   "The card notes that in the 'gum' full-policy episode the object wedged on the fingertips after about 22.5 s and the hand barely moves until the end.",
+   "Released in the FTP-1 zarr layout of the Open-X-Tactile (OXT) collection; the card defines the keys but no paper with the data was found (TactileLab project page: arXiv and code 'Coming soon').",
+   "No license on the card."
+  ],
+  "links": {
+   "project": "https://yijionglin.github.io/tactilelab/",
+   "data": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": "224x224",
+     "fps": 10,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "LEAP Hand finger-module joint encoders",
+     "note": "right_hand_joints (16, rad)"
+    }
+   ],
+   "other": [
+    "sub_task_instruction: one fixed language instruction per episode"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation (dataset card, repository metadata, top-level listing)",
+   "https://yijionglin.github.io/tactilelab/ (project page: authors, PETS-Net, Leap Hand support, 'arXiv Coming soon', 'Code Coming soon')"
+  ],
+  "unconfirmed": [
+   "hours: 20 episodes x 30 s = 10 min, derived from the card's per-episode length; not stated as a total.",
+   "Venue and the two-author list (Lin, Lepora) come from the card's BibTeX; the project page lists six authors and a different title ('TactileLab: Efficient Multimodal Tactile Simulation for Shear-Sensitive Dexterous Sim2Real Robotic Manipulation'). The catalog uses the card's title.",
+   "That the rolled-out policies are the project page's PETS-Net is likely but not stated on the card.",
+   "Per-episode size of about 95 MB is 1.9 GB / 20; zips not opened.",
+   "Publisher account 'Kitval' is not named on the project page; its link to the Lepora lab is from the card's citation only."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation",
+  "access": "open",
+  "format": "FTP-1 zarr (Open-X-Tactile), one episode_<UTC start>.zarr.zip per episode",
+  "total_size": "1.9 GB",
+  "per_episode": "~95 MB",
+  "partial_fetch": "one zip per episode; fetch a single episode file"
+ },
+ "channels": [
+  {
+   "name": "right_tactile_data_fingertips",
+   "kind": "tactile_image",
+   "shape": "(4, 224, 224, 3) per step",
+   "rate_hz": 10,
+   "unit": "raw RGB camera images",
+   "frame": "per fingertip sensor",
+   "note": "with right_tactile_{area,sensor,type}_fingertips metadata keys; from the dataset card; files not opened"
+  },
+  {
+   "name": "camera_main_rgb",
+   "kind": "camera",
+   "shape": "(224, 224, 3)",
+   "rate_hz": 10,
+   "unit": "RGB",
+   "frame": "fixed external view",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "right_hand_joints",
+   "kind": "joint_state",
+   "shape": "(16,)",
+   "rate_hz": 10,
+   "unit": "rad",
+   "frame": "hand joints (right_hand_joints_idx)",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "sub_task_instruction",
+   "kind": "language",
+   "shape": "string",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "'Rotate the object in-hand along the palm direction, counterclockwise as viewed from above the palm.'"
+  },
+  {
+   "name": "timestamps",
+   "kind": "other",
+   "shape": "per step",
+   "rate_hz": 10,
+   "unit": "not stated",
+   "frame": null,
+   "note": "from the dataset card"
+  }
+ ],
+ "episode_index": {
+  "where": "README table (zarr name, object, policy, steps, note)",
+  "count": 20,
+  "fields": [
+   "object",
+   "policy",
+   "steps",
+   "note"
+  ],
+  "tasks": [
+   "in-hand rotation (counterclockwise about the palm normal)"
+  ],
+  "scenes": []
+ }
+}

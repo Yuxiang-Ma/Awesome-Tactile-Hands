@@ -2628,13 +2628,17 @@
   "doi:10.1093/nsr/nwaf583": "W7116924531",
   "arxiv:2505.13982": "W4415021403",
   "arxiv:2610.09455": "W7220933352",
-  "doi:10.1038/s41598-024-78764-x": "W4404247740"
+  "doi:10.1038/s41598-024-78764-x": "W4404247740",
+  "arxiv:2610.19155": "W7222357332",
+  "arxiv:2610.26854": "W7223000392",
+  "arxiv:2603.13869": "W7138132543",
+  "doi:10.1109/tii.2026.3665344": "W7134836654"
  },
  "cursor": {
-  "arxiv_backfill": "2016-04",
+  "arxiv_backfill": "2016-07",
   "hf_backfilled": true,
-  "arxiv_recent_ok": "2026-10-27",
-  "openalex_recent_ok": "2026-10-27",
-  "openalex_backfill": "2015-07"
+  "arxiv_recent_ok": "2026-10-28",
+  "openalex_recent_ok": "2026-10-28",
+  "openalex_backfill": "2015-10"
  }
 }

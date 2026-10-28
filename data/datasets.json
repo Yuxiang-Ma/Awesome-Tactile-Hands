@@ -10277,6 +10277,307 @@
      "own": true
     }
    ]
+  },
+  {
+   "id": "tactilelab_inhandrotation",
+   "name": "TactileLab In-Hand Rotation",
+   "title": "TactileLab: Efficient Shear-Sensitive Tactile Simulation for Sim-to-Real Multi-Finger Dexterous Manipulation",
+   "authors": "Yijiong Lin et al.",
+   "year": 2026,
+   "venue": "ICRA 2026 Workshop on Dexterity with Multifingered Hands",
+   "summary": "20 real-world rollouts (30 s each at 10 Hz, 6,000 steps) of sim-to-real RL in-hand rotation policies on a palm-up 4-finger hand built from LEAP Hand finger modules, with a TacTip-family marker-based optical sensor on each fingertip; each step holds four raw 224x224 tactile images, 16 joint positions and one fixed external RGB view.",
+   "embodiment": "robot",
+   "hand": "Custom palm-up 4-finger hand from LEAP Hand finger modules (16 DoF), Bristol Robotics Laboratory",
+   "bimanual": false,
+   "sensor": {
+    "type": "vision",
+    "taxels_per_hand": null,
+    "sensors_per_hand": 4,
+    "coverage": [
+     "tip"
+    ],
+    "rate_hz": 10,
+    "note": "One TacTip-family marker-based optical sensor per fingertip; right_tactile_data_fingertips holds 4 x 224x224x3 raw tactile camera images per step (sensor tag 'TacTipFingertip', type 'image'), stored at the 10 Hz control rate. From the dataset card; files not opened.",
+    "maker": "custom (Bristol Robotics Laboratory, Lepora lab)",
+    "model": "TacTip-family fingertip (card: 'TacTipFingertip')",
+    "principle": "optical",
+    "range": null,
+    "calibrated": false
+   },
+   "modalities": [
+    "rgb",
+    "language"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 20,
+    "frames": 6000,
+    "tasks": 1,
+    "objects": 10,
+    "subjects": null,
+    "scenes": 1,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "20 episodes (10 household objects x 2 policy variants), 300 steps each at 10 Hz, 6,000 steps; one task (counterclockwise in-hand rotation)"
+   },
+   "availability": "public",
+   "access": "Hugging Face dataset Kitval/TactileLab_InHandRotation, not gated; 20 per-episode zarr zips (1.9 GB in total).",
+   "license": "not stated",
+   "caveats": [
+    "These are rollouts of policies trained in simulation, not teleoperated demonstrations; the card lists no action stream, only joint positions.",
+    "Two policy variants per object: 'full' (proprioception + tactile depth + tactile flow) and 'depth' (proprioception + tactile depth); the stored tactile data are the raw camera images either way.",
+    "The card notes that in the 'gum' full-policy episode the object wedged on the fingertips after about 22.5 s and the hand barely moves until the end.",
+    "Released in the FTP-1 zarr layout of the Open-X-Tactile (OXT) collection; the card defines the keys but no paper with the data was found (TactileLab project page: arXiv and code 'Coming soon').",
+    "No license on the card."
+   ],
+   "links": {
+    "project": "https://yijionglin.github.io/tactilelab/",
+    "data": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "third_person",
+      "count": 1,
+      "model": null,
+      "type": "RGB",
+      "resolution": "224x224",
+      "fps": 10,
+      "mount": "static"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "robot_proprioception",
+      "system": "LEAP Hand finger-module joint encoders",
+      "note": "right_hand_joints (16, rad)"
+     }
+    ],
+    "other": [
+     "sub_task_instruction: one fixed language instruction per episode"
+    ]
+   },
+   "sources": [
+    "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation (dataset card, repository metadata, top-level listing)",
+    "https://yijionglin.github.io/tactilelab/ (project page: authors, PETS-Net, Leap Hand support, 'arXiv Coming soon', 'Code Coming soon')"
+   ],
+   "unconfirmed": [
+    "hours: 20 episodes x 30 s = 10 min, derived from the card's per-episode length; not stated as a total.",
+    "Venue and the two-author list (Lin, Lepora) come from the card's BibTeX; the project page lists six authors and a different title ('TactileLab: Efficient Multimodal Tactile Simulation for Shear-Sensitive Dexterous Sim2Real Robotic Manipulation'). The catalog uses the card's title.",
+    "That the rolled-out policies are the project page's PETS-Net is likely but not stated on the card.",
+    "Per-episode size of about 95 MB is 1.9 GB / 20; zips not opened.",
+    "Publisher account 'Kitval' is not named on the project page; its link to the Lepora lab is from the card's citation only."
+   ]
+  },
+  {
+   "id": "exobridge",
+   "name": "ExoBridge",
+   "title": "ExoBridge: Learning a Bare Hand to Hand-Worn Exoskeleton Mapping through Human Limb Coupling",
+   "authors": "Ruitong Tian et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.07692",
+   "summary": "1,215 paired human demonstrations over 4 tasks in 31 sessions: one hand works bare in front of a fixed RealSense D436 while the other wears a DexUMI-family exoskeleton with 120-taxel tactile arrays on the thumb, index and middle fingertips plus joint encoders; release of the RGB, tactile and encoder data is announced.",
+   "embodiment": "human",
+   "hand": "Human hands, bimanual: one bare, the other in a DexUMI-family exoskeleton calibrated to the XHand (12 DoF)",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 360,
+    "sensors_per_hand": 3,
+    "coverage": [
+     "tip"
+    ],
+    "rate_hz": null,
+    "note": "Fingertip tactile arrays with 120 taxels each on the exoskeleton's thumb, index and middle fingers; the model uses every fourth aligned sample (about 5 Hz). Sensor type, maker and native rate not stated. Described in the paper; no files released.",
+    "maker": "not stated",
+    "model": null,
+    "principle": "unspecified",
+    "range": null,
+    "calibrated": null
+   },
+   "modalities": [
+    "rgb",
+    "hand_pose"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 1215,
+    "frames": 204586,
+    "tasks": 4,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [],
+    "text": "1,215 demonstrations (egg carton opening 245, lid twisting 340, soldering tool orientation 311, USB insertion 319) in 31 sessions; 204,586 aligned steps before subsampling; not released"
+   },
+   "availability": "announced",
+   "access": "The paper states the authors 'will release paired RGB recordings, tactile and encoder measurements' with session identifiers, split assignments and evaluation code, and that video distribution will follow participant consent and data-sharing requirements; no link given (arXiv v1, 2026-10-06).",
+   "license": "not stated",
+   "caveats": [
+    "Not released: the numbers come from the paper, and no file was seen.",
+    "Touch is on the exoskeleton hand only, and only at three fingertips; the bare hand that the camera sees carries no sensor.",
+    "Hours and subject count are not reported; demonstrations are by 'experts'.",
+    "The exoskeleton is calibrated to an XHand on a Franka arm through existing DexUMI-style calibration; no robot data are described as part of the release."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.07692"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "third_person",
+      "count": 1,
+      "model": "Intel RealSense D436",
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "exoskeleton",
+      "system": "DexUMI-family exoskeleton joint encoders",
+      "note": "relative encoder motion is one of the model's targets"
+     },
+     {
+      "target": "fingers",
+      "method": "vision_estimate",
+      "system": "MediaPipe Hands (bare-hand crop for the model)",
+      "note": "used to crop the bare hand, not released as a label"
+     }
+    ],
+    "other": []
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.07692 (abstract via arXiv API, v1 2026-10-06)",
+    "https://arxiv.org/html/2610.07692v1 (hardware, dataset, task counts, release statement, results)"
+   ],
+   "unconfirmed": [
+    "The 120-taxel fingertip arrays match the XHand fingertip modules used in the DexUMI exoskeleton (catalog: dexumi), but the paper does not name the sensor; the hardware link is not set.",
+    "Native tactile rate: the model takes every fourth aligned sample for about 5 Hz, which implies about 20 Hz aligned data; 204,586 steps at 20 Hz would be about 2.8 h. Both are derived, not stated.",
+    "taxels_per_hand = 3 x 120, summed from the paper.",
+    "D436 is the paper's camera name; resolution and frame rate not read.",
+    "'hand_pose' here is the exoskeleton's joint encoders, not a MANO or keypoint label."
+   ]
+  },
+  {
+   "id": "rss_dual_arm_tactile",
+   "name": "RSS Dual-Arm Tactile (tube pour)",
+   "title": "rss-dual-arm-tactile",
+   "authors": "SingleBicycle (Hugging Face account)",
+   "year": 2026,
+   "venue": "Hugging Face dataset (2026)",
+   "summary": "Teleoperated bimanual tube pouring on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm: 100 successful trajectories in two batches plus 9 labelled failures, behind a Hugging Face gate.",
+   "embodiment": "robot",
+   "hand": "BrainCo Revo2 x 2 on UFACTORY xArm6 arms, each covered by a Tujian (Tachin) tactile glove",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "coverage": [],
+    "rate_hz": null,
+    "note": "Card: 'Tujian tactile glove worn on each robot hand'. Taxel count, coverage on the Revo2 hand, rate and file layout are not on the public card; files not opened (gated).",
+    "maker": "Tachin Technology (途见科技, Beijing)",
+    "model": "Tujian tactile glove (card wording)",
+    "principle": "unspecified",
+    "range": null,
+    "calibrated": null
+   },
+   "modalities": [
+    "rgb",
+    "wrist_rgb"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 100,
+    "frames": null,
+    "tasks": 1,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
+   },
+   "availability": "gated",
+   "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026).",
+   "gate": {
+    "kind": "hf_gate",
+    "approval": "manual",
+    "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+    "checked": "2026-10-28",
+    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
+   },
+   "license": "not stated",
+   "caveats": [
+    "No paper or project page; the card refers to an 'RSS project' without a link, and the publisher is a personal account.",
+    "Touch comes from gloves pulled over the robot hands, not from the Revo2's own fingertip sensors; the card does not say whether the hands are the tactile Revo2 TOUCH variant.",
+    "The card gives 137 GB as the total size, while the Hugging Face API reports 31.2 GB of storage on 2026-10-28; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
+    "One task only so far; the failure folders are marked 'Not for training'.",
+    "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read."
+   ],
+   "links": {
+    "data": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "robot_head",
+      "count": 1,
+      "model": null,
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     },
+     {
+      "role": "wrist",
+      "count": 2,
+      "model": null,
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "wrist"
+     }
+    ],
+    "wrist_cameras": 2,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "robot_proprioception",
+      "system": "BrainCo Revo2 and xArm6",
+      "note": "proprioceptive streams not listed on the public card"
+     },
+     {
+      "target": "fingers",
+      "method": "other",
+      "system": "teleoperation (interface not stated)",
+      "note": null
+     }
+    ],
+    "other": [
+     "mesh-based two-arm collision guard used during batch 2"
+    ]
+   },
+   "sources": [
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)"
+   ],
+   "unconfirmed": [
+    "Tujian = 途见, the Chinese name of Tachin Technology, whose TachinGlove is in the catalog; the card does not give the glove model, so the TachinGlove hardware link rests on the maker name.",
+    "episodes = 100 successful trajectories as counted on the card; the 9 failures are not counted.",
+    "Teleoperation interface not named; 'teleoperated demonstrations' is from the card summary.",
+    "Modalities beyond the three cameras and touch (joint states, actions) are not listed on the public card."
+   ]
   }
  ]
 }

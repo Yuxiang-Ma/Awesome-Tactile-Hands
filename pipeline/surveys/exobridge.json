@@ -1,0 +1,157 @@
+{
+ "id": "exobridge",
+ "surveyed": "2026-10-28",
+ "entry": {
+  "id": "exobridge",
+  "name": "ExoBridge",
+  "title": "ExoBridge: Learning a Bare Hand to Hand-Worn Exoskeleton Mapping through Human Limb Coupling",
+  "authors": "Ruitong Tian et al.",
+  "year": 2026,
+  "venue": "arXiv 2610.07692",
+  "summary": "1,215 paired human demonstrations over 4 tasks in 31 sessions: one hand works bare in front of a fixed RealSense D436 while the other wears a DexUMI-family exoskeleton with 120-taxel tactile arrays on the thumb, index and middle fingertips plus joint encoders; release of the RGB, tactile and encoder data is announced.",
+  "embodiment": "human",
+  "hand": "Human hands, bimanual: one bare, the other in a DexUMI-family exoskeleton calibrated to the XHand (12 DoF)",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 360,
+   "sensors_per_hand": 3,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": null,
+   "note": "Fingertip tactile arrays with 120 taxels each on the exoskeleton's thumb, index and middle fingers; the model uses every fourth aligned sample (about 5 Hz). Sensor type, maker and native rate not stated. Described in the paper; no files released.",
+   "maker": "not stated",
+   "model": null,
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "rgb",
+   "hand_pose"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 1215,
+   "frames": 204586,
+   "tasks": 4,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "1,215 demonstrations (egg carton opening 245, lid twisting 340, soldering tool orientation 311, USB insertion 319) in 31 sessions; 204,586 aligned steps before subsampling; not released"
+  },
+  "availability": "announced",
+  "access": "The paper states the authors 'will release paired RGB recordings, tactile and encoder measurements' with session identifiers, split assignments and evaluation code, and that video distribution will follow participant consent and data-sharing requirements; no link given (arXiv v1, 2026-10-06).",
+  "license": "not stated",
+  "caveats": [
+   "Not released: the numbers come from the paper, and no file was seen.",
+   "Touch is on the exoskeleton hand only, and only at three fingertips; the bare hand that the camera sees carries no sensor.",
+   "Hours and subject count are not reported; demonstrations are by 'experts'.",
+   "The exoskeleton is calibrated to an XHand on a Franka arm through existing DexUMI-style calibration; no robot data are described as part of the release."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2610.07692"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Intel RealSense D436",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "exoskeleton",
+     "system": "DexUMI-family exoskeleton joint encoders",
+     "note": "relative encoder motion is one of the model's targets"
+    },
+    {
+     "target": "fingers",
+     "method": "vision_estimate",
+     "system": "MediaPipe Hands (bare-hand crop for the model)",
+     "note": "used to crop the bare hand, not released as a label"
+    }
+   ],
+   "other": []
+  },
+  "sources": [
+   "https://arxiv.org/abs/2610.07692 (abstract via arXiv API, v1 2026-10-06)",
+   "https://arxiv.org/html/2610.07692v1 (hardware, dataset, task counts, release statement, results)"
+  ],
+  "unconfirmed": [
+   "The 120-taxel fingertip arrays match the XHand fingertip modules used in the DexUMI exoskeleton (catalog: dexumi), but the paper does not name the sensor; the hardware link is not set.",
+   "Native tactile rate: the model takes every fourth aligned sample for about 5 Hz, which implies about 20 Hz aligned data; 204,586 steps at 20 Hz would be about 2.8 h. Both are derived, not stated.",
+   "taxels_per_hand = 3 x 120, summed from the paper.",
+   "D436 is the paper's camera name; resolution and frame rate not read.",
+   "'hand_pose' here is the exoskeleton's joint encoders, not a MANO or keypoint label."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://arxiv.org/html/2610.07692v1"
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [
+  {
+   "name": "fingertip tactile (per paper; no release)",
+   "kind": "tactile_grid",
+   "shape": "3 fingertips x 120 taxels",
+   "rate_hz": null,
+   "unit": "LSB (raw counts; MAE reported as 14.8 LSB)",
+   "frame": "exoskeleton thumb, index, middle fingertips",
+   "note": "described in the paper, not checked against files"
+  },
+  {
+   "name": "exoskeleton encoders (per paper)",
+   "kind": "joint_state",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "exoskeleton joints",
+   "note": null
+  },
+  {
+   "name": "RGB video (per paper)",
+   "kind": "camera",
+   "shape": null,
+   "rate_hz": null,
+   "unit": null,
+   "frame": "fixed RealSense D436, bare hand and scene",
+   "note": "release subject to participant consent"
+  }
+ ],
+ "episode_index": {
+  "where": null,
+  "count": 1215,
+  "fields": [
+   "task",
+   "session"
+  ],
+  "tasks": [
+   "egg carton opening",
+   "lid twisting",
+   "soldering tool orientation",
+   "USB insertion"
+  ],
+  "scenes": []
+ }
+}

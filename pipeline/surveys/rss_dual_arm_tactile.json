@@ -1,0 +1,167 @@
+{
+ "id": "rss_dual_arm_tactile",
+ "surveyed": "2026-10-28",
+ "entry": {
+  "id": "rss_dual_arm_tactile",
+  "name": "RSS Dual-Arm Tactile (tube pour)",
+  "title": "rss-dual-arm-tactile",
+  "authors": "SingleBicycle (Hugging Face account)",
+  "year": 2026,
+  "venue": "Hugging Face dataset (2026)",
+  "summary": "Teleoperated bimanual tube pouring on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm: 100 successful trajectories in two batches plus 9 labelled failures, behind a Hugging Face gate.",
+  "embodiment": "robot",
+  "hand": "BrainCo Revo2 x 2 on UFACTORY xArm6 arms, each covered by a Tujian (Tachin) tactile glove",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": null,
+   "coverage": [],
+   "rate_hz": null,
+   "note": "Card: 'Tujian tactile glove worn on each robot hand'. Taxel count, coverage on the Revo2 hand, rate and file layout are not on the public card; files not opened (gated).",
+   "maker": "Tachin Technology (途见科技, Beijing)",
+   "model": "Tujian tactile glove (card wording)",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "rgb",
+   "wrist_rgb"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 100,
+   "frames": null,
+   "tasks": 1,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
+  },
+  "availability": "gated",
+  "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026).",
+  "gate": {
+   "kind": "hf_gate",
+   "approval": "manual",
+   "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "checked": "2026-10-28",
+   "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
+  },
+  "license": "not stated",
+  "caveats": [
+   "No paper or project page; the card refers to an 'RSS project' without a link, and the publisher is a personal account.",
+   "Touch comes from gloves pulled over the robot hands, not from the Revo2's own fingertip sensors; the card does not say whether the hands are the tactile Revo2 TOUCH variant.",
+   "The card gives 137 GB as the total size, while the Hugging Face API reports 31.2 GB of storage on 2026-10-28; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
+   "One task only so far; the failure folders are marked 'Not for training'.",
+   "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "static"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": null,
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "BrainCo Revo2 and xArm6",
+     "note": "proprioceptive streams not listed on the public card"
+    },
+    {
+     "target": "fingers",
+     "method": "other",
+     "system": "teleoperation (interface not stated)",
+     "note": null
+    }
+   ],
+   "other": [
+    "mesh-based two-arm collision guard used during batch 2"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)"
+  ],
+  "unconfirmed": [
+   "Tujian = 途见, the Chinese name of Tachin Technology, whose TachinGlove is in the catalog; the card does not give the glove model, so the TachinGlove hardware link rests on the maker name.",
+   "episodes = 100 successful trajectories as counted on the card; the 9 failures are not counted.",
+   "Teleoperation interface not named; 'teleoperated demonstrations' is from the card summary.",
+   "Modalities beyond the three cameras and touch (joint states, actions) are not listed on the public card."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+  "access": "login",
+  "format": "per-batch folders with README data cards, videos (head and both wrists) and stills; tactile file format not visible",
+  "total_size": "31.2 GB (Hugging Face storage, 2026-10-28); card says 137 GB",
+  "per_episode": null,
+  "partial_fetch": "per-folder files after accepting the gate; not tested"
+ },
+ "channels": [
+  {
+   "name": "tactile glove (per card)",
+   "kind": "other",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "glove over each Revo2 hand",
+   "note": "from the dataset card; files not opened (gated)"
+  },
+  {
+   "name": "head camera video (per card)",
+   "kind": "camera",
+   "shape": null,
+   "rate_hz": null,
+   "unit": null,
+   "frame": "static head camera",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "wrist camera videos (per card)",
+   "kind": "camera",
+   "shape": null,
+   "rate_hz": null,
+   "unit": null,
+   "frame": "one per arm",
+   "note": "from the dataset card; files not opened"
+  }
+ ],
+ "episode_index": {
+  "where": "per-folder README data cards (gated)",
+  "count": 100,
+  "fields": [],
+  "tasks": [
+   "dual-arm tube pour"
+  ],
+  "scenes": []
+ }
+}

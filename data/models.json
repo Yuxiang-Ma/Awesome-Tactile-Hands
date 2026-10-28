@@ -1761,6 +1761,257 @@
     "Where the ground-truth touch was measured (glove or object) is not stated in the abstract."
    ],
    "checked": "2026-10-27"
+  },
+  {
+   "id": "exobridge",
+   "name": "ExoBridge",
+   "title": "ExoBridge: Learning a Bare Hand to Hand-Worn Exoskeleton Mapping through Human Limb Coupling",
+   "authors": "Ruitong Tian et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.07692",
+   "kind": "estimation",
+   "summary": "Temporal convolution network (six causal residual blocks over frozen DINOv2 ViT-S/14 features of a MediaPipe hand crop and a masked scene view) that takes bare-hand RGB video and predicts any-contact and per-fingertip contact probabilities, continuous tactile intensity for the thumb, index and middle, and relative encoder motion of a DexUMI-family exoskeleton worn on the other hand; any-contact AUROC 0.916 and tactile-intensity Pearson r 0.790 on held-out sessions.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "exobridge",
+     "role": "training",
+     "note": "1,215 paired demonstrations over 4 tasks in 31 sessions (204,586 aligned steps, every fourth used); five folds over held-out sessions, three seeds."
+    }
+   ],
+   "own_data": null,
+   "dataset": "exobridge",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "arXiv v1 (2026-10-06): the authors 'will release' the paired recordings with session identifiers, split assignments and evaluation code; no link and no weights statement."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.07692"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.07692 (abstract via arXiv API, v1 2026-10-06)",
+    "https://arxiv.org/html/2610.07692v1 (model, outputs, results, release statement)"
+   ],
+   "unconfirmed": [
+    "The paper names the framework ExoBridge and gives no separate name for the network; the catalog uses ExoBridge for both the data and the model.",
+    "A companion policy on an XHand (12 DoF) on a Franka arm reached 0.80 on egg carton opening and 0.55 on lid twisting over 20 rollouts each; how the bridge's outputs feed that policy was not read in detail."
+   ],
+   "checked": "2026-10-28"
+  },
+  {
+   "id": "dexflex",
+   "name": "DexFLEX",
+   "title": "DexFLEX: Contact-Aware Foundation Controller for Command-Guided Dexterity",
+   "authors": "Weikang Wan et al.",
+   "year": 2026,
+   "venue": "CoRL 2026 (arXiv 2610.14372)",
+   "kind": "policy",
+   "summary": "Low-level controller that takes proprioception and per-fingertip FlexiTac taxel fields (10x6 per finger) plus an upstream fingertip-motion draft from teleoperation or a learned policy, proposes motion chunks with a consistency-flow prior, rolls out their contact consequence in a latent world model, ranks them and decodes joint targets; trained on simulated Isaac Gym rollouts and run on a 16-DoF LEAP hand, where it lifts teleoperation success on six tool-use tasks from 29.2% to 78.3%.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Simulated tactile-proprioceptive rollouts in Isaac Gym from RL experts on Any-Goal-Pose Reaching over procedurally generated objects (amount not stated); real-world tests on a LEAP hand with four FlexiTac fingertip sensors, and 50 demonstrations per task for three policy-learning tasks; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "Project page dex-flex.github.io links only the paper PDF and BibTeX, and the arXiv v1 text has no code or weights statement (read 2026-10-28)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.14372",
+    "project": "https://dex-flex.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.14372 (abstract via arXiv API, v1 2026-10-09)",
+    "https://arxiv.org/html/2610.14372v1 (hardware, training data, components, results)",
+    "https://dex-flex.github.io/ (venue 'CoRL 2026', LEAP hand, FlexiTac 10x6 per finger)"
+   ],
+   "unconfirmed": [
+    "Training touch is simulated; the paper lists the tactile sim-to-real gap as a failure mode and does not describe how taxels are simulated. The model is catalogued because it is evaluated with real FlexiTac touch on the LEAP hand.",
+    "Simulated data collection also used a 22-DoF Sharpa hand; whether one controller covers both hands was not read in detail.",
+    "Policy-learning results (three tasks, 50 demonstrations each): 46.7% average success against 13.3% for direct joint-action prediction."
+   ],
+   "checked": "2026-10-28"
+  },
+  {
+   "id": "occludex",
+   "name": "OccluDex",
+   "title": "OccluDex: Hierarchical 3D Visuo-Tactile Representation Learning for Egocentric Dexterous Manipulation under Self-Occlusion",
+   "authors": "Ziheng Xu et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.39017",
+   "kind": "representation",
+   "summary": "Multi-scale masked autoencoder over an egocentric partial point cloud and 19 tactile channels, with tactile tokens fused into geometric features by cross-attention; pretrained on human WiseGlove demonstrations, then frozen as the backbone of a PPO policy for a Shadow Hand with 19 binarized FSRs (faucet rotation and tabletop reorientation); 85% and 70% zero-shot real-world success on unseen objects.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "1,690 human sequences (409,035 frames at 30 Hz) from 3 subjects wearing a 19-channel WiseGlove with a head-mounted RealSense D435i; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 HTML has no code, data or weights statement or link (read 2026-10-28)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.39017"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.39017 (abstract via arXiv API, v1 2026-09-30)",
+    "https://arxiv.org/html/2609.39017v1 (pretraining data, inputs and outputs, Shadow Hand sensing, results)"
+   ],
+   "unconfirmed": [
+    "RL training uses simulated binary touch; the text gives a tactile activation threshold of 0.01 while Table I lists 40.",
+    "About 3.8 h of glove data: 409,035 frames at 30 Hz, derived, not stated.",
+    "WiseGlove maker and the glove's sensing principle not stated; the real Shadow Hand carries 19 force-sensitive resistors on fingertips, finger links and palm read at 1 kHz and binarized.",
+    "Simulation average success over the two tasks is 86.2% against 75.8% for the baseline the paper calls VTDexManip; the VTDexManip data were not used to train OccluDex itself."
+   ],
+   "checked": "2026-10-28"
+  },
+  {
+   "id": "hutact",
+   "name": "HuTact",
+   "title": "Learning Tactile-Aware Hand Representations from Human Hand-Object Interaction Data",
+   "authors": "Yeonguk Yu et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.27995",
+   "kind": "representation",
+   "summary": "Tactile-aware hand encoder pretrained on about 24 h of human hand-object interaction data without touch (HOT3D, OakInk-v2, TACO, ARCTIC), mid-trained on 44 min of unlabeled Revo2 play data, then used with the 4-channel fingertip readings (normal and tangential force, direction, proximity) of two BrainCo Revo2 hands on a Unitree G1 for grasp prediction, slip detection, object classification and policy learning; 88.26% grasp Macro-F1 with 25% of the labels.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "About 80K frames (44 min) of teleoperated Revo2 play data with six objects (Meta Quest 3), plus labelled downstream sets; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 HTML has no code or model link or release statement (read 2026-10-28)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.27995"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.27995 (abstract via arXiv API, v1 2026-10-20)",
+    "https://arxiv.org/html/2610.27995v1 (hardware, pretraining data, robot play data)"
+   ],
+   "unconfirmed": [
+    "The human pretraining data carry no touch; the touch the model reads is the Revo2 fingertip sensors' (10 sensors over two hands).",
+    "The Revo2 hands are presumably the tactile Revo2 TOUCH version (catalog hardware brainco_revo2_tactile); the paper's sensor description matches its capacitive fingertip module but the variant is not named."
+   ],
+   "checked": "2026-10-28"
+  },
+  {
+   "id": "card",
+   "name": "CARD",
+   "title": "CARD: Contact-Anchored Retargeting for Dexterous Manipulation",
+   "authors": "Cunxi Dai et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.36539",
+   "kind": "other",
+   "summary": "Retargeting framework that turns human demonstrations from video, motion capture or a 744-taxel tactile glove into robot joint targets plus contact force targets (one anchor per hand region and frame), solved by GPU sampling, and replays them on a Sharpa Wave hand with a tactile tracking controller that closes each finger until its fingertip sensor reads the target force; glove and mocap-plus-glove clips keep contact on 77.7% of contact frames, and tactile tracking raises hardware replay success from 4/30 to 25/30.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "66 human clips with a 744-taxel pressure glove registered to a personalized MANO mesh (18 with a VIVE wrist tracker, 48 under OptiTrack motion capture), plus phone videos; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page card-retargeting.github.io has a 'Code' button with the title 'Link to come' and no target (read 2026-10-28); no data or weights statement."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.36539",
+    "project": "https://card-retargeting.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2610.36539 (abstract via arXiv API, v1 2026-10-27)",
+    "https://arxiv.org/html/2610.36539v1 (glove data, tactile tracker, Vid-HACO training data, results; first 100,000 of 131,643 characters)",
+    "https://card-retargeting.github.io/ (sources, hardware, 'Code' placeholder)"
+   ],
+   "unconfirmed": [
+    "The glove's name, maker and rate are not stated; it is not matched to a catalog glove.",
+    "Vid-HACO, the paper's video-to-contact model for sources without touch, is trained on contact labels from 12 hand-object datasets (HOT3D, ARCTIC, HOI4D, DECAF and others) with no measured touch, so it is not catalogued separately.",
+    "kind 'other': CARD is a retargeting and replay framework; touch goes in as glove contact maps and as fingertip force feedback during replay."
+   ],
+   "checked": "2026-10-28"
+  },
+  {
+   "id": "robot_synesthesia",
+   "name": "Robot Synesthesia",
+   "title": "Robot Synesthesia: In-Hand Manipulation with Visuotactile Sensing",
+   "authors": "Ying Yuan et al.",
+   "year": 2024,
+   "venue": "ICRA 2024 (arXiv 2312.01853)",
+   "kind": "policy",
+   "summary": "In-hand rotation policy that places binary touch from 16 force-sensing resistors on the palm and finger links of a 16-DoF Allegro hand as points in the camera point cloud (tactile point cloud) next to proprioception, trained with RL and distillation in Isaac Gym and run zero-shot on the real hand on wrench, double-ball and three-axis rotation tasks.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "None beyond simulation: policies are trained in Isaac Gym and transferred to the real Allegro hand on an xArm6 with an Azure Kinect without real-world data.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/YingYuan0414/in-hand-rotation (linked from the project page; MIT; created 2024-07-11, last push 2024-07-31) holds isaacgymenvs/, distillation/, rl_games/ and scripts/; no checkpoint seen in the top-level listing. Checked 2026-10-28."
+   },
+   "license": "MIT",
+   "links": {
+    "paper": "https://arxiv.org/abs/2312.01853",
+    "project": "https://yingyuan0414.github.io/visuotactile/",
+    "code": "https://github.com/YingYuan0414/in-hand-rotation"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2312.01853 (abstract via arXiv API, v3 2024-07-31)",
+    "https://arxiv.org/html/2312.01853v3 (hardware, sim-to-real, Table III)",
+    "https://yingyuan0414.github.io/visuotactile/ (venue ICRA 2024, code link)",
+    "https://github.com/YingYuan0414/in-hand-rotation (repository metadata, top-level listing)"
+   ],
+   "unconfirmed": [
+    "Training touch is simulated and binarized; the real FSR readings are thresholded to match. FSR model not named.",
+    "Real-world results are 5 episodes per setting (Table III); for example Double Balls, 22.9 rounds of continuous rotation in 60 s trials with the full method."
+   ],
+   "checked": "2026-10-28"
+  },
+  {
+   "id": "tactofind",
+   "name": "TactoFind",
+   "title": "TactoFind: A Tactile Only System for Object Retrieval",
+   "authors": "Sameer Pai et al.",
+   "year": 2023,
+   "venue": "ICRA 2023 (arXiv 2303.13482)",
+   "kind": "estimation",
+   "summary": "Touch-only object retrieval on a three-finger D'Claw hand with an omnidirectional GelSight 360 on each fingertip: binary fingertip contacts from the GelSight images drive grid probing for localization, and a transformer trained with InfoNCE on sequences of tapped contact points (in PyBullet) identifies the target among novel objects before a caging grasp; 59.4% full-pipeline success in the real world (localization 81.0%, identification 75.7%).",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Simulated tapping data on 150 object meshes (Google Scanned Objects, ShapeNet) in PyBullet; real tests on 3-D-printed versions of the test objects; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The project page taochenshh.github.io/projects/tactofind links only the arXiv paper and BibTeX (read 2026-10-28); the paper has no release statement."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2303.13482",
+    "project": "https://taochenshh.github.io/projects/tactofind"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2303.13482 (abstract via arXiv API; comment 'Accepted in ICRA 2023')",
+    "https://arxiv.org/pdf/2303.13482 (pages 2-7: system description, method, results)",
+    "https://taochenshh.github.io/projects/tactofind"
+   ],
+   "unconfirmed": [
+    "The identification model is trained on simulated contacts; real touch enters as binary contact from a force-recognition model on the GelSight images.",
+    "Fingertip-only, three fingers; the D'Claw has 9 DoF (three Dynamixel servos per finger) on a UR5e arm."
+   ],
+   "checked": "2026-10-28"
   }
  ]
 }
