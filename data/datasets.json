@@ -2541,6 +2541,9 @@
    "links": {
     "paper": "https://arxiv.org/abs/2510.25725"
    },
+   "unconfirmed": [
+    "Checked 2026-10-28: the paper (arXiv HTML) has no data or code statement. The Hugging Face account eunjuri (the first author's name is Eunju Kwon) holds ungated Apache-2.0 LeRobot sets with robot_type Unitree_G1_Inspire, per-finger tactile arrays and names such as towel_strong_train_full and sponge_weak_test_full that match the four tasks (checked: empty_can_raw_tactile, soft_manip_data). Neither the paper nor the dataset cards link the two, so the account is not recorded as the release."
+   ],
    "caveats": [],
    "setup": {
     "cameras": [
@@ -8043,11 +8046,11 @@
     "text": "~9.6 h (S1-S8 6.8 h + S9 2.9 h), 337 recordings (304 task + 33 motion-primitive), 40 volunteers, 8 scenarios, 7,356 action segments over 18 primitives and 54 objects; pressure in 232 recordings (~6.7 h)"
    },
    "availability": "public",
-   "access": "Hugging Face velvet-pine-22/PULSE, not gated, 22.0 GB of per-recording 100 Hz CSVs; scene video only for one recording in velvet-pine-22/PULSE-sample.",
+   "access": "Hugging Face velvet-pine-22/PULSE, not gated, 78.8 GB used storage: per-recording 100 Hz CSVs (22.0 GB when checked on 2026-10-17) plus scene-camera and eye-tracking MP4s under data/vN/sM/videos/ (commits titled 'Add first-person videos' on 2026-10-17 and 2026-10-18; two 'Upload folder' commits on 2026-10-28 not inspected); velvet-pine-22/PULSE-sample holds one example recording.",
    "license": "CC BY-NC 4.0 + use restrictions",
    "caveats": [
     "Anonymous NeurIPS 2026 E&D submission under double-blind review; authors, institution and the permanent URL are withheld.",
-    "The README describes per-recording videos/ folders (scene camera + eye video, ~86 GB in total), but the repository tree has none (22.0 GB); one recording (v1/s1) with both videos is in velvet-pine-22/PULSE-sample.",
+    "Videos were added to the main repository after the 2026-10-17 check: scene_cam.mp4 and eye_tracking_overlay.mp4 (60-109 MB each) are in videos/ for v1/s1, v25/s2 and v39/s4. The README gives ~86 GB for the full download with videos and raw files; how many of the 337 recordings have videos was not counted.",
     "Pressure covers 69.7% of task recordings: volunteers v1-v22 have intermittent pressure and mocap, v14 has neither.",
     "Pressure is logged at ~15 Hz and resampled to 100 Hz; the layout of the 25 channels per hand is not documented.",
     "LICENSE adds restrictions to CC BY-NC 4.0: no re-identification, no covert worker surveillance or biometric identification, no redistribution of scene video outside academic research.",
@@ -8087,7 +8090,7 @@
     "other": [
      "EMG: Myo Armband, 8 channels, dominant forearm (20-450 Hz band-pass, rectified)",
      "eye tracking: Dikablis Glasses 3, 24 numeric features",
-     "scene camera (Dikablis Glasses 3, 1280x720, 25 fps) and eye video: recorded, released only for v1/s1 in PULSE-sample",
+     "scene camera (Dikablis Glasses 3, 1280x720, 25 fps) and eye-tracking overlay video: in the main repository under data/vN/sM/videos/ for the three recordings checked (v1/s1, v25/s2, v39/s4); coverage of the other recordings not counted",
      "action segments with natural-language descriptions (4 paraphrases each)"
     ]
    },
@@ -8095,6 +8098,7 @@
     "https://huggingface.co/datasets/velvet-pine-22/PULSE (README.md, LICENSE, DATASHEET.md, croissant.json, metadata/recordings.csv, metadata/batch_alignment_summary.json, annotations_flat/segments.csv, annotations/v25/s2.json, full repo tree via API)",
     "https://huggingface.co/datasets/velvet-pine-22/PULSE data/v25/s2 (aligned_pressure_100hz.csv, alignment_metadata.json, first 30 KB of the other aligned CSVs) and aligned_pressure_100hz.csv of v1/s1, v35/s3, v39/s4, v12/s5, v2/s6, v26/s7, v28/s8",
     "https://huggingface.co/datasets/velvet-pine-22/PULSE-sample (file tree)",
+    "https://huggingface.co/api/datasets/velvet-pine-22/PULSE/tree/main/data/v1/s1/videos (and v25/s2, v39/s4), read 2026-10-28",
     "https://huggingface.co/velvet-pine-22/PULSE-code (file list)"
    ],
    "unconfirmed": [
@@ -8105,7 +8109,8 @@
     "tasks=8 counts scenarios S1-S8; S9 is an isolated motion-primitive protocol without mocap, video or action labels.",
     "Availability: card YAML carries an extra_gated_prompt but the HF API reports gated=false and files resolve without accepting terms (checked 2026-10-17).",
     "Chinese IMU headers point to a Chinese-speaking lab; the institution is withheld and the release gives no Chinese name, so no zh entry.",
-    "v2/s6 pressure CSV spans 57.0 s while recordings.csv lists 76.49 s for the recording."
+    "v2/s6 pressure CSV spans 57.0 s while recordings.csv lists 76.49 s for the recording.",
+    "Video coverage on 2026-10-28: 3 of 3 sampled recordings have videos; the hand-tallied count of about 312 video folders came from a truncated listing and is not confirmed. The 78.8 GB figure is the Hub's 'used storage' and may include history."
    ],
    "rank": {
     "n": 2,

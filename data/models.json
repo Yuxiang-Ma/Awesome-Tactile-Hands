@@ -190,7 +190,7 @@
     "The paper counts 1,933 episode directories in its copy of EgoTouch; the catalog's egotouch entry lists 1,891 episodes. Not reconciled.",
     "The TouchWorld, VT-WM and FeelWorld rows in the paper's comparison re-implement only their tactile conditioning on DTWM's backbone and EgoTouch clips (App. C.3); they are not the original systems."
    ],
-   "checked": "2026-10-27"
+   "checked": "2026-10-28"
   },
   {
    "id": "egopressurediff",
@@ -279,7 +279,7 @@
     "https://github.com/Russell-Zeng/EgoTactile (README, file tree)"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-27"
+   "checked": "2026-10-28"
   },
   {
    "id": "egotac",
@@ -505,7 +505,7 @@
     "https://github.com/search?q=TACROSS&type=repositories"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-25"
+   "checked": "2026-10-28"
   },
   {
    "id": "tactalign",
@@ -589,7 +589,7 @@
    "unconfirmed": [
     "Real-robot runs on two Franka arms with Inspire hands map the simulated policy's commands open loop (Appendix C.3); the paper lists on-robot fine-tuning with real tactile feedback as future work, so the real hands' touch sensors are not read at deployment as far as the text says."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-28"
   },
   {
    "id": "touchanything",
@@ -650,9 +650,10 @@
    ],
    "unconfirmed": [
     "ACE-Data-0 (arXiv 2607.28625) says it evaluated TouchAnything 'using their released pre-trained weights'; no public checkpoint was found on GitHub, the project page or Hugging Face.",
-    "Hugging Face repos named Grange007/touchanything-* (simulation data and a 'tactile-geometry-model' best_model.pth) are not linked from the TouchAnything repo or page and were not attributed to this model."
+    "Hugging Face repos named Grange007/touchanything-* (simulation data and a 'tactile-geometry-model' best_model.pth) are not linked from the TouchAnything repo or page and were not attributed to this model.",
+    "Re-checked 2026-10-28: GitHub Jianyi2004/TouchAnything last pushed 2026-05-21; issue #3 (checkpoint request) still has no author reply; Hugging Face model search 'touchanything' returns only the three Grange007 repos."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-28"
   },
   {
    "id": "touchsight",
@@ -1357,7 +1358,7 @@
     "The text says the learning model is adapted from the authors' earlier VTacO work, which is not in the catalog.",
     "The last 37,115 characters of the full text (methods tail, references) were not read."
    ],
-   "checked": "2026-10-26"
+   "checked": "2026-10-28"
   },
   {
    "id": "m2vtp",
@@ -1523,9 +1524,10 @@
    ],
    "unconfirmed": [
     "The OpenTouch clips are selected by an allowlist the paper attributes to HOPE, which was not checked.",
-    "The last 52,859 characters of the HTML (appendix) were not read."
+    "The last 52,859 characters of the HTML (appendix) were not read.",
+    "Hugging Face repos jungwook2358/wam-openarm-*-rlhnd-v2-50k-ckpt50000 (found by name search 2026-10-28) are not linked from the paper or project page and were not attributed to this model."
    ],
-   "checked": "2026-10-27"
+   "checked": "2026-10-28"
   },
   {
    "id": "dexskills",
@@ -1727,7 +1729,7 @@
     "The RA-L record (doi:10.1109/lra.2026.3732837) has the title 'TransDex: Interaction Geometry Enables Robust Visuo-Tactile Dexterous Manipulation of Transparent Objects' with the same five authors; the published text (closed access) was not read, so the catalog follows the arXiv v2 title and content.",
     "Hand model not named; 16 DoF and cable-driven per the paper. PaXini array model not named. Success rates over 10 trials per task are implied by the percentages."
    ],
-   "checked": "2026-10-27"
+   "checked": "2026-10-28"
   },
   {
    "id": "aet_tacnet",

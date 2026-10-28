@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-27T08:32:54Z",
+ "generated": "2026-10-28T08:42:28Z",
  "baseline": false,
- "urls_checked": 238,
- "seconds": 173,
+ "urls_checked": 253,
+ "seconds": 746,
  "signals": [
   {
    "kind": "dataset",
@@ -11,18 +11,28 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://huggingface.co/front/build/kube-1f487ab/index.js https://huggingface.co/front/build/kube-1f487ab/katex.css https://huggingface.co/front/build/kube-1f487ab/style.css",
+   "detail": "https://huggingface.co/avatars/3e1a982872821b49a295de541ac2c38d.svg https://huggingface.co/front/build/kube-304a4a0/index.js https://huggingface.co/front/build/kube-304a4a0/katex.css https://huggingface.co/front/build/kube-304a4a0/style.css",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "osmo",
-   "name": "OSMO",
-   "url": "https://github.com/jessicayin/osmo_tactile_glove",
-   "priority": 1,
-   "type": "gh_readme",
-   "detail": "README changed",
-   "availability": "partial"
+   "id": "feel",
+   "name": "FEEL",
+   "url": "https://huggingface.co/datasets/edessa/feel",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 101 -> 102, last modified 2026-10-27T17:01:06.000Z",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "pulse",
+   "name": "PULSE",
+   "url": "https://huggingface.co/datasets/velvet-pine-22/PULSE",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 3623 -> 3654, last modified 2026-10-28T07:05:52.000Z",
+   "availability": "public"
   },
   {
    "kind": "dataset",
@@ -31,18 +41,18 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "links_removed",
-   "detail": "https://huggingface.co/front/build/kube-184263b/index.js https://huggingface.co/front/build/kube-184263b/katex.css https://huggingface.co/front/build/kube-184263b/style.css",
+   "detail": "https://huggingface.co/avatars/99518d595e6895a3f8997197d9a052f4.svg https://huggingface.co/front/build/kube-1f487ab/index.js https://huggingface.co/front/build/kube-1f487ab/katex.css https://huggingface.co/front/build/kube-1f487ab/style.css",
    "availability": "public"
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "ace_data_0"
+   "id": "dex_mptd"
   },
   {
    "kind": "dataset",
-   "id": "dexvitac"
+   "id": "egoexplorer"
   },
   {
    "kind": "dataset",
@@ -58,11 +68,15 @@
   },
   {
    "kind": "dataset",
-   "id": "tactalign"
+   "id": "tacross"
   },
   {
    "kind": "dataset",
-   "id": "vicon_glove"
+   "id": "touchscale"
+  },
+  {
+   "kind": "model",
+   "id": "card"
   },
   {
    "kind": "model",
@@ -74,27 +88,272 @@
   },
   {
    "kind": "model",
+   "id": "hutact"
+  },
+  {
+   "kind": "model",
    "id": "rlhnd"
   },
   {
    "kind": "model",
-   "id": "tactalign"
+   "id": "tacross"
   },
   {
    "kind": "model",
-   "id": "tk_stgn"
+   "id": "tactiskill"
   },
   {
    "kind": "model",
-   "id": "touchworld"
+   "id": "touchanything"
   },
   {
    "kind": "model",
-   "id": "vint_net"
+   "id": "transdex"
+  },
+  {
+   "kind": "model",
+   "id": "vitam"
   }
  ],
- "not_fully_released": 41,
- "errors": [],
- "problems": [],
- "sources_failed": []
+ "not_fully_released": 50,
+ "errors": [
+  {
+   "url": "https://arxiv.org/abs/2610.10288",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2605.13083",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2607.09190",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2606.17055",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2512.16842",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2606.09243",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2604.14944",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2404.16823",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2303.12076",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2510.25725",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.11945",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2603.17851",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2512.08920",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2510.08807",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2606.31836",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.05180",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2607.28625",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2602.05513",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2505.16289",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2609.24976",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2505.21864",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.18872",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2608.15060",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2603.15847",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2312.13469",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2606.13102",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2603.20850",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2509.08354",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2607.01067",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2503.05231",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2503.07926",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.10283",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2410.23629",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2505.11420",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2506.14754",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2409.17549",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2602.13579",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2609.34182",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2501.00510",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2405.03476",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.19155",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.07692",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2609.20649",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2609.34286",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2609.20414",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2607.07287",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.22342",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.22932",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2505.13982",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.09455",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.26854",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2603.13869",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.14372",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2609.39017",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.27995",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2610.36539",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2312.01853",
+   "error": "unreachable or rate limited"
+  },
+  {
+   "url": "https://arxiv.org/abs/2303.13482",
+   "error": "unreachable or rate limited"
+  }
+ ],
+ "problems": [
+  "arXiv: 58 links not checked tonight (no answer, 429 or a 5xx); their last fingerprints are kept"
+ ],
+ "sources_failed": [
+  "arXiv"
+ ]
 }
