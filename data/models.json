@@ -188,9 +188,10 @@
     "Weights: the README writes checkpoints from local training (outputs/<date>/<run>/checkpoint-<step>) and links none; none found on Hugging Face.",
     "Venue: arXiv only; the paper's AI-use statement refers to 'the conference policy' without naming a venue.",
     "The paper counts 1,933 episode directories in its copy of EgoTouch; the catalog's egotouch entry lists 1,891 episodes. Not reconciled.",
-    "The TouchWorld, VT-WM and FeelWorld rows in the paper's comparison re-implement only their tactile conditioning on DTWM's backbone and EgoTouch clips (App. C.3); they are not the original systems."
+    "The TouchWorld, VT-WM and FeelWorld rows in the paper's comparison re-implement only their tactile conditioning on DTWM's backbone and EgoTouch clips (App. C.3); they are not the original systems.",
+    "Re-checked 2026-10-29: the GitHub repository's last push is still 2026-09-29 and no checkpoint appeared."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "egopressurediff",
@@ -279,7 +280,7 @@
     "https://github.com/Russell-Zeng/EgoTactile (README, file tree)"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "egotac",
@@ -412,9 +413,10 @@
     "The released sharpa/ archive has sessions named drawOnBalloon_V2 and fixSharpaHandModel_V2 (catalog ftp1_sharpa entry), matching the Draw Balloon and Fix Hand fine-tuning tasks; whether fine-tuning demonstrations are in the release is not stated.",
     "Weights license differs by mirror: the Hugging Face card states none, the ModelScope model page says MIT.",
     "Release-side counts used for comparison (Humanoid Everyday G1 part, LET-Dex bags, OpenTouch clips, OmniSharing sample, DexUMI sample, Open-X-Tactile's Sharpa count) come from the catalog's own entries and were not re-checked here.",
-    "MotionTrans (Inspire hand actuator force, 3.6%) and 16 gripper or UMI sources are also in the mix; none of them is a catalog dataset."
+    "MotionTrans (Inspire hand actuator force, 3.6%) and 16 gripper or UMI sources are also in the mix; none of them is a catalog dataset.",
+    "arXiv v4 was posted 2026-10-27: the abstract is unchanged from v3 and the arXiv page lists no venue; the body was not re-read, so the mix percentages and counts above are from v3. The GitHub repository's last push is still 2026-07-15 and the dataset repository's last commit 2026-06-15."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-29"
   },
   {
    "id": "trex",
@@ -505,7 +507,7 @@
     "https://github.com/search?q=TACROSS&type=repositories"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "tactalign",
@@ -547,7 +549,7 @@
     "https://huggingface.co/api/datasets?author=youngw"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-27"
+   "checked": "2026-10-29"
   },
   {
    "id": "tactiskill",
@@ -589,7 +591,7 @@
    "unconfirmed": [
     "Real-robot runs on two Franka arms with Inspire hands map the simulated policy's commands open loop (Appendix C.3); the paper lists on-robot fine-tuning with real tactile feedback as future work, so the real hands' touch sensors are not read at deployment as far as the text says."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "touchanything",
@@ -651,9 +653,10 @@
    "unconfirmed": [
     "ACE-Data-0 (arXiv 2607.28625) says it evaluated TouchAnything 'using their released pre-trained weights'; no public checkpoint was found on GitHub, the project page or Hugging Face.",
     "Hugging Face repos named Grange007/touchanything-* (simulation data and a 'tactile-geometry-model' best_model.pth) are not linked from the TouchAnything repo or page and were not attributed to this model.",
-    "Re-checked 2026-10-28: GitHub Jianyi2004/TouchAnything last pushed 2026-05-21; issue #3 (checkpoint request) still has no author reply; Hugging Face model search 'touchanything' returns only the three Grange007 repos."
+    "Re-checked 2026-10-28: GitHub Jianyi2004/TouchAnything last pushed 2026-05-21; issue #3 (checkpoint request) still has no author reply; Hugging Face model search 'touchanything' returns only the three Grange007 repos.",
+    "Re-checked 2026-10-29: the last GitHub push is still 2026-05-21; the issue page was not reopened."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "touchsight",
@@ -1358,7 +1361,7 @@
     "The text says the learning model is adapted from the authors' earlier VTacO work, which is not in the catalog.",
     "The last 37,115 characters of the full text (methods tail, references) were not read."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "m2vtp",
@@ -1527,7 +1530,7 @@
     "The last 52,859 characters of the HTML (appendix) were not read.",
     "Hugging Face repos jungwook2358/wam-openarm-*-rlhnd-v2-50k-ckpt50000 (found by name search 2026-10-28) are not linked from the paper or project page and were not attributed to this model."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "dexskills",
@@ -1649,7 +1652,7 @@
     "embodiment 'both': human glove force (taxels in N) in pretraining and robot fingertip wrenches at fine-tuning and test; how the two force representations are mapped onto each other was not read in detail.",
     "The T-Rex hours are the paper's (100 h); the public T-Rex release in the catalog holds about 50 h, so FACT may have used data beyond the public release."
    ],
-   "checked": "2026-10-27"
+   "checked": "2026-10-29"
   },
   {
    "id": "physword",
@@ -1729,7 +1732,7 @@
     "The RA-L record (doi:10.1109/lra.2026.3732837) has the title 'TransDex: Interaction Geometry Enables Robust Visuo-Tactile Dexterous Manipulation of Transparent Objects' with the same five authors; the published text (closed access) was not read, so the catalog follows the arXiv v2 title and content.",
     "Hand model not named; 16 DoF and cable-driven per the paper. PaXini array model not named. Success rates over 10 trials per task are implied by the percentages."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "aet_tacnet",
@@ -1905,7 +1908,7 @@
     "The human pretraining data carry no touch; the touch the model reads is the Revo2 fingertip sensors' (10 sensors over two hands).",
     "The Revo2 hands are presumably the tactile Revo2 TOUCH version (catalog hardware brainco_revo2_tactile); the paper's sensor description matches its capacitive fingertip module but the variant is not named."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "card",
@@ -1941,7 +1944,7 @@
     "Vid-HACO, the paper's video-to-contact model for sources without touch, is trained on contact labels from 12 hand-object datasets (HOT3D, ARCTIC, HOI4D, DECAF and others) with no measured touch, so it is not catalogued separately.",
     "kind 'other': CARD is a retargeting and replay framework; touch goes in as glove contact maps and as fingertip force feedback during replay."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-29"
   },
   {
    "id": "robot_synesthesia",

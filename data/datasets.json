@@ -8000,10 +8000,10 @@
   {
    "id": "pulse",
    "name": "PULSE",
-   "title": "PULSE: A Synchronized Five-Modality Dataset for Multi-Modal Daily Activity Understanding",
-   "authors": "Anonymous Authors",
+   "title": "PULSE: A Synchronized Five-Modality Dataset for Sensorimotor Coordination in Long-Horizon Daily Activities",
+   "authors": "Wolin Liang et al.",
    "year": 2026,
-   "venue": "NeurIPS 2026 E&D submission (under double-blind review)",
+   "venue": "NeurIPS 2026 Evaluations and Datasets Track (Spotlight)",
    "summary": "40 volunteers wore 25-channel fingertip pressure arrays on both hands (values in grams) together with Qualisys mocap, a Myo EMG armband, Dikablis eye tracking and 10 IMUs in 8 household and office scenarios, all resampled to 100 Hz.",
    "embodiment": "human",
    "hand": "Custom fingertip pressure arrays on both hands (25 channels per hand)",
@@ -8040,14 +8040,15 @@
     "scene_types": [
      "lab"
     ],
-    "text": "~9.6 h (S1-S8 6.8 h + S9 2.9 h), 337 recordings (304 task + 33 motion-primitive), 40 volunteers, 8 scenarios, 7,356 action segments over 18 primitives and 54 objects; pressure in 232 recordings (~6.7 h)"
+    "text": "~9.6 h (S1-S8 6.8 h + S9 2.8 h), 337 recordings (304 task + 33 motion-primitive), 40 volunteers, 8 scenarios, 7,356 action segments over 18 primitives and 54 objects; pressure in 232 recordings (~6.7 h)"
    },
    "availability": "public",
-   "access": "Hugging Face velvet-pine-22/PULSE, not gated, 78.8 GB used storage: per-recording 100 Hz CSVs (22.0 GB when checked on 2026-10-17) plus scene-camera and eye-tracking MP4s under data/vN/sM/videos/ (commits titled 'Add first-person videos' on 2026-10-17 and 2026-10-18; two 'Upload folder' commits on 2026-10-28 not inspected); velvet-pine-22/PULSE-sample holds one example recording.",
+   "access": "Hugging Face velvet-pine-22/PULSE, not gated (DOI 10.57967/hf/11314): per-recording 100 Hz CSVs (22.0 GB, tag v1.1), Qualisys TSVs (about 8 GB) and scene-camera and eye-tracking overlay MP4s under data/vN/sM/videos/ (about 63 GB, 311 files of each kind); the README gives about 85 GB for the full download and about 14 GB without raw files and videos. velvet-pine-22/PULSE-sample holds one example recording.",
    "license": "CC BY-NC 4.0 + use restrictions",
    "caveats": [
-    "Anonymous NeurIPS 2026 E&D submission under double-blind review; authors, institution and the permanent URL are withheld.",
-    "Videos were added to the main repository after the 2026-10-17 check: scene_cam.mp4 and eye_tracking_overlay.mp4 (60-109 MB each) are in videos/ for v1/s1, v25/s2 and v39/s4. The README gives ~86 GB for the full download with videos and raw files; how many of the 337 recordings have videos was not counted.",
+    "The 2026-10-29 card (v1.2.1) names the authors (School of Future Technology, South China University of Technology), the NeurIPS 2026 Evaluations and Datasets Track spotlight and a permanent DOI; the earlier double-blind version withheld all three. Companion benchmark code is in velvet-pine-22/PULSE-code (MIT), created 2026-10-29 and pinned to dataset tag v1.1.",
+    "Videos: scene_cam.mp4 and eye_tracking_overlay.mp4 are released for 312 recordings (README: 311 of each; v19/s5 has only the overlay, v15/s9 only the scene camera; v5/s8 and v18/s2 have none). Scene video covers 280 of 304 task recordings (92.1%). Incidentally captured faces are pixelated and there is no audio (README).",
+    "S9 motion-primitive recordings (33) carry 454 human-reviewed primitive segments over 30 recordings since card v1.2 (October 2026); S1-S8 action segments were replaced in v1.1, from 7,789 to 7,356.",
     "Pressure covers 69.7% of task recordings: volunteers v1-v22 have intermittent pressure and mocap, v14 has neither.",
     "Pressure is logged at ~15 Hz and resampled to 100 Hz; the layout of the 25 channels per hand is not documented.",
     "LICENSE adds restrictions to CC BY-NC 4.0: no re-identification, no covert worker surveillance or biometric identification, no redistribution of scene video outside academic research.",
@@ -8056,6 +8057,7 @@
     "v20/s2 IMU units WT4-WT7 are corrupted; v18/s2 egocentric video froze and has no action labels (README)."
    ],
    "links": {
+    "paper": "https://openreview.net/forum?id=AoU576r9O2",
     "project": "https://huggingface.co/datasets/velvet-pine-22/PULSE",
     "data": "https://huggingface.co/datasets/velvet-pine-22/PULSE",
     "code": "https://huggingface.co/velvet-pine-22/PULSE-code"
@@ -8087,7 +8089,7 @@
     "other": [
      "EMG: Myo Armband, 8 channels, dominant forearm (20-450 Hz band-pass, rectified)",
      "eye tracking: Dikablis Glasses 3, 24 numeric features",
-     "scene camera (Dikablis Glasses 3, 1280x720, 25 fps) and eye-tracking overlay video: in the main repository under data/vN/sM/videos/ for the three recordings checked (v1/s1, v25/s2, v39/s4); coverage of the other recordings not counted",
+     "scene camera (Dikablis Glasses 3, 1280x720, 25 fps) and eye-tracking overlay video: in the main repository under data/vN/sM/videos/, 311 files of each kind (README, 2026-10-29)",
      "action segments with natural-language descriptions (4 paraphrases each)"
     ]
    },
@@ -8096,18 +8098,21 @@
     "https://huggingface.co/datasets/velvet-pine-22/PULSE data/v25/s2 (aligned_pressure_100hz.csv, alignment_metadata.json, first 30 KB of the other aligned CSVs) and aligned_pressure_100hz.csv of v1/s1, v35/s3, v39/s4, v12/s5, v2/s6, v26/s7, v28/s8",
     "https://huggingface.co/datasets/velvet-pine-22/PULSE-sample (file tree)",
     "https://huggingface.co/api/datasets/velvet-pine-22/PULSE/tree/main/data/v1/s1/videos (and v25/s2, v39/s4), read 2026-10-28",
-    "https://huggingface.co/velvet-pine-22/PULSE-code (file list)"
+    "https://huggingface.co/velvet-pine-22/PULSE-code (file list, README, commits of 2026-10-29)",
+    "https://huggingface.co/datasets/velvet-pine-22/PULSE README.md v1.2.1 (authors, venue, DOI, video coverage, known issues, changelog), read 2026-10-29",
+    "https://openreview.net/forum?id=AoU576r9O2 (paper link given by the card; page not opened)"
    ],
    "unconfirmed": [
     "Native pressure rate ~15 Hz derived from v25/s2 alignment_metadata.json: 12,376 pressure rows between 17:27:24.698 and 17:41:19.457 (834.8 s). The card states only the 100 Hz aligned rate.",
     "taxels_per_hand=25 is the channel count per hand; the card calls it a 'fingertip pressure array' and gives no layout, so coverage=tip is the card's wording.",
     "calibrated=true from the '(g)' unit in every pressure column header; the calibration method is not stated.",
     "frames=3,470,831 is the sum of n_samples_100hz in metadata/recordings.csv (100 Hz samples over all recordings); hours=9.64 is the sum of duration_sec; pressure-bearing recordings sum to 6.70 h.",
-    "tasks=8 counts scenarios S1-S8; S9 is an isolated motion-primitive protocol without mocap, video or action labels.",
+    "tasks=8 counts scenarios S1-S8; S9 is a separate motion-primitive protocol (33 recordings, no mocap) that the card counts as a ninth scenario.",
     "Availability: card YAML carries an extra_gated_prompt but the HF API reports gated=false and files resolve without accepting terms (checked 2026-10-17).",
     "Chinese IMU headers point to a Chinese-speaking lab; the institution is withheld and the release gives no Chinese name, so no zh entry.",
     "v2/s6 pressure CSV spans 57.0 s while recordings.csv lists 76.49 s for the recording.",
-    "Video coverage on 2026-10-28: 3 of 3 sampled recordings have videos; the hand-tallied count of about 312 video folders came from a truncated listing and is not confirmed. The 78.8 GB figure is the Hub's 'used storage' and may include history."
+    "Video counts (311 scene-camera and 311 overlay files, 312 recordings, about 63 GB) are the README's; the file tree was not tallied. The Hub's 'used storage' reads 125.8 GB on 2026-10-29 (78.8 GB on 2026-10-28) and includes history, so the README's 85 GB is used for the download size.",
+    "Pressure placement is still undocumented in card v1.2.1: 25 channels per hand named R1(g)-R25(g) and L1(g)-L25(g), no layout."
    ],
    "rank": {
     "n": 2,
@@ -8975,10 +8980,10 @@
    },
    "availability": "public",
    "access": "Hugging Face kingchou007/3dtacdex, ungated: one ZIP64 archive (ZIP_STORED) per task holding a Zarr v2 store, 174 GB in total; single arrays and frames can be range-read from the archives.",
-   "license": "not stated",
+   "license": "MIT (card and LICENSE file, 'Copyright (c) 2026 3dtacdex contributors')",
    "caveats": [
-    "License not stated: the card says 'final release version and license are not yet specified' and that no license is inferred from public availability.",
-    "Public review draft for Open-X-Tactile (OXT); official acceptance pending. Uploaded by a paper co-author (kingchou007, Jinzhou Li per the card contact).",
+    "License: MIT since release 1.0.0 (CHANGELOG dated 2026-10-28); until then the card said the license was not yet specified. The LICENSE file is the standard MIT text, which speaks of 'the Software'; whether it is meant to cover the data as well as the code was not checked.",
+    "Open-X-Tactile (OXT) format submission; the changelog states 'no official acceptance or calibrated measurements are claimed'. Uploaded by a paper co-author (kingchou007, Jinzhou Li per the card contact).",
     "5 Hz: demonstrations were recorded at the policy rate (paper: collection and inference at 5 Hz).",
     "Tactile values are uncalibrated; axis signs, physical slot placement and camera conventions still need collection-owner confirmation (card).",
     "openbox: the four middle- and ring-finger pads read zero in every frame; the owner states this is expected.",
@@ -9045,7 +9050,7 @@
    "sources": [
     "https://arxiv.org/abs/2409.17549",
     "https://arxiv.org/html/2409.17549 (Sec. III robot system, Sec. V tasks)",
-    "https://huggingface.co/datasets/kingchou007/3dtacdex (README.md, API info, file tree, QUALITY_REPORT.md, CHANGELOG.md, OXT_COMPLIANCE.md)",
+    "https://huggingface.co/datasets/kingchou007/3dtacdex (README.md, API info, file tree, QUALITY_REPORT.md, CHANGELOG.md, OXT_COMPLIANCE.md; README, LICENSE and CHANGELOG re-read 2026-10-29)",
     "https://huggingface.co/datasets/kingchou007/3dtacdex OXT_Submission_3dtacdex/metadata.json, sensor_details.json, mapping_notes.json",
     "https://huggingface.co/datasets/kingchou007/3dtacdex openbox/openbox.zarr.zip (ZIP central directory; every .zarray/.zattrs; data/timestamps, meta/episode_ends, data/right_tactile_data_fingers, data/sub_task_instruction chunks)",
     "https://huggingface.co/datasets/kingchou007/3dtacdex {openbox,flip,play_data,assembly}.zarr.zip (all chunks of timestamps, episode_ends, right_tactile_data_fingers, sub_task_instruction, source_split, source_group)"
