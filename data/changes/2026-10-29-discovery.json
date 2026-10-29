@@ -1,0 +1,14 @@
+{"date": "2026-10-29", "flow": "discovery", "changes": [
+  {"kind": "added", "target": "dataset", "id": "tacwam_wetlab",
+   "text": "TacWAM Wet-Lab Tasks: glove-teleoperated lab-bench tasks on a UFACTORY xArm6 with a BrainCo Revo2 right hand wearing a Tujian EI-G012 tactile glove (880 taxels, 15 pads), static Orbbec RGB-D and RealSense D405 wrist cameras; 177 counted demonstrations in three folders plus uncounted sorting, whiteboard and dual-arm tube-pour folders; Hugging Face gate with manual approval, CC BY-NC 4.0, no paper.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks"},
+  {"kind": "added", "target": "model", "id": "vtao_bimanip",
+   "text": "VTAO-BiManip: masked visual-tactile-action pretraining on 216 human bimanual bottle-cap unscrewing trajectories (two 20-sensor touch gloves, HoloLens 2, mocap) guiding curriculum RL for dual Shadow Hands (63% seen, 51% unseen bottles in simulation) and run on dual LEAP hands with tactile sensors; no code statement.",
+   "source": "https://arxiv.org/abs/2501.03606"},
+  {"kind": "updated", "target": "hardware", "id": "tachin_glove",
+   "text": "TachinGlove: linked to TacWAM Wet-Lab Tasks, whose card names a Tujian EI-G012 glove (15 pads, 880 taxels) on the robot hand.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks"},
+  {"kind": "updated", "target": "dataset", "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile: the same account's tacwam-wetlab-tasks repository has dual-arm tube-pour folders dated 2026-10-05 and 2026-10-22, matching this release's two batches; noted as the probable source of the copied batch, files not opened.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks"}
+]}

@@ -1,0 +1,44 @@
+{
+ "flow": "status",
+ "date": "2026-10-29",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 12,
+ "updated": 2,
+ "searches": [
+  "TouchScale 500 hours human vision touch dataset release full 500h Hugging Face",
+  "EgoForce dataset FACT force action track foundation model code release",
+  "TACROSS human touch heterogeneous tactile sensors dataset code release",
+  "TactAlign tactile alignment human-to-robot code github release",
+  "RLHND video foundation models hand trackers robot learning code weights",
+  "HuTact tactile-aware hand representations human hand-object interaction code",
+  "TactiDex TactiSkill dataset code release github",
+  "CARD contact-anchored retargeting dexterous manipulation code",
+  "DexUMI full dataset release exoskeleton tactile XHand data",
+  "Glove2Hand HandSense dataset release download",
+  "OSMO tactile glove dataset full demonstrations release 140 demonstrations",
+  "SingleBicycle rss-dual-arm-tactile dataset Revo2 tactile glove",
+  "Dexterous Tactile World Model DTWM weights checkpoint Hugging Face",
+  "EgoTactile EgoPressureFormer code weights release",
+  "TouchAnything bimanual tactile estimation egocentric video pretrained weights checkpoint",
+  "TransDex visuo-tactile transparent objects dataset code weights",
+  "ViTaM stretchable tactile array deformable objects pretrained weights dataset"
+ ],
+ "for_the_owner": [
+  "Judgment call: 3dtacdex is now MIT on Hugging Face, but its LICENSE file is the standard software text ('the Software', 'Copyright (c) 2026 3dtacdex contributors'). The catalog records MIT and notes that coverage of the data itself was not checked."
+ ],
+ "notes": [
+  "No data, code or weights release changed tonight. DexTacWAM 'links_added' is Hugging Face front-end build files, not a catalog link. EgoForce and FACT still show 'Code (Coming Soon)' and 'Data (Coming Soon)'; their signal came from the page layout changing.",
+  "PULSE: the 2026-10-29 card names the authors, the NeurIPS 2026 E&D spotlight and a DOI, and lists videos for 312 recordings. Hub used storage reads 125.8 GB (78.8 GB yesterday); the catalog uses the README's 85 GB download size.",
+  "FTP-1 and Sharpa North-FTP-1: arXiv v4 (2026-10-27) has the same abstract as v3 and no venue; the body was not re-read. GitHub last push 2026-07-15, dataset repository last commit 2026-06-15.",
+  "OSMO: two README commits on 2026-10-26 (TODO note removed, sample-data pointer now data/README.md); data/download_data.sh is still empty and only the one sample demonstration is public, so the entry is unchanged.",
+  "TouchScale: Hugging Face commit history needs a login (HTTP 401); the GitHub repository's last push is 2026-10-16. The full 500 h release, planned before November 2026, was not seen.",
+  "Deep check (17 entries: dexumi, egoforce, glove2hand_handsense, osmo, rss_dual_arm_tactile, tactalign, touchscale, card, dtwm, egopressureformer, hutact, rlhnd, tacross, tactiskill, touchanything, transdex, vitam) found no new code, data or weights.",
+  "Leads for discovery from search results, not reviewed here: RealDexUMI (arXiv 2606.06033, says it will release its dataset), ViTaM-D with the HOT dataset (arXiv 2411.09572, ICCV 2025), DexTouch-WM (arXiv 2609.20649).",
+  "The checked date is 2026-10-29 on dtwm, egopressureformer, ftp1, tacross, tactalign, tactiskill, touchanything, vitam, rlhnd, fact, transdex, hutact and card."
+ ],
+ "started": "2026-10-29T08:30:01Z",
+ "finished": "2026-10-29T08:39:25Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 13 changed files, 2 new entries"
+}

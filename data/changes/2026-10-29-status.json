@@ -1,0 +1,7 @@
+{"date": "2026-10-29", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "tacdex3d",
+   "text": "3dtacdex: license changed from not stated to MIT (Hugging Face card and LICENSE file, release 1.0.0 dated 2026-10-28); the card now describes the release as an Open-X-Tactile format submission with no official acceptance claimed. Data archives are unchanged (four Zarr ZIPs, 47,124 frames).",
+   "source": "https://huggingface.co/datasets/kingchou007/3dtacdex"},
+  {"kind": "updated", "target": "dataset", "id": "pulse",
+   "text": "PULSE: card v1.2.1 names the authors (Wolin Liang et al., South China University of Technology), the venue (NeurIPS 2026 Evaluations and Datasets Track, spotlight) and a permanent DOI (10.57967/hf/11314); scene-camera and eye-tracking overlay videos are listed for 312 recordings (311 files of each, about 63 GB), 454 human-reviewed S9 primitive segments were added, and the benchmark code repository velvet-pine-22/PULSE-code (MIT) now holds files. License stays CC BY-NC 4.0 plus use restrictions.",
+   "source": "https://huggingface.co/datasets/velvet-pine-22/PULSE"}]}

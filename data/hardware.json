@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Taxel Atlas hardware",
   "scope": "Tactile gloves, tactile robot hands and add-on touch sensors for dexterous manipulation data, and the hand-tracking gloves catalog datasets paired with them. Each device lists the catalog datasets recorded with it.",
-  "last_updated": "2026-10-28",
+  "last_updated": "2026-10-29",
   "license": "CC BY 4.0 (text and data); photos belong to their makers"
  },
  "hardware": [
@@ -54,6 +54,10 @@
     },
     {
      "id": "rss_dual_arm_tactile",
+     "role": "tactile glove"
+    },
+    {
+     "id": "tacwam_wetlab",
      "role": "tactile glove"
     }
    ],

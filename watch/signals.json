@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-28T08:42:28Z",
+ "generated": "2026-10-29T08:33:13Z",
  "baseline": false,
- "urls_checked": 253,
- "seconds": 746,
+ "urls_checked": 255,
+ "seconds": 191,
  "signals": [
   {
    "kind": "dataset",
@@ -11,17 +11,51 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://huggingface.co/avatars/3e1a982872821b49a295de541ac2c38d.svg https://huggingface.co/front/build/kube-304a4a0/index.js https://huggingface.co/front/build/kube-304a4a0/katex.css https://huggingface.co/front/build/kube-304a4a0/style.css",
+   "detail": "https://huggingface.co/front/build/kube-b10384e/index.js https://huggingface.co/front/build/kube-b10384e/katex.css https://huggingface.co/front/build/kube-b10384e/style.css",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "feel",
-   "name": "FEEL",
-   "url": "https://huggingface.co/datasets/edessa/feel",
+   "id": "egoforce",
+   "name": "EgoForce",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 1,
+   "type": "phrase_removed",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) Real-world task demonstrations Task Demonstratio",
+   "availability": "announced"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacdex3d",
+   "name": "3dtacdex",
+   "url": "https://huggingface.co/datasets/kingchou007/3dtacdex",
+   "priority": 1,
+   "type": "hf_license",
+   "detail": "None -> mit",
+   "availability": "public"
+  },
+  {
+   "kind": "model",
+   "id": "fact",
+   "name": "FACT",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 1,
+   "type": "phrase_removed",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) Real-world task demonstrations Task Demonstratio",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
+   }
+  },
+  {
+   "kind": "dataset",
+   "id": "ftp1_sharpa",
+   "name": "Sharpa North-FTP-1",
+   "url": "https://arxiv.org/abs/2606.13102",
    "priority": 2,
-   "type": "hf_commit",
-   "detail": "files 101 -> 102, last modified 2026-10-27T17:01:06.000Z",
+   "type": "arxiv_version",
+   "detail": "3 -> 4",
    "availability": "public"
   },
   {
@@ -31,8 +65,42 @@
    "url": "https://huggingface.co/datasets/velvet-pine-22/PULSE",
    "priority": 2,
    "type": "hf_commit",
-   "detail": "files 3623 -> 3654, last modified 2026-10-28T07:05:52.000Z",
+   "detail": "files 3654 -> 3653, last modified 2026-10-29T06:05:16.000Z",
    "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "pulse",
+   "name": "PULSE",
+   "url": "https://huggingface.co/velvet-pine-22/PULSE-code",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 131 -> 257, last modified 2026-10-29T06:02:03.000Z",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacdex3d",
+   "name": "3dtacdex",
+   "url": "https://huggingface.co/datasets/kingchou007/3dtacdex",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 547 -> 553, last modified 2026-10-28T08:58:19.000Z",
+   "availability": "public"
+  },
+  {
+   "kind": "model",
+   "id": "ftp1",
+   "name": "FTP-1",
+   "url": "https://arxiv.org/abs/2606.13102",
+   "priority": 2,
+   "type": "arxiv_version",
+   "detail": "3 -> 4",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "GitHub michaelyuancb/ftp1-policy (fine-tuning and pretraining code, built on openpi). Hugging Face MJJJJ1064/ftp1_v0426_50kstep (50k-step pretrained checkpoint) and MJJJJ1064/ftp1_univtac_finetune (6 UniVTAC task checkpoints), mirrored on ModelScope. Abstract: 'Pretrained models, datasets, training code and more visualization at' the project page, which links the code, the pretrained checkpoint and the dataset."
+   }
   },
   {
    "kind": "dataset",
@@ -41,34 +109,58 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "links_removed",
-   "detail": "https://huggingface.co/avatars/99518d595e6895a3f8997197d9a052f4.svg https://huggingface.co/front/build/kube-1f487ab/index.js https://huggingface.co/front/build/kube-1f487ab/katex.css https://huggingface.co/front/build/kube-1f487ab/style.css",
+   "detail": "https://huggingface.co/front/build/kube-304a4a0/index.js https://huggingface.co/front/build/kube-304a4a0/katex.css https://huggingface.co/front/build/kube-304a4a0/style.css",
    "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoforce",
+   "name": "EgoForce",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 3,
+   "type": "phrase_added",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) FACT Force · Action · Track Real-world task demo",
+   "availability": "announced"
+  },
+  {
+   "kind": "model",
+   "id": "fact",
+   "name": "FACT",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 3,
+   "type": "phrase_added",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) FACT Force · Action · Track Real-world task demo",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
+   }
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "dex_mptd"
+   "id": "dexumi"
   },
   {
    "kind": "dataset",
-   "id": "egoexplorer"
+   "id": "egoforce"
   },
   {
    "kind": "dataset",
-   "id": "gist_vta"
+   "id": "glove2hand_handsense"
   },
   {
    "kind": "dataset",
-   "id": "kaiwu"
+   "id": "osmo"
   },
   {
    "kind": "dataset",
-   "id": "robotacdex"
+   "id": "rss_dual_arm_tactile"
   },
   {
    "kind": "dataset",
-   "id": "tacross"
+   "id": "tactalign"
   },
   {
    "kind": "dataset",
@@ -115,245 +207,8 @@
    "id": "vitam"
   }
  ],
- "not_fully_released": 50,
- "errors": [
-  {
-   "url": "https://arxiv.org/abs/2610.10288",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2605.13083",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2607.09190",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2606.17055",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2512.16842",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2606.09243",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2604.14944",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2404.16823",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2303.12076",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2510.25725",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.11945",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2603.17851",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2512.08920",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2510.08807",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2606.31836",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.05180",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2607.28625",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2602.05513",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2505.16289",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2609.24976",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2505.21864",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.18872",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2608.15060",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2603.15847",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2312.13469",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2606.13102",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2603.20850",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2509.08354",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2607.01067",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2503.05231",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2503.07926",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.10283",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2410.23629",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2505.11420",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2506.14754",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2409.17549",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2602.13579",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2609.34182",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2501.00510",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2405.03476",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.19155",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.07692",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2609.20649",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2609.34286",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2609.20414",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2607.07287",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.22342",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.22932",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2505.13982",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.09455",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.26854",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2603.13869",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.14372",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2609.39017",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.27995",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2610.36539",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2312.01853",
-   "error": "unreachable or rate limited"
-  },
-  {
-   "url": "https://arxiv.org/abs/2303.13482",
-   "error": "unreachable or rate limited"
-  }
- ],
- "problems": [
-  "arXiv: 58 links not checked tonight (no answer, 429 or a 5xx); their last fingerprints are kept"
- ],
- "sources_failed": [
-  "arXiv"
- ]
+ "not_fully_released": 52,
+ "errors": [],
+ "problems": [],
+ "sources_failed": []
 }

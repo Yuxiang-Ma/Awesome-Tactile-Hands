@@ -3,6 +3,60 @@
   {
    "kind": "added",
    "target": "dataset",
+   "id": "tacwam_wetlab",
+   "text": "TacWAM Wet-Lab Tasks: glove-teleoperated lab-bench tasks on a UFACTORY xArm6 with a BrainCo Revo2 right hand wearing a Tujian EI-G012 tactile glove (880 taxels, 15 pads), static Orbbec RGB-D and RealSense D405 wrist cameras; 177 counted demonstrations in three folders plus uncounted sorting, whiteboard and dual-arm tube-pour folders; Hugging Face gate with manual approval, CC BY-NC 4.0, no paper.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+   "date": "2026-10-29",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "vtao_bimanip",
+   "text": "VTAO-BiManip: masked visual-tactile-action pretraining on 216 human bimanual bottle-cap unscrewing trajectories (two 20-sensor touch gloves, HoloLens 2, mocap) guiding curriculum RL for dual Shadow Hands (63% seen, 51% unseen bottles in simulation) and run on dual LEAP hands with tactile sensors; no code statement.",
+   "source": "https://arxiv.org/abs/2501.03606",
+   "date": "2026-10-29",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "hardware",
+   "id": "tachin_glove",
+   "text": "TachinGlove: linked to TacWAM Wet-Lab Tasks, whose card names a Tujian EI-G012 glove (15 pads, 880 taxels) on the robot hand.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+   "date": "2026-10-29",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile: the same account's tacwam-wetlab-tasks repository has dual-arm tube-pour folders dated 2026-10-05 and 2026-10-22, matching this release's two batches; noted as the probable source of the copied batch, files not opened.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+   "date": "2026-10-29",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "tacdex3d",
+   "text": "3dtacdex: license changed from not stated to MIT (Hugging Face card and LICENSE file, release 1.0.0 dated 2026-10-28); the card now describes the release as an Open-X-Tactile format submission with no official acceptance claimed. Data archives are unchanged (four Zarr ZIPs, 47,124 frames).",
+   "source": "https://huggingface.co/datasets/kingchou007/3dtacdex",
+   "date": "2026-10-29",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "pulse",
+   "text": "PULSE: card v1.2.1 names the authors (Wolin Liang et al., South China University of Technology), the venue (NeurIPS 2026 Evaluations and Datasets Track, spotlight) and a permanent DOI (10.57967/hf/11314); scene-camera and eye-tracking overlay videos are listed for 312 recordings (311 files of each, about 63 GB), 454 human-reviewed S9 primitive segments were added, and the benchmark code repository velvet-pine-22/PULSE-code (MIT) now holds files. License stays CC BY-NC 4.0 plus use restrictions.",
+   "source": "https://huggingface.co/datasets/velvet-pine-22/PULSE",
+   "date": "2026-10-29",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
    "id": "tactilelab_inhandrotation",
    "text": "TactileLab In-Hand Rotation: 20 real rollouts (6,000 steps at 10 Hz, 10 objects) of sim-to-real rotation policies on a 4-finger LEAP-module hand with a TacTip optical sensor on each fingertip, raw 224x224 tactile images; public on Hugging Face (1.9 GB, license not stated).",
    "source": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation",
