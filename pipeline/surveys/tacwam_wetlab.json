@@ -1,0 +1,199 @@
+{
+ "id": "tacwam_wetlab",
+ "surveyed": "2026-10-29",
+ "entry": {
+  "id": "tacwam_wetlab",
+  "name": "TacWAM Wet-Lab Tasks",
+  "title": "tacwam-wetlab-tasks",
+  "authors": "SingleBicycle (Hugging Face account)",
+  "year": 2026,
+  "venue": "Hugging Face dataset (2026)",
+  "summary": "Glove-teleoperated lab-bench manipulation on a UFACTORY xArm6 with a BrainCo Revo2 right hand wearing a Tujian EI-G012 tactile glove (880 taxels over 15 pads), with a static Orbbec RGB-D head camera and a RealSense D405 wrist camera: a cap-to-tray smoke test (53 + 60 demonstrations), 64 tube-rack transfers, further task folders (sorting, whiteboard erasing, dual-arm tube pour) and policy rollouts, behind a Hugging Face gate.",
+  "embodiment": "robot",
+  "hand": "BrainCo Revo2 right hand (6 motors) on a UFACTORY xArm6, wearing a Tujian EI-G012 tactile glove; later folders are named dual-arm",
+  "bimanual": null,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 880,
+   "coverage": [],
+   "rate_hz": null,
+   "note": "Card: 'Tujian EI-G012 tactile glove (15 pads, 880 taxels)', stored in right_hand_data.npz; every stream is resampled onto one 30 Hz grid with valid/ masks. Native tactile rate, array shape and units not on the public card; files not opened (gated).",
+   "maker": "Tachin Technology (途见科技, Beijing)",
+   "model": "Tujian EI-G012 tactile glove",
+   "principle": "unspecified",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "rgb",
+   "depth",
+   "wrist_rgb",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": null,
+   "tasks": null,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "Counts on the public card: smoke_test 53 cap-to-tray episodes (14,356 action frames, 8.0 min), smoke_test_v2 60 approved cap-to-tray demonstrations, task1 64 tube-rack transfers (53 train / 11 validation), policy rollouts of N0-VTLA (5 of 10 successes reported); task2 (soft/hard sorting), task3 (whiteboard erasing) and four task4 dual-arm tube-pour folders have no counts on the card. Planned task list T1-T5: cup transport, tube to rack, compliance sorting, tool bench cleanup, dry media transfer."
+  },
+  "availability": "gated",
+  "access": "Hugging Face SingleBicycle/tacwam-wetlab-tasks; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval).",
+  "gate": {
+   "kind": "hf_gate",
+   "approval": "manual",
+   "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+   "checked": "2026-10-29",
+   "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
+  },
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "No paper or project page; the publisher is a personal account, and the card refers to a collection protocol in an unnamed source repository.",
+   "The card's rig section describes only the right arm and right hand, with the left side planned, while the later task4 folders are named dual-arm; whether those use a second gloved hand was not read.",
+   "The card gives 635 GB as the total size, while the Hugging Face API reports 176.2 GB of storage on 2026-10-29.",
+   "The teleoperation glove does not sense thumb opposition; the card says the vendor SDK synthesizes that motor channel from flexion, and the ring and pinky channels saturate at 1000.",
+   "Folder READMEs for task2, task3 and task4 and all data files are behind the gate and were not read."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "robot_head",
+     "count": 1,
+     "model": "Orbbec Gemini 345Lg",
+     "type": "RGB-D",
+     "resolution": null,
+     "fps": null,
+     "mount": "static"
+    },
+    {
+     "role": "wrist",
+     "count": 1,
+     "model": "Intel RealSense D405",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 1,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "BrainCo Revo2 and xArm6",
+     "note": "6 hand motor channels; arm command loop median 25.4 Hz per the card"
+    },
+    {
+     "target": "fingers",
+     "method": "teleop_glove",
+     "system": "UDEX gloves + PICO wrist tracker",
+     "note": "clutched Cartesian teleoperation at 30 Hz"
+    }
+   ],
+   "other": []
+  },
+  "sources": [
+   "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)"
+  ],
+  "unconfirmed": [
+   "Tujian = 途见, the Chinese name of Tachin Technology; EI-G is Tachin's glove series and 880 taxels over 15 regions matches the catalog's TachinGlove, so the hardware link rests on the model number and counts.",
+   "episodes left null: the card counts only 177 demonstrations in three folders (53 + 60 + 64), and the old 53 smoke-test episodes are reused in the V2 training mix.",
+   "The task4_dual_arm_tube_pour_20261005 and _20261022 folders (with failure folders) match the dates of the two batches in rss_dual_arm_tactile by the same account; whether they hold the same files was not checked.",
+   "Predecessor repository SingleBicycle/tacwam-pick-up-bottle (gated, 30 pick-up-bottle and 32 cap-grab episodes on the same xArm6 and Revo2 rig) is named on the card; its tactile source is not stated on its public card.",
+   "Language instructions in English are listed per task in the card's task table; whether episodes store them was not read."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "not_stated",
+  "quote": "license: cc-by-nc-4.0",
+  "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+  "access": "login",
+  "format": "per-episode episode_30hz.h5 (aligned streams with valid/ masks), MP4 head and wrist RGB, depth as FFV1 GRAY16 (mm) in MKV, right_hand_data.npz for glove touch, JSONL robot logs, CSV ledgers",
+  "total_size": "176.2 GB (Hugging Face storage, 2026-10-29); card says 635 GB",
+  "per_episode": null,
+  "partial_fetch": "per-episode files after accepting the gate; not tested"
+ },
+ "channels": [
+  {
+   "name": "right_hand_data.npz (glove touch)",
+   "kind": "tactile_grid",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "15 glove pads over the Revo2 right hand, 880 taxels",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "head RGB-D video (Orbbec Gemini 345Lg)",
+   "kind": "camera",
+   "shape": null,
+   "rate_hz": null,
+   "unit": null,
+   "frame": "static head camera, not egocentric",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "head depth (FFV1 GRAY16 MKV)",
+   "kind": "depth",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "mm",
+   "frame": "static head camera",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "wrist RGB video (RealSense D405)",
+   "kind": "camera",
+   "shape": null,
+   "rate_hz": null,
+   "unit": null,
+   "frame": "xArm6 flange",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "hand motors (thumb_flex, thumb_aux, index, middle, ring, pinky)",
+   "kind": "joint_state",
+   "shape": "(6,)",
+   "rate_hz": 30,
+   "unit": "0-1000 (vendor units)",
+   "frame": "Revo2 right hand",
+   "note": "from the dataset card; files not opened"
+  },
+  {
+   "name": "actions (12 dimensions, three of them constant per the card)",
+   "kind": "action",
+   "shape": "(12,)",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "Cartesian arm pose plus hand motors, axis-angle rotation",
+   "note": "from the dataset card; files not opened"
+  }
+ ],
+ "episode_index": {
+  "where": "per-folder README data cards and CSV ledgers (gated)",
+  "count": null,
+  "fields": [],
+  "tasks": [
+   "cap_to_tray",
+   "tube_rack_hole_transfer",
+   "soft_hard_sorting",
+   "whiteboard_erasing",
+   "dual_arm_tube_pour"
+  ],
+  "scenes": []
+ }
+}

@@ -2014,6 +2014,40 @@
     "Fingertip-only, three fingers; the D'Claw has 9 DoF (three Dynamixel servos per finger) on a UR5e arm."
    ],
    "checked": "2026-10-28"
+  },
+  {
+   "id": "vtao_bimanip",
+   "name": "VTAO-BiManip",
+   "title": "VTAO-BiManip: Masked Visual-Tactile-Action Pre-training with Object Understanding for Bimanual Dexterous Manipulation",
+   "authors": "Zhengnan Sun et al.",
+   "year": 2025,
+   "venue": "arXiv 2501.03606",
+   "kind": "representation",
+   "summary": "Masked visual-tactile-action pretraining on human bimanual bottle-cap unscrewing (HoloLens 2 video, two gloves with 20 binarized touch sensors each, mocap hand motion) that predicts future actions plus bottle pose and size, used to guide two-stage curriculum RL for dual Shadow Hands in Isaac Gym (63% seen and 51% unseen bottles) and run on dual LEAP hands with tactile sensors.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "216 human bimanual unscrewing trajectories with 26 bottles (61,684 aligned frames; vision 30 Hz, glove touch 200 Hz, CHINGMU mocap 1 kHz); release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v2 HTML (2025-12-25) has no code, data or weights statement or link (read 2026-10-29)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2501.03606"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2501.03606 (abstract and versions via arXiv API)",
+    "https://arxiv.org/html/2501.03606v2 (capture system, data counts, simulation results, real-robot platform)"
+   ],
+   "unconfirmed": [
+    "Each glove has 'an inner layer with 20 tactile sensors', identical to the authors' earlier glove; sensor type not stated, readings binarized at 0.4 V. The earlier glove data are catalogued as m2vtp_bottlecap and VTDexManip, but this paper records its own bimanual set.",
+    "Real-robot platform: 'dual Leap Hands equipped with tactile sensors and a Unitree Z1 arm'; tactile sensor type and count on the LEAP hands not stated, and no real-world success rate is reported.",
+    "How touch is produced for RL in Isaac Gym is not described; the abstract's 'over 20%' margin over visual-tactile pretraining matches 63% against 41% for the closest visual-tactile row in Table II, which the paper does not name as the comparison."
+   ],
+   "checked": "2026-10-29"
   }
  ]
 }

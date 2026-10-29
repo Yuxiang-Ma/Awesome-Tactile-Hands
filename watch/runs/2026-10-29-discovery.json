@@ -1,0 +1,37 @@
+{
+ "flow": "discovery",
+ "date": "2026-10-29",
+ "model": "claude-opus-5-5",
+ "reviewed": 63,
+ "added": {
+  "datasets": 1,
+  "models": 1,
+  "hardware": 0
+ },
+ "updated": 2,
+ "queue_left": 342,
+ "searches": [
+  "visuo-tactile dexterous hand dataset 2026",
+  "tactile world model dexterous hand",
+  "触觉手套 数据集 开源",
+  "灵巧手 触觉 数据集 发布"
+ ],
+ "for_the_owner": [
+  "Apply for access: TacWAM Wet-Lab Tasks (Hugging Face gate, manual approval) https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+  "Judgment call: Tactile Embeddings for Multi-Task Learning (Luo et al., ICRA 2024, doi:10.1109/icra57147.2024.10611419) trains a shared encoder on a 130-element capacitive glove (10 people, 5 manipulation tasks) but names no model and states no data release, so it was rejected like earlier unnamed models. Reverse in watch/reviewed.json if unnamed models with real hand touch should count."
+ ],
+ "notes": [
+  "python3 pipeline/merge_entry.py was refused by the shell again; the tacwam_wetlab entry was appended to data/datasets.json by hand, identical to the entry object in pipeline/surveys/tacwam_wetlab.json.",
+  "58 of the top 60 queue candidates were decided, plus 5 search hits (63 in total, 3 over the 60 budget because of the search sweep).",
+  "Left in the queue undecided: Murali et al. IJRR doi:10.1177/02783649241301443 (end effector and tactile sensor not visible in any open source tonight) and Shao et al. CASE 2026 doi:10.1109/case69030.2026.11704244 (in-hand pose estimation on a multi-fingered hand; no abstract reachable, DOI page returned HTTP 202 with an empty body).",
+  "tacwam-wetlab-tasks rollouts include N0-VTLA policy trials, which ties this account to N0-Foundation / OpenNeoData (arXiv 2608.29601), still unreviewed from earlier notes.",
+  "DEXHAND-70K/dexhand-70k-review-sample still returns HTTP 401 (second night); it stays 'later' from 2026-10-28.",
+  "Search hits already in the catalog or reviewed: DexViTac, DECO-50, VTDexManip, Bench2Dex, DexTouch-WM, DexTacWAM, TouchWorld, DexWM, OpenTouch, TouchAnything/EgoTouch, TachinGlove releases, Juqiao glove, TactiDex, EgoPressure models and ADL-21 (the PMC8068022 hit). Daimon-TWM appears only in a LinkedIn post and was not recorded.",
+  "Still pending from earlier notes and not reviewed tonight: DexMani arXiv 2608.00554, the chang-xinhai and cyanhaze awesome-list items, and N0-Foundation / OpenNeoData 2608.29601."
+ ],
+ "started": "2026-10-29T05:30:01Z",
+ "finished": "2026-10-29T05:41:23Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 10 changed files, 2 new entries"
+}

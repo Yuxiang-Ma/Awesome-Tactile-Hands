@@ -109,7 +109,8 @@
    "Tujian = 途见, the Chinese name of Tachin Technology, whose TachinGlove is in the catalog; the card does not give the glove model, so the TachinGlove hardware link rests on the maker name.",
    "episodes = 100 successful trajectories as counted on the card; the 9 failures are not counted.",
    "Teleoperation interface not named; 'teleoperated demonstrations' is from the card summary.",
-   "Modalities beyond the three cameras and touch (joint states, actions) are not listed on the public card."
+   "Modalities beyond the three cameras and touch (joint states, actions) are not listed on the public card.",
+   "The same account's gated SingleBicycle/tacwam-wetlab-tasks (catalog: tacwam_wetlab) holds task4_dual_arm_tube_pour_20261005 and _20261022 folders plus two failure folders, matching the dates of these two batches; it is probably the unnamed repository the batch-1 folder was copied from, not confirmed (seen 2026-10-29, files not opened)."
   ]
  },
  "license": {

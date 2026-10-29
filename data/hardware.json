@@ -55,6 +55,10 @@
     {
      "id": "rss_dual_arm_tactile",
      "role": "tactile glove"
+    },
+    {
+     "id": "tacwam_wetlab",
+     "role": "tactile glove"
     }
    ],
    "sources": [
