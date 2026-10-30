@@ -1,0 +1,4 @@
+{"date": "2026-10-30", "flow": "discovery", "changes": [
+  {"kind": "added", "target": "dataset", "id": "hora",
+   "text": "HORA: added. RoboWheel's (arXiv 2512.02729) human hand-object set with a Paxini EVT2 glove (16 tactile sensors, 29 joint encoders) and up to 11 cameras; 63,141 Mocap trajectories with hand and object tactile maps, public on Hugging Face (HORA-DB/HORA, 918.1 GB in total, Apache-2.0).",
+   "source": "https://huggingface.co/datasets/HORA-DB/HORA"}]}

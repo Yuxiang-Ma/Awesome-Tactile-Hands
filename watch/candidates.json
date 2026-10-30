@@ -1,147 +1,71 @@
 {
- "generated": "2026-10-29T05:32:59Z",
+ "generated": "2026-10-30T05:33:07Z",
  "log": [
-  "arXiv recent (2026-10-08 to 2026-10-29): 9 new",
-  "arXiv backfill 2016-07 (2016-07-01 to 2016-10-01): 0 new",
-  "OpenAlex search recent (2026-09-29 to 2026-10-29): 28 new",
-  "OpenAlex search backfill 2015-10 (2015-10-01 to 2016-01-01): 35 new",
-  "OpenAlex citations of 65 catalog papers: 233 new",
-  "Hugging Face: 267 new from name searches, 203 new from publishers of catalog entries",
+  "arXiv recent (2026-10-09 to 2026-10-30): 13 new",
+  "arXiv backfill 2016-10 (2016-10-01 to 2017-01-01): 1 new",
+  "OpenAlex search recent (2026-09-30 to 2026-10-30): 24 new",
+  "OpenAlex search backfill 2016-01 (2016-01-01 to 2016-04-01): 25 new",
+  "OpenAlex citations of 66 catalog papers: 217 new",
+  "Hugging Face: 243 new from name searches, 188 new from publishers of catalog entries",
   "GitHub: 9 new"
  ],
  "problems": [],
  "sources_failed": [],
- "new_tonight": 53,
+ "new_tonight": 59,
  "queued": 400,
- "dropped_low_score": 465,
+ "dropped_low_score": 408,
  "candidates": [
   {
-   "key": "arxiv:2403.00049",
-   "title": "TEXterity: Tactile Extrinsic deXterity",
-   "date": "2025-12-15",
-   "url": "https://arxiv.org/abs/2403.00049",
-   "authors": "Sangwoon Kim et al.",
-   "abstract": "We introduce a novel approach that combines tactile estimation and control for in-hand object manipulation. By integrating measurements from robot kinematics and an image-based tactile sensor, our framework estimates and tracks object pose while simultaneously generating motion plans in a receding horizon fashion to control the pose of a grasped object. This approach consists of a discrete pose estimator that tracks the most likely sequence of object poses in a coarsely discretized grid, and a continuous pose estimator-controller to refine the pose estimate and accurately manipulate the pose of the grasped object. Our method is tested on diverse objects and configurations, achieving desired manipulation objectives and outperforming single-shot methods in estimation accuracy. The proposed approach holds potential for tasks requiring precise manipulation and limited intrinsic in-hand dexterity under visual occlusion, laying the foundation for closed-loop behavior in applications such as regrasping, insertion, and tool use. Please see supplementary multimedia for videos of real-world demonstrations.",
-   "score": 9.0,
-   "hints": [],
-   "found_by": [
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites model:tactofind"
-   ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "doi:10.1109/lra.2026.3681124",
-   "title": "Adaptive Visual-Tactile Fusion for Contact-Rich Dexterous Manipulation",
-   "date": "2026-04-06",
-   "url": "https://doi.org/10.1109/lra.2026.3681124",
-   "authors": "Zedong Cai et al.",
-   "abstract": "Effective dexterous manipulation hinges on the dynamic integration of visual context with fine-grained tactile feedback. This remains a significant challenge, as existing methods often rely on static fusion strategies and struggle to learn from isolated tactile features. To address this, we propose a hardware-decoupled tactile representation that learns cross-finger spatial features by training a sparse Transformer on unified tactile images, enabling cross-device generalization. Furthermore, we introduce a tactile-activity-guided adaptive visual-tactile fusion mechanism that dynamically adjusts the influence of vision and touch, showing the contribution of touch feedback upon physical contact. We evaluate our method on a series of contact-rich manipulation tasks requiring fine force control. Experimental results show that our method has an average success rate of over 90%, demonstrating effectiveness compared to other methods. Further analysis shows that adaptive multimodal fusion is essential to complete the dexterous manipulation tasks. The videos can be viewed athttps://avtf-dex.github.io.",
-   "score": 7.0,
-   "hints": [],
-   "found_by": [
-    "openalex cites dataset:tacdex3d",
-    "openalex cites model:robot_synesthesia"
-   ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "arxiv:2501.03606",
-   "title": "VTAO-BiManip: Masked Visual-Tactile-Action Pre-training with Object Understanding for Bimanual Dexterous Manipulation",
-   "date": "2025-10-19",
-   "url": "https://arxiv.org/abs/2501.03606",
-   "authors": "Zhengnan Sun et al.",
-   "abstract": "Bimanual dexterous manipulation remains a significant challenge in robotics due to the high DoFs of each hand and their coordination. Existing single-hand manipulation techniques often leverage human demonstrations to guide RL methods but fail to generalize to complex bimanual tasks involving multiple sub-skills. In this paper, we propose VTAO-BiManip, a novel framework that integrates visual-tactile-action pre-training with object understanding, aiming to enable human-like bimanual manipulation via curriculum reinforcement learning (RL). We improve prior learning by incorporating hand motion data, providing more effective guidance for dual-hand coordination. Our pretraining model predicts future actions as well as object pose and size using masked multimodal inputs, facilitating cross-modal regularization. To address the multi-skill learning challenge, we introduce a two-stage curriculum RL approach to stabilize training. We evaluate our method on a bimanual bottle-cap twisting task, demonstrating its effectiveness in both simulated and real-world environments. Our approach achieves a success rate that surpasses existing visual-tactile pretraining methods by over 20%.",
+   "key": "arxiv:2610.39076",
+   "title": "Tactus: Tactile & Pose Sensing Glove for Natural Dexterity Data Collection",
+   "url": "https://arxiv.org/abs/2610.39076",
+   "date": "2026-10-29",
+   "authors": "Li Guan et al.",
+   "abstract": "Collecting naturalistic human manipulation demonstrations with accurate contact force and hand pose is essential for robot dexterous manipulation policy and foundational world model learning - yet no existing wearable platform provides both calibrated fingertip force sensing and occlusion-resilient hand tracking in a form factor that preserves natural manipulation behavior. We present Tactus, a textile-integrated sensing glove that co-optimizes three design pillars: (1) a thin, conformal 3D-knit form factor (1.5 mm fingertip stackup) designed to minimize interference with natural manipulation, (2) strategically placed capacitive tactile sensors at manipulation-relevant regions informed by empirical contact studies, and (3) IMU-fused pose tracking that maintains accuracy through the hand-object occlusions where manipulation data is most valuable. Tactus includes a documented calibration pipeline for cross-glove consistency and per-session calibration for subject-dependent correction. To enable objective comparison, we introduce standardized benchmarking protocols for tactile force regression and hand pose estimation, and apply them to Tactus and two commercially available tactile gloves - to our knowledge the first quantitative cross-platform evaluation of this kind. Tactus resolves a minimum detectable force of 0.59 N at 95% confidence, 1.6 - 2.7x lower than the commercial baselines, and with 0.87 cross-participant consistency, while our pose tracking sustains 11.0 mm fingert",
    "score": 7.0,
    "hints": [
+    "glove",
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia"
+    "arxiv recent"
    ],
-   "first_seen": "2026-10-29"
+   "first_seen": "2026-10-30"
   },
   {
-   "key": "doi:10.1109/tase.2025.3540913",
-   "title": "GelStereo Tip: A Spherical Fingertip Visuotactile Sensor for Multi-Finger Screwing Manipulation",
-   "date": "2025-01-01",
-   "url": "https://doi.org/10.1109/tase.2025.3540913",
-   "authors": "Boyue Zhang et al.",
-   "abstract": "Dexterous hands are the key element for robots to achieve human-like manipulation capabilities. An outstanding challenge is to provide fingertips of dexterous hands with precise tactile deformation sensing capabilities. In this paper, we present the GelStereo Tip, a spherical and easy-to-integrate GelStereo-type visuotactile sensor capable of sensing high-resolution 3D elastomer deformation. Previous calibration method does not take into account the impact of imaging errors caused by the sensor’s compact and high-curvature structural characteristics on the accuracy of tactile sensing. Therefore, we propose a novel self-calibration method based on the Refractive Stereo Ray Tracing model, named GTSC, and demonstrate the accuracy of less than 0.3 mm for deformation sensing. Furthermore, we also propose a Contact Retention Tactile Controller to address the issue of fingertips being unable to overcome obstructive torque during the multi-finger bottle cap screwing. After integrating GelStereo Tip into fingertips of Allegro Hand, the controller adjusts the joint positions of the given trajectory using proportional control based on the difference between the sensor’s actual deformation and the reference state for contact retention. We believe that the GelStereo Tip sensor combined with robotic dexterous hands has great application potential in the field of multi-finger fingertip manipulation. Note to Practitioners—The motivation of this paper is to design a fingertip visuotactile sen",
-   "score": 6.5,
+   "key": "arxiv:2610.37799",
+   "title": "DexSuite: An All-in-One Framework for Dexterous Manipulation Across Arms, Hands, and Tasks",
+   "url": "https://arxiv.org/abs/2610.37799",
+   "date": "2026-10-27",
+   "authors": "Anas Houssaini et al.",
+   "abstract": "Human-level dexterity remains a central open problem in robotics, yet few simulation frameworks cover the full workflow of dexterous manipulation, from setting up a robot to collecting dexterous demonstrations and evaluating policies. We present DexSuite, an all-in-one simulation framework for dexterous manipulation built on the Genesis simulator. DexSuite provides 30 tasks and assembles its 10 arms and 12 end-effectors, from parallel-jaw grippers to dexterous hands, into more than 100 single-arm robots and thousands of bimanual pairs. It also ships a standardized environment API, integrated teleoperation, and simulated tactile sensing. Moreover, we define a benchmark of 16 task-embodiment pairs spanning diverse contact complexities and horizons, and release a dataset of 4,700 successful episodes in simulation from human teleoperation, scripted experts, and learned policies. We release DexSuite as open source and hope others will build on it. Videos and datasets are available at https://dexsuiteorg.github.io",
+   "score": 7.0,
    "hints": [
-    "hand"
+    "hand",
+    "dataset",
+    "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia"
+    "arxiv recent"
    ],
-   "first_seen": "2026-10-29"
+   "first_seen": "2026-10-30"
   },
   {
-   "key": "arxiv:2411.13148",
-   "title": "Learning Time-Optimal and Speed-Adjustable Tactile In-Hand Manipulation",
-   "date": "2024-11-22",
-   "url": "https://arxiv.org/abs/2411.13148",
-   "authors": "Johannes Pitz et al.",
-   "abstract": "In-hand manipulation with multi-fingered hands is a challenging problem that recently became feasible with the advent of deep reinforcement learning methods. While most contributions to the task brought improvements in robustness and generalization, this paper addresses the critical performance measure of the speed at which an in-hand manipulation can be performed. We present reinforcement learning policies that can perform in-hand reorientation significantly faster than previous approaches for the complex setting of goal-conditioned reorientation in $\\mathrm{SO}(3)$ with permanent force closure and tactile feedback only (i.e., using the hand’s torque and position sensors). Moreover, we show how policies can be trained to be speed-adjustable, allowing for setting the average orientation speed of the manipulated object during deployment. To this end, we present suitable and minimalistic reinforcement learning objectives for time-optimal and speed-adjustable in-hand manipulation, as well as an analysis based on extensive experiments in simulation. We also demonstrate the zero-shot transfer of the learned policies to the real DLR-Hand II with a wide range of target speeds and the fastest dextrous in-hand manipulation without visual inputs. Website: https://aidx-lab.org/manipulation/humanoids24",
+   "key": "arxiv:1611.05095",
+   "title": "Learning Dexterous Manipulation Policies from Experience and Imitation",
+   "url": "https://arxiv.org/abs/1611.05095",
+   "date": "2016-11-15",
+   "authors": "Vikash Kumar et al.",
+   "abstract": "We explore learning-based approaches for feedback control of a dexterous five-finger hand performing non-prehensile manipulation. First, we learn local controllers that are able to perform the task starting at a predefined initial state. These controllers are constructed using trajectory optimization with respect to locally-linear time-varying models learned directly from sensor data. In some cases, we initialize the optimizer with human demonstrations collected via teleoperation in a virtual environment. We demonstrate that such controllers can perform the task robustly, both in simulation and on the physical platform, for a limited range of initial conditions around the trained starting state. We then consider two interpolation methods for generalizing to a wider range of initial conditions: deep learning, and nearest neighbors. We find that nearest neighbors achieve higher performance. Nevertheless, the neural network has its advantages: it uses only tactile and proprioceptive feedback but no visual feedback about the object (i.e. it performs the task blind) and learns a time-invariant policy. In contrast, the nearest neighbors method switches between time-varying local controllers based on the proximity of initial object states sensed via motion capture. While both generalization methods leave room for improvement, our work shows that (i) local trajectory-based controllers for complex non-prehensile manipulation tasks can be constructed from surprisingly small amounts of ",
    "score": 6.5,
    "hints": [
     "hand",
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia"
+    "arxiv backfill 2016-10"
    ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "arxiv:2407.18834",
-   "title": "Learning a Shape-Conditioned Agent for Purely Tactile In-Hand Manipulation of Various Objects",
-   "date": "2024-10-14",
-   "url": "https://arxiv.org/abs/2407.18834",
-   "authors": "Johannes Pitz et al.",
-   "abstract": "Reorienting diverse objects with a multi-fingered hand is a challenging task. Current methods in robotic in-hand manipulation are either object-specific or require permanent supervision of the object state from visual sensors. This is far from human capabilities and from what is needed in real-world applications. In this work, we address this gap by training shape-conditioned agents to reorient diverse objects in hand, relying purely on tactile feedback (via torque and position measurements of the fingers’ joints). To achieve this, we propose a learning framework that exploits shape information in a reinforcement learning policy and a learned state estimator. We find that representing 3D shapes by vectors from a fixed set of basis points to the shape’s surface, transformed by its predicted 3D pose, is especially helpful for learning dexterous in-hand manipulation. In simulation and real-world experiments, we show the reorientation of many objects with high success rates, on par with state-of-the-art results obtained with specialized single-object agents. Moreover, we show generalization to novel objects, achieving success rates of ~90% even for non-convex shapes.Website: https://aidx-lab.org/manipulation/iros24",
-   "score": 6.5,
-   "hints": [
-    "hand",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites model:robot_synesthesia"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "hf:datasets/singlebicycle/tacwam-wetlab-tasks",
-   "title": "SingleBicycle/tacwam-wetlab-tasks",
-   "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
-   "date": "2026-09-03",
-   "authors": "SingleBicycle",
-   "abstract": "task_categories:robotics license:cc-by-nc-4.0 robotics imitation-learning teleoperation tactile dexterous-hand lerobot",
-   "score": 6.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "doi:10.1109/iros60139.2025.11246050",
-   "title": "TacCap: A Wearable FBG-Based Tactile Sensor for Efficient Human-to-Robot Skill Transfer",
-   "date": "2025-10-19",
-   "url": "https://doi.org/10.1109/iros60139.2025.11246050",
-   "authors": "Chengyi Xing et al.",
-   "abstract": "Tactile sensing is essential for dexterous manipulation, yet large-scale human demonstration datasets lack tactile feedback, limiting their effectiveness in skill transfer to robots. To address this, we introduce TacCap, a wearable Fiber Bragg Grating (FBG)-based tactile sensor designed for seamless human-to-robot transfer. TacCap is lightweight, durable, and immune to electromagnetic interference, making it ideal for real-world data collection. We detail its design and fabrication, evaluate its sensitivity, repeatability, and cross-sensor consistency, and assess its effectiveness through grasp stability prediction and ablation studies. Our results demonstrate that TacCap enables transferable tactile data collection, bridging the gap between human demonstrations and robotic execution, with broad implications for fine-motor disciplines such as surgical training and musical performance. To support further research and development, we open-source our hardware design and software.",
-   "score": 6.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag"
-   ],
-   "first_seen": "2026-10-26"
+   "first_seen": "2026-10-30"
   },
   {
    "key": "doi:10.1177/02783649241301443",
@@ -160,168 +84,12 @@
    "first_seen": "2026-10-25"
   },
   {
-   "key": "doi:10.1109/icra57147.2024.10611419",
-   "title": "Tactile Embeddings for Multi-Task Learning",
-   "date": "2024-05-13",
-   "url": "https://doi.org/10.1109/icra57147.2024.10611419",
-   "authors": "Yiyue Luo et al.",
-   "abstract": "Tactile sensing plays a pivotal role in human perception and manipulation tasks, allowing us to intuitively understand task dynamics and adapt our actions in real time. Transferring such tactile intelligence to robotic systems would help intelligent agents understand task constraints and accurately interpret the dynamics of both the objects they are interacting with and their own operations. While significant progress has been made in imbuing robots with this tactile intelligence, challenges persist in effectively utilizing tactile information due to the diversity of tactile sensor form factors, manipulation tasks, and learning objectives involved. To address this challenge, we present a unified tactile embedding space capable of predicting a variety of task-centric qualities over multiple manipulation tasks. We collect tactile data from human demonstrations across various tasks and leverage this data to construct a shared latent space for task stage classification, object dynamics estimation, and tactile dynamics prediction. Through experiments and ablation studies, we demonstrate the effectiveness of our shared tactile latent space for more accurate and adaptable tactile networks, showing an improvement of up to 84% over the single-task training.",
-   "score": 6.0,
-   "hints": [],
-   "found_by": [
-    "openalex cites dataset:senstextile",
-    "openalex cites dataset:stag"
-   ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "doi:10.1002/aisy.202200390",
-   "title": "Predictive Learning of Error Recovery with a Sensorized Passivity‐Based Soft Anthropomorphic Hand",
-   "date": "2023-04-12",
-   "url": "https://doi.org/10.1002/aisy.202200390",
-   "authors": "Kieran Gilday et al.",
-   "abstract": "Manipulation strategies based on the passive dynamics of soft‐bodied interactions provide robust performances with limited sensory information. They utilize the kinematic structure and passive dynamics of the body to adapt to objects of varying shapes and properties. However, these soft passive interactions make the state of the robotic device influenced by the environment, making control generation and state estimation difficult. This work presents a closed‐loop framework for dynamic interaction‐based grasping that relies on two novelties: 1) a wrist‐driven passive soft anthropomorphic hand that can generate robust grasp strategies using one‐step kinaesthetic teaching and 2) a learning‐based perception system that uses temporal data from sparse tactile sensors to predict and adapt to failures before it happens. With the anthropomorphic soft design and wrist‐driven control, it is shown that controllers can be generated robust to novel objects and location uncertainty. With the learning‐based high‐level perception system and 32 sensing receptors, it is shown that failures can be predicted in advance, further improving the robustness of the entire system by more than doubling the grasping success rate. From over 1000 real‐world grasping trials, both the control and perception framework are also seen to be transferable to novel objects and conditions. An interactive preprint version of the article can be found here: https://doi.org/10.22541/au.167687985.55182112/v1 .",
-   "score": 6.0,
-   "hints": [
-    "hand"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag"
-   ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "doi:10.1109/lra.2026.3666396",
-   "title": "Rigidity-Based Multi-Finger Coordination for Precise In-Hand Manipulation of Force-Sensitive Objects",
-   "date": "2026-02-19",
-   "url": "https://doi.org/10.1109/lra.2026.3666396",
-   "authors": "Xinan Rong et al.",
-   "abstract": "Precise in-hand manipulation of force-sensitive objects typically requires judicious coordinated force planning as well as accurate contact force feedback and control. Unlike multi-arm platforms with gripper end effectors, multi-fingered hands rely solely on fingertip point contacts and are not able to apply pull forces, therefore poses a more challenging problem. Furthermore, calibrated torque sensors are lacking in most commercial dexterous hands, adding to the difficulty. To address these challenges, we propose a dual-layer framework for multi-finger coordination, enabling high-precision manipulation of force-sensitive objects through joint control without tactile feedback. This approach solves coordinated contact force planning by incorporating graph rigidity and force closure constraints. By employing a force-to-position mapping, the planned force trajectory is converted to a joint trajectory. We validate the framework on a custom dexterous hand, demonstrating the capability to manipulate fragile objects—including a soft yarn, a plastic cup, and a raw egg—with high precision and safety.",
-   "score": 5.5,
-   "hints": [
-    "hand"
-   ],
-   "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "doi:10.1109/lra.2025.3643332",
-   "title": "Gentle Object Retraction in Dense Clutter Using Multimodal Force Sensing and Imitation Learning",
-   "date": "2025-12-11",
-   "url": "https://doi.org/10.1109/lra.2025.3643332",
-   "authors": "Dane Brouwer et al.",
-   "abstract": "Dense collections of movable objects are common in everyday spaces-from cabinets in a home to shelves in a warehouse. Safely retracting objects from such collections is difficult for robots, yet people do it frequently, leveraging learned experience in tandem with vision and non-prehensile tactile sensing on the sides and backs of their hands and arms. We investigate the role of contact force sensing for training robots to gently reach into constrained clutter and extract objects. The available sensing modalities are (1) “eye-in-hand” vision, (2) proprioception, (3) non-prehensile triaxial tactile sensing, (4) contact wrenches estimated from joint torques, and (5) a measure of object acquisition obtained by monitoring the vacuum line of a suction cup. We use imitation learning to train policies from a set of demonstrations on randomly generated scenes, then conduct an ablation study of wrench and tactile information. We evaluate each policy's performance across 40 unseen environment configurations. Policies employing any force sensing show fewer excessive force failures, an increased overall success rate, and faster completion times. The best performance is achieved using both tactile and wrench information, producing an 80% improvement above the baseline without force information.",
-   "score": 5.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites model:tactofind",
-    "openalex cites dataset:hato"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "arxiv:2507.13200",
-   "title": "Few-Shot Transfer of Tool-Use Skills Using Human Demonstrations With Proximity and Tactile Sensing",
-   "date": "2025-06-27",
-   "url": "https://arxiv.org/abs/2507.13200",
-   "authors": "Marina Y. Aoyama et al.",
-   "abstract": "Tools extend the manipulation abilities of robots, much like they do for humans. Despite human expertise in tool manipulation, teaching robots these skills faces challenges. The complexity arises from the interplay of two points of contact: one between the robot and the tool, and another between the tool and the environment. Tactile and proximity sensors play a crucial role in identifying these complex contacts. However, learning tool manipulation with a small amount of real-world data using these sensors remains challenging due to the large sim-to-real gap and sensor noise. To address this, we propose a few-shot tool-use skill transfer framework using multimodal sensing. The framework involves pre-training the base policy to capture contact states common in tool-use skills in simulation and fine-tuning it with human demonstrations collected in the real-world target domain to bridge the domain gap. We validate that this framework enables teaching surface-following tasks using tools with diverse physical and geometric properties with a small number of demonstrations on the Franka Emika robot arm. Our analysis suggests that the robot acquires new tool-use skills by transferring the ability to recognise tool-environment contact relationships from pre-trained to fine-tuned policies. Additionally, integrating proximity and tactile sensors enhances the identification of contact states and environmental geometry.",
-   "score": 5.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "doi:10.1109/iros58592.2024.10802651",
-   "title": "Efficient Tactile Sensing-based Learning from Limited Real-world Demonstrations for Dual-arm Fine Pinch-Grasp Skills",
-   "date": "2024-10-14",
-   "url": "https://doi.org/10.1109/iros58592.2024.10802651",
-   "authors": "Xiaofeng Mao et al.",
-   "abstract": "Imitation learning for robot dexterous manipulation, especially with a real robot setup, typically requires a large number of demonstrations. In this paper, we present a data-efficient learning from demonstration framework which exploits the use of rich tactile sensing data and achieves fine bimanual pinch grasping. Specifically, we employ a convolutional autoencoder network that can effectively extract and encode high-dimensional tactile information. Further, we develop a framework that achieves efficient multi-sensor fusion for imitation learning, allowing the robot to learn contact-aware sensorimotor skills from demonstrations. The ablation studies on encoded tactile features highlighted the effectiveness of incorporating rich contact information, which enabled dexterous bimanual grasping with active contact searching. Extensive experiments demonstrated the robustness of the fine pinch grasp policy directly learned from few-shot demonstration, including grasping of the same object with different initial poses, generalizing to ten unseen new objects, robust and firm grasping against external pushes, as well as contact-aware and reactive re-grasping in case of dropping objects under very large perturbations. Furthermore, the saliency map analysis method is used to describe weight distribution across various modalities during pinch grasping, confirming the effectiveness of our framework at leveraging multimodal information. The video is available online at: https://youtu.be/B",
-   "score": 5.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex"
-   ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "doi:10.1007/978-3-031-71301-9_1",
-   "title": "Universal Wearable Haptic Glove for Force Measurement During Object Manipulation",
-   "date": "2024-01-01",
-   "url": "https://doi.org/10.1007/978-3-031-71301-9_1",
-   "authors": "Ksawery Giera et al.",
-   "abstract": "",
-   "score": 5.5,
-   "hints": [
-    "glove"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag"
-   ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "hf:datasets/edessa/motorsense",
-   "title": "edessa/motorsense",
-   "url": "https://huggingface.co/datasets/edessa/motorsense",
+   "key": "doi:10.3390/mti10110112",
+   "title": "From Passive to Proactive: Designing an Engaging VR Hand Coordination Training System for Children with Autism",
    "date": "2026-10-28",
-   "authors": "edessa",
-   "abstract": "task_categories:video-classification license:other egocentric emg imu multimodal hand-object-interaction",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "hf:datasets/singlebicycle/pico_human_demo_v2",
-   "title": "SingleBicycle/pico_human_demo_v2",
-   "url": "https://huggingface.co/datasets/SingleBicycle/pico_human_demo_v2",
-   "date": "2026-10-24",
-   "authors": "SingleBicycle",
-   "abstract": "task_categories:robotics language:zh license:cc-by-nc-4.0 egocentric hand-tracking hand-pose head-pose",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "hf:datasets/airomantic88/force_aware_visuotactile",
-   "title": "airomantic88/force_aware_visuotactile",
-   "url": "https://huggingface.co/datasets/airomantic88/force_aware_visuotactile",
-   "date": "2026-10-17",
-   "authors": "airomantic88",
-   "abstract": "",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'visuo-tactile'",
-    "hf datasets 'visuotactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "doi:10.1016/j.sna.2026.118676",
-   "title": "A biomimetic trimodal tactile glove with class-prior-guided adaptive residual late fusion for tactile object recognition",
-   "date": "2026-10-16",
-   "url": "https://doi.org/10.1016/j.sna.2026.118676",
-   "authors": "Xiaoming Wang et al.",
-   "abstract": "",
+   "url": "https://doi.org/10.3390/mti10110112",
+   "authors": "Yangcheng Wang et al.",
+   "abstract": "Children with autism spectrum disorder (ASD) often face sensory and attentional challenges that affect their engagement in fine-motor training. This study investigates a VR-based hand coordination system designed using human-centered principles, integrating VR headset configuration with haptic gloves to offer customizable visual, auditory, and tactile feedback and structured task progression. In a controlled study with 60 children with ASD aged 6–12, the VR condition showed greater improvements in hand coordination accuracy and longer training engagement compared to conventional practice. Qualitative feedback from children, caregivers, and therapists further indicated that the clarity of goals, predictable feedback, and manageable interaction demands supported participation for many children, while also revealing individual differences in tolerance for pacing and sensory complexity. The findings suggest that structured interaction design can support fine-motor practice when VR interactions match users’ regulatory needs. Future work will examine how adaptive pacing and context-sensitive cues can better support skill use beyond the training environment.",
    "score": 5.0,
    "hints": [
     "glove"
@@ -329,32 +97,15 @@
    "found_by": [
     "openalex recent"
    ],
-   "first_seen": "2026-10-26"
+   "first_seen": "2026-10-30"
   },
   {
-   "key": "doi:10.3390/electronics15204623",
-   "title": "Sensor-Rich Robotic Grasping in Unstructured Scenes: A Review of Vision, Multimodal Fusion, Learning Architectures, and Closed-Loop Manipulation",
-   "date": "2026-10-10",
-   "url": "https://doi.org/10.3390/electronics15204623",
-   "authors": "Zeyao Hou et al.",
-   "abstract": "Vision-based robotic grasping is a core capability for autonomous manipulation, yet reliable operation in unstructured scenes remains difficult because sensing, representation, contact mechanics, control, and hardware are tightly coupled. This structured qualitative review examines a 117-publication corpus spanning grasp detection and pose estimation, multimodal and tactile sensing, learning architectures, closed-loop correction, active interaction, and deployment-oriented evaluation. The update began with 91 candidate records; DOI and normalized-title deduplication produced 83 unique records, one tangential record was excluded, and 82 additions were combined with 35 prior publications. Primary-topic coding of the 82 additions identified grasp detection and pose as the largest group (26, 31.7%), followed by multimodal or tactile sensing (19, 23.2%) and learning or dexterous manipulation (11, 13.4%). Only three additions were primarily coded to datasets, benchmarks, simulation-to-real transfer, or closed-loop active perception, indicating a reporting and validation imbalance rather than the prevalence of individual failure modes. Across the corpus, geometry-centered perception remains effective when optical measurements and approach constraints are stable, whereas multimodal and active sensing become more important for transparent, reflective, deformable, occluded, or contact-uncertain objects. However, benchmark accuracy is not a proxy for robot-level reliability: latency, ca",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "openalex cites model:scs",
-    "openalex recent"
-   ],
-   "first_seen": "2026-10-27"
-  },
-  {
-   "key": "doi:10.24433/co.0533987.v1",
-   "title": "Digitizing clinical palpation via a wireless, multimodal tactile glove",
-   "date": "2026-10-08",
-   "url": "https://doi.org/10.24433/co.0533987.v1",
-   "authors": "Yaozheng Wang",
-   "abstract": "The codes are used for real-time display of palaption force collecting, which could collect palm force and fingertip shear force seperately.The codes are used for real-time acquisition and visualization of palm normal-force and fingertip shear-force data. The complete acquisition programs require external Bluetooth-connected sensing hardware and an interactive GUI. Since Code Ocean operates in a headless environment without access to the physical BLE devices, the programs automatically run in a headless validation mode and generate static GUI previews for reproducibility and code inspection.",
+   "key": "doi:10.1002/admt.71422",
+   "title": "Low‐Outgassing Liquid Metal–Silicone Composites for Multifunctional Space Applications",
+   "date": "2026-10-28",
+   "url": "https://doi.org/10.1002/admt.71422",
+   "authors": "Spencer Pak et al.",
+   "abstract": "ABSTRACT Space‐grade elastomers provide critical sealing, adhesion, and damping functions in spacecraft but require low outgassing to avoid contamination of sensitive optical and electronic components. Silicone elastomers are widely adopted due to their environmental stability, mechanical reliability, and ease of processing. Here, we introduce a multifunctional, low‐outgassing liquid metal elastomer composite with a space‐grade silicone matrix (S‐LMEC) that combines the mechanical reliability of the silicone with enhanced thermal and electrical properties. Dispersed LM microdroplets enable a 2.3 higher breaking strain, an 11 increase in thermal conductivity, and a 9.6 increase in dielectric permittivity without hindering curing. Thermogravimetric analysis demonstrates that the embedded LM does not compromise the underlying thermal stability of the polymer matrix while active electronic testing indicates the S‐LMEC significantly lowers the steady‐state temperatures by promoting rapid heat dissipation. Furthermore, the material can be patterned into complex structures via direct ink write 3D printing. The outgassing evaluation of the S‐LMEC indicates a total mass loss (TML) of 1.00%. To demonstrate practical utility, the S‐LMEC was integrated into a wearable capacitive tactile glove for soft robotic skin applications. This materials platform expands the design space for space‐grade elastomers, enabling advancements in planetary exploration soft robotics and on‐demand electronic",
    "score": 5.0,
    "hints": [
     "glove"
@@ -362,268 +113,7 @@
    "found_by": [
     "openalex recent"
    ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "hf:datasets/singlebicycle/pico_human_demo_v1",
-   "title": "SingleBicycle/pico_human_demo_v1",
-   "url": "https://huggingface.co/datasets/SingleBicycle/pico_human_demo_v1",
-   "date": "2026-10-07",
-   "authors": "SingleBicycle",
-   "abstract": "task_categories:robotics language:zh license:cc-by-nc-4.0 egocentric hand-tracking hand-pose head-pose camera-pose",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
-   "key": "hf:models/ydaichi/smolvla_tactile_color_pen_v3",
-   "title": "ydaichi/smolvla_tactile_color_pen_v3",
-   "url": "https://huggingface.co/ydaichi/smolvla_tactile_color_pen_v3",
-   "date": "2026-10-04",
-   "authors": "ydaichi",
-   "abstract": "lerobot safetensors smolvla robotics dataset:ydaichi/tactile_color_pen_v3 arxiv:2506.01844 base_model:lerobot/smolvla_base base_model:finetune:lerobot/smolvla_base license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "gh:maahe-25/multimodal-tactile-pipeline",
-   "title": "Maahe-25/multimodal-tactile-pipeline",
-   "url": "https://github.com/Maahe-25/multimodal-tactile-pipeline",
-   "date": "2026-10-02",
-   "authors": "Maahe-25",
-   "abstract": "A dual-brain multimodal data pipeline fusing 5DT tactile glove kinematics and MediaPipe spatial tracking into a Unity neuro-symbolic dashboard.",
-   "score": 5.0,
-   "hints": [
-    "glove"
-   ],
-   "found_by": [
-    "github 'tactile glove'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/jensenyuan/vtam_cucumber_peel_noforce_ablation",
-   "title": "JensenYuan/VTAM_cucumber_peel_noforce_ablation",
-   "url": "https://huggingface.co/JensenYuan/VTAM_cucumber_peel_noforce_ablation",
-   "date": "2026-09-30",
-   "authors": "JensenYuan",
-   "abstract": "diffusers safetensors robotics tactile VTAM ablation license:apache-2.0",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/jensenyuan/vtam_hard_wipe_noforce_ablation",
-   "title": "JensenYuan/VTAM_hard_wipe_noforce_ablation",
-   "url": "https://huggingface.co/JensenYuan/VTAM_hard_wipe_noforce_ablation",
-   "date": "2026-09-30",
-   "authors": "JensenYuan",
-   "abstract": "diffusers safetensors robotics tactile VTAM ablation license:apache-2.0",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "doi:10.5604/01.3001.0055.9303",
-   "title": "Assessment of the accuracy of mapping spatial relations of real objects in a mixed reality simulatorusing the HTC VIVE tracker",
-   "date": "2026-09-30",
-   "url": "https://doi.org/10.5604/01.3001.0055.9303",
-   "authors": "Piotr Golański",
-   "abstract": "The article is aimed at the issue of combining the real world with the virtual world in mixed reality (MR) simulators. Mixed reality allows for integrating the real world with the virtual world – real objects with computer-generated objects. A person interacting with such a system receives both visual and tactile sensations. To ensure proper interaction with system elements, high reconstruction accuracy of virtual objects in relation to the corresponding real objects is necessary. One tool that allows for interaction with such systems is haptic gloves. The aim of this study was to investigate the feasibility of using such gloves in an MR simulator. The article presents the results of an assessment of the accuracy of representing spatial relations between real objects in the virtual world using the HTC VIVE Tracker inertial sensor mounted on haptic gloves.",
-   "score": 5.0,
-   "hints": [
-    "glove"
-   ],
-   "found_by": [
-    "openalex recent"
-   ],
-   "first_seen": "2026-10-26"
-  },
-  {
-   "key": "hf:datasets/eternpoler/tactile_teleoperation_dataset",
-   "title": "eternpoler/tactile_teleoperation_dataset",
-   "url": "https://huggingface.co/datasets/eternpoler/tactile_teleoperation_dataset",
-   "date": "2026-09-29",
-   "authors": "eternpoler",
-   "abstract": "task_categories:other license:mit tactile-sensing imu magnetometer robotic-grasping teleoperation agriculture",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/ydaichi/smolvla_tactile_color_pen",
-   "title": "ydaichi/smolvla_tactile_color_pen",
-   "url": "https://huggingface.co/ydaichi/smolvla_tactile_color_pen",
-   "date": "2026-09-23",
-   "authors": "ydaichi",
-   "abstract": "lerobot safetensors smolvla robotics dataset:ydaichi/tactile_color_pen arxiv:2506.01844 base_model:lerobot/smolvla_base base_model:finetune:lerobot/smolvla_base license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/jensenyuan/vtam_tactile_latefuse_ablation",
-   "title": "JensenYuan/VTAM_tactile_latefuse_ablation",
-   "url": "https://huggingface.co/JensenYuan/VTAM_tactile_latefuse_ablation",
-   "date": "2026-09-21",
-   "authors": "JensenYuan",
-   "abstract": "diffusers safetensors robotics manipulation tactile world-model ablation diffusion-policy license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "hf models 'tactile'",
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/cookieman12/grab_fish_no_tactile_v1_50k",
-   "title": "Cookieman12/grab_fish_no_tactile_v1_50k",
-   "url": "https://huggingface.co/Cookieman12/grab_fish_no_tactile_v1_50k",
-   "date": "2026-09-09",
-   "authors": "Cookieman12",
-   "abstract": "lerobot safetensors act robotics dataset:Cookieman12/grab_fish_no_tactile_v1 arxiv:2304.13705 license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "doi:10.1002/smll.75582",
-   "title": "Robotic Palpation for Spatiotemporal Arterial Pulse Quantification and Mapping Using Multilevel Microdome‐Based Soft Pressure Sensors",
-   "date": "2026-09-07",
-   "url": "https://doi.org/10.1002/smll.75582",
-   "authors": "Seong‐Min Im et al.",
-   "abstract": "ABSTRACT Humanoid robots have advanced capabilities through physical and physiological examinations, but their reliance on visual information limits biological‐object assessment, underscoring the need for tactile perception. Current tactile systems primarily detect basic contact using a limited number of sensors, hindering accurate soft‐object localization and physiological signal acquisition. This study introduces a robotic palpation strategy by utilizing a fully soft‐tactile‐sensor‐integrated humanoid hand for real‐time spatiotemporal arterial pulse diagnosis. A facile fabrication technique produces an artificial pressure‐sensitive layer with multilevel microscale dome‐on‐dome (DoD) structures using eutectic gallium‐indium, achieving high‐density (>72 500 ea/cm 2 ) and large‐area (wafer‐scale >98% yield) fabrication. The DoD‐integrated pressure sensor exhibits a 7.5 × enhanced dynamic response compared with a single‐level sensing layer, enabling the simultaneous detection of subtle vibrations under high‐pressure conditions. The artificial skin is integrated into a humanoid hand, featuring 81 sensors on the fingertip and a total of 801 sensors on the hand, allowing real‐time spatiotemporal arterial pulse quantification and mapping.",
-   "score": 5.0,
-   "hints": [
-    "hand"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/ydaichi/smolvla_tactile_grab_pen_from_bag",
-   "title": "ydaichi/smolvla_tactile_grab_pen_from_bag",
-   "url": "https://huggingface.co/ydaichi/smolvla_tactile_grab_pen_from_bag",
-   "date": "2026-09-03",
-   "authors": "ydaichi",
-   "abstract": "lerobot safetensors smolvla robotics dataset:ydaichi/tactile_grab_pen_from_bag arxiv:2506.01844 base_model:lerobot/smolvla_base base_model:finetune:lerobot/smolvla_base license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/minifranka/wla_pretrain_diff_codefront_vit_yam_egozed_3k_11k",
-   "title": "miniFranka/wla_pretrain_diff_codefront_ViT_yam_egozed_3k_11k",
-   "url": "https://huggingface.co/miniFranka/wla_pretrain_diff_codefront_ViT_yam_egozed_3k_11k",
-   "date": "2026-09-02",
-   "authors": "miniFranka",
-   "abstract": "pytorch robotics world-model video-language-action diffusion code-generation",
-   "score": 5.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/aryankakad/act_tactile_charger_inserting_20ep",
-   "title": "aryankakad/act_tactile_charger_inserting_20ep",
-   "url": "https://huggingface.co/aryankakad/act_tactile_charger_inserting_20ep",
-   "date": "2026-08-28",
-   "authors": "aryankakad",
-   "abstract": "lerobot safetensors robotics act dataset:aryankakad/tactile_charger_inserting arxiv:2304.13705 license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/jensenyuan/dextacwam_wipe_whiteboard",
-   "title": "JensenYuan/DexTacWAM_wipe_whiteboard",
-   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_wipe_whiteboard",
-   "date": "2026-08-08",
-   "authors": "JensenYuan",
-   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/ydaichi/smolvla_tactile_identify_cubes",
-   "title": "ydaichi/smolvla_tactile_identify_cubes",
-   "url": "https://huggingface.co/ydaichi/smolvla_tactile_identify_cubes",
-   "date": "2026-08-07",
-   "authors": "ydaichi",
-   "abstract": "lerobot safetensors robotics smolvla dataset:ydaichi/tactile_identify_cubes arxiv:2506.01844 base_model:lerobot/smolvla_base base_model:finetune:lerobot/smolvla_base license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/jensenyuan/dextacwam_cube_handover",
-   "title": "JensenYuan/DexTacWAM_cube_handover",
-   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_cube_handover",
-   "date": "2026-08-07",
-   "authors": "JensenYuan",
-   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
+   "first_seen": "2026-10-30"
   },
   {
    "key": "doi:10.1109/case69030.2026.11704244",
@@ -638,318 +128,6 @@
    ],
    "found_by": [
     "openalex cites dataset:feelsight"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/armteam/hapticwam-teleop-raw",
-   "title": "armteam/hapticwam-teleop-raw",
-   "url": "https://huggingface.co/datasets/armteam/hapticwam-teleop-raw",
-   "date": "2026-08-01",
-   "authors": "armteam",
-   "abstract": "license:cc-by-4.0 arxiv:2609.23888 robotics manipulation tactile teleoperation",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'haptic'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/jensenyuan/dextacwam_place_with_tongs",
-   "title": "JensenYuan/DexTacWAM_place_with_tongs",
-   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_place_with_tongs",
-   "date": "2026-08-01",
-   "authors": "JensenYuan",
-   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/jensenyuan/dextacwam_unstack_bowl",
-   "title": "JensenYuan/DexTacWAM_unstack_bowl",
-   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_unstack_bowl",
-   "date": "2026-08-01",
-   "authors": "JensenYuan",
-   "abstract": "task_categories:robotics language:en license:apache-2.0 arxiv:2609.24976 LeRobot robotics manipulation tactile dexterous-manipulation DexTacWAM",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_800009_0729_act_tactile",
-   "title": "Dongkkka/Task_800009_0729_ACT_tactile",
-   "url": "https://huggingface.co/Dongkkka/Task_800009_0729_ACT_tactile",
-   "date": "2026-07-30",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_800009_0729_lerobot",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_800009_0729_act_tactileexpert",
-   "title": "Dongkkka/Task_800009_0729_ACT_tactileexpert",
-   "url": "https://huggingface.co/Dongkkka/Task_800009_0729_ACT_tactileexpert",
-   "date": "2026-07-29",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_800009_0729_lerobot",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/tachintech/tactile_gesture_language",
-   "title": "Tachintech/Tactile_Gesture_Language",
-   "url": "https://huggingface.co/datasets/Tachintech/Tactile_Gesture_Language",
-   "date": "2026-07-28",
-   "authors": "Tachintech",
-   "abstract": "license:gpl-3.0 Tactile",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'",
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/trae1oung/swe-touch",
-   "title": "Trae1ounG/SWE-Touch",
-   "url": "https://huggingface.co/datasets/Trae1ounG/SWE-Touch",
-   "date": "2026-07-26",
-   "authors": "Trae1ounG",
-   "abstract": "task_categories:text-generation license:mit software-engineering coding-agents benchmark swe-bench",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf datasets 'touch'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_800007_act_right_only_tactile_chunk32",
-   "title": "Dongkkka/Task_800007_act_right_only_tactile_chunk32",
-   "url": "https://huggingface.co/Dongkkka/Task_800007_act_right_only_tactile_chunk32",
-   "date": "2026-07-22",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_800007_pick_place_peanut_stage1_MCAP_lerobot_v30_right_only_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/tachintech/tactile-deformation-response",
-   "title": "Tachintech/tactile-deformation-response",
-   "url": "https://huggingface.co/datasets/Tachintech/tactile-deformation-response",
-   "date": "2026-07-22",
-   "authors": "Tachintech",
-   "abstract": "task_categories:robotics language:en license:gpl-3.0 tactile-sensing electronic-skin deformation-response tactile-time-series time-series-classification inary-classification npz robotics",
-   "score": 5.0,
-   "hints": [],
-   "found_by": [
-    "hf datasets 'tactile'",
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_800005_0721_tactile_chunk32",
-   "title": "Dongkkka/Task_800005_0721_tactile_chunk32",
-   "url": "https://huggingface.co/Dongkkka/Task_800005_0721_tactile_chunk32",
-   "date": "2026-07-21",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_800005_pick_place_peanut_stage1_merged0721_lerobot_v30_right_only_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_800004_pick_place_peanut_no_tactile_chunk300",
-   "title": "Dongkkka/Task_800004_pick_place_peanut_no_tactile_chunk300",
-   "url": "https://huggingface.co/Dongkkka/Task_800004_pick_place_peanut_no_tactile_chunk300",
-   "date": "2026-07-20",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_800004_pick_place_peanut_stage1_MCAP_Merged_lerobot_v30_right_only_no_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_800004_pick_place_peanut_no_tactile_chunk50",
-   "title": "Dongkkka/Task_800004_pick_place_peanut_no_tactile_chunk50",
-   "url": "https://huggingface.co/Dongkkka/Task_800004_pick_place_peanut_no_tactile_chunk50",
-   "date": "2026-07-20",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_800004_pick_place_peanut_stage1_MCAP_Merged_lerobot_v30_right_only_no_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_800004_pick_place_peanut_no_tactile_chunk100",
-   "title": "Dongkkka/Task_800004_pick_place_peanut_no_tactile_chunk100",
-   "url": "https://huggingface.co/Dongkkka/Task_800004_pick_place_peanut_no_tactile_chunk100",
-   "date": "2026-07-19",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_800004_pick_place_peanut_stage1_MCAP_Merged_lerobot_v30_right_only_no_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_80003_act_0715_no_tactile",
-   "title": "Dongkkka/Task_80003_ACT_0715_no_tactile",
-   "url": "https://huggingface.co/Dongkkka/Task_80003_ACT_0715_no_tactile",
-   "date": "2026-07-15",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_80003_Pick_Place_Peanut_0715_lerobot_v30_right_only_no_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_80002_pick_place_snack_0710_act_no_odom_tactile",
-   "title": "Dongkkka/Task_80002_Pick_Place_Snack_0710_act_no_odom_tactile",
-   "url": "https://huggingface.co/Dongkkka/Task_80002_Pick_Place_Snack_0710_act_no_odom_tactile",
-   "date": "2026-07-13",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_80002_Pick_Place_Snack_0710_lerobot_v30_no_odom_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_80002_pick_place_snack_0710_act_tactile",
-   "title": "Dongkkka/Task_80002_Pick_Place_Snack_0710_act_tactile",
-   "url": "https://huggingface.co/Dongkkka/Task_80002_Pick_Place_Snack_0710_act_tactile",
-   "date": "2026-07-13",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_80002_Pick_Place_Snack_0710_lerobot_v30",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/dongkkka/task_80002_pick_place_snack_0710_act_no_tactile",
-   "title": "Dongkkka/Task_80002_Pick_Place_Snack_0710_act_no_tactile",
-   "url": "https://huggingface.co/Dongkkka/Task_80002_Pick_Place_Snack_0710_act_no_tactile",
-   "date": "2026-07-13",
-   "authors": "Dongkkka",
-   "abstract": "safetensors robotis cyclo_intelligence robotics dataset:Task_80002_Pick_Place_Snack_0710_lerobot_v30_no_tactile",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:datasets/jimingyang/touch-vision-language-dataset",
-   "title": "JimingYang/Touch-Vision-Language-Dataset",
-   "url": "https://huggingface.co/datasets/JimingYang/Touch-Vision-Language-Dataset",
-   "date": "2026-07-05",
-   "authors": "JimingYang",
-   "abstract": "arxiv:2402.13232",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf datasets 'touch'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/woojongkim/smolvla_omx_test_10000_v6_lerobot_tactiletest",
-   "title": "WoojongKim/smolvla_omx_test_10000_v6_lerobot_tactiletest",
-   "url": "https://huggingface.co/WoojongKim/smolvla_omx_test_10000_v6_lerobot_tactiletest",
-   "date": "2026-07-02",
-   "authors": "WoojongKim",
-   "abstract": "lerobot safetensors smolvla robotics dataset:WoojongKim/omx_f_Test_Simcom_6_lerobot_tactiletest arxiv:2506.01844 base_model:lerobot/smolvla_base base_model:finetune:lerobot/smolvla_base license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
-   ],
-   "first_seen": "2026-10-25"
-  },
-  {
-   "key": "hf:models/woojongkim/smolvla_omx_test_10000_v5_lerobot_tactiletest",
-   "title": "WoojongKim/smolvla_omx_test_10000_v5_lerobot_tactiletest",
-   "url": "https://huggingface.co/WoojongKim/smolvla_omx_test_10000_v5_lerobot_tactiletest",
-   "date": "2026-07-01",
-   "authors": "WoojongKim",
-   "abstract": "lerobot safetensors smolvla robotics dataset:WoojongKim/omx_f_Test_Simcom_4_lerobot_tactiletest arxiv:2506.01844 base_model:lerobot/smolvla_base base_model:finetune:lerobot/smolvla_base license:apache-2.0",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "hf models 'tactile'"
    ],
    "first_seen": "2026-10-25"
   },
@@ -1109,8 +287,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-10-29"
   },
@@ -2663,8 +1841,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-10-29"
   },
@@ -2777,7 +1955,8 @@
     "glove"
    ],
    "found_by": [
-    "openalex backfill 2015-10"
+    "openalex backfill 2015-10",
+    "openalex backfill 2016-01"
    ],
    "first_seen": "2026-10-29"
   },
@@ -2908,6 +2087,22 @@
     "openalex backfill 2015-04"
    ],
    "first_seen": "2026-10-27"
+  },
+  {
+   "key": "gh:tacclaw-infinity/tacclaw-infinity.github.io",
+   "title": "tacclaw-infinity/tacclaw-infinity.github.io",
+   "url": "https://github.com/tacclaw-infinity/tacclaw-infinity.github.io",
+   "date": "2026-10-30",
+   "authors": "tacclaw-infinity",
+   "abstract": "Project page for TacClaw-Infinity: A Large-Scale Vision-Tactile-Language-Action Dataset for Dexterous Manipulation.",
+   "score": 4.5,
+   "hints": [
+    "dataset"
+   ],
+   "found_by": [
+    "github 'tactile dexterous dataset'"
+   ],
+   "first_seen": "2026-10-30"
   },
   {
    "key": "arxiv:2610.28519",
@@ -3718,6 +2913,23 @@
    "first_seen": "2026-10-26"
   },
   {
+   "key": "openalex:W2622428651",
+   "title": "Tactile-based control of a dexterous hand prosthesis",
+   "date": "2016-01-07",
+   "url": "https://openalex.org/W2622428651",
+   "authors": "de Oliveira Viegas et al.",
+   "abstract": "This thesis evaluated several aspects which are necessary to interpret the intents of an amputee in order to control a dexterous hand prosthesis. Several experiments were performed to evaluate and improve the hardware of the Tactile Bracelet, a new Human-Machine-Interface presented in [Koi15]. Also all steps involved in a pattern classification-based control system were investigated to develop a system which contains preprocessing, feature extraction and classification. Relevant information contained in the data of 320 tactile sensors of the Tactile Bracelet was extracted through ROI gradients [Cas12].\r\nDifferent non-parametric classifiers were tested to classify different finger and wrist movements performed by intact subjects, as well as by an hand amputee. The classifiers tested were: the k-Nearest-Neighbor (kNN) using the Euclidean distance and the Nearest Cluster Classifier\r\n(NCC) using the Euclidean distance and also using the Mahalanobis distance. Balanced accuracy of the kNN and the NCC using the Euclidean distance applied on data sets containing finger and wrist movements was for the intact subjects as well as for the data recorded from an amputee\r\nbetween 72% and 74%. In case of applying the same classifiers only on wrist movements, the results were above the 95% and for the data recorded from the amputee almost 100% for both classifiers. Through this experiments, it was possible to conclude that different wrist movements can be predicted robustly through simple cla",
+   "score": 4.5,
+   "hints": [
+    "hand",
+    "dataset"
+   ],
+   "found_by": [
+    "openalex backfill 2016-01"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
    "key": "doi:10.1109/humanoids.2015.7363441",
    "title": "MuJoCo HAPTIX: A virtual reality system for hand manipulation",
    "date": "2015-11-01",
@@ -3733,6 +2945,92 @@
     "openalex backfill 2015-10"
    ],
    "first_seen": "2026-10-29"
+  },
+  {
+   "key": "arxiv:2610.40349",
+   "title": "TouchBridge: Tactile-Conditioned Human-to-Robot Transfer for Dexterous Manipulation",
+   "url": "https://arxiv.org/abs/2610.40349",
+   "date": "2026-10-29",
+   "authors": "Haozhe Zhang et al.",
+   "abstract": "Human demonstrations offer an efficient and scalable source of data for dexterous robot manipulation, but differences in sensing and hand morphology complicate the transfer of contact-rich interactions. We present TouchBridge, a hardware--software co-designed framework for human-to-robot data transformation. A wearable human demonstration interface and a corresponding robot interface establish cross-embodiment correspondence in visual and fingertip tactile sensing. We introduce Tac-Retarget, a tactile-conditioned retargeting method that uses measured contact to align fingertip contact patches and preserve their spatial relations within and across hands. Unlike object-aware or simulation-based transfer pipelines, Tac-Retarget requires no object mesh, object-pose estimate, or physics simulation for retargeting, enabling direct and scalable conversion of human demonstrations into robot-domain training data. Combined with visual synthesis and camera-anchored action conversion, TouchBridge produces robot-domain demonstrations for fine-tuning a pretrained vision-language-action (VLA) model. Across four real-world contact-rich tasks, policies fine-tuned solely on TouchBridge-converted human demonstrations achieve a 72.5% average success rate, compared with 77.5% using an equal number of teleoperated robot demonstrations, while human demonstration collection is 7.0x faster. Under the same policy and training setup, Tac-Retarget outperforms DexPilot and UniDex by 25.0 and 42.5 percent",
+   "score": 4.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "arxiv recent"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/jingi0138/fold-glasses-chunk-held-tactile-failure",
+   "title": "JINGI0138/fold-glasses-chunk-held-tactile-failure",
+   "url": "https://huggingface.co/datasets/JINGI0138/fold-glasses-chunk-held-tactile-failure",
+   "date": "2026-10-29",
+   "authors": "JINGI0138",
+   "abstract": "robotics lerobot tactile",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf datasets 'tactile'"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/jingi0138/fold-glasses-chunk-held-tactile-success",
+   "title": "JINGI0138/fold-glasses-chunk-held-tactile-success",
+   "url": "https://huggingface.co/datasets/JINGI0138/fold-glasses-chunk-held-tactile-success",
+   "date": "2026-10-29",
+   "authors": "JINGI0138",
+   "abstract": "robotics lerobot tactile",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf datasets 'tactile'"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/jingi0138/fold-glasses-full-tactile-failure",
+   "title": "JINGI0138/fold-glasses-full-tactile-failure",
+   "url": "https://huggingface.co/datasets/JINGI0138/fold-glasses-full-tactile-failure",
+   "date": "2026-10-29",
+   "authors": "JINGI0138",
+   "abstract": "robotics lerobot tactile",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf datasets 'tactile'"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/jingi0138/fold-glasses-full-tactile-success",
+   "title": "JINGI0138/fold-glasses-full-tactile-success",
+   "url": "https://huggingface.co/datasets/JINGI0138/fold-glasses-full-tactile-success",
+   "date": "2026-10-29",
+   "authors": "JINGI0138",
+   "abstract": "robotics lerobot tactile",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf datasets 'tactile'"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/dongkkka/gr00t-n1.7-sh5-task000802-tactile-200k",
+   "title": "Dongkkka/GR00T-N1.7-SH5-Task000802-Tactile-200k",
+   "url": "https://huggingface.co/Dongkkka/GR00T-N1.7-SH5-Task000802-Tactile-200k",
+   "date": "2026-10-29",
+   "authors": "Dongkkka",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf models 'tactile'"
+   ],
+   "first_seen": "2026-10-30"
   },
   {
    "key": "hf:datasets/usc-psi-lab/simple-decoupled-wbc",
@@ -4751,20 +4049,6 @@
    "first_seen": "2026-10-27"
   },
   {
-   "key": "hf:datasets/singlebicycle/tacwam-pick-up-bottle",
-   "title": "SingleBicycle/tacwam-pick-up-bottle",
-   "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-pick-up-bottle",
-   "date": "2026-08-25",
-   "authors": "SingleBicycle",
-   "abstract": "",
-   "score": 4.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-10-29"
-  },
-  {
    "key": "hf:datasets/carolinepascal/grabette-tactile-full-synced-cartesian",
    "title": "CarolinePascal/grabette-tactile-full-synced-cartesian",
    "url": "https://huggingface.co/datasets/CarolinePascal/grabette-tactile-full-synced-cartesian",
@@ -5015,6 +4299,22 @@
     "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-28"
+  },
+  {
+   "key": "doi:10.3390/app16178383",
+   "title": "Bimanual Tactile-Augmented Teleoperation for Contact-Rich Robotic Manipulation: A Pilot Evaluation",
+   "date": "2026-08-23",
+   "url": "https://doi.org/10.3390/app16178383",
+   "authors": "Xiaohang Shi et al.",
+   "abstract": "Recent advances in robotics have highlighted the importance of multimodal perception for dexterous manipulation in contact-rich environments. Here we present BiTAT, a bimanual tactile-augmented teleoperation system for collecting multimodal human demonstrations and learning manipulation policies. The system integrates custom capacitive tactile sensors into parallel grippers and displays the resulting contact-deformation images to the operator. We evaluated the system in four controlled laboratory tasks: USB removal/insertion, bottle cap unscrewing, cucumber peeling, and toothpaste squeezing. In a pilot repeated-measures study with eight laboratory participants, visual tactile feedback was associated with success-rate increases of 12.5–32.5 percentage points and shorter completion times among successful trials. We further propose a multimodal Diffusion Policy that fuses visual, tactile, and proprioceptive features through a Transformer encoder. In two fixed-layout autonomous tasks, the complete model achieved higher observed success rates than the vision-only baseline, including a 45-percentage-point difference in the 50-demonstration toothpaste-squeezing setting. Together, these results demonstrate the feasibility of the proposed hardware–policy pipeline and suggest that tactile augmentation benefits both human teleoperation and learned manipulation policies in contact-rich tasks.",
+   "score": 4.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites model:vtao_bimanip"
+   ],
+   "first_seen": "2026-10-30"
   },
   {
    "key": "hf:models/wjstx/pick_tube_05_tactile_decoder_deploy",
@@ -6055,6 +5355,638 @@
     "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-29"
+  },
+  {
+   "key": "hf:datasets/usc-psi-lab/psi-data",
+   "title": "USC-PSI-Lab/psi-data",
+   "url": "https://huggingface.co/datasets/USC-PSI-Lab/psi-data",
+   "date": "2026-02-18",
+   "authors": "USC-PSI-Lab",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "title": "JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "url": "https://huggingface.co/datasets/JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "date": "2026-02-17",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/jensenyuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "title": "JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "url": "https://huggingface.co/JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "date": "2026-02-17",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/unihand_preview",
+   "title": "BeingBeyond/UniHand_Preview",
+   "url": "https://huggingface.co/datasets/BeingBeyond/UniHand_Preview",
+   "date": "2026-02-13",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/robointer-vlm_qwenvl25_3b",
+   "title": "InternRobotics/RoboInter-VLM_qwenvl25_3b",
+   "url": "https://huggingface.co/InternRobotics/RoboInter-VLM_qwenvl25_3b",
+   "date": "2026-02-12",
+   "authors": "InternRobotics",
+   "abstract": "transformers safetensors qwen2_5_vl image-text-to-text robotics vision-language-action-model vision-language-model arxiv:2602.09973 base_model:Qwen/Qwen2.5-VL-3B-Instruct base_model:finetune:Qwen/Qwen2.5-VL-3B-Instruct license:apache-2.0 text-generation-inference endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/robointer-vlm_llavaov_7b",
+   "title": "InternRobotics/RoboInter-VLM_llavaov_7B",
+   "url": "https://huggingface.co/InternRobotics/RoboInter-VLM_llavaov_7B",
+   "date": "2026-02-12",
+   "authors": "InternRobotics",
+   "abstract": "safetensors llava_qwen robotics vision-language-action-model vision-language-model arxiv:2602.09973 base_model:lmms-lab/llava-onevision-qwen2-7b-ov base_model:finetune:lmms-lab/llava-onevision-qwen2-7b-ov license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/internrobotics/robointer-vqa",
+   "title": "InternRobotics/RoboInter-VQA",
+   "url": "https://huggingface.co/datasets/InternRobotics/RoboInter-VQA",
+   "date": "2026-02-03",
+   "authors": "InternRobotics",
+   "abstract": "task_categories:robotics task_categories:visual-question-answering language:en arxiv:2602.09973 Embodied-AI Robotic manipulation intermediate-representation",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/internrobotics/robointer-data",
+   "title": "InternRobotics/RoboInter-Data",
+   "url": "https://huggingface.co/datasets/InternRobotics/RoboInter-Data",
+   "date": "2026-02-03",
+   "authors": "InternRobotics",
+   "abstract": "task_categories:robotics language:en arxiv:2602.09973 Embodied-AI Robotic manipulation intermediate-representation",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/robointer-vlm",
+   "title": "InternRobotics/RoboInter-VLM",
+   "url": "https://huggingface.co/InternRobotics/RoboInter-VLM",
+   "date": "2026-02-03",
+   "authors": "InternRobotics",
+   "abstract": "transformers safetensors qwen2_5_vl image-text-to-text robotics vision-language-action-model vision-language-model arxiv:2602.09973 base_model:Qwen/Qwen2.5-VL-7B-Instruct base_model:finetune:Qwen/Qwen2.5-VL-7B-Instruct license:apache-2.0 text-generation-inference endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/robocasa_human_single_lerobot",
+   "title": "BeingBeyond/robocasa_human_single_lerobot",
+   "url": "https://huggingface.co/datasets/BeingBeyond/robocasa_human_single_lerobot",
+   "date": "2026-01-27",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "doi:10.1002/adfm.202527673",
+   "title": "An AI‐Powered, All‐Printed, Scalable, Stretchable Triboelectric E‐Skin for Multifunctional Perception in Dexterous Hand",
+   "date": "2026-01-24",
+   "url": "https://doi.org/10.1002/adfm.202527673",
+   "authors": "Zhaoya Chen et al.",
+   "abstract": "ABSTRACT Achieving human‐like dexterity in robotic hands requires electronic skins (E‐skins) that seamlessly integrate multifunctional sensing, decision‐making, and interactive control. However, existing E‐skins for dexterous hands remain limited to single sensing modalities and face scalability challenges due to complex manufacturing processes. Here, we present a triboelectric E‐skin (TE‐Skin) that overcomes the above limitations via an interfacial compression‐assisted coaxial printing technique. This approach enables the scalable fabrication of ultra‐thin sensory arrays that conformably integrate with the entire robotic hand—fingertips, palm, and dorsum. The TE‐Skin simultaneously enables tactile pressure mapping, dynamic trajectory recognition, material discrimination, secure user authentication, and gesture‐based control. Crucially, deep learning algorithms decode complex triboelectric signals, allowing the system to achieve over 95% accuracy in material recognition and user identification. By merging scalable manufacturing and multifunctional sensing, this work provides a versatile platform for next‐generation robotic manipulation and natural human–robot interaction.",
+   "score": 4.0,
+   "hints": [
+    "hand"
+   ],
+   "found_by": [
+    "openalex cites dataset:feelsight"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/tianxingchen/wbcd-2026",
+   "title": "TianxingChen/WBCD-2026",
+   "url": "https://huggingface.co/datasets/TianxingChen/WBCD-2026",
+   "date": "2026-01-24",
+   "authors": "TianxingChen",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_wipe-board",
+   "title": "BeingBeyond/PND_Adam-U_wipe-board",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_wipe-board",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_pull-wheel",
+   "title": "BeingBeyond/PND_Adam-U_pull-wheel",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_pull-wheel",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_pour-cup",
+   "title": "BeingBeyond/PND_Adam-U_pour-cup",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_pour-cup",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_pick-to-drawer",
+   "title": "BeingBeyond/PND_Adam-U_pick-to-drawer",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_pick-to-drawer",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_pick-simple_speed2x",
+   "title": "BeingBeyond/PND_Adam-U_pick-simple_speed2x",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_pick-simple_speed2x",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_pick-simple",
+   "title": "BeingBeyond/PND_Adam-U_pick-simple",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_pick-simple",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_pick-handover",
+   "title": "BeingBeyond/PND_Adam-U_pick-handover",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_pick-handover",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_pick-bottle",
+   "title": "BeingBeyond/PND_Adam-U_pick-bottle",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_pick-bottle",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/pnd_adam-u_arange-flower",
+   "title": "BeingBeyond/PND_Adam-U_arange-flower",
+   "url": "https://huggingface.co/datasets/BeingBeyond/PND_Adam-U_arange-flower",
+   "date": "2026-01-21",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics license:cc-by-4.0 arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/beingbeyond/being-h05-2b_libero_robocasa",
+   "title": "BeingBeyond/Being-H05-2B_libero_robocasa",
+   "url": "https://huggingface.co/BeingBeyond/Being-H05-2B_libero_robocasa",
+   "date": "2026-01-19",
+   "authors": "BeingBeyond",
+   "abstract": "safetensors beingh vla robotics arxiv:2601.12993 arxiv:2507.15597 base_model:BeingBeyond/Being-H05-2B base_model:finetune:BeingBeyond/Being-H05-2B license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/beingbeyond/being-h05-2b_robocasa",
+   "title": "BeingBeyond/Being-H05-2B_robocasa",
+   "url": "https://huggingface.co/BeingBeyond/Being-H05-2B_robocasa",
+   "date": "2026-01-19",
+   "authors": "BeingBeyond",
+   "abstract": "safetensors beingh vla robotics arxiv:2601.12993 arxiv:2507.15597 base_model:BeingBeyond/Being-H05-2B base_model:finetune:BeingBeyond/Being-H05-2B license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/beingbeyond/being-h05-2b_libero",
+   "title": "BeingBeyond/Being-H05-2B_libero",
+   "url": "https://huggingface.co/BeingBeyond/Being-H05-2B_libero",
+   "date": "2026-01-19",
+   "authors": "BeingBeyond",
+   "abstract": "safetensors beingh vla robotics arxiv:2601.12993 arxiv:2507.15597 base_model:BeingBeyond/Being-H05-2B base_model:finetune:BeingBeyond/Being-H05-2B license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/beingbeyond/being-h05-2b",
+   "title": "BeingBeyond/Being-H05-2B",
+   "url": "https://huggingface.co/BeingBeyond/Being-H05-2B",
+   "date": "2026-01-19",
+   "authors": "BeingBeyond",
+   "abstract": "safetensors beingh vla robotics arxiv:2601.12993 arxiv:2507.15597 base_model:BeingBeyond/Being-H05-2B base_model:finetune:BeingBeyond/Being-H05-2B license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "doi:10.3390/biomimetics11010064",
+   "title": "Preload-Free Conformal Integration of Tactile Sensors on the Fingertip’s Curved Surface",
+   "date": "2026-01-12",
+   "url": "https://doi.org/10.3390/biomimetics11010064",
+   "authors": "Lei Liu et al.",
+   "abstract": "Humans could sensitively perceive and identify objects through dense mechanoreceptors distributed on the skin of curved fingertips. Inspired by this biological structure, this study presents a general conformal integration method for flexible tactile sensors on curved fingertip surfaces. By adopting a spherical partition design and an inverse mode auxiliary layering process, it ensures the uniform distribution of stress at different curvatures. The sensor adopts a 3 × 3 tactile array configuration, replicating the 3D curved surface distribution of human mechanoreceptors. By analyzing multi-point outputs, the sensor reconstructs contact pressure gradients and infers the softness or stiffness of touched objects, thereby realizing both structural and functional bionics. These sensors exhibit excellent linearity within 0–100 kPa (sensitivity ≈ 36.86 kPa−1), fast response (2 ms), and outstanding durability (signal decay of only 1.94% after 30,000 cycles). It is worth noting that this conformal tactile fingertip integration method not only exhibits uniform responses at each unit, but also has the preload-free advantage, and then performs well in pulse detection and hardness discrimination. This work provides a novel bioinspired pathway for conformal integration of tactile sensors, enabling artificial skins and robotic fingertips with human-like tactile perception.",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "openalex cites dataset:stag"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/lejurobotics/kuavo_data_challenge_icra",
+   "title": "LejuRobotics/kuavo_data_challenge_icra",
+   "url": "https://huggingface.co/datasets/LejuRobotics/kuavo_data_challenge_icra",
+   "date": "2026-01-04",
+   "authors": "LejuRobotics",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/internrobotics/vl-ln-bench",
+   "title": "InternRobotics/VL-LN-Bench",
+   "url": "https://huggingface.co/datasets/InternRobotics/VL-LN-Bench",
+   "date": "2025-12-30",
+   "authors": "InternRobotics",
+   "abstract": "task_categories:robotics language:en license:cc-by-sa-4.0 arxiv:2512.22342 navigation",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/vl-ln-bench-basemodel",
+   "title": "InternRobotics/VL-LN-Bench-basemodel",
+   "url": "https://huggingface.co/InternRobotics/VL-LN-Bench-basemodel",
+   "date": "2025-12-26",
+   "authors": "InternRobotics",
+   "abstract": "transformers safetensors qwen2_5_vl image-text-to-text robotics arxiv:2512.22342 license:cc-by-nc-sa-4.0 text-generation-inference endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/beingbeyond/beingvl-vbpe-8k_exp",
+   "title": "BeingBeyond/BeingVL-vBPE-8K_exp",
+   "url": "https://huggingface.co/BeingBeyond/BeingVL-vBPE-8K_exp",
+   "date": "2025-12-22",
+   "authors": "BeingBeyond",
+   "abstract": "license:mit",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-aloha-dual-burger-delivery-01",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-aloha-dual-burger-delivery-01",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-aloha-dual-burger-delivery-01",
+   "date": "2025-12-12",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/minifranka/pi0_bridgev2_sft",
+   "title": "miniFranka/pi0_bridgev2_sft",
+   "url": "https://huggingface.co/miniFranka/pi0_bridgev2_sft",
+   "date": "2025-12-11",
+   "authors": "miniFranka",
+   "abstract": "safetensors",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/internvla-n1-dualvln",
+   "title": "InternRobotics/InternVLA-N1-DualVLN",
+   "url": "https://huggingface.co/InternRobotics/InternVLA-N1-DualVLN",
+   "date": "2025-12-10",
+   "authors": "InternRobotics",
+   "abstract": "safetensors internvla_n1 arxiv:2512.08186",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/internvla-n1-w-navdp",
+   "title": "InternRobotics/InternVLA-N1-w-NavDP",
+   "url": "https://huggingface.co/InternRobotics/InternVLA-N1-w-NavDP",
+   "date": "2025-12-10",
+   "authors": "InternRobotics",
+   "abstract": "safetensors internvla_n1 arxiv:2512.08186",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/internvla-n1-system2",
+   "title": "InternRobotics/InternVLA-N1-System2",
+   "url": "https://huggingface.co/InternRobotics/InternVLA-N1-System2",
+   "date": "2025-12-10",
+   "authors": "InternRobotics",
+   "abstract": "safetensors qwen2_5_vl arxiv:2512.08186",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-koch-arm-to-the-shelf-01",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-koch-arm-to-the-shelf-01",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-koch-arm-to-the-shelf-01",
+   "date": "2025-12-10",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-koch-arm-over-the-barrier-01",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-koch-arm-over-the-barrier-01",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-koch-arm-over-the-barrier-01",
+   "date": "2025-12-10",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-so-arm-101-red-cube-01",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-so-arm-101-red-cube-01",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-so-arm-101-red-cube-01",
+   "date": "2025-12-10",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-over-the-barrier-04",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-over-the-barrier-04",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-over-the-barrier-04",
+   "date": "2025-12-05",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/acerobotics/kairos-sensenova-robot",
+   "title": "ACERobotics/kairos-sensenova-robot",
+   "url": "https://huggingface.co/ACERobotics/kairos-sensenova-robot",
+   "date": "2025-12-03",
+   "authors": "ACERobotics",
+   "abstract": "diffusion worldmodel video-generation text-to-video zh en license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/acerobotics/kairos-sensenova-common",
+   "title": "ACERobotics/kairos-sensenova-common",
+   "url": "https://huggingface.co/ACERobotics/kairos-sensenova-common",
+   "date": "2025-12-03",
+   "authors": "ACERobotics",
+   "abstract": "diffusion worldmodel video-generation text-to-video zh en license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:models/internrobotics/g2vlm-2b-mot",
+   "title": "InternRobotics/G2VLM-2B-MoT",
+   "url": "https://huggingface.co/InternRobotics/G2VLM-2B-MoT",
+   "date": "2025-11-26",
+   "authors": "InternRobotics",
+   "abstract": "transformers safetensors multimodal image-text-to-text en arxiv:2511.21688 base_model:Qwen/Qwen2-VL-2B base_model:finetune:Qwen/Qwen2-VL-2B license:apache-2.0 endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-burger-delivery-01",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-burger-delivery-01",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-burger-delivery-01",
+   "date": "2025-11-26",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-over-the-barrier-03",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-over-the-barrier-03",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-over-the-barrier-03",
+   "date": "2025-11-24",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
+  },
+  {
+   "key": "hf:datasets/opengraphlabs-research/lerobot-simulation-to-the-shelf-02",
+   "title": "OpenGraphLabs-Research/lerobot-simulation-to-the-shelf-02",
+   "url": "https://huggingface.co/datasets/OpenGraphLabs-Research/lerobot-simulation-to-the-shelf-02",
+   "date": "2025-11-19",
+   "authors": "OpenGraphLabs-Research",
+   "abstract": "task_categories:robotics license:apache-2.0 LeRobot",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-10-30"
   }
  ]
 }

@@ -10790,6 +10790,125 @@
      "diversity": false
     }
    }
+  },
+  {
+   "id": "hora",
+   "name": "HORA",
+   "title": "RoboWheel: A Data Engine from Real-World Human Demonstrations for Cross-Embodiment Robotic Learning",
+   "authors": "Yuhong Zhang et al.",
+   "year": 2025,
+   "venue": "arXiv 2512.02729",
+   "summary": "Human hand-object interactions recorded with a Paxini EVT2 glove (16 tactile sensors on fingertips, finger pads and palm; 29 magnetic joint encoders) and up to 11 synchronized cameras (3 RealSense D455 RGB-D), released as 63,141 HDF5 trajectories with MANO hand fits, 6-DoF object pose, contact labels and hand and object tactile maps, inside the ~150k-trajectory HORA set built by the RoboWheel data engine.",
+   "embodiment": "human",
+   "hand": "Human hand in a Paxini EVT2 glove (29 magnetic joint encoders, 16 tactile sensors); one or both hands not stated",
+   "bimanual": null,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "sensors_per_hand": 16,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": null,
+    "note": "Paper: '16 Gen3 tactile (haptic) sensors mounted on key contact regions (fingertips, finger pads, and palm)' for local normal force. Card: tactile_hand and tactile_object are 'dense tactile map' arrays (time x sensors/vertices), Mocap subset only. Shape, rate and units not stated; files not opened.",
+    "maker": "Paxini",
+    "model": "EVT2 glove (Gen3 tactile sensors)",
+    "principle": "unspecified",
+    "range": null,
+    "calibrated": null
+   },
+   "modalities": [
+    "multiview_rgb",
+    "depth",
+    "hand_pose",
+    "object_pose",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 63141,
+    "frames": null,
+    "tasks": null,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [],
+    "text": "HORA(Mocap) 63,141 trajectories with glove touch; HORA(Recordings) 23,560 and HORA(Public Dataset) 66,924 without touch; ~150k trajectories and 918.1 GB in total. Subjects, objects, tasks and hours not stated."
+   },
+   "availability": "public",
+   "access": "Hugging Face HORA-DB/HORA, ungated: per-episode HDF5 files under Mocap/<object id>/ with object assets under Mocap/object/, and a Recordings/ folder for the subset without touch.",
+   "license": "Apache-2.0",
+   "caveats": [
+    "Touch comes from 16 discrete Paxini sensors per glove; the released 'dense tactile map' for the hand and the object is not defined in the paper or the card, and no object-side sensor is described, so the object map is likely derived from the glove and contact fitting.",
+    "Only the Mocap subset (63,141 trajectories) carries touch; the Recordings (23,560) and Public Dataset (66,924, retargeted from public HOI corpora) subsets have none.",
+    "On 2026-10-30 the Hugging Face Mocap/ folder held 9 object folders (100017 to 101152) and their assets; whether these contain all 63,141 trajectories was not checked.",
+    "Number of participants, objects, tasks, recording hours, glove and camera rates, and whether one or both hands wear the glove are not stated in the paper or the card.",
+    "The card's robot fields (gripper states, end-effector pose, joint-space actions for 6/7-DoF arms) come from retargeting in the RoboWheel pipeline; no robot hand touch is recorded.",
+    "The data card states Apache-2.0; the arXiv paper text itself is CC BY-NC-ND 4.0."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2512.02729",
+    "project": "https://zhangyuhong01.github.io/Robowheel",
+    "data": "https://huggingface.co/datasets/HORA-DB/HORA",
+    "code": "https://github.com/zhangyuhong01/Robowheel-Toolkits"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "third_person",
+      "count": 3,
+      "model": "Intel RealSense D455",
+      "type": "RGB-D",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     },
+     {
+      "role": "third_person",
+      "count": 8,
+      "model": null,
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": true,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "other",
+      "system": "Paxini EVT2 glove",
+      "note": "29 magnetic encoders over the wrist, palm and phalanges; glove signals and multi-view video are used to fit MANO parameters"
+     },
+     {
+      "target": "object",
+      "method": "other",
+      "system": "multi-view camera rig",
+      "note": "6-DoF object pose released; estimation method for the Mocap subset not stated"
+     }
+    ],
+    "other": [
+     "hand-object contact annotations",
+     "object meshes and assets"
+    ]
+   },
+   "sources": [
+    "https://arxiv.org/abs/2512.02729 (arXiv API metadata)",
+    "https://arxiv.org/html/2512.02729 (dataset and capture sections, first 100,000 characters)",
+    "https://zhangyuhong01.github.io/Robowheel",
+    "https://huggingface.co/datasets/HORA-DB/HORA (README.md, repository metadata, commit history, tree listing of Mocap/, Mocap/100017 and Mocap/object)"
+   ],
+   "unconfirmed": [
+    "episodes=63,141 is the HORA(Mocap) count from the card and paper Table 1; the released files were not counted.",
+    "Mocap/100017 lists HDF5 files of 4.5-5.4 MB each (first 15 files seen); other folders not listed.",
+    "Sensing principle not stated for the Gen3 sensors; Paxini's other catalogued products use Hall-effect (magnetic) tactile arrays.",
+    "The Paxini EVT2 glove has no maker page in the catalog's sources and is not in data/hardware.json."
+   ]
   }
  ]
 }
