@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-29T08:33:13Z",
+ "generated": "2026-10-30T08:33:08Z",
  "baseline": false,
- "urls_checked": 255,
- "seconds": 191,
+ "urls_checked": 260,
+ "seconds": 187,
  "signals": [
   {
    "kind": "dataset",
@@ -11,71 +11,7 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://huggingface.co/front/build/kube-b10384e/index.js https://huggingface.co/front/build/kube-b10384e/katex.css https://huggingface.co/front/build/kube-b10384e/style.css",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "egoforce",
-   "name": "EgoForce",
-   "url": "https://fact-1-0.github.io/",
-   "priority": 1,
-   "type": "phrase_removed",
-   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) Real-world task demonstrations Task Demonstratio",
-   "availability": "announced"
-  },
-  {
-   "kind": "dataset",
-   "id": "tacdex3d",
-   "name": "3dtacdex",
-   "url": "https://huggingface.co/datasets/kingchou007/3dtacdex",
-   "priority": 1,
-   "type": "hf_license",
-   "detail": "None -> mit",
-   "availability": "public"
-  },
-  {
-   "kind": "model",
-   "id": "fact",
-   "name": "FACT",
-   "url": "https://fact-1-0.github.io/",
-   "priority": 1,
-   "type": "phrase_removed",
-   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) Real-world task demonstrations Task Demonstratio",
-   "availability": {
-    "code": "announced",
-    "weights": "not_released",
-    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
-   }
-  },
-  {
-   "kind": "dataset",
-   "id": "ftp1_sharpa",
-   "name": "Sharpa North-FTP-1",
-   "url": "https://arxiv.org/abs/2606.13102",
-   "priority": 2,
-   "type": "arxiv_version",
-   "detail": "3 -> 4",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "pulse",
-   "name": "PULSE",
-   "url": "https://huggingface.co/datasets/velvet-pine-22/PULSE",
-   "priority": 2,
-   "type": "hf_commit",
-   "detail": "files 3654 -> 3653, last modified 2026-10-29T06:05:16.000Z",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "pulse",
-   "name": "PULSE",
-   "url": "https://huggingface.co/velvet-pine-22/PULSE-code",
-   "priority": 2,
-   "type": "hf_commit",
-   "detail": "files 131 -> 257, last modified 2026-10-29T06:02:03.000Z",
+   "detail": "https://huggingface.co/front/build/kube-6c835fa/index.js https://huggingface.co/front/build/kube-6c835fa/katex.css https://huggingface.co/front/build/kube-6c835fa/style.css",
    "availability": "public"
   },
   {
@@ -85,22 +21,8 @@
    "url": "https://huggingface.co/datasets/kingchou007/3dtacdex",
    "priority": 2,
    "type": "hf_commit",
-   "detail": "files 547 -> 553, last modified 2026-10-28T08:58:19.000Z",
+   "detail": "files 553 -> 6, last modified 2026-10-29T22:52:49.000Z",
    "availability": "public"
-  },
-  {
-   "kind": "model",
-   "id": "ftp1",
-   "name": "FTP-1",
-   "url": "https://arxiv.org/abs/2606.13102",
-   "priority": 2,
-   "type": "arxiv_version",
-   "detail": "3 -> 4",
-   "availability": {
-    "code": "released",
-    "weights": "released",
-    "note": "GitHub michaelyuancb/ftp1-policy (fine-tuning and pretraining code, built on openpi). Hugging Face MJJJJ1064/ftp1_v0426_50kstep (50k-step pretrained checkpoint) and MJJJJ1064/ftp1_univtac_finetune (6 UniVTAC task checkpoints), mirrored on ModelScope. Abstract: 'Pretrained models, datasets, training code and more visualization at' the project page, which links the code, the pretrained checkpoint and the dataset."
-   }
   },
   {
    "kind": "dataset",
@@ -109,7 +31,7 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "links_removed",
-   "detail": "https://huggingface.co/front/build/kube-304a4a0/index.js https://huggingface.co/front/build/kube-304a4a0/katex.css https://huggingface.co/front/build/kube-304a4a0/style.css",
+   "detail": "https://huggingface.co/front/build/kube-b10384e/index.js https://huggingface.co/front/build/kube-b10384e/katex.css https://huggingface.co/front/build/kube-b10384e/style.css",
    "availability": "public"
   },
   {
@@ -118,8 +40,8 @@
    "name": "EgoForce",
    "url": "https://fact-1-0.github.io/",
    "priority": 3,
-   "type": "phrase_added",
-   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) FACT Force · Action · Track Real-world task demo",
+   "type": "page_text",
+   "detail": "text length 4455 -> 3361",
    "availability": "announced"
   },
   {
@@ -128,8 +50,8 @@
    "name": "FACT",
    "url": "https://fact-1-0.github.io/",
    "priority": 3,
-   "type": "phrase_added",
-   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) FACT Force · Action · Track Real-world task demo",
+   "type": "page_text",
+   "detail": "text length 4455 -> 3361",
    "availability": {
     "code": "announced",
     "weights": "not_released",
@@ -140,71 +62,75 @@
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "dexumi"
+   "id": "ace_data_0"
   },
   {
    "kind": "dataset",
-   "id": "egoforce"
+   "id": "dexvitac"
   },
   {
    "kind": "dataset",
-   "id": "glove2hand_handsense"
+   "id": "exobridge"
   },
   {
    "kind": "dataset",
-   "id": "osmo"
+   "id": "htac"
   },
   {
    "kind": "dataset",
-   "id": "rss_dual_arm_tactile"
+   "id": "paxini_omnisharing"
   },
   {
    "kind": "dataset",
+   "id": "sharpa_origami"
+  },
+  {
+   "kind": "dataset",
+   "id": "tactidex"
+  },
+  {
+   "kind": "dataset",
+   "id": "vicon_glove"
+  },
+  {
+   "kind": "model",
+   "id": "dexflex"
+  },
+  {
+   "kind": "model",
+   "id": "ego2contact"
+  },
+  {
+   "kind": "model",
+   "id": "exobridge"
+  },
+  {
+   "kind": "model",
+   "id": "occludex"
+  },
+  {
+   "kind": "model",
+   "id": "robot_synesthesia"
+  },
+  {
+   "kind": "model",
    "id": "tactalign"
   },
   {
-   "kind": "dataset",
-   "id": "touchscale"
+   "kind": "model",
+   "id": "tactofind"
   },
   {
    "kind": "model",
-   "id": "card"
+   "id": "touchsight"
   },
   {
    "kind": "model",
-   "id": "dtwm"
+   "id": "uvta"
   },
   {
    "kind": "model",
-   "id": "egopressureformer"
-  },
-  {
-   "kind": "model",
-   "id": "hutact"
-  },
-  {
-   "kind": "model",
-   "id": "rlhnd"
-  },
-  {
-   "kind": "model",
-   "id": "tacross"
-  },
-  {
-   "kind": "model",
-   "id": "tactiskill"
-  },
-  {
-   "kind": "model",
-   "id": "touchanything"
-  },
-  {
-   "kind": "model",
-   "id": "transdex"
-  },
-  {
-   "kind": "model",
-   "id": "vitam"
+   "id": "vtao_bimanip"
   }
  ],
  "not_fully_released": 52,

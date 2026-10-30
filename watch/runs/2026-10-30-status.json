@@ -1,0 +1,35 @@
+{
+ "flow": "status",
+ "date": "2026-10-30",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 5,
+ "updated": 1,
+ "searches": [
+  "TactAlign human-to-robot policy transfer tactile alignment code github",
+  "UVTA unified visual-tactile-action checkpoints weights dataset huggingface",
+  "H-Tac DeskTask-Tac dataset human-centric transferable tactile pre-training release",
+  "OccluDex hierarchical 3D visuo-tactile representation code dataset",
+  "PaXini OmniSharing DB dataset huggingface paxini full release 2026",
+  "DexVitac dataset release huggingface xitong-c",
+  "Ego2Contact predicting touch egocentric human video code github",
+  "DexFLEX contact-aware foundation controller command-guided dexterity code release",
+  "TouchSight bare-handed tactile prediction egocentric video generative visual augmentation github",
+  "VTAO-BiManip masked visual-tactile-action pre-training bimanual code"
+ ],
+ "for_the_owner": [
+  "Judgment call: 3dtacdex 1.0.1 removed the LICENSE file and the OXT submission folder from the Hugging Face repo; the MIT text now sits only in the card. The 1.0.1 ZIP archives were not opened, so the catalog still lists depth (the card says raw/ keeps depth, but its key table has no depth key) and the 47,124-frame count from the card."
+ ],
+ "notes": [
+  "No data, code or weights release changed tonight. DexTacWAM 'links_removed' and 'links_added' are Hugging Face front-end build files, not catalog links. EgoForce and FACT still show 'Code (Coming Soon)' and 'Data (Coming Soon)' and the same EgoForce figures (2,000 h, 40k episodes); their signal came from the page text getting shorter.",
+  "3dtacdex: the scan signal (files 553 -> 6) is the release 1.0.1 clean-up. The task ZIPs are unchanged in the card (assembly 22,069, flip 12,570, openbox 3,671, play_data 8,814 frames); Hub used storage still reads 488 GB because older commits are kept.",
+  "Deep check (18 entries). Checked directly: dexvitac (Hugging Face repo still holds only a 102-byte README, last modified 2026-03-17), vicon_glove (GitHub repo has only README.md, last push 2026-09-16, 'release upon publication'), tactidex (project page still 'Code (Coming Soon)' and 'Data (Coming Soon)'), ace_data_0 (last modified 2026-10-14, unchanged), htac (H-Tac_Sample last modified 2026-07-06; the BeingBeyond/TTP page still says the full H-Tac is coming soon), exobridge (arXiv v1 only, no release link), tactalign (github.com/google/tactalign still returns 404). Web search for the model names (uvta, ego2contact, occludex, dexflex, touchsight, vtao_bimanip, paxini_omnisharing) returned no new code, data or weights.",
+  "Not re-checked beyond the scan: sharpa_origami, robot_synesthesia, tactofind.",
+  "Ego2Contact: the qqyang Hugging Face model list is the same as recorded on 2026-10-26 (e2c-archive-ckpt, e2c-downstream-eval, ego2contact-demo-videos); the authors have not announced a release, so code and weights stay not_released.",
+  "The checked date is 2026-10-30 on tactalign, touchsight, uvta, ego2contact, exobridge, dexflex, occludex and vtao_bimanip."
+ ],
+ "started": "2026-10-30T08:30:01Z",
+ "finished": "2026-10-30T08:37:13Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 11 changed files, 1 new entries"
+}

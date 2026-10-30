@@ -1,0 +1,4 @@
+{"date": "2026-10-30", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "tacdex3d",
+   "text": "3dtacdex: release 1.0.1 (2026-10-29) corrects right_wrist_pose to the FTP-1 axes (the card says 1.0.0 should not be used as an FTP-1 wrist orientation) and strips the Hub repo to the four task ZIP archives and the README (6 entries, down from 553 files); LICENSE, CHANGELOG, QUALITY_REPORT and the OXT submission folder are no longer on it. Availability stays public; the card still gives 328 segments, 47,124 frames and about 174 GB, and the license is MIT in the card.",
+   "source": "https://huggingface.co/datasets/kingchou007/3dtacdex"}]}

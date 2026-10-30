@@ -549,7 +549,7 @@
     "https://huggingface.co/api/datasets?author=youngw"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-29"
+   "checked": "2026-10-30"
   },
   {
    "id": "tactiskill",
@@ -701,7 +701,7 @@
     "TwinTouch-20H counts 10 h of generated bare-hand video plus the 10 h of source recordings (Sec. III-A); the abstract calls it '20 hours of paired data'.",
     "Force values are raw glove units (active-taxel threshold 5 units, contact threshold 1 unit), not newtons."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-30"
   },
   {
    "id": "touchworld",
@@ -840,7 +840,7 @@
     "https://huggingface.co/api/datasets/Chopper233/UVTA/tree/main"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-25"
+   "checked": "2026-10-30"
   },
   {
    "id": "tacdex3d",
@@ -1325,7 +1325,7 @@
     "Role for egotactile set to fine-tuning because the paper fine-tunes on it for cross-dataset adaptation; whether EgoTactile also enters base training is not stated.",
     "That the Hugging Face user qqyang is the paper's first author Qianqian Yang is inferred from the user name and the Ego2Contact repo names and README; no page links the account to the paper. The checkpoint files were not downloaded or opened, so what each one contains is not confirmed."
    ],
-   "checked": "2026-10-26"
+   "checked": "2026-10-30"
   },
   {
    "id": "vitam",
@@ -1804,7 +1804,7 @@
     "The paper names the framework ExoBridge and gives no separate name for the network; the catalog uses ExoBridge for both the data and the model.",
     "A companion policy on an XHand (12 DoF) on a Franka arm reached 0.80 on egg carton opening and 0.55 on lid twisting over 20 rollouts each; how the bridge's outputs feed that policy was not read in detail."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-30"
   },
   {
    "id": "dexflex",
@@ -1840,7 +1840,7 @@
     "Simulated data collection also used a 22-DoF Sharpa hand; whether one controller covers both hands was not read in detail.",
     "Policy-learning results (three tasks, 50 demonstrations each): 46.7% average success against 13.3% for direct joint-action prediction."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-30"
   },
   {
    "id": "occludex",
@@ -1875,7 +1875,7 @@
     "WiseGlove maker and the glove's sensing principle not stated; the real Shadow Hand carries 19 force-sensitive resistors on fingertips, finger links and palm read at 1 kHz and binarized.",
     "Simulation average success over the two tasks is 86.2% against 75.8% for the baseline the paper calls VTDexManip; the VTDexManip data were not used to train OccluDex itself."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-30"
   },
   {
    "id": "hutact",
@@ -2050,7 +2050,7 @@
     "Real-robot platform: 'dual Leap Hands equipped with tactile sensors and a Unitree Z1 arm'; tactile sensor type and count on the LEAP hands not stated, and no real-world success rate is reported.",
     "How touch is produced for RL in Isaac Gym is not described; the abstract's 'over 20%' margin over visual-tactile pretraining matches 63% against 41% for the closest visual-tactile row in Table II, which the paper does not name as the comparison."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-10-30"
   }
  ]
 }

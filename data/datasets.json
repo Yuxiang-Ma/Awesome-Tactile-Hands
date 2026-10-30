@@ -8980,9 +8980,11 @@
    },
    "availability": "public",
    "access": "Hugging Face kingchou007/3dtacdex, ungated: one ZIP64 archive (ZIP_STORED) per task holding a Zarr v2 store, 174 GB in total; single arrays and frames can be range-read from the archives.",
-   "license": "MIT (card and LICENSE file, 'Copyright (c) 2026 3dtacdex contributors')",
+   "license": "MIT (dataset card, 'Copyright (c) 2026 3dtacdex contributors')",
    "caveats": [
-    "License: MIT since release 1.0.0 (CHANGELOG dated 2026-10-28); until then the card said the license was not yet specified. The LICENSE file is the standard MIT text, which speaks of 'the Software'; whether it is meant to cover the data as well as the code was not checked.",
+    "Release 1.0.1 (2026-10-29) corrects the wrist pose: right_wrist_pose now has the FTP-1 axes (z along the extended fingers, x right, y palmward). The card says 1.0.0 exported the flange orientation directly and should not be used as an FTP-1 wrist orientation. Position is the LEAP base / flange origin; no palm-centre offset is added. The 1.0.1 archives were not opened tonight.",
+    "The Hub repo now holds only the four task ZIP archives, README.md and .gitattributes (6 entries, down from 553 files on 2026-10-29); LICENSE, CHANGELOG.md, QUALITY_REPORT.md, OXT_COMPLIANCE.md and the OXT_Submission_3dtacdex folder were removed from it. The card says the OXT submission package is separate.",
+    "License: MIT since release 1.0.0 (2026-10-28); until then the card said the license was not yet specified. The MIT text is now only in the card, which speaks of 'the Software'; whether it is meant to cover the data as well as the code was not checked.",
     "Open-X-Tactile (OXT) format submission; the changelog states 'no official acceptance or calibrated measurements are claimed'. Uploaded by a paper co-author (kingchou007, Jinzhou Li per the card contact).",
     "5 Hz: demonstrations were recorded at the policy rate (paper: collection and inference at 5 Hz).",
     "Tactile values are uncalibrated; axis signs, physical slot placement and camera conventions still need collection-owner confirmation (card).",
@@ -9027,7 +9029,7 @@
       "target": "fingers",
       "method": "robot_proprioception",
       "system": "LEAP Hand 16 joints (source radians) + commanded joints, velocities, efforts in raw/",
-      "note": "joint-to-URDF mapping in OXT_Submission_3dtacdex/mapping_notes.json"
+      "note": "joint-to-URDF mapping was in OXT_Submission_3dtacdex/mapping_notes.json, no longer on the Hub as of 2026-10-30"
      },
      {
       "target": "wrist",
@@ -9050,8 +9052,8 @@
    "sources": [
     "https://arxiv.org/abs/2409.17549",
     "https://arxiv.org/html/2409.17549 (Sec. III robot system, Sec. V tasks)",
-    "https://huggingface.co/datasets/kingchou007/3dtacdex (README.md, API info, file tree, QUALITY_REPORT.md, CHANGELOG.md, OXT_COMPLIANCE.md; README, LICENSE and CHANGELOG re-read 2026-10-29)",
-    "https://huggingface.co/datasets/kingchou007/3dtacdex OXT_Submission_3dtacdex/metadata.json, sensor_details.json, mapping_notes.json",
+    "https://huggingface.co/datasets/kingchou007/3dtacdex (README.md of release 1.0.1, API info, file tree and commit list re-read 2026-10-30; earlier reads also covered QUALITY_REPORT.md, CHANGELOG.md, OXT_COMPLIANCE.md and LICENSE, since removed from the Hub)",
+    "https://huggingface.co/datasets/kingchou007/3dtacdex OXT_Submission_3dtacdex/metadata.json, sensor_details.json, mapping_notes.json (read before 2026-10-30; folder no longer on the Hub)",
     "https://huggingface.co/datasets/kingchou007/3dtacdex openbox/openbox.zarr.zip (ZIP central directory; every .zarray/.zattrs; data/timestamps, meta/episode_ends, data/right_tactile_data_fingers, data/sub_task_instruction chunks)",
     "https://huggingface.co/datasets/kingchou007/3dtacdex {openbox,flip,play_data,assembly}.zarr.zip (all chunks of timestamps, episode_ends, right_tactile_data_fingers, sub_task_instruction, source_split, source_group)"
    ],
@@ -9061,7 +9063,7 @@
     "Coverage: pulp pads sit on the LEAP 'dip' link (middle phalanx) per mapping_notes.json, so tip + phalanx.",
     "Tactile principle not stated by the card or the paper; the paper says each taxel measures a 3-axis force. The catalog's hardware entry paxini_px6ax lists PX-6AX as magnetic (Hall array) for GEN3/GEN4; this release uses GEN1.",
     "Camera models of the released views not stated in the release; RGB sizes from the .zarray shapes (1280x720 and 1024x768).",
-    "Depth unit not stated ('original source values; per-camera calibration not asserted').",
+    "Depth unit not stated ('original source values; per-camera calibration not asserted'). The 1.0.1 key table lists no depth key; the card text says raw/ retains depth, poses and available commands, velocities and efforts. Not re-checked in the 1.0.1 archives.",
     "Card contact kingchou007@gmail.com; author name Jinzhou Li is inferred from the handle and the author list, not stated."
    ],
    "zh": {
