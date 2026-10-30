@@ -2,84 +2,76 @@
  "runs": {
   "discovery": {
    "flow": "discovery",
-   "date": "2026-10-29",
+   "date": "2026-10-30",
    "model": "claude-opus-5-5",
    "reviewed": 63,
    "added": {
     "datasets": 1,
-    "models": 1,
+    "models": 0,
     "hardware": 0
    },
-   "updated": 2,
-   "queue_left": 342,
+   "updated": 0,
+   "queue_left": 340,
    "searches": [
-    "visuo-tactile dexterous hand dataset 2026",
     "tactile world model dexterous hand",
     "触觉手套 数据集 开源",
-    "灵巧手 触觉 数据集 发布"
+    "灵巧手 触觉 数据集 发布",
+    "human tactile demonstration dataset robot hand"
    ],
    "for_the_owner": [
-    "Apply for access: TacWAM Wet-Lab Tasks (Hugging Face gate, manual approval) https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
-    "Judgment call: Tactile Embeddings for Multi-Task Learning (Luo et al., ICRA 2024, doi:10.1109/icra57147.2024.10611419) trains a shared encoder on a 130-element capacitive glove (10 people, 5 manipulation tasks) but names no model and states no data release, so it was rejected like earlier unnamed models. Reverse in watch/reviewed.json if unnamed models with real hand touch should count."
+    "Viewer samples wanted: HORA (public, Apache-2.0, ~5 MB HDF5 per Mocap episode) https://huggingface.co/datasets/HORA-DB/HORA",
+    "Judgment call: Tactus (arXiv 2610.39076, Meta Reality Labs) is a 47-site capacitive glove recorded on 23 tasks and 16 YCB manipulation tasks, but states no data or model release, so it was rejected as a hardware paper. Reverse in watch/reviewed.json if it should be tracked for a later release."
    ],
    "notes": [
-    "python3 pipeline/merge_entry.py was refused by the shell again; the tacwam_wetlab entry was appended to data/datasets.json by hand, identical to the entry object in pipeline/surveys/tacwam_wetlab.json.",
-    "58 of the top 60 queue candidates were decided, plus 5 search hits (63 in total, 3 over the 60 budget because of the search sweep).",
-    "Left in the queue undecided: Murali et al. IJRR doi:10.1177/02783649241301443 (end effector and tactile sensor not visible in any open source tonight) and Shao et al. CASE 2026 doi:10.1109/case69030.2026.11704244 (in-hand pose estimation on a multi-fingered hand; no abstract reachable, DOI page returned HTTP 202 with an empty body).",
-    "tacwam-wetlab-tasks rollouts include N0-VTLA policy trials, which ties this account to N0-Foundation / OpenNeoData (arXiv 2608.29601), still unreviewed from earlier notes.",
-    "DEXHAND-70K/dexhand-70k-review-sample still returns HTTP 401 (second night); it stays 'later' from 2026-10-28.",
-    "Search hits already in the catalog or reviewed: DexViTac, DECO-50, VTDexManip, Bench2Dex, DexTouch-WM, DexTacWAM, TouchWorld, DexWM, OpenTouch, TouchAnything/EgoTouch, TachinGlove releases, Juqiao glove, TactiDex, EgoPressure models and ADL-21 (the PMC8068022 hit). Daimon-TWM appears only in a LinkedIn post and was not recorded.",
+    "python3 pipeline/merge_entry.py was refused by the shell again (third night); the hora entry was appended to data/datasets.json by hand, identical to the entry object in pipeline/surveys/hora.json.",
+    "All 60 top queue candidates were decided, plus 3 search-sweep records (HORA on Hugging Face, its RoboWheel paper arXiv 2512.02729, and HapTile arXiv 2606.04825): 63 in total.",
+    "Shao et al. CASE 2026 (doi:10.1109/case69030.2026.11704244) set to 'later': title says tactile in-hand pose estimation on a multi-fingered hand, but no abstract or open full text was reachable two nights running.",
+    "Murali et al. IJRR (doi:10.1177/02783649241301443) rejected: no open source tonight names a multi-finger hand; the open-access PDF at eprints.gla.ac.uk/343847/3/343847.pdf did not extract to text, so the end effector was not read directly.",
+    "The Paxini EVT2 glove used by HORA is not in data/hardware.json; the paper describes it (29 magnetic encoders, 16 Gen3 tactile sensors) but no maker page was found tonight.",
+    "Search hits already in the catalog or reviewed: DexTouch-WM, DexTacWAM, TouchWorld, DexWM, Dexterous World Models, OpenTouch, TachinGlove, TactiDex, VTouch++, SmartHand, ADL-21, UVTA, DexViTac, RoboTacDex, PalmDex, EgoPressure. Daimon-TWM again only in a LinkedIn post, not recorded.",
+    "Queue positions 60 onward continue with more eunjuri SmolVLA checkpoints; most of the next night's top slots are the same pattern.",
     "Still pending from earlier notes and not reviewed tonight: DexMani arXiv 2608.00554, the chang-xinhai and cyanhaze awesome-list items, and N0-Foundation / OpenNeoData 2608.29601."
    ],
-   "started": "2026-10-29T05:30:01Z",
-   "finished": "2026-10-29T05:41:23Z",
+   "started": "2026-10-30T05:30:01Z",
+   "finished": "2026-10-30T05:39:08Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 10 changed files, 2 new entries"
+   "guard": "nightly guard passed: 7 changed files, 1 new entries"
   },
   "status": {
    "flow": "status",
-   "date": "2026-10-29",
+   "date": "2026-10-30",
    "model": "claude-sonnet-5-5",
-   "reviewed": 12,
-   "updated": 2,
+   "reviewed": 5,
+   "updated": 1,
    "searches": [
-    "TouchScale 500 hours human vision touch dataset release full 500h Hugging Face",
-    "EgoForce dataset FACT force action track foundation model code release",
-    "TACROSS human touch heterogeneous tactile sensors dataset code release",
-    "TactAlign tactile alignment human-to-robot code github release",
-    "RLHND video foundation models hand trackers robot learning code weights",
-    "HuTact tactile-aware hand representations human hand-object interaction code",
-    "TactiDex TactiSkill dataset code release github",
-    "CARD contact-anchored retargeting dexterous manipulation code",
-    "DexUMI full dataset release exoskeleton tactile XHand data",
-    "Glove2Hand HandSense dataset release download",
-    "OSMO tactile glove dataset full demonstrations release 140 demonstrations",
-    "SingleBicycle rss-dual-arm-tactile dataset Revo2 tactile glove",
-    "Dexterous Tactile World Model DTWM weights checkpoint Hugging Face",
-    "EgoTactile EgoPressureFormer code weights release",
-    "TouchAnything bimanual tactile estimation egocentric video pretrained weights checkpoint",
-    "TransDex visuo-tactile transparent objects dataset code weights",
-    "ViTaM stretchable tactile array deformable objects pretrained weights dataset"
+    "TactAlign human-to-robot policy transfer tactile alignment code github",
+    "UVTA unified visual-tactile-action checkpoints weights dataset huggingface",
+    "H-Tac DeskTask-Tac dataset human-centric transferable tactile pre-training release",
+    "OccluDex hierarchical 3D visuo-tactile representation code dataset",
+    "PaXini OmniSharing DB dataset huggingface paxini full release 2026",
+    "DexVitac dataset release huggingface xitong-c",
+    "Ego2Contact predicting touch egocentric human video code github",
+    "DexFLEX contact-aware foundation controller command-guided dexterity code release",
+    "TouchSight bare-handed tactile prediction egocentric video generative visual augmentation github",
+    "VTAO-BiManip masked visual-tactile-action pre-training bimanual code"
    ],
    "for_the_owner": [
-    "Judgment call: 3dtacdex is now MIT on Hugging Face, but its LICENSE file is the standard software text ('the Software', 'Copyright (c) 2026 3dtacdex contributors'). The catalog records MIT and notes that coverage of the data itself was not checked."
+    "Judgment call: 3dtacdex 1.0.1 removed the LICENSE file and the OXT submission folder from the Hugging Face repo; the MIT text now sits only in the card. The 1.0.1 ZIP archives were not opened, so the catalog still lists depth (the card says raw/ keeps depth, but its key table has no depth key) and the 47,124-frame count from the card."
    ],
    "notes": [
-    "No data, code or weights release changed tonight. DexTacWAM 'links_added' is Hugging Face front-end build files, not a catalog link. EgoForce and FACT still show 'Code (Coming Soon)' and 'Data (Coming Soon)'; their signal came from the page layout changing.",
-    "PULSE: the 2026-10-29 card names the authors, the NeurIPS 2026 E&D spotlight and a DOI, and lists videos for 312 recordings. Hub used storage reads 125.8 GB (78.8 GB yesterday); the catalog uses the README's 85 GB download size.",
-    "FTP-1 and Sharpa North-FTP-1: arXiv v4 (2026-10-27) has the same abstract as v3 and no venue; the body was not re-read. GitHub last push 2026-07-15, dataset repository last commit 2026-06-15.",
-    "OSMO: two README commits on 2026-10-26 (TODO note removed, sample-data pointer now data/README.md); data/download_data.sh is still empty and only the one sample demonstration is public, so the entry is unchanged.",
-    "TouchScale: Hugging Face commit history needs a login (HTTP 401); the GitHub repository's last push is 2026-10-16. The full 500 h release, planned before November 2026, was not seen.",
-    "Deep check (17 entries: dexumi, egoforce, glove2hand_handsense, osmo, rss_dual_arm_tactile, tactalign, touchscale, card, dtwm, egopressureformer, hutact, rlhnd, tacross, tactiskill, touchanything, transdex, vitam) found no new code, data or weights.",
-    "Leads for discovery from search results, not reviewed here: RealDexUMI (arXiv 2606.06033, says it will release its dataset), ViTaM-D with the HOT dataset (arXiv 2411.09572, ICCV 2025), DexTouch-WM (arXiv 2609.20649).",
-    "The checked date is 2026-10-29 on dtwm, egopressureformer, ftp1, tacross, tactalign, tactiskill, touchanything, vitam, rlhnd, fact, transdex, hutact and card."
+    "No data, code or weights release changed tonight. DexTacWAM 'links_removed' and 'links_added' are Hugging Face front-end build files, not catalog links. EgoForce and FACT still show 'Code (Coming Soon)' and 'Data (Coming Soon)' and the same EgoForce figures (2,000 h, 40k episodes); their signal came from the page text getting shorter.",
+    "3dtacdex: the scan signal (files 553 -> 6) is the release 1.0.1 clean-up. The task ZIPs are unchanged in the card (assembly 22,069, flip 12,570, openbox 3,671, play_data 8,814 frames); Hub used storage still reads 488 GB because older commits are kept.",
+    "Deep check (18 entries). Checked directly: dexvitac (Hugging Face repo still holds only a 102-byte README, last modified 2026-03-17), vicon_glove (GitHub repo has only README.md, last push 2026-09-16, 'release upon publication'), tactidex (project page still 'Code (Coming Soon)' and 'Data (Coming Soon)'), ace_data_0 (last modified 2026-10-14, unchanged), htac (H-Tac_Sample last modified 2026-07-06; the BeingBeyond/TTP page still says the full H-Tac is coming soon), exobridge (arXiv v1 only, no release link), tactalign (github.com/google/tactalign still returns 404). Web search for the model names (uvta, ego2contact, occludex, dexflex, touchsight, vtao_bimanip, paxini_omnisharing) returned no new code, data or weights.",
+    "Not re-checked beyond the scan: sharpa_origami, robot_synesthesia, tactofind.",
+    "Ego2Contact: the qqyang Hugging Face model list is the same as recorded on 2026-10-26 (e2c-archive-ckpt, e2c-downstream-eval, ego2contact-demo-videos); the authors have not announced a release, so code and weights stay not_released.",
+    "The checked date is 2026-10-30 on tactalign, touchsight, uvta, ego2contact, exobridge, dexflex, occludex and vtao_bimanip."
    ],
-   "started": "2026-10-29T08:30:01Z",
-   "finished": "2026-10-29T08:39:25Z",
+   "started": "2026-10-30T08:30:01Z",
+   "finished": "2026-10-30T08:37:13Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 13 changed files, 2 new entries"
+   "guard": "nightly guard passed: 11 changed files, 1 new entries"
   }
  }
 }

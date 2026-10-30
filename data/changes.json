@@ -3,6 +3,24 @@
   {
    "kind": "added",
    "target": "dataset",
+   "id": "hora",
+   "text": "HORA: added. RoboWheel's (arXiv 2512.02729) human hand-object set with a Paxini EVT2 glove (16 tactile sensors, 29 joint encoders) and up to 11 cameras; 63,141 Mocap trajectories with hand and object tactile maps, public on Hugging Face (HORA-DB/HORA, 918.1 GB in total, Apache-2.0).",
+   "source": "https://huggingface.co/datasets/HORA-DB/HORA",
+   "date": "2026-10-30",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "tacdex3d",
+   "text": "3dtacdex: release 1.0.1 (2026-10-29) corrects right_wrist_pose to the FTP-1 axes (the card says 1.0.0 should not be used as an FTP-1 wrist orientation) and strips the Hub repo to the four task ZIP archives and the README (6 entries, down from 553 files); LICENSE, CHANGELOG, QUALITY_REPORT and the OXT submission folder are no longer on it. Availability stays public; the card still gives 328 segments, 47,124 frames and about 174 GB, and the license is MIT in the card.",
+   "source": "https://huggingface.co/datasets/kingchou007/3dtacdex",
+   "date": "2026-10-30",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
    "id": "tacwam_wetlab",
    "text": "TacWAM Wet-Lab Tasks: glove-teleoperated lab-bench tasks on a UFACTORY xArm6 with a BrainCo Revo2 right hand wearing a Tujian EI-G012 tactile glove (880 taxels, 15 pads), static Orbbec RGB-D and RealSense D405 wrist cameras; 177 counted demonstrations in three folders plus uncounted sorting, whiteboard and dual-arm tube-pour folders; Hugging Face gate with manual approval, CC BY-NC 4.0, no paper.",
    "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",

@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-10-29"
+  "last_updated": "2026-10-30"
  },
  "datasets": [
   {
@@ -8980,9 +8980,11 @@
    },
    "availability": "public",
    "access": "Hugging Face kingchou007/3dtacdex, ungated: one ZIP64 archive (ZIP_STORED) per task holding a Zarr v2 store, 174 GB in total; single arrays and frames can be range-read from the archives.",
-   "license": "MIT (card and LICENSE file, 'Copyright (c) 2026 3dtacdex contributors')",
+   "license": "MIT (dataset card, 'Copyright (c) 2026 3dtacdex contributors')",
    "caveats": [
-    "License: MIT since release 1.0.0 (CHANGELOG dated 2026-10-28); until then the card said the license was not yet specified. The LICENSE file is the standard MIT text, which speaks of 'the Software'; whether it is meant to cover the data as well as the code was not checked.",
+    "Release 1.0.1 (2026-10-29) corrects the wrist pose: right_wrist_pose now has the FTP-1 axes (z along the extended fingers, x right, y palmward). The card says 1.0.0 exported the flange orientation directly and should not be used as an FTP-1 wrist orientation. Position is the LEAP base / flange origin; no palm-centre offset is added. The 1.0.1 archives were not opened tonight.",
+    "The Hub repo now holds only the four task ZIP archives, README.md and .gitattributes (6 entries, down from 553 files on 2026-10-29); LICENSE, CHANGELOG.md, QUALITY_REPORT.md, OXT_COMPLIANCE.md and the OXT_Submission_3dtacdex folder were removed from it. The card says the OXT submission package is separate.",
+    "License: MIT since release 1.0.0 (2026-10-28); until then the card said the license was not yet specified. The MIT text is now only in the card, which speaks of 'the Software'; whether it is meant to cover the data as well as the code was not checked.",
     "Open-X-Tactile (OXT) format submission; the changelog states 'no official acceptance or calibrated measurements are claimed'. Uploaded by a paper co-author (kingchou007, Jinzhou Li per the card contact).",
     "5 Hz: demonstrations were recorded at the policy rate (paper: collection and inference at 5 Hz).",
     "Tactile values are uncalibrated; axis signs, physical slot placement and camera conventions still need collection-owner confirmation (card).",
@@ -9027,7 +9029,7 @@
       "target": "fingers",
       "method": "robot_proprioception",
       "system": "LEAP Hand 16 joints (source radians) + commanded joints, velocities, efforts in raw/",
-      "note": "joint-to-URDF mapping in OXT_Submission_3dtacdex/mapping_notes.json"
+      "note": "joint-to-URDF mapping was in OXT_Submission_3dtacdex/mapping_notes.json, no longer on the Hub as of 2026-10-30"
      },
      {
       "target": "wrist",
@@ -9050,8 +9052,8 @@
    "sources": [
     "https://arxiv.org/abs/2409.17549",
     "https://arxiv.org/html/2409.17549 (Sec. III robot system, Sec. V tasks)",
-    "https://huggingface.co/datasets/kingchou007/3dtacdex (README.md, API info, file tree, QUALITY_REPORT.md, CHANGELOG.md, OXT_COMPLIANCE.md; README, LICENSE and CHANGELOG re-read 2026-10-29)",
-    "https://huggingface.co/datasets/kingchou007/3dtacdex OXT_Submission_3dtacdex/metadata.json, sensor_details.json, mapping_notes.json",
+    "https://huggingface.co/datasets/kingchou007/3dtacdex (README.md of release 1.0.1, API info, file tree and commit list re-read 2026-10-30; earlier reads also covered QUALITY_REPORT.md, CHANGELOG.md, OXT_COMPLIANCE.md and LICENSE, since removed from the Hub)",
+    "https://huggingface.co/datasets/kingchou007/3dtacdex OXT_Submission_3dtacdex/metadata.json, sensor_details.json, mapping_notes.json (read before 2026-10-30; folder no longer on the Hub)",
     "https://huggingface.co/datasets/kingchou007/3dtacdex openbox/openbox.zarr.zip (ZIP central directory; every .zarray/.zattrs; data/timestamps, meta/episode_ends, data/right_tactile_data_fingers, data/sub_task_instruction chunks)",
     "https://huggingface.co/datasets/kingchou007/3dtacdex {openbox,flip,play_data,assembly}.zarr.zip (all chunks of timestamps, episode_ends, right_tactile_data_fingers, sub_task_instruction, source_split, source_group)"
    ],
@@ -9061,7 +9063,7 @@
     "Coverage: pulp pads sit on the LEAP 'dip' link (middle phalanx) per mapping_notes.json, so tip + phalanx.",
     "Tactile principle not stated by the card or the paper; the paper says each taxel measures a 3-axis force. The catalog's hardware entry paxini_px6ax lists PX-6AX as magnetic (Hall array) for GEN3/GEN4; this release uses GEN1.",
     "Camera models of the released views not stated in the release; RGB sizes from the .zarray shapes (1280x720 and 1024x768).",
-    "Depth unit not stated ('original source values; per-camera calibration not asserted').",
+    "Depth unit not stated ('original source values; per-camera calibration not asserted'). The 1.0.1 key table lists no depth key; the card text says raw/ retains depth, poses and available commands, velocities and efforts. Not re-checked in the 1.0.1 archives.",
     "Card contact kingchou007@gmail.com; author name Jinzhou Li is inferred from the handle and the author list, not stated."
    ],
    "zh": {
@@ -10787,6 +10789,146 @@
      "video": true,
      "hand_pose": true,
      "scale": false,
+     "diversity": false
+    }
+   }
+  },
+  {
+   "id": "hora",
+   "name": "HORA",
+   "title": "RoboWheel: A Data Engine from Real-World Human Demonstrations for Cross-Embodiment Robotic Learning",
+   "authors": "Yuhong Zhang et al.",
+   "year": 2025,
+   "venue": "arXiv 2512.02729",
+   "summary": "Human hand-object interactions recorded with a Paxini EVT2 glove (16 tactile sensors on fingertips, finger pads and palm; 29 magnetic joint encoders) and up to 11 synchronized cameras (3 RealSense D455 RGB-D), released as 63,141 HDF5 trajectories with MANO hand fits, 6-DoF object pose, contact labels and hand and object tactile maps, inside the ~150k-trajectory HORA set built by the RoboWheel data engine.",
+   "embodiment": "human",
+   "hand": "Human hand in a Paxini EVT2 glove (29 magnetic joint encoders, 16 tactile sensors); one or both hands not stated",
+   "bimanual": null,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "sensors_per_hand": 16,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": null,
+    "note": "Paper: '16 Gen3 tactile (haptic) sensors mounted on key contact regions (fingertips, finger pads, and palm)' for local normal force. Card: tactile_hand and tactile_object are 'dense tactile map' arrays (time x sensors/vertices), Mocap subset only. Shape, rate and units not stated; files not opened.",
+    "maker": "Paxini",
+    "model": "EVT2 glove (Gen3 tactile sensors)",
+    "principle": "unspecified",
+    "range": null,
+    "calibrated": null
+   },
+   "modalities": [
+    "multiview_rgb",
+    "depth",
+    "hand_pose",
+    "object_pose",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 63141,
+    "frames": null,
+    "tasks": null,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [],
+    "text": "HORA(Mocap) 63,141 trajectories with glove touch; HORA(Recordings) 23,560 and HORA(Public Dataset) 66,924 without touch; ~150k trajectories and 918.1 GB in total. Subjects, objects, tasks and hours not stated."
+   },
+   "availability": "public",
+   "access": "Hugging Face HORA-DB/HORA, ungated: per-episode HDF5 files under Mocap/<object id>/ with object assets under Mocap/object/, and a Recordings/ folder for the subset without touch.",
+   "license": "Apache-2.0",
+   "caveats": [
+    "Touch comes from 16 discrete Paxini sensors per glove; the released 'dense tactile map' for the hand and the object is not defined in the paper or the card, and no object-side sensor is described, so the object map is likely derived from the glove and contact fitting.",
+    "Only the Mocap subset (63,141 trajectories) carries touch; the Recordings (23,560) and Public Dataset (66,924, retargeted from public HOI corpora) subsets have none.",
+    "On 2026-10-30 the Hugging Face Mocap/ folder held 9 object folders (100017 to 101152) and their assets; whether these contain all 63,141 trajectories was not checked.",
+    "Number of participants, objects, tasks, recording hours, glove and camera rates, and whether one or both hands wear the glove are not stated in the paper or the card.",
+    "The card's robot fields (gripper states, end-effector pose, joint-space actions for 6/7-DoF arms) come from retargeting in the RoboWheel pipeline; no robot hand touch is recorded.",
+    "The data card states Apache-2.0; the arXiv paper text itself is CC BY-NC-ND 4.0."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2512.02729",
+    "project": "https://zhangyuhong01.github.io/Robowheel",
+    "data": "https://huggingface.co/datasets/HORA-DB/HORA",
+    "code": "https://github.com/zhangyuhong01/Robowheel-Toolkits"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "third_person",
+      "count": 3,
+      "model": "Intel RealSense D455",
+      "type": "RGB-D",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     },
+     {
+      "role": "third_person",
+      "count": 8,
+      "model": null,
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": true,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "other",
+      "system": "Paxini EVT2 glove",
+      "note": "29 magnetic encoders over the wrist, palm and phalanges; glove signals and multi-view video are used to fit MANO parameters"
+     },
+     {
+      "target": "object",
+      "method": "other",
+      "system": "multi-view camera rig",
+      "note": "6-DoF object pose released; estimation method for the Mocap subset not stated"
+     }
+    ],
+    "other": [
+     "hand-object contact annotations",
+     "object meshes and assets"
+    ]
+   },
+   "sources": [
+    "https://arxiv.org/abs/2512.02729 (arXiv API metadata)",
+    "https://arxiv.org/html/2512.02729 (dataset and capture sections, first 100,000 characters)",
+    "https://zhangyuhong01.github.io/Robowheel",
+    "https://huggingface.co/datasets/HORA-DB/HORA (README.md, repository metadata, commit history, tree listing of Mocap/, Mocap/100017 and Mocap/object)"
+   ],
+   "unconfirmed": [
+    "episodes=63,141 is the HORA(Mocap) count from the card and paper Table 1; the released files were not counted.",
+    "Mocap/100017 lists HDF5 files of 4.5-5.4 MB each (first 15 files seen); other folders not listed.",
+    "Sensing principle not stated for the Gen3 sensors; Paxini's other catalogued products use Hall-effect (magnetic) tactile arrays.",
+    "The Paxini EVT2 glove has no maker page in the catalog's sources and is not in data/hardware.json."
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "public download",
+     "files not opened yet"
+    ]
+   },
+   "contents": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
      "diversity": false
     }
    }
