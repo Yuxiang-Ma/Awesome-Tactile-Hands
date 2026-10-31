@@ -2869,13 +2869,14 @@
   "arxiv:2610.36539": null,
   "arxiv:2312.01853": "W4401417123",
   "arxiv:2303.13482": "W4383109192",
-  "arxiv:2501.03606": "W4416749095"
+  "arxiv:2501.03606": "W4416749095",
+  "arxiv:2512.02729": "W4417009262"
  },
  "cursor": {
-  "arxiv_backfill": "2017-01",
+  "arxiv_backfill": "2017-04",
   "hf_backfilled": true,
-  "arxiv_recent_ok": "2026-10-30",
-  "openalex_recent_ok": "2026-10-30",
-  "openalex_backfill": "2016-04"
+  "arxiv_recent_ok": "2026-10-31",
+  "openalex_recent_ok": "2026-10-31",
+  "openalex_backfill": "2016-07"
  }
 }

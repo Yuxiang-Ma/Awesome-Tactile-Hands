@@ -2051,6 +2051,122 @@
     "How touch is produced for RL in Isaac Gym is not described; the abstract's 'over 20%' margin over visual-tactile pretraining matches 63% against 41% for the closest visual-tactile row in Table II, which the paper does not name as the comparison."
    ],
    "checked": "2026-10-30"
+  },
+  {
+   "id": "omnivtla",
+   "name": "OmniVTLA",
+   "title": "OmniVTLA: Vision-Tactile-Language-Action Models with Semantic-Aligned Tactile Sensing",
+   "authors": "Zhengxue Cheng et al.",
+   "year": 2025,
+   "venue": "IEEE RA-L (arXiv 2508.08706)",
+   "kind": "policy",
+   "summary": "Vision-tactile-language-action model with a dual-path tactile encoder (a pretrained ViT plus a semantically aligned tactile ViT trained on the authors' ObjTac set) that takes Paxini Gen2 Hall-array force maps, stitched into one 224x224 image, and outputs actions for a UR5 with either a two-sensor jaw gripper or an 11-sensor four-finger hand; abstract reports 100% pick-and-place success on the hand, 6.2 points over the baseline.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "ObjTac: 56 objects in 10 categories touched with a Paxini Gen2 sensor (2-5 trials of 10-60 s each, 60 Hz), 135K tactile-video-text samples and 252 first-person videos (720p, 30 FPS); linked from the project page to a Google Drive folder and omnisharingdb.paxini.com. Which device made the touches is not stated. Robot demonstration counts not read.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page (read 2026-10-31) shows 'Coming Soon. The code repository will be available shortly.' The arXiv v3 text has no code or weights statement."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2508.08706",
+    "project": "https://readerek.github.io/Objtac.github.io"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2508.08706 (abstract and comment via arXiv API; v3, 2026-06-15)",
+    "https://arxiv.org/html/2508.08706v3 (robot setup, Paxini Gen2 sensors, ObjTac collection)",
+    "https://readerek.github.io/Objtac.github.io (ObjTac specifications, code status, data link)"
+   ],
+   "unconfirmed": [
+    "The hand is described only as an '11-tactile-sensor dexterous hand' with four fingers; the model is not named. It may be PaXini's DexH13 (catalog hardware paxini_dexh13), which the paper does not say.",
+    "The paper gives no tactile ablation on the hand; the 6.2-point gain is against a pi0 baseline whose tactile input is not stated.",
+    "Which existing datasets were combined with ObjTac to train the tactile encoder is not stated; the training follows AnyTouch's second stage.",
+    "ObjTac is not catalogued as a dataset because the source does not say the touches were made by a hand."
+   ],
+   "checked": "2026-10-31"
+  },
+  {
+   "id": "tavi",
+   "name": "TAVI",
+   "title": "See to Touch: Learning Tactile Dexterity through Visual Incentives",
+   "authors": "Irmak Guzey et al.",
+   "year": 2023,
+   "venue": "arXiv 2309.12300",
+   "kind": "policy",
+   "summary": "Tactile Adaptation from Visual Incentives: online RL on an Allegro hand (Kinova Jaco arm) learns residual policies from 15 XELA uSkin 4x4 tri-axial pads, encoded by the T-Dex tactile encoder, with a reward from optimal-transport matching of contrastive visual features against one Holo-Dex demonstration; 73% average success over 6 tasks (peg insertion, sponge flipping, eraser turning, bowl unstacking, plier picking, mint opening), up to 30 min of online training each.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "tdex",
+     "role": "pretraining",
+     "note": "Tactile encoder pretrained by T-Dex on its 2.5 h of tactile play data; the README points to the T-Dex tactile_encoder download."
+    }
+   ],
+   "own_data": "One Holo-Dex teleoperated demonstration per task for the reward plus online rollouts (subsampled to 10 Hz). README: six demonstrations for each of the six tasks are on a public Google Drive folder; files not opened.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/irmakguzey/see-to-touch (last push 2023-10-24) holds training and deployment code; the README links task demonstrations and the T-Dex tactile encoder on Google Drive and says it depends on a non-public Holo-Dex version. No trained TAVI policy checkpoints are linked (read 2026-10-31)."
+   },
+   "license": "not stated (no license on the GitHub repository)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2309.12300",
+    "project": "https://see-to-touch.github.io/",
+    "code": "https://github.com/irmakguzey/see-to-touch"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2309.12300 (abstract via arXiv API)",
+    "https://arxiv.org/html/2309.12300v1 (hardware, tactile encoder, demonstrations, Table of task results)",
+    "https://see-to-touch.github.io/ (task list, Data and Code links)",
+    "https://github.com/irmakguzey/see-to-touch (repository metadata, README)"
+   ],
+   "unconfirmed": [
+    "No venue appears in the sources read; the arXiv record lists none.",
+    "The released demonstrations (6 tasks x 6 demonstrations per the README, against one per task in the paper) were not opened and are not catalogued as a dataset; their tactile content is not confirmed."
+   ],
+   "checked": "2026-10-31"
+  },
+  {
+   "id": "unitachand",
+   "name": "UniTacHand",
+   "title": "UniTacHand: Unified Spatio-Tactile Representation for Human to Robotic Hand Skill Transfer",
+   "authors": "Chi Zhang et al.",
+   "year": 2025,
+   "venue": "arXiv 2512.21233",
+   "kind": "representation",
+   "summary": "Projects touch from a 137-taxel pressure glove and from a 5-finger Inspire tactile hand (1,062 taxels on fingers and palm, on a RealMan arm) onto the MANO UV surface and aligns the two with contrastive learning on 10 min of paired data, so policies trained on glove data run zero-shot on the robot; 73.3% one-shot manipulation success against 50.0% for a robot-only visual-tactile policy.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Paired human-robot recordings at 40 Hz: 10 min, 688 trajectories, about 16k frames over 50 objects, with a separate motion-capture glove for 21 hand keypoints; human demonstration counts for the policies not read. No release stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "github.com/BeingBeyond/UniTacHand (created 2025-12-17, last push 2025-12-25) holds only README.md and docs/ (the project page); the arXiv v3 text read has no code, weights or data statement (read 2026-10-31)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2512.21233",
+    "project": "https://beingbeyond.github.io/UniTacHand/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2512.21233 (abstract via arXiv API; v3, 2025-12-29)",
+    "https://arxiv.org/html/2512.21233v3 (first 100,000 of 106,752 characters: hardware, data, results)",
+    "https://beingbeyond.github.io/UniTacHand/ (results tables, links)",
+    "https://github.com/BeingBeyond/UniTacHand (repository metadata, top-level files)"
+   ],
+   "unconfirmed": [
+    "The glove make and model are not given; the Inspire hand model is not named beyond 'Inspire tactile hand'.",
+    "The last 6,752 characters of the arXiv HTML (end of appendix, references) were not read."
+   ],
+   "checked": "2026-10-31"
   }
  ]
 }

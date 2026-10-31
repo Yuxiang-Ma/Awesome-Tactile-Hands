@@ -1,0 +1,10 @@
+{"date": "2026-10-31", "flow": "discovery", "changes": [
+  {"kind": "added", "target": "model", "id": "omnivtla",
+   "text": "OmniVTLA: added. Vision-tactile-language-action policy (IEEE RA-L, arXiv 2508.08706) on Paxini Gen2 Hall-array touch, run on a UR5 with a jaw gripper or an 11-sensor four-finger hand (100% pick-and-place on the hand); code announced as coming soon, no weights.",
+   "source": "https://arxiv.org/abs/2508.08706"},
+  {"kind": "added", "target": "model", "id": "tavi",
+   "text": "TAVI: added. See to Touch (arXiv 2309.12300) trains Allegro hand policies with online RL on 15 XELA uSkin pads through the T-Dex tactile encoder, rewarded by visual matching to one demonstration; 73% over 6 tasks; code on GitHub, no policy weights.",
+   "source": "https://github.com/irmakguzey/see-to-touch"},
+  {"kind": "added", "target": "model", "id": "unitachand",
+   "text": "UniTacHand: added. Aligns a 137-taxel pressure glove and a 1,062-taxel Inspire tactile hand on the MANO UV map with contrastive learning on 10 min of paired data (arXiv 2512.21233); 73.3% one-shot success; repository holds only the project page.",
+   "source": "https://arxiv.org/abs/2512.21233"}]}

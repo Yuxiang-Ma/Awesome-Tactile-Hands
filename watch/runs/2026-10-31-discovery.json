@@ -1,0 +1,36 @@
+{
+ "flow": "discovery",
+ "date": "2026-10-31",
+ "model": "claude-opus-5-5",
+ "reviewed": 61,
+ "added": {
+  "datasets": 0,
+  "models": 3,
+  "hardware": 0
+ },
+ "updated": 0,
+ "queue_left": 340,
+ "searches": [
+  "触觉手套 数据集 开源",
+  "灵巧手 触觉 数据集 发布",
+  "human tactile demonstration dataset robot hand",
+  "tactile pretraining dexterous policy human glove"
+ ],
+ "for_the_owner": [
+  "Judgment call: TAVI's README says six demonstrations for each of six Allegro + XELA tasks are public on Google Drive (https://drive.google.com/drive/folders/1IpU97D4nSosdyyWmvuLO-E3phRA-nf8c). They were not opened or catalogued as a dataset; add a survey if a small T-Dex-style demo set should be listed.",
+  "Judgment call: OmniVTLA's ObjTac (56 objects, 135K Paxini Gen2 tactile-video-text samples, Google Drive and omnisharingdb.paxini.com) was not catalogued because neither the paper nor the project page says whether the touches were made by a hand, a gripper or a handheld sensor."
+ ],
+ "notes": [
+  "60 queue candidates (positions 0-59) decided, plus 1 search-sweep record (UniTacHand, arXiv 2512.21233): 61 in total. 3 models added, no datasets.",
+  "Positions 0-59 were mostly LeRobot checkpoints from eunjuri and Tna001 with no paper (rejected as last night) and openalex citation hits; the queue's next slots include in-scope-looking items: TacClaw-Infinity project page (gh:tacclaw-infinity/tacclaw-infinity.github.io, 'Large-Scale Vision-Tactile-Language-Action Dataset for Dexterous Manipulation'), Touch-JEPA arXiv 2610.28519, ReDex arXiv 2610.07525 and the armteam HapticWAM sets (arXiv 2609.23888).",
+  "Lead doi:10.1007/s41315-026-00521-2 (Springer review of tactile dexterous hands): the article page redirects to a Springer login, so the datasets and models it names were not checked.",
+  "ASCL (doi:10.1109/tase.2025.3585040) set to 'later': named grasp-stability model for multi-fingered hands, closed access, hand and data not named in the sources found.",
+  "Search hits already in the catalog or reviewed: TachinGlove, OpenTouch, TactiDex, VTouch++, SmartHand, ADL-21, UVTA, DexViTac, HORA, RoboTacDex, HapTile, PalmDex, TactAlign, OSMO, Spark-0/HumanTouch, TTP, DexTouch-WM. Baihu-VTouch (60,000 min cross-embodiment vision-touch set, OpenLoong) appeared only in a CGTN news article; its 380+ tasks and 100+ skills match VTouch++ (rejected 2026-10-29, gripper only); not recorded without a primary source.",
+  "Still pending from earlier notes: DexMani arXiv 2608.00554, the chang-xinhai and cyanhaze awesome-list items, and N0-Foundation / OpenNeoData 2608.29601."
+ ],
+ "started": "2026-10-31T05:30:01Z",
+ "finished": "2026-10-31T05:39:49Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 6 changed files, 3 new entries"
+}
