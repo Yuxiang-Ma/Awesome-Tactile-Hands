@@ -2,6 +2,42 @@
  "changes": [
   {
    "kind": "added",
+   "target": "model",
+   "id": "omnivtla",
+   "text": "OmniVTLA: added. Vision-tactile-language-action policy (IEEE RA-L, arXiv 2508.08706) on Paxini Gen2 Hall-array touch, run on a UR5 with a jaw gripper or an 11-sensor four-finger hand (100% pick-and-place on the hand); code announced as coming soon, no weights.",
+   "source": "https://arxiv.org/abs/2508.08706",
+   "date": "2026-10-31",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tavi",
+   "text": "TAVI: added. See to Touch (arXiv 2309.12300) trains Allegro hand policies with online RL on 15 XELA uSkin pads through the T-Dex tactile encoder, rewarded by visual matching to one demonstration; 73% over 6 tasks; code on GitHub, no policy weights.",
+   "source": "https://github.com/irmakguzey/see-to-touch",
+   "date": "2026-10-31",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "unitachand",
+   "text": "UniTacHand: added. Aligns a 137-taxel pressure glove and a 1,062-taxel Inspire tactile hand on the MANO UV map with contrastive learning on 10 min of paired data (arXiv 2512.21233); 73.3% one-shot success; repository holds only the project page.",
+   "source": "https://arxiv.org/abs/2512.21233",
+   "date": "2026-10-31",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "dextraverse",
+   "text": "DextraVerse: a second real-robot task, unscrew_bottle_cap, was added to the Hugging Face repo (commit cc7a4456, 2026-10-31): 56 episodes, 16,417 frames at about 14.6 Hz (19 min), a 5.7 GB zarr archive, with a left hand holding the bottle and a right hand unscrewing the cap, and new deform3 and distforce fingertip maps from SharpaWave SDK 5.x. Real-robot totals are now 317 episodes and 154,799 frames in 2 tasks (were 261 and 138,382 in 1); availability stays public, license CC BY 4.0.",
+   "source": "https://huggingface.co/datasets/ntumars/DextraVerse",
+   "date": "2026-10-31",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
    "target": "dataset",
    "id": "hora",
    "text": "HORA: added. RoboWheel's (arXiv 2512.02729) human hand-object set with a Paxini EVT2 glove (16 tactile sensors, 29 joint encoders) and up to 11 cameras; 63,141 Mocap trajectories with hand and object tactile maps, public on Hugging Face (HORA-DB/HORA, 918.1 GB in total, Apache-2.0).",
