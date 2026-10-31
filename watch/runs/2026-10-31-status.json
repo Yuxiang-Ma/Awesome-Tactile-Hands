@@ -1,0 +1,42 @@
+{
+ "flow": "status",
+ "date": "2026-10-31",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 3,
+ "updated": 1,
+ "searches": [
+  "DexMPTD dataset tactile release",
+  "EgoExplorer tactile dataset code release",
+  "GIST VTA visuo-tactile dataset dexterous hand",
+  "Kaiwu dataset multimodal dexterous hand tactile glove",
+  "RoboTacDex dataset tactile",
+  "TaCross tactile dataset dexterous hand",
+  "TacWAM wetlab tactile dataset",
+  "AET-TacNet tactile github code weights",
+  "DexTouch-WM tactile world model dexterous hand code",
+  "EgoPressureDiff tactile pressure diffusion code",
+  "FACT tactile dexterous hand policy github code release",
+  "OmniVTLA visuo-tactile-language-action github weights",
+  "Robot Synesthesia tactile in-hand rotation code github",
+  "TactAlign human-robot tactile alignment code release",
+  "TactoFind tactile object search dexterous hand code",
+  "TouchAnything dataset framework tactile code weights",
+  "TransDex tactile dexterous transfer code github",
+  "ViNT-Net visuo-tactile network dexterous code"
+ ],
+ "for_the_owner": [
+  "Viewer samples wanted: DextraVerse unscrew_bottle_cap (new task, 56 episodes, 5.7 GB zarr in the public ntumars/DextraVerse repo, CC BY 4.0). The archive was not downloaded or opened, so every number for it comes from its README and the catalog integrity check does not cover it."
+ ],
+ "notes": [
+  "Three signals. DextraVerse (P2, files 47 -> 49) is the unscrew_bottle_cap task added by commit cc7a4456; the entry now covers both real-robot tasks (episodes, frames, hours, tasks, objects, sensor note, tracking, caveats, sources and unconfirmed updated). The two DexTacWAM signals (P1 links_added, P3 links_removed) are Hugging Face front-end build files (kube-*/index.js, katex.css, style.css), not catalog links, and need no edit.",
+  "DextraVerse derived numbers: 317 episodes = 261 + 56, 154,799 frames = 138,382 + 16,417, 2.37 h = 2.05 h + 19 min (the README's figure), objects 2 (cube, bottle). They are listed under unconfirmed in the entry. The sub-README says the unscrew task used Vive trackers and data gloves, unlike the SpaceMouse plus learned grasp policy in the first task; the glove and tracker models are not named.",
+  "Deep check (18 entries), no new release found for any of them. Checked directly: egoexplorer (Hugging Face repos InternRobotics/EgoExplorer and EgoExplorer-oxt still gated manual, GitHub README present, entry already links the code), tacross (project page still 'Software release coming soon', dataset 'planned'), tacwam_wetlab (still gated manual, last modified 2026-10-24), touchanything (GitHub last push 2026-05-21, issue #3 now has a second request for weights with no reply, no Hugging Face models under zhouzhoujy), transdex (GitHub last push 2026-10-03, no checkpoint), robot_synesthesia (last push 2024-07-31, no checkpoint), tactalign (project page 'Coming Soon', google/tactalign still 404), tactofind (project page links only the paper), fact (project page still 'Code (Coming Soon)' and 'Data (Coming Soon)'), vint_net (project page still '[Video] (Coming Soon)', no code link), egopressurediff (GitHub last push 2026-06-29, no checkpoint link), omnivtla (project page 'Coming Soon', already recorded tonight by the discovery run).",
+  "Checked by arXiv metadata and web search only: dextouch_wm (no code or project page in the arXiv record v2, no repository in search), robotacdex (abstract still says 'will be open-sourced soon'), gist_vta (arXiv v2 abstract states no release), dex_mptd, kaiwu and aet_tacnet (search returned only the papers; Kaiwu stays gated on ScienceDB, AET-TacNet is closed access).",
+  "The checked date is 2026-10-31 on dextouch_wm, egopressurediff, fact, vint_net, tactalign, touchanything, transdex, aet_tacnet, robot_synesthesia and tactofind. Web search results for the other model names mostly returned aggregator pages; none was used as a source."
+ ],
+ "started": "2026-10-31T08:30:02Z",
+ "finished": "2026-10-31T08:39:41Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 10 changed files, 3 new entries"
+}

@@ -1,0 +1,4 @@
+{"date": "2026-10-31", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "dextraverse",
+   "text": "DextraVerse: a second real-robot task, unscrew_bottle_cap, was added to the Hugging Face repo (commit cc7a4456, 2026-10-31): 56 episodes, 16,417 frames at about 14.6 Hz (19 min), a 5.7 GB zarr archive, with a left hand holding the bottle and a right hand unscrewing the cap, and new deform3 and distforce fingertip maps from SharpaWave SDK 5.x. Real-robot totals are now 317 episodes and 154,799 frames in 2 tasks (were 261 and 138,382 in 1); availability stays public, license CC BY 4.0.",
+   "source": "https://huggingface.co/datasets/ntumars/DextraVerse"}]}

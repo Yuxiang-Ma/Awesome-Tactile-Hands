@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-10-30T08:33:08Z",
+ "updated": "2026-10-31T08:35:13Z",
  "urls": {
   "http://stag.csail.mit.edu/": {
    "kind": "page",
@@ -20,7 +20,7 @@
     "https://github.com/Erkil1452/touch"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "http://stag.csail.mit.edu/#data": {
    "kind": "page",
@@ -40,27 +40,27 @@
     "https://github.com/Erkil1452/touch"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://1drv.ms/f/c/9054151f0ba654c9/EmdvA3bTnsNErIH6P5rsvlwBm-K3KRsRZKDm99xcYqoROA": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://1drv.ms/f/c/9054151f0ba654c9/EsZlIVlJEudEpYT2Ofl7tj8BbNErfoJZdkgG5PnZ5j6_hg": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://1drv.ms/f/c/9054151f0ba654c9/EslUpgsfFVQggJB7AQAAAAABSp31p8Fft1mtHyOwJNqmoA": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://1drv.ms/u/c/9054151f0ba654c9/EbYX2-fmQ6pDiCf2vF3yYawBLC8lpGQBZWM4L_r3VXBQFw": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://3dtacdex.github.io/": {
    "kind": "page",
@@ -71,7 +71,7 @@
     "https://github.com/tianhaowuhz/3dtacdex"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://ace-data-engine.github.io/ACE-Data-0/": {
    "kind": "page",
@@ -82,7 +82,7 @@
     "https://huggingface.co/datasets/ACERobotics/ACE-Data-0"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://action-sense.csail.mit.edu/": {
    "kind": "page",
@@ -93,7 +93,7 @@
     "https://github.com/delpreto/ActionNet"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://action-sense.csail.mit.edu/data.html": {
    "kind": "page",
@@ -141,7 +141,7 @@
     "n) [unavailable] [unavailable] Split 1 videos: C01 | C02 | C03 | C04 | C05 Split 1 times : C01 | C02 | C03 | C04 | C05 [coming soon] Split 1 audio: M01 | M02 Split 1 times: M01 and M02 S02 YouTube Spl",
     "t 1 Split 2 Split 3 Split 1 Split 2 Split 3 [coming soon] [coming soon] [coming soon] Body measurements for all subjects XLSX file of body measurements and procedures Data for Subject S00 Note: Chapte"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://adaptac-dex.github.io/": {
    "kind": "page",
@@ -155,7 +155,7 @@
     "https://github.com/real-dex-suite/REAL-ROBO.git"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://adonis-galaxy.github.io/dtwm-project-page/": {
    "kind": "page",
@@ -166,7 +166,7 @@
     "https://github.com/Adonis-galaxy/Dexterous-Tactile-World-Model"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://akashsharma02.github.io/sparsh-skin-ssl/": {
    "kind": "page",
@@ -178,7 +178,7 @@
     "https://huggingface.co/datasets/facebook/sparsh-skin-dataset"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://akashsharma02.github.io/sparsh-x-ssl/": {
    "kind": "page",
@@ -189,7 +189,7 @@
     "https://github.com/facebookresearch/sparsh-multisensory-touch"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2303.12076": {
    "kind": "arxiv",
@@ -198,7 +198,7 @@
    "updated": "2023-03-21",
    "journal_ref": null,
    "comment": "Video and code can be accessed here: https://tactile-dexterity.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2303.13482": {
    "kind": "arxiv",
@@ -207,7 +207,16 @@
    "updated": "2023-03-23",
    "journal_ref": null,
    "comment": "Accepted in ICRA 2023",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
+  },
+  "https://arxiv.org/abs/2309.12300": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2023-09-21",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2312.01853": {
    "kind": "arxiv",
@@ -216,7 +225,7 @@
    "updated": "2024-07-31",
    "journal_ref": null,
    "comment": "Project page: https://yingyuan0414.github.io/visuotactile/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2312.13469": {
    "kind": "arxiv",
@@ -225,7 +234,7 @@
    "updated": "2023-12-20",
    "journal_ref": null,
    "comment": "43 pages, 20 figures, 1 table; https://suddhu.github.io/neural-feels/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2404.16823": {
    "kind": "arxiv",
@@ -234,7 +243,7 @@
    "updated": "2024-05-22",
    "journal_ref": null,
    "comment": "Code and Project Website: https://toruowo.github.io/hato/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2405.03476": {
    "kind": "arxiv",
@@ -243,7 +252,7 @@
    "updated": "2024-05-06",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2409.17549": {
    "kind": "arxiv",
@@ -252,7 +261,7 @@
    "updated": "2025-06-16",
    "journal_ref": null,
    "comment": "Accepted to ICRA 2025",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2410.23629": {
    "kind": "arxiv",
@@ -261,7 +270,7 @@
    "updated": "2024-11-01",
    "journal_ref": null,
    "comment": "Accepted to NeurIPS 2024. Project Page Link: https://pimforce.hcitech.org/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2501.00510": {
    "kind": "arxiv",
@@ -270,7 +279,7 @@
    "updated": "2025-01-06",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2501.03606": {
    "kind": "arxiv",
@@ -279,7 +288,7 @@
    "updated": "2025-12-25",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2503.05231": {
    "kind": "arxiv",
@@ -288,7 +297,7 @@
    "updated": "2025-06-03",
    "journal_ref": "IEEE Robotics and Automation Letters, vol. 10, no. 11, pp. 11482-11489, Nov. 2025",
    "comment": "8 pages, 5 figures, Submitted to IEEE Robotics and Automation Letters (RAL)",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2503.07926": {
    "kind": "arxiv",
@@ -297,7 +306,7 @@
    "updated": "2025-07-24",
    "journal_ref": null,
    "comment": "8 pages. Accepted by 2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2505.11420": {
    "kind": "arxiv",
@@ -306,7 +315,7 @@
    "updated": "2025-05-16",
    "journal_ref": null,
    "comment": "18 pages, 15 figures",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2505.13982": {
    "kind": "arxiv",
@@ -315,7 +324,7 @@
    "updated": "2025-07-21",
    "journal_ref": "2025 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS), pp. 3232-3239 (2025)",
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2505.16289": {
    "kind": "arxiv",
@@ -324,7 +333,7 @@
    "updated": "2025-08-28",
    "journal_ref": null,
    "comment": "9 pages, 10 figures, 2 tables",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2505.21864": {
    "kind": "arxiv",
@@ -333,7 +342,7 @@
    "updated": "2025-10-02",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2506.14754": {
    "kind": "arxiv",
@@ -342,7 +351,16 @@
    "updated": "2025-06-17",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
+  },
+  "https://arxiv.org/abs/2508.08706": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2026-06-15",
+   "journal_ref": null,
+   "comment": "Accepted by IEEE Robotics and Automation Letters (RA-L). ObjTac dataset: https://readerek.github.io/Objtac.github.io",
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2509.08354": {
    "kind": "arxiv",
@@ -351,7 +369,7 @@
    "updated": "2025-09-10",
    "journal_ref": null,
    "comment": "20 pages, 19 figures, accepted by IEEE Transactions on Robotics",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2510.08807": {
    "kind": "arxiv",
@@ -360,7 +378,7 @@
    "updated": "2026-07-04",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2510.25725": {
    "kind": "arxiv",
@@ -369,7 +387,7 @@
    "updated": "2025-11-13",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2512.02729": {
    "kind": "arxiv",
@@ -378,7 +396,7 @@
    "updated": "2025-12-02",
    "journal_ref": null,
    "comment": "27 Pages, 21 figures",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2512.08920": {
    "kind": "arxiv",
@@ -387,7 +405,7 @@
    "updated": "2025-12-09",
    "journal_ref": null,
    "comment": "Project website: https://jessicayin.github.io/osmo_tactile_glove/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2512.16842": {
    "kind": "arxiv",
@@ -396,7 +414,16 @@
    "updated": "2025-12-18",
    "journal_ref": null,
    "comment": "https://opentouch-tactile.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
+  },
+  "https://arxiv.org/abs/2512.21233": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2025-12-29",
+   "journal_ref": null,
+   "comment": "The first two authors contributed equally",
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2602.05513": {
    "kind": "arxiv",
@@ -405,7 +432,7 @@
    "updated": "2026-08-17",
    "journal_ref": null,
    "comment": "25 pages, 8 figures. Project Page: https://baai-humanoid.github.io/DECO-webpage/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2602.13579": {
    "kind": "arxiv",
@@ -414,7 +441,7 @@
    "updated": "2026-02-14",
    "journal_ref": null,
    "comment": "Website: https://yswi.github.io/tactalign/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2603.13869": {
    "kind": "arxiv",
@@ -423,7 +450,7 @@
    "updated": "2026-07-21",
    "journal_ref": null,
    "comment": "Project page: https://transdex.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2603.15847": {
    "kind": "arxiv",
@@ -432,7 +459,7 @@
    "updated": "2026-03-16",
    "journal_ref": null,
    "comment": "14 pages, 7 figures",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2603.17851": {
    "kind": "arxiv",
@@ -441,7 +468,7 @@
    "updated": "2026-03-18",
    "journal_ref": null,
    "comment": "9 pages, 9 figures.Project page: https://xitong-c.github.io/DexViTac/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2603.20850": {
    "kind": "arxiv",
@@ -450,7 +477,7 @@
    "updated": "2026-06-08",
    "journal_ref": null,
    "comment": "CVPR 2026 Highlight. This version includes the motion retarget process in the appendix",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2604.14944": {
    "kind": "arxiv",
@@ -459,7 +486,7 @@
    "updated": "2026-10-06",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2605.13083": {
    "kind": "arxiv",
@@ -468,7 +495,7 @@
    "updated": "2026-05-13",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2606.09243": {
    "kind": "arxiv",
@@ -477,7 +504,7 @@
    "updated": "2026-06-08",
    "journal_ref": null,
    "comment": "Accepted to ICML2026 spotlight",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2606.13102": {
    "kind": "arxiv",
@@ -486,7 +513,7 @@
    "updated": "2026-10-27",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2606.17055": {
    "kind": "arxiv",
@@ -495,7 +522,7 @@
    "updated": "2026-06-18",
    "journal_ref": null,
    "comment": "Project page: https://tactile-rex.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2606.31836": {
    "kind": "arxiv",
@@ -504,7 +531,7 @@
    "updated": "2026-06-30",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2607.01067": {
    "kind": "arxiv",
@@ -513,7 +540,7 @@
    "updated": "2026-07-01",
    "journal_ref": null,
    "comment": "The first two authors contribute equally. Orders are decided by flipping a coin",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2607.07287": {
    "kind": "arxiv",
@@ -522,7 +549,7 @@
    "updated": "2026-07-09",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2607.09190": {
    "kind": "arxiv",
@@ -531,7 +558,7 @@
    "updated": "2026-07-10",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2607.28625": {
    "kind": "arxiv",
@@ -540,7 +567,7 @@
    "updated": "2026-07-30",
    "journal_ref": null,
    "comment": "Project Page: https://ace-data-engine.github.io/ACE-Data-0/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2608.15060": {
    "kind": "arxiv",
@@ -549,7 +576,7 @@
    "updated": "2026-10-16",
    "journal_ref": null,
    "comment": "NeurIPS 2026 Accepted. Project Page: https://egotac.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2609.20414": {
    "kind": "arxiv",
@@ -558,7 +585,7 @@
    "updated": "2026-09-17",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2609.20649": {
    "kind": "arxiv",
@@ -567,7 +594,7 @@
    "updated": "2026-09-18",
    "journal_ref": null,
    "comment": "Accept to IROS 2026 Workshop RoBoWoMo (Lightning Talk)",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2609.24976": {
    "kind": "arxiv",
@@ -576,7 +603,7 @@
    "updated": "2026-09-21",
    "journal_ref": null,
    "comment": "22 pages. Project website: https://dextacwam.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2609.34182": {
    "kind": "arxiv",
@@ -585,7 +612,7 @@
    "updated": "2026-09-29",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2609.34286": {
    "kind": "arxiv",
@@ -594,7 +621,7 @@
    "updated": "2026-09-28",
    "journal_ref": null,
    "comment": "Project page: https://adonis-galaxy.github.io/dtwm-project-page/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2609.39017": {
    "kind": "arxiv",
@@ -603,7 +630,7 @@
    "updated": "2026-09-30",
    "journal_ref": null,
    "comment": "8 pages, 5 figures. This work has been submitted to the IEEE for possible publication. Copyright may be transferred without notice, after which this version may no longer be accessible",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.05180": {
    "kind": "arxiv",
@@ -612,7 +639,7 @@
    "updated": "2026-10-14",
    "journal_ref": null,
    "comment": "9 pages, 6 figures, 4 tables",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.07692": {
    "kind": "arxiv",
@@ -621,7 +648,7 @@
    "updated": "2026-10-06",
    "journal_ref": null,
    "comment": "8 pages, 6 figures",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.09455": {
    "kind": "arxiv",
@@ -630,7 +657,7 @@
    "updated": "2026-10-07",
    "journal_ref": null,
    "comment": "34 pages, 15 figures",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.10283": {
    "kind": "arxiv",
@@ -639,7 +666,7 @@
    "updated": "2026-10-07",
    "journal_ref": null,
    "comment": "12 Pages. Website: https://lasr-lab.github.io/dexterous-grasp-stability/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.10288": {
    "kind": "arxiv",
@@ -648,7 +675,7 @@
    "updated": "2026-10-08",
    "journal_ref": null,
    "comment": "Project page: https://touch-scale.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.11945": {
    "kind": "arxiv",
@@ -657,7 +684,7 @@
    "updated": "2026-10-08",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.14372": {
    "kind": "arxiv",
@@ -666,7 +693,7 @@
    "updated": "2026-10-09",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.18872": {
    "kind": "arxiv",
@@ -675,7 +702,7 @@
    "updated": "2026-10-13",
    "journal_ref": null,
    "comment": "Project page: internrobotics.github.io/egoexplorer.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.19155": {
    "kind": "arxiv",
@@ -684,7 +711,7 @@
    "updated": "2026-10-13",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.22342": {
    "kind": "arxiv",
@@ -693,7 +720,7 @@
    "updated": "2026-10-15",
    "journal_ref": null,
    "comment": "Website: https://xsparkai.com/Spark-0",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.22932": {
    "kind": "arxiv",
@@ -702,7 +729,7 @@
    "updated": "2026-10-16",
    "journal_ref": null,
    "comment": "8 pages, 6 figures",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.26854": {
    "kind": "arxiv",
@@ -711,7 +738,7 @@
    "updated": "2026-10-21",
    "journal_ref": null,
    "comment": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.27995": {
    "kind": "arxiv",
@@ -720,7 +747,7 @@
    "updated": "2026-10-20",
    "journal_ref": null,
    "comment": "9 pages, 4 figures",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://arxiv.org/abs/2610.36539": {
    "kind": "arxiv",
@@ -729,7 +756,7 @@
    "updated": "2026-10-27",
    "journal_ref": null,
    "comment": "Project webpage: https://card-retargeting.github.io/",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://baai-humanoid.github.io/DECO-webpage/": {
    "kind": "page",
@@ -738,7 +765,19 @@
    "text_len": 4,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
+  },
+  "https://beingbeyond.github.io/UniTacHand/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "c0b39004e775bb03",
+   "text_len": 4656,
+   "links": [
+    "https://github.com/BeingBeyond/UniTacHand",
+    "https://github.com/nerfies/nerfies.github.io"
+   ],
+   "phrases": [],
+   "seen": "2026-10-31"
   },
   "https://card-retargeting.github.io/": {
    "kind": "page",
@@ -747,7 +786,7 @@
    "text_len": 7995,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://dataset-mall.paxini.com": {
    "kind": "page",
@@ -756,7 +795,7 @@
    "text_len": 8,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://dex-flex.github.io/": {
    "kind": "page",
@@ -765,7 +804,7 @@
    "text_len": 8047,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://dex-umi.github.io/": {
    "kind": "page",
@@ -777,7 +816,7 @@
     "https://github.com/real-stanford/DexUMI"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://dextacwam.github.io/": {
    "kind": "page",
@@ -790,82 +829,82 @@
     "https://github.com/nerfies/nerfies.github.io"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.1038/s41467-024-53654-y": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.1038/s41586-019-1234-z": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.1038/s41597-025-04552-5": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.1038/s41598-024-78764-x": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.1038/s41928-021-00558-0": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.1093/nsr/nwaf583": {
    "kind": "page",
    "status": 403,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.1109/tii.2026.3665344": {
    "kind": "page",
    "status": 202,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.25532/OPARA-1588": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.25532/OPARA-787": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.3390/s21082594": {
    "kind": "page",
    "status": 403,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.48557/L6OWMM": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://doi.org/10.57760/sciencedb.14937": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://drive.google.com/drive/folders/148ycBmuvqkdESvAhStlhYJ7ISMgelEvL": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://drive.google.com/file/d/1G52ihW7EbE5eSe04jnxGpo7cc1jxYWHw/view": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://egotac.github.io/": {
    "kind": "page",
@@ -879,7 +918,7 @@
     "https://huggingface.co/wkzhang/EgoTac"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://egotactile.github.io/": {
    "kind": "page",
@@ -891,7 +930,7 @@
     "https://huggingface.co/datasets/HustleHard/EgoTactile"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://fact-1-0.github.io/": {
    "kind": "page",
@@ -902,12 +941,12 @@
    "phrases": [
     "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) FACT Force · Action · Track Real-world task demo"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://forms.gle/QzEPJ7ncuGHgi1gS9": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://ftp1-policy.github.io/": {
    "kind": "page",
@@ -920,7 +959,7 @@
     "https://www.modelscope.cn/datasets/Eureka1064/FTP-1-Dataset"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/ARQ-CRISP/DexSkills": {
    "kind": "gh",
@@ -932,7 +971,7 @@
    "size_kb": 355632,
    "readme_sha": "28ce2a5ac1c658fa8a4d8a646035c585a18b6235",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/ARQ-CRISP/DexSkills/tree/main/DexSkill_dataset": {
    "kind": "gh",
@@ -944,7 +983,7 @@
    "size_kb": 355632,
    "readme_sha": "28ce2a5ac1c658fa8a4d8a646035c585a18b6235",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/ARQ-CRISP/DexSkills/tree/main/DexSkill_dataset/trained_policy": {
    "kind": "gh",
@@ -956,7 +995,7 @@
    "size_kb": 355632,
    "readme_sha": "28ce2a5ac1c658fa8a4d8a646035c585a18b6235",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/Adonis-galaxy/Dexterous-Tactile-World-Model": {
    "kind": "gh",
@@ -968,7 +1007,7 @@
    "size_kb": 332,
    "readme_sha": "99870d2e8daeff78eb80f13664974894e5cf2d8c",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/BAAI-Humanoid/DECO": {
    "kind": "gh",
@@ -980,7 +1019,7 @@
    "size_kb": 48966,
    "readme_sha": "ffda2ee4362dc521e648835241c0a32f8735f01c",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/BeingBeyond/TTP": {
    "kind": "gh",
@@ -992,7 +1031,7 @@
    "size_kb": 316,
    "readme_sha": "5059a0519163f4941fde661106803298b8a8018a",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/DarioDiDomenico/SData_ReachGrasp": {
    "kind": "gh",
@@ -1004,7 +1043,7 @@
    "size_kb": 5835,
    "readme_sha": "d73406559dc43d2f4b0c5dfc9731662e24a0f0fc",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/Erkil1452/touch": {
    "kind": "gh",
@@ -1016,7 +1055,7 @@
    "size_kb": 29,
    "readme_sha": "79189aa0dbaa0b45c9a92ec7c7ecb6dd2e4d0fe8",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/InternRobotics/EgoExplorer": {
    "kind": "gh",
@@ -1028,7 +1067,7 @@
    "size_kb": 62377,
    "readme_sha": "937866902c16905ada84a3fcc4b32eb0d44c8bd7",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/Jianyi2004/TouchAnything": {
    "kind": "gh",
@@ -1040,7 +1079,7 @@
    "size_kb": 134494,
    "readme_sha": "902ef3d7d51f62dacc9f4d2ce4616b22dc734369",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/LFGfg/TransDex": {
    "kind": "gh",
@@ -1052,7 +1091,7 @@
    "size_kb": 82952,
    "readme_sha": "a0805919445ae53aed52344a2ed2310c14dd8efb",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/LQTS/M2VTP": {
    "kind": "gh",
@@ -1064,7 +1103,7 @@
    "size_kb": 7930,
    "readme_sha": "b05d0c5ad99c050eb3a895553d7500ca360768a8",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/LQTS/Pretraining_for_M2VTP": {
    "kind": "gh",
@@ -1076,7 +1115,7 @@
    "size_kb": 305,
    "readme_sha": "048ea5b3d5a4e1ea9168ff6cd725b66e63fa0647",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/LQTS/VTDexManip": {
    "kind": "gh",
@@ -1088,7 +1127,7 @@
    "size_kb": 58564,
    "readme_sha": "b7597ea817a380c3dfdfd856212fd0f202f8e12f",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/LejuRobotics/kuavo_data_challenge": {
    "kind": "gh",
@@ -1100,7 +1139,7 @@
    "size_kb": 2192,
    "readme_sha": "b5e92cadafef3cc67c6c9b198e81b22b80183e7c",
    "release": "v1.0.2 2026-02-25",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/Mr-Zwkid/EgoTac": {
    "kind": "gh",
@@ -1112,7 +1151,7 @@
    "size_kb": 30976,
    "readme_sha": "e0a43156846a75243adad52feaf6f7af67ce79fe",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/OpenTouch-MIT/opentouch": {
    "kind": "gh",
@@ -1124,7 +1163,7 @@
    "size_kb": 4023,
    "readme_sha": "35f4b34c2fa6751709b914330777b9159a0ba096",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/Russell-Zeng/EgoTactile": {
    "kind": "gh",
@@ -1136,7 +1175,7 @@
    "size_kb": 3953,
    "readme_sha": "9376e694f8280b2b2b3f897525e4377ec4afacc4",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/TouchTronix-Robotics/FusionX-DataCollection": {
    "kind": "gh",
@@ -1148,7 +1187,7 @@
    "size_kb": 6005,
    "readme_sha": "e0cefc1f1c0c16269a41e0984a52b1c37f9f0c74",
    "release": "v3.0.0 2026-10-12",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/VICON-dataset/dataset": {
    "kind": "gh",
@@ -1160,7 +1199,7 @@
    "size_kb": 1,
    "readme_sha": "1173c4329071de627854ad7b859044d0c5fbbe2e",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/XsparkAI/Spark-0": {
    "kind": "gh",
@@ -1172,7 +1211,7 @@
    "size_kb": 3604,
    "readme_sha": "bd9b7c03bae6f834c1f579081fbd2d00c47578e6",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/YingYuan0414/in-hand-rotation": {
    "kind": "gh",
@@ -1184,7 +1223,7 @@
    "size_kb": 5596,
    "readme_sha": "20169d454358cf6f94bca0ee2a0c86d853753301",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/YunzhuLi/senstextile": {
    "kind": "gh",
@@ -1196,7 +1235,7 @@
    "size_kb": 200529,
    "readme_sha": "45af6b518644ca89b9c2d424dbd36890fe57a147",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/ZhuoyangLiu2005/T-Rex": {
    "kind": "gh",
@@ -1208,7 +1247,7 @@
    "size_kb": 145516,
    "readme_sha": "ad43c9657ea5a013a3865473d3395e56e7c1d3a7",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/alanchancl/Tactile-GAT": {
    "kind": "gh",
@@ -1220,7 +1259,7 @@
    "size_kb": 23,
    "readme_sha": "7fe7cef94b7916b003d8c01d90c0431831946a05",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/delpreto/ActionNet": {
    "kind": "gh",
@@ -1232,7 +1271,7 @@
    "size_kb": 58958,
    "readme_sha": "e1860f1c0a15c347e3ffc4cf8bb42f96c5f49f9c",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/dextacwam/DexTacWAM": {
    "kind": "gh",
@@ -1244,7 +1283,7 @@
    "size_kb": 3075,
    "readme_sha": "f437e88a5bf7d13333a0e3cfcb3fe772559a4633",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/facebookresearch/neuralfeels": {
    "kind": "gh",
@@ -1256,7 +1295,7 @@
    "size_kb": 6056,
    "readme_sha": "ca8011a3f993641c14370e60d7343065233b9e07",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/facebookresearch/sparsh-multisensory-touch": {
    "kind": "gh",
@@ -1268,7 +1307,19 @@
    "size_kb": 14980,
    "readme_sha": "0fabbdfb5be66b1c966afef2ce32f4b79f8b8235",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
+  },
+  "https://github.com/irmakguzey/see-to-touch": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "irmakguzey/see-to-touch",
+   "pushed_at": "2023-10-24T18:13:25Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 734,
+   "readme_sha": "a27963d93d9e9d81e9b56ba2084fbbd241ff21c9",
+   "release": null,
+   "seen": "2026-10-31"
   },
   "https://github.com/irmakguzey/tactile-dexterity": {
    "kind": "gh",
@@ -1280,7 +1331,7 @@
    "size_kb": 607,
    "readme_sha": "875eb3e39ae34695523d2cc3b10ccbb1b432e7f5",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/jeffsonyu/ViTaM": {
    "kind": "gh",
@@ -1292,7 +1343,7 @@
    "size_kb": 179246,
    "readme_sha": "9630be612b3604707808ced30ccd9c78cc20acec",
    "release": "v1.0.0 2024-09-30",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/jessicayin/osmo_tactile_glove": {
    "kind": "gh",
@@ -1304,7 +1355,7 @@
    "size_kb": 238082,
    "readme_sha": "ab1c0b4f49f770094afa1a2999bc0b7c0e85fb65",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/kingchou007/adaptac-dex": {
    "kind": "gh",
@@ -1316,7 +1367,7 @@
    "size_kb": 12476,
    "readme_sha": "9f0fec767188380dd1784c31afb611d8360bd135",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/lasr-lab/dexterous-grasp-stability": {
    "kind": "gh",
@@ -1328,7 +1379,7 @@
    "size_kb": 12508,
    "readme_sha": "d38d1d9b3d14e759cf57f3dddd75c8d6306d8989",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/linker-bot/UMI-Dex": {
    "kind": "gh",
@@ -1340,7 +1391,7 @@
    "size_kb": 66071,
    "readme_sha": "c8c7b5bae73851a366629f805ce0ab9317d01db2",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/michaelyuancb/ftp1-policy": {
    "kind": "gh",
@@ -1352,7 +1403,7 @@
    "size_kb": 85825,
    "readme_sha": "57799e021b577908a9bf8c2df00d7fcf3fdfd467",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/nolann030628/OXT-QC": {
    "kind": "gh",
@@ -1361,10 +1412,10 @@
    "pushed_at": "2026-10-30T08:04:53Z",
    "archived": false,
    "license": null,
-   "size_kb": 140434,
+   "size_kb": 140481,
    "readme_sha": "05b4e548f396e6facf9eb4b5fff307ddf210fe04",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/phai-lab/touchscale": {
    "kind": "gh",
@@ -1376,7 +1427,7 @@
    "size_kb": 383490,
    "readme_sha": "125d1f91794bc099f6da6e2d6d8443fb84ff2f66",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/physical-superintelligence-lab/Humanoid-Everyday": {
    "kind": "gh",
@@ -1388,7 +1439,7 @@
    "size_kb": 7306,
    "readme_sha": "e8485d24754f208feac00dbd8fa3307e96ed2145",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/px-DataCollection/px_omnisharing_dataprocess_kit": {
    "kind": "gh",
@@ -1400,7 +1451,7 @@
    "size_kb": 190018,
    "readme_sha": "c8cb83369a273265b9e71df6617c7986df0a90c9",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/real-stanford/DexUMI": {
    "kind": "gh",
@@ -1412,7 +1463,7 @@
    "size_kb": 17136,
    "readme_sha": "3caaa440365b8719ac7c410d0f6a55c321c1181d",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/snuvclab/HRDexDB": {
    "kind": "gh",
@@ -1424,7 +1475,7 @@
    "size_kb": 404319,
    "readme_sha": "fec1a2030be65aae271a1276142bdbf7409fbd71",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/tianhaowuhz/3dtacdex": {
    "kind": "gh",
@@ -1436,7 +1487,7 @@
    "size_kb": 76407,
    "readme_sha": "de5c1a9acdadceba3f32328e3be9235471373d2d",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/tianhaowuhz/3dtacdex/tree/main/ckpts": {
    "kind": "gh",
@@ -1448,7 +1499,7 @@
    "size_kb": 76407,
    "readme_sha": "de5c1a9acdadceba3f32328e3be9235471373d2d",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/toruowo/hato": {
    "kind": "gh",
@@ -1460,7 +1511,7 @@
    "size_kb": 6351,
    "readme_sha": "05d343810865f4311782d96097b56cc70ec817ce",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/uni-vta/UVTA": {
    "kind": "gh",
@@ -1472,7 +1523,7 @@
    "size_kb": 1939,
    "readme_sha": "0b1d136900162031a4807e0af4a19e192d1442d8",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://github.com/zhangyuhong01/Robowheel-Toolkits": {
    "kind": "gh",
@@ -1484,7 +1535,7 @@
    "size_kb": 114198,
    "readme_sha": "231e5daa354b81e2e6093471afbdb0c8b88a2257",
    "release": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://grasplikehuman.github.io/": {
    "kind": "page",
@@ -1496,13 +1547,13 @@
     "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://grasplikehuman.github.io/static/datasets/grasplikehumans_dataset.zip": {
    "kind": "page",
    "status": 200,
    "length": "21185342",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://hci-tech-lab.github.io/PiMForce/": {
    "kind": "page",
@@ -1514,7 +1565,7 @@
     "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/BAAI-Humanoid/DECO_sim": {
    "kind": "hf",
@@ -1527,7 +1578,7 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 8,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/BeingBeyond/TTP": {
    "kind": "hf",
@@ -1540,7 +1591,7 @@
    "disabled": false,
    "license": null,
    "files": 43,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder": {
    "kind": "hf",
@@ -1553,7 +1604,7 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 5,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/MJJJJ1064/ftp1_v0426_50kstep": {
    "kind": "hf",
@@ -1566,7 +1617,7 @@
    "disabled": false,
    "license": null,
    "files": 96,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/TianxingChen/Spark-0": {
    "kind": "hf",
@@ -1579,13 +1630,13 @@
    "disabled": false,
    "license": null,
    "files": 4,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc": {
    "kind": "page",
    "status": 200,
-   "text_sha": "60af76640f9c72d9",
-   "text_len": 1591,
+   "text_sha": "9c7d1de421899cc0",
+   "text_len": 1501,
    "links": [
     "https://cdn-avatars.huggingface.co/v1/production/uploads/649e31b4ed3107c9bd1fc7eb/MN9Hh84P87vpTpawPl-mJ.jpeg",
     "https://cdn-avatars.huggingface.co/v1/production/uploads/no-auth/lKP9PoghnhdtMgz4M60TF.png",
@@ -1602,14 +1653,14 @@
     "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-600-normal.woff2",
     "https://huggingface.co/front/assets/fonts/source-sans-pro-latin-700-normal.woff2",
     "https://huggingface.co/front/assets/huggingface_logo-noborder.svg",
-    "https://huggingface.co/front/build/kube-6c835fa/index.js",
-    "https://huggingface.co/front/build/kube-6c835fa/katex.css",
-    "https://huggingface.co/front/build/kube-6c835fa/style.css",
+    "https://huggingface.co/front/build/kube-7e92521/index.js",
+    "https://huggingface.co/front/build/kube-7e92521/katex.css",
+    "https://huggingface.co/front/build/kube-7e92521/style.css",
     "https://huggingface.co/inference/models",
     "https://huggingface.co/js/script.js"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale": {
    "kind": "hf",
@@ -1622,12 +1673,12 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 16353,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/ACERobotics/ACE-Data-0": {
    "kind": "hf",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/BAAI-Humanoid/DECO-50": {
    "kind": "hf",
@@ -1640,7 +1691,7 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 8179,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample": {
    "kind": "hf",
@@ -1653,7 +1704,7 @@
    "disabled": false,
    "license": null,
    "files": 319,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/Chopper233/UVTA": {
    "kind": "hf",
@@ -1666,7 +1717,7 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 60,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/FeelAuthors/FEEL-Benchmark": {
    "kind": "hf",
@@ -1679,7 +1730,7 @@
    "disabled": false,
    "license": "cc-by-4.0",
    "files": 7056,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/HORA-DB/HORA": {
    "kind": "hf",
@@ -1692,12 +1743,12 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 1309,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/HRDexDB/HRDexDB": {
    "kind": "hf",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/HustleHard/EgoTactile": {
    "kind": "hf",
@@ -1710,7 +1761,7 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 1539,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/InternRobotics/EgoExplorer": {
    "kind": "hf",
@@ -1723,7 +1774,7 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 164,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation": {
    "kind": "hf",
@@ -1736,7 +1787,7 @@
    "disabled": false,
    "license": null,
    "files": 22,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/LejuRobotics/LET-Dex-Dataset": {
    "kind": "hf",
@@ -1749,7 +1800,7 @@
    "disabled": false,
    "license": "cc-by-nc-sa-4.0",
    "files": 745,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/MJJJJ1064/FTP-1-Dataset": {
    "kind": "hf",
@@ -1762,7 +1813,7 @@
    "disabled": false,
    "license": null,
    "files": 89,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/OpenGraphLabs-Research/ego-tactile-manipulation": {
    "kind": "hf",
@@ -1775,7 +1826,7 @@
    "disabled": false,
    "license": "cc-by-4.0",
    "files": 612,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/PsiBotAI/SynData": {
    "kind": "hf",
@@ -1788,7 +1839,7 @@
    "disabled": false,
    "license": "cc-by-4.0",
    "files": 4039,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/PsiBotAI/SynData/tree/main/tools/syndata_render": {
    "kind": "hf",
@@ -1801,17 +1852,17 @@
    "disabled": false,
    "license": "cc-by-4.0",
    "files": 4039,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/Rimbot/PalmDex": {
    "kind": "hf",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/Sharpa-Robotics/SharpaDex-v1.0": {
    "kind": "hf",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/SharpaIT/RoCo_TaskBoardAssembly": {
    "kind": "hf",
@@ -1824,7 +1875,7 @@
    "disabled": false,
    "license": "cc-by-4.0",
    "files": 29819,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge": {
    "kind": "hf",
@@ -1837,7 +1888,7 @@
    "disabled": false,
    "license": "cc-by-4.0",
    "files": 18849,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile": {
    "kind": "hf",
@@ -1850,7 +1901,7 @@
    "disabled": false,
    "license": null,
    "files": 7420,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks": {
    "kind": "hf",
@@ -1863,7 +1914,7 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 23188,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/Tachintech/Fixed_Viewpoint_Tactile_Dataset": {
    "kind": "hf",
@@ -1876,7 +1927,7 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 159,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01": {
    "kind": "hf",
@@ -1889,7 +1940,7 @@
    "disabled": false,
    "license": "gpl-3.0",
    "files": 279,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/USC-PSI-Lab/humanoid-everyday": {
    "kind": "hf",
@@ -1902,17 +1953,17 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 26869,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/chuqiaoLyu/Xspark-HumanTouch": {
    "kind": "hf",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/daimonrobotics/Daimon-Infinity": {
    "kind": "hf",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/edessa/feel": {
    "kind": "hf",
@@ -1925,7 +1976,7 @@
    "disabled": false,
    "license": null,
    "files": 102,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/facebook/sparsh-skin-dataset": {
    "kind": "hf",
@@ -1938,7 +1989,7 @@
    "disabled": false,
    "license": null,
    "files": 5869,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/facebook/sparsh-x-dataset": {
    "kind": "hf",
@@ -1951,7 +2002,7 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 8,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/kingchou007/3dtacdex": {
    "kind": "hf",
@@ -1964,7 +2015,7 @@
    "disabled": false,
    "license": "mit",
    "files": 6,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/lilfiiiiish/juqiao-glove-0929": {
    "kind": "hf",
@@ -1977,20 +2028,20 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 14,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/ntumars/DextraVerse": {
    "kind": "hf",
    "status": 200,
    "id": "ntumars/DextraVerse",
-   "sha": "b36b2488a2a75f401b554408847cb36fbfa9dba9",
-   "last_modified": "2026-10-08T03:10:10.000Z",
+   "sha": "cc7a44563461d5ec403fa3cc73de225c3ef0712b",
+   "last_modified": "2026-10-31T07:59:19.000Z",
    "gated": false,
    "private": false,
    "disabled": false,
    "license": "cc-by-4.0",
-   "files": 47,
-   "seen": "2026-10-30"
+   "files": 49,
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/paxini/Omnisharing_DB_SampleData": {
    "kind": "hf",
@@ -2003,7 +2054,7 @@
    "disabled": false,
    "license": null,
    "files": 1002,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/suddhu/Feelsight": {
    "kind": "hf",
@@ -2016,7 +2067,7 @@
    "disabled": false,
    "license": "mit",
    "files": 6,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/touchtronix/FusionX-Multimodal-Sample-Data-V3": {
    "kind": "hf",
@@ -2029,7 +2080,7 @@
    "disabled": false,
    "license": "cc-by-4.0",
    "files": 47383,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/velvet-pine-22/PULSE": {
    "kind": "hf",
@@ -2042,7 +2093,7 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 3653,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/vint6d/vint6d": {
    "kind": "hf",
@@ -2055,7 +2106,7 @@
    "disabled": false,
    "license": "mit",
    "files": 29,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/wkzhang/EgoTac-SC": {
    "kind": "hf",
@@ -2068,7 +2119,7 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 48,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/xitong-c/DexViTac_Dataset": {
    "kind": "hf",
@@ -2081,7 +2132,7 @@
    "disabled": false,
    "license": null,
    "files": 2,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/youngw/tactile_align_encoder_pretrain_glove": {
    "kind": "hf",
@@ -2094,7 +2145,7 @@
    "disabled": false,
    "license": null,
    "files": 14,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/zekaiwang/trex_dataset": {
    "kind": "hf",
@@ -2107,7 +2158,7 @@
    "disabled": false,
    "license": "mit",
    "files": 7903,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/datasets/zhouzhoujy/EgoTouch": {
    "kind": "hf",
@@ -2120,7 +2171,7 @@
    "disabled": false,
    "license": null,
    "files": 22897,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/facebook/sparsh-skin": {
    "kind": "hf",
@@ -2133,7 +2184,7 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 4,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/facebook/sparsh-x-all": {
    "kind": "hf",
@@ -2146,7 +2197,7 @@
    "disabled": false,
    "license": "cc-by-nc-4.0",
    "files": 4,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/kingchou007/3dTacDex": {
    "kind": "hf",
@@ -2159,7 +2210,7 @@
    "disabled": false,
    "license": "mit",
    "files": 3,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/miniFranka/T-Rex_midtrain_mecka23k_ucb100_vqvae_epoch6": {
    "kind": "hf",
@@ -2172,7 +2223,7 @@
    "disabled": false,
    "license": "mit",
    "files": 15,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/suddhu/tactile_transformer": {
    "kind": "hf",
@@ -2185,7 +2236,7 @@
    "disabled": false,
    "license": "mit",
    "files": 4,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/velvet-pine-22/PULSE-code": {
    "kind": "hf",
@@ -2198,7 +2249,7 @@
    "disabled": false,
    "license": "mit",
    "files": 257,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://huggingface.co/wkzhang/EgoTac": {
    "kind": "hf",
@@ -2211,7 +2262,7 @@
    "disabled": false,
    "license": "apache-2.0",
    "files": 6,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://humanoideveryday.github.io/": {
    "kind": "page",
@@ -2222,12 +2273,12 @@
    "phrases": [
     "Coming Soon BibTeX @misc{zhao2025humanoideverydaycomprehensiverobotic, title={Humanoid Everyday: A Comprehensive Robotic Dataset fo"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://ieeexplore.ieee.org/document/10610933/": {
    "kind": "page",
    "status": 202,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://internrobotics.github.io/egoexplorer.github.io/": {
    "kind": "page",
@@ -2241,7 +2292,7 @@
    "phrases": [
     "18872}, } The dataset, the capture toolkit and the reconstruction code will be released"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://jianyi2004.github.io/TouchAnything-Website/": {
    "kind": "page",
@@ -2253,7 +2304,7 @@
     "https://huggingface.co/datasets/zhouzhoujy/EgoTouch/tree/main"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://lasr-lab.github.io/dexterous-grasp-stability/": {
    "kind": "page",
@@ -2265,7 +2316,7 @@
     "https://github.com/lasr-lab/dexterous-grasp-stability/tree/main/docs"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://lasr.org/research/gentle-grasping": {
    "kind": "page",
@@ -2274,7 +2325,7 @@
    "text_len": 5843,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://lqts.github.io/M2VTP/": {
    "kind": "page",
@@ -2285,7 +2336,7 @@
     "https://github.com/LQTS/M2VTP"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://lqts.github.io/VTDexManip/": {
    "kind": "page",
@@ -2296,7 +2347,7 @@
     "https://github.com/LQTS/VTDexManip"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://mlzxy.github.io/glove2hand": {
    "kind": "page",
@@ -2310,7 +2361,7 @@
    "phrases": [
     "Stay tuned — larger dataset releases and updates about our multi-modal sensing gloves are on the way"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset": {
    "kind": "page",
@@ -2323,7 +2374,7 @@
     "https://www.modelscope.cn/datasets/Linkerbot/UMI-Dex-Pro-L6_Manipulation-Dataset.md"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://modelscope.cn/datasets/daimonrobotics/Daimon-Infinity-Lite": {
    "kind": "page",
@@ -2336,7 +2387,7 @@
     "https://www.modelscope.cn/datasets/daimonrobotics/Daimon-Infinity-Lite.md"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://nvidia-isaac.github.io/video_to_data/physicalword/": {
    "kind": "page",
@@ -2347,7 +2398,7 @@
    "phrases": [
     "Overview Demos Method Results BibTeX Paper Code coming soon NVIDIA PEKING UNIVERSITY UC BERKELEY REASONING BEFORE ACTING Physical Word"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://omnisharingdb.paxini.com/": {
    "kind": "page",
@@ -2356,7 +2407,7 @@
    "text_len": 2887,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://open-x-tactile.github.io/": {
    "kind": "page",
@@ -2365,19 +2416,19 @@
    "text_len": 761,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://openreview.net/forum?id=AoU576r9O2": {
    "kind": "page",
    "status": 200,
    "length": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://openreview.net/forum?id=olvz0gAdGOX": {
    "kind": "page",
    "status": 200,
    "length": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://opentouch-tactile.github.io/": {
    "kind": "page",
@@ -2388,7 +2439,7 @@
     "https://github.com/OpenTouch-MIT/opentouch"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://phanes-lab.github.io/TouchWorld-website/": {
    "kind": "page",
@@ -2397,19 +2448,32 @@
    "text_len": 10097,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf": {
    "kind": "page",
    "status": 200,
    "length": "8677836",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
+  },
+  "https://readerek.github.io/Objtac.github.io": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "b8d10d13b6d54815",
+   "text_len": 5342,
+   "links": [
+    "https://drive.google.com/drive/folders/1jamNGWYhCk-uVKtrleF55WUpHctmOQBH?usp=drive_link"
+   ],
+   "phrases": [
+    "OmniVTLA: Vision-Tactile-Language-Action Model Coming Soon The code repository will be available shortly"
+   ],
+   "seen": "2026-10-31"
   },
   "https://real.stanford.edu/dexumi/sample_data.zip": {
    "kind": "page",
    "status": 200,
    "length": "544417783",
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://research.beingbeyond.com/ttp": {
    "kind": "page",
@@ -2422,7 +2486,7 @@
     "https://huggingface.co/datasets/BeingBeyond/H-Tac_Sample"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://robotic-origami-challenge.github.io/": {
    "kind": "page",
@@ -2433,7 +2497,7 @@
     "https://forms.gle/Y46WUArricVAQPBv9"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://rocochallenge.github.io/RoCo-IROS2026/": {
    "kind": "page",
@@ -2447,7 +2511,19 @@
     "https://forms.gle/d2NKNAE7dqSfYZB87"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
+  },
+  "https://see-to-touch.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "268e890f02c293cb",
+   "text_len": 2468,
+   "links": [
+    "https://drive.google.com/drive/folders/1IpU97D4nSosdyyWmvuLO-E3phRA-nf8c?usp=sharing",
+    "https://github.com/irmakguzey/see-to-touch"
+   ],
+   "phrases": [],
+   "seen": "2026-10-31"
   },
   "https://senstextile.csail.mit.edu/": {
    "kind": "page",
@@ -2459,7 +2535,7 @@
     "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://seungjun-moon.github.io/rlhnd/": {
    "kind": "page",
@@ -2472,7 +2548,7 @@
    "phrases": [
     "Code will be released at github"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://snuvclab.github.io/HRDexDB/": {
    "kind": "page",
@@ -2486,7 +2562,7 @@
     "https://huggingface.co/datasets/HRDexDB/HRDexDB"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://suddhu.github.io/neural-feels/": {
    "kind": "page",
@@ -2506,7 +2582,7 @@
     "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://tacross-touch-project.github.io/": {
    "kind": "page",
@@ -2520,7 +2596,7 @@
    "phrases": [
     "Download hardware v1 ZIP ↓ View GitHub release ↗ Software release coming soon"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://tactidex.github.io/": {
    "kind": "page",
@@ -2529,7 +2605,7 @@
    "text_len": 6335,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://tactile-dexterity.github.io/": {
    "kind": "page",
@@ -2541,7 +2617,7 @@
     "https://github.com/irmakguzey/tactile-dexterity"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://tactile-rex.github.io/": {
    "kind": "page",
@@ -2557,7 +2633,7 @@
    "phrases": [
     "Citation to be released The design of this project page was adapted from the Doorman Humanoid project page template — many thanks to the origin"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://taochenshh.github.io/projects/tactofind": {
    "kind": "page",
@@ -2566,7 +2642,7 @@
    "text_len": 1871,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://toruowo.github.io/hato/": {
    "kind": "page",
@@ -2578,7 +2654,7 @@
     "https://github.com/toruowo/hato"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://touch-scale.github.io/": {
    "kind": "page",
@@ -2590,7 +2666,7 @@
     "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://transdex.github.io/": {
    "kind": "page",
@@ -2601,7 +2677,7 @@
     "https://github.com/LFGfg/TransDex"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://uni-vta.github.io/": {
    "kind": "page",
@@ -2613,7 +2689,7 @@
     "https://huggingface.co/datasets/Chopper233/UVTA"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://vint-6d.github.io/": {
    "kind": "page",
@@ -2626,33 +2702,33 @@
    "phrases": [
     "iversity 2 Tencent 3 UC Merced 4 Chinese Academic of Sciences, Automation Institute [Paper] [Dataset] [Poster] [Video] (Coming Soon) This paper addresses the scarcity of large-scale datasets for accur"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.cs.umd.edu/~edessale/feel": {
    "kind": "page",
    "status": 200,
    "length": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/AAszkuRRMYwZ6OtmPWPlRxs/Codes?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADhaUZvH2eDJ3ggmGAlN5k0?rlkey=eyt5gs66uimhiw3dismnylamw&st=rnrefyzz&dl=0": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.dropbox.com/scl/fo/m7qye1l3ii6hlwgzlajyv/ADrSa2qEfM-GUzzrE35r5Sk/Codes/Checkpoints?rlkey=eyt5gs66uimhiw3dismnylamw&dl=0": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.dropbox.com/sh/g70n60jfutzd0l5/AACnOgtLUG8tHbU8TLn5MBFba?dl=0": {
    "kind": "page",
    "status": 200,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.jessicayin.com/osmo_tactile_glove/": {
    "kind": "page",
@@ -2672,7 +2748,7 @@
     "https://github.com/jessicayin/osmo_tactile_glove/tree/main/pcb/sensor_boards"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.opengraphlabs.com/": {
    "kind": "page",
@@ -2681,7 +2757,7 @@
    "text_len": 2212,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.sharpa.com/": {
    "kind": "page",
@@ -2690,7 +2766,7 @@
    "text_len": 5899,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://www.tachin.com/en": {
    "kind": "page",
@@ -2699,7 +2775,7 @@
    "text_len": 3627,
    "links": [],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://xitong-c.github.io/DexViTac/": {
    "kind": "page",
@@ -2714,7 +2790,7 @@
     "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://xsparkai.com/Spark-0": {
    "kind": "page",
@@ -2728,7 +2804,7 @@
    "phrases": [
     "2 3 4 5 * Equal contribution § Project leads † Corresponding authors Paper Code Code (XPolicyLab) Code (SparkArena-Sim) Coming soon BibTeX 01 Overview Generalist robot policies benefit from large-scal"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://xsparkai.com/sparklab/humantouch/": {
    "kind": "page",
@@ -2740,7 +2816,7 @@
     "https://www.modelscope.cn/datasets/chuqiaoLyu/Xspark-HumanTouch"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://yijionglin.github.io/tactilelab/": {
    "kind": "page",
@@ -2754,7 +2830,7 @@
     "Lepora † † Bristol Robotics Laboratory, University of Bristol ‡ Xi'an Jiaotong-Liverpool University arXiv Coming soon Code Coming soon Abstract Robotic simulators with tactile sensing are increasingly",
     "Main Results (More experimental results will be released in the paper"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://yingyuan0414.github.io/visuotactile/": {
    "kind": "page",
@@ -2766,7 +2842,7 @@
     "https://github.com/nerfies/nerfies.github.io"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://yswi.github.io/tactalign/": {
    "kind": "page",
@@ -2780,13 +2856,13 @@
    "phrases": [
     "arXiv Coming Soon Abstract We present TactAlign , a cross-sensor tactile alignment method for cross-embodiment human-to-robot policy tran"
    ],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://zenodo.org/records/4607289": {
    "kind": "page",
    "status": 200,
    "length": null,
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   },
   "https://zhangyuhong01.github.io/Robowheel": {
    "kind": "page",
@@ -2799,7 +2875,7 @@
     "https://huggingface.co/datasets/HORA-DB/HORA"
    ],
    "phrases": [],
-   "seen": "2026-10-30"
+   "seen": "2026-10-31"
   }
  },
  "openalex": {

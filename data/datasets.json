@@ -4335,11 +4335,11 @@
   {
    "id": "dextraverse",
    "name": "DextraVerse",
-   "title": "DextraVerse: real-robot task (pick_cube_place_box)",
+   "title": "DextraVerse: real-robot tasks (pick_cube_place_box, unscrew_bottle_cap)",
    "authors": "Xiangyu Chen et al.",
    "year": 2026,
    "venue": "Hugging Face dataset (no paper)",
-   "summary": "Two Sharpa Wave hands on a Dexmate Vega robot pick a purple cube into an orange box in 261 real episodes (~19.5 Hz), with a 24x24 deformation map and a 3-axis force in N from each of the 10 fingertip sensors, plus head and wrist RGB.",
+   "summary": "Two Sharpa Wave hands on a Dexmate Vega robot in 317 real episodes of two tasks (pick a cube into a box, 261 episodes at ~19.5 Hz; unscrew a bottle cap with both hands, 56 episodes at ~14.6 Hz), with 24x24 fingertip deformation maps and a 3-axis force in N from each of the 10 fingertip sensors, plus head and wrist RGB.",
    "embodiment": "robot",
    "hand": "Sharpa Wave (22 DoF) x 2 on Dexmate Vega (two 7-DoF arms)",
    "bimanual": true,
@@ -4352,7 +4352,7 @@
     ],
     "rate_hz": 19.5,
     "calibrated": true,
-    "note": "Per hand and frame: {side}_tactile_data_fingers (5, 24, 24) uint8 fingertip deformation map (mostly 0 at rest, up to ~200 in contact) and {side}_tactile_data_fingerforce (5, 3) float32 contact force in N in each fingertip sensor's own frame; channel order thumb, index, middle, ring, pinky (area ids 0-4). Forces are not tared: rest |F| is 0.35-2.05 N per finger (median over episodes). No palm or phalanx sensing.",
+    "note": "Per hand and frame: {side}_tactile_data_fingers (5, 24, 24) uint8 fingertip deformation map (mostly 0 at rest, up to ~200 in contact) and {side}_tactile_data_fingerforce (5, 3) float32 contact force in N in each fingertip sensor's own frame; channel order thumb, index, middle, ring, pinky (area ids 0-4). Forces are not tared: rest |F| is 0.35-2.05 N per finger (median over episodes). unscrew_bottle_cap (SharpaWave SDK 5.x, ~14.6 Hz) replaces the single-channel map with {side}_tactile_data_deform3 (5, 24, 24, 3) uint8 and {side}_tactile_data_distforce (5, 24, 24, 3) float32 per-taxel force in SDK units, and keeps fingerforce (5, 3) float32 in N, zeroed per episode. No palm or phalanx sensing.",
     "maker": "Sharpa",
     "model": "Sharpa Wave fingertip tactile sensor",
     "principle": "optical",
@@ -4364,27 +4364,29 @@
     "language"
    ],
    "scale": {
-    "hours": 2.05,
-    "episodes": 261,
-    "frames": 138382,
-    "tasks": 1,
-    "objects": 1,
+    "hours": 2.37,
+    "episodes": 317,
+    "frames": 154799,
+    "tasks": 2,
+    "objects": 2,
     "subjects": null,
     "scenes": null,
     "scene_types": [
      "lab"
     ],
-    "text": "Real robot: 261 episodes, 138,382 frames at ~19.5 Hz (123 min), 1 task (cube into box); the 300 simulated episodes (3 tasks, 135,734 frames) in the same repo are not counted"
+    "text": "Real robot: 317 episodes, 154,799 frames, 2 tasks (cube into box: 261 episodes, 138,382 frames at ~19.5 Hz, 123 min; unscrew bottle cap: 56 episodes, 16,417 frames at ~14.6 Hz, 19 min); the 300 simulated episodes (3 tasks, 135,734 frames) in the same repo are not counted"
    },
    "availability": "public",
-   "access": "Hugging Face ntumars/DextraVerse, ungated: the real part is one 43 GB stored (uncompressed) ZIP64 of a zarr v2 replay buffer, so single zarr chunks can be range-read; an earlier HDF5 export with actions is on the gated repo Xiongge0212/dextraverse-rig-grasp-n261 (login, auto-approved).",
+   "access": "Hugging Face ntumars/DextraVerse, ungated: each real task is one stored (uncompressed) ZIP64 of a zarr v2 replay buffer (43 GB for pick_cube_place_box, 5.7 GB for unscrew_bottle_cap), so single zarr chunks can be range-read; an earlier HDF5 export with actions is on the gated repo Xiongge0212/dextraverse-rig-grasp-n261 (login, auto-approved).",
    "license": "CC BY 4.0",
    "caveats": [
-    "One real task on one rig: pick up a purple cube and place it in an orange box. 256 of 261 episodes use one hand (140 left, 116 right), 3 use both hands, 2 never grasp; the idle hand's tactile channels stay at rest.",
-    "The arm was teleoperated with a SpaceMouse and the hand closed by a learned grasp policy on the operator's command, so finger motion is not human-teleoperated.",
-    "No action stream in the CC BY 4.0 export (measured joints, wrist and head-camera poses only). The gated HDF5 original adds 63-D actions, hand joint commands, grasp phase and fingertip sensor poses; its card states no license.",
-    "Fingertip forces are not tared: rest |F| is 0.35-2.05 N per finger (median over episodes) and up to ~6.5 N (95th percentile, left index). Some maps are not blank at rest (64 episodes on the left hand, 18 on the right show a value > 20 in the first 20 frames); in episode 229 the left index reads ~4.8 N and a static pattern throughout.",
-    "Sampling is irregular: median 19.5 Hz (per-episode medians 15.9-22.1 Hz); episodes 32, 33 and 42 contain recording stalls of 4.8, 5.9 and 1.2 s.",
+    "Two real tasks on one rig, 2026-09 and 2026-10 recordings. pick_cube_place_box (checked in full): pick up a purple cube and place it in an orange box; 256 of 261 episodes use one hand (140 left, 116 right), 3 use both hands, 2 never grasp; the idle hand's tactile channels stay at rest. unscrew_bottle_cap (added 2026-10-31, README read, files not opened): hold a bottle with the left hand and unscrew the cap with the right, both hands active in all 56 episodes of 15 to 31 s, recorded 2026-10-15 in four sessions.",
+    "The two real tasks have different tactile arrays (single-channel 'fingers' map in pick_cube_place_box; 'deform3' and 'distforce' in unscrew_bottle_cap, from SharpaWave SDK 5.x) and different rates (19.5 Hz against ~14.6 Hz), so they cannot be concatenated without a mapping. The unscrew_bottle_cap README says its fingerforce and distforce were zeroed per episode (mean of the first 5 frames subtracted) and deform3 was not.",
+    "In pick_cube_place_box the arm was teleoperated with a SpaceMouse and the hand closed by a learned grasp policy on the operator's command, so finger motion is not human-teleoperated. In unscrew_bottle_cap the arms follow Vive trackers on the operator's wrists and the fingers are retargeted from the operator's data gloves.",
+    "No action stream in the CC BY 4.0 export (measured joints, wrist and head-camera poses only; the unscrew_bottle_cap README lists no action array either). The gated HDF5 original of pick_cube_place_box adds 63-D actions, hand joint commands, grasp phase and fingertip sensor poses; its card states no license.",
+    "pick_cube_place_box fingertip forces are not tared: rest |F| is 0.35-2.05 N per finger (median over episodes) and up to ~6.5 N (95th percentile, left index). Some maps are not blank at rest (64 episodes on the left hand, 18 on the right show a value > 20 in the first 20 frames); in episode 229 the left index reads ~4.8 N and a static pattern throughout.",
+    "pick_cube_place_box sampling is irregular: median 19.5 Hz (per-episode medians 15.9-22.1 Hz); episodes 32, 33 and 42 contain recording stalls of 4.8, 5.9 and 1.2 s. unscrew_bottle_cap was set to record at 20 Hz but ran at about 14.6 Hz (median step 0.068 s) with one 0.24 s stall; its README says to use the timestamps.",
+    "unscrew_bottle_cap: the right index, middle and ring fingertips report at most 0.3, 0.9 and 1.1 N across all episodes while their deformation maps vary; the right thumb (up to 23 N) and pinky (up to 7 N) carry most of the measured cap contact. The authors left out a fifth session (fingertips read a 19 to 61 N offset with hands open) and one aborted attempt.",
     "The same repo holds 300 simulated episodes (handover, pick and place, stack cube; Isaac PhysX contact force and synthetic TacMap images, 224x224 renders). They are not counted here.",
     "The hand-joint slot indices (FAAS slots) are a contributor-derived mapping, not one published by Sharpa or Open-X-Tactile.",
     "No paper, project page or code: the card says these 'remain empty at the contributor's request'."
@@ -4435,7 +4437,19 @@
       "target": "wrist",
       "method": "other",
       "system": "SpaceMouse",
-      "note": "teleoperation of the arm; the hand is closed by a learned grasp policy on the operator's command"
+      "note": "pick_cube_place_box: teleoperation of the arm; the hand is closed by a learned grasp policy on the operator's command"
+     },
+     {
+      "target": "wrist",
+      "method": "optical_tracker",
+      "system": "Vive trackers on the operator's wrists",
+      "note": "unscrew_bottle_cap only: the robot arms follow the trackers (tracker model not stated)"
+     },
+     {
+      "target": "fingers",
+      "method": "teleop_glove",
+      "system": "operator data gloves (model not stated)",
+      "note": "unscrew_bottle_cap only: fingers are retargeted from the glove data to the Sharpa Wave hands"
      }
     ],
     "other": [
@@ -4447,6 +4461,7 @@
    "sources": [
     "https://huggingface.co/datasets/ntumars/DextraVerse (README.md)",
     "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README_real_robot.md",
+    "https://huggingface.co/datasets/ntumars/DextraVerse/raw/main/DextraVerse/README_unscrew_bottle_cap.md (read 2026-10-31, commit cc7a4456)",
     "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README.md (simulation part)",
     "https://huggingface.co/datasets/ntumars/DextraVerse (DextraVerse/joint_mapping.json, supplementary_joints_note.json, supplementary_tactile_note.json, canonical_mapping_evidence.json, SHA256SUMS.txt, commit history)",
     "https://huggingface.co/api/datasets/ntumars/DextraVerse/tree/main?recursive=1",
@@ -4457,8 +4472,10 @@
    ],
    "unconfirmed": [
     "hours=2.05 is the card's '123 minutes'; the sum of per-episode timestamp spans is 122.8 min. rate_hz=19.5 is the card's 'about 19.5 Hz' and the median frame step over all episodes (0.0512 s); the gated HDF5 card says 20 Hz recording with a 50 Hz control loop.",
-    "objects=1: the grasped object is one purple cube; the orange box is the container. Derived from the task text.",
-    "scene_types=['lab'] from one decoded head-camera frame (office/lab room, table, bystander); the card does not describe the scene. Camera models are not stated.",
+    "objects=2: the purple cube (the orange box is the container) and the bottle in unscrew_bottle_cap (its cap not counted separately). Derived from the task text.",
+    "scene_types=['lab'] from one decoded head-camera frame of pick_cube_place_box (office/lab room, table, bystander); the card does not describe the scene, and no unscrew_bottle_cap frame was decoded. Camera models are not stated.",
+    "Since 2026-10-31 the totals add the two real tasks: episodes 317 = 261 + 56, frames 154,799 = 138,382 + 16,417, hours 2.37 = 2.05 + 19 min / 60 (the unscrew_bottle_cap README gives '19 minutes' and 16,417 frames at about 14.6 Hz, which is 18.7 min). The unscrew_bottle_cap counts, rates, array shapes and 5.7 GB size come from its README; the zarr was not opened and its ZIP listing was not read.",
+    "unscrew_bottle_cap distforce values are in 'SDK units' per the README; whether they are newtons is not stated. The data glove and Vive tracker models are not named.",
     "Sensing principle 'optical' and type 'vision' come from Sharpa's description of the Wave fingertip sensor as camera-based (catalog hardware entry sharpa_wave); the DextraVerse card only calls the arrays a 'deformation map' and 'contact force'. The 24x24 map size differs from the 240x240 deformation maps T-Rex releases from the same hand; how DextraVerse's map was produced is not stated.",
     "calibrated=true because the card states the force in newtons; it is the hand's own force output, and no calibration procedure is described.",
     "Authors from the simulation README ('Authors, in contributor-specified order: xiangyu chen, chuhao zhou, jiaxiao shi'); the real-robot README names only the contact xiangyu.chen@ntu.edu.sg. Organisation is the HF org 'MARS Lab' (ntumars) and the card's 'MARS Lab, Nanyang Technological University'.",

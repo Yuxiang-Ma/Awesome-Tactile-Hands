@@ -144,7 +144,7 @@
     "dataset null: the paper does not describe the public HumanTouch release as its data, although the authors overlap (HumanTouch's first author Chuqiao Lyu is a co-author). The release's 10-task and 17,608-episode counts used here come from the catalog's humantouch entry.",
     "Venue from the arXiv comment 'Accept to IROS 2026 Workshop RoBoWoMo (Lightning Talk)'."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-31"
   },
   {
    "id": "dtwm",
@@ -241,7 +241,7 @@
    "unconfirmed": [
     "ACE-Data-0 (arXiv 2607.28625) says it evaluated EgoPressureDiff 'using their released pre-trained weights'; no public checkpoint was found."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-10-31"
   },
   {
    "id": "egopressureformer",
@@ -549,7 +549,7 @@
     "https://huggingface.co/api/datasets?author=youngw"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-30"
+   "checked": "2026-10-31"
   },
   {
    "id": "tactiskill",
@@ -654,9 +654,9 @@
     "ACE-Data-0 (arXiv 2607.28625) says it evaluated TouchAnything 'using their released pre-trained weights'; no public checkpoint was found on GitHub, the project page or Hugging Face.",
     "Hugging Face repos named Grange007/touchanything-* (simulation data and a 'tactile-geometry-model' best_model.pth) are not linked from the TouchAnything repo or page and were not attributed to this model.",
     "Re-checked 2026-10-28: GitHub Jianyi2004/TouchAnything last pushed 2026-05-21; issue #3 (checkpoint request) still has no author reply; Hugging Face model search 'touchanything' returns only the three Grange007 repos.",
-    "Re-checked 2026-10-29: the last GitHub push is still 2026-05-21; the issue page was not reopened."
+    "Re-checked 2026-10-31: the last GitHub push is still 2026-05-21; issue #3 was reopened and holds a second request for the checkpoint (2026-07-12) with no reply; the Hugging Face account zhouzhoujy has no models."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-10-31"
   },
   {
    "id": "touchsight",
@@ -1174,7 +1174,7 @@
     "https://huggingface.co/api/datasets/vint6d/vint6d/tree/main"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-27"
+   "checked": "2026-10-31"
   },
   {
    "id": "tdex",
@@ -1652,7 +1652,7 @@
     "embodiment 'both': human glove force (taxels in N) in pretraining and robot fingertip wrenches at fine-tuning and test; how the two force representations are mapped onto each other was not read in detail.",
     "The T-Rex hours are the paper's (100 h); the public T-Rex release in the catalog holds about 50 h, so FACT may have used data beyond the public release."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-10-31"
   },
   {
    "id": "physword",
@@ -1713,7 +1713,7 @@
    "release": {
     "code": "released",
     "weights": "not_released",
-    "note": "github.com/LFGfg/TransDex (linked from transdex.github.io; created 2025-12-11, last push 2026-10-03) holds README.md, policy_ws/ and requirements.txt; no license, README empty; no checkpoint seen. The paper has no release statement. Checked 2026-10-27."
+    "note": "github.com/LFGfg/TransDex (linked from transdex.github.io; created 2025-12-11, last push 2026-10-03) holds README.md, policy_ws/ and requirements.txt; no license, README empty; no checkpoint seen. The paper has no release statement. Checked 2026-10-31 (last push still 2026-10-03)."
    },
    "license": "not stated (no license on the GitHub repository)",
    "links": {
@@ -1732,7 +1732,7 @@
     "The RA-L record (doi:10.1109/lra.2026.3732837) has the title 'TransDex: Interaction Geometry Enables Robust Visuo-Tactile Dexterous Manipulation of Transparent Objects' with the same five authors; the published text (closed access) was not read, so the catalog follows the arXiv v2 title and content.",
     "Hand model not named; 16 DoF and cable-driven per the paper. PaXini array model not named. Success rates over 10 trials per task are implied by the percentages."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-10-31"
   },
   {
    "id": "aet_tacnet",
@@ -1765,7 +1765,7 @@
     "The evaluation data is probably Reach&Grasp (catalog reachgrasp: Bielefeld 58-taxel glove, CyberGlove, Vicon and EMG, with Pour, Screw and frontal-reach tasks), which OpenAlex lists among the paper's references; the abstract does not name it, so it is not linked in uses.",
     "Where the ground-truth touch was measured (glove or object) is not stated in the abstract."
    ],
-   "checked": "2026-10-27"
+   "checked": "2026-10-31"
   },
   {
    "id": "exobridge",
@@ -1963,7 +1963,7 @@
    "release": {
     "code": "released",
     "weights": "not_released",
-    "note": "github.com/YingYuan0414/in-hand-rotation (linked from the project page; MIT; created 2024-07-11, last push 2024-07-31) holds isaacgymenvs/, distillation/, rl_games/ and scripts/; no checkpoint seen in the top-level listing. Checked 2026-10-28."
+    "note": "github.com/YingYuan0414/in-hand-rotation (linked from the project page; MIT; created 2024-07-11, last push 2024-07-31) holds isaacgymenvs/, distillation/, rl_games/ and scripts/; no checkpoint seen in the top-level listing. Checked 2026-10-31 (last push still 2024-07-31)."
    },
    "license": "MIT",
    "links": {
@@ -1981,7 +1981,7 @@
     "Training touch is simulated and binarized; the real FSR readings are thresholded to match. FSR model not named.",
     "Real-world results are 5 episodes per setting (Table III); for example Double Balls, 22.9 rounds of continuous rotation in 60 s trials with the full method."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-31"
   },
   {
    "id": "tactofind",
@@ -2016,7 +2016,7 @@
     "The identification model is trained on simulated contacts; real touch enters as binary contact from a force-recognition model on the GelSight images.",
     "Fingertip-only, three fingers; the D'Claw has 9 DoF (three Dynamixel servos per finger) on a UR5e arm."
    ],
-   "checked": "2026-10-28"
+   "checked": "2026-10-31"
   },
   {
    "id": "vtao_bimanip",

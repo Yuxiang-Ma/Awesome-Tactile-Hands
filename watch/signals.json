@@ -1,8 +1,8 @@
 {
- "generated": "2026-10-30T08:33:08Z",
+ "generated": "2026-10-31T08:35:13Z",
  "baseline": false,
- "urls_checked": 260,
- "seconds": 187,
+ "urls_checked": 267,
+ "seconds": 311,
  "signals": [
   {
    "kind": "dataset",
@@ -11,17 +11,17 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://huggingface.co/front/build/kube-6c835fa/index.js https://huggingface.co/front/build/kube-6c835fa/katex.css https://huggingface.co/front/build/kube-6c835fa/style.css",
+   "detail": "https://huggingface.co/front/build/kube-7e92521/index.js https://huggingface.co/front/build/kube-7e92521/katex.css https://huggingface.co/front/build/kube-7e92521/style.css",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "tacdex3d",
-   "name": "3dtacdex",
-   "url": "https://huggingface.co/datasets/kingchou007/3dtacdex",
+   "id": "dextraverse",
+   "name": "DextraVerse",
+   "url": "https://huggingface.co/datasets/ntumars/DextraVerse",
    "priority": 2,
    "type": "hf_commit",
-   "detail": "files 553 -> 6, last modified 2026-10-29T22:52:49.000Z",
+   "detail": "files 47 -> 49, last modified 2026-10-31T07:59:19.000Z",
    "availability": "public"
   },
   {
@@ -31,82 +31,58 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "links_removed",
-   "detail": "https://huggingface.co/front/build/kube-b10384e/index.js https://huggingface.co/front/build/kube-b10384e/katex.css https://huggingface.co/front/build/kube-b10384e/style.css",
+   "detail": "https://huggingface.co/front/build/kube-6c835fa/index.js https://huggingface.co/front/build/kube-6c835fa/katex.css https://huggingface.co/front/build/kube-6c835fa/style.css",
    "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "egoforce",
-   "name": "EgoForce",
-   "url": "https://fact-1-0.github.io/",
-   "priority": 3,
-   "type": "page_text",
-   "detail": "text length 4455 -> 3361",
-   "availability": "announced"
-  },
-  {
-   "kind": "model",
-   "id": "fact",
-   "name": "FACT",
-   "url": "https://fact-1-0.github.io/",
-   "priority": 3,
-   "type": "page_text",
-   "detail": "text length 4455 -> 3361",
-   "availability": {
-    "code": "announced",
-    "weights": "not_released",
-    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
-   }
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "ace_data_0"
+   "id": "dex_mptd"
   },
   {
    "kind": "dataset",
-   "id": "dexvitac"
+   "id": "egoexplorer"
   },
   {
    "kind": "dataset",
-   "id": "exobridge"
+   "id": "gist_vta"
   },
   {
    "kind": "dataset",
-   "id": "htac"
+   "id": "kaiwu"
   },
   {
    "kind": "dataset",
-   "id": "paxini_omnisharing"
+   "id": "robotacdex"
   },
   {
    "kind": "dataset",
-   "id": "sharpa_origami"
+   "id": "tacross"
   },
   {
    "kind": "dataset",
-   "id": "tactidex"
-  },
-  {
-   "kind": "dataset",
-   "id": "vicon_glove"
+   "id": "tacwam_wetlab"
   },
   {
    "kind": "model",
-   "id": "dexflex"
+   "id": "aet_tacnet"
   },
   {
    "kind": "model",
-   "id": "ego2contact"
+   "id": "dextouch_wm"
   },
   {
    "kind": "model",
-   "id": "exobridge"
+   "id": "egopressurediff"
   },
   {
    "kind": "model",
-   "id": "occludex"
+   "id": "fact"
+  },
+  {
+   "kind": "model",
+   "id": "omnivtla"
   },
   {
    "kind": "model",
@@ -122,18 +98,18 @@
   },
   {
    "kind": "model",
-   "id": "touchsight"
+   "id": "touchanything"
   },
   {
    "kind": "model",
-   "id": "uvta"
+   "id": "transdex"
   },
   {
    "kind": "model",
-   "id": "vtao_bimanip"
+   "id": "vint_net"
   }
  ],
- "not_fully_released": 52,
+ "not_fully_released": 55,
  "errors": [],
  "problems": [],
  "sources_failed": []
