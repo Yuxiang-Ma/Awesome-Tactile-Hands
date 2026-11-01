@@ -2946,13 +2946,16 @@
   "arxiv:2312.01853": "W4401417123",
   "arxiv:2303.13482": "W4383109192",
   "arxiv:2501.03606": "W4416749095",
-  "arxiv:2512.02729": "W4417009262"
+  "arxiv:2512.02729": "W4417009262",
+  "arxiv:2508.08706": "W7167224584",
+  "arxiv:2309.12300": "W4401415761",
+  "arxiv:2512.21233": "W7117293674"
  },
  "cursor": {
-  "arxiv_backfill": "2017-04",
+  "arxiv_backfill": "2017-07",
   "hf_backfilled": true,
-  "arxiv_recent_ok": "2026-10-31",
-  "openalex_recent_ok": "2026-10-31",
-  "openalex_backfill": "2016-07"
+  "arxiv_recent_ok": "2026-11-01",
+  "openalex_recent_ok": "2026-11-01",
+  "openalex_backfill": "2016-10"
  }
 }
