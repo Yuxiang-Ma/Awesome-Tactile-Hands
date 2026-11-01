@@ -189,9 +189,10 @@
     "Venue: arXiv only; the paper's AI-use statement refers to 'the conference policy' without naming a venue.",
     "The paper counts 1,933 episode directories in its copy of EgoTouch; the catalog's egotouch entry lists 1,891 episodes. Not reconciled.",
     "The TouchWorld, VT-WM and FeelWorld rows in the paper's comparison re-implement only their tactile conditioning on DTWM's backbone and EgoTouch clips (App. C.3); they are not the original systems.",
-    "Re-checked 2026-10-29: the GitHub repository's last push is still 2026-09-29 and no checkpoint appeared."
+    "Re-checked 2026-10-29: the GitHub repository's last push is still 2026-09-29 and no checkpoint appeared.",
+    "Re-checked 2026-11-01: the last push is still 2026-09-29 and the top-level listing is unchanged (no checkpoint folder)."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-11-01"
   },
   {
    "id": "egopressurediff",
@@ -266,7 +267,7 @@
    "release": {
     "code": "not_released",
     "weights": "not_released",
-    "note": "The project's repository github.com/Russell-Zeng/EgoTactile holds EgoPressureDiff code only; none of its 146 tree entries is TimeSformer or EgoPressureFormer code, and no checkpoint is linked. Checked 2026-10-25."
+    "note": "The project's repository github.com/Russell-Zeng/EgoTactile holds EgoPressureDiff code only; none of its 146 tree entries is TimeSformer or EgoPressureFormer code, and no checkpoint is linked. Checked 2026-10-25; on 2026-11-01 the repository's last push was still 2026-06-29 and its top-level files were unchanged."
    },
    "license": "not stated",
    "links": {
@@ -280,7 +281,7 @@
     "https://github.com/Russell-Zeng/EgoTactile (README, file tree)"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-29"
+   "checked": "2026-11-01"
   },
   {
    "id": "egotac",
@@ -532,7 +533,7 @@
    "release": {
     "code": "announced",
     "weights": "not_released",
-    "note": "yswi.github.io/tactalign: the GitHub button reads 'Coming Soon' and links github.com/google/tactalign, which returned 404 on 2026-10-25. The Hugging Face account youngw has 4 datasets and no models."
+    "note": "yswi.github.io/tactalign: the GitHub button reads 'Coming Soon' and links github.com/google/tactalign, which returned 404 on 2026-10-25. The Hugging Face account youngw has 4 datasets and no models. On 2026-11-01 the page still shows the same GitHub link and google/tactalign still returned 404."
    },
    "license": "not stated",
    "links": {
@@ -549,7 +550,7 @@
     "https://huggingface.co/api/datasets?author=youngw"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-31"
+   "checked": "2026-11-01"
   },
   {
    "id": "tactiskill",
@@ -699,9 +700,10 @@
    "unconfirmed": [
     "TouchSight cites HumanTouch as a website [12] and uses 54,931 episodes (500 h); the public release holds 17,608 episodes (~132.8 h) over 10 tasks (catalog humantouch entry), and TwinTouch alone covers 52 tasks. Which episodes are in the release is not stated.",
     "TwinTouch-20H counts 10 h of generated bare-hand video plus the 10 h of source recordings (Sec. III-A); the abstract calls it '20 hours of paired data'.",
-    "Force values are raw glove units (active-taxel threshold 5 units, contact threshold 1 unit), not newtons."
+    "Force values are raw glove units (active-taxel threshold 5 units, contact threshold 1 unit), not newtons.",
+    "Re-checked 2026-11-01: arXiv lists only v1 (2026-09-17) and a web search for the name found no repository or model."
    ],
-   "checked": "2026-10-30"
+   "checked": "2026-11-01"
   },
   {
    "id": "touchworld",
@@ -1159,7 +1161,7 @@
    "release": {
     "code": "announced",
     "weights": "not_released",
-    "note": "vint-6d.github.io announces the 'release of the VinT-6D dataset and benchmark code'; the dataset is on Hugging Face, but no code link appears and GitHub search finds only the page repo VinT-6D/vint-6d.github.io. Checked 2026-10-25."
+    "note": "vint-6d.github.io announces the 'release of the VinT-6D dataset and benchmark code'; the dataset is on Hugging Face, but no code link appears and GitHub search finds only the page repo VinT-6D/vint-6d.github.io. Checked 2026-10-25; on 2026-11-01 the page still says the benchmark code release is coming and links only the Hugging Face dataset."
    },
    "license": "not stated",
    "links": {
@@ -1174,7 +1176,7 @@
     "https://huggingface.co/api/datasets/vint6d/vint6d/tree/main"
    ],
    "unconfirmed": [],
-   "checked": "2026-10-31"
+   "checked": "2026-11-01"
   },
   {
    "id": "tdex",
@@ -1677,7 +1679,7 @@
    "release": {
     "code": "announced",
     "weights": "not_released",
-    "note": "Project page nvidia-isaac.github.io/video_to_data/physicalword/: 'Code coming soon' (read 2026-10-27). The arXiv v3 HTML has no code, weights or data statement."
+    "note": "Project page nvidia-isaac.github.io/video_to_data/physicalword/: 'Code coming soon' (read 2026-10-27 and again 2026-11-01). The arXiv v3 HTML has no code, weights or data statement."
    },
    "license": "not stated",
    "links": {
@@ -1694,7 +1696,7 @@
     "Table 3 labels the robot hand data 'Sharpa data' without naming T-Rex; the link to T-Rex is from the text. Co-author Dantong Niu is also T-Rex's first author.",
     "OpenNeoData (5,000+ h with touch) is not in the catalog; its embodiments were not checked."
    ],
-   "checked": "2026-10-27"
+   "checked": "2026-11-01"
   },
   {
    "id": "transdex",
@@ -1906,9 +1908,10 @@
    ],
    "unconfirmed": [
     "The human pretraining data carry no touch; the touch the model reads is the Revo2 fingertip sensors' (10 sensors over two hands).",
-    "The Revo2 hands are presumably the tactile Revo2 TOUCH version (catalog hardware brainco_revo2_tactile); the paper's sensor description matches its capacitive fingertip module but the variant is not named."
+    "The Revo2 hands are presumably the tactile Revo2 TOUCH version (catalog hardware brainco_revo2_tactile); the paper's sensor description matches its capacitive fingertip module but the variant is not named.",
+    "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-20); no code, model or data link found beyond the paper."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-11-01"
   },
   {
    "id": "card",
@@ -1942,9 +1945,10 @@
    "unconfirmed": [
     "The glove's name, maker and rate are not stated; it is not matched to a catalog glove.",
     "Vid-HACO, the paper's video-to-contact model for sources without touch, is trained on contact labels from 12 hand-object datasets (HOT3D, ARCTIC, HOI4D, DECAF and others) with no measured touch, so it is not catalogued separately.",
-    "kind 'other': CARD is a retargeting and replay framework; touch goes in as glove contact maps and as fingertip force feedback during replay."
+    "kind 'other': CARD is a retargeting and replay framework; touch goes in as glove contact maps and as fingertip force feedback during replay.",
+    "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-27); the project page shows a Code button and no repository link was found in its HTML. The page abstract and the arXiv abstract give contact maintained on 43 to 78% of contact frames and GRAB task success from 12% to 32%, which are different measures from the 77.7% and 4/30 to 25/30 figures in the summary above; the summary's figures were not re-checked against the paper body."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-11-01"
   },
   {
    "id": "robot_synesthesia",
@@ -1963,7 +1967,7 @@
    "release": {
     "code": "released",
     "weights": "not_released",
-    "note": "github.com/YingYuan0414/in-hand-rotation (linked from the project page; MIT; created 2024-07-11, last push 2024-07-31) holds isaacgymenvs/, distillation/, rl_games/ and scripts/; no checkpoint seen in the top-level listing. Checked 2026-10-31 (last push still 2024-07-31)."
+    "note": "github.com/YingYuan0414/in-hand-rotation (linked from the project page; MIT; created 2024-07-11, last push 2024-07-31) holds isaacgymenvs/, distillation/, rl_games/ and scripts/; no checkpoint seen in the top-level listing. Checked 2026-11-01 (last push still 2024-07-31)."
    },
    "license": "MIT",
    "links": {
@@ -1981,7 +1985,7 @@
     "Training touch is simulated and binarized; the real FSR readings are thresholded to match. FSR model not named.",
     "Real-world results are 5 episodes per setting (Table III); for example Double Balls, 22.9 rounds of continuous rotation in 60 s trials with the full method."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-01"
   },
   {
    "id": "tactofind",
@@ -2014,9 +2018,10 @@
    ],
    "unconfirmed": [
     "The identification model is trained on simulated contacts; real touch enters as binary contact from a force-recognition model on the GelSight images.",
-    "Fingertip-only, three fingers; the D'Claw has 9 DoF (three Dynamixel servos per finger) on a UR5e arm."
+    "Fingertip-only, three fingers; the D'Claw has 9 DoF (three Dynamixel servos per finger) on a UR5e arm.",
+    "Re-checked 2026-11-01: the project page still links only the arXiv paper and BibTeX; a web search for the name with 'code' found no repository."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-01"
   },
   {
    "id": "vtao_bimanip",
@@ -2164,9 +2169,10 @@
    ],
    "unconfirmed": [
     "The glove make and model are not given; the Inspire hand model is not named beyond 'Inspire tactile hand'.",
-    "The last 6,752 characters of the arXiv HTML (end of appendix, references) were not read."
+    "The last 6,752 characters of the arXiv HTML (end of appendix, references) were not read.",
+    "Re-checked 2026-11-01: the project page links github.com/BeingBeyond/UniTacHand, whose last push is still 2025-12-25 and whose top level is still README.md and docs/."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-01"
   },
   {
    "id": "touchbridge",

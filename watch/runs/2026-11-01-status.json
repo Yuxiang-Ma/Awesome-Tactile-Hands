@@ -1,0 +1,36 @@
+{
+ "flow": "status",
+ "date": "2026-11-01",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 4,
+ "updated": 3,
+ "searches": [
+  "EgoForce 2610.19155 dataset release",
+  "TactAlign RSS 2026 tactile alignment code dataset github",
+  "OSMO tactile glove Meta FAIR open-source dataset 2512.08920",
+  "DexUMI dataset release tactile code",
+  "Glove2Hand HandSense dataset download",
+  "TouchScale dataset 500 hours tactile Hugging Face",
+  "UniTacHand tactile code weights github",
+  "TactoFind tactile only object retrieval code",
+  "HuTact tactile-aware hand representation human hand-object interaction code",
+  "TouchSight tactile model weights github",
+  "Touch-JEPA tactile dexterous hand code weights"
+ ],
+ "for_the_owner": [
+  "Judgment call: DextraVerse was re-encoded on 2026-11-01 (version 1.1.0, Blosc + Zstd level 5, values stated unchanged). The earlier full read of pick_cube_place_box and any viewer samples were made on version 1.0.0; the archives were not downloaded or re-hashed tonight, so a person may want to re-run the integrity check.",
+  "Judgment call: HRDexDB allegro_v5 timestamps were corrected in the Google Drive archives on 2026-11-01. The catalog viewer sample is an Inspire F1 sequence, so it is not affected; whether the Hugging Face allegro_v5 files carry the correction is not stated."
+ ],
+ "notes": [
+  "Four signals. rss_dual_arm_tactile (P1, files 7,420 -> 12,888) is the new task4_pi05_rl_rollouts_20261030 folder (61 policy-rollout episodes), read from the public card and file listing; the gated files were not opened, and the summary, scale text, caveats, sources and gate check date were updated. dextraverse (P2) is the Blosc + Zstd re-encode commit, file count unchanged at 49. hrdexdb (P2 GitHub README change) is the per-subset size table and Google Drive archive counts, plus the Hugging Face card news item about rebuilt allegro_v5 archives; the 2.1K sequence figure in the GitHub README and 3.2K in the Hugging Face card are already recorded under unconfirmed. dextacwam (P3 page text 1501 -> 1498 characters) lists the same seven dataset repos and the encoder as before, so no edit.",
+  "Deep check (19 entries), no new release found. Checked directly: dtwm (GitHub last push still 2026-09-29), egopressureformer (EgoTactile repo last push still 2026-06-29), card (project page and arXiv still v1, no code link in the page HTML), robot_synesthesia (last push 2024-07-31), tactalign model and dataset (project page 'Coming Soon', google/tactalign still 404), tactofind (project page links only the paper), unitachand (project page links github.com/BeingBeyond/UniTacHand, last push 2025-12-25, README.md and docs/ only), vint_net (project page still lists the code as coming), physword (project page 'Code coming soon'), hutact and touchsight (arXiv metadata, still v1 only), touch_jepa (mnseong/touch-jepa still empty, last push 2026-10-22), dexumi (GitHub last push 2026-04-18, no full dataset link), osmo (project page lists hardware, firmware and code, no dataset link), glove2hand_handsense (Request Dataset form unchanged), touchscale (HF repos TouchScale and TouchScale-OXT unchanged since 2026-10-23 and 2026-10-26), egoforce (project page fact-1-0.github.io still 'Code (Coming Soon)' and 'Data (Coming Soon)').",
+  "The first web search for 'EgoForce 2610.19155' returned a Hugging Face dataset chris10/EgoForce from a different paper (DFKI, hand pose from a monocular egocentric camera, arXiv 2605.12498 per the search). It shares the name with the catalog's EgoForce (force dataset of the FACT paper) and was not used.",
+  "The checked date is 2026-11-01 on dtwm, egopressureformer, hutact, card, robot_synesthesia, tactalign, tactofind, unitachand, vint_net, physword and touchsight; touch_jepa already carried it from tonight's earlier run. CARD's arXiv and project-page abstracts give 43 to 78% contact maintained and GRAB task success 12% to 32%, while the catalog summary gives 77.7% and 4/30 to 25/30; the difference is recorded under the entry's unconfirmed and was not resolved against the paper body.",
+  "No dataset became public tonight, so no viewer samples are requested and no new gate appeared."
+ ],
+ "started": "2026-11-01T09:30:01Z",
+ "finished": "2026-11-01T09:37:33Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 10 changed files, 4 new entries"
+}

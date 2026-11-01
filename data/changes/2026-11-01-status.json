@@ -1,0 +1,10 @@
+{"date": "2026-11-01", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile (tube pour): a new folder, task4_pi05_rl_rollouts_20261030, holds 61 real-robot policy rollouts (22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL in two learner groups, plus one voided attempt) with videos, per-decision records, Revo2 and glove tactile and score outputs; the card now gives 157 GB in total (was 137 GB). The 100 teleoperated trajectories are unchanged and the rollouts are not counted in episodes; availability stays gated (manual approval) and the files were not opened.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"},
+  {"kind": "updated", "target": "dataset", "id": "dextraverse",
+   "text": "DextraVerse: dataset version 1.1.0 (commit 25773192, 2026-11-01) re-encoded every array in all five archives with Blosc + Zstd level 5 and left the array values unchanged; the card now lists 44 GB for pick_cube_place_box and 5.8 GB for unscrew_bottle_cap (were 43 GB and 5.7 GB). Availability stays public, license CC BY 4.0, episode and frame counts unchanged.",
+   "source": "https://huggingface.co/datasets/ntumars/DextraVerse"},
+  {"kind": "updated", "target": "dataset", "id": "hrdexdb",
+   "text": "HRDexDB: the Hugging Face card's news item of 2026-11-01 says the Google Drive mirror was re-synced and all allegro_v5 archives were rebuilt with corrected raw timestamps, so Allegro data downloaded from Google Drive earlier should be downloaded again. Availability stays public, license CC BY-NC 4.0.",
+   "source": "https://huggingface.co/datasets/HRDexDB/HRDexDB"}]}
