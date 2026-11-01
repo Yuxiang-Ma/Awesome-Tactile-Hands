@@ -3,6 +3,69 @@
   {
    "kind": "added",
    "target": "model",
+   "id": "touchbridge",
+   "text": "TouchBridge: added. Tac-Retarget (arXiv 2610.40349) aligns PaXini fingertip contact from Manus-glove human demonstrations to two Wuji hands on a Moz1 robot; GR00T N1.7 fine-tuned only on converted data reaches 72.5% over 4 tasks against 77.5% with teleoperation; code marked coming soon.",
+   "source": "https://arxiv.org/abs/2610.40349",
+   "date": "2026-11-01",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "touch_jepa",
+   "text": "Touch-JEPA: added. V-JEPA 2.1 model (arXiv 2610.28519) that estimates hand contact and tactile magnitude from video, trained with OpenTouch and HandSense touch; contact AUROC 0.862 on OpenTouch and 0.676 zero-shot on HRDexDB Allegro episodes; linked repository is empty.",
+   "source": "https://arxiv.org/abs/2610.28519",
+   "date": "2026-11-01",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "redex",
+   "text": "ReDex: added. Force-conditioned behavior-cloning policy (arXiv 2610.07525) on a 12-DoF XHAND1 with five 120-taxel magnetic fingertip arrays, trained on human finger-level corrections; Object Flipping 14% to 86%; no code statement.",
+   "source": "https://arxiv.org/abs/2610.07525",
+   "date": "2026-11-01",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "upvital",
+   "text": "UpViTaL: added. ICRA 2025 tactile encoder learned from tactile-glove time series and fused with unpaired vision through an RL reward, so the robot hand needs no tactile sensors at deployment; closed access, only the abstract read.",
+   "source": "https://doi.org/10.1109/icra55743.2025.11127230",
+   "date": "2026-11-01",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile (tube pour): a new folder, task4_pi05_rl_rollouts_20261030, holds 61 real-robot policy rollouts (22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL in two learner groups, plus one voided attempt) with videos, per-decision records, Revo2 and glove tactile and score outputs; the card now gives 157 GB in total (was 137 GB). The 100 teleoperated trajectories are unchanged and the rollouts are not counted in episodes; availability stays gated (manual approval) and the files were not opened.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "date": "2026-11-01",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "dextraverse",
+   "text": "DextraVerse: dataset version 1.1.0 (commit 25773192, 2026-11-01) re-encoded every array in all five archives with Blosc + Zstd level 5 and left the array values unchanged; the card now lists 44 GB for pick_cube_place_box and 5.8 GB for unscrew_bottle_cap (were 43 GB and 5.7 GB). Availability stays public, license CC BY 4.0, episode and frame counts unchanged.",
+   "source": "https://huggingface.co/datasets/ntumars/DextraVerse",
+   "date": "2026-11-01",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "hrdexdb",
+   "text": "HRDexDB: the Hugging Face card's news item of 2026-11-01 says the Google Drive mirror was re-synced and all allegro_v5 archives were rebuilt with corrected raw timestamps, so Allegro data downloaded from Google Drive earlier should be downloaded again. Availability stays public, license CC BY-NC 4.0.",
+   "source": "https://huggingface.co/datasets/HRDexDB/HRDexDB",
+   "date": "2026-11-01",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "model",
    "id": "omnivtla",
    "text": "OmniVTLA: added. Vision-tactile-language-action policy (IEEE RA-L, arXiv 2508.08706) on Paxini Gen2 Hall-array touch, run on a UR5 with a jaw gripper or an 11-sensor four-finger hand (100% pick-and-place on the hand); code announced as coming soon, no weights.",
    "source": "https://arxiv.org/abs/2508.08706",

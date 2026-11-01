@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-10-31"
+  "last_updated": "2026-11-01"
  },
  "datasets": [
   {
@@ -862,6 +862,12 @@
      "url": "https://arxiv.org/abs/2610.09455",
      "note": "Tactile expert trained on 1,469 OpenTouch clips, the 16x16 glove grid mapped to 205 of 778 MANO vertices; OpenTouch test: contact F1 0.696, AUROC 0.980, force MAE 0.489 kPa, RMSE 2.508 kPa.",
      "model": "rlhnd"
+    },
+    {
+     "name": "Touch-JEPA, arXiv 2610.28519",
+     "url": "https://arxiv.org/abs/2610.28519",
+     "note": "22,638 16-frame clips for training (970 training recordings); 123 test recordings (2,519 clips) for contact and magnitude evaluation; magnitude taken as 3072 minus the released 169-taxel sensor value.",
+     "model": "touch_jepa"
     }
    ]
   },
@@ -1071,7 +1077,7 @@
     ]
    },
    "availability": "public",
-   "access": "Hugging Face HRDexDB/HRDexDB, ungated, ~1.56 TB of per-sequence folders (per-camera mp4, raw .npy robot streams, MANO, object pose npz); single files can be fetched; Google Drive ZIP mirror also offered.",
+   "access": "Hugging Face HRDexDB/HRDexDB, ungated, ~1.56 TB of per-sequence folders (per-camera mp4, raw .npy robot streams, MANO, object pose npz); single files can be fetched; Google Drive mirror of one .tar.gz per object also offered (re-synced with Hugging Face on 2026-11-01).",
    "license": "CC BY-NC 4.0",
    "caveats": [
     "Grasping only: one grasp-and-lift task per sequence; robot trials teleoperated to reproduce a reference human grasp (no frame-level alignment between paired human and robot sequences).",
@@ -1081,7 +1087,8 @@
     "Many raw .npy files (arm streams, Inspire F1 hand and tactile, Robotiq hand, teleop) are pickled object arrays and need allow_pickle to load.",
     "Release (2,703 sequences) is smaller than the paper's 3,215 trials; all 453 released Allegro sequences are labelled successful, while the paper reports 52 Allegro failures.",
     "The metadata catalog (metadata/episodes.parquet, 2,104 rows) does not cover the Robotiq sequences; 33 Robotiq folders lack raw/ and 36 lack calibration files.",
-    "Videos are 2048x1536 MPEG-4 Part 2 (not H.264), ~230-840 MB per sequence (median, by embodiment) across 22-23 views."
+    "Videos are 2048x1536 MPEG-4 Part 2 (not H.264), ~230-840 MB per sequence (median, by embodiment) across 22-23 views.",
+    "The Hugging Face card's news item of 2026-11-01 says all allegro_v5 archives on the Google Drive mirror were rebuilt with corrected raw timestamps, and that allegro_v5 downloaded from Google Drive before that date should be downloaded again. Whether the Hugging Face allegro_v5 files carry the same correction is not stated; the Allegro tactile.npy timestamps were not re-checked here."
    ],
    "links": {
     "project": "https://snuvclab.github.io/HRDexDB/",
@@ -1174,7 +1181,8 @@
     "https://snuvclab.github.io/HRDexDB/",
     "https://huggingface.co/datasets/HRDexDB/HRDexDB (README.md, metadata/*.parquet, full repo tree)",
     "https://huggingface.co/datasets/HRDexDB/HRDexDB raw files of human/apple/0, allegro_v5/apple/3, inspire_f1/apple/0, inspire_dftp/apple/0, robotiq_2f85/apple/0 and tactile/force files of 9 more robot sequences",
-    "https://github.com/snuvclab/HRDexDB (README.md, hrdexdb/common.py, hrdexdb_contact_heatmaps/hrdexdb_io.py)"
+    "https://github.com/snuvclab/HRDexDB (README.md, hrdexdb/common.py, hrdexdb_contact_heatmaps/hrdexdb_io.py; README re-read 2026-11-01: per-subset sizes and Google Drive archive counts)",
+    "https://huggingface.co/datasets/HRDexDB/HRDexDB (README.md re-read 2026-11-01: news item of 2026-11-01, object_masses.json)"
    ],
    "unconfirmed": [
     "episodes=2,703 counted from sequence folders in the HF tree (human 441, allegro_v5 453, inspire_f1 592, inspire_dftp 618, robotiq_2f85 599); metadata/episodes.parquet lists 2,104 (no Robotiq); paper: 3,215 trials (541 human, 539 Allegro, 743 Inspire F1, 791 Inspire DFTP, 601 Robotiq); GitHub README: 2.1K; HF card: 3.2K.",
@@ -1241,6 +1249,12 @@
      "url": "https://arxiv.org/abs/2610.09455",
      "note": "Contact head only, with labels computed from hand and object meshes (5 mm signed distance); HRDexDB's tactile readings are not used.",
      "model": "rlhnd"
+    },
+    {
+     "name": "Touch-JEPA, arXiv 2610.28519",
+     "url": "https://arxiv.org/abs/2610.28519",
+     "note": "Zero-shot contact and magnitude evaluation on 89 Allegro episodes (10,562 frames) and on Inspire-hand sequences, using joint angles for hand geometry.",
+     "model": "touch_jepa"
     }
    ]
   },
@@ -4383,7 +4397,7 @@
     "text": "Real robot: 317 episodes, 154,799 frames, 2 tasks (cube into box: 261 episodes, 138,382 frames at ~19.5 Hz, 123 min; unscrew bottle cap: 56 episodes, 16,417 frames at ~14.6 Hz, 19 min); the 300 simulated episodes (3 tasks, 135,734 frames) in the same repo are not counted"
    },
    "availability": "public",
-   "access": "Hugging Face ntumars/DextraVerse, ungated: each real task is one stored (uncompressed) ZIP64 of a zarr v2 replay buffer (43 GB for pick_cube_place_box, 5.7 GB for unscrew_bottle_cap), so single zarr chunks can be range-read; an earlier HDF5 export with actions is on the gated repo Xiongge0212/dextraverse-rig-grasp-n261 (login, auto-approved).",
+   "access": "Hugging Face ntumars/DextraVerse, ungated: each real task is one ZIP64 of a zarr v2 replay buffer (44 GB for pick_cube_place_box, 5.8 GB for unscrew_bottle_cap, as listed on the card on 2026-11-01; 43 GB and 5.7 GB before). Dataset version 1.1.0 (commit 25773192, 2026-11-01) re-encoded every array with Blosc + Zstd level 5 and left the array values unchanged from 1.0.0; the archives were range-readable stored ZIPs when checked earlier, and that was not re-checked after the re-encode. An earlier HDF5 export with actions is on the gated repo Xiongge0212/dextraverse-rig-grasp-n261 (login, auto-approved).",
    "license": "CC BY 4.0",
    "caveats": [
     "Two real tasks on one rig, 2026-09 and 2026-10 recordings. pick_cube_place_box (checked in full): pick up a purple cube and place it in an orange box; 256 of 261 episodes use one hand (140 left, 116 right), 3 use both hands, 2 never grasp; the idle hand's tactile channels stay at rest. unscrew_bottle_cap (added 2026-10-31, README read, files not opened): hold a bottle with the left hand and unscrew the cap with the right, both hands active in all 56 episodes of 15 to 31 s, recorded 2026-10-15 in four sessions.",
@@ -4465,7 +4479,7 @@
     ]
    },
    "sources": [
-    "https://huggingface.co/datasets/ntumars/DextraVerse (README.md)",
+    "https://huggingface.co/datasets/ntumars/DextraVerse (README.md; re-read 2026-11-01 for version 1.1.0, archive sizes and the commit history)",
     "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README_real_robot.md",
     "https://huggingface.co/datasets/ntumars/DextraVerse/raw/main/DextraVerse/README_unscrew_bottle_cap.md (read 2026-10-31, commit cc7a4456)",
     "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README.md (simulation part)",
@@ -4480,7 +4494,7 @@
     "hours=2.05 is the card's '123 minutes'; the sum of per-episode timestamp spans is 122.8 min. rate_hz=19.5 is the card's 'about 19.5 Hz' and the median frame step over all episodes (0.0512 s); the gated HDF5 card says 20 Hz recording with a 50 Hz control loop.",
     "objects=2: the purple cube (the orange box is the container) and the bottle in unscrew_bottle_cap (its cap not counted separately). Derived from the task text.",
     "scene_types=['lab'] from one decoded head-camera frame of pick_cube_place_box (office/lab room, table, bystander); the card does not describe the scene, and no unscrew_bottle_cap frame was decoded. Camera models are not stated.",
-    "Since 2026-10-31 the totals add the two real tasks: episodes 317 = 261 + 56, frames 154,799 = 138,382 + 16,417, hours 2.37 = 2.05 + 19 min / 60 (the unscrew_bottle_cap README gives '19 minutes' and 16,417 frames at about 14.6 Hz, which is 18.7 min). The unscrew_bottle_cap counts, rates, array shapes and 5.7 GB size come from its README; the zarr was not opened and its ZIP listing was not read.",
+    "Since 2026-10-31 the totals add the two real tasks: episodes 317 = 261 + 56, frames 154,799 = 138,382 + 16,417, hours 2.37 = 2.05 + 19 min / 60 (the unscrew_bottle_cap README gives '19 minutes' and 16,417 frames at about 14.6 Hz, which is 18.7 min). The unscrew_bottle_cap counts, rates and array shapes come from its README (the main card gives its size as 5.8 GB since 2026-11-01); the zarr was not opened and its ZIP listing was not read. The pick_cube_place_box checks above (all non-camera arrays read in full) were made on version 1.0.0 before the 2026-11-01 re-encode; the card states the values are unchanged, which was not re-verified.",
     "unscrew_bottle_cap distforce values are in 'SDK units' per the README; whether they are newtons is not stated. The data glove and Vive tracker models are not named.",
     "Sensing principle 'optical' and type 'vision' come from Sharpa's description of the Wave fingertip sensor as camera-based (catalog hardware entry sharpa_wave); the DextraVerse card only calls the arrays a 'deformation map' and 'contact force'. The 24x24 map size differs from the 240x240 deformation maps T-Rex releases from the same hand; how DextraVerse's map was produced is not stated.",
     "calibrated=true because the card states the force in newtons; it is the hand's own force output, and no calibration procedure is described.",
@@ -5889,7 +5903,15 @@
      "scale": false,
      "diversity": false
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "Touch-JEPA, arXiv 2610.28519",
+     "url": "https://arxiv.org/abs/2610.28519",
+     "note": "3,721 clips from the released synthesized bare-hand videos with five fingertip glove channels and binary contact labels; 161 training and 18 test recordings (447 test clips).",
+     "model": "touch_jepa"
+    }
+   ]
   },
   {
    "id": "grasp_like_humans",
@@ -10557,7 +10579,7 @@
    "authors": "SingleBicycle (Hugging Face account)",
    "year": 2026,
    "venue": "Hugging Face dataset (2026)",
-   "summary": "Teleoperated bimanual tube pouring on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm: 100 successful trajectories in two batches plus 9 labelled failures, behind a Hugging Face gate.",
+   "summary": "Teleoperated bimanual tube pouring on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm: 100 successful trajectories in two batches plus 9 labelled failures and, since 2026-10-30, 61 real-robot policy rollouts (pi0.5 base policy and noise-space RL), behind a Hugging Face gate.",
    "embodiment": "robot",
    "hand": "BrainCo Revo2 x 2 on UFACTORY xArm6 arms, each covered by a Tujian (Tachin) tactile glove",
    "bimanual": true,
@@ -10588,23 +10610,24 @@
     "scene_types": [
      "lab"
     ],
-    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
+    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; task4_pi05_rl_rollouts_20261030 (added 2026-10-30, rewritten 2026-11-01) holds 61 policy-rollout episodes that are not counted in episodes (22 pi0.5 base-policy, 39 from RL stage 1 with two learner groups); pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
    },
    "availability": "gated",
-   "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026).",
+   "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026) and a policy-rollout folder (task4_pi05_rl_rollouts_20261030).",
    "gate": {
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
-    "checked": "2026-10-28",
+    "checked": "2026-11-01",
     "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
    },
    "license": "not stated",
    "caveats": [
     "No paper or project page; the card refers to an 'RSS project' without a link, and the publisher is a personal account.",
     "Touch comes from gloves pulled over the robot hands, not from the Revo2's own fingertip sensors; the card does not say whether the hands are the tactile Revo2 TOUCH variant.",
-    "The card gives 137 GB as the total size, while the Hugging Face API reports 31.2 GB of storage on 2026-10-28; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
+    "The card gave 137 GB as the total size on 2026-10-28 and gives 157 GB on 2026-11-01, while the Hugging Face API reported 31.2 GB of storage on 2026-10-28 and 48.2 GB on 2026-11-01; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
     "One task only so far; the failure folders are marked 'Not for training'.",
+    "task4_pi05_rl_rollouts_20261030 (public card, files not opened) holds policy rollouts, not demonstrations: 22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL (DSRL-SAC) in two learner groups, plus one voided attempt, with videos, per-decision records, Revo2 and glove tactile and the authors' 'Ours scorer' outputs. The card reports base policy 13/20, label 4/10 training and 5/10 evaluation, label_ours 5/10 training and 5/9 evaluation, and no measurable difference between the groups or against the base policy.",
     "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read."
    ],
    "links": {
@@ -10652,7 +10675,8 @@
     ]
    },
    "sources": [
-    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)"
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)",
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/task4_pi05_rl_rollouts_20261030 (public file listing, read 2026-11-01)"
    ],
    "unconfirmed": [
     "Tujian = 途见, the Chinese name of Tachin Technology, whose TachinGlove is in the catalog; the card does not give the glove model, so the TachinGlove hardware link rests on the maker name.",

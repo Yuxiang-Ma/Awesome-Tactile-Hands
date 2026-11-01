@@ -1,18 +1,18 @@
 {
- "generated": "2026-10-31T08:35:13Z",
+ "generated": "2026-11-01T09:33:15Z",
  "baseline": false,
- "urls_checked": 267,
- "seconds": 311,
+ "urls_checked": 274,
+ "seconds": 193,
  "signals": [
   {
    "kind": "dataset",
-   "id": "dextacwam",
-   "name": "DexTacWAM",
-   "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
+   "id": "rss_dual_arm_tactile",
+   "name": "RSS Dual-Arm Tactile (tube pour)",
+   "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
    "priority": 1,
-   "type": "links_added",
-   "detail": "https://huggingface.co/front/build/kube-7e92521/index.js https://huggingface.co/front/build/kube-7e92521/katex.css https://huggingface.co/front/build/kube-7e92521/style.css",
-   "availability": "public"
+   "type": "hf_commit",
+   "detail": "files 7420 -> 12888, last modified 2026-11-01T08:43:25.000Z",
+   "availability": "gated"
   },
   {
    "kind": "dataset",
@@ -21,7 +21,17 @@
    "url": "https://huggingface.co/datasets/ntumars/DextraVerse",
    "priority": 2,
    "type": "hf_commit",
-   "detail": "files 47 -> 49, last modified 2026-10-31T07:59:19.000Z",
+   "detail": "files 49 -> 49, last modified 2026-11-01T04:27:00.000Z",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "hrdexdb",
+   "name": "HRDexDB",
+   "url": "https://github.com/snuvclab/HRDexDB",
+   "priority": 2,
+   "type": "gh_readme",
+   "detail": "README changed",
    "availability": "public"
   },
   {
@@ -30,59 +40,59 @@
    "name": "DexTacWAM",
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
-   "type": "links_removed",
-   "detail": "https://huggingface.co/front/build/kube-6c835fa/index.js https://huggingface.co/front/build/kube-6c835fa/katex.css https://huggingface.co/front/build/kube-6c835fa/style.css",
+   "type": "page_text",
+   "detail": "text length 1501 -> 1498",
    "availability": "public"
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "dex_mptd"
+   "id": "dexumi"
   },
   {
    "kind": "dataset",
-   "id": "egoexplorer"
+   "id": "egoforce"
   },
   {
    "kind": "dataset",
-   "id": "gist_vta"
+   "id": "glove2hand_handsense"
   },
   {
    "kind": "dataset",
-   "id": "kaiwu"
+   "id": "osmo"
   },
   {
    "kind": "dataset",
-   "id": "robotacdex"
+   "id": "rss_dual_arm_tactile"
   },
   {
    "kind": "dataset",
-   "id": "tacross"
+   "id": "tactalign"
   },
   {
    "kind": "dataset",
-   "id": "tacwam_wetlab"
+   "id": "touchscale"
   },
   {
    "kind": "model",
-   "id": "aet_tacnet"
+   "id": "card"
   },
   {
    "kind": "model",
-   "id": "dextouch_wm"
+   "id": "dtwm"
   },
   {
    "kind": "model",
-   "id": "egopressurediff"
+   "id": "egopressureformer"
   },
   {
    "kind": "model",
-   "id": "fact"
+   "id": "hutact"
   },
   {
    "kind": "model",
-   "id": "omnivtla"
+   "id": "physword"
   },
   {
    "kind": "model",
@@ -98,18 +108,22 @@
   },
   {
    "kind": "model",
-   "id": "touchanything"
+   "id": "touch_jepa"
   },
   {
    "kind": "model",
-   "id": "transdex"
+   "id": "touchsight"
+  },
+  {
+   "kind": "model",
+   "id": "unitachand"
   },
   {
    "kind": "model",
    "id": "vint_net"
   }
  ],
- "not_fully_released": 55,
+ "not_fully_released": 59,
  "errors": [],
  "problems": [],
  "sources_failed": []
