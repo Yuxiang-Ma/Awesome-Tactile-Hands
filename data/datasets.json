@@ -64,7 +64,7 @@
     "kind": "hf_gate",
     "approval": "automatic",
     "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale",
-    "checked": "2026-10-24"
+    "checked": "2026-11-02"
    },
    "license": "CC BY-NC 4.0",
    "caveats": [
@@ -147,7 +147,8 @@
     "subjects: the paper says about 20 participants for 500 h; the release card and episodes.parquet give 24 pseudonymous actor ids.",
     "objects=905 is the card's '905+'; 193 of them have meshes.",
     "scene_types are the 7 environment words of the card; scenes=22 counts the scene field of episodes.parquet (the paper's 9 high-level settings refer to the full 500 h).",
-    "imu.txt header says '#timestamp[ns]' but the first column holds Unix seconds (e.g. 1788249254.095250); measured rate 201.7-203.0 Hz in the 8 sampled episodes."
+    "imu.txt header says '#timestamp[ns]' but the first column holds Unix seconds (e.g. 1788249254.095250); measured rate 201.7-203.0 Hz in the 8 sampled episodes.",
+    "TouchScale-OXT: its public card (read 2026-11-02, repository last modified 2026-10-26) states 15,488 trajectories and 3,521,366 frames at 10 Hz (97.8 h) across 920 task zarrs, while 15,324 episodes minus the 236 it says were dropped is 15,088, the figure the derived-release note uses; the card's trajectory count is not reconciled. TouchScale itself (2077AIDataFoundation/TouchScale) was last modified 2026-10-23, so the 500 h release planned before November 2026 is not on Hugging Face as of 2026-11-02."
    ],
    "rank": {
     "n": 4,
@@ -3625,8 +3626,8 @@
     "kind": "form",
     "approval": "not stated",
     "url": "https://huggingface.co/datasets/ACERobotics/ACE-Data-0",
-    "checked": "2026-10-18",
-    "note": "The dataset card asks for a personal access form for non-commercial academic research; the Hugging Face gate itself was off on 2026-10-16 and 2026-10-18."
+    "checked": "2026-11-02",
+    "note": "The dataset card asks for a personal access form for non-commercial academic research; the Hugging Face gate itself was off on 2026-10-16, 2026-10-18 and 2026-11-02 (API gated: false; repository last modified 2026-10-14)."
    },
    "license": "ACE-Data-0 Research License Agreement v1.0 (non-commercial academic research only, no redistribution)",
    "caveats": [
@@ -8394,7 +8395,7 @@
     "kind": "hf_gate",
     "approval": "automatic",
     "url": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge",
-    "checked": "2026-10-24",
+    "checked": "2026-11-02",
     "note": "No extra terms: the card sets no gate prompt or form fields; the Hugging Face gate shares the username and email with the authors. The ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons."
    },
    "license": "CC BY 4.0",
@@ -10579,7 +10580,7 @@
    "authors": "SingleBicycle (Hugging Face account)",
    "year": 2026,
    "venue": "Hugging Face dataset (2026)",
-   "summary": "Teleoperated bimanual tube pouring on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm: 100 successful trajectories in two batches plus 9 labelled failures and, since 2026-10-30, 61 real-robot policy rollouts (pi0.5 base policy and noise-space RL), behind a Hugging Face gate.",
+   "summary": "Teleoperated bimanual tube pouring on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm: 100 successful trajectories in two batches plus 9 labelled failures and, since 2026-10-30, 82 real-robot policy rollouts (pi0.5 and Diffusion Policy base policies, noise-space RL), behind a Hugging Face gate.",
    "embodiment": "robot",
    "hand": "BrainCo Revo2 x 2 on UFACTORY xArm6 arms, each covered by a Tujian (Tachin) tactile glove",
    "bimanual": true,
@@ -10610,7 +10611,7 @@
     "scene_types": [
      "lab"
     ],
-    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; task4_pi05_rl_rollouts_20261030 (added 2026-10-30, rewritten 2026-11-01) holds 61 policy-rollout episodes that are not counted in episodes (22 pi0.5 base-policy, 39 from RL stage 1 with two learner groups); pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
+    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; task4_pi05_rl_rollouts_20261030 (added 2026-10-30, rewritten 2026-11-01, extended 2026-11-02) holds 82 policy-rollout episodes that are not counted in episodes (22 pi0.5 base-policy, 39 from RL stage 1 with two learner groups, 20 Diffusion Policy base-policy in dp_base/, 1 training episode of the pi0.5 DSRL-NA stage in pi05_s1_dsrl_na_partial/); pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
    },
    "availability": "gated",
    "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026) and a policy-rollout folder (task4_pi05_rl_rollouts_20261030).",
@@ -10618,16 +10619,16 @@
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
-    "checked": "2026-11-01",
+    "checked": "2026-11-02",
     "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
    },
    "license": "not stated",
    "caveats": [
     "No paper or project page; the card refers to an 'RSS project' without a link, and the publisher is a personal account.",
     "Touch comes from gloves pulled over the robot hands, not from the Revo2's own fingertip sensors; the card does not say whether the hands are the tactile Revo2 TOUCH variant.",
-    "The card gave 137 GB as the total size on 2026-10-28 and gives 157 GB on 2026-11-01, while the Hugging Face API reported 31.2 GB of storage on 2026-10-28 and 48.2 GB on 2026-11-01; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
+    "The card gave 137 GB as the total size on 2026-10-28, 157 GB on 2026-11-01 and 163 GB on 2026-11-02, while the Hugging Face API reported 31.2 GB of storage on 2026-10-28, 48.2 GB on 2026-11-01 and 53.7 GB on 2026-11-02; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
     "One task only so far; the failure folders are marked 'Not for training'.",
-    "task4_pi05_rl_rollouts_20261030 (public card, files not opened) holds policy rollouts, not demonstrations: 22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL (DSRL-SAC) in two learner groups, plus one voided attempt, with videos, per-decision records, Revo2 and glove tactile and the authors' 'Ours scorer' outputs. The card reports base policy 13/20, label 4/10 training and 5/10 evaluation, label_ours 5/10 training and 5/9 evaluation, and no measurable difference between the groups or against the base policy.",
+    "task4_pi05_rl_rollouts_20261030 (public card, files not opened) holds policy rollouts, not demonstrations: 22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL (DSRL-SAC) in two learner groups, plus one voided attempt, with videos, per-decision records, Revo2 and glove tactile and the authors' 'Ours scorer' outputs. Since 2026-11-02 it also lists dp_base/ (20 Diffusion Policy base-policy episodes, 13/20 successes, 3 of the 7 failures are collision-guard aborts) and pi05_s1_dsrl_na_partial/ (the first training episode of the DSRL-NA stage), which brings the card's count to 82 episodes. The card reports pi0.5 base policy 13/20, label 4/10 training and 5/10 evaluation, label_ours 5/10 training and 5/9 evaluation, and no measurable difference between the groups or against the base policy.",
     "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read."
    ],
    "links": {
@@ -10676,7 +10677,7 @@
    },
    "sources": [
     "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)",
-    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/task4_pi05_rl_rollouts_20261030 (public file listing, read 2026-11-01)"
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/task4_pi05_rl_rollouts_20261030 (public file listing, read 2026-11-02)"
    ],
    "unconfirmed": [
     "Tujian = 途见, the Chinese name of Tachin Technology, whose TachinGlove is in the catalog; the card does not give the glove model, so the TachinGlove hardware link rests on the maker name.",

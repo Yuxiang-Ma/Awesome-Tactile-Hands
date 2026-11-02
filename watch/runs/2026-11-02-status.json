@@ -1,0 +1,39 @@
+{
+ "flow": "status",
+ "date": "2026-11-02",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 2,
+ "updated": 1,
+ "searches": [
+  "TaCross tactile human glove Revo2 code release GitHub",
+  "TactiSkill TactiDex tactile dexterous code dataset release",
+  "RLHND video foundation models hand trackers robot learning code weights",
+  "TouchBridge tactile-conditioned human-to-robot transfer dexterous code",
+  "CARD contact-anchored retargeting dexterous manipulation code Vid-HACO",
+  "OmniVTLA ObjTac dataset code release",
+  "HuTact tactile-aware hand representations human hand-object interaction code",
+  "VTAO-BiManip visual-tactile-action pretraining bimanual code",
+  "DTWM Dexterous Tactile World Model checkpoint weights Hugging Face",
+  "UVTA uni-vta visuo-tactile diffusion policy checkpoints dataset",
+  "TransDex 3D visuo-tactile fusion point cloud pre-training checkpoint",
+  "EgoPressureFormer EgoTactile weights checkpoint",
+  "Grasp Like Humans TK-STGN tactile kinesthetic code dataset",
+  "DexViTac dataset Hugging Face release",
+  "ExoBridge bare hand exoskeleton tactile dataset release",
+  "TouchScale 500 hours dataset full release Hugging Face"
+ ],
+ "for_the_owner": [],
+ "notes": [
+  "Two signals. rss_dual_arm_tactile (P1, files 12,888 -> 14,915) is an extension of task4_pi05_rl_rollouts_20261030 with dp_base/ (20 Diffusion Policy base-policy episodes) and pi05_s1_dsrl_na_partial/ (1 training episode); the public card now counts 82 rollout episodes and 163 GB, the Hugging Face API 53.7 GB. Read from the public card and file listing only; the gated files were not opened, and nightly_tool.py hf-commits returned HTTP 401 for this gated repository, so the commit contents were taken from the folder listing's commit messages. Summary, scale text, caveats, sources and the gate check date were updated; availability stays gated. dextacwam (P3 page text 1498 -> 1498 characters) is a released dataset and the collection page lists the same seven dataset repos and the encoder, last updated Sep 28 and Sep 30, so no edit.",
+  "Deep check (21 entries: 8 datasets, 13 models), no new release found. Datasets checked directly: ace_data_0 (HF gate still off, repository last modified 2026-10-14), dexvitac (Hugging Face repo still holds only a 102-byte README, last modified 2026-03-17; code repo xitong-c/DexViTac_Code holds README.md only), exobridge (arXiv still v1 only, no release link), htac (BeingBeyond/H-Tac_Sample last modified 2026-07-06, TTP repo last push 2026-07-07), paxini_omnisharing (HF last modified 2026-10-19, ungated sample unchanged), sharpa_origami (HF gate still automatic, last modified 2026-07-24), tactidex (project page still 'Code (Coming Soon)' and 'Data (Coming Soon)'), touchscale (HF repo last modified 2026-10-23, no 500 h release yet). Models checked directly: dtwm, egopressureformer, tacross, tactiskill, uvta, tk_stgn, rlhnd, transdex, hutact, card, vtao_bimanip, omnivtla, touchbridge; repository last-push dates and project pages match the catalog.",
+  "TouchScale: the TouchScale-OXT card (repository last modified 2026-10-26) states 15,488 trajectories and 3,521,366 frames at 10 Hz (97.8 h), while 15,324 episodes minus the 236 dropped is 15,088, the figure the catalog uses; recorded under the entry's unconfirmed and not reconciled.",
+  "The checked date is 2026-11-02 on dtwm, egopressureformer, tacross, tactiskill, uvta, tk_stgn, rlhnd, transdex, hutact, card, vtao_bimanip, omnivtla and touchbridge. Gate check dates were refreshed on rss_dual_arm_tactile, touchscale, sharpa_origami and ace_data_0.",
+  "Lead for discovery: the CARD search returned arXiv 2609.24093, 'Dexterous Robot Manipulation from Human Demonstrations via Contact-Anchored Retargeting and Residual Policy Learning', a different paper from the catalog's CARD (2610.36539). Its title and abstract were not read for scope.",
+  "No dataset became public tonight, so no viewer samples are requested and no new gate appeared."
+ ],
+ "started": "2026-11-02T09:30:02Z",
+ "finished": "2026-11-02T09:42:22Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 11 changed files, 2 new entries"
+}

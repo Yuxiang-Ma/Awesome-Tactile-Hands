@@ -1,0 +1,4 @@
+{"date": "2026-11-02", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile (tube pour): task4_pi05_rl_rollouts_20261030 now also lists dp_base/ (20 Diffusion Policy base-policy episodes, 13/20 successes, 3 of the 7 failures are collision-guard aborts) and pi05_s1_dsrl_na_partial/ (the first training episode of the DSRL-NA stage), so the card counts 82 rollout episodes (was 61); the card gives 163 GB in total (was 157 GB) and the Hugging Face API 53.7 GB (was 48.2 GB). The 100 teleoperated trajectories are unchanged and the rollouts are not counted in episodes; availability stays gated (manual approval) and the files were not opened.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"}]}

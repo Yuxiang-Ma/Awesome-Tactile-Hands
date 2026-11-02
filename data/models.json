@@ -190,9 +190,10 @@
     "The paper counts 1,933 episode directories in its copy of EgoTouch; the catalog's egotouch entry lists 1,891 episodes. Not reconciled.",
     "The TouchWorld, VT-WM and FeelWorld rows in the paper's comparison re-implement only their tactile conditioning on DTWM's backbone and EgoTouch clips (App. C.3); they are not the original systems.",
     "Re-checked 2026-10-29: the GitHub repository's last push is still 2026-09-29 and no checkpoint appeared.",
-    "Re-checked 2026-11-01: the last push is still 2026-09-29 and the top-level listing is unchanged (no checkpoint folder)."
+    "Re-checked 2026-11-01: the last push is still 2026-09-29 and the top-level listing is unchanged (no checkpoint folder).",
+    "Re-checked 2026-11-02: the last push is still 2026-09-29 and the top-level listing is unchanged; a Hugging Face and web search for the name found no checkpoint."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-02"
   },
   {
    "id": "egopressurediff",
@@ -280,8 +281,10 @@
     "https://egotactile.github.io/",
     "https://github.com/Russell-Zeng/EgoTactile (README, file tree)"
    ],
-   "unconfirmed": [],
-   "checked": "2026-11-01"
+   "unconfirmed": [
+    "Re-checked 2026-11-02: the repository's last push is still 2026-06-29 and its top-level files are unchanged; a web search for EgoPressureFormer found no code or checkpoint."
+   ],
+   "checked": "2026-11-02"
   },
   {
    "id": "egotac",
@@ -507,8 +510,10 @@
     "https://github.com/tacross-touch-project/tacross-touch-project.github.io/releases/tag/hardware-v1",
     "https://github.com/search?q=TACROSS&type=repositories"
    ],
-   "unconfirmed": [],
-   "checked": "2026-10-29"
+   "unconfirmed": [
+    "Re-checked 2026-11-02: the project page still reads 'Software release coming soon' and links only the hardware-v1 release; a web search found no repository."
+   ],
+   "checked": "2026-11-02"
   },
   {
    "id": "tactalign",
@@ -590,9 +595,10 @@
     "https://github.com/search?q=TactiSkill&type=repositories"
    ],
    "unconfirmed": [
-    "Real-robot runs on two Franka arms with Inspire hands map the simulated policy's commands open loop (Appendix C.3); the paper lists on-robot fine-tuning with real tactile feedback as future work, so the real hands' touch sensors are not read at deployment as far as the text says."
+    "Real-robot runs on two Franka arms with Inspire hands map the simulated policy's commands open loop (Appendix C.3); the paper lists on-robot fine-tuning with real tactile feedback as future work, so the real hands' touch sensors are not read at deployment as far as the text says.",
+    "Re-checked 2026-11-02: tactidex.github.io still shows 'Code (Coming Soon)' and 'Data (Coming Soon)' with no link; a web search found no repository or dataset."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-11-02"
   },
   {
    "id": "touchanything",
@@ -841,8 +847,10 @@
     "https://huggingface.co/api/models?author=Chopper233",
     "https://huggingface.co/api/datasets/Chopper233/UVTA/tree/main"
    ],
-   "unconfirmed": [],
-   "checked": "2026-10-30"
+   "unconfirmed": [
+    "Re-checked 2026-11-02: the repository's last push is still 2026-09-30; no checkpoint link found in the listing or by web search."
+   ],
+   "checked": "2026-11-02"
   },
   {
    "id": "tacdex3d",
@@ -1008,8 +1016,10 @@
     "https://grasplikehuman.github.io/",
     "https://github.com/search?q=TK-STGN&type=repositories"
    ],
-   "unconfirmed": [],
-   "checked": "2026-10-27"
+   "unconfirmed": [
+    "Re-checked 2026-11-02: grasplikehuman.github.io still offers only the dataset zip and the paper (a 'Dataset (Coming soon)' line is commented out in the page); a web search found no code or weights."
+   ],
+   "checked": "2026-11-02"
   },
   {
    "id": "vt_jointpretrain",
@@ -1530,9 +1540,10 @@
    "unconfirmed": [
     "The OpenTouch clips are selected by an allowlist the paper attributes to HOPE, which was not checked.",
     "The last 52,859 characters of the HTML (appendix) were not read.",
-    "Hugging Face repos jungwook2358/wam-openarm-*-rlhnd-v2-50k-ckpt50000 (found by name search 2026-10-28) are not linked from the paper or project page and were not attributed to this model."
+    "Hugging Face repos jungwook2358/wam-openarm-*-rlhnd-v2-50k-ckpt50000 (found by name search 2026-10-28) are not linked from the paper or project page and were not attributed to this model.",
+    "Re-checked 2026-11-02: seungjun-moon/rlhnd was last pushed 2026-10-08 and still holds only README.md, index.html, logo.svg and videos/; a web search found no code or weights."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-11-02"
   },
   {
    "id": "dexskills",
@@ -1732,9 +1743,10 @@
    ],
    "unconfirmed": [
     "The RA-L record (doi:10.1109/lra.2026.3732837) has the title 'TransDex: Interaction Geometry Enables Robust Visuo-Tactile Dexterous Manipulation of Transparent Objects' with the same five authors; the published text (closed access) was not read, so the catalog follows the arXiv v2 title and content.",
-    "Hand model not named; 16 DoF and cable-driven per the paper. PaXini array model not named. Success rates over 10 trials per task are implied by the percentages."
+    "Hand model not named; 16 DoF and cable-driven per the paper. PaXini array model not named. Success rates over 10 trials per task are implied by the percentages.",
+    "Re-checked 2026-11-02: github.com/LFGfg/TransDex was last pushed 2026-10-03 and still holds README.md, policy_ws/ and requirements.txt; no checkpoint seen."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-02"
   },
   {
    "id": "aet_tacnet",
@@ -1909,9 +1921,10 @@
    "unconfirmed": [
     "The human pretraining data carry no touch; the touch the model reads is the Revo2 fingertip sensors' (10 sensors over two hands).",
     "The Revo2 hands are presumably the tactile Revo2 TOUCH version (catalog hardware brainco_revo2_tactile); the paper's sensor description matches its capacitive fingertip module but the variant is not named.",
-    "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-20); no code, model or data link found beyond the paper."
+    "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-20); no code, model or data link found beyond the paper.",
+    "Re-checked 2026-11-02: arXiv still lists only v1; a web search for HuTact found no repository."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-02"
   },
   {
    "id": "card",
@@ -1946,9 +1959,10 @@
     "The glove's name, maker and rate are not stated; it is not matched to a catalog glove.",
     "Vid-HACO, the paper's video-to-contact model for sources without touch, is trained on contact labels from 12 hand-object datasets (HOT3D, ARCTIC, HOI4D, DECAF and others) with no measured touch, so it is not catalogued separately.",
     "kind 'other': CARD is a retargeting and replay framework; touch goes in as glove contact maps and as fingertip force feedback during replay.",
-    "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-27); the project page shows a Code button and no repository link was found in its HTML. The page abstract and the arXiv abstract give contact maintained on 43 to 78% of contact frames and GRAB task success from 12% to 32%, which are different measures from the 77.7% and 4/30 to 25/30 figures in the summary above; the summary's figures were not re-checked against the paper body."
+    "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-27); the project page shows a Code button and no repository link was found in its HTML. The page abstract and the arXiv abstract give contact maintained on 43 to 78% of contact frames and GRAB task success from 12% to 32%, which are different measures from the 77.7% and 4/30 to 25/30 figures in the summary above; the summary's figures were not re-checked against the paper body.",
+    "Re-checked 2026-11-02: the project page still shows a Code button with no target link; a web search for the name found no repository."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-02"
   },
   {
    "id": "robot_synesthesia",
@@ -2053,9 +2067,10 @@
    "unconfirmed": [
     "Each glove has 'an inner layer with 20 tactile sensors', identical to the authors' earlier glove; sensor type not stated, readings binarized at 0.4 V. The earlier glove data are catalogued as m2vtp_bottlecap and VTDexManip, but this paper records its own bimanual set.",
     "Real-robot platform: 'dual Leap Hands equipped with tactile sensors and a Unitree Z1 arm'; tactile sensor type and count on the LEAP hands not stated, and no real-world success rate is reported.",
-    "How touch is produced for RL in Isaac Gym is not described; the abstract's 'over 20%' margin over visual-tactile pretraining matches 63% against 41% for the closest visual-tactile row in Table II, which the paper does not name as the comparison."
+    "How touch is produced for RL in Isaac Gym is not described; the abstract's 'over 20%' margin over visual-tactile pretraining matches 63% against 41% for the closest visual-tactile row in Table II, which the paper does not name as the comparison.",
+    "Re-checked 2026-11-02: arXiv lists v1 and v2 (2025-12-25) only; no code, data or weights link found by web search."
    ],
-   "checked": "2026-10-30"
+   "checked": "2026-11-02"
   },
   {
    "id": "omnivtla",
@@ -2090,9 +2105,10 @@
     "The hand is described only as an '11-tactile-sensor dexterous hand' with four fingers; the model is not named. It may be PaXini's DexH13 (catalog hardware paxini_dexh13), which the paper does not say.",
     "The paper gives no tactile ablation on the hand; the 6.2-point gain is against a pi0 baseline whose tactile input is not stated.",
     "Which existing datasets were combined with ObjTac to train the tactile encoder is not stated; the training follows AnyTouch's second stage.",
-    "ObjTac is not catalogued as a dataset because the source does not say the touches were made by a hand."
+    "ObjTac is not catalogued as a dataset because the source does not say the touches were made by a hand.",
+    "Re-checked 2026-11-02: the project page still reads 'Coming Soon. The code repository will be available shortly.'; a web search found no repository."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-02"
   },
   {
    "id": "tavi",
@@ -2206,9 +2222,10 @@
    "unconfirmed": [
     "kind 'other': touch goes into the retargeting step only; the paper says tactile measurements 'are used only for retargeting, not as policy inputs'.",
     "Five PaXini sensors per robot hand are stated; the count on the human glove is not stated and is assumed to match (one per fingertip). The PaXini model and taxel count are not given.",
-    "Wuji hand DoF is given only as 'high-DoF' (20 or more); the arm model is not named."
+    "Wuji hand DoF is given only as 'high-DoF' (20 or more); the arm model is not named.",
+    "Re-checked 2026-11-02: the project page shows a Code button with no target link; a web search for the name found no repository."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-02"
   },
   {
    "id": "touch_jepa",
