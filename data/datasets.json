@@ -10979,6 +10979,127 @@
      "diversity": false
     }
    }
+  },
+  {
+   "id": "talos_electrician_wirenuts",
+   "name": "Talos electrician wire-nut sample",
+   "title": "Free sample: electrician joining a ceiling light's wires with wire nuts: head-mounted stereo egocentric video, 12-IMU tactile glove, force in newtons and 3D hand pose",
+   "authors": "Talos Dataworks",
+   "year": 2026,
+   "venue": "Hugging Face dataset (free sample of a commercial dataset)",
+   "summary": "One 62 s episode of a residential electrician joining a ceiling fixture's wires with wire nuts, recorded with a right-hand Talos glove (10 force-sensing-resistor pads on the fingertips and palm at 200 Hz, 12 BMI160 IMUs giving a 21-joint MANO-order hand pose) and a head-mounted Luxonis OAK-D Pro W (2016x1520 colour plus a 640x400 global-shutter stereo pair).",
+   "embodiment": "human",
+   "hand": "Talos glove, right hand, worn under a work glove",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 10,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "rate_hz": 200,
+    "note": "10 force-sensing-resistor pads: F0 thumb pad, F1-F4 index to little fingertips, P0 thenar, P1 hypothenar, P2 distal palm, P3 central palm, P4 index-base palm. Per pad: conductance in microsiemens (observation.hand.right.pads), raw 12-bit ADC in the talos/ sidecar, and estimated newtons from each pad's pre-sewing load-cell bench curve (observation.hand.right.pad_force). 200 Hz raw, 30 Hz in the LeRobot frames. F1 (index tip) gave no signal in this recording and P4 has no bench curve.",
+    "maker": "Talos Dataworks",
+    "model": "Talos glove",
+    "principle": "piezoresistive",
+    "range": "bench-measured ranges 0.32-23 N (F0) to 0.43-39 N (P0) per the card",
+    "calibrated": true
+   },
+   "modalities": [
+    "egocentric",
+    "hand_pose",
+    "imu",
+    "language"
+   ],
+   "scale": {
+    "hours": 0.017,
+    "episodes": 1,
+    "frames": 1860,
+    "tasks": 1,
+    "objects": null,
+    "subjects": 1,
+    "scenes": 1,
+    "scene_types": [
+     "home"
+    ],
+    "text": "Sample: 1 episode, 62 s, 1,860 frames per camera at 30 fps (step 6 of a 25-step, 26-minute job); the full 25-episode recording is sold separately"
+   },
+   "availability": "partial",
+   "access": "Hugging Face talosdataworks/electrician-wire-nuts-tactile-glove-hand-pose-sample, ungated, 102.6 MB (LeRobot v2.1 parquet and AV1 videos plus a talos/ folder of raw sensor streams); the full 26-minute job is offered through Datarade or talosdataworks.com.",
+   "gate": {
+    "kind": "purchase",
+    "approval": "not stated",
+    "url": "https://datarade.ai/data-products/egocentric-data-electrician-installing-two-ceiling-lights-talos-dataworks",
+    "checked": "2026-11-02",
+    "note": "The one-episode sample is public; the card says the full 25-step dataset is available from Talos Dataworks on Datarade or through talosdataworks.com. No price is stated on the card."
+   },
+   "license": "CC BY-NC 4.0",
+   "caveats": [
+    "Single 62 s episode from one electrician at one home site; the card states CC BY-NC 4.0 for this sample only and no licence for the full dataset.",
+    "Force in newtons is an estimate from bench curves measured before the pads were sewn into the glove; the card says hysteresis, repeatability and drift missed their targets (10%, 5%, 8% in about 5 min) for most pads and advises relying on contact timing and relative changes. Nothing was checked against a reference instrument during the job.",
+    "The index-tip pad (F1) stays at its untouched level for the whole episode, so index-tip contact is not captured; the index-base palm pad (P4) has no bench run. Peak forces in this episode are 6.0 N or less on every pad.",
+    "Hand pose is computed from the 12 glove IMUs (no magnetometer) on a template skeleton: 21 joints in MANO order in the hand frame, not fitted MANO parameters; the hand's position and heading relative to the camera are not given, and the card expects absolute joint-angle offsets of up to about 10 degrees.",
+    "The glove runs on its own clock; each episode's hand_right.json gives the fitted offset and drift to the camera clock (5.2 ms uncertainty, 9.1 ms RMS residual per the card).",
+    "A second Talos Dataworks sample on Hugging Face (electrician-wiring-egocentric-stereo-sample) has no glove and is not in the catalog."
+   ],
+   "links": {
+    "data": "https://huggingface.co/datasets/talosdataworks/electrician-wire-nuts-tactile-glove-hand-pose-sample",
+    "project": "https://datarade.ai/data-products/egocentric-data-electrician-installing-two-ceiling-lights-talos-dataworks"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "egocentric",
+      "count": 1,
+      "model": "Luxonis OAK-D Pro W (colour)",
+      "type": "RGB",
+      "resolution": "2016x1520",
+      "fps": 30,
+      "mount": "head"
+     },
+     {
+      "role": "egocentric",
+      "count": 1,
+      "model": "Luxonis OAK-D Pro W (global-shutter stereo pair)",
+      "type": "stereo",
+      "resolution": "640x400",
+      "fps": 30,
+      "mount": "head"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "imu",
+      "system": "Talos glove, 12 Bosch BMI160 IMUs (hand back and finger segments)",
+      "note": "21-joint 3D hand pose in MANO joint order (metres, hand frame) and 21 joint angles derived from the IMUs; distal joints estimated"
+     },
+     {
+      "target": "body",
+      "method": "imu",
+      "system": "OAK-D Pro W IMU",
+      "note": "about 400 Hz raw, 30 Hz in the LeRobot frames"
+     }
+    ],
+    "other": [
+     "raw glove IMU and pad streams at 200 Hz and camera IMU in a talos/ sidecar folder",
+     "glove-to-camera clock fit per episode",
+     "showcase_ep06.mp4 overlay video"
+    ]
+   },
+   "sources": [
+    "https://huggingface.co/datasets/talosdataworks/electrician-wire-nuts-tactile-glove-hand-pose-sample (README.md, Hugging Face API metadata and top-level listing)",
+    "https://huggingface.co/api/datasets?author=talosdataworks (two datasets listed)"
+   ],
+   "unconfirmed": [
+    "hours = 62 s / 3600, from the card's stated duration.",
+    "No depth stream is released; the stereo pair is given as two grey videos.",
+    "'language' from the card: each episode carries a plain-language step label in its task string; the string itself was not read (tasks.jsonl not opened).",
+    "The glove maker is taken to be Talos Dataworks because the card calls it 'the Talos glove'; no separate maker page was read."
+   ]
   }
  ]
 }

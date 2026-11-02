@@ -3013,13 +3013,17 @@
   "arxiv:2512.02729": "W4417009262",
   "arxiv:2508.08706": "W7167224584",
   "arxiv:2309.12300": "W4401415761",
-  "arxiv:2512.21233": "W7117293674"
+  "arxiv:2512.21233": "W7117293674",
+  "arxiv:2610.40349": "W7224927844",
+  "arxiv:2610.28519": "W7223111210",
+  "arxiv:2610.07525": "W7220991376",
+  "doi:10.1109/icra55743.2025.11127230": "W4413925096"
  },
  "cursor": {
-  "arxiv_backfill": "2017-07",
+  "arxiv_backfill": "2017-10",
   "hf_backfilled": true,
-  "arxiv_recent_ok": "2026-11-01",
-  "openalex_recent_ok": "2026-11-01",
-  "openalex_backfill": "2016-10"
+  "arxiv_recent_ok": "2026-11-02",
+  "openalex_recent_ok": "2026-11-02",
+  "openalex_backfill": "2017-01"
  }
 }

@@ -2329,6 +2329,45 @@
     "Embodiment 'human': the abstract says tactile data come from tactile gloves and that the robot hand needs no tactile sensors at deployment."
    ],
    "checked": "2026-11-01"
+  },
+  {
+   "id": "mts_3dcnns",
+   "name": "MTS-3DCNNs",
+   "title": "Gradient adaptive sampling and multiple temporal scale 3D CNNs for tactile object recognition",
+   "authors": "Xiaoliang Qian et al.",
+   "year": 2023,
+   "venue": "Frontiers in Neurorobotics 17:1159168 (2023)",
+   "kind": "estimation",
+   "summary": "Object classifier for tactile frame sequences; frames picked by gradient adaptive sampling (GAS) from a grasp sequence go into three temporal-scale 3D CNN branches on a modified ResNet3D-18, and an object label comes out; 88.81% top-1 on the 27 MIT-STAG glove classes (32x32 frames) and 100% on 10 iCub hand classes.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "stag",
+     "role": "training",
+     "note": "MIT-STAG 32x32 glove frames, 27 categories; 36,531 frames for training and 16,119 for testing; 88.81% top-1 against 81.82% for the best prior result cited"
+    }
+   ],
+   "own_data": "No data of its own; also trains and tests on the iCub tactile object dataset of Soh et al. 2012 (10 categories, 1,320 training and 880 test frames; not a catalog entry).",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The Frontiers full text links no repository and says inquiries go to the corresponding authors (read 2026-11-02)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://doi.org/10.3389/fnbot.2023.1159168"
+   },
+   "sources": [
+    "https://www.frontiersin.org/articles/10.3389/fnbot.2023.1159168/full (datasets, results, availability statement)",
+    "https://api.openalex.org/works/doi:10.3389/fnbot.2023.1159168 (authors, venue)"
+   ],
+   "unconfirmed": [
+    "The number of sampled frames N and the clip length are not given in the paper; M = 3 temporal scales is the best configuration.",
+    "Embodiment 'both': MIT-STAG is a human glove dataset and the iCub set comes from a five-finger robot hand."
+   ],
+   "checked": "2026-11-02"
   }
  ]
 }
