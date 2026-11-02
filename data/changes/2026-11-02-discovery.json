@@ -1,0 +1,7 @@
+{"date": "2026-11-02", "flow": "discovery", "changes": [
+  {"kind": "added", "target": "dataset", "id": "talos_electrician_wirenuts",
+   "text": "Talos electrician wire-nut sample: added. One free 62 s episode of an electrician joining ceiling-light wires, recorded with a right-hand Talos glove (10 FSR pads at 200 Hz with bench-estimated newtons, 12 IMUs giving a 21-joint hand pose) and a head-mounted OAK-D Pro W; CC BY-NC 4.0; the full 26-minute job is sold through Datarade.",
+   "source": "https://huggingface.co/datasets/talosdataworks/electrician-wire-nuts-tactile-glove-hand-pose-sample"},
+  {"kind": "added", "target": "model", "id": "mts_3dcnns",
+   "text": "MTS-3DCNNs: added. Frontiers in Neurorobotics 2023 object classifier with gradient adaptive frame sampling and three temporal-scale 3D CNN branches; 88.81% top-1 on the 27 MIT-STAG glove classes and 100% on iCub hand data; no code linked.",
+   "source": "https://doi.org/10.3389/fnbot.2023.1159168"}]}

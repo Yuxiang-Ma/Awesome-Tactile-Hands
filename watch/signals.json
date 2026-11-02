@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-01T09:33:15Z",
+ "generated": "2026-11-02T09:35:17Z",
  "baseline": false,
- "urls_checked": 274,
- "seconds": 193,
+ "urls_checked": 277,
+ "seconds": 314,
  "signals": [
   {
    "kind": "dataset",
@@ -11,28 +11,8 @@
    "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
    "priority": 1,
    "type": "hf_commit",
-   "detail": "files 7420 -> 12888, last modified 2026-11-01T08:43:25.000Z",
+   "detail": "files 12888 -> 14915, last modified 2026-11-02T05:43:38.000Z",
    "availability": "gated"
-  },
-  {
-   "kind": "dataset",
-   "id": "dextraverse",
-   "name": "DextraVerse",
-   "url": "https://huggingface.co/datasets/ntumars/DextraVerse",
-   "priority": 2,
-   "type": "hf_commit",
-   "detail": "files 49 -> 49, last modified 2026-11-01T04:27:00.000Z",
-   "availability": "public"
-  },
-  {
-   "kind": "dataset",
-   "id": "hrdexdb",
-   "name": "HRDexDB",
-   "url": "https://github.com/snuvclab/HRDexDB",
-   "priority": 2,
-   "type": "gh_readme",
-   "detail": "README changed",
-   "availability": "public"
   },
   {
    "kind": "dataset",
@@ -41,34 +21,38 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "page_text",
-   "detail": "text length 1501 -> 1498",
+   "detail": "text length 1498 -> 1498",
    "availability": "public"
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "dexumi"
+   "id": "ace_data_0"
   },
   {
    "kind": "dataset",
-   "id": "egoforce"
+   "id": "dexvitac"
   },
   {
    "kind": "dataset",
-   "id": "glove2hand_handsense"
+   "id": "exobridge"
   },
   {
    "kind": "dataset",
-   "id": "osmo"
+   "id": "htac"
   },
   {
    "kind": "dataset",
-   "id": "rss_dual_arm_tactile"
+   "id": "paxini_omnisharing"
   },
   {
    "kind": "dataset",
-   "id": "tactalign"
+   "id": "sharpa_origami"
+  },
+  {
+   "kind": "dataset",
+   "id": "tactidex"
   },
   {
    "kind": "dataset",
@@ -92,38 +76,42 @@
   },
   {
    "kind": "model",
-   "id": "physword"
+   "id": "omnivtla"
   },
   {
    "kind": "model",
-   "id": "robot_synesthesia"
+   "id": "rlhnd"
   },
   {
    "kind": "model",
-   "id": "tactalign"
+   "id": "tacross"
   },
   {
    "kind": "model",
-   "id": "tactofind"
+   "id": "tactiskill"
   },
   {
    "kind": "model",
-   "id": "touch_jepa"
+   "id": "tk_stgn"
   },
   {
    "kind": "model",
-   "id": "touchsight"
+   "id": "touchbridge"
   },
   {
    "kind": "model",
-   "id": "unitachand"
+   "id": "transdex"
   },
   {
    "kind": "model",
-   "id": "vint_net"
+   "id": "uvta"
+  },
+  {
+   "kind": "model",
+   "id": "vtao_bimanip"
   }
  ],
- "not_fully_released": 59,
+ "not_fully_released": 61,
  "errors": [],
  "problems": [],
  "sources_failed": []

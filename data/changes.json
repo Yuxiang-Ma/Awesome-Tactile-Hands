@@ -2,6 +2,33 @@
  "changes": [
   {
    "kind": "added",
+   "target": "dataset",
+   "id": "talos_electrician_wirenuts",
+   "text": "Talos electrician wire-nut sample: added. One free 62 s episode of an electrician joining ceiling-light wires, recorded with a right-hand Talos glove (10 FSR pads at 200 Hz with bench-estimated newtons, 12 IMUs giving a 21-joint hand pose) and a head-mounted OAK-D Pro W; CC BY-NC 4.0; the full 26-minute job is sold through Datarade.",
+   "source": "https://huggingface.co/datasets/talosdataworks/electrician-wire-nuts-tactile-glove-hand-pose-sample",
+   "date": "2026-11-02",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "mts_3dcnns",
+   "text": "MTS-3DCNNs: added. Frontiers in Neurorobotics 2023 object classifier with gradient adaptive frame sampling and three temporal-scale 3D CNN branches; 88.81% top-1 on the 27 MIT-STAG glove classes and 100% on iCub hand data; no code linked.",
+   "source": "https://doi.org/10.3389/fnbot.2023.1159168",
+   "date": "2026-11-02",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile (tube pour): task4_pi05_rl_rollouts_20261030 now also lists dp_base/ (20 Diffusion Policy base-policy episodes, 13/20 successes, 3 of the 7 failures are collision-guard aborts) and pi05_s1_dsrl_na_partial/ (the first training episode of the DSRL-NA stage), so the card counts 82 rollout episodes (was 61); the card gives 163 GB in total (was 157 GB) and the Hugging Face API 53.7 GB (was 48.2 GB). The 100 teleoperated trajectories are unchanged and the rollouts are not counted in episodes; availability stays gated (manual approval) and the files were not opened.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "date": "2026-11-02",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
    "target": "model",
    "id": "touchbridge",
    "text": "TouchBridge: added. Tac-Retarget (arXiv 2610.40349) aligns PaXini fingertip contact from Manus-glove human demonstrations to two Wuji hands on a Moz1 robot; GR00T N1.7 fine-tuned only on converted data reaches 72.5% over 4 tasks against 77.5% with teleoperation; code marked coming soon.",
