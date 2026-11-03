@@ -10622,12 +10622,12 @@
     "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; task4_pi05_rl_rollouts_20261030 (added 2026-10-30, rewritten 2026-11-01, extended 2026-11-02) holds 82 policy-rollout episodes that are not counted in episodes (22 pi0.5 base-policy, 39 from RL stage 1 with two learner groups, 20 Diffusion Policy base-policy in dp_base/, 1 training episode of the pi0.5 DSRL-NA stage in pi05_s1_dsrl_na_partial/); pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
    },
    "availability": "gated",
-   "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026) and a policy-rollout folder (task4_pi05_rl_rollouts_20261030).",
+   "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026), a policy-rollout folder (task4_pi05_rl_rollouts_20261030) and, since 2026-11-02, glove code (tujian_glove_code_20261102).",
    "gate": {
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
-    "checked": "2026-11-02",
+    "checked": "2026-11-03",
     "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
    },
    "license": "not stated",
@@ -10637,7 +10637,8 @@
     "The card gave 137 GB as the total size on 2026-10-28, 157 GB on 2026-11-01 and 163 GB on 2026-11-02, while the Hugging Face API reported 31.2 GB of storage on 2026-10-28, 48.2 GB on 2026-11-01 and 53.7 GB on 2026-11-02; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
     "One task only so far; the failure folders are marked 'Not for training'.",
     "task4_pi05_rl_rollouts_20261030 (public card, files not opened) holds policy rollouts, not demonstrations: 22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL (DSRL-SAC) in two learner groups, plus one voided attempt, with videos, per-decision records, Revo2 and glove tactile and the authors' 'Ours scorer' outputs. Since 2026-11-02 it also lists dp_base/ (20 Diffusion Policy base-policy episodes, 13/20 successes, 3 of the 7 failures are collision-guard aborts) and pi05_s1_dsrl_na_partial/ (the first training episode of the DSRL-NA stage), which brings the card's count to 82 episodes. The card reports pi0.5 base policy 13/20, label 4/10 training and 5/10 evaluation, label_ours 5/10 training and 5/9 evaluation, and no measurable difference between the groups or against the base policy.",
-    "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read."
+    "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read.",
+    "A top-level folder tujian_glove_code_20261102 (README.md 6.06 kB and a 215 kB zip) appeared on 2026-11-02; the commit message says it adds paths.py, xhost.py, arm_frames.py and __init__.py as support modules for align.py and packing. The main card does not mention it, the files are gated and were not opened, so whether it documents the glove's taxel layout is unknown."
    ],
    "links": {
     "data": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"

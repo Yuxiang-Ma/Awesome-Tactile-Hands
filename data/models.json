@@ -513,7 +513,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the project page still reads 'Software release coming soon' and links only the hardware-v1 release; a web search found no repository."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-03"
   },
   {
    "id": "tactalign",
@@ -661,9 +661,10 @@
     "ACE-Data-0 (arXiv 2607.28625) says it evaluated TouchAnything 'using their released pre-trained weights'; no public checkpoint was found on GitHub, the project page or Hugging Face.",
     "Hugging Face repos named Grange007/touchanything-* (simulation data and a 'tactile-geometry-model' best_model.pth) are not linked from the TouchAnything repo or page and were not attributed to this model.",
     "Re-checked 2026-10-28: GitHub Jianyi2004/TouchAnything last pushed 2026-05-21; issue #3 (checkpoint request) still has no author reply; Hugging Face model search 'touchanything' returns only the three Grange007 repos.",
-    "Re-checked 2026-10-31: the last GitHub push is still 2026-05-21; issue #3 was reopened and holds a second request for the checkpoint (2026-07-12) with no reply; the Hugging Face account zhouzhoujy has no models."
+    "Re-checked 2026-10-31: the last GitHub push is still 2026-05-21; issue #3 was reopened and holds a second request for the checkpoint (2026-07-12) with no reply; the Hugging Face account zhouzhoujy has no models.",
+    "Re-checked 2026-11-03: the GitHub repo is still last pushed 2026-05-21; issue #3 (checkpoint request) is open with the 2026-07-12 follow-up and no author reply; the Hugging Face account zhouzhoujy lists 0 models and only the EgoTouch dataset."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-03"
   },
   {
    "id": "touchsight",
@@ -762,7 +763,7 @@
     "TouchWorld and EgoTouch share first author Jianyi Zhou and corresponding author Shuo Yang; whether the pretraining used the public EgoTouch release or internal recordings is not stated.",
     "Venue: arXiv only; no conference is named on the abstract page or the project page."
    ],
-   "checked": "2026-10-27"
+   "checked": "2026-11-03"
   },
   {
    "id": "ttp",
@@ -1337,7 +1338,7 @@
     "Role for egotactile set to fine-tuning because the paper fine-tunes on it for cross-dataset adaptation; whether EgoTactile also enters base training is not stated.",
     "That the Hugging Face user qqyang is the paper's first author Qianqian Yang is inferred from the user name and the Ego2Contact repo names and README; no page links the account to the paper. The checkpoint files were not downloaded or opened, so what each one contains is not confirmed."
    ],
-   "checked": "2026-10-30"
+   "checked": "2026-11-03"
   },
   {
    "id": "vitam",
@@ -1373,7 +1374,7 @@
     "The text says the learning model is adapted from the authors' earlier VTacO work, which is not in the catalog.",
     "The last 37,115 characters of the full text (methods tail, references) were not read."
    ],
-   "checked": "2026-10-29"
+   "checked": "2026-11-03"
   },
   {
    "id": "m2vtp",
@@ -1541,9 +1542,10 @@
     "The OpenTouch clips are selected by an allowlist the paper attributes to HOPE, which was not checked.",
     "The last 52,859 characters of the HTML (appendix) were not read.",
     "Hugging Face repos jungwook2358/wam-openarm-*-rlhnd-v2-50k-ckpt50000 (found by name search 2026-10-28) are not linked from the paper or project page and were not attributed to this model.",
-    "Re-checked 2026-11-02: seungjun-moon/rlhnd was last pushed 2026-10-08 and still holds only README.md, index.html, logo.svg and videos/; a web search found no code or weights."
+    "Re-checked 2026-11-02: seungjun-moon/rlhnd was last pushed 2026-10-08 and still holds only README.md, index.html, logo.svg and videos/; a web search found no code or weights.",
+    "Re-checked 2026-11-03: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page still says 'Code will be released at github.com/seungjun-moon/rlhnd'."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-03"
   },
   {
    "id": "dexskills",
@@ -1818,7 +1820,7 @@
     "The paper names the framework ExoBridge and gives no separate name for the network; the catalog uses ExoBridge for both the data and the model.",
     "A companion policy on an XHand (12 DoF) on a Franka arm reached 0.80 on egg carton opening and 0.55 on lid twisting over 20 rollouts each; how the bridge's outputs feed that policy was not read in detail."
    ],
-   "checked": "2026-10-30"
+   "checked": "2026-11-03"
   },
   {
    "id": "dexflex",
@@ -1854,7 +1856,7 @@
     "Simulated data collection also used a 22-DoF Sharpa hand; whether one controller covers both hands was not read in detail.",
     "Policy-learning results (three tasks, 50 demonstrations each): 46.7% average success against 13.3% for direct joint-action prediction."
    ],
-   "checked": "2026-10-30"
+   "checked": "2026-11-03"
   },
   {
    "id": "occludex",
@@ -1924,7 +1926,7 @@
     "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-20); no code, model or data link found beyond the paper.",
     "Re-checked 2026-11-02: arXiv still lists only v1; a web search for HuTact found no repository."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-03"
   },
   {
    "id": "card",
@@ -2108,7 +2110,7 @@
     "ObjTac is not catalogued as a dataset because the source does not say the touches were made by a hand.",
     "Re-checked 2026-11-02: the project page still reads 'Coming Soon. The code repository will be available shortly.'; a web search found no repository."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-03"
   },
   {
    "id": "tavi",
@@ -2151,7 +2153,7 @@
     "No venue appears in the sources read; the arXiv record lists none.",
     "The released demonstrations (6 tasks x 6 demonstrations per the README, against one per task in the paper) were not opened and are not catalogued as a dataset; their tactile content is not confirmed."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-03"
   },
   {
    "id": "unitachand",
@@ -2345,7 +2347,7 @@
     "Only the abstract was read. The glove make, taxel count, robot hand, task names and success rates are not known.",
     "Embodiment 'human': the abstract says tactile data come from tactile gloves and that the robot hand needs no tactile sensors at deployment."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-03"
   },
   {
    "id": "mts_3dcnns",

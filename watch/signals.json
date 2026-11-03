@@ -1,9 +1,19 @@
 {
- "generated": "2026-11-02T09:35:17Z",
+ "generated": "2026-11-03T09:33:28Z",
  "baseline": false,
- "urls_checked": 277,
- "seconds": 314,
+ "urls_checked": 286,
+ "seconds": 206,
  "signals": [
+  {
+   "kind": "dataset",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://huggingface.co/front/build/kube-d45badd/index.js https://huggingface.co/front/build/kube-d45badd/katex.css https://huggingface.co/front/build/kube-d45badd/style.css",
+   "availability": "public"
+  },
   {
    "kind": "dataset",
    "id": "rss_dual_arm_tactile",
@@ -11,7 +21,27 @@
    "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
    "priority": 1,
    "type": "hf_commit",
-   "detail": "files 12888 -> 14915, last modified 2026-11-02T05:43:38.000Z",
+   "detail": "files 14915 -> 14917, last modified 2026-11-02T22:47:47.000Z",
+   "availability": "gated"
+  },
+  {
+   "kind": "dataset",
+   "id": "fusionx_sample",
+   "name": "FusionX Multimodal Sample Data",
+   "url": "https://github.com/TouchTronix-Robotics/FusionX-DataCollection",
+   "priority": 2,
+   "type": "gh_readme",
+   "detail": "README changed",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "touchscale",
+   "name": "TouchScale",
+   "url": "https://arxiv.org/abs/2610.10288",
+   "priority": 2,
+   "type": "arxiv_version",
+   "detail": "2 -> 3",
    "availability": "gated"
   },
   {
@@ -20,55 +50,65 @@
    "name": "DexTacWAM",
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
-   "type": "page_text",
-   "detail": "text length 1498 -> 1498",
+   "type": "links_removed",
+   "detail": "https://huggingface.co/front/build/kube-7e92521/index.js https://huggingface.co/front/build/kube-7e92521/katex.css https://huggingface.co/front/build/kube-7e92521/style.css",
    "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "talos_electrician_wirenuts",
+   "name": "Talos electrician wire-nut sample",
+   "url": "https://datarade.ai/data-products/egocentric-data-electrician-installing-two-ceiling-lights-talos-dataworks",
+   "priority": 3,
+   "type": "page_text",
+   "detail": "text length 20744 -> 20748",
+   "availability": "partial"
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "ace_data_0"
+   "id": "dex_mptd"
   },
   {
    "kind": "dataset",
-   "id": "dexvitac"
+   "id": "egoexplorer"
   },
   {
    "kind": "dataset",
+   "id": "gist_vta"
+  },
+  {
+   "kind": "dataset",
+   "id": "kaiwu"
+  },
+  {
+   "kind": "dataset",
+   "id": "robotacdex"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacross"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacwam_wetlab"
+  },
+  {
+   "kind": "dataset",
+   "id": "vicon_glove"
+  },
+  {
+   "kind": "model",
+   "id": "dexflex"
+  },
+  {
+   "kind": "model",
+   "id": "ego2contact"
+  },
+  {
+   "kind": "model",
    "id": "exobridge"
-  },
-  {
-   "kind": "dataset",
-   "id": "htac"
-  },
-  {
-   "kind": "dataset",
-   "id": "paxini_omnisharing"
-  },
-  {
-   "kind": "dataset",
-   "id": "sharpa_origami"
-  },
-  {
-   "kind": "dataset",
-   "id": "tactidex"
-  },
-  {
-   "kind": "dataset",
-   "id": "touchscale"
-  },
-  {
-   "kind": "model",
-   "id": "card"
-  },
-  {
-   "kind": "model",
-   "id": "dtwm"
-  },
-  {
-   "kind": "model",
-   "id": "egopressureformer"
   },
   {
    "kind": "model",
@@ -88,30 +128,30 @@
   },
   {
    "kind": "model",
-   "id": "tactiskill"
+   "id": "tactile_viewgcn"
   },
   {
    "kind": "model",
-   "id": "tk_stgn"
+   "id": "tavi"
   },
   {
    "kind": "model",
-   "id": "touchbridge"
+   "id": "touchanything"
   },
   {
    "kind": "model",
-   "id": "transdex"
+   "id": "touchworld"
   },
   {
    "kind": "model",
-   "id": "uvta"
+   "id": "upvital"
   },
   {
    "kind": "model",
-   "id": "vtao_bimanip"
+   "id": "vitam"
   }
  ],
- "not_fully_released": 61,
+ "not_fully_released": 63,
  "errors": [],
  "problems": [],
  "sources_failed": []

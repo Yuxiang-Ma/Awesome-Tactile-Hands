@@ -1,0 +1,38 @@
+{
+ "flow": "status",
+ "date": "2026-11-03",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 6,
+ "updated": 1,
+ "searches": [
+  "Dex-MPTD TacCompress multi-point tactile dexterous hand dataset code",
+  "EgoExplorer Vision-Motion-Touch Observatory dataset release",
+  "Humanoid Visual-Tactile-Action Dataset Contact-Rich Manipulation Eunju Kwon dataset",
+  "Kaiwu multimodal manipulation dataset Shuo Jiang dataset download",
+  "RoboTacDex dexterous visual-tactile-action dataset humanoid",
+  "TACROSS heterogeneous tactile sensors human touch system dataset code",
+  "VICON Visual-Inertial-Contact hand-object tracking manipulation datasets code",
+  "DexFLEX Contact-Aware Foundation Controller Command-Guided Dexterity code",
+  "Ego2Contact Predicting Touch from Egocentric Human Video code weights",
+  "ExoBridge bare hand to hand-worn exoskeleton mapping code",
+  "HuTact Tactile-Aware Hand Representations Human Hand-Object Interaction code",
+  "OmniVTLA Vision-Tactile-Language-Action semantic-aligned tactile weights code",
+  "RLHND video foundation models physically grounded hand trackers robot learning code",
+  "UpViTaL Unpaired Visual-Tactile Self-Supervised Representation Learning Dexterous Manipulation code",
+  "Tactile-ViewGCN shape descriptor tactile data graph convolutional network code",
+  "See to Touch TAVI tactile dexterity visual incentives pretrained weights"
+ ],
+ "for_the_owner": [],
+ "notes": [
+  "Six signals. rss_dual_arm_tactile (P1, files 14,915 -> 14,917): the two new files are README.md and a zip in the new folder tujian_glove_code_20261102; nightly_tool.py hf-commits returned HTTP 401 for this gated repository, so the change was read from the public folder listing and its commit message. Caveat, access text and the gate check date were updated; availability stays gated and no gated file was opened.",
+  "No edit for the other five. dextacwam (P1 links_added, P3 links_removed) lists only Hugging Face front-end build files (kube-*/index.js, katex.css, style.css), not dataset links; the entry is public. fusionx_sample (P2 README change): the code repository README now describes the v1.3.1 Windows GUI, SDK 0.1.0 wheels and camera tests; the two sample-data repos are unchanged (V3 last modified 2026-05-19). touchscale (P2 arXiv 2 -> 3, updated 2026-11-02): the abstract still describes the 500 h set and says it will be released; the Hugging Face repo is last modified 2026-10-23 and still holds the 100 h release, so scale and access are unchanged. talos_electrician_wirenuts (P3 page_text 20,744 -> 20,748): the Datarade page text readable by the tool is navigation; no price or gate change was visible.",
+  "Deep check (21 entries: 8 datasets, 13 models), no new release found. Read directly: tacwam_wetlab (Hugging Face repo last modified 2026-10-24, gate still manual), tacross dataset and model (project page still lists the software as coming soon and only hardware v1 downloadable), rlhnd (GitHub repo last pushed 2026-10-08, still README.md, index.html, logo.svg, videos/), touchanything (repo last pushed 2026-05-21; issue #3 checkpoint request still unanswered; author's Hugging Face account has no models), tavi (repo last pushed 2023-10-24), vitam (repo last pushed 2024-09-30), dexflex, touchworld and omnivtla project pages (no code link; OmniVTLA page still says 'Coming Soon'). For dex_mptd, egoexplorer, gist_vta, kaiwu, robotacdex, vicon_glove, ego2contact, exobridge, hutact, upvital and tactile_viewgcn only a web search was run, and it surfaced no code, weights or data link beyond what the catalog records; search summaries are not primary sources.",
+  "The checked date is 2026-11-03 on rlhnd, touchanything, touchworld, tacross, ego2contact, vitam, exobridge, dexflex, hutact, omnivtla, tavi and upvital (tactile_viewgcn already carried it from tonight's discovery). The gate check date was refreshed on rss_dual_arm_tactile.",
+  "No dataset became public tonight, so no viewer samples are requested and no new gate appeared."
+ ],
+ "started": "2026-11-03T09:30:01Z",
+ "finished": "2026-11-03T09:38:23Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 12 changed files, 3 new entries"
+}
