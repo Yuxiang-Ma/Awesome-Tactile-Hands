@@ -1,0 +1,4 @@
+{"date": "2026-11-03", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile (tube pour): a new top-level folder tujian_glove_code_20261102 (README.md 6.06 kB and a 215 kB zip) appeared on 2026-11-02; its commit message says it adds paths.py, xhost.py, arm_frames.py and __init__.py as support modules for align.py and packing. The main card does not mention it and the files are gated, so whether it documents the Tujian glove's taxel layout is unknown. The rollout and demonstration counts are unchanged and availability stays gated (manual approval).",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/tujian_glove_code_20261102"}]}

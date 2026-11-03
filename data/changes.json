@@ -3,6 +3,51 @@
   {
    "kind": "added",
    "target": "dataset",
+   "id": "htd",
+   "text": "Humanoid Touch Dream (HTD): added. 871 VR-teleoperated Unitree G1 demonstrations over six tasks, 760 with Inspire RH56DFTP hands (1,062 piezoresistive taxels per hand) and 111 lab-cleanup episodes with Inspire RH56F1 hands (37 capacitive features per hand), 994,778 frames with head and wrist RGB; public on Hugging Face under CC BY 4.0 (about 388 GB in Open-X-Tactile Zarr, plus a source HDF5 release).",
+   "source": "https://huggingface.co/datasets/chrisyrniu/HTD",
+   "date": "2026-11-03",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "htd",
+   "text": "HTD (Humanoid Transformer with Touch Dreaming): added. Policy taking images, proprioception, hand forces and 1,062-taxel touch, trained to also predict future hand forces and tactile latents; 90.9% relative success gain over the stronger ACT baseline on five G1 tasks; training code released (MIT), no policy checkpoint.",
+   "source": "https://arxiv.org/abs/2604.13015",
+   "date": "2026-11-03",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tactile_jepa",
+   "text": "Tactile-JEPA: added. Masked-embedding self-supervised encoder for distributed e-skins, with graph-guided masking at two scales; pretrained on Sparsh-skin (Xela on Allegro) and DECO-50 (Inspire hands); 6.3% lower force error and 20.8% lower in-hand orientation error than the prior best; code and CC BY-NC 4.0 weights released.",
+   "source": "https://arxiv.org/abs/2609.24385",
+   "date": "2026-11-03",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tactile_viewgcn",
+   "text": "Tactile-ViewGCN: added. View-GCN object classifier on groups of MIT-STAG glove frames with a ResNet-18 frame encoder; 81.82% accuracy on STAG; no code linked.",
+   "source": "https://arxiv.org/abs/2203.06183",
+   "date": "2026-11-03",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile (tube pour): a new top-level folder tujian_glove_code_20261102 (README.md 6.06 kB and a 215 kB zip) appeared on 2026-11-02; its commit message says it adds paths.py, xhost.py, arm_frames.py and __init__.py as support modules for align.py and packing. The main card does not mention it and the files are gated, so whether it documents the Tujian glove's taxel layout is unknown. The rollout and demonstration counts are unchanged and availability stays gated (manual approval).",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/tujian_glove_code_20261102",
+   "date": "2026-11-03",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
    "id": "talos_electrician_wirenuts",
    "text": "Talos electrician wire-nut sample: added. One free 62 s episode of an electrician joining ceiling-light wires, recorded with a right-hand Talos glove (10 FSR pads at 200 Hz with bench-estimated newtons, 12 IMUs giving a 21-joint hand pose) and a head-mounted OAK-D Pro W; CC BY-NC 4.0; the full 26-minute job is sold through Datarade.",
    "source": "https://huggingface.co/datasets/talosdataworks/electrician-wire-nuts-tactile-glove-hand-pose-sample",

@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-11-02"
+  "last_updated": "2026-11-03"
  },
  "datasets": [
   {
@@ -1593,6 +1593,12 @@
      "url": "https://doi.org/10.3389/fnbot.2023.1159168",
      "note": "MIT-STAG 32x32 glove frames, 27 categories; 36,531 frames for training and 16,119 for testing; 88.81% top-1 against 81.82% for the best prior result cited",
      "model": "mts_3dcnns"
+    },
+    {
+     "name": "Tactile-ViewGCN, ISPCC 2025 (arXiv 2203.06183)",
+     "url": "https://arxiv.org/abs/2203.06183",
+     "note": "MIT-STAG 32x32 glove frames; frames of each object clustered with kNN into 8 groups treated as cube-vertex viewpoints; 81.82% classification accuracy, reported above earlier methods on the same set",
+     "model": "tactile_viewgcn"
     }
    ]
   },
@@ -4091,6 +4097,12 @@
      "note": "Trained separately on each of the 4 DECO-50 tasks (50 h, 28 sub-tasks, 8K+ trajectories, 5M+ frames); more than 2,000 real rollouts, 72.25% average success, and the tactile adapter adds 10.25 points on average.",
      "model": "deco",
      "own": true
+    },
+    {
+     "name": "Tactile-JEPA, arXiv 2609.24385",
+     "url": "https://arxiv.org/abs/2609.24385",
+     "note": "Assembly subset only: 2,124 Inspire taxels grouped into 528 nodes, 3-frame input; policy head predicting 12 hand-joint action components over 16 steps. Released checkpoint: normalized action RMSE 0.458",
+     "model": "tactile_jepa"
     }
    ]
   },
@@ -8820,6 +8832,12 @@
    },
    "used_by": [
     {
+     "name": "Tactile-JEPA, arXiv 2609.24385",
+     "url": "https://arxiv.org/abs/2609.24385",
+     "note": "368 Xela uSkin taxels x 3 magnetic axes on an Allegro hand (4.6 h of teleoperated play), 10-frame input; force, object and in-hand pose heads. Released checkpoints: force RMSE 12.47 cN, object top-1 83.7%, orientation RMSE 5.39 deg",
+     "model": "tactile_jepa"
+    },
+    {
      "name": "Sparsh-skin, CoRL 2025 (arXiv 2505.11420)",
      "url": "https://arxiv.org/abs/2505.11420",
      "note": "Pretrained on ~4 h of teleoperated play with 14 objects (11 sequences of ~2 min per object; the release has 10 per object, 140); downstream tasks use labelled sets from the same rig.",
@@ -10622,12 +10640,12 @@
     "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; task4_pi05_rl_rollouts_20261030 (added 2026-10-30, rewritten 2026-11-01, extended 2026-11-02) holds 82 policy-rollout episodes that are not counted in episodes (22 pi0.5 base-policy, 39 from RL stage 1 with two learner groups, 20 Diffusion Policy base-policy in dp_base/, 1 training episode of the pi0.5 DSRL-NA stage in pi05_s1_dsrl_na_partial/); pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
    },
    "availability": "gated",
-   "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026) and a policy-rollout folder (task4_pi05_rl_rollouts_20261030).",
+   "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026), a policy-rollout folder (task4_pi05_rl_rollouts_20261030) and, since 2026-11-02, glove code (tujian_glove_code_20261102).",
    "gate": {
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
-    "checked": "2026-11-02",
+    "checked": "2026-11-03",
     "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
    },
    "license": "not stated",
@@ -10637,7 +10655,8 @@
     "The card gave 137 GB as the total size on 2026-10-28, 157 GB on 2026-11-01 and 163 GB on 2026-11-02, while the Hugging Face API reported 31.2 GB of storage on 2026-10-28, 48.2 GB on 2026-11-01 and 53.7 GB on 2026-11-02; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
     "One task only so far; the failure folders are marked 'Not for training'.",
     "task4_pi05_rl_rollouts_20261030 (public card, files not opened) holds policy rollouts, not demonstrations: 22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL (DSRL-SAC) in two learner groups, plus one voided attempt, with videos, per-decision records, Revo2 and glove tactile and the authors' 'Ours scorer' outputs. Since 2026-11-02 it also lists dp_base/ (20 Diffusion Policy base-policy episodes, 13/20 successes, 3 of the 7 failures are collision-guard aborts) and pi05_s1_dsrl_na_partial/ (the first training episode of the DSRL-NA stage), which brings the card's count to 82 episodes. The card reports pi0.5 base policy 13/20, label 4/10 training and 5/10 evaluation, label_ours 5/10 training and 5/9 evaluation, and no measurable difference between the groups or against the base policy.",
-    "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read."
+    "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read.",
+    "A top-level folder tujian_glove_code_20261102 (README.md 6.06 kB and a 215 kB zip) appeared on 2026-11-02; the commit message says it adds paths.py, xhost.py, arm_frames.py and __init__.py as support modules for align.py and packing. The main card does not mention it, the files are gated and were not opened, so whether it documents the glove's taxel layout is unknown."
    ],
    "links": {
     "data": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"
@@ -11131,6 +11150,156 @@
      "diversity": false
     }
    }
+  },
+  {
+   "id": "htd",
+   "name": "Humanoid Touch Dream (HTD)",
+   "title": "Learning Versatile Humanoid Manipulation with Touch Dreaming",
+   "authors": "Yaru Niu et al.",
+   "year": 2026,
+   "venue": "arXiv 2604.13015",
+   "summary": "871 VR-teleoperated demonstrations on a Unitree G1 humanoid over six tasks: 760 with two Inspire RH56DFTP hands (1,062 piezoresistive taxels per hand) and 111 lab-cleanup episodes with two Inspire RH56F1 hands (37 capacitive force, direction and proximity features per hand), with head and wrist RGB, joint states and hand motor forces.",
+   "embodiment": "robot",
+   "hand": "Inspire RH56DFTP (6 DoF) x 2 or Inspire RH56F1 (6 DoF) x 2 on Unitree G1",
+   "bimanual": true,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 1062,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": 30,
+    "note": "DFTP episodes (760): 1,062 piezoresistive readings per hand in 17 regions, stored as counts / 4,095 and grouped into 11 Open-X-Tactile surface areas with padding masks. F1 episodes (111, lab task): 37 capacitive features per hand (per fingertip normal force, tangential force, direction sine and cosine, proximity; three palm regions with four force and direction features each). Both hand types also give six motor-force channels per hand (vendor force_act/1000 scale, not calibrated torques).",
+    "maker": "Inspire Robots",
+    "model": "RH56DFTP (piezoresistive) and RH56F1 (capacitive)",
+    "principle": "piezoresistive",
+    "range": "counts 0-4095 (DFTP)"
+   },
+   "modalities": [
+    "egocentric",
+    "wrist_rgb",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 871,
+    "frames": 994778,
+    "tasks": 6,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "871 episodes, 994,778 frames at about 30 Hz, 6 tasks (book 162, insert-T 208, litter scooping 163, tea serving 77, towel folding 150 on DFTP hands; lab cleanup 111 on F1 hands); paper trains on 193 / 150 / 141 / 153 / 72 demonstrations for its five DFTP tasks"
+   },
+   "availability": "public",
+   "access": "Two ungated Hugging Face releases under CC BY 4.0: chrisyrniu/HTD (Open-X-Tactile Zarr v2, one ZIP per episode, about 388 GB, with a per-episode manifest) and chrisyrniu/humanoid-touch-dream (repaired source HDF5 plus MP4 videos, about 391 GB).",
+   "license": "CC BY 4.0",
+   "caveats": [
+    "Two hand types with different touch: the five DFTP tasks have 1,062-taxel arrays, the lab-cleanup task (F1 hands) has 37 capacitive features per hand. The source release's card says the F1 lab recordings contain informative tactile data; it does not say the same of the DFTP recordings.",
+    "Timestamps are host camera-read times; the Open-X-Tactile card lists 165 timing gaps across 102 episodes, eight of them about 2 s long.",
+    "Tea-serving episodes have only the head camera; the other tasks add left and right wrist cameras.",
+    "The F1 direction pair (0, 0) is the SDK's no-contact flag and can appear with nonzero force; F1 proximity is a normalized reading, not a distance.",
+    "Split labels: 767 train, 57 validation and 47 unlabelled episodes in the Open-X-Tactile manifest; the source release states 814 train and 57 validation. The paper reports training on 709 demonstrations over its five tasks.",
+    "Language is one task instruction repeated per frame; no subtask boundaries or success labels."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2604.13015",
+    "project": "https://humanoid-touch-dream.github.io/",
+    "data": "https://huggingface.co/datasets/chrisyrniu/HTD",
+    "code": "https://github.com/chrisyrniu/humanoid-touch-dream"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "robot_head",
+      "count": 1,
+      "model": null,
+      "type": "stereo",
+      "resolution": "640x480",
+      "fps": 30,
+      "mount": "robot"
+     },
+     {
+      "role": "wrist",
+      "count": 2,
+      "model": null,
+      "type": "RGB",
+      "resolution": null,
+      "fps": 30,
+      "mount": "wrist"
+     }
+    ],
+    "wrist_cameras": 2,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "body",
+      "method": "robot_proprioception",
+      "system": "Unitree G1: 7 arm joints and 6 hand joints per side, 15 leg and waist joints, wrist poses",
+      "note": "the Open-X-Tactile release keeps the original velocity commands under provenance/"
+     },
+     {
+      "target": "fingers",
+      "method": "vision_estimate",
+      "system": "VR teleoperation (headset not named in the paper)",
+      "note": "operator head, wrist and hand motion mapped to the robot; hand targets retargeted with DexPilot; an RL lower-body controller keeps balance"
+     }
+    ],
+    "other": [
+     "hand motor forces, 6 per hand",
+     "language task instruction per frame"
+    ]
+   },
+   "sources": [
+    "https://arxiv.org/abs/2604.13015 (abstract via arXiv API, v3 2026-08-17)",
+    "https://arxiv.org/html/2604.13015v3 (tactile observation, demonstrations per task, teleoperation, baselines; first 100,000 characters)",
+    "https://humanoid-touch-dream.github.io/",
+    "https://huggingface.co/datasets/chrisyrniu/HTD (README.md, API metadata, top-level listing)",
+    "https://huggingface.co/datasets/chrisyrniu/humanoid-touch-dream (README.md, API metadata, top-level listing)",
+    "https://github.com/chrisyrniu/humanoid-touch-dream (repository metadata and README)"
+   ],
+   "unconfirmed": [
+    "Hand model names come from the dataset cards ('Inspire DFTP or F1 dexterous hands'); the paper describes only a 1,062-dimensional tactile observation in 17 regions, which matches the catalog's RH56DFTP hardware record. The F1 tactile variant (-T1) is not named.",
+    "hours not computed: 994,778 frames at about 30 Hz would be about 9.2 h, but the card says to use recorded timestamps and lists timing gaps.",
+    "Head camera is called a dual-lens head camera in the paper and a 'selected left stereo view' in the Open-X-Tactile card; its model and frame rate are not stated beyond 'approximately 30 Hz' recording. Wrist camera model and resolution not stated.",
+    "The project page shows 'IROS 2026'; the arXiv record lists no venue, so the venue is left as arXiv.",
+    "scene_types 'lab' is inferred from the task list and videos on the project page; scenes are not labelled. Files not opened."
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "public download",
+     "files not opened yet"
+    ]
+   },
+   "contents": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   },
+   "used_by": [
+    {
+     "name": "HTD (Humanoid Transformer with Touch Dreaming), arXiv 2604.13015",
+     "url": "https://arxiv.org/abs/2604.13015",
+     "note": "709 DFTP demonstrations: Insert-T 193, Book Organization 150, Towel Folding 141, Cat Litter Scooping 153, Tea Serving 72; latent tactile prediction gave a 30% relative success gain over raw tactile prediction in the ablation",
+     "model": "htd",
+     "own": true
+    }
+   ]
   }
  ]
 }
