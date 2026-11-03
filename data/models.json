@@ -2385,6 +2385,140 @@
     "Embodiment 'both': MIT-STAG is a human glove dataset and the iCub set comes from a five-finger robot hand."
    ],
    "checked": "2026-11-02"
+  },
+  {
+   "id": "htd",
+   "name": "HTD (Humanoid Transformer with Touch Dreaming)",
+   "title": "Learning Versatile Humanoid Manipulation with Touch Dreaming",
+   "authors": "Yaru Niu et al.",
+   "year": 2026,
+   "venue": "arXiv 2604.13015",
+   "kind": "policy",
+   "summary": "Encoder-decoder Transformer policy for a Unitree G1 with two Inspire RH56DFTP hands: head and wrist images, proprioception, hand joint forces and 1,062-taxel tactile arrays in, action chunks for end-effector pose, torso, base velocity and hands out; in training it also predicts future hand-joint forces and future tactile latents from an EMA target encoder; 90.9% relative gain in mean success over the stronger ACT baseline on five real tasks.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "htd",
+     "role": "training",
+     "note": "709 DFTP demonstrations: Insert-T 193, Book Organization 150, Towel Folding 141, Cat Litter Scooping 153, Tea Serving 72; latent tactile prediction gave a 30% relative success gain over raw tactile prediction in the ablation"
+    }
+   ],
+   "own_data": null,
+   "dataset": "htd",
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/chrisyrniu/humanoid-touch-dream (MIT, last push 2026-11-02) holds htd_policy/ with HTD, MXT and ACT training code, and example whole-body-controller checkpoints; the README links no manipulation-policy checkpoint and tells users to train on their own demonstrations (read 2026-11-03)."
+   },
+   "license": "MIT",
+   "links": {
+    "paper": "https://arxiv.org/abs/2604.13015",
+    "project": "https://humanoid-touch-dream.github.io/",
+    "code": "https://github.com/chrisyrniu/humanoid-touch-dream"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2604.13015 (abstract via arXiv API, v3 2026-08-17)",
+    "https://arxiv.org/html/2604.13015v3 (inputs, outputs, demonstrations per task, baselines; first 100,000 characters)",
+    "https://humanoid-touch-dream.github.io/",
+    "https://github.com/chrisyrniu/humanoid-touch-dream (repository metadata and README)"
+   ],
+   "unconfirmed": [
+    "touch 'both': tactile arrays are a policy input; the touch-dreaming heads that predict future forces and tactile latents are used in training only, not at deployment.",
+    "The 709 training demonstrations come from the paper; the public release holds 760 DFTP episodes for the same five tasks plus 111 F1 lab episodes that the paper does not report.",
+    "The project page lists IROS 2026; the arXiv record has no venue."
+   ],
+   "checked": "2026-11-03"
+  },
+  {
+   "id": "tactile_jepa",
+   "name": "Tactile-JEPA",
+   "title": "Tactile-JEPA: Topology-Aware Self-Supervised Representation Learning for Distributed Tactile Sensors",
+   "authors": "Elizaveta Kovtun et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.24385",
+   "kind": "representation",
+   "summary": "Self-supervised encoder for distributed electronic skins that predicts embeddings of masked sensing elements from the unmasked rest, with spatial masking at two scales guided by the sensor connectivity graph; pretrained separately on Xela uSkin on an Allegro hand (368 taxels), Inspire hand arrays (2 x 1,062 taxels) and tactile socks, it lowers force error by 6.3% and in-hand orientation error by 20.8% against the prior best.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "sparsh_skin",
+     "role": "pretraining",
+     "note": "368 Xela uSkin taxels x 3 magnetic axes on an Allegro hand (4.6 h of teleoperated play), 10-frame input; force, object and in-hand pose heads. Released checkpoints: force RMSE 12.47 cN, object top-1 83.7%, orientation RMSE 5.39 deg"
+    },
+    {
+     "id": "deco50",
+     "role": "pretraining",
+     "note": "Assembly subset only: 2,124 Inspire taxels grouped into 528 nodes, 3-frame input; policy head predicting 12 hand-joint action components over 16 steps. Released checkpoint: normalized action RMSE 0.458"
+    }
+   ],
+   "own_data": null,
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Code at github.com/E-Kovtun/tactile (last push 2026-10-09; GitHub reports license NOASSERTION, LICENSE.md in the repo). Weights in the Hugging Face Tactile-JEPA organisation: tactile-jepa-xela, tactile-jepa-deco, tactile-jepa-socks-action and tactile-jepa-socks-pose (pretrain encoder plus selected downstream heads, CC BY-NC 4.0, created 2026-09-23; read 2026-11-03)."
+   },
+   "license": "CC BY-NC 4.0 (weights)",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.24385",
+    "project": "https://bosbobos.github.io/Tactile-JEPA/",
+    "code": "https://github.com/E-Kovtun/tactile",
+    "weights": "https://huggingface.co/Tactile-JEPA/tactile-jepa-xela"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.24385 (abstract via arXiv API, v1 2026-09-21)",
+    "https://arxiv.org/html/2609.24385v1 (Table I datasets)",
+    "https://huggingface.co/Tactile-JEPA/tactile-jepa-xela (README.md)",
+    "https://huggingface.co/Tactile-JEPA/tactile-jepa-deco (README.md)",
+    "https://github.com/E-Kovtun/tactile (repository metadata)"
+   ],
+   "unconfirmed": [
+    "The third pretraining set is knitted piezoresistive tactile socks on human feet (237 + 216 taxels, 14 Hz, 5.9 h); it is outside the catalog's scope and not listed in uses.",
+    "The released heads were selected on saved test metrics (stated on the model cards); the paper's tables report multi-seed means, which were not read.",
+    "The code licence text was not read; GitHub's API reports NOASSERTION."
+   ],
+   "checked": "2026-11-03"
+  },
+  {
+   "id": "tactile_viewgcn",
+   "name": "Tactile-ViewGCN",
+   "title": "Tactile-ViewGCN: Learning Shape Descriptor from Tactile Data using Graph Convolutional Network",
+   "authors": "Sachidanand V S et al.",
+   "year": 2022,
+   "venue": "ISPCC 2025 (arXiv 2203.06183)",
+   "kind": "estimation",
+   "summary": "Object classifier for sets of tactile-glove frames: a modified ResNet-18 encodes each MIT-STAG glove frame, the frames are grouped into views and fused hierarchically by a View-GCN graph network, and an object label comes out; 81.82% accuracy on STAG.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "stag",
+     "role": "training",
+     "note": "MIT-STAG 32x32 glove frames; frames of each object clustered with kNN into 8 groups treated as cube-vertex viewpoints; 81.82% classification accuracy, reported above earlier methods on the same set"
+    }
+   ],
+   "own_data": null,
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv abstract page links no repository and a web search for the name found no code (2026-11-03)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2203.06183"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2203.06183 (abstract, authors)",
+    "https://doi.org/10.1109/ispcc66872.2025.11039550 (abstract via OpenAlex, from the discovery queue)"
+   ],
+   "unconfirmed": [
+    "Only the abstract and search-result excerpts were read; the 8-cluster view construction and ResNet-18 backbone come from search excerpts of the paper, not from the full text.",
+    "Year 2022 is the arXiv submission (March 2022); the IEEE ISPCC version is dated 2025."
+   ],
+   "checked": "2026-11-03"
   }
  ]
 }

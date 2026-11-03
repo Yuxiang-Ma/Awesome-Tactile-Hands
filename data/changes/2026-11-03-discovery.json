@@ -1,0 +1,13 @@
+{"date": "2026-11-03", "flow": "discovery", "changes": [
+  {"kind": "added", "target": "dataset", "id": "htd",
+   "text": "Humanoid Touch Dream (HTD): added. 871 VR-teleoperated Unitree G1 demonstrations over six tasks, 760 with Inspire RH56DFTP hands (1,062 piezoresistive taxels per hand) and 111 lab-cleanup episodes with Inspire RH56F1 hands (37 capacitive features per hand), 994,778 frames with head and wrist RGB; public on Hugging Face under CC BY 4.0 (about 388 GB in Open-X-Tactile Zarr, plus a source HDF5 release).",
+   "source": "https://huggingface.co/datasets/chrisyrniu/HTD"},
+  {"kind": "added", "target": "model", "id": "htd",
+   "text": "HTD (Humanoid Transformer with Touch Dreaming): added. Policy taking images, proprioception, hand forces and 1,062-taxel touch, trained to also predict future hand forces and tactile latents; 90.9% relative success gain over the stronger ACT baseline on five G1 tasks; training code released (MIT), no policy checkpoint.",
+   "source": "https://arxiv.org/abs/2604.13015"},
+  {"kind": "added", "target": "model", "id": "tactile_jepa",
+   "text": "Tactile-JEPA: added. Masked-embedding self-supervised encoder for distributed e-skins, with graph-guided masking at two scales; pretrained on Sparsh-skin (Xela on Allegro) and DECO-50 (Inspire hands); 6.3% lower force error and 20.8% lower in-hand orientation error than the prior best; code and CC BY-NC 4.0 weights released.",
+   "source": "https://arxiv.org/abs/2609.24385"},
+  {"kind": "added", "target": "model", "id": "tactile_viewgcn",
+   "text": "Tactile-ViewGCN: added. View-GCN object classifier on groups of MIT-STAG glove frames with a ResNet-18 frame encoder; 81.82% accuracy on STAG; no code linked.",
+   "source": "https://arxiv.org/abs/2203.06183"}]}

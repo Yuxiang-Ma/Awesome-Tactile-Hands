@@ -2111,6 +2111,10 @@
     {
      "id": "deco50",
      "role": "robot hand"
+    },
+    {
+     "id": "htd",
+     "role": "robot hand"
     }
    ],
    "sources": [
@@ -2175,6 +2179,10 @@
    "datasets": [
     {
      "id": "hrdexdb",
+     "role": "robot hand"
+    },
+    {
+     "id": "htd",
      "role": "robot hand"
     }
    ],
