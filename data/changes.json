@@ -3,6 +3,213 @@
   {
    "kind": "added",
    "target": "dataset",
+   "id": "decal",
+   "text": "DeCAL dataset: 1,279 bimanual trajectories (1,989,891 frames, 13 tasks) on two Sharpa Wave hands with per-fingertip 6-D contact vectors and 240x240 deformation images; public on ModelScope in Open-X-Tactile format, 2.0 TB, Apache-2.0 on the card.",
+   "source": "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
+   "id": "tipdex_vtla",
+   "text": "TipDex-VTLA demonstrations: 300 teleoperated demonstrations of 4 tasks on two Inspire RH56F2-E2-T1 hands with 364 piezoresistive taxels each; release announced in the paper.",
+   "source": "https://arxiv.org/abs/2611.25683",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
+   "id": "bvt20",
+   "text": "BVT-20: 44.2 h of bimanual glove touch (290 taxels per hand) from 22 participants over 20 coordination tasks; the paper says it is released, but its anonymous project page returned 404, so availability is announced.",
+   "source": "https://arxiv.org/abs/2609.23352",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
+   "id": "talos_electrician_conduit",
+   "text": "Talos electrician conduit and subpanel sample: three free episodes (306 s) with Talos gloves on both hands (10 FSR pads and 12 IMUs each) and head-mounted stereo video with depth; the 45-minute job is sold separately.",
+   "source": "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "touchtwin",
+   "text": "TouchTwin: rebuilds TouchScale glove recordings in MuJoCo with the 880-taxel touch setting each finger's contact and closing force, and generates perturbed demonstrations with simulated contact and force labels; no code release stated.",
+   "source": "https://arxiv.org/abs/2611.17619",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "touchannotator",
+   "text": "TouchAnnotator: predicts 21x21 per-hand pressure and contact from egocentric video, trained on EgoTouch, HumanTouch, T-Rex and three bare-hand sets; MIT code and a 9.40 GB checkpoint are public.",
+   "source": "https://arxiv.org/abs/2611.09129",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "vistacalign",
+   "text": "VisTacAlign: co-trains an ORCA Hand v2 policy (363 Hall taxels) on robot data and 202-taxel glove demonstrations with mapped per-finger force; code marked coming soon.",
+   "source": "https://arxiv.org/abs/2609.30959",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "decal",
+   "text": "DeCAL: VLA for two Sharpa Wave hands that takes fingertip deformation maps and forces and predicts future tactile latents in training; Apache-2.0 code public, no trained checkpoint linked.",
+   "source": "https://github.com/AureleoPKU/DeCAL",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tipdex_vtla",
+   "text": "TipDex-VTLA: VTLA policy on Inspire RH56F2-E2-T1 hands that compares forecast and measured touch to refine unexecuted actions; code and data announced.",
+   "source": "https://arxiv.org/abs/2611.25683",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "biview_touch",
+   "text": "BiView-Touch: tactile-only encoder pretrained on HumanTouch by completing one masked hand region from the rest of that hand and the other hand; evaluated on BVT-20.",
+   "source": "https://arxiv.org/abs/2609.23352",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "haco",
+   "text": "HACo: compliant-action policy for two Sharpa hands from fingertip wrenches, deformation maps and 44 joint torques; 83% mean success over five tasks; Apache-2.0 code public, no checkpoint.",
+   "source": "https://github.com/OpenDriveLab/HACo",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "star",
+   "text": "STAR: VTLA training recipe on pi0.5 using 200 h of bimanual data from hands with 268 piezoresistive taxels each; no code, weights or data release stated.",
+   "source": "https://arxiv.org/abs/2609.12549",
+   "date": "2026-11-23",
+   "flow": "discovery"
+  },
+  {
+   "kind": "released",
+   "target": "dataset",
+   "id": "egoforce",
+   "text": "EgoForce: data released on Hugging Face (zhicao/EgoForce, 1.9 TB, CC BY-NC 4.0, ungated); availability announced -> public. The card counts 739 h, 18,373 recordings, 25 tasks and 191 collectors with 5 x 12 fingertip taxels per hand in newtons (palm taxels not included), against the paper's 2,000 h and 40k episodes. The project page still shows 'Code (Coming Soon)'.",
+   "source": "https://huggingface.co/datasets/zhicao/EgoForce",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "fact",
+   "text": "FACT: the project page 'Data' button now links the EgoForce release; code stays 'Coming Soon' and no weights were found, so release status is unchanged (code announced, weights not released).",
+   "source": "https://fact-1-0.github.io/",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "released",
+   "target": "dataset",
+   "id": "tactidex",
+   "text": "TactiDex: a 'Dataset' button on the project page now opens a Google Drive folder listing TactiDex_Output.zip (45.02 GB) and TactiDex_objects.zip (138.3 MB) without sign-in; availability not_released -> public. Folder contents, license and layout were not opened.",
+   "source": "https://tactidex.github.io/",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "tactiskill",
+   "text": "TactiSkill: the project page lost its 'Coming Soon' wording and now shows only Paper, arXiv, Video and Dataset links; no code repository or weights link exists, so code stays announced.",
+   "source": "https://tactidex.github.io/",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "released",
+   "target": "model",
+   "id": "touchbridge",
+   "text": "TouchBridge: code released on GitHub (touchbridge2026/TouchBridge, created 2026-11-17: pipeline for masks, inpainting, tactile-conditioned retargeting and Zarr export, glove parts, MOZ and dual Wuji robot model); code announced -> released. License not stated and no TouchBridge weights or task data in the repository.",
+   "source": "https://github.com/touchbridge2026/TouchBridge",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "dextacwam",
+   "text": "DexTacWAM: the six task sets (595 trajectories, 314,281 frames by the card) were also posted on 2026-11-22 as zarr files in JensenYuan/DexTacWAM_OXT (ungated, 381 GB, card license CC-BY-4.0) for Open-X-Tactile. Bottle cap, cube place, handover and whiteboard counts match the LeRobot sets; tongs shows 92,241 frames against 55,691 and bowl 36,669 against 36,712. Availability stays public.",
+   "source": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_OXT",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile: a second task, dual-arm USB plugging, appeared from 2026-11-08 (57 + 43 successful trajectories and 8 failures), and rollout folders added since 2026-11-03 (120 pour episodes of 2026-11-02/03, 140 USB-plug episodes of 2026-11-15 to 11-20, 40 pour evaluation trials of 2026-11-21/22). Episodes 100 -> 200, tasks 1 -> 2. The card gives 516 GB against 238.4 GB from the API; availability stays gated (manual approval) and no gated file was opened.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "tacwam_wetlab",
+   "text": "TacWAM Wet-Lab Tasks: the repository grew from 23,188 to 23,225 files (176.7 GB by the API) and now lists task_case_study_20261104, task_media_20261023 and dual_arm_third_person_pov_20261019; gate still manual and no gated file was opened, so counts are unchanged.",
+   "source": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "dextraverse",
+   "text": "DextraVerse: the Hugging Face repository was renamed to ntumars/DextraVerse_OXT on 2026-11-23 and its archive folder to DextraVerse_OXT/; the card says the old address redirects and the archives are byte-identical. Link updated, availability stays public (CC BY 4.0).",
+   "source": "https://huggingface.co/datasets/ntumars/DextraVerse_OXT",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "tactilelab_inhandrotation",
+   "text": "TactileLab In-Hand Rotation: the repository is now Kitval/TactileLab_InHandRotation_OXT and its card links the paper TactileLab (arXiv 2611.07881, 2026-11-05). Still ungated, 20 episodes, 1.9 GB, no license stated; paper and link added.",
+   "source": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation_OXT",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "egoexplorer",
+   "text": "EgoExplorer: the code repository moved from InternRobotics/EgoExplorer to Sage-PhysicalAI/EgoExplorer (last push 2026-10-23); the Hugging Face dataset is unchanged under InternRobotics (gate manual, last modified 2026-10-22). Code link updated.",
+   "source": "https://github.com/Sage-PhysicalAI/EgoExplorer",
+   "date": "2026-11-23",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
    "id": "htd",
    "text": "Humanoid Touch Dream (HTD): added. 871 VR-teleoperated Unitree G1 demonstrations over six tasks, 760 with Inspire RH56DFTP hands (1,062 piezoresistive taxels per hand) and 111 lab-cleanup episodes with Inspire RH56F1 hands (37 capacitive features per hand), 994,778 frames with head and wrist RGB; public on Hugging Face under CC BY 4.0 (about 388 GB in Open-X-Tactile Zarr, plus a source HDF5 release).",
    "source": "https://huggingface.co/datasets/chrisyrniu/HTD",

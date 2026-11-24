@@ -1,0 +1,165 @@
+{
+ "id": "talos_electrician_conduit",
+ "surveyed": "2026-11-23",
+ "entry": {
+  "id": "talos_electrician_conduit",
+  "name": "Talos electrician conduit and subpanel sample",
+  "title": "Free sample: electrician installing an outdoor conduit run and subpanel: head-mounted stereo egocentric video + depth, tactile sensor gloves on both hands (24 IMUs, 20 force pads, force in newtons) and 3D hand pose for both hands",
+  "authors": "Talos Dataworks",
+  "year": 2026,
+  "venue": "Hugging Face dataset (free sample of a commercial dataset)",
+  "summary": "Three episodes (306 s) of a master electrician strapping PVC conduit, connecting feeder wires in a new subpanel and routing them in the main panel, recorded on 3 November 2026 with Talos gloves on both hands (10 force-sensing-resistor pads and 12 IMUs each, 200 Hz) and a head-mounted Luxonis OAK-D Pro W with stereo-derived depth; wrist positions in the camera come from forearm AprilTags.",
+  "embodiment": "human",
+  "hand": "Talos glove x 2, worn under red work gloves",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 10,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 200,
+   "note": "10 force-sensing-resistor pads per hand: F0 thumb pad, F1-F4 index to little fingertips, P0 thenar, P1 hypothenar, P2 distal palm, P3 central palm, P4 index-base palm; conductance (observation.hand.<side>.pads) and estimated newtons (observation.hand.<side>.pad_force) at 30 Hz in the LeRobot frames, 200 Hz raw in the talos/ sidecar.",
+   "maker": "Talos Dataworks",
+   "model": "Talos glove",
+   "principle": "piezoresistive",
+   "range": "peak readings in the sample 0.1-23.1 N per pad",
+   "calibrated": true
+  },
+  "modalities": [
+   "egocentric",
+   "depth",
+   "hand_pose",
+   "imu",
+   "language"
+  ],
+  "scale": {
+   "hours": 0.085,
+   "episodes": 3,
+   "frames": 9180,
+   "tasks": 3,
+   "objects": null,
+   "subjects": 1,
+   "scenes": 1,
+   "scene_types": [
+    "home"
+   ],
+   "text": "Sample: 3 episodes, 306 s, 9,180 frames per stream at 30 fps (steps 33-35 of a 38-step, 45-minute job); the full recording is sold separately"
+  },
+  "availability": "partial",
+  "access": "Hugging Face talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample, ungated, 2.51 GB (LeRobot v2.1 parquet, AV1 and lossless HEVC depth videos, plus a talos/ folder of raw sensor streams); the full 45-minute job is offered through Datarade or talosdataworks.com/datasets.",
+  "gate": {
+   "kind": "purchase",
+   "approval": "not stated",
+   "url": "https://talosdataworks.com/datasets",
+   "checked": "2026-11-23",
+   "note": "The three-episode sample is public; the card says the full 38-step dataset is available from Talos Dataworks on Datarade or through talosdataworks.com/datasets and is licensed separately for commercial use. No price is stated."
+  },
+  "license": "CC BY-NC 4.0",
+  "caveats": [
+   "Five minutes from one electrician at one residential site; CC BY-NC 4.0 covers the sample only.",
+   "Force in newtons comes from bench curves of the right glove's pads, reused for the left glove (P4 uses Interlink's published FSR 400 curve). The card gives hysteresis of 27-52% per pad, repeatability 6.6-28.5% (80.2% on the ring tip) and drift 8.3-14.2% in about 5 min, all above its targets, and says a 2 N reading may be anywhere from about 1 to 3 N.",
+   "Right-hand pads F0, F1, F2 and P2 register contact in 0.0% of frames and right P0 carries a steady preload, so most right-hand fingertip touch is missing; left-hand peaks reach 23.1 N (index tip).",
+   "Hand pose comes from the glove IMUs on a template skeleton (not fitted MANO parameters), not checked against motion capture; the card expects offsets of up to about 10 degrees. Wrist positions exist only where a forearm tag is seen or bridged: 33% of frames for the left hand, 19% for the right.",
+   "Depth was computed after recording from the stereo pair with the projector off; it reaches no nearer than about 0.17 m.",
+   "Another sample from the same seller is catalogued as talos_electrician_wirenuts (one right-hand glove, a different job)."
+  ],
+  "links": {
+   "data": "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
+   "project": "https://talosdataworks.com/datasets"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Luxonis OAK-D Pro W (colour)",
+     "type": "RGB",
+     "resolution": "2016x1520",
+     "fps": 30,
+     "mount": "head"
+    },
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": "Luxonis OAK-D Pro W (global-shutter stereo pair)",
+     "type": "stereo",
+     "resolution": "640x400",
+     "fps": 30,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": true,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "imu",
+     "system": "Talos glove, 12 six-axis IMUs per hand",
+     "note": "21-joint 3D hand pose in MANO joint order, 21 joint angles and MANO-layout rotations for 15 finger joints; DIP joints estimated"
+    },
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "tag36h11 AprilTags on forearm pods, seen by the head camera",
+     "note": "wrist position in camera coordinates where a tag is in view or the gap is 0.33 s or less"
+    },
+    {
+     "target": "body",
+     "method": "imu",
+     "system": "OAK-D Pro W IMU",
+     "note": "400 Hz raw, 30 Hz in the LeRobot frames"
+    }
+   ],
+   "other": [
+    "raw glove IMU and pad streams at 200 Hz in a talos/ sidecar folder",
+    "glove-to-camera clock fit per episode",
+    "showcase.mp4 overlay video from the full dataset"
+   ]
+  },
+  "sources": [
+   "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample (README.md, Hugging Face API metadata and top-level listing)"
+  ],
+  "unconfirmed": [
+   "hours = 306 s / 3600, from the card's stated duration.",
+   "tasks = 3 counts the three step labels in the sample (strap the conduit and recheck the level; connect the feeder wires in the subpanel; route the feeder wires in the main panel).",
+   "The spec sheet PDF in the repository was not read. Files not opened."
+  ]
+ },
+ "license": {
+  "name": "CC BY-NC 4.0",
+  "redistribution": "allowed",
+  "quote": "This sample is licensed CC BY-NC 4.0.",
+  "url": "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample"
+ },
+ "download": {
+  "where": "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
+  "access": "open",
+  "format": "LeRobot v2.1 parquet + AV1 / lossless 12-bit HEVC depth mp4, plus talos/ sidecar parquet and imu/ jsonl",
+  "total_size": "2.51 GB",
+  "per_episode": "about 0.84 GB (2.51 GB / 3), derived",
+  "partial_fetch": "per-episode parquet and mp4 files"
+ },
+ "channels": [
+  {"name": "observation.images.colour", "kind": "camera", "shape": "2016x1520", "rate_hz": 30, "unit": "AV1", "frame": "head, wide-angle, not undistorted", "note": "from the dataset card; files not opened"},
+  {"name": "observation.images.left / right", "kind": "camera", "shape": "640x400 grey as 3 channels", "rate_hz": 30, "unit": "AV1", "frame": "head stereo pair, 7.5 cm baseline", "note": "from the dataset card; files not opened"},
+  {"name": "observation.images.depth", "kind": "depth", "shape": "504x380", "rate_hz": 30, "unit": "mm", "frame": "colour camera optical axis", "note": "stereo-derived after recording; from the dataset card; files not opened"},
+  {"name": "observation.hand.left/right.pads", "kind": "pressure_scalar", "shape": "(10,) per hand", "rate_hz": 30, "unit": "microsiemens", "frame": "per pad", "note": "from the dataset card; files not opened"},
+  {"name": "observation.hand.left/right.pad_force", "kind": "pressure_scalar", "shape": "(10,) per hand", "rate_hz": 30, "unit": "N (bench-curve estimate)", "frame": "per pad", "note": "from the dataset card; files not opened"},
+  {"name": "hand pose (keypoints_3d, joint_angles, joint_rotations, wrist_position, keypoints_cam, keypoints_2d)", "kind": "hand_pose", "shape": "21 joints per hand", "rate_hz": 30, "unit": "m, rad, px", "frame": "hand frame and camera frame", "note": "from the dataset card; files not opened"},
+  {"name": "observation.imu", "kind": "imu", "shape": "(6,)", "rate_hz": 30, "unit": "m/s2, rad/s", "frame": "head camera", "note": "from the dataset card; files not opened"},
+  {"name": "task", "kind": "language", "shape": "string per episode", "rate_hz": null, "unit": null, "frame": null, "note": "plain-language step label; from the dataset card; files not opened"}
+ ],
+ "episode_index": {
+  "where": "meta/episodes.jsonl",
+  "count": 3,
+  "fields": ["task"],
+  "tasks": [
+   "strap the conduit to the wall and recheck the level",
+   "connect the feeder wires in the subpanel",
+   "walk to the main panel and route the feeder wires inside it"
+  ],
+  "scenes": null
+ }
+}

@@ -1,0 +1,149 @@
+{
+ "id": "decal",
+ "surveyed": "2026-11-23",
+ "entry": {
+  "id": "decal",
+  "name": "DeCAL dataset",
+  "title": "DeCAL: Towards Physically-Grounded Dexterous Vision-Language-Action Models via Contact-Aware Latent Co-Imagination",
+  "authors": "Yankai Fu et al.",
+  "year": 2026,
+  "venue": "CoRL 2026 (arXiv 2609.09119)",
+  "summary": "1,279 teleoperated bimanual trajectories over 13 tasks on two UR5 arms with two 22-DoF Sharpa Wave hands, with a 6-D contact vector and a 240x240 deformation image for each of the 10 fingertips, front and two wrist RGB views, 56 joint positions and a per-frame language instruction at 30 Hz.",
+  "embodiment": "robot",
+  "hand": "Sharpa Wave (22 DoF) x 2 on two UR5 arms",
+  "bimanual": true,
+  "sensor": {
+   "type": "vision",
+   "taxels_per_hand": null,
+   "sensors_per_hand": 5,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 30,
+   "note": "Per fingertip (10 per frame): a 6-D contact vector (10 x 6 per frame) and a 240x240x1 contact-deformation image (10 x 240 x 240 x 1). The paper derives 6-DoF force/torque from raw 320x240 tactile images with a pretrained regression model and deformation maps with a translation model (TacMap); the release carries the vector and deformation image, raw tactile images are not listed on the card.",
+   "maker": "Sharpa",
+   "model": "Sharpa Wave fingertip tactile sensors",
+   "principle": "optical",
+   "range": null
+  },
+  "modalities": [
+   "egocentric",
+   "wrist_rgb",
+   "robot_action",
+   "language"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 1279,
+   "frames": 1989891,
+   "tasks": 13,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "1,279 trajectories, 1,989,891 frames at 30 Hz, 13 tasks (Open-X-Tactile release); the paper trains on 100 demonstrations for each of 6 tasks"
+  },
+  "availability": "public",
+  "access": "ModelScope Aureleo/DeCALdata_OXT (Open-X-Tactile Zarr, 2.0 TB, Apache License 2.0 on the card), linked from the DeCAL code repository README.",
+  "license": "Apache-2.0 (ModelScope card header; the card's notes say licensing stays with the original DeCAL release)",
+  "caveats": [
+   "The release (13 tasks, 1,279 trajectories) is larger than the paper's training set (6 tasks: Wipe Vase, Erase Whiteboard, Assemble Parts, Twist Cap, Pipetting, Screw Light Bulb; 100 demonstrations each); the 7 extra task names were not read.",
+   "Only the Open-X-Tactile conversion was found. The code README's link to ModelScope Aureleo/DeCAL_dataset gave no card (its .md returned HTTP 404 on 2026-11-23), so the original robot logs were not seen.",
+   "The card says the converted release provides state trajectories from which to derive future-state action targets; recorded teleoperation commands are not listed among the fields.",
+   "Teleoperation used MANUS MetaGlove Pro gloves and VIVE trackers (paper)."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2609.09119",
+   "project": "https://aureleopku.github.io/DeCAL",
+   "data": "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT",
+   "code": "https://github.com/AureleoPKU/DeCAL"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Intel RealSense D435",
+     "type": "RGB",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": "static"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": "Intel RealSense D435",
+     "type": "RGB",
+     "resolution": "640x480",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "UR5 joint positions (6 per arm) and Sharpa Wave joint positions (22 per hand)",
+     "note": "56 joint-position channels per frame"
+    },
+    {
+     "target": "fingers",
+     "method": "teleop_glove",
+     "system": "MANUS MetaGlove Pro with VIVE trackers",
+     "note": "teleoperation interface named in the paper"
+    }
+   ],
+   "other": [
+    "per-frame language instruction (sub_task_instruction)"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2609.09119",
+   "https://arxiv.org/html/2609.09119 (platform, tactile representations, data collection, tasks; first 100,000 characters)",
+   "https://aureleopku.github.io/DeCAL (CoRL 2026, task results)",
+   "https://github.com/AureleoPKU/DeCAL (repository metadata and README dataset lines)",
+   "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT.md (dataset card: statistics, robot setup, modalities, OXT layout, license)"
+  ],
+  "unconfirmed": [
+   "Camera roles: the card lists one front and two wrist RGB cameras; the paper lists two wrist and one egocentric RealSense D435. Resolution 640x480 is the card's stored shape.",
+   "hours not computed: 1,989,891 frames at 30 Hz would be about 18.4 h; the card gives no duration.",
+   "Availability 'public' from the ModelScope card (no gate stated, 234,411 downloads listed); the file listing renders with JavaScript and was not read. Files not opened.",
+   "scene_types 'lab' is inferred from the task names and project page videos; scenes are not labelled.",
+   "Venue: the project page and repository description say CoRL 2026; the arXiv record lists none."
+  ]
+ },
+ "license": {
+  "name": "Apache-2.0",
+  "redistribution": "allowed",
+  "quote": "License: Apache License 2.0",
+  "url": "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT"
+ },
+ "download": {
+  "where": "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT",
+  "access": "open",
+  "format": "Open-X-Tactile Zarr: data/ arrays concatenated per package, episode boundaries in meta/episode_ends",
+  "total_size": "2.0 TB",
+  "per_episode": "about 1.6 GB on average (2.0 TB / 1,279), derived",
+  "partial_fetch": "per-task .zarr packages; layout of files on ModelScope not read"
+ },
+ "channels": [
+  {"name": "camera_main_rgb", "kind": "camera", "shape": "(480, 640, 3)", "rate_hz": 30, "unit": "uint8 RGB", "frame": "front camera", "note": "from the dataset card; files not opened"},
+  {"name": "left_wrist_camera_rgb, right_wrist_camera_rgb", "kind": "camera", "shape": "(480, 640, 3) each", "rate_hz": 30, "unit": "uint8 RGB", "frame": "wrist", "note": "from the dataset card; files not opened"},
+  {"name": "tactile state (OXT tactile group, sensor SharpaWave)", "kind": "wrench", "shape": "(10, 6)", "rate_hz": 30, "unit": "not stated", "frame": "per fingertip", "note": "6-D contact vector per fingertip; group suffixes and dtypes to be read from the Zarr metadata; from the dataset card; files not opened"},
+  {"name": "tactile deformation (OXT tactile group, sensor SharpaWave)", "kind": "deformation_map", "shape": "(10, 240, 240, 1)", "rate_hz": 30, "unit": "not stated", "frame": "per fingertip", "note": "from the dataset card; files not opened"},
+  {"name": "left_arm_joints, right_arm_joints", "kind": "joint_state", "shape": "(6,) each", "rate_hz": 30, "unit": "not stated", "frame": "UR5 joint space", "note": "from the dataset card; files not opened"},
+  {"name": "left_hand_joints, right_hand_joints (+ _idx)", "kind": "joint_state", "shape": "(22,) each", "rate_hz": 30, "unit": "not stated", "frame": "Sharpa Wave joint space, canonical OXT/FAAS indices", "note": "from the dataset card; files not opened"},
+  {"name": "sub_task_instruction", "kind": "language", "shape": "string per frame", "rate_hz": 30, "unit": null, "frame": null, "note": "from the dataset card; files not opened"}
+ ],
+ "episode_index": {
+  "where": "meta/episode_ends in each .zarr package",
+  "count": 1279,
+  "fields": ["task"],
+  "tasks": null,
+  "scenes": null
+ }
+}

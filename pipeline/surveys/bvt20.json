@@ -1,0 +1,93 @@
+{
+ "id": "bvt20",
+ "surveyed": "2026-11-23",
+ "entry": {
+  "id": "bvt20",
+  "name": "BVT-20",
+  "title": "BiView-Touch: Learning Bimanual Tactile Representations by Cross-Hand Completion",
+  "authors": "Chenxin Liang et al.",
+  "year": 2026,
+  "venue": "arXiv 2609.23352",
+  "summary": "44.2 h of bimanual tactile recordings from 22 right-handed participants over 20 coordination tasks (peg insertion, three-pin plug insertion, nut and bolt, block transfer, buckle and others), 6,893 sessions, each task recorded in paired active and support roles with the hands swapped, with whole-hand touch on both hands and MANUS hand tracking.",
+  "embodiment": "human",
+  "hand": "tactile gloves on both hands (make not stated)",
+  "bimanual": true,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": 290,
+   "coverage": [],
+   "rate_hz": null,
+   "note": "The method uses 290 taxels per hand in a mirrored canonical order, grouped into 11 anatomical regions; the paper does not tie this count to BVT-20 explicitly.",
+   "maker": null,
+   "model": null,
+   "principle": "unspecified",
+   "range": null
+  },
+  "modalities": [
+   "hand_pose"
+  ],
+  "scale": {
+   "hours": 44.2,
+   "episodes": 6893,
+   "frames": null,
+   "tasks": 20,
+   "objects": null,
+   "subjects": 22,
+   "scenes": null,
+   "scene_types": [],
+   "text": "44.2 h, 6,893 sessions, 20 tasks (T01-T20), 22 participants"
+  },
+  "availability": "announced",
+  "access": "The paper says 'We collect and release BVT-20' and points to an anonymous 4open.science project page, which returned HTTP 404 on 2026-11-23; no download link found.",
+  "license": "not stated",
+  "caveats": [
+   "Glove make, sensor type, coverage and sampling rate are not given in the paper; 'acquisition details' are deferred to the project website, which was not reachable.",
+   "Wrist-motion labels were derived from MANUS skeletal tracking; whether video was recorded is not stated.",
+   "Task T17 (buckle) is held out in the paper for transfer evaluation."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2609.23352",
+   "project": "https://anonymous.4open.science/w/biview-touch-review-site-050C/"
+  },
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "magnetic",
+     "system": "MANUS (model not stated)",
+     "note": "skeletal tracking used to derive wrist-motion labels"
+    }
+   ],
+   "other": []
+  },
+  "sources": [
+   "https://arxiv.org/abs/2609.23352",
+   "https://arxiv.org/html/2609.23352 (datasets, BVT-20 statistics, task table, release sentence)",
+   "https://anonymous.4open.science/w/biview-touch-review-site-050C/ (HTTP 404, 2026-11-23)"
+  ],
+  "unconfirmed": [
+   "taxels_per_hand 290 is the method's canonical layout; it is assumed to be BVT-20's layout because BVT-20 is used for transfer without a stated remapping.",
+   "MANUS tracking method set to 'magnetic' because MANUS gloves track by EMF; the paper names only 'MANUS skeletal tracking'.",
+   "Availability 'announced': the paper calls the dataset released, but no download was reachable."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": null
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [],
+ "episode_index": null
+}

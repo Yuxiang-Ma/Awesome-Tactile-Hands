@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-11-03"
+  "last_updated": "2026-11-23"
  },
  "datasets": [
   {
@@ -211,6 +211,12 @@
      "model": "touchanything"
     },
     {
+     "name": "TouchTwin, arXiv 2611.17619",
+     "url": "https://arxiv.org/abs/2611.17619",
+     "note": "Selected TouchScale recordings (head and wrist RGB-D, 880-taxel glove) rebuilt as one- and two-hand MuJoCo replays; objects shown include a mug, flask, spray bottle, first-aid box, toolbox, headphones, kitchen scale, parts box, basket, steel mug, wok and 1 mL pipette. Policy and contact-predictor results use the mug task; the number of recordings used is not stated.",
+     "model": "touchtwin"
+    },
+    {
      "name": "2077AIDataFoundation/TouchScale-OXT (Hugging Face dataset)",
      "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale-OXT",
      "note": "derived release by the same publisher: the 100 h converted to FTP-1 zarr for Open-X-Tactile, 15,088 trajectories (236 dropped for failed head-pose checks), 920 per-task zarr.zip files, 10 Hz, 224x224 RGB, 21 MANO joint angles per hand estimated from the head camera, ~1.01 TB; Hugging Face gate, manual approval per the HF API (2026-10-25); CC BY-NC 4.0; files not opened"
@@ -395,6 +401,12 @@
      "model": "ego2contact"
     },
     {
+     "name": "TouchAnnotator, arXiv 2611.09129",
+     "url": "https://arxiv.org/abs/2611.09129",
+     "note": "541 segments, 411,568 frames, 3.8 h; relative pressure, contact and privileged wrist views. Evaluated on 184 seen and 76 unseen episodes: unseen temporal accuracy 0.8687, volumetric IoU 0.3821, MAE 0.0638 from ego video only.",
+     "model": "touchannotator"
+    },
+    {
      "name": "TouchAnything, arXiv 2605.13083",
      "url": "https://arxiv.org/abs/2605.13083",
      "note": "Trained and tested on EgoTouch: 1,891 episodes split 80/10/10 by episode, with the test set divided into seen and unseen objects; 25 epochs on a frozen DINOv2 ViT-B/14.",
@@ -449,15 +461,18 @@
     "scenes": 1,
     "scene_types": []
    },
-   "availability": "not_released",
-   "access": "No data or code link on the project page or arXiv as of 2026-10-15.",
+   "availability": "public",
+   "access": "The project page's 'Dataset' button (added since the 2026-10-15 check, when the page had no data link) opens a Google Drive folder that lists two zip files without a sign-in: TactiDex_Output.zip (45.02 GB, shared Nov 11) and TactiDex_objects.zip (138.3 MB, shared Nov 16), each with a Download button; nothing was downloaded.",
    "license": "unconfirmed",
    "caveats": [
-    "No RGB video: pose comes from the MANUS gloves and OptiTrack."
+    "No RGB video: pose comes from the MANUS gloves and OptiTrack.",
+    "The Drive folder has no README or license file in its listing, and the project page says nothing about its contents. Which zip holds the 757 sequences, the tactile streams and the 49 object meshes is not stated (the names suggest the objects zip holds the scanned meshes); the file layout and channels were not opened.",
+    "Hosted as a Google Drive share link with no version tag or DOI; the folder listing is the only evidence seen, and whether both files download without a quota prompt was not tested."
    ],
    "links": {
     "project": "https://tactidex.github.io/",
-    "paper": "https://arxiv.org/abs/2607.09190"
+    "paper": "https://arxiv.org/abs/2607.09190",
+    "data": "https://drive.google.com/drive/folders/1O3Dipx7l_5aTlrXQKpZNMMUo5XbOHH5K?usp=sharing"
    },
    "image": "https://tactidex.github.io/static/images/f1_dataset.png",
    "thumb": "assets/thumbs/tactidex.jpg",
@@ -495,7 +510,8 @@
    },
    "sources": [
     "https://arxiv.org/html/2607.09190",
-    "https://tactidex.github.io/"
+    "https://tactidex.github.io/ (header links read 2026-11-23: Paper, arXiv, Video, Dataset)",
+    "https://drive.google.com/drive/folders/1O3Dipx7l_5aTlrXQKpZNMMUo5XbOHH5K?usp=sharing (folder listing only, read 2026-11-23)"
    ],
    "unconfirmed": [
     "hours=11.8 derived from 5.1M frames (Table 1) at the 120 Hz kinematic/pose rate; the paper states no duration, and the frame count could be counted differently (e.g. per hand).",
@@ -503,15 +519,16 @@
     "No RGB/egocentric video is described as part of the dataset.",
     "Tactile glove maker/model not named.",
     "scenes=1: all capture is in one OptiTrack workspace (lab).",
-    "Project page shows Code/Data as 'Coming Soon'."
+    "Project page on 2026-11-23: a 'Dataset' button with the Drive link; no visible Code button, and the text 'Code (Coming Soon)' appears only next to a comment marker in the page source. The earlier 'Data (Coming Soon)' text is gone."
    ],
    "rank": {
-    "n": 6,
-    "label": "Paper only",
+    "n": 2,
+    "label": "Open, not checked",
     "integrity": "not checked",
     "failed": [],
     "why": [
-     "not released"
+     "public download",
+     "files not opened yet"
     ]
    },
    "contents": {
@@ -711,6 +728,12 @@
      "note": "Tactile mid-training on the 100 h T-Rex teleoperation set (22 motor primitives, 200+ objects, 7,700+ trajectories), of which about 50 h is public; post-training uses about 100 demonstrations per task on 12 tasks.",
      "model": "trex",
      "own": true
+    },
+    {
+     "name": "TouchAnnotator, arXiv 2611.09129",
+     "url": "https://arxiv.org/abs/2611.09129",
+     "note": "4,371 segments, 4,363,007 frames, 40.4 h of dexterous robot-hand recordings; contact derived from optical fingertip deformation, plus privileged views.",
+     "model": "touchannotator"
     }
    ]
   },
@@ -4246,9 +4269,10 @@
     "text": "1,083 episodes, 655,562 frames (~6.1 h) @30 fps: 488-episode pretraining corpus (250 instructions, 3.5 h) + 6 task sets of 96-100 demos (595 episodes, 2.6 h); 4 more raw HDF5 repos (300 success + 40 failure episodes) outside the collection"
    },
    "availability": "public",
-   "access": "Hugging Face collection JensenYuan/dextacwam: 7 ungated LeRobot v2.1 repos (~509 GB, one parquet per episode with images and tactile arrays inside); 4 raw HDF5 + MP4 repos (~305 GB) sit under the same account but are not in the collection or README.",
-   "license": "Apache-2.0",
+   "access": "Hugging Face collection JensenYuan/dextacwam: 7 ungated LeRobot v2.1 repos (~509 GB, one parquet per episode with images and tactile arrays inside); 4 raw HDF5 + MP4 repos (~305 GB) sit under the same account but are not in the collection or README. Since 2026-11-22 the collection also lists JensenYuan/DexTacWAM_OXT (ungated, 381.3 GB by the Hugging Face API): the six task sets re-packed as one zarr.zip each for Open-X-Tactile.",
+   "license": "Apache-2.0 (LeRobot collection); CC-BY-4.0 (DexTacWAM_OXT card)",
    "caveats": [
+    "DexTacWAM_OXT (created 2026-11-22, last changed 2026-11-23, card tags license:cc-by-4.0) holds the six task sets as DexTacWAM_OXT/<task>.zarr.zip in the FTP-1 zarr layout, contributed to Open-X-Tactile. Its card table lists 595 trajectories and 314,281 frames: tongs 100 / 92,241, bottle cap 96 / 58,064, bowl unstacking 100 / 36,669, cube place 100 / 26,904 (right hand only), cube handover 100 / 34,218, whiteboard 99 / 66,185. Bottle cap, cube place, handover and whiteboard have the same episode and frame counts as the LeRobot sets; bowl differs by 43 frames (36,712 in the LeRobot set) and tongs by 36,550 (55,691 in the LeRobot set). The card does not say why. Per frame it stores head and wrist RGB at 192x256, arm joints (7 rad per side), hand joints (22 per side, Sharpa Wave order) and per-finger tactile images (T, 5, 192, 256, 1) uint8 for thumb to little finger, with no marker-flow or wrench arrays listed. Card only; the zip files were not opened.",
     "The 488-episode pretraining corpus re-releases T-Rex recordings (same lab, rig and 21 of T-Rex's 22 motor-primitive verbs): in 48 of 48 checked episodes the 58-D joint-state range lies inside a T-Rex episode with the same primitive and object (2 identical in length and range; corpus 200 = T-Rex 3479 frame for frame). The authors do not say this; it is the catalog's check.",
     "Fingertip wrenches are stored inside 'actions' (first 60 values: left then right hand, thumb..pinky, 6 values each), unit not stated; frames where a finger read all zeros were filled with the previous value during conversion.",
     "Tactile and camera images are downscaled to 192x256 (raw gel image 240x320, raw cameras 640x360). The 488 corpus has the head camera only and no 'deform' column.",
@@ -4320,6 +4344,7 @@
     "https://dextacwam.github.io/",
     "https://github.com/dextacwam/DexTacWAM (README.md, NOTICE, data/utils/layout_contracts/arm_layouts.json, data/utils/layout_contract.py, data/dex_vtam_dataset.py, data/tactile_dataset.py, data/stats/diverse_488/*.json, scripts/figures/make_raw_tactile_figure.py)",
     "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
+    "https://huggingface.co/datasets/JensenYuan/DexTacWAM_OXT (README.md, API metadata, top-level listing, commit history; read 2026-11-23)",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_488_diverse_episodes (README.md, meta/info.json, meta/tasks.jsonl, meta/episodes.jsonl, meta.bak.20260521_212738/, file tree; state column of 48 episodes; parquet footer of episode_000362)",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_unscrew_bottle_cap, _unstack_bowl, _place_with_tongs, _cube_handover, _wipe_whiteboard, _pick_place_cube (README.md, meta/info.json, meta/tasks.jsonl, meta/episodes.jsonl, dataset_identity.json, conversion_metadata.json, episode_provenance.json, file trees)",
     "https://huggingface.co/datasets/JensenYuan/DexTacWAM_pick_place_cube data/chunk-000/episode_000034.parquet (tactile, tactile_flow, deform, images, state, actions); DexTacWAM_cube_handover episode_000062 and DexTacWAM_wipe_whiteboard episode_000000 (state, actions, timestamp); actions column of 24 task-set episodes",
@@ -4418,7 +4443,7 @@
     "text": "Real robot: 317 episodes, 154,799 frames, 2 tasks (cube into box: 261 episodes, 138,382 frames at ~19.5 Hz, 123 min; unscrew bottle cap: 56 episodes, 16,417 frames at ~14.6 Hz, 19 min); the 300 simulated episodes (3 tasks, 135,734 frames) in the same repo are not counted"
    },
    "availability": "public",
-   "access": "Hugging Face ntumars/DextraVerse, ungated: each real task is one ZIP64 of a zarr v2 replay buffer (44 GB for pick_cube_place_box, 5.8 GB for unscrew_bottle_cap, as listed on the card on 2026-11-01; 43 GB and 5.7 GB before). Dataset version 1.1.0 (commit 25773192, 2026-11-01) re-encoded every array with Blosc + Zstd level 5 and left the array values unchanged from 1.0.0; the archives were range-readable stored ZIPs when checked earlier, and that was not re-checked after the re-encode. An earlier HDF5 export with actions is on the gated repo Xiongge0212/dextraverse-rig-grasp-n261 (login, auto-approved).",
+   "access": "Hugging Face ntumars/DextraVerse_OXT (renamed from ntumars/DextraVerse on 2026-11-23 per the card, which says the old address redirects and the archives are byte-identical; the archive folder is now DextraVerse_OXT/ instead of DextraVerse/), ungated: each real task is one ZIP64 of a zarr v2 replay buffer (44 GB for pick_cube_place_box, 5.8 GB for unscrew_bottle_cap, as listed on the card on 2026-11-01; 43 GB and 5.7 GB before). Dataset version 1.1.0 (commit 25773192, 2026-11-01) re-encoded every array with Blosc + Zstd level 5 and left the array values unchanged from 1.0.0; the archives were range-readable stored ZIPs when checked earlier, and that was not re-checked after the re-encode. An earlier HDF5 export with actions is on the gated repo Xiongge0212/dextraverse-rig-grasp-n261 (login, auto-approved).",
    "license": "CC BY 4.0",
    "caveats": [
     "Two real tasks on one rig, 2026-09 and 2026-10 recordings. pick_cube_place_box (checked in full): pick up a purple cube and place it in an orange box; 256 of 261 episodes use one hand (140 left, 116 right), 3 use both hands, 2 never grasp; the idle hand's tactile channels stay at rest. unscrew_bottle_cap (added 2026-10-31, README read, files not opened): hold a bottle with the left hand and unscrew the cap with the right, both hands active in all 56 episodes of 15 to 31 s, recorded 2026-10-15 in four sessions.",
@@ -4433,7 +4458,7 @@
     "No paper, project page or code: the card says these 'remain empty at the contributor's request'."
    ],
    "links": {
-    "data": "https://huggingface.co/datasets/ntumars/DextraVerse",
+    "data": "https://huggingface.co/datasets/ntumars/DextraVerse_OXT",
     "project": null,
     "paper": null,
     "code": null
@@ -4501,6 +4526,7 @@
    },
    "sources": [
     "https://huggingface.co/datasets/ntumars/DextraVerse (README.md; re-read 2026-11-01 for version 1.1.0, archive sizes and the commit history)",
+    "https://huggingface.co/datasets/ntumars/DextraVerse_OXT (README.md, API metadata and top-level listing; read 2026-11-23 after the rename)",
     "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README_real_robot.md",
     "https://huggingface.co/datasets/ntumars/DextraVerse/raw/main/DextraVerse/README_unscrew_bottle_cap.md (read 2026-10-31, commit cc7a4456)",
     "https://huggingface.co/datasets/ntumars/DextraVerse/blob/main/DextraVerse/README.md (simulation part)",
@@ -4779,13 +4805,14 @@
     "Step annotations are VLM drafts reviewed by operators; the expert audit of drafts found factual errors in 11.09% of segments before correction.",
     "The card and paper name the video key observation.images.ego; the mini release stores it as observation.images.camera_0. The repository also holds a per-task zarr copy (dataset/oxt/EgoExplorer/<task>.zarr) that the card does not describe.",
     "Number of participants and objects not stated.",
-    "The release files were not opened for this survey (gated, access not requested); channels come from the card, the paper and the file tree."
+    "The release files were not opened for this survey (gated, access not requested); channels come from the card, the paper and the file tree.",
+    "The code repository now sits at github.com/Sage-PhysicalAI/EgoExplorer (the GitHub API full_name on 2026-11-23; github.com/InternRobotics/EgoExplorer was the earlier address); last push 2026-10-23, 32 stars, no license reported. The Hugging Face dataset is still under InternRobotics, gate manual, last modified 2026-10-22, so the release itself is unchanged."
    ],
    "links": {
     "paper": "https://arxiv.org/abs/2610.18872",
     "project": "https://internrobotics.github.io/egoexplorer.github.io/",
     "data": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
-    "code": "https://github.com/InternRobotics/EgoExplorer"
+    "code": "https://github.com/Sage-PhysicalAI/EgoExplorer"
    },
    "image": "https://internrobotics.github.io/egoexplorer.github.io/assets/hero-poster.jpg",
    "setup": {
@@ -6407,6 +6434,12 @@
    },
    "used_by": [
     {
+     "name": "BiView-Touch, arXiv 2609.23352",
+     "url": "https://arxiv.org/abs/2609.23352",
+     "note": "About 89.6 h for training and 7.6 h for validation under a session-disjoint split of the roughly 100 h, 13,469-episode release; downstream evaluation sessions excluded. Masked-region force regression MAE 0.892 N, RMSE 2.388 N.",
+     "model": "biview_touch"
+    },
+    {
      "name": "DexTouch-WM, IROS 2026 Workshop RoBoWoMo (arXiv 2609.20649)",
      "url": "https://arxiv.org/abs/2609.20649",
      "note": "World-model pretraining on about 100 h of HumanTouch-system recordings over 50 bimanual tasks (Moxian gloves under MANUS MetaGloves, 320 of 360 taxels per hand kept), together with 5 h of robot data over 6 tasks; adding 100 h of human data raised held-out robot Contact-F1 from 0.55 to 0.71. The public HumanTouch release covers 10 tasks, so this corpus is a different task set.",
@@ -6417,6 +6450,12 @@
      "url": "https://arxiv.org/abs/2610.22342",
      "note": "1,000 h of HumanTouch recordings (100+ tasks, 32 operators, Moxian gloves under MANUS Metagloves, 320 observed taxels per hand, 60 Hz) make up 35% of a 1.9k h, 7-source pretraining mixture with touch in 44% of samples; keeping the touch raised vision-only success on the Ego Humanoid benchmark from 52.5% to 71.7% and SparkArena-Real success from 44.0% to 52.0%. The public HumanTouch release holds about 132.8 h over 10 tasks (catalog humantouch entry), so most of this corpus is not public.",
      "model": "spark_0"
+    },
+    {
+     "name": "TouchAnnotator, arXiv 2611.09129",
+     "url": "https://arxiv.org/abs/2611.09129",
+     "note": "17,545 segments, 28,505,945 frames, 132.0 h; relative pressure, contact and privileged views.",
+     "model": "touchannotator"
     },
     {
      "name": "TouchSight, arXiv 2609.20414",
@@ -10222,19 +10261,18 @@
    "authors": "Zhi Cao et al.",
    "year": 2026,
    "venue": "arXiv 2610.19155",
-   "summary": "About 2,000 h of bimanual human demonstrations (40k episodes, 1,000 tasks, 120 scenes, 1,000 demonstrators) with two TouchTronix conductive-textile gloves (5 x 12 fingertip taxels + 60 palm taxels per hand, ~200 Hz, calibrated to newtons), a head-mounted stereo pair and two wrist RGB cameras; release announced.",
+   "summary": "739 h in 18,373 bimanual human recordings (25 tasks, 191 collectors, 2026-09-02 to 09-08) with two TouchTronix conductive-textile gloves (5 fingers x 12 fingertip taxels per hand in newtons, plus pressure, bend and IMU quaternion, aligned to the video frames; palm taxels not included), a head-mounted stereo pair and two wrist RGB cameras; released on Hugging Face under CC BY-NC 4.0, while the paper describes about 2,000 h.",
    "embodiment": "human",
    "hand": "TouchTronix tactile gloves, both hands (FusionX multimodal data collection system)",
    "bimanual": true,
    "sensor": {
     "type": "piezoresistive",
-    "taxels_per_hand": 120,
+    "taxels_per_hand": 60,
     "coverage": [
-     "tip",
-     "palm"
+     "tip"
     ],
     "rate_hz": 200,
-    "note": "Per hand: a piezoresistive conductive-textile array with 12 taxels on every fingertip (5 x 12) and 60 taxels on the palm, one bend sensor per finger and an orientation IMU, all sampled at about 200 Hz. Taxel readings are converted to force in newtons with a pneumatic calibration rig (pressure x effective area). Described in the paper; no files released.",
+    "note": "Released tactile.npz per recording, one row per head-video frame (nearest glove sample within 0.03 s; glove about 200 Hz): L_force and R_force float16 (N, 5, 12) in newtons, L_press and R_press (N, 5, 12) in sensor units, L_bend and R_bend (N, 5), L_quat and R_quat (N, 4) glove IMU orientation, L_valid and R_valid, and per-finger L_flag and R_flag marking spans a CNN noise detector judged unreliable (force and pressure of that finger are set to 0 there). Palm sensors are not included in the release, although the paper describes 60 palm taxels per hand. Per the paper the taxel readings are converted to force with a pneumatic calibration rig (pressure x effective area). From the dataset card; files not opened.",
     "maker": "TouchTronix Robotics",
     "model": "tactile glove of the FusionX multimodal data collection system (model name not given)",
     "principle": "piezoresistive",
@@ -10244,32 +10282,34 @@
    "modalities": [
     "egocentric",
     "wrist_rgb",
-    "hand_pose",
     "imu"
    ],
    "scale": {
-    "hours": 2000,
-    "episodes": 40000,
+    "hours": 739,
+    "episodes": 18373,
     "frames": null,
-    "tasks": 1000,
+    "tasks": 25,
     "objects": null,
-    "subjects": 1000,
-    "scenes": 120,
+    "subjects": 191,
+    "scenes": null,
     "scene_types": [],
-    "text": "~2,000 h, ~40k episodes, ~1,000 tasks, ~120 scenes, ~1,000 demonstrators (paper and project page); not released"
+    "text": "739 h, 18,373 recordings (18,311 with tactile.npz), 25 tasks, 191 collectors, collected 2026-09-02 to 2026-09-08 (Hugging Face card)"
    },
-   "availability": "announced",
-   "access": "Project page fact-1-0.github.io shows 'Data (Coming Soon)' and 'Code (Coming Soon)' (2026-10-27); the paper has no release, license or dataset URL statement.",
-   "license": "not stated",
+   "availability": "public",
+   "access": "Hugging Face zhicao/EgoForce, ungated (1.9 TB by the Hugging Face API), laid out as <date>/<task>/<collector>/recording_NNN/ with head.mp4, wrist_left.mp4, wrist_right.mp4, timestamps.json and tactile.npz; files can be fetched by task folder with snapshot_download allow_patterns. Project page links the repository under 'Data'; 'Code (Coming Soon)' remains.",
+   "license": "CC BY-NC 4.0",
    "caveats": [
-    "Not released: the numbers come from the paper and project page, and no file was seen.",
-    "Hand pose is estimated from video (ViTPose keypoints and HaMeR MANO meshes on the left stereo view, scaled with stereo depth), refined with the glove bend sensors and IMU when the hand is occluded; no motion capture.",
-    "Fingertip and palm only: 12 taxels per fingertip, none on the other phalanges.",
-    "Task categories are named (deformable manipulation, assembly, storage, other fine manipulation); objects are not counted."
+    "The release is smaller than the paper's description: the paper and project page give about 2,000 h, 40k episodes, 1,000 tasks, 120 scenes and 1,000 demonstrators, while the Hugging Face card counts 739 h, 18,373 recordings, 25 tasks and 191 collectors (the card says nothing about the difference).",
+    "Palm taxels are not in the release (the card says 'Palm sensors are not included'); the paper describes 60 palm taxels per hand, so the released touch is 5 x 12 fingertip taxels per hand.",
+    "Hand keypoints are not released as data: the repository holds handpose_algorithm/ (offline 2D/3D keypoint estimation from head.mp4; MANO must be downloaded separately). In the paper the pose is estimated from video (ViTPose keypoints and HaMeR MANO meshes on the left stereo view, scaled with stereo depth), refined with the glove bend sensors and IMU when the hand is occluded; no motion capture.",
+    "Frames where a CNN noise detector flagged a finger as unreliable have that finger's force and pressure set to 0; use the *_flag arrays to tell a screened zero from a true zero. 62 recordings have no tactile.npz.",
+    "head.mp4 is side-by-side stereo downscaled to 1920x600 (960x600 per eye, from 1920x1200 native); wrist videos are 960x540.",
+    "Task folder names are kept as recorded and include typos and run-together words (for example Assembly_of_Disassem_bly_and_Wooden_Shapes)."
    ],
    "links": {
     "paper": "https://arxiv.org/abs/2610.19155",
-    "project": "https://fact-1-0.github.io/"
+    "project": "https://fact-1-0.github.io/",
+    "data": "https://huggingface.co/datasets/zhicao/EgoForce"
    },
    "setup": {
     "cameras": [
@@ -10321,21 +10361,25 @@
    "sources": [
     "https://arxiv.org/abs/2610.19155 (abstract via arXiv API, v1 2026-10-13)",
     "https://arxiv.org/html/2610.19155v1 (dataset section, appendix on the glove and cameras, acknowledgments)",
-    "https://fact-1-0.github.io/ (dataset figures, 'Data (Coming Soon)')"
+    "https://fact-1-0.github.io/ (dataset figures; 'Data' link to the Hugging Face repository read 2026-11-23, earlier 'Data (Coming Soon)')",
+    "https://huggingface.co/datasets/zhicao/EgoForce (README.md, API metadata, top-level listing, commit history; read 2026-11-23)"
    ],
    "unconfirmed": [
-    "taxels_per_hand = 120 = 5 x 12 fingertip + 60 palm, summed from the paper's appendix; the layout matches the conductive-fabric glove in the catalog's fusionx_sample release (4x3 per finger, 4x15 palm), but the paper does not name the glove generation.",
-    "subjects = 1,000 is the paper's count of demonstrators; whether these are distinct people is not stated.",
+    "taxels_per_hand = 60 = 5 fingers x 12 taxels, from the Hugging Face card's L_force shape (N, 5, 12). The paper's appendix adds 60 palm taxels per hand, which the card says are not included; the layout matches the conductive-fabric glove in the catalog's fusionx_sample release (4x3 per finger, 4x15 palm), but the paper does not name the glove generation.",
+    "subjects = 191 is the card's 'Collectors' count (collector or session codes in the folder names); whether each is one distinct person is not stated.",
+    "scenes: the paper's 120 is not repeated on the card, so scenes is null.",
+    "No file was opened or downloaded; the 739 h, 18,373 recordings and 25 tasks are the card's figures (the task table on the card sums to 18,373 recordings, checked by adding its 25 rows).",
     "Who collected the data and where is not stated; the acknowledgments say it was 'collected with the FusionX multimodal data collection system (TouchTronix Robotics, NY, USA)'.",
     "The modality 'egocentric' is the head-mounted stereo pair; 'wrist_rgb' the two 1920x1080 wrist cameras."
    ],
    "rank": {
-    "n": 6,
-    "label": "Paper only",
+    "n": 2,
+    "label": "Open, not checked",
     "integrity": "not checked",
     "failed": [],
     "why": [
-     "release announced"
+     "public download",
+     "files not opened yet"
     ]
    },
    "contents": {
@@ -10403,18 +10447,19 @@
     "text": "20 episodes (10 household objects x 2 policy variants), 300 steps each at 10 Hz, 6,000 steps; one task (counterclockwise in-hand rotation)"
    },
    "availability": "public",
-   "access": "Hugging Face dataset Kitval/TactileLab_InHandRotation, not gated; 20 per-episode zarr zips (1.9 GB in total).",
+   "access": "Hugging Face dataset Kitval/TactileLab_InHandRotation_OXT (renamed from Kitval/TactileLab_InHandRotation, seen 2026-11-23), not gated; 20 per-episode zarr zips under TactileLab_InHandRotation_OXT/ (1.9 GB in total).",
    "license": "not stated",
    "caveats": [
     "These are rollouts of policies trained in simulation, not teleoperated demonstrations; the card lists no action stream, only joint positions.",
     "Two policy variants per object: 'full' (proprioception + tactile depth + tactile flow) and 'depth' (proprioception + tactile depth); the stored tactile data are the raw camera images either way.",
     "The card notes that in the 'gum' full-policy episode the object wedged on the fingertips after about 22.5 s and the hand barely moves until the end.",
-    "Released in the FTP-1 zarr layout of the Open-X-Tactile (OXT) collection; the card defines the keys but no paper with the data was found (TactileLab project page: arXiv and code 'Coming soon').",
-    "No license on the card."
+    "Released in the FTP-1 zarr layout of the Open-X-Tactile (OXT) collection; the card defines the keys and, as read on 2026-11-23, links the paper 'TactileLab: Sim-to-Real Dexterous Robot Manipulation with Efficient Shear-Sensitive Tactile Simulation' (arXiv 2611.07881, v1 2026-11-05; Lin, He, Jack, Yang, Li, Lepora). The paper's abstract describes real-world dual-arm and dexterous in-hand deployment; which of its experiments produced these 20 episodes was not read.",
+    "No license on the card (checked again 2026-11-23; the Hugging Face license field is empty)."
    ],
    "links": {
     "project": "https://yijionglin.github.io/tactilelab/",
-    "data": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation"
+    "paper": "https://arxiv.org/abs/2611.07881",
+    "data": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation_OXT"
    },
    "setup": {
     "cameras": [
@@ -10444,6 +10489,8 @@
    },
    "sources": [
     "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation (dataset card, repository metadata, top-level listing)",
+    "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation_OXT (dataset card, repository metadata; read 2026-11-23)",
+    "https://arxiv.org/abs/2611.07881 (abstract via arXiv API; v1 2026-11-05)",
     "https://yijionglin.github.io/tactilelab/ (project page: authors, PETS-Net, Leap Hand support, 'arXiv Coming soon', 'Code Coming soon')"
    ],
    "unconfirmed": [
@@ -10606,7 +10653,7 @@
    "authors": "SingleBicycle (Hugging Face account)",
    "year": 2026,
    "venue": "Hugging Face dataset (2026)",
-   "summary": "Teleoperated bimanual tube pouring on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm: 100 successful trajectories in two batches plus 9 labelled failures and, since 2026-10-30, 82 real-robot policy rollouts (pi0.5 and Diffusion Policy base policies, noise-space RL), behind a Hugging Face gate.",
+   "summary": "Teleoperated bimanual tube pouring (100 successful trajectories in two batches) and, since 2026-11-08, USB plugging (100 successful trajectories in two batches) on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm, plus labelled failures and several hundred real-robot policy rollouts (pi0.5 and Diffusion Policy, noise-space RL), behind a Hugging Face gate.",
    "embodiment": "robot",
    "hand": "BrainCo Revo2 x 2 on UFACTORY xArm6 arms, each covered by a Tujian (Tachin) tactile glove",
    "bimanual": true,
@@ -10628,16 +10675,16 @@
    ],
    "scale": {
     "hours": null,
-    "episodes": 100,
+    "episodes": 200,
     "frames": null,
-    "tasks": 1,
+    "tasks": 2,
     "objects": null,
     "subjects": null,
     "scenes": null,
     "scene_types": [
      "lab"
     ],
-    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders; task4_pi05_rl_rollouts_20261030 (added 2026-10-30, rewritten 2026-11-01, extended 2026-11-02) holds 82 policy-rollout episodes that are not counted in episodes (22 pi0.5 base-policy, 39 from RL stage 1 with two learner groups, 20 Diffusion Policy base-policy in dp_base/, 1 training episode of the pi0.5 DSRL-NA stage in pi05_s1_dsrl_na_partial/); pipette transfer, cap twisting, beaker wiping and cloth folding listed as planned"
+    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders. USB plug (added 2026-11-08): 57 (2026-11-08/09) + 43 (2026-11-10, with a teleop push perturbation) successful trajectories plus 8 failures. Policy rollouts are not counted in episodes: task4_pi05_rl_rollouts_20261030 (82 episodes), task4_dp_rl_rollouts_20261103 (120 episodes, added 2026-11-03), 40 pi0.5 pour evaluation trials of 2026-11-21/22 in four groups, and 140 USB-plug rollouts (20 + 40 + 30 + 40 + 10, 2026-11-15 to 11-20) with 3/20 success for the Diffusion Policy base and 0/10 for each of the 12 later policy groups, per the card; pipette, cap, hold-and-wipe and cloth folding listed as planned"
    },
    "availability": "gated",
    "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026), a policy-rollout folder (task4_pi05_rl_rollouts_20261030) and, since 2026-11-02, glove code (tujian_glove_code_20261102).",
@@ -10645,15 +10692,18 @@
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
-    "checked": "2026-11-03",
-    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
+    "checked": "2026-11-23",
+    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-23; the nightly scan returned empty values for this repository that night, but a later direct read showed the repository public, not disabled and still gated manual, last modified 2026-11-24 02:27 UTC)."
    },
    "license": "not stated",
    "caveats": [
+    "A second task, dual-arm USB plugging (right hand holds a USB hub, left hand pinches a flash drive or cable plug and plugs it in), appeared on 2026-11-08 and the card now lists tube pour and USB plug as done. Of its 100 successful trajectories, 57 are batch 1 and 43 are batch 2 with a push perturbation; 8 failed attempts are published as not for training. The task_box_flip_preview_20261123 and task_case_videos_20261115 folders are listed in the repository but are not described on the public card; files not opened.",
+    "The card gives 516 GB as the total size on 2026-11-23, while the Hugging Face API reports 238.4 GB of storage.",
+    "Policy rollouts, not demonstrations: for the Diffusion Policy trained on USB-plug batch 1, base success was 3/20, and the later Diffusion Policy and pi0.5 groups (12 groups of 10 trials, 2026-11-17 to 11-20) all scored 0/10. Pour evaluation of 2026-11-21/22 (pi0.5, four reward-weighting groups x 10 trials) scored 8, 7, 8 and 8 of 10 (demo, plain, Ours, vision); the card says the stage-point advantage of Ours over vision (p = 0.047) is not significant after correcting for 5 comparisons.",
     "No paper or project page; the card refers to an 'RSS project' without a link, and the publisher is a personal account.",
     "Touch comes from gloves pulled over the robot hands, not from the Revo2's own fingertip sensors; the card does not say whether the hands are the tactile Revo2 TOUCH variant.",
     "The card gave 137 GB as the total size on 2026-10-28, 157 GB on 2026-11-01 and 163 GB on 2026-11-02, while the Hugging Face API reported 31.2 GB of storage on 2026-10-28, 48.2 GB on 2026-11-01 and 53.7 GB on 2026-11-02; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
-    "One task only so far; the failure folders are marked 'Not for training'.",
+    "Two demonstration tasks so far (tube pour, USB plug); the failure folders are marked 'Not for training'.",
     "task4_pi05_rl_rollouts_20261030 (public card, files not opened) holds policy rollouts, not demonstrations: 22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL (DSRL-SAC) in two learner groups, plus one voided attempt, with videos, per-decision records, Revo2 and glove tactile and the authors' 'Ours scorer' outputs. Since 2026-11-02 it also lists dp_base/ (20 Diffusion Policy base-policy episodes, 13/20 successes, 3 of the 7 failures are collision-guard aborts) and pi05_s1_dsrl_na_partial/ (the first training episode of the DSRL-NA stage), which brings the card's count to 82 episodes. The card reports pi0.5 base policy 13/20, label 4/10 training and 5/10 evaluation, label_ours 5/10 training and 5/9 evaluation, and no measurable difference between the groups or against the base policy.",
     "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read.",
     "A top-level folder tujian_glove_code_20261102 (README.md 6.06 kB and a 215 kB zip) appeared on 2026-11-02; the commit message says it adds paths.py, xhost.py, arm_frames.py and __init__.py as support modules for align.py and packing. The main card does not mention it, the files are gated and were not opened, so whether it documents the glove's taxel layout is unknown."
@@ -10704,7 +10754,8 @@
    },
    "sources": [
     "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)",
-    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/task4_pi05_rl_rollouts_20261030 (public file listing, read 2026-11-02)"
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/task4_pi05_rl_rollouts_20261030 (public file listing, read 2026-11-02)",
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public dataset page text and repository metadata via the Hugging Face API, read 2026-11-23; no gated file opened)"
    ],
    "unconfirmed": [
     "Tujian = 途见, the Chinese name of Tachin Technology, whose TachinGlove is in the catalog; the card does not give the glove model, so the TachinGlove hardware link rests on the maker name.",
@@ -10783,8 +10834,8 @@
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
-    "checked": "2026-10-29",
-    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual."
+    "checked": "2026-11-23",
+    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-23)."
    },
    "license": "CC BY-NC 4.0",
    "caveats": [
@@ -10792,7 +10843,8 @@
     "The card's rig section describes only the right arm and right hand, with the left side planned, while the later task4 folders are named dual-arm; whether those use a second gloved hand was not read.",
     "The card gives 635 GB as the total size, while the Hugging Face API reports 176.2 GB of storage on 2026-10-29.",
     "The teleoperation glove does not sense thumb opposition; the card says the vendor SDK synthesizes that motor channel from flexion, and the ring and pinky channels saturate at 1000.",
-    "Folder READMEs for task2, task3 and task4 and all data files are behind the gate and were not read."
+    "Folder READMEs for task2, task3 and task4 and all data files are behind the gate and were not read.",
+    "Re-read 2026-11-23: repository last modified 2026-11-05, 23,225 files (23,188 at the previous scan), 176.7 GB by the Hugging Face API, license tag cc-by-nc-4.0, gate manual. Top-level folders now include task_case_study_20261104, task_media_20261023 and dual_arm_third_person_pov_20261019 next to the task1 to task4 folders; none is described in this entry's counts, the commit that added them could not be read (the commit API returns HTTP 401 for this gated repository), and the files were not opened."
    ],
    "links": {
     "data": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks"
@@ -11300,6 +11352,511 @@
      "own": true
     }
    ]
+  },
+  {
+   "id": "decal",
+   "name": "DeCAL dataset",
+   "title": "DeCAL: Towards Physically-Grounded Dexterous Vision-Language-Action Models via Contact-Aware Latent Co-Imagination",
+   "authors": "Yankai Fu et al.",
+   "year": 2026,
+   "venue": "CoRL 2026 (arXiv 2609.09119)",
+   "summary": "1,279 teleoperated bimanual trajectories over 13 tasks on two UR5 arms with two 22-DoF Sharpa Wave hands, with a 6-D contact vector and a 240x240 deformation image for each of the 10 fingertips, front and two wrist RGB views, 56 joint positions and a per-frame language instruction at 30 Hz.",
+   "embodiment": "robot",
+   "hand": "Sharpa Wave (22 DoF) x 2 on two UR5 arms",
+   "bimanual": true,
+   "sensor": {
+    "type": "vision",
+    "taxels_per_hand": null,
+    "sensors_per_hand": 5,
+    "coverage": [
+     "tip"
+    ],
+    "rate_hz": 30,
+    "note": "Per fingertip (10 per frame): a 6-D contact vector (10 x 6 per frame) and a 240x240x1 contact-deformation image (10 x 240 x 240 x 1). The paper derives 6-DoF force/torque from raw 320x240 tactile images with a pretrained regression model and deformation maps with a translation model (TacMap); the release carries the vector and deformation image, raw tactile images are not listed on the card.",
+    "maker": "Sharpa",
+    "model": "Sharpa Wave fingertip tactile sensors",
+    "principle": "optical",
+    "range": null
+   },
+   "modalities": [
+    "egocentric",
+    "wrist_rgb",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 1279,
+    "frames": 1989891,
+    "tasks": 13,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "1,279 trajectories, 1,989,891 frames at 30 Hz, 13 tasks (Open-X-Tactile release); the paper trains on 100 demonstrations for each of 6 tasks"
+   },
+   "availability": "public",
+   "access": "ModelScope Aureleo/DeCALdata_OXT (Open-X-Tactile Zarr, 2.0 TB, Apache License 2.0 on the card), linked from the DeCAL code repository README.",
+   "license": "Apache-2.0 (ModelScope card header; the card's notes say licensing stays with the original DeCAL release)",
+   "caveats": [
+    "The release (13 tasks, 1,279 trajectories) is larger than the paper's training set (6 tasks: Wipe Vase, Erase Whiteboard, Assemble Parts, Twist Cap, Pipetting, Screw Light Bulb; 100 demonstrations each); the 7 extra task names were not read.",
+    "Only the Open-X-Tactile conversion was found. The code README's link to ModelScope Aureleo/DeCAL_dataset gave no card (its .md returned HTTP 404 on 2026-11-23), so the original robot logs were not seen.",
+    "The card says the converted release provides state trajectories from which to derive future-state action targets; recorded teleoperation commands are not listed among the fields.",
+    "Teleoperation used MANUS MetaGlove Pro gloves and VIVE trackers (paper)."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.09119",
+    "project": "https://aureleopku.github.io/DeCAL",
+    "data": "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT",
+    "code": "https://github.com/AureleoPKU/DeCAL"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "third_person",
+      "count": 1,
+      "model": "Intel RealSense D435",
+      "type": "RGB",
+      "resolution": "640x480",
+      "fps": 30,
+      "mount": "static"
+     },
+     {
+      "role": "wrist",
+      "count": 2,
+      "model": "Intel RealSense D435",
+      "type": "RGB",
+      "resolution": "640x480",
+      "fps": 30,
+      "mount": "wrist"
+     }
+    ],
+    "wrist_cameras": 2,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "robot_proprioception",
+      "system": "UR5 joint positions (6 per arm) and Sharpa Wave joint positions (22 per hand)",
+      "note": "56 joint-position channels per frame"
+     },
+     {
+      "target": "fingers",
+      "method": "teleop_glove",
+      "system": "MANUS MetaGlove Pro with VIVE trackers",
+      "note": "teleoperation interface named in the paper"
+     }
+    ],
+    "other": [
+     "per-frame language instruction (sub_task_instruction)"
+    ]
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.09119",
+    "https://arxiv.org/html/2609.09119 (platform, tactile representations, data collection, tasks; first 100,000 characters)",
+    "https://aureleopku.github.io/DeCAL (CoRL 2026, task results)",
+    "https://github.com/AureleoPKU/DeCAL (repository metadata and README dataset lines)",
+    "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT.md (dataset card: statistics, robot setup, modalities, OXT layout, license)"
+   ],
+   "unconfirmed": [
+    "Camera roles: the card lists one front and two wrist RGB cameras; the paper lists two wrist and one egocentric RealSense D435. Resolution 640x480 is the card's stored shape.",
+    "hours not computed: 1,989,891 frames at 30 Hz would be about 18.4 h; the card gives no duration.",
+    "Availability 'public' from the ModelScope card (no gate stated, 234,411 downloads listed); the file listing renders with JavaScript and was not read. Files not opened.",
+    "scene_types 'lab' is inferred from the task names and project page videos; scenes are not labelled.",
+    "Venue: the project page and repository description say CoRL 2026; the arXiv record lists none."
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "public download",
+     "files not opened yet"
+    ]
+   },
+   "contents": {
+    "score": 4,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   }
+  },
+  {
+   "id": "tipdex_vtla",
+   "name": "TipDex-VTLA demonstrations",
+   "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
+   "authors": "Xudi Ge et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.25683",
+   "summary": "300 teleoperated demonstrations of four bimanual tasks (Egg Transfer, Grape Pinching, Tissue Extraction, Mung Bean Pouring) on two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands, each carrying eight piezoresistive arrays with 364 taxels over five fingertips and three palm regions at 30 Hz, with one overhead and two wrist RGB cameras.",
+   "embodiment": "robot",
+   "hand": "Inspire RH56F2-E2-T1 x 2 on two RealMan RM75 arms",
+   "bimanual": true,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 364,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "rate_hz": 30,
+    "note": "Eight piezoresistive arrays per hand (five fingertip regions, three palm regions), 364 taxels per hand.",
+    "maker": null,
+    "model": null,
+    "principle": "piezoresistive",
+    "range": null
+   },
+   "modalities": [
+    "multiview_rgb",
+    "wrist_rgb",
+    "robot_action",
+    "language"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 300,
+    "frames": null,
+    "tasks": 4,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2); per-task counts and hours not stated"
+   },
+   "availability": "announced",
+   "access": "The paper states 'We will release the collected data and source code.'; no link is given (checked 2026-11-23).",
+   "license": "not stated",
+   "caveats": [
+    "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it.",
+    "Per-task demonstration counts, episode length and storage format are not stated."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.25683"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "third_person",
+      "count": 1,
+      "model": "Intel RealSense D405",
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     },
+     {
+      "role": "wrist",
+      "count": 2,
+      "model": "Intel RealSense D435i",
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "wrist"
+     }
+    ],
+    "wrist_cameras": 2,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "robot_proprioception",
+      "system": "RealMan RM75 (7 DoF) arms and Inspire RH56F2-E2-T1 hands",
+      "note": "teleoperation method not read"
+     }
+    ],
+    "other": [
+     "language instruction"
+    ]
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19)",
+    "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)"
+   ],
+   "unconfirmed": [
+    "The tactile maker is not stated; the hand model RH56F2-E2-T1 suggests Inspire's own sensors, which the paper does not say. The catalog's RH56F1 record (8 capacitive sites per hand) does not match the 364 piezoresistive taxels given here, so no hardware link was made.",
+    "'language' in modalities: the policy takes a language instruction; how it is stored in the release is unknown.",
+    "Camera frame rates and resolutions not read; depth from the RealSense cameras is not mentioned as recorded."
+   ],
+   "rank": {
+    "n": 6,
+    "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "release announced"
+    ]
+   },
+   "contents": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
+  },
+  {
+   "id": "bvt20",
+   "name": "BVT-20",
+   "title": "BiView-Touch: Learning Bimanual Tactile Representations by Cross-Hand Completion",
+   "authors": "Chenxin Liang et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.23352",
+   "summary": "44.2 h of bimanual tactile recordings from 22 right-handed participants over 20 coordination tasks (peg insertion, three-pin plug insertion, nut and bolt, block transfer, buckle and others), 6,893 sessions, each task recorded in paired active and support roles with the hands swapped, with whole-hand touch on both hands and MANUS hand tracking.",
+   "embodiment": "human",
+   "hand": "tactile gloves on both hands (make not stated)",
+   "bimanual": true,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 290,
+    "coverage": [],
+    "rate_hz": null,
+    "note": "The method uses 290 taxels per hand in a mirrored canonical order, grouped into 11 anatomical regions; the paper does not tie this count to BVT-20 explicitly.",
+    "maker": null,
+    "model": null,
+    "principle": "unspecified",
+    "range": null
+   },
+   "modalities": [
+    "hand_pose"
+   ],
+   "scale": {
+    "hours": 44.2,
+    "episodes": 6893,
+    "frames": null,
+    "tasks": 20,
+    "objects": null,
+    "subjects": 22,
+    "scenes": null,
+    "scene_types": [],
+    "text": "44.2 h, 6,893 sessions, 20 tasks (T01-T20), 22 participants"
+   },
+   "availability": "announced",
+   "access": "The paper says 'We collect and release BVT-20' and points to an anonymous 4open.science project page, which returned HTTP 404 on 2026-11-23; no download link found.",
+   "license": "not stated",
+   "caveats": [
+    "Glove make, sensor type, coverage and sampling rate are not given in the paper; 'acquisition details' are deferred to the project website, which was not reachable.",
+    "Wrist-motion labels were derived from MANUS skeletal tracking; whether video was recorded is not stated.",
+    "Task T17 (buckle) is held out in the paper for transfer evaluation."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.23352",
+    "project": "https://anonymous.4open.science/w/biview-touch-review-site-050C/"
+   },
+   "setup": {
+    "cameras": [],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "magnetic",
+      "system": "MANUS (model not stated)",
+      "note": "skeletal tracking used to derive wrist-motion labels"
+     }
+    ],
+    "other": []
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.23352",
+    "https://arxiv.org/html/2609.23352 (datasets, BVT-20 statistics, task table, release sentence)",
+    "https://anonymous.4open.science/w/biview-touch-review-site-050C/ (HTTP 404, 2026-11-23)"
+   ],
+   "unconfirmed": [
+    "taxels_per_hand 290 is the method's canonical layout; it is assumed to be BVT-20's layout because BVT-20 is used for transfer without a stated remapping.",
+    "MANUS tracking method set to 'magnetic' because MANUS gloves track by EMF; the paper names only 'MANUS skeletal tracking'.",
+    "Availability 'announced': the paper calls the dataset released, but no download was reachable."
+   ],
+   "rank": {
+    "n": 6,
+    "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "release announced"
+    ]
+   },
+   "contents": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": false,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": true
+    }
+   },
+   "used_by": [
+    {
+     "name": "BiView-Touch, arXiv 2609.23352",
+     "url": "https://arxiv.org/abs/2609.23352",
+     "note": "Transfer to held-out task T17 (buckle) at 25% labels: phase balanced accuracy 66.46%, contact balanced accuracy 93.42%.",
+     "model": "biview_touch",
+     "own": true
+    }
+   ]
+  },
+  {
+   "id": "talos_electrician_conduit",
+   "name": "Talos electrician conduit and subpanel sample",
+   "title": "Free sample: electrician installing an outdoor conduit run and subpanel: head-mounted stereo egocentric video + depth, tactile sensor gloves on both hands (24 IMUs, 20 force pads, force in newtons) and 3D hand pose for both hands",
+   "authors": "Talos Dataworks",
+   "year": 2026,
+   "venue": "Hugging Face dataset (free sample of a commercial dataset)",
+   "summary": "Three episodes (306 s) of a master electrician strapping PVC conduit, connecting feeder wires in a new subpanel and routing them in the main panel, recorded on 3 November 2026 with Talos gloves on both hands (10 force-sensing-resistor pads and 12 IMUs each, 200 Hz) and a head-mounted Luxonis OAK-D Pro W with stereo-derived depth; wrist positions in the camera come from forearm AprilTags.",
+   "embodiment": "human",
+   "hand": "Talos glove x 2, worn under red work gloves",
+   "bimanual": true,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 10,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "rate_hz": 200,
+    "note": "10 force-sensing-resistor pads per hand: F0 thumb pad, F1-F4 index to little fingertips, P0 thenar, P1 hypothenar, P2 distal palm, P3 central palm, P4 index-base palm; conductance (observation.hand.<side>.pads) and estimated newtons (observation.hand.<side>.pad_force) at 30 Hz in the LeRobot frames, 200 Hz raw in the talos/ sidecar.",
+    "maker": "Talos Dataworks",
+    "model": "Talos glove",
+    "principle": "piezoresistive",
+    "range": "peak readings in the sample 0.1-23.1 N per pad",
+    "calibrated": true
+   },
+   "modalities": [
+    "egocentric",
+    "depth",
+    "hand_pose",
+    "imu",
+    "language"
+   ],
+   "scale": {
+    "hours": 0.085,
+    "episodes": 3,
+    "frames": 9180,
+    "tasks": 3,
+    "objects": null,
+    "subjects": 1,
+    "scenes": 1,
+    "scene_types": [
+     "home"
+    ],
+    "text": "Sample: 3 episodes, 306 s, 9,180 frames per stream at 30 fps (steps 33-35 of a 38-step, 45-minute job); the full recording is sold separately"
+   },
+   "availability": "partial",
+   "access": "Hugging Face talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample, ungated, 2.51 GB (LeRobot v2.1 parquet, AV1 and lossless HEVC depth videos, plus a talos/ folder of raw sensor streams); the full 45-minute job is offered through Datarade or talosdataworks.com/datasets.",
+   "gate": {
+    "kind": "purchase",
+    "approval": "not stated",
+    "url": "https://talosdataworks.com/datasets",
+    "checked": "2026-11-23",
+    "note": "The three-episode sample is public; the card says the full 38-step dataset is available from Talos Dataworks on Datarade or through talosdataworks.com/datasets and is licensed separately for commercial use. No price is stated."
+   },
+   "license": "CC BY-NC 4.0",
+   "caveats": [
+    "Five minutes from one electrician at one residential site; CC BY-NC 4.0 covers the sample only.",
+    "Force in newtons comes from bench curves of the right glove's pads, reused for the left glove (P4 uses Interlink's published FSR 400 curve). The card gives hysteresis of 27-52% per pad, repeatability 6.6-28.5% (80.2% on the ring tip) and drift 8.3-14.2% in about 5 min, all above its targets, and says a 2 N reading may be anywhere from about 1 to 3 N.",
+    "Right-hand pads F0, F1, F2 and P2 register contact in 0.0% of frames and right P0 carries a steady preload, so most right-hand fingertip touch is missing; left-hand peaks reach 23.1 N (index tip).",
+    "Hand pose comes from the glove IMUs on a template skeleton (not fitted MANO parameters), not checked against motion capture; the card expects offsets of up to about 10 degrees. Wrist positions exist only where a forearm tag is seen or bridged: 33% of frames for the left hand, 19% for the right.",
+    "Depth was computed after recording from the stereo pair with the projector off; it reaches no nearer than about 0.17 m.",
+    "Another sample from the same seller is catalogued as talos_electrician_wirenuts (one right-hand glove, a different job)."
+   ],
+   "links": {
+    "data": "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
+    "project": "https://talosdataworks.com/datasets"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "egocentric",
+      "count": 1,
+      "model": "Luxonis OAK-D Pro W (colour)",
+      "type": "RGB",
+      "resolution": "2016x1520",
+      "fps": 30,
+      "mount": "head"
+     },
+     {
+      "role": "egocentric",
+      "count": 1,
+      "model": "Luxonis OAK-D Pro W (global-shutter stereo pair)",
+      "type": "stereo",
+      "resolution": "640x400",
+      "fps": 30,
+      "mount": "head"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": true,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "imu",
+      "system": "Talos glove, 12 six-axis IMUs per hand",
+      "note": "21-joint 3D hand pose in MANO joint order, 21 joint angles and MANO-layout rotations for 15 finger joints; DIP joints estimated"
+     },
+     {
+      "target": "wrist",
+      "method": "other",
+      "system": "tag36h11 AprilTags on forearm pods, seen by the head camera",
+      "note": "wrist position in camera coordinates where a tag is in view or the gap is 0.33 s or less"
+     },
+     {
+      "target": "body",
+      "method": "imu",
+      "system": "OAK-D Pro W IMU",
+      "note": "400 Hz raw, 30 Hz in the LeRobot frames"
+     }
+    ],
+    "other": [
+     "raw glove IMU and pad streams at 200 Hz in a talos/ sidecar folder",
+     "glove-to-camera clock fit per episode",
+     "showcase.mp4 overlay video from the full dataset"
+    ]
+   },
+   "sources": [
+    "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample (README.md, Hugging Face API metadata and top-level listing)"
+   ],
+   "unconfirmed": [
+    "hours = 306 s / 3600, from the card's stated duration.",
+    "tasks = 3 counts the three step labels in the sample (strap the conduit and recheck the level; connect the feeder wires in the subpanel; route the feeder wires in the main panel).",
+    "The spec sheet PDF in the repository was not read. Files not opened."
+   ],
+   "rank": {
+    "n": 5,
+    "label": "Sample only",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "only a sample or part released",
+     "application: purchase",
+     "files not opened yet"
+    ]
+   },
+   "contents": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": true,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
   }
  ]
 }
