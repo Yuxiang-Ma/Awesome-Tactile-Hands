@@ -1,4 +1,4 @@
-// Helpers shared by the dataset catalog (site.js), the models page (models.js) and the hardware page (hardware.js).
+// Helpers shared by the catalog (site.js with catalog-ds.js and catalog-hw.js) and the models page (models.js).
 const REPO = 'https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands';
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -46,13 +46,14 @@ function edgeFill(img) {
   }
   img.style.background = FILL.get(key);
 }
-document.addEventListener('load', e => {if (e.target.matches?.('.thumb img, img.hero')) edgeFill(e.target)}, true);
+document.addEventListener('load', e => {if (e.target.matches?.('.thumb img, img.hero, .rt img, .lki img')) edgeFill(e.target)}, true);
 
 /* ---------- nightly checks (pipeline/NIGHTLY.md): footer status, the change log in the dialog, and New tags for entries
-   added in the last 14 days. Each page sets PAGE_TARGET ('dataset' | 'model' | 'hardware') and defines openDetail(id). ---------- */
+   added in the last 14 days. The models page sets PAGE_TARGET = 'model' and defines openDetail(id);
+   the catalog defines focusItem(target, id) for datasets and hardware. ---------- */
 const NIGHTLY = {changes: [], runs: {}, added: new Set()};
 const TARGET_URL = {dataset: id => `./#d=${encodeURIComponent(id)}`, model: id => `models.html#m=${encodeURIComponent(id)}`,
-  hardware: id => `hardware.html#h=${encodeURIComponent(id)}`};
+  hardware: id => `./#tab=hardware&h=${encodeURIComponent(id)}`};
 const CHANGE_WORD = {added: 'Added', released: 'Released', updated: 'Updated', withdrawn: 'Withdrawn'};
 const newTag = (target, id) => NIGHTLY.added.has(`${target}:${id}`) ? '<span class="tag new" title="Added by the nightly check in the last 14 days">New</span>' : '';
 async function loadNightly() {
@@ -85,7 +86,8 @@ function openChanges() {
       x.source ? ` <a class="srcl" href="${esc(x.source)}" target="_blank" rel="noopener">source</a>` : ''}</span></li>`).join('')}</ul>`).join('') || '<p class="src">No changes logged yet.</p>'}</div></div>`;
   $('dlg').querySelector('.x').onclick = () => $('dlg').close();
   $('dlg').querySelectorAll('a[data-t]').forEach(a => a.onclick = e => {
-    if (typeof PAGE_TARGET !== 'undefined' && a.dataset.t === PAGE_TARGET && typeof openDetail === 'function') {e.preventDefault(); openDetail(a.dataset.i)}
+    if (typeof focusItem === 'function' && a.dataset.t !== 'model') {e.preventDefault(); focusItem(a.dataset.t, a.dataset.i)}
+    else if (typeof PAGE_TARGET !== 'undefined' && a.dataset.t === PAGE_TARGET && typeof openDetail === 'function') {e.preventDefault(); openDetail(a.dataset.i)}
   });
   if (!$('dlg').open) $('dlg').showModal();
 }
