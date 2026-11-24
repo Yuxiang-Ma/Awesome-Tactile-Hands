@@ -71,7 +71,7 @@
      "note": "In the paper's own release, 96-100 teleoperated demonstrations for each of 6 tasks (595 episodes) fine-tune the video world model (stage 2) and train the action expert from scratch (stage 3); the 488-episode stage 1 corpus is in the same release."
     }
    ],
-   "own_data": "488-episode bimanual corpus (paper: roughly 4 h; code README: 3.5 h) and 96-100 demonstrations for each of 6 tasks on two Sharpa Wave hands; released on Hugging Face under Apache-2.0.",
+   "own_data": "488-episode bimanual corpus (paper: roughly 4 h; code README: 3.5 h) and 96-100 demonstrations for each of 6 tasks on two Sharpa Wave hands; released on Hugging Face under Apache-2.0; the six task sets were also posted on 2026-11-22 as zarr files in JensenYuan/DexTacWAM_OXT (card license CC-BY-4.0).",
    "dataset": "dextacwam",
    "release": {
     "code": "released",
@@ -98,9 +98,10 @@
     "T-Rex as the source of the 488-episode corpus is the catalog's check (trex and dextacwam entries: 48 of 48 sampled corpus episodes lie inside T-Rex episodes; corpus episode 200 equals T-Rex episode 3479 in all 555 frames). The paper, README and dataset card do not name T-Rex; the paper cites it only as related work.",
     "kind 'policy' because the headline result is real-robot task score (70.6 vs 38.0 over 6 tasks); the paper calls DexTacWAM a world-action model, and its world model also predicts future visual and tactile latents.",
     "Corpus duration: the paper and project page say roughly four hours; the code README's dataset table says 3.5 h.",
-    "weights 'released' covers the stage 1 tactile encoder only; the stage 2 world models and stage 3 action experts are trained per task from the public Genie Envisioner GE_base_fast_v0.1 checkpoint and are not released."
+    "weights 'released' covers the stage 1 tactile encoder only; the stage 2 world models and stage 3 action experts are trained per task from the public Genie Envisioner GE_base_fast_v0.1 checkpoint and are not released.",
+    "Re-checked 2026-11-23: the encoder repo's last two commits (2026-11-04) edit README.md only, and the file list is unchanged (model.pt 826 MB, config.yaml, best_metrics.json)."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-11-23"
   },
   {
    "id": "dextouch_wm",
@@ -580,7 +581,7 @@
    "release": {
     "code": "announced",
     "weights": "not_released",
-    "note": "tactidex.github.io shows 'Code (Coming Soon)' and 'Data (Coming Soon)' buttons with no link; GitHub search for TactiDex and TactiSkill finds only the page repo tactidex/tactidex.github.io; weights are not mentioned. Checked 2026-10-25."
+    "note": "tactidex.github.io on 2026-11-23 shows Paper, arXiv, Video and Dataset links and no visible Code button; on 2026-10-25 it showed 'Code (Coming Soon)' and 'Data (Coming Soon)' with no link. The Dataset button now opens a Google Drive folder (data release, see the tactidex entry). No TactiSkill code repository or weights were found (the page's only GitHub repository is the page itself, found 2026-10-25); weights are not mentioned."
    },
    "license": "not stated",
    "links": {
@@ -596,9 +597,10 @@
    ],
    "unconfirmed": [
     "Real-robot runs on two Franka arms with Inspire hands map the simulated policy's commands open loop (Appendix C.3); the paper lists on-robot fine-tuning with real tactile feedback as future work, so the real hands' touch sensors are not read at deployment as far as the text says.",
-    "Re-checked 2026-11-02: tactidex.github.io still shows 'Code (Coming Soon)' and 'Data (Coming Soon)' with no link; a web search found no repository or dataset."
+    "Re-checked 2026-11-02: tactidex.github.io still shows 'Code (Coming Soon)' and 'Data (Coming Soon)' with no link; a web search found no repository or dataset.",
+    "Re-checked 2026-11-23: the page lost the 'Coming Soon' wording; code status is read as announced because the paper and earlier page promised code, but no repository link exists now. This is the catalog's reading, not a statement by the authors."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-23"
   },
   {
    "id": "touchanything",
@@ -761,9 +763,10 @@
     "The flyingGH repository is attributed to co-author Feiyang Hong by its commit author name (FeiyangHong) and its description ('The tactile world model component of TouchWorld'); neither the paper nor the project page links it.",
     "kind 'policy': the paper calls TouchWorld a tactile foundation model implemented as a hierarchical manipulation policy, with the tactile world model as one of four modules. embodiment 'both' because human touch enters only through the world model's EgoTouch pretraining.",
     "TouchWorld and EgoTouch share first author Jianyi Zhou and corresponding author Shuo Yang; whether the pretraining used the public EgoTouch release or internal recordings is not stated.",
-    "Venue: arXiv only; no conference is named on the abstract page or the project page."
+    "Venue: arXiv only; no conference is named on the abstract page or the project page.",
+    "Re-checked 2026-11-23: the project page text still has only a Paper button and no code, data or weights link; github.com/flyingGH/TouchWorld-Tactile_World_Model is unchanged (last push 2026-07-03, Apache-2.0)."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-23"
   },
   {
    "id": "ttp",
@@ -892,9 +895,10 @@
     "https://github.com/tianhaowuhz/3dtacdex (README, LICENSE, file tree)"
    ],
    "unconfirmed": [
-    "The name 3DTacDex comes from the project page title and the README ('official implementation of ICRA 2025 paper, 3DTacDex'); the paper text calls the method 'ours'."
+    "The name 3DTacDex comes from the project page title and the README ('official implementation of ICRA 2025 paper, 3DTacDex'); the paper text calls the method 'ours'.",
+    "Re-checked 2026-11-23 after a README change signal: the repository (last push 2026-11-16, MIT LICENSE present, top level lists ckpts/) has a README that still says it contains only the encoder pretraining code, names ckpts/encoder.pt for downstream tasks and ckpts/all.pt for evaluation, and links the Hugging Face dataset and checkpoint; code and weights status unchanged."
    ],
-   "checked": "2026-10-25"
+   "checked": "2026-11-23"
   },
   {
    "id": "sparsh_skin",
@@ -1543,9 +1547,10 @@
     "The last 52,859 characters of the HTML (appendix) were not read.",
     "Hugging Face repos jungwook2358/wam-openarm-*-rlhnd-v2-50k-ckpt50000 (found by name search 2026-10-28) are not linked from the paper or project page and were not attributed to this model.",
     "Re-checked 2026-11-02: seungjun-moon/rlhnd was last pushed 2026-10-08 and still holds only README.md, index.html, logo.svg and videos/; a web search found no code or weights.",
-    "Re-checked 2026-11-03: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page still says 'Code will be released at github.com/seungjun-moon/rlhnd'."
+    "Re-checked 2026-11-03: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page still says 'Code will be released at github.com/seungjun-moon/rlhnd'.",
+    "Re-checked 2026-11-23: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page text still says 'Code will be released at github.com/seungjun-moon/rlhnd'."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-23"
   },
   {
    "id": "dexskills",
@@ -1651,7 +1656,7 @@
    "release": {
     "code": "announced",
     "weights": "not_released",
-    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
+    "note": "Project page fact-1-0.github.io (read 2026-11-23): 'Code (Coming Soon)' remains and 'Data' now links to the Hugging Face repository zhicao/EgoForce (CC BY-NC 4.0; 739 h, 18,373 recordings, 25 tasks), first seen as 'Data (Coming Soon)' on 2026-10-27. The arXiv v1 HTML has no code, weights or license statement and no repository link; no FACT code repository or weights were found."
    },
    "license": "not stated",
    "links": {
@@ -1665,9 +1670,10 @@
    ],
    "unconfirmed": [
     "embodiment 'both': human glove force (taxels in N) in pretraining and robot fingertip wrenches at fine-tuning and test; how the two force representations are mapped onto each other was not read in detail.",
-    "The T-Rex hours are the paper's (100 h); the public T-Rex release in the catalog holds about 50 h, so FACT may have used data beyond the public release."
+    "The T-Rex hours are the paper's (100 h); the public T-Rex release in the catalog holds about 50 h, so FACT may have used data beyond the public release.",
+    "The public EgoForce release (739 h, 18,373 recordings, fingertip taxels only) is smaller than the 2,000 h of human data with palm taxels that the paper describes for pretraining; whether the released subset is what FACT used is not stated."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-23"
   },
   {
    "id": "physword",
@@ -1962,9 +1968,10 @@
     "Vid-HACO, the paper's video-to-contact model for sources without touch, is trained on contact labels from 12 hand-object datasets (HOT3D, ARCTIC, HOI4D, DECAF and others) with no measured touch, so it is not catalogued separately.",
     "kind 'other': CARD is a retargeting and replay framework; touch goes in as glove contact maps and as fingertip force feedback during replay.",
     "Re-checked 2026-11-01: arXiv lists only v1 (2026-10-27); the project page shows a Code button and no repository link was found in its HTML. The page abstract and the arXiv abstract give contact maintained on 43 to 78% of contact frames and GRAB task success from 12% to 32%, which are different measures from the 77.7% and 4/30 to 25/30 figures in the summary above; the summary's figures were not re-checked against the paper body.",
-    "Re-checked 2026-11-02: the project page still shows a Code button with no target link; a web search for the name found no repository."
+    "Re-checked 2026-11-02: the project page still shows a Code button with no target link; a web search for the name found no repository.",
+    "Re-checked 2026-11-23: the project page's Code button still has href '#' and the tooltip 'Link to come'; no data or weights statement; arXiv paper links are unchanged."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-23"
   },
   {
    "id": "robot_synesthesia",
@@ -2035,9 +2042,10 @@
    "unconfirmed": [
     "The identification model is trained on simulated contacts; real touch enters as binary contact from a force-recognition model on the GelSight images.",
     "Fingertip-only, three fingers; the D'Claw has 9 DoF (three Dynamixel servos per finger) on a UR5e arm.",
-    "Re-checked 2026-11-01: the project page still links only the arXiv paper and BibTeX; a web search for the name with 'code' found no repository."
+    "Re-checked 2026-11-01: the project page still links only the arXiv paper and BibTeX; a web search for the name with 'code' found no repository.",
+    "Re-checked 2026-11-23: the project page text (abstract, paper summary, BibTeX) has no code link; a web search for the name with 'code' returned only the paper, the project page and aggregator listings."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-23"
   },
   {
    "id": "vtao_bimanip",
@@ -2108,9 +2116,10 @@
     "The paper gives no tactile ablation on the hand; the 6.2-point gain is against a pi0 baseline whose tactile input is not stated.",
     "Which existing datasets were combined with ObjTac to train the tactile encoder is not stated; the training follows AnyTouch's second stage.",
     "ObjTac is not catalogued as a dataset because the source does not say the touches were made by a hand.",
-    "Re-checked 2026-11-02: the project page still reads 'Coming Soon. The code repository will be available shortly.'; a web search found no repository."
+    "Re-checked 2026-11-02: the project page still reads 'Coming Soon. The code repository will be available shortly.'; a web search found no repository.",
+    "Re-checked 2026-11-23: the project page still shows the same 'Coming Soon' notice and Paper, Dataset and Code buttons; its only data host link is a Google Drive folder (ObjTac); no repository link."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-23"
   },
   {
    "id": "tavi",
@@ -2204,30 +2213,34 @@
    "embodiment": "both",
    "touch": "input",
    "uses": [],
-   "own_data": "60 human (TouchBridge-Cap glove) and 60 teleoperated robot demonstrations for each of 4 tasks (Flip Book, Screw Bulb, Apply Sauce, Grasp Egg Roll), with egocentric RealSense D455 and two wrist cameras; no release stated.",
+   "own_data": "60 human (TouchBridge-Cap glove) and 60 teleoperated robot demonstrations for each of 4 tasks (Flip Book, Screw Bulb, Apply Sauce, Grasp Egg Roll), with egocentric RealSense D455 and two wrist cameras; no release stated. The code repository ships one preprocessed human light-bulb demonstration for its demo script (examples/), not the task datasets.",
    "dataset": null,
    "release": {
-    "code": "announced",
+    "code": "released",
     "weights": "not_released",
-    "note": "Project page touchbridge2026.github.io has a 'Code' button marked 'Coming soon' with no target; the arXiv v1 text states no code, data or weights release (read 2026-11-01)."
+    "note": "GitHub touchbridge2026/TouchBridge (created 2026-11-17, one push, 8 stars; project page 'Code' button now links to it, earlier 'Coming soon' with no target): README describes the human-to-robot pipeline (preprocessing, SAM2/SAM3 masks, ProPainter inpainting, tactile-conditioned retargeting, whole-body IK, rendering and Zarr export), a CPU light-bulb demo, the TouchBridge-Cap glove parts in hardware/, and the MOZ and dual Wuji robot model in assets/robot. 'Weights are not included in this repository': the weight table lists only SAM2.1, SAM3, ProPainter, RAFT and flow-completion checkpoints from their own sources, and no GR00T policy checkpoint is mentioned. Demo not run."
    },
    "license": "not stated",
    "links": {
     "paper": "https://arxiv.org/abs/2610.40349",
-    "project": "https://touchbridge2026.github.io/"
+    "project": "https://touchbridge2026.github.io/",
+    "code": "https://github.com/touchbridge2026/TouchBridge"
    },
    "sources": [
-    "https://arxiv.org/abs/2610.40349 (abstract via arXiv API; v1, 2026-10-29)",
+    "https://arxiv.org/abs/2610.40349 (abstract via arXiv API; v1, 2026-10-29; v2 updated 2026-11-17)",
     "https://arxiv.org/html/2610.40349v1 (hardware, policy, tasks, demonstration counts)",
-    "https://touchbridge2026.github.io/ (links, 'Coming soon' code button)"
+    "https://touchbridge2026.github.io/ (links, code button; read 2026-11-23)",
+    "https://github.com/touchbridge2026/TouchBridge (repository metadata, top-level listing, README.md, THIRD_PARTY.md; read 2026-11-23)"
    ],
    "unconfirmed": [
     "kind 'other': touch goes into the retargeting step only; the paper says tactile measurements 'are used only for retargeting, not as policy inputs'.",
     "Five PaXini sensors per robot hand are stated; the count on the human glove is not stated and is assumed to match (one per fingertip). The PaXini model and taxel count are not given.",
     "Wuji hand DoF is given only as 'high-DoF' (20 or more); the arm model is not named.",
-    "Re-checked 2026-11-02: the project page shows a Code button with no target link; a web search for the name found no repository."
+    "Re-checked 2026-11-02: the project page shows a Code button with no target link; a web search for the name found no repository.",
+    "License: the repository has no LICENSE file in its top-level listing and the GitHub API reports none; THIRD_PARTY.md covers only SAM2, SAM3 and ProPainter (the last under the non-commercial S-Lab License 1.0). The licence of TouchBridge's own code is therefore 'not stated'.",
+    "arXiv v2 (2026-11-17) was not diffed against v1; the v2 abstract read on 2026-11-23 gives the same headline results as the summary (72.5% against 77.5%, collection 7.0x faster, +25.0 and +42.5 points over DexPilot and UniDex)."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-23"
   },
   {
    "id": "touch_jepa",

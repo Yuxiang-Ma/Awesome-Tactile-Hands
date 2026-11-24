@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-03T09:33:28Z",
+ "generated": "2026-11-24T03:34:02Z",
  "baseline": false,
- "urls_checked": 286,
- "seconds": 206,
+ "urls_checked": 307,
+ "seconds": 209,
  "signals": [
   {
    "kind": "dataset",
@@ -11,8 +11,68 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://huggingface.co/front/build/kube-d45badd/index.js https://huggingface.co/front/build/kube-d45badd/katex.css https://huggingface.co/front/build/kube-d45badd/style.css",
+   "detail": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_OXT https://huggingface.co/front/build/kube-461cc29/index.js https://huggingface.co/front/build/kube-461cc29/katex.css https://huggingface.co/front/build/kube-461cc29/style.css",
    "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://dextacwam.github.io/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder https://huggingface.co/datasets/JensenYuan/DexTacWAM_OXT",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoforce",
+   "name": "EgoForce",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://huggingface.co/datasets/zhicao/EgoForce",
+   "availability": "announced"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoforce",
+   "name": "EgoForce",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 1,
+   "type": "phrase_removed",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) FACT Force · Action · Track Real-world task demo",
+   "availability": "announced"
+  },
+  {
+   "kind": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "name": "RSS Dual-Arm Tactile (tube pour)",
+   "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "priority": 1,
+   "type": "hf_gated",
+   "detail": "manual -> None",
+   "availability": "gated"
+  },
+  {
+   "kind": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "name": "RSS Dual-Arm Tactile (tube pour)",
+   "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "priority": 1,
+   "type": "hf_private",
+   "detail": "False -> None",
+   "availability": "gated"
+  },
+  {
+   "kind": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "name": "RSS Dual-Arm Tactile (tube pour)",
+   "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "priority": 1,
+   "type": "hf_disabled",
+   "detail": "False -> None",
+   "availability": "gated"
   },
   {
    "kind": "dataset",
@@ -21,8 +81,138 @@
    "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
    "priority": 1,
    "type": "hf_commit",
-   "detail": "files 14915 -> 14917, last modified 2026-11-02T22:47:47.000Z",
+   "detail": "files 14917 -> None, last modified None",
    "availability": "gated"
+  },
+  {
+   "kind": "dataset",
+   "id": "tactidex",
+   "name": "TactiDex",
+   "url": "https://tactidex.github.io/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://drive.google.com/drive/folders/1O3Dipx7l_5aTlrXQKpZNMMUo5XbOHH5K?usp=sharing",
+   "availability": "not_released"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacwam_wetlab",
+   "name": "TacWAM Wet-Lab Tasks",
+   "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
+   "priority": 1,
+   "type": "hf_commit",
+   "detail": "files 23188 -> 23225, last modified 2026-11-05T02:57:55.000Z",
+   "availability": "gated"
+  },
+  {
+   "kind": "dataset",
+   "id": "talos_electrician_wirenuts",
+   "name": "Talos electrician wire-nut sample",
+   "url": "https://huggingface.co/datasets/talosdataworks/electrician-wire-nuts-tactile-glove-hand-pose-sample",
+   "priority": 1,
+   "type": "hf_commit",
+   "detail": "files 18 -> 18, last modified 2026-11-12T02:08:19.000Z",
+   "availability": "partial"
+  },
+  {
+   "kind": "model",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://dextacwam.github.io/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder https://huggingface.co/datasets/JensenYuan/DexTacWAM_OXT",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "GitHub dextacwam/DexTacWAM README 'Release' lists training and offline inference code for all three stages, configs for the six tasks and ablations, and deployment code. Hugging Face JensenYuan/DexTacWAM_multi_finger_tactile_encoder holds the stage 1 tactile encoder (866 MB, step 53000). README: 'Not included: stage 2 world models and stage 3 action experts.' Code and weights are linked from the project page."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "fact",
+   "name": "FACT",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://huggingface.co/datasets/zhicao/EgoForce",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "fact",
+   "name": "FACT",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 1,
+   "type": "phrase_removed",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data (Coming Soon) FACT Force · Action · Track Real-world task demo",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "tactiskill",
+   "name": "TactiSkill",
+   "url": "https://tactidex.github.io/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://drive.google.com/drive/folders/1O3Dipx7l_5aTlrXQKpZNMMUo5XbOHH5K?usp=sharing",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "tactidex.github.io shows 'Code (Coming Soon)' and 'Data (Coming Soon)' buttons with no link; GitHub search for TactiDex and TactiSkill finds only the page repo tactidex/tactidex.github.io; weights are not mentioned. Checked 2026-10-25."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "touchbridge",
+   "name": "TouchBridge",
+   "url": "https://touchbridge2026.github.io/",
+   "priority": 1,
+   "type": "links_added",
+   "detail": "https://github.com/touchbridge2026/TouchBridge",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page touchbridge2026.github.io has a 'Code' button marked 'Coming soon' with no target; the arXiv v1 text states no code, data or weights release (read 2026-11-01)."
+   }
+  },
+  {
+   "kind": "dataset",
+   "id": "dextraverse",
+   "name": "DextraVerse",
+   "url": "https://huggingface.co/datasets/ntumars/DextraVerse",
+   "priority": 2,
+   "type": "hf_id",
+   "detail": "ntumars/DextraVerse -> ntumars/DextraVerse_OXT",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "dextraverse",
+   "name": "DextraVerse",
+   "url": "https://huggingface.co/datasets/ntumars/DextraVerse",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 49 -> 49, last modified 2026-11-23T06:24:41.000Z",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoexplorer",
+   "name": "EgoExplorer",
+   "url": "https://github.com/InternRobotics/EgoExplorer",
+   "priority": 2,
+   "type": "gh_full_name",
+   "detail": "InternRobotics/EgoExplorer -> Sage-PhysicalAI/EgoExplorer",
+   "availability": "partial"
   },
   {
    "kind": "dataset",
@@ -36,13 +226,109 @@
   },
   {
    "kind": "dataset",
-   "id": "touchscale",
-   "name": "TouchScale",
-   "url": "https://arxiv.org/abs/2610.10288",
+   "id": "hrdexdb",
+   "name": "HRDexDB",
+   "url": "https://github.com/snuvclab/HRDexDB",
+   "priority": 2,
+   "type": "gh_readme",
+   "detail": "README changed",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "name": "RSS Dual-Arm Tactile (tube pour)",
+   "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "priority": 2,
+   "type": "hf_id",
+   "detail": "SingleBicycle/rss-dual-arm-tactile -> None",
+   "availability": "gated"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacdex3d",
+   "name": "3dtacdex",
+   "url": "https://github.com/tianhaowuhz/3dtacdex",
+   "priority": 2,
+   "type": "gh_readme",
+   "detail": "README changed",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "tactilelab_inhandrotation",
+   "name": "TactileLab In-Hand Rotation",
+   "url": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation",
+   "priority": 2,
+   "type": "hf_id",
+   "detail": "Kitval/TactileLab_InHandRotation -> Kitval/TactileLab_InHandRotation_OXT",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "tactilelab_inhandrotation",
+   "name": "TactileLab In-Hand Rotation",
+   "url": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 22 -> 22, last modified 2026-11-20T22:46:32.000Z",
+   "availability": "public"
+  },
+  {
+   "kind": "model",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://huggingface.co/JensenYuan/DexTacWAM_multi_finger_tactile_encoder",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 5 -> 5, last modified 2026-11-04T20:30:05.000Z",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "GitHub dextacwam/DexTacWAM README 'Release' lists training and offline inference code for all three stages, configs for the six tasks and ablations, and deployment code. Hugging Face JensenYuan/DexTacWAM_multi_finger_tactile_encoder holds the stage 1 tactile encoder (866 MB, step 53000). README: 'Not included: stage 2 world models and stage 3 action experts.' Code and weights are linked from the project page."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "tacdex3d",
+   "name": "3DTacDex",
+   "url": "https://github.com/tianhaowuhz/3dtacdex",
+   "priority": 2,
+   "type": "gh_readme",
+   "detail": "README changed",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "github.com/tianhaowuhz/3dtacdex (MIT) holds the encoder pretraining code and checkpoints ckpts/encoder.pt (148 KB, for downstream tasks) and ckpts/all.pt (59 MB); README: 'This repo only contain the pretrain code of tactile encoder'. The diffusion-policy code is not in it. Checked 2026-10-25."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "tacdex3d",
+   "name": "3DTacDex",
+   "url": "https://github.com/tianhaowuhz/3dtacdex/tree/main/ckpts",
+   "priority": 2,
+   "type": "gh_readme",
+   "detail": "README changed",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "github.com/tianhaowuhz/3dtacdex (MIT) holds the encoder pretraining code and checkpoints ckpts/encoder.pt (148 KB, for downstream tasks) and ckpts/all.pt (59 MB); README: 'This repo only contain the pretrain code of tactile encoder'. The diffusion-policy code is not in it. Checked 2026-10-25."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "touchbridge",
+   "name": "TouchBridge",
+   "url": "https://arxiv.org/abs/2610.40349",
    "priority": 2,
    "type": "arxiv_version",
-   "detail": "2 -> 3",
-   "availability": "gated"
+   "detail": "1 -> 2",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page touchbridge2026.github.io has a 'Code' button marked 'Coming soon' with no target; the arXiv v1 text states no code, data or weights release (read 2026-11-01)."
+   }
   },
   {
    "kind": "dataset",
@@ -51,8 +337,38 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "links_removed",
-   "detail": "https://huggingface.co/front/build/kube-7e92521/index.js https://huggingface.co/front/build/kube-7e92521/katex.css https://huggingface.co/front/build/kube-7e92521/style.css",
+   "detail": "https://huggingface.co/front/build/kube-d45badd/index.js https://huggingface.co/front/build/kube-d45badd/katex.css https://huggingface.co/front/build/kube-d45badd/style.css",
    "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "dexvitac",
+   "name": "DexViTac",
+   "url": "https://xitong-c.github.io/DexViTac/",
+   "priority": 3,
+   "type": "page_text",
+   "detail": "text length 4651 -> 13076",
+   "availability": "announced"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoforce",
+   "name": "EgoForce",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 3,
+   "type": "phrase_added",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data FACT Force · Action · Track Real-world task demonstrations Tas",
+   "availability": "announced"
+  },
+  {
+   "kind": "dataset",
+   "id": "tacross",
+   "name": "TACROSS",
+   "url": "https://tacross-touch-project.github.io/",
+   "priority": 3,
+   "type": "page_text",
+   "detail": "text length 9697 -> 9746",
+   "availability": "announced"
   },
   {
    "kind": "dataset",
@@ -61,38 +377,70 @@
    "url": "https://datarade.ai/data-products/egocentric-data-electrician-installing-two-ceiling-lights-talos-dataworks",
    "priority": 3,
    "type": "page_text",
-   "detail": "text length 20744 -> 20748",
+   "detail": "text length 20748 -> 20765",
    "availability": "partial"
+  },
+  {
+   "kind": "model",
+   "id": "fact",
+   "name": "FACT",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 3,
+   "type": "phrase_added",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data FACT Force · Action · Track Real-world task demonstrations Tas",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io: 'Code (Coming Soon)' and 'Data (Coming Soon)' (read 2026-10-27). The arXiv v1 HTML has no code, weights or license statement and no repository link."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "tacross",
+   "name": "TACROSS",
+   "url": "https://tacross-touch-project.github.io/",
+   "priority": 3,
+   "type": "page_text",
+   "detail": "text length 9697 -> 9746",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "tacross-touch-project.github.io: 'Software release coming soon' and 'Software and the dataset are planned for release'; only hardware v1 files (BOM, PCB Gerbers, pick-and-place) are on a GitHub release. No checkpoint is mentioned. Checked 2026-10-25."
+   }
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "dex_mptd"
+   "id": "bvt20"
   },
   {
    "kind": "dataset",
-   "id": "egoexplorer"
+   "id": "dexvitac"
   },
   {
    "kind": "dataset",
-   "id": "gist_vta"
+   "id": "exobridge"
   },
   {
    "kind": "dataset",
-   "id": "kaiwu"
+   "id": "htac"
   },
   {
    "kind": "dataset",
-   "id": "robotacdex"
+   "id": "paxini_omnisharing"
   },
   {
    "kind": "dataset",
-   "id": "tacross"
+   "id": "sharpa_origami"
   },
   {
    "kind": "dataset",
-   "id": "tacwam_wetlab"
+   "id": "tactidex"
+  },
+  {
+   "kind": "dataset",
+   "id": "talos_electrician_wirenuts"
   },
   {
    "kind": "dataset",
@@ -100,15 +448,19 @@
   },
   {
    "kind": "model",
-   "id": "dexflex"
+   "id": "card"
   },
   {
    "kind": "model",
-   "id": "ego2contact"
+   "id": "dextouch_wm"
   },
   {
    "kind": "model",
-   "id": "exobridge"
+   "id": "egopressurediff"
+  },
+  {
+   "kind": "model",
+   "id": "fact"
   },
   {
    "kind": "model",
@@ -124,19 +476,23 @@
   },
   {
    "kind": "model",
-   "id": "tacross"
+   "id": "star"
   },
   {
    "kind": "model",
-   "id": "tactile_viewgcn"
+   "id": "tactile_gat"
   },
   {
    "kind": "model",
-   "id": "tavi"
+   "id": "tactofind"
   },
   {
    "kind": "model",
-   "id": "touchanything"
+   "id": "tk_stgn"
+  },
+  {
+   "kind": "model",
+   "id": "touchbridge"
   },
   {
    "kind": "model",
@@ -148,10 +504,10 @@
   },
   {
    "kind": "model",
-   "id": "vitam"
+   "id": "vistacalign"
   }
  ],
- "not_fully_released": 63,
+ "not_fully_released": 73,
  "errors": [],
  "problems": [],
  "sources_failed": []

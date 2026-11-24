@@ -1,0 +1,49 @@
+{
+ "flow": "status",
+ "date": "2026-11-23",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 36,
+ "updated": 11,
+ "searches": [
+  "DexTouch-WM tactile world model Wuji hand code release",
+  "EgoTactile EgoPressureDiff grasp pressure egocentric video code dataset",
+  "TouchWorld predictive reactive tactile foundation model dexterous manipulation code weights",
+  "CARD Contact-Anchored Retargeting for Dexterous Manipulation code github",
+  "STAR Sparse Tactile Representation Learning Vision-Tactile-Language-Action dexterous code",
+  "TactoFind tactile only object retrieval system code",
+  "VisTacAlign co-training dexterous policies tactile human robot demonstrations visual-tactile alignment code",
+  "BiView-Touch BVT-20 bimanual tactile representations cross-hand completion dataset",
+  "DexViTac dataset release Hugging Face code visuo-tactile-kinematic demonstrations",
+  "H-Tac DeskTask-Tac human-centric transferable tactile pre-training dataset code",
+  "PaXini OmniSharing DB tactile dataset download",
+  "Robotic Origami Challenge Sharpa fold plane demonstrations dataset",
+  "VICON Visual-Inertial-Contact hand-object tracking manipulation datasets code release",
+  "ExoBridge bare hand to hand-worn exoskeleton mapping human limb coupling code",
+  "HuTact tactile-aware hand representations human hand-object interaction code github",
+  "UpViTaL unpaired visual-tactile self-supervised representation learning dexterous code",
+  "TK-STGN Grasp Like Humans multi-fingered grasping proprioceptive sensorimotor integration code",
+  "Tactile-GAT tactile graph attention networks robot tactile perception classification code"
+ ],
+ "for_the_owner": [
+  "Viewer samples wanted: EgoForce became public (Hugging Face zhicao/EgoForce, 1.9 TB, CC BY-NC 4.0, ungated). Files can be fetched per task folder, for example 20260902/Pour_water/*; each recording has head.mp4, wrist_left.mp4, wrist_right.mp4, timestamps.json and tactile.npz.",
+  "Viewer samples wanted: TactiDex became public through a Google Drive folder (TactiDex_Output.zip, 45.02 GB, and TactiDex_objects.zip, 138.3 MB) https://drive.google.com/drive/folders/1O3Dipx7l_5aTlrXQKpZNMMUo5XbOHH5K?usp=sharing",
+  "Judgment call: tactidex is marked public from the folder listing alone (no sign-in, a Download button on each file); nothing was downloaded and the zip contents, layout and license are unknown. Set it back to partial or unclear if the download needs a request or fails.",
+  "No new gate appeared. rss_dual_arm_tactile and tacwam_wetlab are still gated (manual approval); their gate check dates are 2026-11-23."
+ ],
+ "notes": [
+  "36 signals, 11 change-log lines. Real changes: EgoForce released (and FACT page now links it, code still 'Coming Soon'); TactiDex Dataset button with a Drive folder (TactiSkill code still announced); TouchBridge code repository (created 2026-11-17, no license, no TouchBridge weights); DexTacWAM zarr copy of the six task sets in JensenYuan/DexTacWAM_OXT (CC-BY-4.0, 381 GB); rss_dual_arm_tactile second task (USB plug) and rollout folders; tacwam_wetlab new folders; renames of DextraVerse and TactileLab repositories; the EgoExplorer code repository moved to Sage-PhysicalAI.",
+  "rss_dual_arm_tactile (P1 hf_gated, hf_private, hf_disabled, hf_commit and P2 hf_id, all 'x -> None'): the scan got empty values for this repository, not a real change. A direct read the same night showed it public, not disabled, gated manual, 26 top-level entries, last modified 2026-11-24 02:27 UTC. No withdrawn line was logged. nightly_tool.py hf-commits returns HTTP 401 for this gated repository, so what changed was read from the public card and folder listing.",
+  "EgoForce differs from the paper: card says 739 h, 18,373 recordings, 25 tasks, 191 collectors, 5 x 12 fingertip taxels per hand and no palm taxels, against the paper's 2,000 h, 40k episodes, 1,000 tasks and 60 palm taxels. The scale fields now hold the card's numbers and the paper's are in the caveats. The card's task table was added up and sums to 18,373. No file was opened.",
+  "No edit for the other signals. dextacwam P3 links_removed lists only Hugging Face front-end build files. dextacwam model P2 hf_commit: the tactile encoder repo's last two commits (2026-11-04) edit README.md only. talos_electrician_wirenuts (P1 hf_commit, P3 page_text): the 2026-11-12 commit only links talosdataworks.com/datasets, which the entry already mentions; file count unchanged at 18. hrdexdb README change: download instructions (Hugging Face and Google Drive, about 1.6 TB, per-subset sizes) match the entry. fusionx_sample README change: still describes the v1.3.1 GUI and SDK 0.1.0 wheels; sample data repos not re-read. tacdex3d README change: code and checkpoints status unchanged (model checked date refreshed). dexvitac P3 page_text (4,651 -> 13,076 characters): the project page now adds a DexViTac++ bimanual extension section (21 DoF per-hand kinematics, 240 g hand unit); the Hugging Face repository still holds only a README ('The complete dataset will be released in the near future', last modified 2026-03-17) and the code repository only a README, so availability stays announced. tacross P3 page_text: still 'Software release coming soon' and only hardware v1 downloadable.",
+  "Deep check (24 entries). Read from a primary source tonight: tactidex, touchbridge, fact (changed); dexvitac (project page, Hugging Face repo, GitHub repo), talos_electrician_wirenuts (Hugging Face repo and commits), sharpa_origami (Hugging Face API: gate auto, last modified 2026-07-24, CC-BY-4.0), touchworld (project page and the flyingGH world-model repo, unchanged), card (project page: Code button still href '#', 'Link to come'), omnivtla (project page still 'Coming Soon'), rlhnd (GitHub repo and project page, unchanged since 2026-10-08), tactofind (project page, no code link), vistacalign (project page: paper and code 'coming soon'). Web search only, no primary source read, so no checked date changed: bvt20, exobridge, htac, paxini_omnisharing, vicon_glove, dextouch_wm, egopressurediff, hutact, tactile_gat, tk_stgn, upvital, star (star's project page was also read and shows no code link, and its entry was added by tonight's discovery run). The searches surfaced no code, weights or data link beyond what the catalog records; search summaries are leads, not sources.",
+  "Models with a changed checked date (2026-11-23): dextacwam, fact, tactiskill, touchbridge, tacdex3d, rlhnd, tactofind, card, touchworld, omnivtla.",
+  "Discovery leads for the next discovery run: the TactileLab paper (arXiv 2611.07881, 'TactileLab: Sim-to-Real Dexterous Robot Manipulation with Efficient Shear-Sensitive Tactile Simulation', Lin et al., 2026-11-05) is not in the catalog as a model; it trains in-hand rotation policies with TacTip-family sensors on a 4-finger LEAP-module hand and its data card is the tactilelab_inhandrotation entry. The Open-X-Tactile site (open-x-tactile.github.io) is named on the DexTacWAM, DextraVerse and TactileLab cards and may list other contributed datasets.",
+  "tactidex entry: license stays 'unconfirmed' and no scale numbers changed; which of the two Drive zips holds the 757 sequences is not stated.",
+  "Not done: no viewer samples or integrity checks (a person runs them); no gated file opened; no dataset downloaded."
+ ],
+ "started": "2026-11-24T03:30:33Z",
+ "finished": "2026-11-24T03:42:50Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 15 changed files, 10 new entries"
+}
