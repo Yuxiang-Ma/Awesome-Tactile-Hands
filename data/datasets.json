@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-11-23"
+  "last_updated": "2026-11-24"
  },
  "datasets": [
   {
@@ -401,6 +401,12 @@
      "model": "ego2contact"
     },
     {
+     "name": "T-WLA, arXiv 2610.28814",
+     "url": "https://arxiv.org/abs/2610.28814",
+     "note": "Tactile encoder pretrained contrastively on synchronized 21x21 pressure maps and hand-pose histories; tactile-conditioned future hand-motion prediction evaluated across five environments, finger-joint MPJPE 0.35 cm against 0.50 for the best baseline.",
+     "model": "twla"
+    },
+    {
      "name": "TouchAnnotator, arXiv 2611.09129",
      "url": "https://arxiv.org/abs/2611.09129",
      "note": "541 segments, 411,568 frames, 3.8 h; relative pressure, contact and privileged wrist views. Evaluated on 184 seen and 76 unseen episodes: unseen temporal accuracy 0.8687, volumetric IoU 0.3821, MAE 0.0638 from ego video only.",
@@ -730,6 +736,12 @@
      "own": true
     },
     {
+     "name": "TF²-Steering, arXiv 2611.01483",
+     "url": "https://arxiv.org/abs/2611.01483",
+     "note": "Named with OpenNeoData and FTP-1-Sharpa as tactile pretraining data; amount used not stated.",
+     "model": "tf2_steering"
+    },
+    {
      "name": "TouchAnnotator, arXiv 2611.09129",
      "url": "https://arxiv.org/abs/2611.09129",
      "note": "4,371 segments, 4,363,007 frames, 40.4 h of dexterous robot-hand recordings; contact derived from optical fingertip deformation, plus privileged views.",
@@ -880,6 +892,12 @@
      "url": "https://arxiv.org/abs/2606.13102",
      "note": "OpenTouch glove as an array-type sensor, 1.5% of the mix. The checkpoint's statistics list 2,958 trajectories over 26 tasks; OpenTouch releases about 2,900 annotated clips.",
      "model": "ftp1"
+    },
+    {
+     "name": "HOPE, NeurIPS 2026 (arXiv 2608.06192)",
+     "url": "https://arxiv.org/abs/2608.06192",
+     "note": "Glove taxels projected onto MANO vertices and converted to kPa: 1,644 clips (171,765 frames) for training and 190 clips (17,264 frames) for testing.",
+     "model": "hope"
     },
     {
      "name": "RLHND, arXiv 2610.09455",
@@ -4806,7 +4824,8 @@
     "The card and paper name the video key observation.images.ego; the mini release stores it as observation.images.camera_0. The repository also holds a per-task zarr copy (dataset/oxt/EgoExplorer/<task>.zarr) that the card does not describe.",
     "Number of participants and objects not stated.",
     "The release files were not opened for this survey (gated, access not requested); channels come from the card, the paper and the file tree.",
-    "The code repository now sits at github.com/Sage-PhysicalAI/EgoExplorer (the GitHub API full_name on 2026-11-23; github.com/InternRobotics/EgoExplorer was the earlier address); last push 2026-10-23, 32 stars, no license reported. The Hugging Face dataset is still under InternRobotics, gate manual, last modified 2026-10-22, so the release itself is unchanged."
+    "The code repository now sits at github.com/Sage-PhysicalAI/EgoExplorer (the GitHub API full_name on 2026-11-23; github.com/InternRobotics/EgoExplorer was the earlier address); last push 2026-10-23, 32 stars, no license reported. The Hugging Face dataset is still under InternRobotics, gate manual, last modified 2026-10-22, so the release itself is unchanged.",
+    "The project page internrobotics.github.io/egoexplorer.github.io/ returned HTTP 404 on two scans in a row, the second on 2026-11-24; the Hugging Face card, the GitHub repository and the gate were reachable the same day and no replacement project page was found, so the link is kept and availability stays partial."
    ],
    "links": {
     "paper": "https://arxiv.org/abs/2610.18872",
@@ -5664,6 +5683,12 @@
      "note": "The paper's own Sharpa North-FTP-1 data, with Sharpa DTC fingertip images, is 9.0% of the mix. The checkpoint's statistics list 9,328 trajectories, the count the catalog's ftp1_sharpa entry cites from Open-X-Tactile for the release.",
      "model": "ftp1",
      "own": true
+    },
+    {
+     "name": "TF²-Steering, arXiv 2611.01483",
+     "url": "https://arxiv.org/abs/2611.01483",
+     "note": "Named with OpenNeoData and the T-Rex dataset as tactile pretraining data; amount used not stated.",
+     "model": "tf2_steering"
     }
    ]
   },
@@ -8404,7 +8429,15 @@
      "scale": true,
      "diversity": true
     }
-   }
+   },
+   "used_by": [
+    {
+     "name": "WiTac, arXiv 2611.21057",
+     "url": "https://arxiv.org/abs/2611.21057",
+     "note": "SharpaDex v1.0, 'nearly 300 hours' over 59 tasks, 98%/2% split by episode; 30,000 steps at batch 1,024 with contact-descriptor, deformation-change, fingertip-motion, masked wrist-feature and wrench-response objectives.",
+     "model": "witac"
+    }
+   ]
   },
   {
    "id": "sharpa_origami",
@@ -9381,6 +9414,12 @@
     }
    ],
    "used_by": [
+    {
+     "name": "T-WLA, arXiv 2610.28814",
+     "url": "https://arxiv.org/abs/2610.28814",
+     "note": "Future hand-motion prediction on the full held-out test split: finger-joint MPJPE 0.46 cm against 0.63 for VITRA + tactile.",
+     "model": "twla"
+    },
     {
      "name": "MIT-Media-Lab/tachin-annotations-v1 (Hugging Face dataset)",
      "url": "https://huggingface.co/datasets/MIT-Media-Lab/tachin-annotations-v1",
@@ -11492,7 +11531,7 @@
   {
    "id": "tipdex_vtla",
    "name": "TipDex-VTLA demonstrations",
-   "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
+   "title": "TipDex-VTLA: Learning to Refine Actions with Visual Reliability and Tactile Feedback for Dexterous Manipulation",
    "authors": "Xudi Ge et al.",
    "year": 2026,
    "venue": "arXiv 2611.25683",
@@ -11534,7 +11573,7 @@
     "text": "300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2); per-task counts and hours not stated"
    },
    "availability": "announced",
-   "access": "The paper states 'We will release the collected data and source code.'; no link is given (checked 2026-11-23).",
+   "access": "The paper states 'We will release the collected data and source code.'; no link is given in v1 or v2 (checked 2026-11-24).",
    "license": "not stated",
    "caveats": [
     "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it.",
@@ -11579,8 +11618,9 @@
     ]
    },
    "sources": [
-    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19)",
-    "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)"
+    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19; v2 2026-11-22)",
+    "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)",
+    "https://arxiv.org/html/2611.25683v2 (title, abstract and release sentence rechecked 2026-11-24)"
    ],
    "unconfirmed": [
     "The tactile maker is not stated; the hand model RH56F2-E2-T1 suggests Inspire's own sensors, which the paper does not say. The catalog's RH56F1 record (8 capacitive sites per hand) does not match the 364 piezoresistive taxels given here, so no hardware link was made.",
@@ -11828,7 +11868,8 @@
     ]
    },
    "sources": [
-    "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample (README.md, Hugging Face API metadata and top-level listing)"
+    "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample (README.md, Hugging Face API metadata and top-level listing)",
+    "https://doi.org/10.5281/zenodo.24147501 (Zenodo 'lite' mirror by Talos Dataworks, record 24147502, published 2026-11-11: dataset card, LeRobot metadata, one episode parquet, spec sheet; 7.2 MB, CC BY-NC 4.0)"
    ],
    "unconfirmed": [
     "hours = 306 s / 3600, from the card's stated duration.",
@@ -11853,6 +11894,217 @@
      "calibrated": true,
      "video": true,
      "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
+  },
+  {
+   "id": "clinician_bathing",
+   "name": "Clinician Bathing Demonstrations",
+   "title": "High Fidelity Capture, Reconstruction, and Transfer of Human Demonstrations for Robot-Assisted Bathing",
+   "authors": "Arjun S. Lakshmipathy et al.",
+   "year": 2026,
+   "venue": "RSS 2026 (arXiv 2608.09127)",
+   "summary": "Three trained clinicians wiping the arms, legs, thighs, obliques, back, neck and face of six seated subjects with wet wipes, wearing a 65-taxel capacitive Pressure Profile Systems TactileGlove on each hand (10 Hz) inside a 20-camera Vicon capture at 120 Hz; 128 captures, 257,000 frames, with SMPL-X and MANO fits, contact regions and force.",
+   "embodiment": "human",
+   "hand": "Pressure Profile Systems TactileGlove on both hands of the clinician",
+   "bimanual": true,
+   "sensor": {
+    "type": "capacitive",
+    "taxels_per_hand": 65,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": 10,
+    "note": "65 differential-capacitance pressure taxels per glove across the palm and digits, synchronised with Vicon by timecode; 3M TB641 grip material added to the glove palms.",
+    "maker": "Pressure Profile Systems",
+    "model": "TactileGlove",
+    "principle": "capacitive",
+    "range": null
+   },
+   "modalities": [
+    "hand_pose",
+    "mocap"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": 128,
+    "frames": 257000,
+    "tasks": null,
+    "objects": null,
+    "subjects": 9,
+    "scenes": 1,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "128 captures, 257,000 frames (mean 2,007 frames per capture), 3 clinicians bathing 6 subjects, 8 body regions"
+   },
+   "availability": "announced",
+   "access": "The paper says 'All relevant materials will be publicly released'; no dataset link or repository was given (checked 2026-11-24).",
+   "license": "not stated",
+   "caveats": [
+    "The touch is human-on-human contact through a wet wipe during bathing, not object manipulation on a table.",
+    "No RGB video of the demonstrations is described; capture is Vicon markers (52 on each subject, 23 on the back of each glove) plus the gloves.",
+    "The paper reports 128 captures, while its per-region table sums to 138.",
+    "Hands, chest and pelvis of the subjects were not bathed in the captures."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2608.09127"
+   },
+   "setup": {
+    "cameras": [],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "optical_mocap",
+      "system": "Vicon Vantage-V16 (20 cameras, 120 Hz)",
+      "note": "23 markers on the back of each glove; MANO fitted from markers"
+     },
+     {
+      "target": "body",
+      "method": "optical_mocap",
+      "system": "Vicon Vantage-V16 (20 cameras, 120 Hz)",
+      "note": "52 markers on each person; SMPL-X fitted with MoSh++"
+     }
+    ],
+    "other": []
+   },
+   "sources": [
+    "https://arxiv.org/abs/2608.09127 (abstract via arXiv API; v1, 2026-08-10, RSS 2026)",
+    "https://arxiv.org/html/2608.09127 (capture setup, gloves, scale, release sentence)"
+   ],
+   "unconfirmed": [
+    "subjects 9 counts 3 clinicians and 6 bathed subjects; only the clinicians wore the gloves.",
+    "The paper cites the glove as Pressure Profile Systems 'TactileGlove' without a revision; the 65-taxel count matches the catalog's TactileGlove II record.",
+    "Coverage tip, phalanx and palm is from the paper's 'across the palm and digits'; the exact element layout was not read.",
+    "hours not stated; 257,000 frames at the 120 Hz Vicon rate would be about 0.6 h, which assumes frames are counted at that rate."
+   ],
+   "rank": {
+    "n": 6,
+    "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "release announced"
+    ]
+   },
+   "contents": {
+    "score": 1,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": false,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": false
+    }
+   }
+  },
+  {
+   "id": "force_vision",
+   "name": "Force-Vision (Li et al., ICLR 2024)",
+   "title": "Learning to Jointly Understand Visual and Tactile Signals",
+   "authors": "Yichen Li et al.",
+   "year": 2024,
+   "venue": "ICLR 2024",
+   "summary": "A person wearing a knitted full-hand pressure glove (16x16 readouts over palm and fingers, calibrated to newtons with a UR5e) squeezes, holds and presses 89 articulated tools (scissors, sprayers, staplers, clips) while a webcam records the hand-object scene; 150,000 frames of paired force maps and RGB, plus a canonical photo of each object.",
+   "embodiment": "human",
+   "hand": "knitted pressure glove built after Sundaram et al. 2019 (STAG method), one hand",
+   "bimanual": false,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": 256,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": null,
+    "note": "16x16 grid of pressure readouts per frame, stored as a 2D heatmap; calibrated to force with a UR5e arm.",
+    "maker": "custom (MIT CSAIL)",
+    "model": null,
+    "principle": "piezoresistive",
+    "range": null
+   },
+   "modalities": [
+    "rgb"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": null,
+    "frames": 150000,
+    "tasks": 3,
+    "objects": 89,
+    "subjects": null,
+    "scenes": 1,
+    "scene_types": [
+     "lab"
+    ],
+    "text": "150,000 frames, 89 object instances in 4+ categories, manipulations squeeze, hold and press; train 123,561 frames (81 objects), test 21,000 frames"
+   },
+   "availability": "public",
+   "access": "The project site's 'Download Data' links a Google Drive file (d256.zip) whose page opens without sign-in; size not shown, files not opened (checked 2026-11-24).",
+   "license": "not stated",
+   "caveats": [
+    "The introduction says 2,000,000 paired frames; the dataset section says 150,000 frames (123,561 train, 21,000 test). The smaller figure is used here.",
+    "Glove maker, sampling rate and number of wearers are not stated; the glove follows the knitted design of Sundaram et al. 2019 but with a 16x16 readout grid.",
+    "No hand pose is recorded; the second modality is a single webcam video plus a static photo of each object."
+   ],
+   "links": {
+    "paper": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/3848bc3112429079af85dedb7d369ef4-Abstract-Conference.html",
+    "project": "https://sites.google.com/view/iclr-submission-force-vision/home",
+    "data": "https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "third_person",
+      "count": 1,
+      "model": "webcam (model not stated)",
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "static"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [],
+    "other": []
+   },
+   "sources": [
+    "https://proceedings.iclr.cc/paper_files/paper/2024/file/3848bc3112429079af85dedb7d369ef4-Paper-Conference.pdf (pages 1-9: dataset, glove, splits, method, results)",
+    "https://sites.google.com/view/iclr-submission-force-vision/home (data link)",
+    "https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view (file page: d256.zip)"
+   ],
+   "unconfirmed": [
+    "taxels_per_hand 256 is the 16x16 readout grid stated in the paper; the physical sensor count of the glove is not given.",
+    "principle piezoresistive is assumed from the cited knitted-glove design (Sundaram et al. 2019), which uses a piezoresistive film; the paper only says 'embroidery-based'.",
+    "tasks 3 counts the manipulation types named in the latent-space figure (squeeze, hold, press).",
+    "Whether d256.zip holds the full 150,000-frame release was not checked; files not opened."
+   ],
+   "rank": {
+    "n": 2,
+    "label": "Open, not checked",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "public download",
+     "files not opened yet"
+    ]
+   },
+   "contents": {
+    "score": 1,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": false,
      "scale": false,
      "diversity": false
     }

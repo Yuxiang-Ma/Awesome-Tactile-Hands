@@ -1,6 +1,6 @@
 {
  "version": 1,
- "updated": "2026-11-24T03:34:02Z",
+ "updated": "2026-11-24T09:34:18Z",
  "urls": {
   "http://stag.csail.mit.edu/": {
    "kind": "page",
@@ -164,6 +164,17 @@
    "text_len": 3896,
    "links": [
     "https://github.com/Adonis-galaxy/Dexterous-Tactile-World-Model"
+   ],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
+  "https://akashsharma02.github.io/ptld-website/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "14a475a0fb93ebef",
+   "text_len": 4702,
+   "links": [
+    "https://github.com/akashsharma02/ptld"
    ],
    "phrases": [],
    "seen": "2026-11-24"
@@ -367,6 +378,15 @@
    "comment": null,
    "seen": "2026-11-24"
   },
+  "https://arxiv.org/abs/2506.15953": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-05-13",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-11-24"
+  },
   "https://arxiv.org/abs/2508.08706": {
    "kind": "arxiv",
    "status": 200,
@@ -374,6 +394,15 @@
    "updated": "2026-06-15",
    "journal_ref": null,
    "comment": "Accepted by IEEE Robotics and Automation Letters (RA-L). ObjTac dataset: https://readerek.github.io/Objtac.github.io",
+   "seen": "2026-11-24"
+  },
+  "https://arxiv.org/abs/2508.14441": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2025-08-20",
+   "journal_ref": null,
+   "comment": null,
    "seen": "2026-11-24"
   },
   "https://arxiv.org/abs/2509.08354": {
@@ -455,6 +484,15 @@
    "updated": "2026-02-14",
    "journal_ref": null,
    "comment": "Website: https://yswi.github.io/tactalign/",
+   "seen": "2026-11-24"
+  },
+  "https://arxiv.org/abs/2603.04531": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2026-06-18",
+   "journal_ref": null,
+   "comment": null,
    "seen": "2026-11-24"
   },
   "https://arxiv.org/abs/2603.13869": {
@@ -590,6 +628,33 @@
    "updated": "2026-07-30",
    "journal_ref": null,
    "comment": "Project Page: https://ace-data-engine.github.io/ACE-Data-0/",
+   "seen": "2026-11-24"
+  },
+  "https://arxiv.org/abs/2608.01824": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-08-18",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-11-24"
+  },
+  "https://arxiv.org/abs/2608.06192": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-10-30",
+   "journal_ref": null,
+   "comment": "project page is at: https://subin6.github.io/page-hope",
+   "seen": "2026-11-24"
+  },
+  "https://arxiv.org/abs/2608.09127": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-08-10",
+   "journal_ref": "Proceedings of Robotics: Science and Systems (RSS), 2026",
+   "comment": "Accepted to Robotics: Science and Systems (RSS) 2026. Official conference page: https://www.roboticsproceedings.org/rss22/p094.pdf",
    "seen": "2026-11-24"
   },
   "https://arxiv.org/abs/2608.15060": {
@@ -844,6 +909,15 @@
    "comment": "Project Page: https://touch-jepa.github.io",
    "seen": "2026-11-24"
   },
+  "https://arxiv.org/abs/2610.28814": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 2,
+   "updated": "2026-11-17",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-11-24"
+  },
   "https://arxiv.org/abs/2610.36539": {
    "kind": "arxiv",
    "status": 200,
@@ -858,6 +932,24 @@
    "status": 200,
    "version": 2,
    "updated": "2026-11-17",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-11-24"
+  },
+  "https://arxiv.org/abs/2611.01483": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-11-01",
+   "journal_ref": null,
+   "comment": "19 pages, 6 figures. Project page: https://yiming-cc.github.io/tf2-steering/",
+   "seen": "2026-11-24"
+  },
+  "https://arxiv.org/abs/2611.07881": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 1,
+   "updated": "2026-11-05",
    "journal_ref": null,
    "comment": null,
    "seen": "2026-11-24"
@@ -880,13 +972,22 @@
    "comment": null,
    "seen": "2026-11-24"
   },
+  "https://arxiv.org/abs/2611.21057": {
+   "kind": "arxiv",
+   "status": 200,
+   "version": 3,
+   "updated": "2026-11-20",
+   "journal_ref": null,
+   "comment": null,
+   "seen": "2026-11-24"
+  },
   "https://arxiv.org/abs/2611.25683": {
    "kind": "arxiv",
    "status": 200,
-   "version": 1,
-   "updated": "2026-11-19",
+   "version": 2,
+   "updated": "2026-11-22",
    "journal_ref": null,
-   "comment": null,
+   "comment": "10 pages, 5 figures. Title updated; main text and results unchanged",
    "seen": "2026-11-24"
   },
   "https://aureleopku.github.io/DeCAL": {
@@ -1070,12 +1171,22 @@
    "status": 200,
    "seen": "2026-11-24"
   },
+  "https://drive.google.com/drive/folders/1O3Dipx7l_5aTlrXQKpZNMMUo5XbOHH5K?usp=sharing": {
+   "kind": "page",
+   "status": 200,
+   "seen": "2026-11-24"
+  },
   "https://drive.google.com/drive/folders/1SSE9pQetSoLbk82gnHd8Z3xHq7doRGgf": {
    "kind": "page",
    "status": 200,
    "seen": "2026-11-24"
   },
   "https://drive.google.com/file/d/1G52ihW7EbE5eSe04jnxGpo7cc1jxYWHw/view": {
+   "kind": "page",
+   "status": 200,
+   "seen": "2026-11-24"
+  },
+  "https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view": {
    "kind": "page",
    "status": 200,
    "seen": "2026-11-24"
@@ -1257,18 +1368,6 @@
    "release": null,
    "seen": "2026-11-24"
   },
-  "https://github.com/InternRobotics/EgoExplorer": {
-   "kind": "gh",
-   "status": 200,
-   "full_name": "Sage-PhysicalAI/EgoExplorer",
-   "pushed_at": "2026-10-23T05:52:55Z",
-   "archived": false,
-   "license": null,
-   "size_kb": 62377,
-   "readme_sha": "937866902c16905ada84a3fcc4b32eb0d44c8bd7",
-   "release": null,
-   "seen": "2026-11-24"
-  },
   "https://github.com/Jianyi2004/TouchAnything": {
    "kind": "gh",
    "status": 200,
@@ -1389,6 +1488,18 @@
    "release": null,
    "seen": "2026-11-24"
   },
+  "https://github.com/RoboVerseOrg/ViTacFormer": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "RoboVerseOrg/ViTacFormer",
+   "pushed_at": "2026-08-08T20:23:57Z",
+   "archived": false,
+   "license": "Apache-2.0",
+   "size_kb": 7292,
+   "readme_sha": "372701b5bfb820148edb6b1bac9064544d73c592",
+   "release": null,
+   "seen": "2026-11-24"
+  },
   "https://github.com/Russell-Zeng/EgoTactile": {
    "kind": "gh",
    "status": 200,
@@ -1398,6 +1509,18 @@
    "license": null,
    "size_kb": 3953,
    "readme_sha": "9376e694f8280b2b2b3f897525e4377ec4afacc4",
+   "release": null,
+   "seen": "2026-11-24"
+  },
+  "https://github.com/Sage-PhysicalAI/EgoExplorer": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "Sage-PhysicalAI/EgoExplorer",
+   "pushed_at": "2026-10-23T05:52:55Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 62377,
+   "readme_sha": "937866902c16905ada84a3fcc4b32eb0d44c8bd7",
    "release": null,
    "seen": "2026-11-24"
   },
@@ -1593,6 +1716,18 @@
    "release": null,
    "seen": "2026-11-24"
   },
+  "https://github.com/kaichen-z/TWLA": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "kaichen-z/TWLA",
+   "pushed_at": "2026-11-17T22:47:41Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 6709,
+   "readme_sha": "deb6a6926c7c5e23066a66c60852b0ade6ba2571",
+   "release": null,
+   "seen": "2026-11-24"
+  },
   "https://github.com/kingchou007/adaptac-dex": {
    "kind": "gh",
    "status": 200,
@@ -1725,6 +1860,18 @@
    "release": null,
    "seen": "2026-11-24"
   },
+  "https://github.com/subin6/hope": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "subin6/hope",
+   "pushed_at": "2026-10-30T04:08:29Z",
+   "archived": false,
+   "license": "NOASSERTION",
+   "size_kb": 10271,
+   "readme_sha": "a0bebab000d7b90b1e61f4afa7f72a249b2bf5b7",
+   "release": null,
+   "seen": "2026-11-24"
+  },
   "https://github.com/tianhaowuhz/3dtacdex": {
    "kind": "gh",
    "status": 200,
@@ -1758,6 +1905,18 @@
    "license": null,
    "size_kb": 6351,
    "readme_sha": "05d343810865f4311782d96097b56cc70ec817ce",
+   "release": null,
+   "seen": "2026-11-24"
+  },
+  "https://github.com/touchbridge2026/TouchBridge": {
+   "kind": "gh",
+   "status": 200,
+   "full_name": "touchbridge2026/TouchBridge",
+   "pushed_at": "2026-11-17T03:45:25Z",
+   "archived": false,
+   "license": null,
+   "size_kb": 93119,
+   "readme_sha": "4902feba3fd7c431bfc9750460aa3025dcd33ea1",
    "release": null,
    "seen": "2026-11-24"
   },
@@ -1909,8 +2068,8 @@
   "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc": {
    "kind": "page",
    "status": 200,
-   "text_sha": "8b9da8dd9aabf446",
-   "text_len": 1722,
+   "text_sha": "e3855ab1603f3784",
+   "text_len": 1704,
    "links": [
     "https://cdn-avatars.huggingface.co/v1/production/uploads/649e31b4ed3107c9bd1fc7eb/MN9Hh84P87vpTpawPl-mJ.jpeg",
     "https://cdn-avatars.huggingface.co/v1/production/uploads/no-auth/lKP9PoghnhdtMgz4M60TF.png",
@@ -2051,7 +2210,7 @@
    "files": 164,
    "seen": "2026-11-24"
   },
-  "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation": {
+  "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation_OXT": {
    "kind": "hf",
    "status": 200,
    "id": "Kitval/TactileLab_InHandRotation_OXT",
@@ -2310,7 +2469,7 @@
    "files": 14,
    "seen": "2026-11-24"
   },
-  "https://huggingface.co/datasets/ntumars/DextraVerse": {
+  "https://huggingface.co/datasets/ntumars/DextraVerse_OXT": {
    "kind": "hf",
    "status": 200,
    "id": "ntumars/DextraVerse_OXT",
@@ -2466,6 +2625,11 @@
    "files": 7903,
    "seen": "2026-11-24"
   },
+  "https://huggingface.co/datasets/zhicao/EgoForce": {
+   "kind": "hf",
+   "status": 200,
+   "seen": "2026-11-24"
+  },
   "https://huggingface.co/datasets/zhouzhoujy/EgoTouch": {
    "kind": "hf",
    "status": 200,
@@ -2602,18 +2766,8 @@
   },
   "https://internrobotics.github.io/egoexplorer.github.io/": {
    "kind": "page",
-   "status": 200,
-   "text_sha": "3ce316cad0664009",
-   "text_len": 11424,
-   "links": [
-    "https://github.com/InternRobotics/EgoExplorer",
-    "https://huggingface.co/datasets/InternRobotics/EgoExplorer"
-   ],
-   "phrases": [
-    "18872}, } The dataset, the capture toolkit and the reconstruction code will be released"
-   ],
-   "seen": "2026-11-03",
-   "failing": 404
+   "status": 404,
+   "seen": "2026-11-24"
   },
   "https://jianyi2004.github.io/TouchAnything-Website/": {
    "kind": "page",
@@ -2783,6 +2937,15 @@
    "phrases": [],
    "seen": "2026-11-24"
   },
+  "https://proceedings.iclr.cc/paper_files/paper/2024/hash/3848bc3112429079af85dedb7d369ef4-Abstract-Conference.html": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "25d8291da6b70f5e",
+   "text_len": 1966,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
   "https://proceedings.iclr.cc/paper_files/paper/2025/file/e19b6f65791e350347bcff8a3955cb5b-Paper-Conference.pdf": {
    "kind": "page",
    "status": 200,
@@ -2828,6 +2991,18 @@
    "text_len": 5561,
    "links": [
     "https://forms.gle/Y46WUArricVAQPBv9"
+   ],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
+  "https://roboverseorg.github.io/ViTacFormerPage/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "7b5fab60959c1c6a",
+   "text_len": 4866,
+   "links": [
+    "https://github.com/RoboVerseOrg/ViTacFormer",
+    "https://github.com/nerfies/nerfies.github.io"
    ],
    "phrases": [],
    "seen": "2026-11-24"
@@ -2883,6 +3058,31 @@
    ],
    "seen": "2026-11-24"
   },
+  "https://sites.google.com/view/dex-fbi": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "eb83dfd1c5d97c5e",
+   "text_len": 3783,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
+  "https://sites.google.com/view/iclr-submission-force-vision/home": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "052e67f23eff547d",
+   "text_len": 451,
+   "links": [
+    "https://docs.google.com/drawings/d/1J9MwM6oLJWssC7sHPUyHX0gtpdb6gWUputTrVhE6uss/preview?ac=true",
+    "https://docs.google.com/drawings/d/1WBxiCrDiIuOjCR4jipYROUdaHUXCt9l5wyQA560PxZs/preview?ac=true",
+    "https://docs.google.com/file/d/1J9MwM6oLJWssC7sHPUyHX0gtpdb6gWUputTrVhE6uss/edit",
+    "https://docs.google.com/file/d/1WBxiCrDiIuOjCR4jipYROUdaHUXCt9l5wyQA560PxZs/edit",
+    "https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view?usp=drive_link",
+    "https://github.com/yilundu/gem"
+   ],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
   "https://snuvclab.github.io/HRDexDB/": {
    "kind": "page",
    "status": 200,
@@ -2906,6 +3106,18 @@
    "phrases": [],
    "seen": "2026-11-24"
   },
+  "https://subin6.github.io/page-hope": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "21b41c05bdd17646",
+   "text_len": 7456,
+   "links": [
+    "https://github.com/nerfies/nerfies.github.io",
+    "https://github.com/subin6/hope"
+   ],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
   "https://suddhu.github.io/neural-feels/": {
    "kind": "page",
    "status": 200,
@@ -2922,6 +3134,17 @@
     "https://github.com/facebookresearch/theseus",
     "https://github.com/isl-org/DPT",
     "https://huggingface.co/front/assets/huggingface_logo-noborder.svg"
+   ],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
+  "https://t-wla.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "9c6b162f3ee56743",
+   "text_len": 5128,
+   "links": [
+    "https://github.com/kaichen-z/TWLA"
    ],
    "phrases": [],
    "seen": "2026-11-24"
@@ -3104,6 +3327,15 @@
    ],
    "seen": "2026-11-24"
   },
+  "https://wrist-informed-tactile-representations.github.io/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "a2732eecfd5a1770",
+   "text_len": 9264,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
   "https://www.cs.umd.edu/~edessale/feel": {
    "kind": "page",
    "status": 200,
@@ -3244,6 +3476,15 @@
    ],
    "seen": "2026-11-24"
   },
+  "https://yiming-cc.github.io/tf2-steering/": {
+   "kind": "page",
+   "status": 200,
+   "text_sha": "2ee2be7fffaceeb3",
+   "text_len": 2840,
+   "links": [],
+   "phrases": [],
+   "seen": "2026-11-24"
+  },
   "https://yingyuan0414.github.io/visuotactile/": {
    "kind": "page",
    "status": 200,
@@ -3369,13 +3610,22 @@
   "doi:10.3389/fnbot.2023.1159168": "W4367053463",
   "arxiv:2604.13015": "W7154483605",
   "arxiv:2609.24385": "W7214003297",
-  "arxiv:2203.06183": "W4221163915"
+  "arxiv:2203.06183": "W4221163915",
+  "arxiv:2611.07881": "W7225419049",
+  "arxiv:2609.09119": "W7212037977",
+  "arxiv:2611.25683": "W7237083792",
+  "arxiv:2609.23352": "W7214042161",
+  "arxiv:2611.17619": "W7233709031",
+  "arxiv:2611.09129": "W7225661842",
+  "arxiv:2609.30959": "W7214643061",
+  "arxiv:2609.36596": "W7214914986",
+  "arxiv:2609.12549": "W7212586568"
  },
  "cursor": {
-  "arxiv_backfill": "2018-04",
+  "arxiv_backfill": "2018-07",
   "hf_backfilled": true,
   "arxiv_recent_ok": "2026-11-24",
   "openalex_recent_ok": "2026-11-24",
-  "openalex_backfill": "2017-07"
+  "openalex_backfill": "2017-10"
  }
 }

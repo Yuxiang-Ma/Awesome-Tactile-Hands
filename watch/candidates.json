@@ -1,172 +1,40 @@
 {
- "generated": "2026-11-24T03:18:56Z",
+ "generated": "2026-11-24T06:33:20Z",
  "log": [
-  "arXiv recent (2026-11-03 to 2026-11-24): 20 new",
-  "arXiv backfill 2018-01 (2018-01-01 to 2018-04-01): 0 new",
+  "arXiv recent (2026-11-03 to 2026-11-24): 18 new",
+  "arXiv backfill 2018-04 (2018-04-01 to 2018-07-01): 1 new",
   "OpenAlex search recent (2026-10-25 to 2026-11-24): 25 new",
-  "OpenAlex search backfill 2017-04 (2017-04-01 to 2017-07-01): 18 new",
-  "OpenAlex citations of 78 catalog papers: 466 new",
-  "Hugging Face: 230 new from name searches, 174 new from publishers of catalog entries",
+  "OpenAlex search backfill 2017-07 (2017-07-01 to 2017-10-01): 22 new",
+  "OpenAlex citations of 87 catalog papers: 443 new",
+  "Hugging Face: 229 new from name searches, 183 new from publishers of catalog entries",
   "GitHub: 10 new"
  ],
  "problems": [],
  "sources_failed": [],
  "new_tonight": 310,
  "queued": 400,
- "dropped_low_score": 632,
+ "dropped_low_score": 538,
  "candidates": [
   {
-   "key": "arxiv:2611.06724",
-   "title": "Dexterous Robotic Hands in the Foundation-Model Era: A Full-Stack Survey of Hardware, Data, Cross-Embodiment Transfer, Learning, and Evaluation",
-   "url": "https://arxiv.org/abs/2611.06724",
-   "date": "2026-11-04",
-   "authors": "Ji Pei",
-   "abstract": "Dexterous robotic hands are increasingly coupled to large-scale human data and foundation models, yet progress in hardware, representation learning and evaluation is often assessed separately. This survey reviews work from January 2024 to early November 2026, with earlier studies included to establish technical lineages. We organize the literature into five interdependent layers: hardware; data collection and curation; cross-embodiment transfer; learning and foundation models; and evaluation and applications. Human hand-object understanding and tactile sensing provide two cross-cutting perspectives. A system-level architecture, comparative tables and five case analyses connect design choices across these layers. We distinguish within-study experimental comparisons from heterogeneous corpus statistics, vendor specifications and company-reported results. Three conclusions emerge. First, the value of human data depends on kinematic, visual and contact alignment, not recording volume alone. Second, shared action representations and foundation policies do not remove embodiment-specific constraints on force, latency and contact. Third, task completion is insufficient to establish physical correctness or deployment readiness. Evidence remains limited for zero-shot transfer of contact-rich skills between morphologically different hands, long-duration reliability, and cross-sensor tactile generalization. We identify eleven open problems and propose reporting interfaces and controlled ",
-   "score": 45.5,
+   "key": "arxiv:2611.21057",
+   "title": "WiTac: Wrist-Informed Tactile Representations for Contact-Rich Manipulation",
+   "url": "https://arxiv.org/abs/2611.21057",
+   "date": "2026-11-16",
+   "authors": "Haotian He et al.",
+   "abstract": "Similar tactile contacts can call for different corrections depending on the configuration of the hand, object and target. Rather than supplying touch and wrist vision separately, fusing them before policy injection better grounds tactile features in visual context, yielding more accurate contact representations. We introduce Wrist-Informed Tactile Representations (WiTac), a pretrained encoder that learns such representations before action generation. Pretrained on nearly 300 hours of SharpaDex data, WiTac deeply fuses tactile signals with hand motion and wrist views into a comprehensive contact representation. Conditioning downstream VLA policies (GR00T N1.7 and $π_{0.5}$) on WiTac substantially improves task success over vision-only base policies across four contact-rich manipulation tasks (+28.8% and +15.0% on average), and further outperforms a wrist-free tactile encoder by 18.8% and 7.5%, respectively. Offline analyses further show that incorporating wrist vision yields more accurate contact descriptors, stronger joint task-contact discrimination, greater feature stability under tactile noise, and clearer action-direction readout from similar contacts. Project page: https://wrist-informed-tactile-representations.github.io/.",
+   "score": 18.0,
    "hints": [
-    "hand",
-    "dataset",
     "model"
    ],
    "found_by": [
     "arxiv recent",
-    "openalex recent",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato",
+    "openalex cites dataset:decal",
+    "openalex cites dataset:dextacwam",
+    "openalex cites dataset:ftp1_sharpa",
     "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:dexumi",
-    "openalex cites dataset:sparsh_skin",
-    "openalex cites model:unitachand",
-    "openalex cites dataset:tactalign",
-    "openalex cites dataset:dexvitac",
-    "openalex cites dataset:hrdexdb",
-    "openalex cites dataset:ftp1_sharpa",
     "openalex cites dataset:trex",
-    "openalex cites dataset:htac",
     "openalex cites model:omnivtla",
-    "openalex cites model:touchworld",
-    "openalex cites dataset:tactidex",
-    "openalex cites model:dtwm",
-    "openalex cites dataset:uvta",
-    "openalex cites dataset:touchscale"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.17619",
-   "title": "TouchTwin: Scaling Human Touch Data via Real-to-Sim-to-Real",
-   "url": "https://arxiv.org/abs/2611.17619",
-   "date": "2026-11-13",
-   "authors": "Huiwen Han et al.",
-   "abstract": "Human demonstrations are becoming the main source of data for dexterous manipulation, and real-to-sim-to-real pipelines multiply each demonstration in simulation. These pipelines rebuild the interaction from vision, which recovers how the hand moves. Which fingers touch, when, and how hard remain unobserved, because a hand pose shows where each finger stops on the surface rather than how far it is driven to close. This gap is a force gap: on held-out recordings, a hand policy that imitates the observed pose grips with 0.31x the recorded force, and a policy trained on physics replays of vision-tracked poses grips with 1.55x. TouchTwin closes the gap with measured human touch. Each selected TouchScale recording, captured with head and wrist RGB-D cameras and an 880-taxel glove, is rebuilt in MuJoCo. Coding agents write the objects as physics-tested programs, and a per-subject tactile hand replays the interaction with the recorded touch setting the contact and the closing force of each finger. In simulation, a policy trained on touch-grounded replays grips at 0.99x the recorded force and succeeds in 20/20 trials on held-out recordings and 35/36 unseen perturbations; a contact predictor trained on them misses 13% of real contact frames, against 32% for vision-based replays. Each replay also seeds perturbed demonstrations with simulated contact and force labels, rendered as realistic video in new views and scenes.",
-   "score": 23.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "arxiv recent",
-    "openalex recent",
-    "openalex cites dataset:stag",
-    "openalex cites dataset:dexumi",
-    "openalex cites dataset:opentouch",
-    "openalex cites dataset:egotouch",
-    "openalex cites dataset:tactidex",
-    "openalex cites dataset:egotac_sc",
-    "openalex cites model:touchsight",
-    "openalex cites model:dtwm",
-    "openalex cites dataset:touchscale"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.09129",
-   "title": "TouchAnnotator: Multi-Source Tactile Supervision with Privileged-View Distillation",
-   "url": "https://arxiv.org/abs/2611.09129",
-   "date": "2026-11-06",
-   "authors": "Ao Li et al.",
-   "abstract": "Egocentric video captures human-object interaction at scale but rarely includes tactile labels for hidden contact and pressure. We introduce TouchAnnotator, an ego-only bimanual tactile annotator trained with multi-source tactile supervision and privileged-view distillation. A canonical hand field unifies glove pressure, geometry-derived human contact, and robot fingertip deformation from six datasets and three embodiments, while source-aware masks preserve valid targets. During training, an EMA teacher observes synchronized ego and wrist views and distills hand-local representations and tactile predictions into a student that uses only ego video and estimated pose at inference. Compact past-clip memory supplies temporal context. We evaluate on EgoTouch, zero-shot FPHA transfer, and 860 synchronized glove recordings. The model transfers to bare-hand contact and produces qualitatively coherent tactile responses across bare-hand, gloved-hand, and robot embodiments. On measured recordings, it improves temporal accuracy by 5.38 points and Volumetric IoU by 5.02 points under a shared protocol. These results show that heterogeneous human--robot supervision and privileged training views can turn egocentric video into dense tactile annotations.",
-   "score": 20.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "arxiv recent",
-    "openalex cites dataset:opentouch",
-    "openalex cites dataset:egotouch",
-    "openalex cites dataset:egotactile",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:trex",
-    "openalex cites dataset:htac",
-    "openalex cites model:omnivtla",
-    "openalex cites dataset:egotac_sc"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2609.30959",
-   "title": "VisTacAlign: Co-Training Dexterous Policies on Tactile Human and Robot Demonstrations using Visual-Tactile Alignment",
-   "date": "2026-09-25",
-   "url": "https://arxiv.org/abs/2609.30959",
-   "authors": "Julien Poffet et al.",
-   "abstract": "Human demonstrations are a cheap source of data for dexterous manipulation, but co-training a robot policy on them requires closing the human--robot gap in every modality the policy consumes. We present VisTacAlign, a framework for co-training 3D-visual-tactile dexterous policies on human and robot demonstrations. Glove-tracked human hand motion is retargeted to a 17-DoF tactile robot hand with a one-time fingertip correction. The human hand is then erased from both stereo views and replaced by a posed robot-hand mesh painted with pixels from robot recordings, and a real-time stereo foundation model is re-run on the composite, so the human point clouds carry the same stereo errors and visibility as the robot ones. Finally, a capacitive tactile glove is aligned to the robot's fingertip sensors in its signal space, giving one interpretable per-finger force representation. A diffusion transformer consumes point-cloud, proprioceptive, and per-finger tactile tokens. On three real-world tasks requiring precise force -- Lego assembly, plucking strawberries of varying size, and activating and lifting a power drill -- adding aligned human demonstrations to existing robot data improves over robot-only policies, and ablations show that both tactile input and visual alignment are necessary. Project page: https://vis-tac-align.github.io",
-   "score": 20.0,
-   "hints": [
-    "glove",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:hato",
-    "openalex cites model:unitachand",
-    "openalex cites dataset:tactalign"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2609.09119",
-   "title": "DeCAL: Towards Physically-Grounded Dexterous Vision-Language-Action Models via Contact-Aware Latent Co-Imagination",
-   "date": "2026-09-08",
-   "url": "https://arxiv.org/abs/2609.09119",
-   "authors": "Yankai Fu et al.",
-   "abstract": "Dexterous manipulation involves contact-rich and fine-grained interactions with the physical world, posing significant challenges for existing vision-language-action (VLA) models due to severe visual occlusions and complex contact dynamics. While recent works have incorporated tactile sensing into robotic manipulation, most approaches still rely on homogeneous multimodal fusion, lacking adaptive tactile integration and explicit modeling of physical dynamics. In this work, we present DeCAL, a physically-grounded dexterous vision-language-action model that unifies understanding, imagination and action generation for contact-rich dexterous manipulation. Built upon a Mixture-of-Transformers (MoT) architecture, DeCAL leverages specialized experts for each capability while enabling efficient information flow among them. To effectively leverage tactile information, we introduce Adaptive Visuo-Tactile Fusion that dynamically regulates tactile interactions via a contact-aware gating strategy. Furthermore, we propose Visuo-Tactile Latent Co-Imagination to jointly model visual and tactile dynamics, equipping the policy with implicit physical world knowledge. Experimental results show that DeCAL consistently achieves state-of-the-art performance across all tasks, attaining a 71% average success rate and an 83.4% progress success rate, while also demonstrating strong generalization to unseen scenarios. The website is available at https://aureleopku.github.io/DeCAL.",
-   "score": 17.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:hato",
-    "openalex cites dataset:deco50",
-    "openalex cites dataset:ftp1_sharpa"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.25683",
-   "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
-   "url": "https://arxiv.org/abs/2611.25683",
-   "date": "2026-11-19",
-   "authors": "Xudi Ge et al.",
-   "abstract": "Changes in illumination can induce action drift in dexterous manipulation even when the physical state remains unchanged. Although existing vision--tactile--language--action (VTLA) policies incorporate tactile feedback, when and how touch refines actions under changing visual conditions remains challenging. We introduce \\textbf{TipDex-VTLA}, a VTLA policy that combines estimated visual action reliability and tactile forecast verification to regulate execution-time refinement. Specifically, Visual Action Sensitivity Estimation (VASE) learns visual reliability from a frozen reference policy's action sensitivity to illumination perturbations. Tactile Anticipation and Correction during Execution (TACE) compares predicted and measured touch at matched times and combines the resulting discrepancy with visual reliability to gate bounded feature corrections for unexecuted actions. This effectively helps to refine actions under challenging unseen visual conditions. We evaluate TipDex-VTLA on four real-world dexterous manipulation tasks and the UniVTAC simulation benchmark. TipDex-VTLA trained on data collected under normal visual conditions, achieves average full-task success rates of 87.5% (resp. 73.8%) under normal (resp. challenging unseen) lighting in real-world tasks, significantly outperforming some state-of-the-art methods. We will release the collected data and source code.",
-   "score": 17.0,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "arxiv recent",
-    "openalex recent",
-    "openalex cites model:tavi",
-    "openalex cites dataset:deco50",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:trex",
-    "openalex cites model:touchworld",
-    "openalex cites dataset:dextacwam"
+    "openalex cites model:star"
    ],
    "first_seen": "2026-11-24"
   },
@@ -182,139 +50,14 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:tactofind",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:sparsh_x",
+    "openalex cites dataset:ftp1_sharpa",
     "openalex cites dataset:htd",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:trex"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2610.02784",
-   "title": "SimpleTouch: Can Vision-Language-Action Models Master Contact-Rich Manipulation Without Tactile Policy Pretraining?",
-   "date": "2026-10-02",
-   "url": "https://arxiv.org/abs/2610.02784",
-   "authors": "Chen Yang et al.",
-   "abstract": "Tactile sensing provides essential contact information for robotic manipulation, yet incorporating it into pretrained vision-language-action (VLA) models remains challenging. A common concern is that simply introducing touch during task-specific fine-tuning may fail to bridge the cross-modal gap, yielding limited gains or even reduced success. Consequently, existing methods often rely on large-scale tactile policy pretraining or separate visuotactile alignment, adding data requirements and training stages. We introduce SimpleTouch, a simple VLA extension that augments $π_{0.5}$ with a tactile expert, to test whether these additional stages are necessary. Leveraging all tokens from a frozen pretrained tactile encoder, the expert learns from action supervision and multi-horizon prediction of future tactile latents. This single-stage training uses only task demonstrations, without additional tactile policy pretraining or separate alignment. With 50 demonstrations per task, SimpleTouch achieves the highest success rate among evaluated methods on all six UniVTAC tasks. Its average success rate reaches 77.5%, compared with 45.2% for FTP-$π_{0.5}$ and 66.7% for FTP-1, corresponding to gains of 32.3 and 10.8 percentage points, respectively. Across four real-world tasks, it averages 71.3%, exceeding FTP-1 by 8.8 percentage points. These results demonstrate that, given pretrained VLA and tactile representations, additional tactile policy pretraining is not a prerequisite for strong per",
-   "score": 17.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
     "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:htd",
-    "openalex cites dataset:trex",
-    "openalex cites model:omnivtla",
-    "openalex cites model:touchworld"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2609.24068",
-   "title": "When Does Touch Matter? Charting the Vision-Interaction Gap in Cluttered Dexterous Grasping",
-   "date": "2026-09-21",
-   "url": "https://arxiv.org/abs/2609.24068",
-   "authors": "Hao Jiang et al.",
-   "abstract": "Dexterous grasping in clutter poses a basic sensing question: when do tactile measurements and external wrench estimates improve on visual geometry? Occlusion and contact can obscure grasp quality, motivating a controlled evaluation of these interaction signals. We present a controlled real-world study over five tabletop scene conditions on a dexterous hand (LEAP Hand) with vision, per-finger and wrist wrench estimates, and distributed fingertip taxels. With demonstrations, visual observations, action space, and compliant control fixed, we compare diffusion policies trained by imitation learning on vision only, wrench, taxels, or all combined, plus representation and fusion baselines. The combined policy succeeds in 24/25 trials versus 14/25 for vision only, and 15/15 versus 6/15 across the three confined conditions. Ablations show that wrench and taxel feedback are complementary. Behavioral comparisons show that interaction feedback enables earlier rejection of inadequate contacts, regrasping before lift, and more stable grasps. To our knowledge, this is the first real-world study to combine and separately evaluate these interaction modalities for target-oriented dexterous grasping in clutter. These results chart a widening vision-interaction gap and position cluttered dexterous grasping as a benchmark for determining when the learned policy needs interaction sensing. Project website: https://interaction-dex-grasp.github.io/",
-   "score": 16.5,
-   "hints": [
-    "hand",
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
     "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:trex"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2608.21290",
-   "title": "VT-MUSE: Multimodal Unified Sequential Visuotactile Representation Learning for Manipulation",
-   "date": "2026-08-21",
-   "url": "https://arxiv.org/abs/2608.21290",
-   "authors": "Congsheng Xu et al.",
-   "abstract": "We propose VT-MUSE, a Multimodal Unified SEquential representation learning framework for visuotactilemanipulation. Existing approaches often encode visual and tactile observations independently before fusion, limiting their ability to capture fine-grained cross-modal dependencies. Moreover, most methods focus on observations at the current time step and overlook the temporal evolution of contact. VT-MUSE addresses both limitations through a two-stage representation learning framework. In Stage I, modality specific encoders are jointly adapted via cross-modal temporal alignment and masked-view consistency. In Stage II, a conditional variational latent model processes masked visual sequences together with full tactile histories. Auxiliary decoders reconstruct the masked recent visual observations and predict tactile depth changes, encouraging the latent representation to retain both global visual context and local contact dynamics. The learned representation is subsequently integrated into a lightweight Transformer policy through gated cross-attention. On the simulation benchmark, VT-MUSE outperforms the strongest baseline evaluated on all tasks by 11 percentage points and also achieves substantial improvements in real-world experiments.",
-   "score": 15.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites model:omnivtla",
-    "openalex cites dataset:tactidex"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2607.23782",
-   "title": "$N_0$-VTLA: Scaling Vision-Tactile-Language-Action Model with Latent Tactile Tokens",
-   "date": "2026-07-26",
-   "url": "https://arxiv.org/abs/2607.23782",
-   "authors": "NeoteAI Team et al.",
-   "abstract": "We present $N_0$-VTLA, a vision-tactile-language-action (VTLA) foundation model capable of (1) fine-grained contact-rich manipulation with tactile perception and tactile-feedback control, and (2) offline policy improvement from stored deployment data. Building on current vision-based backbones, we propose a training recipe for tactile integration consisting of visuo-tactile pre-training, staged tactile-pathway integration, and advantage-conditioned offline policy improvement. During pre-training, the policy learns broad contact priors from NeoData, our large-scale visuo-tactile robot dataset; to our knowledge, $N_0$-VTLA is the first VTLA model pretrained on tactile data at scale. During post-training, we augment the policy with a predictive tactile pathway that distills the contact patterns learned at scale into the fine motion adjustments required by downstream tactile-centric manipulation. For offline policy improvement, we introduce ALTER, an advantage-conditioned offline reinforcement learning method that converts relative progress and trajectory-event comparisons into binary advantage labels for policy training on a fixed deployment corpus, further improving task-specific learning on contact-rich skills such as deformable object manipulation. Across contact-rich benchmarks, $N_0$-VTLA outperforms strong baselines by wide margins: it wins all nine real-robot NeoReal tasks and reaches 63.8% mean success on a twenty-task simulation suite, against 44.0% for the strongest ba",
-   "score": 15.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:trex",
-    "openalex cites dataset:htac",
-    "openalex cites model:omnivtla"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2607.22964",
-   "title": "Pose-Aware Modeling to Mitigate Pose-Related Artifacts in Tactile Gloves",
-   "date": "2026-07-25",
-   "url": "https://arxiv.org/abs/2607.22964",
-   "authors": "Tianhong Catherine Yu et al.",
-   "abstract": "Tactile gloves digitize contact and force during hand-object interactions, enabling robotics applications in dexterous manipulation, teleoperation, and learning from demonstration. To preserve hand dexterity and capture the nuances of natural interactions, these gloves and the integrated tactile sensors are designed to be soft, flexible, and comfortable. However, such flexible sensors are sensitive not only to contact forces but also unavoidably to hand pose changes, resulting in pose-related artifacts (PRAs). PRAs are especially problematic in the low-force range, resulting in misdetections or late-onset detections of contact, which raises the minimum detectable force (MDF) of the glove. In this work, we characterize the PRAs in relation to pose and force. Building on these insights, we introduce a glove-agnostic algorithmic framework that leverages hand pose information, which is increasingly available, to mitigate PRAs without glove modifications. Our pose-aware force estimation model augments tactile-to-force pipelines with a residual prediction branch that explicitly accounts for pose-induced sensor deformations. We validate our approach across 3 glove designs and 15 users, reducing MDF by 10.4%, 12.2%, and 18.3%, with consistent improvements across all evaluated metrics. This method provides a practical path to improving the usability of tactile gloves in data collection and diverse robotic applications.",
-   "score": 15.5,
-   "hints": [
-    "glove"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:senstextile",
-    "openalex cites model:vitam",
-    "openalex cites dataset:pimforce",
-    "openalex cites dataset:grasp_like_humans"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2410.17246",
-   "title": "Learning Precise, Contact-Rich Manipulation through Uncalibrated Tactile Skins",
-   "date": "2024-10-22",
-   "url": "https://arxiv.org/abs/2410.17246",
-   "authors": "Venkatesh Pattabiraman et al.",
-   "abstract": "While visuomotor policy learning has advanced robotic manipulation, precisely executing contact-rich tasks remains challenging due to the limitations of vision in reasoning about physical interactions. To address this, recent work has sought to integrate tactile sensing into policy learning. However, many existing approaches rely on optical tactile sensors that are either restricted to recognition tasks or require complex dimensionality reduction steps for policy learning. In this work, we explore learning policies with magnetic skin sensors, which are inherently low-dimensional, highly sensitive, and inexpensive to integrate with robotic platforms. To leverage these sensors effectively, we present the Visuo-Skin (ViSk) framework, a simple approach that uses a transformer-based policy and treats skin sensor data as additional tokens alongside visual information. Evaluated on four complex real-world tasks involving credit card swiping, plug insertion, USB insertion, and bookshelf retrieval, ViSk significantly outperforms both vision-only and optical tactile sensing based policies. Further analysis reveals that combining tactile and visual modalities enhances policy performance and spatial generalization, achieving an average improvement of 27.5% across tasks. https://visuoskin.github.io/",
-   "score": 15.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag",
     "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
+    "openalex cites dataset:trex",
     "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato"
+    "openalex cites model:tactofind"
    ],
    "first_seen": "2026-11-24"
   },
@@ -330,33 +73,13 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:hato",
-    "openalex cites model:vtao_bimanip",
-    "openalex cites dataset:opentouch",
     "openalex cites dataset:deco50",
     "openalex cites dataset:ftp1_sharpa",
-    "openalex cites model:omnivtla"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2603.19201",
-   "title": "OmniVTA: Visuo-Tactile World Modeling for Contact-Rich Robotic Manipulation",
-   "date": "2026-03-19",
-   "url": "https://arxiv.org/abs/2603.19201",
-   "authors": "Yuhang Zheng et al.",
-   "abstract": "Contact-rich manipulation tasks, such as wiping and assembly, require accurate perception of contact forces, friction changes, and state transitions that cannot be reliably inferred from vision alone. Despite growing interest in visuo-tactile manipulation, progress is constrained by two persistent limitations: existing datasets are small in scale and narrow in task coverage, and current methods treat tactile signals as passive observations rather than using them to model contact dynamics or enable closed-loop control explicitly. In this paper, we present \\textbf{OmniViTac}, a large-scale visuo-tactile-action dataset comprising $21{,}000+$ trajectories across $86$ tasks and $100+$ objects, organized into six physics-grounded interaction patterns. Building on this dataset, we propose \\textbf{OmniVTA}, a world-model-based visuo-tactile manipulation framework that integrates four tightly coupled modules: a self-supervised tactile encoder, a two-stream visuo-tactile world model for predicting short-horizon contact evolution, a contact-aware fusion policy for action generation, and a 60Hz reflexive controller that corrects deviations between predicted and observed tactile signals in a closed loop. Real-robot experiments across all six interaction categories show that OmniVTA outperforms existing methods and generalizes well to unseen objects and geometric configurations, confirming the value of combining predictive contact modeling with high-frequency tactile feedback for contact-r",
-   "score": 15.0,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites model:tavi",
+    "openalex cites dataset:hato",
+    "openalex cites dataset:opentouch",
     "openalex cites dataset:tacdex3d",
-    "openalex cites model:omnivtla"
+    "openalex cites model:omnivtla",
+    "openalex cites model:vtao_bimanip"
    ],
    "first_seen": "2026-11-24"
   },
@@ -373,96 +96,12 @@
    ],
    "found_by": [
     "arxiv recent",
-    "openalex recent",
-    "openalex cites dataset:stag",
+    "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:sparsh_skin",
     "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:sparsh_skin",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:trex"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2609.36596",
-   "title": "HACo: Learning Haptic Active Compliance for Force-Aware Dexterous Manipulation",
-   "date": "2026-09-29",
-   "url": "https://arxiv.org/abs/2609.36596",
-   "authors": "N. Ye et al.",
-   "abstract": "Contact-rich dexterous manipulation requires policies that translate physical feedback into motion commands while regulating interaction loads across evolving multi-contact interactions. This requires haptic observations of contact state and action supervision showing how commands should adapt. Existing policies often overlook complementary fingertip tactile and joint-torque feedback, while common action targets either encode excessive loading or omit motion constrained by the object. We introduce HACo, a Haptic Active Compliance policy that learns force-regulating actions directly from haptic feedback. Compliance-regulated teleoperation converts operator inputs into controller-executable compliant actions that preserve motion intent while regulating loads. HACo learns these actions directly, using command-state discrepancy as auxiliary compliant-intent supervision. It combines local fingertip tactile responses with joint-torque feedback capturing load transmission through the articulated hand, including contacts beyond tactile coverage. A Compliance Grounding Module uses gated haptic cross-attention to ground action generation in the evolving haptic state, enabling closed-loop force regulation without explicit online contact modeling. We evaluate HACo on a real-world benchmark covering multi-contact friction, tangential interaction, fragile curved-surface contact, rotational torque, and deformable-object manipulation. Across 20 trials per task, HACo achieves an 83% mean succ",
-   "score": 14.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:hato",
-    "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:stag",
     "openalex cites dataset:trex",
-    "openalex cites model:omnivtla"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2609.23352",
-   "title": "BiView-Touch: Learning Bimanual Tactile Representations by Cross-Hand Completion",
-   "date": "2026-09-20",
-   "url": "https://arxiv.org/abs/2609.23352",
-   "authors": "Chenxin Liang et al.",
-   "abstract": "Bimanual interaction produces complementary tactile views of the same physical process, yet existing tactile representation learning largely models the two hands independently or combines them only for downstream prediction, leaving their cross-hand relationship unexplored. To exploit this overlooked structure, we introduce BiView-Touch, a tactile-only framework that completes masked target-hand latents from the remaining visible target-hand regions and the synchronized full contralateral hand. A student encoder with a geometry-conditioned directional decoder predicts full-view EMA latent targets, while temporal and layout counterfactuals encourage sensitivity to synchronized and anatomically organized source information. Controlled ablations and source-context interventions show that BiView-Touch learns structured cross-hand dependence on temporally aligned and anatomically organized contralateral tactile context, rather than benefiting from bilateral input alone. On the public HumanTouch dataset, its frozen representations consistently outperform representative self-supervised baselines across low-label settings. With only 5\\% downstream labels, BiView-Touch achieves relative balanced-accuracy gains of 7.1\\% on bilateral wrist-motion recognition and 14.1\\% on force-derived interaction-phase recognition. We further introduce BVT-20, a 20-task bilateral tactile dataset, and demonstrate transfer across recording sessions and pretraining corpora, including transfer to a held-ou",
-   "score": 14.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tacdex3d",
-    "openalex cites model:upvital",
-    "openalex cites model:vtao_bimanip",
-    "openalex cites dataset:sparsh_skin",
-    "openalex cites dataset:egotouch"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2609.12549",
-   "title": "STAR: Sparse Tactile Representation Learning in Vision-Tactile-Language-Action Models for Dexterous Manipulation",
-   "date": "2026-09-11",
-   "url": "https://arxiv.org/abs/2609.12549",
-   "authors": "Xiangcheng Liu et al.",
-   "abstract": "Dexterous manipulation requires coordinated multi-finger control and effective tactile feedback, yet learning these capabilities remains challenging due to the lack of large-scale real-world data and the difficulty of extracting effective representations from sparse tactile signals. We build a robot platform and teleoperation system to collect a 200-hour bimanual dexterous manipulation dataset with synchronized visual, tactile, and language annotations, comprising 10,576 trajectories across 65 tasks, 69.5% of which involve dexterous multi-finger manipulation. We further propose STAR, an integrated training recipe for vision-tactile-language-action (VTLA) models that addresses the spatial, temporal, and informational sparsity of tactile signals through visual-tactile joint pre-training, sparse-global tactile token representation, and sparse future tactile prediction. Trained on this dataset, STAR achieves a 61% average success rate across four real-world tasks with 100 post-training trajectories per task, demonstrating dexterous performance under task-specific post-training.",
-   "score": 14.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:dexumi",
-    "openalex cites dataset:deco50"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2505.02915",
-   "title": "Zero-shot Sim2Real Transfer for Magnet-Based Tactile Sensor on Insertion Tasks",
-   "date": "2026-06-01",
-   "url": "https://arxiv.org/abs/2505.02915",
-   "authors": "Beining Han et al.",
-   "abstract": "Tactile sensing is an important sensing modality for robot manipulation. Among different types of tactile sensors, magnet-based sensors, like u-skin, balance well between high durability and tactile density. However, the large sim-to-real gap of tactile sensors prevents robots from acquiring useful tactile-based manipulation skills from simulation data, a recipe that has been successful for achieving complex and sophisticated control policies. Prior work has implemented binarization techniques to bridge the sim-to-real gap for dexterous in-hand manipulation. However, binarization inherently loses much information that is useful in many other tasks, e.g., insertion. In our work, we propose GCS, a novel sim-to-real technique to learn contact-rich skills with dense, distributed, 3-axis tactile readings. We evaluate our approach on blind insertion tasks and show zero-shot sim-to-real transfer of RL policies with raw tactile reading as input.",
-   "score": 14.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:sparsh_skin"
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -480,32 +119,11 @@
    ],
    "found_by": [
     "arxiv recent",
+    "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:sparsh_skin",
     "openalex cites dataset:tdex",
     "openalex cites model:tavi",
-    "openalex cites dataset:sparsh_skin",
-    "openalex cites dataset:ftp1_sharpa",
     "openalex cites model:touchworld"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.21057",
-   "title": "WiTac: Wrist-Informed Tactile Representations for Contact-Rich Manipulation",
-   "url": "https://arxiv.org/abs/2611.21057",
-   "date": "2026-11-16",
-   "authors": "Haotian He et al.",
-   "abstract": "Similar tactile contacts can call for different corrections depending on the configuration of the hand, object and target. Rather than supplying touch and wrist vision separately, fusing them before policy injection better grounds tactile features in visual context, yielding more accurate contact representations. We introduce Wrist-Informed Tactile Representations (WiTac), a pretrained encoder that learns such representations before action generation. Pretrained on nearly 300 hours of SharpaDex data, WiTac deeply fuses tactile signals with hand motion and wrist views into a comprehensive contact representation. Conditioning downstream VLA policies (GR00T N1.7 and $π_{0.5}$) on WiTac substantially improves task success over vision-only base policies across four contact-rich manipulation tasks (+28.8% and +15.0% on average), and further outperforms a wrist-free tactile encoder by 18.8% and 7.5%, respectively. Offline analyses further show that incorporating wrist vision yields more accurate contact descriptors, stronger joint task-contact discrimination, greater feature stability under tactile noise, and clearer action-direction readout from similar contacts. Project page: https://wrist-informed-tactile-representations.github.io/.",
-   "score": 14.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "arxiv recent",
-    "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:trex",
-    "openalex cites model:omnivtla",
-    "openalex cites dataset:dextacwam"
    ],
    "first_seen": "2026-11-24"
   },
@@ -523,9 +141,9 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:sparsh_x",
     "openalex cites dataset:dexumi",
-    "openalex cites dataset:sparsh_skin"
+    "openalex cites dataset:sparsh_skin",
+    "openalex cites dataset:sparsh_x"
    ],
    "first_seen": "2026-11-24"
   },
@@ -541,32 +159,35 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:tavi",
-    "openalex cites model:robot_synesthesia",
     "openalex cites dataset:feelsight",
+    "openalex cites dataset:hato",
     "openalex cites dataset:vint6d",
-    "openalex cites dataset:hato"
+    "openalex cites model:robot_synesthesia",
+    "openalex cites model:tavi"
    ],
    "first_seen": "2026-11-24"
   },
   {
-   "key": "arxiv:2607.20683",
-   "title": "FELT: Generating Tactile Signals from Vision for Visuo-Tactile Manipulation",
-   "date": "2026-07-22",
-   "url": "https://arxiv.org/abs/2607.20683",
-   "authors": "Zinan Li et al.",
-   "abstract": "Tactile sensing can improve performance in contact-rich robot manipulation. However, learning policies that use real tactile feedback typically requires demonstrations collected with tactile-equipped hardware. We present Feature-Extracted Latent Tactile (FELT), a framework that uses existing paired visuo-tactile data to learn contact-aware representations from RGB observations. FELT provides these representations to downstream policies through two interfaces: generated tactile images and contact-aware features. FELT combines a frozen visual encoder with separate query decoders for the left and right finger, reflecting the spatial organization of dual-finger tactile arrays. The two branches exchange information through gated connections, and a convolutional readout produces spatial contact representations for the downstream interfaces. For downstream manipulation, the image interface decodes these spatial representations into tactile images, allowing policies trained with either real or generated tactile observations to use generated images at deployment. Alternatively, the feature interface feeds these representations directly to the policy during both training and deployment, without real tactile observations. Experiments on four contact-rich real-robot tasks show that both interfaces achieve higher success rates than vision-only policies. Directly incorporating learned contact-aware features into the policy improves success by 15-22.5 percentage points across the four tasks",
+   "key": "arxiv:2611.01483",
+   "title": "$TF^2$-Steering: Action Refinement with Tactile Forecasts and Feedback via Velocity-Field Steering",
+   "url": "https://arxiv.org/abs/2611.01483",
+   "date": "2026-11-01",
+   "authors": "Yiming Chen et al.",
+   "abstract": "Tactile sensing plays a crucial role in everyday human interaction. Consider inserting a plug into a tight socket, vision alone provides limited guidance during the final insertion stage, and we instead rely on both anticipated contact and realized tactile feedback to ajust the insertion motion. The same capability is equally important for robots, particularly in dexterous manipulation tasks. Yet many contemporary robot policies remain vision-dominant. This visual bias, compounded by limited tactile data and sparse contact events, can cause directly incorporated tactile signals to be ignored or even compromise the policy's pretrained capabilities, yielding degrading performance as observed in our experiments. We present $TF^2$-Steering, which refines actions via learned residual steering of the flow-matching action expert's velocity field, using a tactile mixture-of-experts architecture to integrate both tactile forecasts and real-time tactile feedback. Together with specific designed three stages training recipe, $TF^2$-Steering enables tactile signals to correct and, when necessary, redirect the flow-matching action-generation process, while building on the strong action-generation capacity of the vision-based foundation policy. Extensive experiments across six simulated and six real-world manipulation tasks demonstrate the effectiveness of $TF^2$-Steering. It outperforms the strongest evaluated baselines by 10.7 percentage points in average simulation success rate and 9.1 ",
    "score": 13.5,
    "hints": [
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:ftp1_sharpa"
+    "arxiv recent",
+    "openalex cites dataset:decal",
+    "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:trex",
+    "openalex cites model:omnivtla",
+    "openalex cites model:touchworld",
+    "openalex recent"
    ],
-   "first_seen": "2026-11-24"
+   "first_seen": "2026-11-03"
   },
   {
    "key": "arxiv:2508.14441",
@@ -582,47 +203,9 @@
    "found_by": [
     "openalex cites dataset:stag",
     "openalex cites dataset:tdex",
+    "openalex cites model:robot_synesthesia",
     "openalex cites model:tavi",
-    "openalex cites model:robot_synesthesia",
     "openalex cites model:vitam"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2410.24091",
-   "title": "3D-ViTac: Learning Fine-Grained Manipulation with Visuo-Tactile Sensing",
-   "date": "2025-01-12",
-   "url": "https://arxiv.org/abs/2410.24091",
-   "authors": "Binghao Huang et al.",
-   "abstract": "Tactile and visual perception are both crucial for humans to perform fine-grained interactions with their environment. Developing similar multi-modal sensing capabilities for robots can significantly enhance and expand their manipulation skills. This paper introduces \\textbf{3D-ViTac}, a multi-modal sensing and learning system designed for dexterous bimanual manipulation. Our system features tactile sensors equipped with dense sensing units, each covering an area of 3$mm^2$. These sensors are low-cost and flexible, providing detailed and extensive coverage of physical contacts, effectively complementing visual information. To integrate tactile and visual data, we fuse them into a unified 3D representation space that preserves their 3D structures and spatial relationships. The multi-modal representation can then be coupled with diffusion policies for imitation learning. Through concrete hardware experiments, we demonstrate that even low-cost robots can perform precise manipulations and significantly outperform vision-only policies, particularly in safe interactions with fragile items and executing long-horizon tasks involving in-hand manipulation. Our project page is available at \\url{https://binghao-huang.github.io/3D-ViTac/}.",
-   "score": 13.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:tdex",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2607.14487",
-   "title": "MIDAS Hand: Modular low-Impedance Direct-drive Anthropomorphic Sensing Hand",
-   "date": "2026-07-16",
-   "url": "https://arxiv.org/abs/2607.14487",
-   "authors": "Alvin Zhu et al.",
-   "abstract": "Dexterous manipulation is limited not only by algorithms but by a shortage of accessible hand hardware that combines human-scale morphology, ease of manufacturing or maintenance, tactile sensing, and practical cost. Existing dexterous hands tend to optimize some of these properties at the expense of others. We present MIDAS Hand, a low-cost, open-source, human-scale dexterous hand with integrated tactile sensing for manipulation research. MIDAS Hand provides 16 total degrees of freedom (DoF) with 13 active DoF, directly driven actuation with measurably low backdrive torque, and 283 three-axis tactile taxels in a compact 700 g package with a bill of materials under 3,000 USD. Built from 3D-printed components, it assembles in under three hours while providing the strength, repeatability, and maintainability needed for repeated real-world experiments. Alongside the hardware, we release a full stack: design files, build documentation, control and tactile Python APIs, simulation models, and retargeting and teleoperation pipelines. We characterize MIDAS Hand through workspace and grasp-taxonomy analysis, payload and reliability tests, backdrivability measurements, and teleoperation demonstrations with tactile sensing, showing that it offers a balanced, reproducible platform for tactile dexterous manipulation and human-to-robot data collection. Project page: https://midas-hand.com",
-   "score": 13.0,
-   "hints": [
-    "hand"
-   ],
-   "found_by": [
-    "openalex cites dataset:opentouch",
-    "openalex cites dataset:trex",
-    "openalex cites model:omnivtla"
    ],
    "first_seen": "2026-11-24"
   },
@@ -638,10 +221,10 @@
     "dataset"
    ],
    "found_by": [
+    "openalex cites dataset:feelsight",
     "openalex cites dataset:stag",
     "openalex cites dataset:tdex",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -659,67 +242,9 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:vitam",
     "openalex cites dataset:feelsight",
-    "openalex cites dataset:sparsh_x"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.00455",
-   "title": "TacMind: Benchmarking and Modeling Tactile Interaction States for Robotic Manipulation",
-   "date": "2026-10-30",
-   "url": "https://arxiv.org/abs/2611.00455",
-   "authors": "Jiaxin Shi et al.",
-   "abstract": "Tactile sensing provides robots with direct observations of contact physics, local geometry, and interaction dynamics, making it a vital source of feedback for contact-rich manipulation. However, existing tactile manipulation studies are often developed and evaluated within specific task settings, making it difficult to systematically compare how tactile information contributes under different interaction conditions. In this work, we develop a benchmark in simulation comprising 128 tasks organized around three complementary evaluation regimes: Precise, Recognition, and Dynamic. The benchmark further includes controlled static and dynamic task variants and 12 perturbation settings for evaluating robustness under changes in visual and physical conditions. These settings motivate studying tactile information as a temporally evolving interaction representation rather than only as an instantaneous observation. We therefore propose an action-conditioned latent predictive world model that integrates tactile history and learns a tactile state through prediction of future tactile latents. Building on this representation, we design a model that conditions action generation on the learned tactile state and uses predicted future tactile information to refine candidate actions through predictive tactile reflection. Experiments on the proposed benchmark show consistent gains from incorporating tactile information across the evaluated regimes. Project Page: https://tacmind-bench.github.io/",
-   "score": 12.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:robot_synesthesia",
     "openalex cites dataset:sparsh_x",
-    "openalex cites model:touchworld"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2509.14688",
-   "title": "exUMI: Extensible Robot Teaching System with Action-aware Task-agnostic Tactile Representation",
-   "date": "2025-10-07",
-   "url": "https://arxiv.org/abs/2509.14688",
-   "authors": "Yue Xu et al.",
-   "abstract": "Tactile-aware robot learning faces critical challenges in data collection and representation due to data scarcity and sparsity, and the absence of force feedback in existing systems. To address these limitations, we introduce a tactile robot learning system with both hardware and algorithm innovations. We present exUMI, an extensible data collection device that enhances the vanilla UMI with robust proprioception (via AR MoCap and rotary encoder), modular visuo-tactile sensing, and automated calibration, achieving 100% data usability. Building on an efficient collection of over 1 M tactile frames, we propose Tactile Prediction Pretraining (TPP), a representation learning framework through action-aware temporal tactile prediction, capturing contact dynamics and mitigating tactile sparsity. Real-world experiments show that TPP outperforms traditional tactile imitation learning. Our work bridges the gap between human tactile intuition and robot learning through co-designed hardware and algorithms, offering open-source resources to advance contact-rich manipulation research. Project page: https://silicx.github.io/exUMI.",
-   "score": 12.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:tacdex3d"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2507.15062",
-   "title": "Touch in the Wild: Learning Fine-Grained Manipulation with a Portable Visuo-Tactile Gripper",
-   "date": "2025-01-01",
-   "url": "https://arxiv.org/abs/2507.15062",
-   "authors": "Xinyue Zhu et al.",
-   "abstract": "Handheld grippers are increasingly used to collect human demonstrations due to their ease of deployment and versatility. However, most existing designs lack tactile sensing, despite the critical role of tactile feedback in precise manipulation. We present a portable, lightweight gripper with integrated tactile sensors that enables synchronized collection of visual and tactile data in diverse, real-world, and in-the-wild settings. Building on this hardware, we propose a cross-modal representation learning framework that integrates visual and tactile signals while preserving their distinct characteristics. The learning procedure allows the emergence of interpretable representations that consistently focus on contacting regions relevant for physical interactions. When used for downstream manipulation tasks, these representations enable more efficient and effective policy learning, supporting precise robotic manipulation based on multimodal feedback. We validate our approach on fine-grained tasks such as test tube insertion and pipette-based fluid transfer, demonstrating improved accuracy and robustness under external disturbances. Our project page is available at https://binghao-huang.github.io/touch_in_the_wild/ .",
-   "score": 12.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:tdex",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites model:vitam"
    ],
    "first_seen": "2026-11-24"
   },
@@ -757,9 +282,9 @@
     "model"
    ],
    "found_by": [
+    "openalex cites dataset:hato",
     "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
-    "openalex cites dataset:hato"
+    "openalex cites model:tavi"
    ],
    "first_seen": "2026-11-24"
   },
@@ -776,10 +301,10 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:tactile_gat",
     "openalex cites dataset:feelsight",
-    "openalex cites dataset:trex"
+    "openalex cites dataset:tdex",
+    "openalex cites dataset:trex",
+    "openalex cites model:tactile_gat"
    ],
    "first_seen": "2026-11-24"
   },
@@ -817,8 +342,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:tacdex3d"
+    "openalex cites dataset:tacdex3d",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -835,33 +360,12 @@
     "model"
    ],
    "found_by": [
+    "openalex cites dataset:feelsight",
     "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
     "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites model:tavi"
    ],
    "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.01483",
-   "title": "$TF^2$-Steering: Action Refinement with Tactile Forecasts and Feedback via Velocity-Field Steering",
-   "url": "https://arxiv.org/abs/2611.01483",
-   "date": "2026-11-01",
-   "authors": "Yiming Chen et al.",
-   "abstract": "Tactile sensing plays a crucial role in everyday human interaction. Consider inserting a plug into a tight socket, vision alone provides limited guidance during the final insertion stage, and we instead rely on both anticipated contact and realized tactile feedback to ajust the insertion motion. The same capability is equally important for robots, particularly in dexterous manipulation tasks. Yet many contemporary robot policies remain vision-dominant. This visual bias, compounded by limited tactile data and sparse contact events, can cause directly incorporated tactile signals to be ignored or even compromise the policy's pretrained capabilities, yielding degrading performance as observed in our experiments. We present $TF^2$-Steering, which refines actions via learned residual steering of the flow-matching action expert's velocity field, using a tactile mixture-of-experts architecture to integrate both tactile forecasts and real-time tactile feedback. Together with specific designed three stages training recipe, $TF^2$-Steering enables tactile signals to correct and, when necessary, redirect the flow-matching action-generation process, while building on the strong action-generation capacity of the vision-based foundation policy. Extensive experiments across six simulated and six real-world manipulation tasks demonstrate the effectiveness of $TF^2$-Steering. It outperforms the strongest evaluated baselines by 10.7 percentage points in average simulation success rate and 9.1 ",
-   "score": 11.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "arxiv recent",
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:trex",
-    "openalex cites model:omnivtla",
-    "openalex cites model:touchworld",
-    "openalex recent"
-   ],
-   "first_seen": "2026-11-03"
   },
   {
    "key": "arxiv:2610.39585",
@@ -875,9 +379,9 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:feel",
-    "openalex cites dataset:egotactile",
     "openalex cites dataset:egotac_sc",
+    "openalex cites dataset:egotactile",
+    "openalex cites dataset:feel",
     "openalex cites model:touchsight"
    ],
    "first_seen": "2026-11-24"
@@ -895,8 +399,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:hato",
     "openalex cites dataset:deco50",
+    "openalex cites dataset:hato",
     "openalex cites dataset:htd"
    ],
    "first_seen": "2026-11-24"
@@ -914,8 +418,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:htd",
     "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:htd",
     "openalex cites dataset:tactidex"
    ],
    "first_seen": "2026-11-24"
@@ -933,8 +437,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:opentouch"
+    "openalex cites dataset:opentouch",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -950,28 +454,10 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
+    "openalex cites dataset:dexvitac",
     "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:dexvitac"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2604.28156",
-   "title": "FlexiTac: A Low-Cost, Open-Source, Scalable Tactile Sensing Solution for Robotic Systems",
-   "date": "2026-04-30",
-   "url": "https://arxiv.org/abs/2604.28156",
-   "authors": "Binghao Huang et al.",
-   "abstract": "We present FlexiTac, a low-cost, open-source, and scalable piezoresistive tactile sensing solution designed for robotic end-effectors. FlexiTac is a practical \"plug-in\" module consisting of (i) thin, flexible tactile sensor pads that provide dense tactile signals and (ii) a compact multi-channel readout board that streams synchronized measurements for real-time control and large-scale data collection. FlexiTac pads adopt a sealed three-layer laminate stack (FPC-Velostat-FPC) with electrode patterns directly integrated into flexible printed circuits, substantially improving fabrication throughput and repeatability while maintaining mechanical compliance for deployment on both rigid and soft grippers. The readout electronics use widely available, low-cost components and stream tactile signals to a host computer at 100 Hz via serial communication. Across multiple configurations, including fingertip pads and larger tactile mats, FlexiTac can be mounted on diverse platforms without major mechanical redesign. We further show that FlexiTac supports modern tactile learning pipelines, including 3D visuo-tactile fusion for contact-aware decision making, cross-embodiment skill transfer, and real-to-sim-to-real fine-tuning with GPU-parallel tactile simulation. Our project page is available at https://flexitac.github.io/.",
-   "score": 11.5,
-   "hints": [],
-   "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:senstextile",
     "openalex cites dataset:tdex",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:hato"
+    "openalex cites model:tavi"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1006,9 +492,9 @@
    ],
    "found_by": [
     "arxiv recent",
-    "openalex recent",
+    "openalex cites model:omnivtla",
     "openalex cites model:robot_synesthesia",
-    "openalex cites model:omnivtla"
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1025,8 +511,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:dexumi"
+    "openalex cites dataset:dexumi",
+    "openalex cites dataset:sparsh_x"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1042,8 +528,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
     "openalex cites dataset:opentouch",
+    "openalex cites dataset:stag",
     "openalex cites dataset:tactalign"
    ],
    "first_seen": "2026-11-24"
@@ -1062,8 +548,8 @@
    ],
    "found_by": [
     "openalex cites dataset:hato",
-    "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:sparsh_skin"
+    "openalex cites dataset:sparsh_skin",
+    "openalex cites dataset:sparsh_x"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1080,8 +566,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:tacdex3d"
+    "openalex cites dataset:tacdex3d",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1095,10 +581,10 @@
    "score": 10.5,
    "hints": [],
    "found_by": [
-    "openalex cites model:tavi",
     "openalex cites dataset:ftp1_sharpa",
     "openalex cites dataset:trex",
     "openalex cites model:omnivtla",
+    "openalex cites model:tavi",
     "openalex cites model:touchworld"
    ],
    "first_seen": "2026-11-24"
@@ -1141,43 +627,6 @@
    "first_seen": "2026-11-24"
   },
   {
-   "key": "arxiv:2503.02881",
-   "title": "Reactive Diffusion Policy: Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation",
-   "date": "2025-06-21",
-   "url": "https://arxiv.org/abs/2503.02881",
-   "authors": "Han Xue et al.",
-   "abstract": "Case Study 1: Correct minor positional errors during contact using tactile feedback.",
-   "score": 10.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites model:tavi",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:hato"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2505.18472",
-   "title": "ManiFeel: Benchmarking and Understanding Visuotactile Manipulation Policy Learning",
-   "date": "2025-05-24",
-   "url": "https://arxiv.org/abs/2505.18472",
-   "authors": "Quan Khanh Luu et al.",
-   "abstract": "Supervised visuomotor policies have shown strong performance in robotic manipulation but often struggle in tasks with limited visual inputs, such as operations in confined spaces and dimly lit environments, or tasks requiring precise perception of object properties and environmental interactions. In such cases, tactile feedback becomes essential for manipulation. While the rapid progress of supervised visuomotor policies has benefited greatly from high-quality, reproducible simulation benchmarks in visual imitation, the visuotactile domain still lacks a similarly comprehensive and reliable benchmark for large-scale and rigorous evaluation. To address this, we introduce ManiFeel, a reproducible and scalable simulation benchmark designed to systematically study supervised visuotactile policy learning. ManiFeel offers a diverse suite of contact-rich and visually challenging manipulation tasks, a modular evaluation pipeline spanning sensing modalities, tactile representations, and policy architectures, as well as real-world validation. Through extensive experiments, ManiFeel demonstrates how tactile sensing enhances policy performance across diverse manipulation scenarios, ranging from precise contact-driven operations to visually constrained settings. In addition, the results reveal task-dependent strengths of different tactile modalities and identify key design principles and open challenges for robust visuotactile policy learning. Real-world evaluations further confirm that Ma",
-   "score": 10.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites model:tavi",
-    "openalex cites dataset:hato"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
    "key": "arxiv:2606.08737",
    "title": "Dream-Tac: A Unified Tactile World Action Model for Contact-Rich Robot Manipulation",
    "date": "2026-11-09",
@@ -1189,45 +638,9 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tacdex3d",
     "openalex cites dataset:sparsh_x",
+    "openalex cites dataset:tacdex3d",
     "openalex cites model:omnivtla"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "hf:datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
-   "title": "talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
-   "url": "https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
-   "date": "2026-11-05",
-   "authors": "talosdataworks",
-   "abstract": "task_categories:robotics license:cc-by-nc-4.0 LeRobot egocentric human-demonstration stereo depth imu glove tactile force hand-pose mano bimanual",
-   "score": 10.0,
-   "hints": [
-    "glove"
-   ],
-   "found_by": [
-    "hf datasets 'tactile'",
-    "hf datasets 'glove'",
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2610.24285",
-   "title": "ACTS: Learning Visuo-Tactile World Models from Human Physical Interaction",
-   "date": "2026-10-16",
-   "url": "https://arxiv.org/abs/2610.24285",
-   "authors": "Yuxiang Ma et al.",
-   "abstract": "Abstract Action-conditioned world models for contact-rich manipulation require data that captures how contact forms, slides, and releases under varying force. Such data are slow to collect through robot teleoperation, which often lacks force feedback and is constrained by gripper geometry. We ask whether these dynamics can instead be learned from human physical interaction and transferred to a robot. We present ACTS, a visuo-tactile world model trained only on human interaction data. Operators manipulate handheld GelSight sensors while we record third-person and wrist video, tactile images, 6-DoF sensor motion, and tactile-derived normal force, yielding React, a 4.9-hour bimanual dataset across three objects. We represent actions at the tactile sensor as motion augmented by force change, providing a shared action space for human collection and robot execution. ACTS jointly predicts future scene, wrist, and tactile observations. On held-out human data, ACTS improves scene-view prediction by 0.7-2.0 dB PSNR over the stronger of two visuo-tactile world models trained from scratch on React. Without fine-tuning, in the robot teleoperation rollouts we inspected, predicted tactile imprints still appear and disappear with recorded contact. Visual transfer is less robust: camera predictions exceed frame copying on PushT, are mixed on Rope, and fall below it on Motherboard, while wrist views can blur or hallucinate structure. These results suggest that contact dynamics transfer more re",
-   "score": 10.0,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:sparsh_x"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1243,8 +656,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:feelsight",
     "openalex cites dataset:dexumi",
+    "openalex cites dataset:feelsight",
     "openalex cites model:omnivtla"
    ],
    "first_seen": "2026-11-24"
@@ -1262,8 +675,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:opentouch",
-    "openalex cites dataset:egotouch"
+    "openalex cites dataset:egotouch",
+    "openalex cites dataset:opentouch"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1280,8 +693,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:hato",
-    "openalex cites dataset:dexumi"
+    "openalex cites dataset:dexumi",
+    "openalex cites dataset:hato"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1297,8 +710,8 @@
     "glove"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:senstextile"
+    "openalex cites dataset:senstextile",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1317,8 +730,8 @@
    ],
    "found_by": [
     "arxiv recent",
-    "openalex recent",
-    "openalex cites model:robot_synesthesia"
+    "openalex cites model:robot_synesthesia",
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1385,9 +798,9 @@
     "model"
    ],
    "found_by": [
+    "openalex cites dataset:sparsh_skin",
     "openalex cites dataset:tdex",
-    "openalex cites model:tavi",
-    "openalex cites dataset:sparsh_skin"
+    "openalex cites model:tavi"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1421,9 +834,9 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:tavi",
+    "openalex cites dataset:hato",
     "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:hato"
+    "openalex cites model:tavi"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1439,8 +852,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
     "openalex cites dataset:feelsight",
+    "openalex cites dataset:tdex",
     "openalex cites dataset:vint6d"
    ],
    "first_seen": "2026-11-24"
@@ -1457,9 +870,9 @@
     "model"
    ],
    "found_by": [
+    "openalex cites dataset:feelsight",
     "openalex cites dataset:stag",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1475,8 +888,27 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:senstextile"
+    "openalex cites dataset:senstextile",
+    "openalex cites dataset:stag"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "arxiv:2611.26405",
+   "title": "TacInno: Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action",
+   "date": "2026-11-19",
+   "url": "https://arxiv.org/abs/2611.26405",
+   "authors": "Weile Li et al.",
+   "abstract": "Vision-Language-Action (VLA) models have recently been equipped with tactile sensing to perceive visually subtle contact events in contact-rich manipulation. However, adding tactile input yields inconsistent gains, and some visuo-tactile VLA models rely little on tactile input, because much of the tactile change, such as the gel deformation during gripper closure, is predictable from visual observations and executed actions. To address this problem, we introduce TacInno, which isolates the contact dynamics that vision and executed actions cannot explain, termed tactile innovation, and uses tactile innovation only as a training target. Specifically, the TacInno tokenizer, conditioned on visual observations and executed actions, compresses the future tactile change into a discrete code, and the policy, TacInno-VLA, learns to predict the code, adding no module for the code at deployment. TacInno-VLA achieves average success rates of 87.5% across six simulation tasks and 70.5% across four real-world tasks, outperforming the strongest visuo-tactile baseline by 10.7 and 9.0 percentage points, respectively. Ablation studies validate the contributions of visual and action conditioning, multi-frame encoding, and auxiliary code prediction. Together, these results demonstrate the effectiveness of tactile innovation as a supervision signal for contact-rich manipulation.",
+   "score": 9.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:decal",
+    "openalex cites dataset:ftp1_sharpa",
+    "openalex cites model:omnivtla",
+    "openalex cites model:physword"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1494,9 +926,9 @@
    ],
    "found_by": [
     "arxiv recent",
-    "openalex recent",
+    "openalex cites dataset:feelsight",
     "openalex cites model:tactofind",
-    "openalex cites dataset:feelsight"
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1529,9 +961,9 @@
     "hand"
    ],
    "found_by": [
-    "openalex recent",
     "openalex cites dataset:trex",
-    "openalex cites model:touchworld"
+    "openalex cites model:touchworld",
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1600,8 +1032,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:tacdex3d"
+    "openalex cites dataset:tacdex3d",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1634,8 +1066,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:sparsh_x",
     "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:sparsh_x",
     "openalex cites model:touchworld"
    ],
    "first_seen": "2026-11-24"
@@ -1759,8 +1191,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:feelsight",
     "openalex cites dataset:dex_mptd",
+    "openalex cites dataset:feelsight",
     "openalex cites model:omnivtla"
    ],
    "first_seen": "2026-11-24"
@@ -1811,8 +1243,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:vint6d",
     "openalex cites dataset:opentouch",
+    "openalex cites dataset:vint6d",
     "openalex cites model:omnivtla"
    ],
    "first_seen": "2026-11-24"
@@ -1847,9 +1279,9 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:tactofind",
     "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato"
+    "openalex cites dataset:hato",
+    "openalex cites model:tactofind"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1863,10 +1295,10 @@
    "score": 8.5,
    "hints": [],
    "found_by": [
-    "openalex cites dataset:tdex",
     "openalex cites dataset:feelsight",
-    "openalex cites dataset:vint6d",
-    "openalex cites dataset:hato"
+    "openalex cites dataset:hato",
+    "openalex cites dataset:tdex",
+    "openalex cites dataset:vint6d"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1931,9 +1363,9 @@
    "score": 8.0,
    "hints": [],
    "found_by": [
+    "openalex cites dataset:sparsh_skin",
     "openalex cites dataset:stag",
-    "openalex cites model:tactile_gat",
-    "openalex cites dataset:sparsh_skin"
+    "openalex cites model:tactile_gat"
    ],
    "first_seen": "2026-11-24"
   },
@@ -1949,8 +1381,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
     "openalex cites dataset:sparsh_skin",
+    "openalex cites dataset:tdex",
     "openalex cites model:omnivtla"
    ],
    "first_seen": "2026-11-24"
@@ -2036,8 +1468,8 @@
    ],
    "found_by": [
     "openalex cites dataset:hato",
-    "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:sparsh_skin"
+    "openalex cites dataset:sparsh_skin",
+    "openalex cites dataset:sparsh_x"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2088,8 +1520,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2123,8 +1555,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2175,8 +1607,8 @@
    ],
    "found_by": [
     "arxiv recent",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2210,8 +1642,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:sparsh_skin"
+    "openalex cites dataset:sparsh_skin",
+    "openalex cites dataset:sparsh_x"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2227,8 +1659,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2242,8 +1674,8 @@
    "score": 7.5,
    "hints": [],
    "found_by": [
-    "openalex cites dataset:htd",
     "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:htd",
     "openalex cites dataset:trex"
    ],
    "first_seen": "2026-11-24"
@@ -2278,9 +1710,9 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
     "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato"
+    "openalex cites dataset:hato",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2313,8 +1745,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tactalign",
-    "openalex cites dataset:htd"
+    "openalex cites dataset:htd",
+    "openalex cites dataset:tactalign"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2330,9 +1762,9 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
     "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato"
+    "openalex cites dataset:hato",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2349,8 +1781,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:adl21"
+    "openalex cites dataset:adl21",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2366,8 +1798,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:dexumi"
+    "openalex cites dataset:dexumi",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2385,24 +1817,6 @@
    ],
    "found_by": [
     "arxiv recent"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.26405",
-   "title": "TacInno: Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action",
-   "date": "2026-11-19",
-   "url": "https://arxiv.org/abs/2611.26405",
-   "authors": "Weile Li et al.",
-   "abstract": "Vision-Language-Action (VLA) models have recently been equipped with tactile sensing to perceive visually subtle contact events in contact-rich manipulation. However, adding tactile input yields inconsistent gains, and some visuo-tactile VLA models rely little on tactile input, because much of the tactile change, such as the gel deformation during gripper closure, is predictable from visual observations and executed actions. To address this problem, we introduce TacInno, which isolates the contact dynamics that vision and executed actions cannot explain, termed tactile innovation, and uses tactile innovation only as a training target. Specifically, the TacInno tokenizer, conditioned on visual observations and executed actions, compresses the future tactile change into a discrete code, and the policy, TacInno-VLA, learns to predict the code, adding no module for the code at deployment. TacInno-VLA achieves average success rates of 87.5% across six simulation tasks and 70.5% across four real-world tasks, outperforming the strongest visuo-tactile baseline by 10.7 and 9.0 percentage points, respectively. Ablation studies validate the contributions of visual and action conditioning, multi-frame encoding, and auxiliary code prediction. Together, these results demonstrate the effectiveness of tactile innovation as a supervision signal for contact-rich manipulation.",
-   "score": 7.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites model:omnivtla",
-    "openalex cites model:physword"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2442,6 +1856,23 @@
    "first_seen": "2026-11-01"
   },
   {
+   "key": "arxiv:2610.28259",
+   "title": "Large Multimodal Models for Direct Robot Control: GPT-6 as a Beginning",
+   "date": "2026-10-20",
+   "url": "https://arxiv.org/abs/2610.28259",
+   "authors": "Youwei Zhou et al.",
+   "abstract": "Recent advances in visuospatial understanding and agentic reasoning enable direct robotic manipulation with general-purpose multimodal models, but their embodied capabilities remain poorly understood. This paper systematically evaluate GPT-6 Astra for closed-loop robotic manipulation using a lightweight agent execution framework. We first probe three fundamental embodied capabilities-depth perception, embodied in-context learning, and tactile understanding-and demonstrate that the model can exploit depth information, acquire simple manipulation strategies from contextual demonstrations, and use tactile feedback to correct its actions. We then evaluate GPT-6 Astra across five established manipulation benchmarks along six capability dimensions. Despite competitive performance on several benchmarks-26.92\\% success on RoboDojo and 76.0\\% on RoboTwin 2.0-our analysis reveals a pronounced gap between semantic reasoning and physical execution, particularly in consequence-aware action planning, precision, and complex motion coordination. To further examine these limitations, we introduce LIBERO-GeoMotion, a new benchmark of geometry-constrained tasks that require precise pose alignment, coordinated translation and rotation, and anticipation of physical action consequences. GPT-6 Astra achieves only 11.1\\% zero-shot success, exposing the difficulty of translating spatial understanding into physically feasible motion. Real-world experiments corroborate these findings: zero-shot executi",
+   "score": 7.0,
+   "hints": [
+    "dataset"
+   ],
+   "found_by": [
+    "openalex cites dataset:decal",
+    "openalex cites dataset:ftp1_sharpa"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "hf:datasets/2077aidatafoundation/touchscale_oxt",
    "title": "2077AIDataFoundation/TouchScale_OXT",
    "url": "https://huggingface.co/datasets/2077AIDataFoundation/TouchScale_OXT",
@@ -2468,9 +1899,9 @@
     "model"
    ],
    "found_by": [
+    "openalex cites dataset:feelsight",
     "openalex cites dataset:tdex",
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2502,8 +1933,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tacdex3d",
-    "openalex cites dataset:dexumi"
+    "openalex cites dataset:dexumi",
+    "openalex cites dataset:tacdex3d"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2537,8 +1968,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:grasp_like_humans"
+    "openalex cites dataset:grasp_like_humans",
+    "openalex cites dataset:tdex"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2571,8 +2002,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tactalign",
     "openalex cites dataset:ftp1_sharpa",
+    "openalex cites dataset:tactalign",
     "openalex cites model:omnivtla"
    ],
    "first_seen": "2026-11-24"
@@ -2641,8 +2072,8 @@
     "hand"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2698,20 +2129,6 @@
    "first_seen": "2026-11-24"
   },
   {
-   "key": "hf:datasets/jensenyuan/dextacwam_oxt",
-   "title": "JensenYuan/DexTacWAM_OXT",
-   "url": "https://huggingface.co/datasets/JensenYuan/DexTacWAM_OXT",
-   "date": "2026-11-22",
-   "authors": "JensenYuan",
-   "abstract": "license:cc-by-4.0 arxiv:2609.24976 robotics tactile visuo-tactile dexterous-manipulation open-x-tactile ftp-1",
-   "score": 6.5,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
    "key": "hf:datasets/kitval/inhandrotation_oxt",
    "title": "Kitval/InHandRotation_OXT",
    "url": "https://huggingface.co/datasets/Kitval/InHandRotation_OXT",
@@ -2735,9 +2152,9 @@
    "score": 6.5,
    "hints": [],
    "found_by": [
-    "openalex recent",
     "openalex cites dataset:stag",
-    "openalex cites model:vitam"
+    "openalex cites model:vitam",
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2755,20 +2172,6 @@
    ],
    "found_by": [
     "openalex cites model:touchworld"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "hf:datasets/kitval/tactilelab_inhandrotation_oxt",
-   "title": "Kitval/TactileLab_InHandRotation_OXT",
-   "url": "https://huggingface.co/datasets/Kitval/TactileLab_InHandRotation_OXT",
-   "date": "2026-10-23",
-   "authors": "Kitval",
-   "abstract": "task_categories:robotics arxiv:2611.07881 tactile visuotactile dexterous-manipulation in-hand-rotation open-x-tactile",
-   "score": 6.5,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2864,8 +2267,8 @@
    "score": 6.5,
    "hints": [],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2913,8 +2316,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:opentouch"
+    "openalex cites dataset:opentouch",
+    "openalex cites dataset:sparsh_x"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2947,8 +2350,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites model:tactofind",
-    "openalex cites dataset:sparsh_x"
+    "openalex cites dataset:sparsh_x",
+    "openalex cites model:tactofind"
    ],
    "first_seen": "2026-11-24"
   },
@@ -2964,8 +2367,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:hato"
+    "openalex cites dataset:hato",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3014,8 +2417,8 @@
     "dataset"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:senstextile"
+    "openalex cites dataset:senstextile",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3102,6 +2505,23 @@
    "first_seen": "2026-11-24"
   },
   {
+   "key": "doi:10.1109/iros.2017.8206196",
+   "title": "Feeling the force: Integrating force and pose for fluent discovery through imitation learning to open medicine bottles",
+   "date": "2017-09-01",
+   "url": "https://doi.org/10.1109/iros.2017.8206196",
+   "authors": "Mark Edmonds et al.",
+   "abstract": "Learning complex robot manipulation policies for real-world objects is challenging, often requiring significant tuning within controlled environments. In this paper, we learn a manipulation model to execute tasks with multiple stages and variable structure, which typically are not suitable for most robot manipulation approaches. The model is learned from human demonstration using a tactile glove that measures both hand pose and contact forces. The tactile glove enables observation of visually latent changes in the scene, specifically the forces imposed to unlock the child-safety mechanisms of medicine bottles. From these observations, we learn an action planner through both a top-down stochastic grammar model (And-Or graph) to represent the compositional nature of the task sequence and a bottom-up discriminative model from the observed poses and forces. These two terms are combined during planning to select the next optimal action. We present a method for transferring this human-specific knowledge onto a robot platform and demonstrate that the robot can perform successful manipulations of unseen objects with similar task structure.",
+   "score": 6.5,
+   "hints": [
+    "glove",
+    "model"
+   ],
+   "found_by": [
+    "openalex backfill 2017-07"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "hf:datasets/jsun/visuotactile-gs_oxt",
    "title": "jsun/VisuoTactile-GS_OXT",
    "url": "https://huggingface.co/datasets/jsun/VisuoTactile-GS_OXT",
@@ -3111,8 +2531,8 @@
    "score": 6.0,
    "hints": [],
    "found_by": [
-    "hf datasets 'visuotactile'",
-    "hf datasets 'visuo-tactile'"
+    "hf datasets 'visuo-tactile'",
+    "hf datasets 'visuotactile'"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3193,8 +2613,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:senstextile"
+    "openalex cites dataset:senstextile",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3222,8 +2642,8 @@
    "score": 6.0,
    "hints": [],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:tacdex3d"
+    "openalex cites dataset:tacdex3d",
+    "openalex cites dataset:tdex"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3503,8 +2923,8 @@
    ],
    "found_by": [
     "arxiv recent",
-    "openalex recent",
-    "openalex cites dataset:egotac_sc"
+    "openalex cites dataset:egotac_sc",
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3599,8 +3019,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:tdex"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3698,8 +3118,8 @@
     "hand"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:tdex"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3749,8 +3169,8 @@
     "hand"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
   },
@@ -3988,6 +3408,20 @@
    "first_seen": "2026-11-24"
   },
   {
+   "key": "hf:models/zhicao/egocentric-handpose",
+   "title": "zhicao/egocentric-handpose",
+   "url": "https://huggingface.co/zhicao/egocentric-handpose",
+   "date": "2026-11-07",
+   "authors": "zhicao",
+   "abstract": "hand-pose-estimation mano egocentric robotics keypoint-detection license:other",
+   "score": 5.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "doi:10.1002/admt.71424",
    "title": "A Flexible Multi‐Modal Tactile Sensor Enabling Decoupled Pressure–Temperature–Proximity Perception for Closed‐Loop Robotic Contact Control",
    "date": "2026-10-23",
@@ -4005,22 +3439,6 @@
    "first_seen": "2026-11-01"
   },
   {
-   "key": "arxiv:2610.28259",
-   "title": "Large Multimodal Models for Direct Robot Control: GPT-6 as a Beginning",
-   "date": "2026-10-20",
-   "url": "https://arxiv.org/abs/2610.28259",
-   "authors": "Youwei Zhou et al.",
-   "abstract": "Recent advances in visuospatial understanding and agentic reasoning enable direct robotic manipulation with general-purpose multimodal models, but their embodied capabilities remain poorly understood. This paper systematically evaluate GPT-6 Astra for closed-loop robotic manipulation using a lightweight agent execution framework. We first probe three fundamental embodied capabilities-depth perception, embodied in-context learning, and tactile understanding-and demonstrate that the model can exploit depth information, acquire simple manipulation strategies from contextual demonstrations, and use tactile feedback to correct its actions. We then evaluate GPT-6 Astra across five established manipulation benchmarks along six capability dimensions. Despite competitive performance on several benchmarks-26.92\\% success on RoboDojo and 76.0\\% on RoboTwin 2.0-our analysis reveals a pronounced gap between semantic reasoning and physical execution, particularly in consequence-aware action planning, precision, and complex motion coordination. To further examine these limitations, we introduce LIBERO-GeoMotion, a new benchmark of geometry-constrained tasks that require precise pose alignment, coordinated translation and rotation, and anticipation of physical action consequences. GPT-6 Astra achieves only 11.1\\% zero-shot success, exposing the difficulty of translating spatial understanding into physically feasible motion. Real-world experiments corroborate these findings: zero-shot executi",
-   "score": 5.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "openalex cites dataset:ftp1_sharpa"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
    "key": "arxiv:2610.27613",
    "title": "Embodied Task Agents Can Perform Fine Manipulation through Tactile In-Context Learning",
    "date": "2026-10-20",
@@ -4030,18 +3448,18 @@
    "score": 5.0,
    "hints": [],
    "found_by": [
-    "openalex cites model:tavi",
-    "openalex cites dataset:ftp1_sharpa"
+    "openalex cites dataset:ftp1_sharpa",
+    "openalex cites model:tavi"
    ],
    "first_seen": "2026-11-24"
   },
   {
-   "key": "hf:datasets/ntumars/dextraverse_oxt",
-   "title": "ntumars/DextraVerse_OXT",
-   "url": "https://huggingface.co/datasets/ntumars/DextraVerse_OXT",
-   "date": "2026-10-06",
-   "authors": "ntumars",
-   "abstract": "task_categories:robotics license:cc-by-4.0 tactile dexterous-manipulation bimanual open-x-tactile",
+   "key": "hf:models/zhicao/fact",
+   "title": "zhicao/FACT",
+   "url": "https://huggingface.co/zhicao/FACT",
+   "date": "2026-10-15",
+   "authors": "zhicao",
+   "abstract": "robotics tactile vla license:mit",
    "score": 5.0,
    "hints": [],
    "found_by": [
@@ -4124,8 +3542,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:tactofind",
-    "openalex cites dataset:dexskills"
+    "openalex cites dataset:dexskills",
+    "openalex cites model:tactofind"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4251,8 +3669,8 @@
     "model"
    ],
    "found_by": [
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:tdex"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4268,8 +3686,40 @@
     "model"
    ],
    "found_by": [
-    "openalex cites model:robot_synesthesia",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:robot_synesthesia"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "doi:10.1109/tcsii.2017.2754141",
+   "title": "Online Learning for Multimodal Data Fusion With Application to Object Recognition",
+   "date": "2017-09-18",
+   "url": "https://doi.org/10.1109/tcsii.2017.2754141",
+   "authors": "Shahin Shahrampour et al.",
+   "abstract": "We consider online multimodal data fusion, where the goal is to combine information from multiple modes to identify an element in a large dictionary. We address this problem in the context of object recognition by focusing on tactile sensing as one of the modes. Using a tactile glove with seven sensors, various individuals grasp different objects to obtain 7-D time series, where each component represents the pressure sequence applied to one sensor. The pressure data of all objects is stored in a dictionary as a reference. The objective is to match a streaming vector time series from grasping an unknown object to a dictionary object. We propose an algorithm that may start with prior knowledge provided by other modes. Receiving pressure data sequentially, the algorithm uses a dissimilarity metric to modify the prior and form a probability distribution over the dictionary. When the dictionary objects are dissimilar in shape, we empirically show that our algorithm recognize the unknown object even with a uniform prior. If there exists a similar object to the unknown object in the dictionary, our algorithm needs the prior from other modes to detect the unknown object. Notably, our algorithm maintains a similar performance to standard offline classification techniques, such as support vector machine, with a significantly lower computational time.",
+   "score": 5.0,
+   "hints": [
+    "glove"
+   ],
+   "found_by": [
+    "openalex backfill 2017-07"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "doi:10.1109/roman.2017.8172474",
+   "title": "Learning robot tactile sensing of object for shape recognition using multi-fingered robot hands",
+   "date": "2017-08-01",
+   "url": "https://doi.org/10.1109/roman.2017.8172474",
+   "authors": "Wen-Ying Lee et al.",
+   "abstract": "Robots can deal with different kinds of challenges using tactile sensing arrays as a primary resource. This paper demonstrates the ability of robotic hands to recognize objects' shapes using only a flexible tactile sensor arrays attached to the robotic hand's surface without building the 3D models of objects. A telemanipulation module was developed to achieve a co-moving mechanism between the robotic hand and human hands so that the robotic hand can directly learn the best way to grasp objects from human hands without additional path planning process. Tactile array data were collected while the robotic hand was performing a reiterative grasping process. By extracting the proper features from the tactile sensor array data, the support vector machines (SVMs) were employed to perform object classification. From experiments, the proposed method can achieve 96.67% classification accuracy based on sensory data and SVMs.",
+   "score": 5.0,
+   "hints": [
+    "hand"
+   ],
+   "found_by": [
+    "openalex backfill 2017-07"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4317,8 +3767,8 @@
     "hand"
    ],
    "found_by": [
-    "openalex recent",
-    "openalex cites dataset:stag"
+    "openalex cites dataset:stag",
+    "openalex recent"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4388,6 +3838,22 @@
    "first_seen": "2026-11-02"
   },
   {
+   "key": "hf:models/zhicao/zhi-policy",
+   "title": "zhicao/Zhi-Policy",
+   "url": "https://huggingface.co/zhicao/Zhi-Policy",
+   "date": "2026-10-20",
+   "authors": "zhicao",
+   "abstract": "",
+   "score": 4.5,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "arxiv:2610.17748",
    "title": "I3L: Iterative Interactive Imitation Learning for Whole-Body Mobile Manipulation",
    "date": "2026-10-13",
@@ -4413,8 +3879,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:senstextile"
+    "openalex cites dataset:senstextile",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4638,8 +4104,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4685,8 +4151,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "openalex cites dataset:stag",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:stag"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4700,8 +4166,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "openalex cites dataset:senstextile",
-    "openalex cites dataset:grasp_like_humans"
+    "openalex cites dataset:grasp_like_humans",
+    "openalex cites dataset:senstextile"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4780,8 +4246,8 @@
    "score": 4.5,
    "hints": [],
    "found_by": [
-    "openalex cites model:vitam",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:vitam"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4798,6 +4264,22 @@
    ],
    "found_by": [
     "openalex cites dataset:stag"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "doi:10.1108/ir-12-2015-0226",
+   "title": "Robust dexterous telemanipulation following object-orientation commands",
+   "date": "2017-07-05",
+   "url": "https://doi.org/10.1108/ir-12-2015-0226",
+   "authors": "Andrés Montaño et al.",
+   "abstract": "Purpose This paper aims to present a procedure to change the orientation of a grasped object using dexterous manipulation. The manipulation is controlled by teleoperation in a very simple way, with the commands introduced by an operator using a keyboard. Design/methodology/approach The paper shows a teleoperation scheme, hand kinematics and a manipulation strategy to manipulate different objects using the Schunk Dexterous Hand (SDH2). A state machine is used to model the teleoperation actions and the system states. A virtual link is used to include the contact point on the hand kinematics of the SDH2. Findings Experiments were conducted to evaluate the proposed approach with different objects, varying the initial grasp configuration and the sequence of actions commanded by the operator. Originality/value The proposed approach uses a shared telemanipulation schema to perform dexterous manipulation; in this schema, the operator sends high-level commands and a local system uses this information, jointly with tactile measurements and the current status of the system, to generate proper setpoints for the low-level control of the fingers, which may be a commercial close one. The main contribution of this work is the mentioned local system, simple enough for practical applications and robust enough to avoid object falls.",
+   "score": 4.5,
+   "hints": [
+    "hand"
+   ],
+   "found_by": [
+    "openalex backfill 2017-07"
    ],
    "first_seen": "2026-11-24"
   },
@@ -4911,6 +4393,20 @@
    "date": "2026-11-20",
    "authors": "InternRobotics",
    "abstract": "language:en license:mit robotics simulation wet-op-bench",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/zhicao/nw_bench_handpose",
+   "title": "zhicao/NW_bench_handpose",
+   "url": "https://huggingface.co/datasets/zhicao/NW_bench_handpose",
+   "date": "2026-11-20",
+   "authors": "zhicao",
+   "abstract": "",
    "score": 4.0,
    "hints": [],
    "found_by": [
@@ -5135,6 +4631,20 @@
    "first_seen": "2026-11-24"
   },
   {
+   "key": "hf:models/zhicao/tract",
+   "title": "zhicao/tract",
+   "url": "https://huggingface.co/zhicao/tract",
+   "date": "2026-11-05",
+   "authors": "zhicao",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "doi:10.5281/zenodo.23949913",
    "title": "IntelliMan_WP5_Grasping, Manipulation and Arm-Hand Coordination_T5.1_Data fusion and sensing technology_IEEESensorsLetters2026_Data",
    "date": "2026-11-04",
@@ -5257,6 +4767,34 @@
    "first_seen": "2026-11-24"
   },
   {
+   "key": "hf:models/zhicao/zhi-teleop",
+   "title": "zhicao/Zhi-Teleop",
+   "url": "https://huggingface.co/zhicao/Zhi-Teleop",
+   "date": "2026-10-20",
+   "authors": "zhicao",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/zhicao/i2rt",
+   "title": "zhicao/i2rt",
+   "url": "https://huggingface.co/zhicao/i2rt",
+   "date": "2026-10-20",
+   "authors": "zhicao",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "arxiv:2610.19594",
    "title": "RoboSpan: Learning Modular Coordination Policies for High-DoF Whole-Body Mobile Manipulation with Teleoperation",
    "url": "https://arxiv.org/abs/2610.19594",
@@ -5345,6 +4883,20 @@
    "hints": [],
    "found_by": [
     "openalex cites model:omnivtla"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/zhicao/human-mcap-examples",
+   "title": "zhicao/human-mcap-examples",
+   "url": "https://huggingface.co/datasets/zhicao/human-mcap-examples",
+   "date": "2026-09-12",
+   "authors": "zhicao",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-11-24"
   },
@@ -6199,6 +5751,20 @@
    "first_seen": "2026-10-28"
   },
   {
+   "key": "hf:datasets/zhicao/openpi",
+   "title": "zhicao/openpi",
+   "url": "https://huggingface.co/datasets/zhicao/openpi",
+   "date": "2026-04-14",
+   "authors": "zhicao",
+   "abstract": "task_categories:robotics license:mit franka-panda manipulation real-world 224x224 square-center-crop",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "hf:datasets/jensenyuan/univtac_pull_out_key_lerobot",
    "title": "JensenYuan/univtac_pull_out_key_lerobot",
    "url": "https://huggingface.co/datasets/JensenYuan/univtac_pull_out_key_lerobot",
@@ -6342,6 +5908,20 @@
    "first_seen": "2026-10-28"
   },
   {
+   "key": "hf:models/zhicao/pi05_droid",
+   "title": "zhicao/pi05_droid",
+   "url": "https://huggingface.co/zhicao/pi05_droid",
+   "date": "2026-03-25",
+   "authors": "zhicao",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "hf:models/acerobotics/kairos-sensenova-robot-4b-480p",
    "title": "ACERobotics/kairos-sensenova-robot-4B-480P",
    "url": "https://huggingface.co/ACERobotics/kairos-sensenova-robot-4B-480P",
@@ -6438,6 +6018,20 @@
     "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-29"
+  },
+  {
+   "key": "hf:datasets/zhicao/libero",
+   "title": "zhicao/libero",
+   "url": "https://huggingface.co/datasets/zhicao/libero",
+   "date": "2026-03-14",
+   "authors": "zhicao",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
   },
   {
    "key": "hf:datasets/internrobotics/synthverse",
@@ -6594,6 +6188,232 @@
     "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-29"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/chip_task_lerobot",
+   "title": "JensenYuan/chip_task_lerobot",
+   "url": "https://huggingface.co/datasets/JensenYuan/chip_task_lerobot",
+   "date": "2026-03-03",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "arxiv:2603.01700",
+   "title": "TacMamba: A Tactile History Compression Adapter Bridging Fast Reflexes and Slow VLA Reasoning",
+   "date": "2026-03-02",
+   "url": "https://arxiv.org/abs/2603.01700",
+   "authors": "Zhenan Wang et al.",
+   "abstract": "In visually ambiguous manipulation such as detecting button click tactile feedback is often the sole source of ground truth. However, fusing tactile data poses a significant challenge due to a spatiotemporal mismatch: tactile perception requires high-frequency processing with long-horizon memory (System 1), whereas visual policies operate at low control frequencies (System 2). Existing architectures struggle to bridge this gap: Transformers are computationally prohibitive for high-frequency loops (>100Hz), while LSTMs suffer from forgetting over extended interaction histories. In this paper, we introduce TacMamba, a hierarchical architecture that aligns high-bandwidth tactile reflexes with low-frequency visual planning. Our approach comprises three core contributions: (1) a custom high-frequency tactile interface designed for flexible integration; (2) a Mamba-based Tactile History Compressor that encodes continuous force history into a compact state with O(1) inference latency (0.45 ms), enabling plug-and-play fusion with VLA models without joint pre-training and (3) a Tactile-Guided Dual-Stage Training strategy that leverages temporal discrimination for self-supervised representation learning and phase-uniform sampling to mitigate data sparsity. Experiments on discrete counting and implicit state switching demonstrate that TacMamba achieves 100% success rates, significantly outperforming the visual-only pi_0.5 baseline, while strictly satisfying hard real-time constraints.",
+   "score": 4.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites model:omnivtla"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/acerobotics/ace-brain-0-8b",
+   "title": "ACERobotics/ACE-Brain-0-8B",
+   "url": "https://huggingface.co/ACERobotics/ACE-Brain-0-8B",
+   "date": "2026-02-26",
+   "authors": "ACERobotics",
+   "abstract": "transformers safetensors qwen3_vl image-text-to-text conversational arxiv:2603.03198 base_model:ACERobotics/ACE-Brain-0-8B base_model:finetune:ACERobotics/ACE-Brain-0-8B license:mit endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/calvin_lerobot",
+   "title": "JensenYuan/calvin_lerobot",
+   "url": "https://huggingface.co/datasets/JensenYuan/calvin_lerobot",
+   "date": "2026-02-26",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/usc-psi-lab/psi-model",
+   "title": "USC-PSI-Lab/psi-model",
+   "url": "https://huggingface.co/USC-PSI-Lab/psi-model",
+   "date": "2026-02-23",
+   "authors": "USC-PSI-Lab",
+   "abstract": "safetensors",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/minifranka/libero_npy",
+   "title": "miniFranka/libero_npy",
+   "url": "https://huggingface.co/datasets/miniFranka/libero_npy",
+   "date": "2026-02-21",
+   "authors": "miniFranka",
+   "abstract": "license:mit",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/jensenyuan/nemotron-780k-qwen3-8b-regen-temp0",
+   "title": "JensenYuan/nemotron-780k-qwen3-8b-regen-temp0",
+   "url": "https://huggingface.co/JensenYuan/nemotron-780k-qwen3-8b-regen-temp0",
+   "date": "2026-02-18",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/usc-psi-lab/psi-data",
+   "title": "USC-PSI-Lab/psi-data",
+   "url": "https://huggingface.co/datasets/USC-PSI-Lab/psi-data",
+   "date": "2026-02-18",
+   "authors": "USC-PSI-Lab",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "title": "JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "url": "https://huggingface.co/datasets/JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "date": "2026-02-17",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/jensenyuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "title": "JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "url": "https://huggingface.co/JensenYuan/nemotron-505k-qwen3-8b-regen-temp0",
+   "date": "2026-02-17",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/beingbeyond/unihand_preview",
+   "title": "BeingBeyond/UniHand_Preview",
+   "url": "https://huggingface.co/datasets/BeingBeyond/UniHand_Preview",
+   "date": "2026-02-13",
+   "authors": "BeingBeyond",
+   "abstract": "task_categories:robotics arxiv:2601.12993 arxiv:2507.15597 lerobot vla",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/internrobotics/robointer-vlm_qwenvl25_3b",
+   "title": "InternRobotics/RoboInter-VLM_qwenvl25_3b",
+   "url": "https://huggingface.co/InternRobotics/RoboInter-VLM_qwenvl25_3b",
+   "date": "2026-02-12",
+   "authors": "InternRobotics",
+   "abstract": "transformers safetensors qwen2_5_vl image-text-to-text robotics vision-language-action-model vision-language-model arxiv:2602.09973 base_model:Qwen/Qwen2.5-VL-3B-Instruct base_model:finetune:Qwen/Qwen2.5-VL-3B-Instruct license:apache-2.0 text-generation-inference endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/internrobotics/robointer-vlm_llavaov_7b",
+   "title": "InternRobotics/RoboInter-VLM_llavaov_7B",
+   "url": "https://huggingface.co/InternRobotics/RoboInter-VLM_llavaov_7B",
+   "date": "2026-02-12",
+   "authors": "InternRobotics",
+   "abstract": "safetensors llava_qwen robotics vision-language-action-model vision-language-model arxiv:2602.09973 base_model:lmms-lab/llava-onevision-qwen2-7b-ov base_model:finetune:lmms-lab/llava-onevision-qwen2-7b-ov license:apache-2.0",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/internrobotics/robointer-vqa",
+   "title": "InternRobotics/RoboInter-VQA",
+   "url": "https://huggingface.co/datasets/InternRobotics/RoboInter-VQA",
+   "date": "2026-02-03",
+   "authors": "InternRobotics",
+   "abstract": "task_categories:robotics task_categories:visual-question-answering language:en arxiv:2602.09973 Embodied-AI Robotic manipulation intermediate-representation",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/internrobotics/robointer-data",
+   "title": "InternRobotics/RoboInter-Data",
+   "url": "https://huggingface.co/datasets/InternRobotics/RoboInter-Data",
+   "date": "2026-02-03",
+   "authors": "InternRobotics",
+   "abstract": "task_categories:robotics language:en arxiv:2602.09973 Embodied-AI Robotic manipulation intermediate-representation",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:models/internrobotics/robointer-vlm",
+   "title": "InternRobotics/RoboInter-VLM",
+   "url": "https://huggingface.co/InternRobotics/RoboInter-VLM",
+   "date": "2026-02-03",
+   "authors": "InternRobotics",
+   "abstract": "transformers safetensors qwen2_5_vl image-text-to-text robotics vision-language-action-model vision-language-model arxiv:2602.09973 base_model:Qwen/Qwen2.5-VL-7B-Instruct base_model:finetune:Qwen/Qwen2.5-VL-7B-Instruct license:apache-2.0 text-generation-inference endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-24"
   }
  ]
 }

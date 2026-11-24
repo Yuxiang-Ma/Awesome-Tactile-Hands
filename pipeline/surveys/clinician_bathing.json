@@ -1,0 +1,106 @@
+{
+ "id": "clinician_bathing",
+ "surveyed": "2026-11-24",
+ "entry": {
+  "id": "clinician_bathing",
+  "name": "Clinician Bathing Demonstrations",
+  "title": "High Fidelity Capture, Reconstruction, and Transfer of Human Demonstrations for Robot-Assisted Bathing",
+  "authors": "Arjun S. Lakshmipathy et al.",
+  "year": 2026,
+  "venue": "RSS 2026 (arXiv 2608.09127)",
+  "summary": "Three trained clinicians wiping the arms, legs, thighs, obliques, back, neck and face of six seated subjects with wet wipes, wearing a 65-taxel capacitive Pressure Profile Systems TactileGlove on each hand (10 Hz) inside a 20-camera Vicon capture at 120 Hz; 128 captures, 257,000 frames, with SMPL-X and MANO fits, contact regions and force.",
+  "embodiment": "human",
+  "hand": "Pressure Profile Systems TactileGlove on both hands of the clinician",
+  "bimanual": true,
+  "sensor": {
+   "type": "capacitive",
+   "taxels_per_hand": 65,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": 10,
+   "note": "65 differential-capacitance pressure taxels per glove across the palm and digits, synchronised with Vicon by timecode; 3M TB641 grip material added to the glove palms.",
+   "maker": "Pressure Profile Systems",
+   "model": "TactileGlove",
+   "principle": "capacitive",
+   "range": null
+  },
+  "modalities": [
+   "hand_pose",
+   "mocap"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 128,
+   "frames": 257000,
+   "tasks": null,
+   "objects": null,
+   "subjects": 9,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "128 captures, 257,000 frames (mean 2,007 frames per capture), 3 clinicians bathing 6 subjects, 8 body regions"
+  },
+  "availability": "announced",
+  "access": "The paper says 'All relevant materials will be publicly released'; no dataset link or repository was given (checked 2026-11-24).",
+  "license": "not stated",
+  "caveats": [
+   "The touch is human-on-human contact through a wet wipe during bathing, not object manipulation on a table.",
+   "No RGB video of the demonstrations is described; capture is Vicon markers (52 on each subject, 23 on the back of each glove) plus the gloves.",
+   "The paper reports 128 captures, while its per-region table sums to 138.",
+   "Hands, chest and pelvis of the subjects were not bathed in the captures."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2608.09127"
+  },
+  "setup": {
+   "cameras": [],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "optical_mocap",
+     "system": "Vicon Vantage-V16 (20 cameras, 120 Hz)",
+     "note": "23 markers on the back of each glove; MANO fitted from markers"
+    },
+    {
+     "target": "body",
+     "method": "optical_mocap",
+     "system": "Vicon Vantage-V16 (20 cameras, 120 Hz)",
+     "note": "52 markers on each person; SMPL-X fitted with MoSh++"
+    }
+   ],
+   "other": []
+  },
+  "sources": [
+   "https://arxiv.org/abs/2608.09127 (abstract via arXiv API; v1, 2026-08-10, RSS 2026)",
+   "https://arxiv.org/html/2608.09127 (capture setup, gloves, scale, release sentence)"
+  ],
+  "unconfirmed": [
+   "subjects 9 counts 3 clinicians and 6 bathed subjects; only the clinicians wore the gloves.",
+   "The paper cites the glove as Pressure Profile Systems 'TactileGlove' without a revision; the 65-taxel count matches the catalog's TactileGlove II record.",
+   "Coverage tip, phalanx and palm is from the paper's 'across the palm and digits'; the exact element layout was not read.",
+   "hours not stated; 257,000 frames at the 120 Hz Vicon rate would be about 0.6 h, which assumes frames are counted at that rate."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": null
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [],
+ "episode_index": null
+}

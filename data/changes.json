@@ -3,6 +3,132 @@
   {
    "kind": "added",
    "target": "dataset",
+   "id": "clinician_bathing",
+   "text": "Clinician Bathing Demonstrations: 128 Vicon captures (257,000 frames) of 3 clinicians bathing 6 subjects while wearing 65-taxel PPS TactileGloves on both hands; release announced in the RSS 2026 paper, no link yet.",
+   "source": "https://arxiv.org/abs/2608.09127",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
+   "id": "force_vision",
+   "text": "Force-Vision (Li et al., ICLR 2024): 150,000 frames of a knitted 16x16 pressure glove paired with webcam video over 89 articulated tools; a data zip is linked on Google Drive, license not stated.",
+   "source": "https://sites.google.com/view/iclr-submission-force-vision/home",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "witac",
+   "text": "WiTac: per-finger contact tokens from Sharpa Wave fingertip deformation, hand pose and wrist views, pretrained on about 300 h of SharpaDex; raises GR00T N1.7 from 37.5% to 66.3% on four tasks; no code release stated.",
+   "source": "https://arxiv.org/abs/2611.21057",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "ptld",
+   "text": "PTLD: tactile state estimator for an Allegro hand with 368 Xela uSkin taxels, distilled from real rollouts of a simulation-trained privileged policy; its code link returns 404.",
+   "source": "https://arxiv.org/abs/2603.04531",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tf2_steering",
+   "text": "TF²-Steering: tactile residual steering of a flow-matching action expert on two Sharpa hands, pretrained with T-Rex and FTP-1-Sharpa touch; 71.5% average progress success on six real tasks; no code release.",
+   "source": "https://arxiv.org/abs/2611.01483",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "fbi",
+   "text": "FBI: visuotactile shortcut policy for a Shadow Hand, trained in simulation and run with 148 RunesKee force sensors in the real world; the paper points to code on its site, which has none.",
+   "source": "https://arxiv.org/abs/2508.14441",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "twla",
+   "text": "T-WLA: tactile editor that corrects action chunks between RGB updates on Linker Hand L6 fingertip arrays, with its tactile encoder pretrained on EgoTouch and evaluated on Tachin; code on GitHub without a license file.",
+   "source": "https://github.com/kaichen-z/TWLA",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "retouch",
+   "text": "ReTouch: pi0-based VLA for an XHand (120 three-axis taxels per finger) that predicts and refines future touch online; 83.6 average score on seven tasks; code and its 900-demonstration XHT-Dataset not released.",
+   "source": "https://arxiv.org/abs/2608.01824",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "vitacformer",
+   "text": "ViTacFormer: cross-attention visuo-tactile policy with tactile prediction on pre-release Sharpa Wave hands; Apache-2.0 code public, no checkpoint.",
+   "source": "https://github.com/RoboVerseOrg/ViTacFormer",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "hope",
+   "text": "HOPE: per-vertex MANO contact and pressure in kPa from monocular video, trained and tested on OpenTouch glove pressure (vertex contact F1 0.680, MAE 1.23 kPa); code public, no checkpoint.",
+   "source": "https://arxiv.org/abs/2608.06192",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "talos_electrician_conduit",
+   "text": "Talos electrician conduit and subpanel sample: a Zenodo lite mirror (one episode, LeRobot metadata and spec sheet, 7.2 MB, CC BY-NC 4.0) added to sources.",
+   "source": "https://doi.org/10.5281/zenodo.24147501",
+   "date": "2026-11-24",
+   "flow": "discovery"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "egoexplorer",
+   "text": "EgoExplorer: the project page (internrobotics.github.io/egoexplorer.github.io/) returned HTTP 404 on two scans in a row. The Hugging Face dataset (gate manual, last modified 2026-10-22) and the GitHub repository (Sage-PhysicalAI/EgoExplorer) still answer, so availability stays partial; the dead link is kept and recorded in the caveats.",
+   "source": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+   "date": "2026-11-24",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "tipdex_vtla",
+   "text": "TipDex-VTLA demonstrations: arXiv v2 (2026-11-22) retitled the paper 'Learning to Refine Actions with Visual Reliability and Tactile Feedback for Dexterous Manipulation'; the comment says main text and results are unchanged. The release sentence ('We will release the collected data and source code') still has no link, so availability stays announced.",
+   "source": "https://arxiv.org/abs/2611.25683",
+   "date": "2026-11-24",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "tipdex_vtla",
+   "text": "TipDex-VTLA: title updated to the arXiv v2 wording (2026-11-22; results unchanged). v2 repeats the code and data promise with no link and no repository was found, so code stays announced.",
+   "source": "https://arxiv.org/abs/2611.25683",
+   "date": "2026-11-24",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
    "id": "decal",
    "text": "DeCAL dataset: 1,279 bimanual trajectories (1,989,891 frames, 13 tasks) on two Sharpa Wave hands with per-fingertip 6-D contact vectors and 240x240 deformation images; public on ModelScope in Open-X-Tactile format, 2.0 TB, Apache-2.0 on the card.",
    "source": "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT",

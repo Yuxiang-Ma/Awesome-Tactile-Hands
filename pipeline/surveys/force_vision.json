@@ -1,0 +1,104 @@
+{
+ "id": "force_vision",
+ "surveyed": "2026-11-24",
+ "entry": {
+  "id": "force_vision",
+  "name": "Force-Vision (Li et al., ICLR 2024)",
+  "title": "Learning to Jointly Understand Visual and Tactile Signals",
+  "authors": "Yichen Li et al.",
+  "year": 2024,
+  "venue": "ICLR 2024",
+  "summary": "A person wearing a knitted full-hand pressure glove (16x16 readouts over palm and fingers, calibrated to newtons with a UR5e) squeezes, holds and presses 89 articulated tools (scissors, sprayers, staplers, clips) while a webcam records the hand-object scene; 150,000 frames of paired force maps and RGB, plus a canonical photo of each object.",
+  "embodiment": "human",
+  "hand": "knitted pressure glove built after Sundaram et al. 2019 (STAG method), one hand",
+  "bimanual": false,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 256,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "note": "16x16 grid of pressure readouts per frame, stored as a 2D heatmap; calibrated to force with a UR5e arm.",
+   "maker": "custom (MIT CSAIL)",
+   "model": null,
+   "principle": "piezoresistive",
+   "range": null
+  },
+  "modalities": [
+   "rgb"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": 150000,
+   "tasks": 3,
+   "objects": 89,
+   "subjects": null,
+   "scenes": 1,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "150,000 frames, 89 object instances in 4+ categories, manipulations squeeze, hold and press; train 123,561 frames (81 objects), test 21,000 frames"
+  },
+  "availability": "public",
+  "access": "The project site's 'Download Data' links a Google Drive file (d256.zip) whose page opens without sign-in; size not shown, files not opened (checked 2026-11-24).",
+  "license": "not stated",
+  "caveats": [
+   "The introduction says 2,000,000 paired frames; the dataset section says 150,000 frames (123,561 train, 21,000 test). The smaller figure is used here.",
+   "Glove maker, sampling rate and number of wearers are not stated; the glove follows the knitted design of Sundaram et al. 2019 but with a 16x16 readout grid.",
+   "No hand pose is recorded; the second modality is a single webcam video plus a static photo of each object."
+  ],
+  "links": {
+   "paper": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/3848bc3112429079af85dedb7d369ef4-Abstract-Conference.html",
+   "project": "https://sites.google.com/view/iclr-submission-force-vision/home",
+   "data": "https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "webcam (model not stated)",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "static"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [],
+   "other": []
+  },
+  "sources": [
+   "https://proceedings.iclr.cc/paper_files/paper/2024/file/3848bc3112429079af85dedb7d369ef4-Paper-Conference.pdf (pages 1-9: dataset, glove, splits, method, results)",
+   "https://sites.google.com/view/iclr-submission-force-vision/home (data link)",
+   "https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view (file page: d256.zip)"
+  ],
+  "unconfirmed": [
+   "taxels_per_hand 256 is the 16x16 readout grid stated in the paper; the physical sensor count of the glove is not given.",
+   "principle piezoresistive is assumed from the cited knitted-glove design (Sundaram et al. 2019), which uses a piezoresistive film; the paper only says 'embroidery-based'.",
+   "tasks 3 counts the manipulation types named in the latent-space figure (squeeze, hold, press).",
+   "Whether d256.zip holds the full 150,000-frame release was not checked; files not opened."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": null
+ },
+ "download": {
+  "where": "https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view",
+  "access": "open",
+  "format": "zip (d256.zip); contents not opened",
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [],
+ "episode_index": null
+}
