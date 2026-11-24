@@ -2850,6 +2850,324 @@
     "touch 'both': future tactile prediction is a training objective; tactile signals are a policy input."
    ],
    "checked": "2026-11-23"
+  },
+  {
+   "id": "witac",
+   "name": "WiTac",
+   "title": "WiTac: Wrist-Informed Tactile Representations for Contact-Rich Manipulation",
+   "authors": "Haotian He et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.21057",
+   "kind": "representation",
+   "summary": "Pretrained encoder for the Sharpa North robot with two 22-DoF Sharpa Wave hands: an eight-frame history of the ten 240x240 fingertip deformation maps, wrist-relative fingertip poses, the 65-D joint state and both wrist fisheye views (frozen DINOv3) go in, ten 768-D per-finger contact tokens come out and are injected through a learned gate into GR00T N1.7 or pi0.5; over four real tasks it lifts average success from 37.5% to 66.3% (GR00T) and from 43.8% to 58.8% (pi0.5).",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "sharpadex",
+     "role": "pretraining",
+     "note": "SharpaDex v1.0, 'nearly 300 hours' over 59 tasks, 98%/2% split by episode; 30,000 steps at batch 1,024 with contact-descriptor, deformation-change, fingertip-motion, masked wrist-feature and wrench-response objectives."
+    }
+   ],
+   "own_data": "200 exoskeleton-teleoperated demonstrations for each of 4 tasks (insert battery, wipe bowl, reinsert USB, open cabinet); release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v3 text states no release; the project page wrist-informed-tactile-representations.github.io links only the paper and BibTeX (read 2026-11-24)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.21057",
+    "project": "https://wrist-informed-tactile-representations.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.21057 (abstract via arXiv API; v3, 2026-11-20)",
+    "https://arxiv.org/html/2611.21057v3 (hardware, encoder inputs and outputs, pretraining, results)",
+    "https://wrist-informed-tactile-representations.github.io/ (authors, affiliations, links)"
+   ],
+   "unconfirmed": [
+    "The spatial tactile backbone is initialised from the 'SharpaWave Deform Encoder'; whether that encoder is public was not checked.",
+    "Authors are from Sharpa Robotics, PKU, SJTU, ShanghaiTech and CUHK (project page)."
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "id": "ptld",
+   "name": "PTLD",
+   "title": "PTLD: Sim-to-real Privileged Tactile Latent Distillation for Dexterous Manipulation",
+   "authors": "Rosy Chen et al.",
+   "year": 2026,
+   "venue": "arXiv 2603.04531",
+   "kind": "policy",
+   "summary": "Sim-to-real recipe for an Allegro hand on a Franka arm covered with Xela uSkin (18 pads, 368 three-axis taxels on fingertips, phalanges and palm): privileged-state RL policies trained in simulation are rolled out in a motion-captured real setup to collect touch, and a tactile state estimator (a 1D temporal conv over 0.5 s of 100 Hz touch plus fingertip positions for rotation, a causal Transformer for reorientation) is distilled to output the privileged latent; 182% better in-hand rotation than proprioception only and 57% more reorientation goals reached.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Real tactile rollouts of the privileged policy with object pose from 4 RealSense cameras and ChArUco markers at 50 Hz: about 180 min per rotation policy (3 DAgger rounds of 30 two-minute trajectories); reorientation amount not stated; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "The project page akashsharma02.github.io/ptld-website has a 'Code' button to github.com/akashsharma02/ptld, which returned HTTP 404 on 2026-11-24; the arXiv v3 text states no release."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2603.04531",
+    "project": "https://akashsharma02.github.io/ptld-website/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2603.04531 (v3: hardware, data collection, estimator, results)",
+    "https://akashsharma02.github.io/ptld-website/ (sensor coverage, code link)",
+    "https://github.com/akashsharma02/ptld (HTTP 404)"
+   ],
+   "unconfirmed": [
+    "The project page carries a commented-out line 'Accepted as Oral at CoRL 2025'; the venue is left as arXiv.",
+    "code 'announced': a Code link exists but the repository was not reachable.",
+    "On cube rotation the paper's table gives the AAC teacher a higher rotation reward (17.3) than PTLD (4.5), while the text says PTLD outperforms it."
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "id": "tf2_steering",
+   "name": "TF²-Steering",
+   "title": "TF²-Steering: Action Refinement with Tactile Forecasts and Feedback via Velocity-Field Steering",
+   "authors": "Yiming Chen et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.01483",
+   "kind": "policy",
+   "summary": "World-action model (LTX-Video backbone, Q-Former compression, flow-matching action expert) for two UR5e arms with 22-DoF Sharpa hands: language, three RealSense views and fingertip touch go in, and a tactile mixture-of-experts adds a learned residual to the action expert's velocity field from forecast and real-time touch; 71.5% average progress success on six real tasks against 62.4% for T-Rex, and 68.3% on six UniVTAC simulation tasks against 57.7% for FTP-1.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "trex",
+     "role": "pretraining",
+     "note": "Named with OpenNeoData and FTP-1-Sharpa as tactile pretraining data; amount used not stated."
+    },
+    {
+     "id": "ftp1_sharpa",
+     "role": "pretraining",
+     "note": "Named with OpenNeoData and the T-Rex dataset as tactile pretraining data; amount used not stated."
+    }
+   ],
+   "own_data": "100 teleoperated demonstrations for each of 6 real tasks (fruit on plate, close zipper, wipe whiteboard, twist cap, split cups, dropper transfer); release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The project page yiming-cc.github.io/tf2-steering shows a 'Code' label with no repository link; the arXiv v1 text states no release (read 2026-11-24)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.01483",
+    "project": "https://yiming-cc.github.io/tf2-steering/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2611.01483 (v1: platform, inputs, outputs, data, results)",
+    "https://yiming-cc.github.io/tf2-steering/ (authors, links)"
+   ],
+   "unconfirmed": [
+    "The paper does not name the tactile sensor; Sharpa hands carry fingertip deformation sensors.",
+    "The abstract gives a 10.7-point simulation gain; the table values give 10.6."
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "id": "fbi",
+   "name": "FBI",
+   "title": "FBI: Learning Dexterous In-hand Manipulation with Dynamic Visuotactile Shortcut Policy",
+   "authors": "Yijin Chen et al.",
+   "year": 2025,
+   "venue": "arXiv 2508.14441",
+   "kind": "policy",
+   "summary": "One-step shortcut (flow-matching) policy for a 24-DoF Shadow Hand: two robot states, two partial point clouds and touch mapped to 456 contact keypoints go in, joint-target sequences come out, with a Flow2Tactile module that predicts touch from point-cloud flow when no sensors are present; in the real world the hand carries 148 RunesKee force sensors (82 on fingers, 66 on the palm, 20 Hz) and FBI reaches 35.0% average success with touch and 33.5% vision-only, against 18.5% for ManiCM.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Simulated demonstrations from PPO and VRL3 agents (5,000 per object for push and reorientation, 10 per Adroit task); real-world demonstration count not stated; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "announced",
+    "note": "The paper says 'Code, models, and more results are available in the website'; the site sites.google.com/view/dex-fbi had no code or model link on 2026-11-24."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2508.14441",
+    "project": "https://sites.google.com/view/dex-fbi"
+   },
+   "sources": [
+    "https://arxiv.org/html/2508.14441 (v1: hand, sensors, inputs, outputs, results, release sentence)",
+    "https://sites.google.com/view/dex-fbi (no code link)"
+   ],
+   "unconfirmed": [
+    "Training is in simulation (Isaac Sim, MuJoCo Adroit); recorded hand touch enters only in real-world evaluation.",
+    "Real readings are interpolated from 148 sensors onto 16 regions of the 456 simulated keypoints; the paper does not describe a recorded real-touch dataset."
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "id": "twla",
+   "name": "T-WLA",
+   "title": "T-WLA: Bridging Slow Vision and Fast Touch",
+   "authors": "Kaichen Zhou et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.28814",
+   "kind": "policy",
+   "summary": "World-language-action policy for a Linker A7 dual-arm robot with two Linker Hand L6 hands (a 12x6 tactile array on each fingertip, about 8.3 Hz per finger): at each RGB update a visual branch writes a visual memory and a base action chunk, and between updates a tactile editor uses the cached memory and recent touch to correct unexecuted actions; future-image and future-pressure heads are training-only; 51.0% average success on four tasks against 23.0% for T-Rex.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "egotouch",
+     "role": "pretraining",
+     "note": "Tactile encoder pretrained contrastively on synchronized 21x21 pressure maps and hand-pose histories; tactile-conditioned future hand-motion prediction evaluated across five environments, finger-joint MPJPE 0.35 cm against 0.50 for the best baseline."
+    },
+    {
+     "id": "tachin_demo01",
+     "role": "evaluation",
+     "note": "Future hand-motion prediction on the full held-out test split: finger-joint MPJPE 0.46 cm against 0.63 for VITRA + tactile."
+    }
+   ],
+   "own_data": "30 Wuji-glove teleoperated demonstrations for each of 4 tasks (egg transfer, single-sheet pickup, paper-cup nesting, paper-bag dragging); release not stated. Visual pretraining also uses GigaHands, OakInk2 and TACO (bare hands, not catalog entries).",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "The paper says 'Videos and code are available at the project website'; github.com/kaichen-z/TWLA (no license file, last push 2026-11-17) holds T-WLA_foundation_model/, tactile_editor/ and robot_hardware/; no checkpoint link seen (read 2026-11-24)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.28814",
+    "project": "https://t-wla.github.io/",
+    "code": "https://github.com/kaichen-z/TWLA"
+   },
+   "sources": [
+    "https://arxiv.org/html/2610.28814 (v2: inputs, outputs, data, results; appendix hardware read from characters 100,000 on)",
+    "https://t-wla.github.io/ (results, code link)",
+    "https://github.com/kaichen-z/TWLA (repository metadata)"
+   ],
+   "unconfirmed": [
+    "The fingertip sensor's maker and principle are not stated; Linker Hand L6 is sold with tactile fingertips.",
+    "embodiment 'both': human glove touch (EgoTouch, Tachin) is used for pretraining and evaluation, robot touch for control.",
+    "The repository README text was empty when read; whether it holds trained weights was not checked."
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "id": "retouch",
+   "name": "ReTouch",
+   "title": "ReTouch: Empowering Contact-Rich Dexterous Manipulation with Online-Refined Tactile Prediction",
+   "authors": "Shiqi Zhang et al.",
+   "year": 2026,
+   "venue": "arXiv 2608.01824",
+   "kind": "policy",
+   "summary": "VLA initialised from pi0 for a UR7e arm with a five-finger XHand (120 three-axis taxels per finger): three RGB views, language, an 18-D state and a ten-frame tactile window (10x5x120x3) through a Tactile-Patch Encoder go in, and a high-frequency module outputs 16-step joint chunks while predicting future tactile states and refining both from incoming touch; 83.6 average task score on seven tasks against 65.2 for Tactile-VLA.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [],
+   "own_data": "XHT-Dataset: 900 real demonstrations over 7 tasks (pipette press, bottle grasp, cob grasp, sponge wipe, button press, cabinet retrieval, liquid transfer) on the XHand-UR7e platform, 800 for training; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v2 text has no release statement, project page or repository link (read 2026-11-24)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2608.01824"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2608.01824 (abstract via arXiv API; v2, 2026-08-18)",
+    "https://arxiv.org/html/2608.01824 (platform, inputs, outputs, data, results)"
+   ],
+   "unconfirmed": [
+    "The tactile sensor maker is not stated; 120 three-axis taxels per finger is the paper's figure for the XHand.",
+    "touch 'both': future tactile states are predicted and refined online alongside actions."
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "id": "vitacformer",
+   "name": "ViTacFormer",
+   "title": "ViTacFormer: Learning Cross-Modal Representation for Visuo-Tactile Dexterous Manipulation",
+   "authors": "Liang Heng et al.",
+   "year": 2025,
+   "venue": "arXiv 2506.15953",
+   "kind": "policy",
+   "summary": "Cross-attention visuo-tactile encoder with an autoregressive tactile-prediction head, trained with an easy-to-hard curriculum, for two Realman arms with pre-release 17-DoF Sharpa Wave hands: four camera views, 58-D proprioception and the ten fingertips' force-torque readings (320x240 sensors) go in, 100-step action chunks come out; 10/10 peg insertion and cap twist against 6/10 for ACT with touch, and 70% full success on the 11-stage hamburger task.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [],
+   "own_data": "50 teleoperated demonstrations per task (peg insertion, cap twist, vase wipe, book flip, make hamburger); release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/RoboVerseOrg/ViTacFormer (Apache-2.0, last push 2026-08-08) holds training and inference scripts; no checkpoint link seen; the paper states no release (read 2026-11-24)."
+   },
+   "license": "Apache-2.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2506.15953",
+    "project": "https://roboverseorg.github.io/ViTacFormerPage/",
+    "code": "https://github.com/RoboVerseOrg/ViTacFormer"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2506.15953 (abstract via arXiv API; v2, 2026-05-13)",
+    "https://arxiv.org/html/2506.15953 (hardware, inputs, outputs, results)",
+    "https://roboverseorg.github.io/ViTacFormerPage/ (code link)",
+    "https://github.com/RoboVerseOrg/ViTacFormer (repository metadata)"
+   ],
+   "unconfirmed": [
+    "The hand is 'the developing version of SharpaWave' with 17 DoF, unlike the 22-DoF production Sharpa Wave.",
+    "The policy uses 3-axis force and torque per fingertip, not the raw tactile images.",
+    "The repository README text was empty when read; the dataset/ folder was not opened."
+   ],
+   "checked": "2026-11-24"
+  },
+  {
+   "id": "hope",
+   "name": "HOPE",
+   "title": "HOPE: Hand-Object Pressure Estimation from Monocular Videos",
+   "authors": "Subin Jeon et al.",
+   "year": 2026,
+   "venue": "NeurIPS 2026 (arXiv 2608.06192)",
+   "kind": "estimation",
+   "summary": "Vertex-anchored video transformer (VertexFormer: frozen DINOv3 ViT-B/16 patches plus HaWoR MANO vertex tokens, 10-frame clips) that predicts per-vertex contact and pressure in kPa on the 778-vertex MANO hand from monocular RGB; trained on OpenTouch glove pressure, PressureVisionDB and DexYCB/ARCTIC contact, it reaches vertex-level contact F1 0.680 and pressure MAE 1.23 kPa on the OpenTouch test set against 0.373 F1 for HACO and 1.53 kPa for PressureVision++.",
+   "embodiment": "human",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "opentouch",
+     "role": "training",
+     "note": "Glove taxels projected onto MANO vertices and converted to kPa: 1,644 clips (171,765 frames) for training and 190 clips (17,264 frames) for testing."
+    }
+   ],
+   "own_data": "23 held-out clips (6,310 frames) with two pressure sensors on the thumb and index fingertips, used to check bare-hand transfer (mean Spearman 0.50); release not stated. Also trains on PressureVisionDB, DexYCB and ARCTIC (not catalog entries).",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/subin6/hope ('Official repository', license file NOASSERTION, last push 2026-10-30) holds src/, configs/, scripts/ and preprocess/; the project page's 'Model' link is commented out (read 2026-11-24)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2608.06192",
+    "project": "https://subin6.github.io/page-hope",
+    "code": "https://github.com/subin6/hope"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2608.06192 (abstract via arXiv API; v2, 2026-10-30)",
+    "https://arxiv.org/pdf/2608.06192v2 (pages 5-9: annotation, model, datasets, results)",
+    "https://subin6.github.io/page-hope (NeurIPS 2026, links)",
+    "https://github.com/subin6/hope (repository metadata)"
+   ],
+   "unconfirmed": [
+    "The license of the code repository could not be identified by GitHub (NOASSERTION); the license file was not read.",
+    "OpenTouch pressure is normalised with a 50 kPa reference taken as OpenTouch's nominal full-scale range."
+   ],
+   "checked": "2026-11-24"
   }
  ]
 }

@@ -1007,6 +1007,10 @@
     {
      "id": "pimforce",
      "role": "tactile glove"
+    },
+    {
+     "id": "clinician_bathing",
+     "role": "tactile glove"
     }
    ],
    "sources": [
