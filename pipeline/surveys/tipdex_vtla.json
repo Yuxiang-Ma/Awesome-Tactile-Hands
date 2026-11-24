@@ -1,0 +1,119 @@
+{
+ "id": "tipdex_vtla",
+ "surveyed": "2026-11-23",
+ "entry": {
+  "id": "tipdex_vtla",
+  "name": "TipDex-VTLA demonstrations",
+  "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
+  "authors": "Xudi Ge et al.",
+  "year": 2026,
+  "venue": "arXiv 2611.25683",
+  "summary": "300 teleoperated demonstrations of four bimanual tasks (Egg Transfer, Grape Pinching, Tissue Extraction, Mung Bean Pouring) on two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands, each carrying eight piezoresistive arrays with 364 taxels over five fingertips and three palm regions at 30 Hz, with one overhead and two wrist RGB cameras.",
+  "embodiment": "robot",
+  "hand": "Inspire RH56F2-E2-T1 x 2 on two RealMan RM75 arms",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": 364,
+   "coverage": [
+    "tip",
+    "palm"
+   ],
+   "rate_hz": 30,
+   "note": "Eight piezoresistive arrays per hand (five fingertip regions, three palm regions), 364 taxels per hand.",
+   "maker": null,
+   "model": null,
+   "principle": "piezoresistive",
+   "range": null
+  },
+  "modalities": [
+   "multiview_rgb",
+   "wrist_rgb",
+   "robot_action",
+   "language"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": 300,
+   "frames": null,
+   "tasks": 4,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "lab"
+   ],
+   "text": "300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2); per-task counts and hours not stated"
+  },
+  "availability": "announced",
+  "access": "The paper states 'We will release the collected data and source code.'; no link is given (checked 2026-11-23).",
+  "license": "not stated",
+  "caveats": [
+   "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it.",
+   "Per-task demonstration counts, episode length and storage format are not stated."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2611.25683"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "third_person",
+     "count": 1,
+     "model": "Intel RealSense D405",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "static"
+    },
+    {
+     "role": "wrist",
+     "count": 2,
+     "model": "Intel RealSense D435i",
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 2,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "RealMan RM75 (7 DoF) arms and Inspire RH56F2-E2-T1 hands",
+     "note": "teleoperation method not read"
+    }
+   ],
+   "other": [
+    "language instruction"
+   ]
+  },
+  "sources": [
+   "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19)",
+   "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)"
+  ],
+  "unconfirmed": [
+   "The tactile maker is not stated; the hand model RH56F2-E2-T1 suggests Inspire's own sensors, which the paper does not say. The catalog's RH56F1 record (8 capacitive sites per hand) does not match the 364 piezoresistive taxels given here, so no hardware link was made.",
+   "'language' in modalities: the policy takes a language instruction; how it is stored in the release is unknown.",
+   "Camera frame rates and resolutions not read; depth from the RealSense cameras is not mentioned as recorded."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": null
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [],
+ "episode_index": null
+}

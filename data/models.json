@@ -2521,6 +2521,322 @@
     "Year 2022 is the arXiv submission (March 2022); the IEEE ISPCC version is dated 2025."
    ],
    "checked": "2026-11-03"
+  },
+  {
+   "id": "touchtwin",
+   "name": "TouchTwin",
+   "title": "TouchTwin: Scaling Human Touch Data via Real-to-Sim-to-Real",
+   "authors": "Huiwen Han et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.17619",
+   "kind": "generation",
+   "summary": "Rebuilds selected TouchScale recordings in MuJoCo, with coding agents writing each object as a physics-tested program and a per-subject hand carrying the glove's 880 taxels on 15 pads, so the recorded touch sets each finger's contact and closing force; the replays seed perturbed demonstrations with simulated contact and force labels and Wan2.2-rendered video. A hand policy trained on the replays grips at 0.99x the recorded force (20/20 held-out recordings, 35/36 perturbations, in simulation), and a contact predictor trained on them misses 13% of real contact frames against 32% for vision-based replays.",
+   "embodiment": "human",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "touchscale",
+     "role": "training",
+     "note": "Selected TouchScale recordings (head and wrist RGB-D, 880-taxel glove) rebuilt as one- and two-hand MuJoCo replays; objects shown include a mug, flask, spray bottle, first-aid box, toolbox, headphones, kitchen scale, parts box, basket, steel mug, wok and 1 mL pipette. Policy and contact-predictor results use the mug task; the number of recordings used is not stated."
+    }
+   ],
+   "own_data": "Simulated replays, perturbed demonstrations with physics-resolved contact and force labels, and generated videos; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text and the project page touchtwin.github.io link no code, data or weights and state no release (read 2026-11-23)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.17619",
+    "project": "https://touchtwin.github.io"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.17619 (abstract via arXiv API; v1, 2026-11-13)",
+    "https://arxiv.org/html/2611.17619v1 (pipeline, experiments, limitations)",
+    "https://touchtwin.github.io (taxel layout, objects, results)"
+   ],
+   "unconfirmed": [
+    "kind 'generation': the pipeline turns recorded glove touch into simulated contact and force labels for new demonstrations; it also trains a hand policy and a contact predictor on them.",
+    "All policy results are in simulation and the paper lists real-robot experiments as future work; the policy's inputs and outputs were not read in detail.",
+    "The number of TouchScale recordings, subjects and tasks rebuilt is not stated; '20/20' counts held-out recordings for the mug task."
+   ],
+   "checked": "2026-11-23"
+  },
+  {
+   "id": "touchannotator",
+   "name": "TouchAnnotator",
+   "title": "TouchAnnotator: Multi-Source Tactile Supervision with Privileged-View Distillation",
+   "authors": "Ao Li et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.09129",
+   "kind": "estimation",
+   "summary": "Takes egocentric RGB video (8-frame clips at 224x224, two past clips as memory) and WiLoR hand poses and outputs a 21x21 relative-pressure field and a contact-probability field for each hand; a Qwen3.5-4B video tower is distilled from an EMA teacher that also sees wrist views, trained on 195.3 h from six sources (gloves, bare hands, robot hands). On 897 of the authors' own Wuji-glove recordings it gains 5.38 points of temporal accuracy and 5.02 points of volumetric IoU over TouchAnything.",
+   "embodiment": "both",
+   "touch": "output",
+   "uses": [
+    {
+     "id": "egotouch",
+     "role": "training",
+     "note": "541 segments, 411,568 frames, 3.8 h; relative pressure, contact and privileged wrist views. Evaluated on 184 seen and 76 unseen episodes: unseen temporal accuracy 0.8687, volumetric IoU 0.3821, MAE 0.0638 from ego video only."
+    },
+    {
+     "id": "humantouch",
+     "role": "training",
+     "note": "17,545 segments, 28,505,945 frames, 132.0 h; relative pressure, contact and privileged views."
+    },
+    {
+     "id": "trex",
+     "role": "training",
+     "note": "4,371 segments, 4,363,007 frames, 40.4 h of dexterous robot-hand recordings; contact derived from optical fingertip deformation, plus privileged views."
+    }
+   ],
+   "own_data": "897 egocentric sequences over 30 tasks (about 5 h) with Wuji gloves measuring both hands, used for evaluation; release not stated. Also trains on HOI4D, TACO and OakInk2 bare-hand contact derived from geometry (not catalog entries).",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "github.com/RammusLeo/TouchAnnotator (MIT, last push 2026-11-02) holds inference code and demo.py; Hugging Face RammusLeo/TouchAnnotator holds the 9.40 GB 'Full student' checkpoint (v1.0, ungated) and RammusLeo/TouchAnnotator-0813 an earlier 951 MB checkpoint. The paper itself states no release (read 2026-11-23)."
+   },
+   "license": "MIT (code); Qwen license file shipped with the weights",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.09129",
+    "code": "https://github.com/RammusLeo/TouchAnnotator",
+    "weights": "https://huggingface.co/RammusLeo/TouchAnnotator"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.09129 (abstract via arXiv API; v1, 2026-11-06)",
+    "https://arxiv.org/html/2611.09129v1 (Table 1 sources, model, evaluation sets; first 100,000 of 107,170 characters)",
+    "https://huggingface.co/RammusLeo/TouchAnnotator (README, file list)",
+    "https://github.com/RammusLeo/TouchAnnotator (repository metadata)"
+   ],
+   "unconfirmed": [
+    "The paper does not link the code or weights; the Hugging Face card's title and method match the paper, and the repository was created 2026-10-28, before the arXiv posting.",
+    "The 860-episode figure in the abstract is a cached raw subset (21 tasks) of the 897 retained sequences; the glove's taxel layout was not read.",
+    "On the authors' recordings MAE is slightly worse than TouchAnything (0.0875 against 0.0830)."
+   ],
+   "checked": "2026-11-23"
+  },
+  {
+   "id": "vistacalign",
+   "name": "VisTacAlign",
+   "title": "VisTacAlign: Co-Training Dexterous Policies on Tactile Human and Robot Demonstrations using Visual-Tactile Alignment",
+   "authors": "Julien Poffet et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.30959",
+   "kind": "policy",
+   "summary": "23.5M-parameter diffusion transformer (ManiFlow, consistency flow matching) that takes two stereo point clouds, proprioception and per-finger tactile tokens (one normal force and a contact bit per finger) and outputs 64-step chunks for an xArm 7 with a 17-DoF ORCA Hand v2 (363 three-axis Hall taxels on the fingertips); co-trained on human demonstrations from a 202-taxel capacitive glove whose per-finger forces are mapped onto the robot's force distribution, it lifts Lego success from 10% to 80% and large-strawberry plucking from 0% to 70% over robot-only training.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Human demonstrations with a 202-taxel capacitive glove (60 Hz) on a Rokoko Smartgloves II and teleoperated ORCA-hand demonstrations: drill 26 human and 26 robot, strawberry 124 human and 84 robot, Lego 50 human and 10-30 robot; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page vis-tac-align.github.io (anonymous, 'Under review, ICRA 2027') shows 'Paper · coming soon' and 'Code · coming soon'; the arXiv v2 text states no release (read 2026-11-23)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.30959",
+    "project": "https://vis-tac-align.github.io"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.30959 (v2: hardware, policy, demonstrations, results)",
+    "https://vis-tac-align.github.io (alignment results, code status)"
+   ],
+   "unconfirmed": [
+    "The glove's tactile layer maker is not stated; 44 of its 202 taxels are on the fingertips.",
+    "Tactile alignment reduces both glove and robot touch to one force per finger, so the policy does not see the full taxel arrays.",
+    "Authors are from the arXiv listing; the project page is anonymous."
+   ],
+   "checked": "2026-11-23"
+  },
+  {
+   "id": "decal",
+   "name": "DeCAL",
+   "title": "DeCAL: Towards Physically-Grounded Dexterous Vision-Language-Action Models via Contact-Aware Latent Co-Imagination",
+   "authors": "Yankai Fu et al.",
+   "year": 2026,
+   "venue": "CoRL 2026 (arXiv 2609.09119)",
+   "kind": "policy",
+   "summary": "Mixture-of-Transformers VLA initialised from InternVLA-A1-3B for two UR5 arms with two 22-DoF Sharpa Wave hands: language, one egocentric and two wrist RealSense views, proprioception, per-finger deformation maps and 6-DoF fingertip forces go in; 50-step action chunks come out, while a generation expert predicts future visual (Cosmos VAE) and tactile latents during training; 71% average success over six tasks against 56% for DECO.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [],
+   "own_data": null,
+   "dataset": "decal",
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/AureleoPKU/DeCAL (Apache-2.0, last push 2026-11-21) holds fine-tuning, offline evaluation and server-inference code; the README points to InternVLA-A1-3B as the base model and to '/path/to/checkpoint' for DeCAL checkpoints, with no trained checkpoint linked. Data on ModelScope Aureleo/DeCALdata_OXT (read 2026-11-23)."
+   },
+   "license": "Apache-2.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.09119",
+    "project": "https://aureleopku.github.io/DeCAL",
+    "code": "https://github.com/AureleoPKU/DeCAL"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.09119 (platform, inputs, outputs, tasks; first 100,000 characters)",
+    "https://aureleopku.github.io/DeCAL (results table, CoRL 2026)",
+    "https://github.com/AureleoPKU/DeCAL (repository metadata and README)",
+    "https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT.md"
+   ],
+   "unconfirmed": [
+    "touch 'both': tactile deformation maps and forces are inputs; future tactile latents are predicted as training supervision and the decoders are dropped at inference.",
+    "Training set from the paper: 100 teleoperated demonstrations for each of 6 tasks; the public release holds 1,279 trajectories over 13 tasks, so the extra 7 tasks are not part of the paper's reported training."
+   ],
+   "checked": "2026-11-23"
+  },
+  {
+   "id": "tipdex_vtla",
+   "name": "TipDex-VTLA",
+   "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
+   "authors": "Xudi Ge et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.25683",
+   "kind": "policy",
+   "summary": "Vision-tactile-language-action policy for two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands (364 piezoresistive taxels each): multi-view RGB, language, proprioception and recent tactile history go in; a nominal action chunk, a visual-reliability score and forecast tactile frames come out, and measured-versus-forecast touch gates corrections to unexecuted actions; 87.5% average success under normal and 73.8% under unseen lighting on four real tasks, and 84.9% on eight UniVTAC simulation tasks.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [],
+   "own_data": null,
+   "dataset": "tipdex_vtla",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "The arXiv v1 text says 'We will release the collected data and source code.' and gives no link (read 2026-11-23)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.25683"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API; v1, 2026-11-19)",
+    "https://arxiv.org/html/2611.25683v1 (hardware, inputs, outputs, data, results, release sentence)"
+   ],
+   "unconfirmed": [
+    "The simulation results use the UniVTAC benchmark and its released optical tactile encoder, not the Inspire hands.",
+    "N0-VTLA, a baseline here, reaches 31.3% under unseen lighting in the authors' runs."
+   ],
+   "checked": "2026-11-23"
+  },
+  {
+   "id": "biview_touch",
+   "name": "BiView-Touch",
+   "title": "BiView-Touch: Learning Bimanual Tactile Representations by Cross-Hand Completion",
+   "authors": "Chenxin Liang et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.23352",
+   "kind": "representation",
+   "summary": "Tactile-only self-supervised encoder for two gloved hands (290 taxels per hand in 11 anatomical regions, 60-frame windows): it masks one region group of one hand and predicts that hand's EMA-teacher latents from the rest of it plus the full other hand, through a CrossFormer taxel encoder, region queries and a geometry-conditioned decoder; with 5% labels on HumanTouch it gains 7.1% (wrist motion) and 14.1% (force phase) relative balanced accuracy over frozen SSL baselines.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "humantouch",
+     "role": "pretraining",
+     "note": "About 89.6 h for training and 7.6 h for validation under a session-disjoint split of the roughly 100 h, 13,469-episode release; downstream evaluation sessions excluded. Masked-region force regression MAE 0.892 N, RMSE 2.388 N."
+    },
+    {
+     "id": "bvt20",
+     "role": "evaluation",
+     "note": "Transfer to held-out task T17 (buckle) at 25% labels: phase balanced accuracy 66.46%, contact balanced accuracy 93.42%."
+    }
+   ],
+   "own_data": null,
+   "dataset": "bvt20",
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "The paper says 'Our code and dataset details are available on the anonymous project page' (anonymous.4open.science/w/biview-touch-review-site-050C/), which returned HTTP 404 on 2026-11-23; weights are not mentioned."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.23352"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.23352 (v1: datasets, architecture, results, release sentences)",
+    "https://anonymous.4open.science/w/biview-touch-review-site-050C/ (HTTP 404)"
+   ],
+   "unconfirmed": [
+    "code 'announced': the paper points to an anonymous page for code that could not be reached.",
+    "How HumanTouch's 320-360 taxels per hand were mapped to the 290-taxel canonical layout was not read."
+   ],
+   "checked": "2026-11-23"
+  },
+  {
+   "id": "haco",
+   "name": "HACo",
+   "title": "HACo: Learning Haptic Active Compliance for Force-Aware Dexterous Manipulation",
+   "authors": "Naisheng Ye et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.36596",
+   "kind": "policy",
+   "summary": "Flow-matching policy initialised from GR00T N1.7 for two UR5 arms with Sharpa hands: three RGB views, language, robot state, 9-step histories of the ten fingertip wrenches and 44 hand-joint torques and the current fingertip deformation maps go in, and compliant arm and hand references (recorded from admittance-regulated teleoperation) come out; 83% mean success over five force-sensitive tasks against 35% for T-Rex.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "100 teleoperated demonstrations (MANUS Metagloves Pro and VIVE trackers) for each of 5 tasks: insert poker cards, open book, draw on balloon, unscrew cap, squeeze toothpaste; only a two-second unscrew-cap sample is in the code repository.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/OpenDriveLab/HACo (Apache-2.0, last push 2026-10-09) holds training and deployment code and dataset/sample (two-second unscrew-cap example); the README links no HACo checkpoint, only NVIDIA base models (read 2026-11-23)."
+   },
+   "license": "Apache-2.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.36596",
+    "project": "https://opendrivelab.github.io/Haco-Page/",
+    "code": "https://github.com/OpenDriveLab/HACo"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2609.36596 (abstract via arXiv API; v2, 2026-10-11)",
+    "https://arxiv.org/html/2609.36596v2 (hardware, inputs, outputs, tasks, results)",
+    "https://opendrivelab.github.io/Haco-Page/",
+    "https://github.com/OpenDriveLab/HACo (repository metadata and README)"
+   ],
+   "unconfirmed": [
+    "The paper names 'Sharpa dexterous hands' without a model; 44 joint torques for two hands match the 22-DoF Sharpa Wave, which the paper does not state.",
+    "T-Rex is a baseline initialised from its released mid-training checkpoint; HACo does not train on T-Rex data."
+   ],
+   "checked": "2026-11-23"
+  },
+  {
+   "id": "star",
+   "name": "STAR",
+   "title": "STAR: Sparse Tactile Representation Learning in Vision-Tactile-Language-Action Models for Dexterous Manipulation",
+   "authors": "Xiangcheng Liu et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.12549",
+   "kind": "policy",
+   "summary": "Training recipe on pi0.5 for a bimanual wheeled robot (Agibot) with 10-actuated-DoF hands carrying 268 piezoresistive normal-force taxels each on palm and inner finger surfaces: head and wrist images, per-hand tactile signals, proprioception and language go in, 50-step chunks of end-effector poses and hand joints come out; masked visual-tactile pretraining, sparse-global tactile tokens and sparse future tactile prediction give 61% average success on four tasks with 100 post-training trajectories each, against 44% for pi0.5.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [],
+   "own_data": "200 h of teleoperated bimanual data, 10,576 trajectories over 65 tasks (69.5% multi-finger dexterous) with head and wrist RGB, both hands' tactile signals, states, actions and language at 30 Hz; no release stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v2 text has no code, data or weights statement; the project page stardex-web.github.io/Star links none (read 2026-11-23)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.12549",
+    "project": "https://stardex-web.github.io/Star/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.12549 (v2: platform, sensors, dataset, model, results)",
+    "https://stardex-web.github.io/Star/ (authors, affiliations, tasks)"
+   ],
+   "unconfirmed": [
+    "The hand model and tactile maker are not named; the affiliations (Shanghai Innovation Institute, Agibot) suggest an Agibot hand.",
+    "touch 'both': future tactile prediction is a training objective; tactile signals are a policy input."
+   ],
+   "checked": "2026-11-23"
   }
  ]
 }

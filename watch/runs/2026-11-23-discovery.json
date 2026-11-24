@@ -1,0 +1,41 @@
+{
+ "flow": "discovery",
+ "date": "2026-11-23",
+ "model": "claude-opus-5-5",
+ "reviewed": 28,
+ "added": {
+  "datasets": 4,
+  "models": 8,
+  "hardware": 0
+ },
+ "updated": 0,
+ "queue_left": 372,
+ "searches": [
+  "tactile world model dexterous hand",
+  "触觉手套 数据集 开源",
+  "灵巧手 触觉 数据集 发布",
+  "human tactile demonstration dataset robot hand"
+ ],
+ "for_the_owner": [
+  "Viewer samples wanted: decal (public on ModelScope, Open-X-Tactile Zarr, 2.0 TB, Apache-2.0 on the card; file listing not read because the page renders with JavaScript) https://www.modelscope.cn/datasets/Aureleo/DeCALdata_OXT",
+  "Viewer samples wanted: talos_electrician_conduit (three ungated LeRobot v2.1 episodes, 2.51 GB, CC BY-NC 4.0) https://huggingface.co/datasets/talosdataworks/electrician-conduit-subpanel-two-hand-tactile-glove-sample",
+  "Judgment call: arXiv 2609.24068 (LEAP hand with 4 PaXini pads, 508 taxels; best variant called VWT-Attn, 24/25 against 14/25 for vision only) was rejected as a controlled sensing study with no named model or data release, following the 2026-11-02 Bristol LEAP-hand precedent.",
+  "Judgment call: BVT-20 was added as 'announced' although the paper says 'We collect and release BVT-20'; its only link (an anonymous 4open.science page) returned HTTP 404, and the glove hardware is not described in the paper."
+ ],
+ "notes": [
+  "Queue positions 0-59 were triaged; 28 decided (1 lead, 8 models, 1 dataset-only, 18 rejects). The 8-model cap was reached at position 18, so in-scope or unclear candidates after it were left in the queue for the next run: CoRA-VTLA 2611.23963, WiTac 2611.21057 (pretrained on about 300 h of SharpaDex), PTLD 2603.04531, RAPID Hand 2506.07490, FBI 2508.14441, Tac-DINO 2606.12069, DexMove W7236513678, T-WLA 2610.28814, ViTaL 2506.13762, ReTouch 2608.01824, ViTacFormer 2506.15953, 2510.21609, TF2-Steering 2611.01483, TactoHand 2610.39585, PACE 2610.16308, ViTaR 2608.15816, HOPE 2608.06192, Tac2Pix 2606.08765, MILE 2512.00324, 3DTouch 2611.23961, CGP 2603.05687, bathing 2608.09127, CoP 2605.28812, Dex-X 2609.07747, TacForcing 2608.25798, tau 2607.24485, N0-TWAM 2607.23783, Dream-Tac 2606.08737, and surveys 2610.30438, 2608.07558, 2608.15490.",
+  "LingBot-Touch (arXiv 2611.12806, queue position 15) has no arXiv HTML and its PDF exceeds the fetch limit (10 MB); it was left in the queue undecided. The abstract describes a cross-sensor tactile foundation model (piezoresistive, magnetic, visuotactile) used with pi0.5 and LingBot-VLA on dexterous hands.",
+  "data/datasets.json was edited by hand: python3 pipeline/merge_entry.py was refused by the shell, so the entries of the four surveys (decal, tipdex_vtla, bvt20, talos_electrician_conduit) were appended in the same format.",
+  "decal is linked to hardware sharpa_wave (datasets list in data/hardware.json). tipdex_vtla is not linked: its RH56F2-E2-T1 hands carry 364 piezoresistive taxels, which matches neither catalog Inspire record.",
+  "The two earlier 'later' records for TouchAnnotator (hf:models/rammusleo/touchannotator and -0813) were re-decided as model and duplicate now that arXiv 2611.09129 is public.",
+  "DeCAL's data is published in the Open-X-Tactile (OXT) format; open-x-tactile.github.io may list more converted hand datasets and was not checked tonight.",
+  "Lead arXiv 2611.06724 (first 200,000 of 358,512 characters read) names tactile-hand items not in the catalog or reviewed.json: World In Your Hands (WIYH; named only in a hardware record), RealDexUMI, TAG, KineDex, CraftNet, DUET (AGILINK) and MILE (queue position 46). AdvDex, Bench2Dex and ART-Glove are already handled.",
+  "Search hits not in the catalog or reviewed.json, left for the next run because the model cap was reached: TacOT arXiv 2610.04363 (Manus glove with five fingertip force sensors, XHand robot), DexTac arXiv 2601.21474 (kinesthetic teaching on a dexterous hand with tactile sensing) and MimicTouch arXiv 2310.16917 (human-hand tactile demonstrations, robot gripper; check where the human tactile sensor sits).",
+  "Search hits already in the catalog or reviewed: DexTacWAM, DexTouch-WM, DTWM, DexWM, Dexterous World Models, TachinGlove data (途见科技), OpenTouch, TactiDex, TacClaw-Infinity, VTouch++, UVTA (2609.34182), RoboTacDex, HapTile, DexViTac, SmartHand, ADL-21."
+ ],
+ "started": "2026-11-24T03:15:35Z",
+ "finished": "2026-11-24T03:30:30Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 12 changed files, 10 new entries"
+}

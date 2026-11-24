@@ -3147,13 +3147,16 @@
   "arxiv:2610.28519": "W7223111210",
   "arxiv:2610.07525": "W7220991376",
   "doi:10.1109/icra55743.2025.11127230": "W4413925096",
-  "doi:10.3389/fnbot.2023.1159168": "W4367053463"
+  "doi:10.3389/fnbot.2023.1159168": "W4367053463",
+  "arxiv:2604.13015": "W7154483605",
+  "arxiv:2609.24385": "W7214003297",
+  "arxiv:2203.06183": "W4221163915"
  },
  "cursor": {
-  "arxiv_backfill": "2018-01",
+  "arxiv_backfill": "2018-04",
   "hf_backfilled": true,
-  "arxiv_recent_ok": "2026-11-03",
-  "openalex_recent_ok": "2026-11-03",
-  "openalex_backfill": "2017-04"
+  "arxiv_recent_ok": "2026-11-24",
+  "openalex_recent_ok": "2026-11-24",
+  "openalex_backfill": "2017-07"
  }
 }
