@@ -194,7 +194,7 @@
     "Re-checked 2026-11-01: the last push is still 2026-09-29 and the top-level listing is unchanged (no checkpoint folder).",
     "Re-checked 2026-11-02: the last push is still 2026-09-29 and the top-level listing is unchanged; a Hugging Face and web search for the name found no checkpoint."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-24"
   },
   {
    "id": "egopressurediff",
@@ -285,7 +285,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the repository's last push is still 2026-06-29 and its top-level files are unchanged; a web search for EgoPressureFormer found no code or checkpoint."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-24"
   },
   {
    "id": "egotac",
@@ -666,7 +666,7 @@
     "Re-checked 2026-10-31: the last GitHub push is still 2026-05-21; issue #3 was reopened and holds a second request for the checkpoint (2026-07-12) with no reply; the Hugging Face account zhouzhoujy has no models.",
     "Re-checked 2026-11-03: the GitHub repo is still last pushed 2026-05-21; issue #3 (checkpoint request) is open with the 2026-07-12 follow-up and no author reply; the Hugging Face account zhouzhoujy lists 0 models and only the EgoTouch dataset."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-24"
   },
   {
    "id": "touchsight",
@@ -854,7 +854,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the repository's last push is still 2026-09-30; no checkpoint link found in the listing or by web search."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-24"
   },
   {
    "id": "tacdex3d",
@@ -1550,7 +1550,7 @@
     "Re-checked 2026-11-03: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page still says 'Code will be released at github.com/seungjun-moon/rlhnd'.",
     "Re-checked 2026-11-23: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page text still says 'Code will be released at github.com/seungjun-moon/rlhnd'."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-24"
   },
   {
    "id": "dexskills",
@@ -1626,7 +1626,7 @@
     "embodiment human: the text records 'the pressure distribution and curvature degree of the hand when grasping 19 different types of objects' with a glove and mentions no robot hand; who wore the glove is not stated.",
     "The split of the 16 pressure sensors between fingertips and palm is only in Figure 2, which was not read."
    ],
-   "checked": "2026-10-26"
+   "checked": "2026-11-24"
   },
   {
    "id": "fact",
@@ -2045,7 +2045,7 @@
     "Re-checked 2026-11-01: the project page still links only the arXiv paper and BibTeX; a web search for the name with 'code' found no repository.",
     "Re-checked 2026-11-23: the project page text (abstract, paper summary, BibTeX) has no code link; a web search for the name with 'code' returned only the paper, the project page and aggregator listings."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-24"
   },
   {
    "id": "vtao_bimanip",
@@ -2443,7 +2443,7 @@
     "The 709 training demonstrations come from the paper; the public release holds 760 DFTP episodes for the same five tasks plus 111 F1 lab episodes that the paper does not report.",
     "The project page lists IROS 2026; the arXiv record has no venue."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-24"
   },
   {
    "id": "tactile_jepa",
@@ -2575,7 +2575,7 @@
     "All policy results are in simulation and the paper lists real-robot experiments as future work; the policy's inputs and outputs were not read in detail.",
     "The number of TouchScale recordings, subjects and tasks rebuilt is not stated; '20/20' counts held-out recordings for the mug task."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-24"
   },
   {
    "id": "touchannotator",
@@ -2701,12 +2701,12 @@
     "touch 'both': tactile deformation maps and forces are inputs; future tactile latents are predicted as training supervision and the decoders are dropped at inference.",
     "Training set from the paper: 100 teleoperated demonstrations for each of 6 tasks; the public release holds 1,279 trajectories over 13 tasks, so the extra 7 tasks are not part of the paper's reported training."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-24"
   },
   {
    "id": "tipdex_vtla",
    "name": "TipDex-VTLA",
-   "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
+   "title": "TipDex-VTLA: Learning to Refine Actions with Visual Reliability and Tactile Feedback for Dexterous Manipulation",
    "authors": "Xudi Ge et al.",
    "year": 2026,
    "venue": "arXiv 2611.25683",
@@ -2720,15 +2720,16 @@
    "release": {
     "code": "announced",
     "weights": "not_released",
-    "note": "The arXiv v1 text says 'We will release the collected data and source code.' and gives no link (read 2026-11-23)."
+    "note": "The arXiv v1 text says 'We will release the collected data and source code.' and gives no link (read 2026-11-23). v2 (2026-11-22, title changed, results unchanged) repeats the sentence with no link (read 2026-11-24); no GitHub repository found."
    },
    "license": "not stated",
    "links": {
     "paper": "https://arxiv.org/abs/2611.25683"
    },
    "sources": [
-    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API; v1, 2026-11-19)",
-    "https://arxiv.org/html/2611.25683v1 (hardware, inputs, outputs, data, results, release sentence)"
+    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API; v1, 2026-11-19; v2, 2026-11-22)",
+    "https://arxiv.org/html/2611.25683v1 (hardware, inputs, outputs, data, results, release sentence)",
+    "https://arxiv.org/html/2611.25683v2 (title, abstract and release sentence rechecked 2026-11-24)"
    ],
    "unconfirmed": [
     "The simulation results use the UniVTAC benchmark and its released optical tactile encoder, not the Inspire hands.",
@@ -2849,7 +2850,7 @@
     "The hand model and tactile maker are not named; the affiliations (Shanghai Innovation Institute, Agibot) suggest an Agibot hand.",
     "touch 'both': future tactile prediction is a training objective; tactile signals are a policy input."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-24"
   },
   {
    "id": "witac",

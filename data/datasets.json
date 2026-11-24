@@ -4806,7 +4806,8 @@
     "The card and paper name the video key observation.images.ego; the mini release stores it as observation.images.camera_0. The repository also holds a per-task zarr copy (dataset/oxt/EgoExplorer/<task>.zarr) that the card does not describe.",
     "Number of participants and objects not stated.",
     "The release files were not opened for this survey (gated, access not requested); channels come from the card, the paper and the file tree.",
-    "The code repository now sits at github.com/Sage-PhysicalAI/EgoExplorer (the GitHub API full_name on 2026-11-23; github.com/InternRobotics/EgoExplorer was the earlier address); last push 2026-10-23, 32 stars, no license reported. The Hugging Face dataset is still under InternRobotics, gate manual, last modified 2026-10-22, so the release itself is unchanged."
+    "The code repository now sits at github.com/Sage-PhysicalAI/EgoExplorer (the GitHub API full_name on 2026-11-23; github.com/InternRobotics/EgoExplorer was the earlier address); last push 2026-10-23, 32 stars, no license reported. The Hugging Face dataset is still under InternRobotics, gate manual, last modified 2026-10-22, so the release itself is unchanged.",
+    "The project page internrobotics.github.io/egoexplorer.github.io/ returned HTTP 404 on two scans in a row, the second on 2026-11-24; the Hugging Face card, the GitHub repository and the gate were reachable the same day and no replacement project page was found, so the link is kept and availability stays partial."
    ],
    "links": {
     "paper": "https://arxiv.org/abs/2610.18872",
@@ -11492,7 +11493,7 @@
   {
    "id": "tipdex_vtla",
    "name": "TipDex-VTLA demonstrations",
-   "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
+   "title": "TipDex-VTLA: Learning to Refine Actions with Visual Reliability and Tactile Feedback for Dexterous Manipulation",
    "authors": "Xudi Ge et al.",
    "year": 2026,
    "venue": "arXiv 2611.25683",
@@ -11534,7 +11535,7 @@
     "text": "300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2); per-task counts and hours not stated"
    },
    "availability": "announced",
-   "access": "The paper states 'We will release the collected data and source code.'; no link is given (checked 2026-11-23).",
+   "access": "The paper states 'We will release the collected data and source code.'; no link is given in v1 or v2 (checked 2026-11-24).",
    "license": "not stated",
    "caveats": [
     "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it.",
@@ -11579,8 +11580,9 @@
     ]
    },
    "sources": [
-    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19)",
-    "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)"
+    "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19; v2 2026-11-22)",
+    "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)",
+    "https://arxiv.org/html/2611.25683v2 (title, abstract and release sentence rechecked 2026-11-24)"
    ],
    "unconfirmed": [
     "The tactile maker is not stated; the hand model RH56F2-E2-T1 suggests Inspire's own sensors, which the paper does not say. The catalog's RH56F1 record (8 capacitive sites per hand) does not match the 364 piezoresistive taxels given here, so no hardware link was made.",

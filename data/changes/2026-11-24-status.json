@@ -1,0 +1,10 @@
+{"date": "2026-11-24", "flow": "status", "changes": [
+  {"kind": "updated", "target": "dataset", "id": "egoexplorer",
+   "text": "EgoExplorer: the project page (internrobotics.github.io/egoexplorer.github.io/) returned HTTP 404 on two scans in a row. The Hugging Face dataset (gate manual, last modified 2026-10-22) and the GitHub repository (Sage-PhysicalAI/EgoExplorer) still answer, so availability stays partial; the dead link is kept and recorded in the caveats.",
+   "source": "https://huggingface.co/datasets/InternRobotics/EgoExplorer"},
+  {"kind": "updated", "target": "dataset", "id": "tipdex_vtla",
+   "text": "TipDex-VTLA demonstrations: arXiv v2 (2026-11-22) retitled the paper 'Learning to Refine Actions with Visual Reliability and Tactile Feedback for Dexterous Manipulation'; the comment says main text and results are unchanged. The release sentence ('We will release the collected data and source code') still has no link, so availability stays announced.",
+   "source": "https://arxiv.org/abs/2611.25683"},
+  {"kind": "updated", "target": "model", "id": "tipdex_vtla",
+   "text": "TipDex-VTLA: title updated to the arXiv v2 wording (2026-11-22; results unchanged). v2 repeats the code and data promise with no link and no repository was found, so code stays announced.",
+   "source": "https://arxiv.org/abs/2611.25683"}]}

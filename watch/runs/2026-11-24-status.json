@@ -1,0 +1,33 @@
+{
+ "flow": "status",
+ "date": "2026-11-24",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 6,
+ "updated": 3,
+ "searches": [
+  "AET-TacNet tactile code github",
+  "DTWM Dexterous Tactile World Model weights Hugging Face",
+  "EgoPressureFormer code release egotactile",
+  "FBI dexterous tactile \"dex-fbi\" code weights",
+  "HTD Humanoid Transformer with Touch Dreaming weights checkpoint",
+  "OccluDex tactile dexterous code github",
+  "PTLD Sparsh privileged tactile learning dexterous code release",
+  "RLHND seungjun-moon code weights",
+  "STAR stardex tactile dexterous code release"
+ ],
+ "for_the_owner": [
+  "Judgment call: the EgoExplorer project page link (internrobotics.github.io/egoexplorer.github.io/) is dead (HTTP 404 on two scans) but the dataset and code are intact, so nothing was marked withdrawn. If the authors moved the page, the link needs the new address; none was found on the Hugging Face card or the GitHub repository.",
+  "No dataset became public tonight and no new gate appeared, so no viewer samples are wanted and nothing needs an access application."
+ ],
+ "notes": [
+  "6 signals, 3 change-log lines. egoexplorer P1 (project page 404 on two scans): caveat added, availability unchanged. tipdex_vtla P2 (arXiv v1 -> v2, dataset and model entries): title changed to the v2 wording, release sentence unchanged. dextacwam P3 page_text (1,722 -> 1,704 characters on the Hugging Face collection page) was not reviewed because the dataset is public.",
+  "Deep check (27 entries). Read from a primary source tonight: tipdex_vtla (arXiv v2 HTML and abstract), dtwm, htd, touchanything, vitacformer, decal, twla, tactile_gat and uvta (GitHub API, repositories exist and release status in the catalog is unchanged), egopressureformer (project page now links the EgoTactile repository and the Hugging Face dataset, both already catalogued under egopressurediff and egotactile; the repository was last pushed 2026-06-29 and no EgoPressureFormer-specific release was confirmed, so it stays not_released), ptld (project page now has a Code button pointing to github.com/akashsharma02/ptld, which returns HTTP 404, so code stays announced), rlhnd (the GitHub repository holds only the project page, pushed 2026-10-08; the page says 'Code will be released at github.com/seungjun-moon/rlhnd'), fbi, star, touchtwin, witac and tactofind (project pages, no code or weights link). Datasets: htac (Hugging Face H-Tac_Sample unchanged since 2026-07-06, TTP repository Apache-2.0), paxini_omnisharing (Hugging Face sample ungated, last modified 2026-10-19), sharpa_origami (gate auto, last modified 2026-07-24), dexumi (GitHub repository, last push 2026-04-18), exobridge (arXiv v1 only, no code or data link in the abstract), egoexplorer, tipdex_vtla. Not confirmed from a primary source, so no checked date changed: aet_tacnet and occludex (one web search each, no hits and no project page in the catalog), bvt20 and tacwam_wetlab (not opened tonight beyond last night's read). The weights status of the models whose code is released (dtwm, htd, touchanything, vitacformer, decal, twla, uvta) was not re-read in the READMEs; the catalog values stand.",
+  "Models with a changed checked date (2026-11-24): dtwm, egopressureformer, touchanything, uvta, rlhnd, tactile_gat, tactofind, htd, touchtwin, decal, star, tipdex_vtla. witac, ptld, fbi, twla and vitacformer already carried 2026-11-24 from tonight's discovery run.",
+  "Not done: no viewer samples or integrity checks (a person runs them); no gated file opened; no dataset downloaded."
+ ],
+ "started": "2026-11-24T09:30:01Z",
+ "finished": "2026-11-24T09:37:25Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 13 changed files, 10 new entries"
+}
