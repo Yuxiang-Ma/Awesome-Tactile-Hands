@@ -8487,7 +8487,7 @@
     "kind": "hf_gate",
     "approval": "automatic",
     "url": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge",
-    "checked": "2026-11-02",
+    "checked": "2026-11-25",
     "note": "No extra terms: the card sets no gate prompt or form fields; the Hugging Face gate shares the username and email with the authors. The ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons."
    },
    "license": "CC BY 4.0",
@@ -10873,8 +10873,8 @@
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
-    "checked": "2026-11-23",
-    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-23)."
+    "checked": "2026-11-25",
+    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-25)."
    },
    "license": "CC BY-NC 4.0",
    "caveats": [

@@ -194,7 +194,7 @@
     "Re-checked 2026-11-01: the last push is still 2026-09-29 and the top-level listing is unchanged (no checkpoint folder).",
     "Re-checked 2026-11-02: the last push is still 2026-09-29 and the top-level listing is unchanged; a Hugging Face and web search for the name found no checkpoint."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "egopressurediff",
@@ -244,7 +244,7 @@
    "unconfirmed": [
     "ACE-Data-0 (arXiv 2607.28625) says it evaluated EgoPressureDiff 'using their released pre-trained weights'; no public checkpoint was found."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-25"
   },
   {
    "id": "egopressureformer",
@@ -514,7 +514,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the project page still reads 'Software release coming soon' and links only the hardware-v1 release; a web search found no repository."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-25"
   },
   {
    "id": "tactalign",
@@ -666,7 +666,7 @@
     "Re-checked 2026-10-31: the last GitHub push is still 2026-05-21; issue #3 was reopened and holds a second request for the checkpoint (2026-07-12) with no reply; the Hugging Face account zhouzhoujy has no models.",
     "Re-checked 2026-11-03: the GitHub repo is still last pushed 2026-05-21; issue #3 (checkpoint request) is open with the 2026-07-12 follow-up and no author reply; the Hugging Face account zhouzhoujy lists 0 models and only the EgoTouch dataset."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "touchsight",
@@ -854,7 +854,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the repository's last push is still 2026-09-30; no checkpoint link found in the listing or by web search."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "tacdex3d",
@@ -1024,7 +1024,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: grasplikehuman.github.io still offers only the dataset zip and the paper (a 'Dataset (Coming soon)' line is commented out in the page); a web search found no code or weights."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-25"
   },
   {
    "id": "vt_jointpretrain",
@@ -1340,9 +1340,10 @@
    "unconfirmed": [
     "The maker of the 880-taxel glove worn by the Revo 2 hand is not given in the parts read.",
     "Role for egotactile set to fine-tuning because the paper fine-tunes on it for cross-dataset adaptation; whether EgoTactile also enters base training is not stated.",
-    "That the Hugging Face user qqyang is the paper's first author Qianqian Yang is inferred from the user name and the Ego2Contact repo names and README; no page links the account to the paper. The checkpoint files were not downloaded or opened, so what each one contains is not confirmed."
+    "That the Hugging Face user qqyang is the paper's first author Qianqian Yang is inferred from the user name and the Ego2Contact repo names and README; no page links the account to the paper. The checkpoint files were not downloaded or opened, so what each one contains is not confirmed.",
+    "2026-11-25: yvonneoo.github.io/ego2contact-page/ (GitHub YvonneoO/ego2contact-page, created 2026-11-02) carries the paper's title, reads 'Anonymous submission · supplementary webpage', names no authors and links no code, weights or data. The paper does not link it, so it is not recorded as the project page."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-25"
   },
   {
    "id": "vitam",
@@ -1378,7 +1379,7 @@
     "The text says the learning model is adapted from the authors' earlier VTacO work, which is not in the catalog.",
     "The last 37,115 characters of the full text (methods tail, references) were not read."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-25"
   },
   {
    "id": "m2vtp",
@@ -1550,7 +1551,7 @@
     "Re-checked 2026-11-03: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page still says 'Code will be released at github.com/seungjun-moon/rlhnd'.",
     "Re-checked 2026-11-23: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page text still says 'Code will be released at github.com/seungjun-moon/rlhnd'."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "dexskills",
@@ -1734,7 +1735,7 @@
    "release": {
     "code": "released",
     "weights": "not_released",
-    "note": "github.com/LFGfg/TransDex (linked from transdex.github.io; created 2025-12-11, last push 2026-10-03) holds README.md, policy_ws/ and requirements.txt; no license, README empty; no checkpoint seen. The paper has no release statement. Checked 2026-10-31 (last push still 2026-10-03)."
+    "note": "github.com/LFGfg/TransDex (linked from transdex.github.io; created 2025-12-11, last push 2026-10-03) holds README.md, policy_ws/ and requirements.txt; no license. The README gives pretraining and policy training steps, links no checkpoint, and says 'The example dataset will be released at Google Drive later' (pretraining data). The paper has no release statement (read 2026-11-25)."
    },
    "license": "not stated (no license on the GitHub repository)",
    "links": {
@@ -1746,7 +1747,7 @@
     "https://arxiv.org/abs/2603.13869 (abstract via arXiv API, v2 2026-07-21)",
     "https://arxiv.org/html/2603.13869v2 (hardware, inputs and outputs, pretraining, Table I)",
     "https://transdex.github.io/ ('Accepted by IEEE RA-L', code link)",
-    "https://github.com/LFGfg/TransDex (repository metadata, top-level listing)",
+    "https://github.com/LFGfg/TransDex (repository metadata, top-level listing, README.md)",
     "https://api.openalex.org/works/doi:10.1109/lra.2026.3732837 (RA-L record: vol. 11, no. 11, pp. 12671-12678, 2026-09-10)"
    ],
    "unconfirmed": [
@@ -1754,7 +1755,7 @@
     "Hand model not named; 16 DoF and cable-driven per the paper. PaXini array model not named. Success rates over 10 trials per task are implied by the percentages.",
     "Re-checked 2026-11-02: github.com/LFGfg/TransDex was last pushed 2026-10-03 and still holds README.md, policy_ws/ and requirements.txt; no checkpoint seen."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-25"
   },
   {
    "id": "aet_tacnet",
@@ -1826,7 +1827,7 @@
     "The paper names the framework ExoBridge and gives no separate name for the network; the catalog uses ExoBridge for both the data and the model.",
     "A companion policy on an XHand (12 DoF) on a Franka arm reached 0.80 on egg carton opening and 0.55 on lid twisting over 20 rollouts each; how the bridge's outputs feed that policy was not read in detail."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-25"
   },
   {
    "id": "dexflex",
@@ -1862,7 +1863,7 @@
     "Simulated data collection also used a 22-DoF Sharpa hand; whether one controller covers both hands was not read in detail.",
     "Policy-learning results (three tasks, 50 demonstrations each): 46.7% average success against 13.3% for direct joint-action prediction."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-25"
   },
   {
    "id": "occludex",
@@ -1897,7 +1898,7 @@
     "WiseGlove maker and the glove's sensing principle not stated; the real Shadow Hand carries 19 force-sensitive resistors on fingertips, finger links and palm read at 1 kHz and binarized.",
     "Simulation average success over the two tasks is 86.2% against 75.8% for the baseline the paper calls VTDexManip; the VTDexManip data were not used to train OccluDex itself."
    ],
-   "checked": "2026-10-30"
+   "checked": "2026-11-25"
   },
   {
    "id": "hutact",
@@ -2162,7 +2163,7 @@
     "No venue appears in the sources read; the arXiv record lists none.",
     "The released demonstrations (6 tasks x 6 demonstrations per the README, against one per task in the paper) were not opened and are not catalogued as a dataset; their tactile content is not confirmed."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-25"
   },
   {
    "id": "unitachand",
@@ -2443,7 +2444,7 @@
     "The 709 training demonstrations come from the paper; the public release holds 760 DFTP episodes for the same five tasks plus 111 F1 lab episodes that the paper does not report.",
     "The project page lists IROS 2026; the arXiv record has no venue."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "tactile_jepa",
@@ -2533,7 +2534,7 @@
     "Only the abstract and search-result excerpts were read; the 8-cluster view construction and ResNet-18 backbone come from search excerpts of the paper, not from the full text.",
     "Year 2022 is the arXiv submission (March 2022); the IEEE ISPCC version is dated 2025."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-25"
   },
   {
    "id": "touchtwin",
@@ -2575,7 +2576,7 @@
     "All policy results are in simulation and the paper lists real-robot experiments as future work; the policy's inputs and outputs were not read in detail.",
     "The number of TouchScale recordings, subjects and tasks rebuilt is not stated; '20/20' counts held-out recordings for the mug task."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "touchannotator",
@@ -2701,7 +2702,7 @@
     "touch 'both': tactile deformation maps and forces are inputs; future tactile latents are predicted as training supervision and the decoders are dropped at inference.",
     "Training set from the paper: 100 teleoperated demonstrations for each of 6 tasks; the public release holds 1,279 trajectories over 13 tasks, so the extra 7 tasks are not part of the paper's reported training."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "tipdex_vtla",
@@ -2779,7 +2780,7 @@
     "code 'announced': the paper points to an anonymous page for code that could not be reached.",
     "How HumanTouch's 320-360 taxels per hand were mapped to the 290-taxel canonical layout was not read."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-25"
   },
   {
    "id": "haco",
@@ -2816,7 +2817,7 @@
     "The paper names 'Sharpa dexterous hands' without a model; 44 joint torques for two hands match the 22-DoF Sharpa Wave, which the paper does not state.",
     "T-Rex is a baseline initialised from its released mid-training checkpoint; HACo does not train on T-Rex data."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-25"
   },
   {
    "id": "star",
@@ -2850,7 +2851,7 @@
     "The hand model and tactile maker are not named; the affiliations (Shanghai Innovation Institute, Agibot) suggest an Agibot hand.",
     "touch 'both': future tactile prediction is a training objective; tactile signals are a policy input."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "witac",
@@ -2891,7 +2892,7 @@
     "The spatial tactile backbone is initialised from the 'SharpaWave Deform Encoder'; whether that encoder is public was not checked.",
     "Authors are from Sharpa Robotics, PKU, SJTU, ShanghaiTech and CUHK (project page)."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "ptld",
@@ -2927,7 +2928,7 @@
     "code 'announced': a Code link exists but the repository was not reachable.",
     "On cube rotation the paper's table gives the AAC teacher a higher rotation reward (17.3) than PTLD (4.5), while the text says PTLD outperforms it."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "tf2_steering",
@@ -3035,26 +3036,31 @@
    "dataset": null,
    "release": {
     "code": "released",
-    "weights": "not_released",
-    "note": "The paper says 'Videos and code are available at the project website'; github.com/kaichen-z/TWLA (no license file, last push 2026-11-17) holds T-WLA_foundation_model/, tactile_editor/ and robot_hardware/; no checkpoint link seen (read 2026-11-24)."
+    "weights": "released",
+    "note": "Code: github.com/kaichen-z/TWLA (no license file, last push 2026-11-17) holds T-WLA_foundation_model/, tactile_editor/ and robot_hardware/. Weights: the README's 'Pretrained Weights' table links T-WLA-FD.pt (visual policy, 1.6 GB) and T-WLA-WM.pt (RGB world head, 375.6 MB) in the Hugging Face account anon-submission-0518 (repositories created 2026-10-02, ungated), an EgoTouch H8 tactile encoder (mano-aligned-v1/h8/best.pt, 12.3 MB) in MIT-Media-Lab/egotouch-tactile-encoder-p1-v1, and SmolVLA, VITRA and MemoryVLA baseline checkpoints. The trained tactile editor, which corrects actions from touch, is not linked: 'No final W3 editor download is currently linked in this release.' Checkpoints not downloaded (read 2026-11-25)."
    },
-   "license": "not stated",
+   "license": "not stated (code and T-WLA checkpoints); CC BY-NC 4.0 (EgoTouch tactile encoder)",
    "links": {
     "paper": "https://arxiv.org/abs/2610.28814",
     "project": "https://t-wla.github.io/",
-    "code": "https://github.com/kaichen-z/TWLA"
+    "code": "https://github.com/kaichen-z/TWLA",
+    "weights": "https://huggingface.co/anon-submission-0518/T-WLA-FD"
    },
    "sources": [
     "https://arxiv.org/html/2610.28814 (v2: inputs, outputs, data, results; appendix hardware read from characters 100,000 on)",
     "https://t-wla.github.io/ (results, code link)",
-    "https://github.com/kaichen-z/TWLA (repository metadata)"
+    "https://github.com/kaichen-z/TWLA (repository metadata, README.md, tactile_editor/README.md)",
+    "https://huggingface.co/anon-submission-0518/T-WLA-FD (model card, file list)",
+    "https://huggingface.co/anon-submission-0518/T-WLA-WM (model card, file list)",
+    "https://huggingface.co/MIT-Media-Lab/egotouch-tactile-encoder-p1-v1 (model card, mano-aligned-v1/h8 file list)"
    ],
    "unconfirmed": [
     "The fingertip sensor's maker and principle are not stated; Linker Hand L6 is sold with tactile fingertips.",
     "embodiment 'both': human glove touch (EgoTouch, Tachin) is used for pretraining and evaluation, robot touch for control.",
-    "The repository README text was empty when read; whether it holds trained weights was not checked."
+    "weights 'released' covers the visual policy, world head and pretrained tactile encoder; the tactile editor has to be trained with the released code.",
+    "The T-WLA-FD and T-WLA-WM cards state no license; the VITRA baseline card applies the Gemma Terms of Use to that checkpoint."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "retouch",
@@ -3101,12 +3107,12 @@
    "embodiment": "robot",
    "touch": "both",
    "uses": [],
-   "own_data": "50 teleoperated demonstrations per task (peg insertion, cap twist, vase wipe, book flip, make hamburger); release not stated.",
+   "own_data": "50 teleoperated demonstrations per task (peg insertion, cap twist, vase wipe, book flip, make hamburger); the repository README links an example data zip, and no release of the full set is stated.",
    "dataset": null,
    "release": {
     "code": "released",
     "weights": "not_released",
-    "note": "github.com/RoboVerseOrg/ViTacFormer (Apache-2.0, last push 2026-08-08) holds training and inference scripts; no checkpoint link seen; the paper states no release (read 2026-11-24)."
+    "note": "github.com/RoboVerseOrg/ViTacFormer (Apache-2.0, last push 2026-08-08) holds training and inference scripts. The README links an example data zip on Google Drive for training and no checkpoint, and asks the user to edit the checkpoint paths in inference.sh; the paper states no release (read 2026-11-25)."
    },
    "license": "Apache-2.0",
    "links": {
@@ -3123,9 +3129,9 @@
    "unconfirmed": [
     "The hand is 'the developing version of SharpaWave' with 17 DoF, unlike the 22-DoF production Sharpa Wave.",
     "The policy uses 3-axis force and torque per fingertip, not the raw tactile images.",
-    "The repository README text was empty when read; the dataset/ folder was not opened."
+    "The README's example_data.zip (file name read from the Drive page, not downloaded) and the dataset/ folder were not opened; the README does not state the zip's task or size."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "hope",
@@ -3149,26 +3155,28 @@
    "dataset": null,
    "release": {
     "code": "released",
-    "weights": "not_released",
-    "note": "github.com/subin6/hope ('Official repository', license file NOASSERTION, last push 2026-10-30) holds src/, configs/, scripts/ and preprocess/; the project page's 'Model' link is commented out (read 2026-11-24)."
+    "weights": "released",
+    "note": "github.com/subin6/hope ('Official repository', last push 2026-10-30) holds src/, configs/, scripts/ and preprocess/. The README links a HOPE checkpoint on Google Drive (hope_checkpoint.tar, fetched by scripts/download/hope_checkpoint.sh into config.yaml and checkpoints/epoch_20.pt); the Drive page showed the file name and nothing was downloaded. docs/data.md also links a Drive folder (~1.1 GB) of OpenTouch SAM3 masks, an OpenTouch hand reconstruction and a PressureVision MANO fit (read 2026-11-25)."
    },
-   "license": "not stated",
+   "license": "CC BY-NC 4.0",
    "links": {
     "paper": "https://arxiv.org/abs/2608.06192",
     "project": "https://subin6.github.io/page-hope",
-    "code": "https://github.com/subin6/hope"
+    "code": "https://github.com/subin6/hope",
+    "weights": "https://drive.google.com/file/d/12Mpb1uOC-wjkNdfkmDc94pt-fGKHg0rm/view"
    },
    "sources": [
     "https://arxiv.org/abs/2608.06192 (abstract via arXiv API; v2, 2026-10-30)",
     "https://arxiv.org/pdf/2608.06192v2 (pages 5-9: annotation, model, datasets, results)",
     "https://subin6.github.io/page-hope (NeurIPS 2026, links)",
-    "https://github.com/subin6/hope (repository metadata)"
+    "https://github.com/subin6/hope (repository metadata, README.md, docs/data.md, scripts/download/hope_checkpoint.sh)",
+    "https://drive.google.com/file/d/12Mpb1uOC-wjkNdfkmDc94pt-fGKHg0rm/view (file page: hope_checkpoint.tar)"
    ],
    "unconfirmed": [
-    "The license of the code repository could not be identified by GitHub (NOASSERTION); the license file was not read.",
+    "License from the README ('HOPE is released under CC BY-NC 4.0'); GitHub reports NOASSERTION and the LICENSE file was not read.",
     "OpenTouch pressure is normalised with a 50 kPa reference taken as OpenTouch's nominal full-scale range."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-25"
   },
   {
    "id": "cop_sim2real",
@@ -3319,25 +3327,26 @@
    "dataset": null,
    "release": {
     "code": "released",
-    "weights": "not_released",
-    "note": "github.com/gcfy63821/dexx_lab ('IsaacLab release version of Dex-X', MIT, last push 2026-10-30) is linked from the project page; a checkpoints/ folder is present but was not opened (read 2026-11-25)."
+    "weights": "released",
+    "note": "github.com/gcfy63821/dexx_lab ('IsaacLab release version of Dex-X', MIT, last push 2026-10-30) is linked from the project page. Its checkpoints/ folder holds student_lean_v6_L1.pth (1.8 MB, point-cloud student with 25 tactile points, 'The checkpoint to deploy'), teacher_poseobs.pth (3.0 MB, state teacher with touch) and an earlier teacher_poseobs_T0.pth (3.0 MB). checkpoints/README.md says the release simulation differs from the one the checkpoints were trained in (arm base height) and that the additional data augmentation used in the experiments is not included (read 2026-11-25)."
    },
    "license": "MIT",
    "links": {
     "paper": "https://arxiv.org/abs/2609.07747",
     "project": "https://dexx-code.github.io/dexx-code/",
-    "code": "https://github.com/gcfy63821/dexx_lab"
+    "code": "https://github.com/gcfy63821/dexx_lab",
+    "weights": "https://github.com/gcfy63821/dexx_lab/tree/main/checkpoints"
    },
    "sources": [
     "https://arxiv.org/html/2609.07747 (v3: hardware, inputs, outputs, results; first 100,000 characters)",
     "https://dexx-code.github.io/dexx-code/ (CoRL 2026, code and dataset links)",
-    "https://github.com/gcfy63821/dexx_lab (repository metadata)",
+    "https://github.com/gcfy63821/dexx_lab (repository metadata, README.md, checkpoints/ file list, checkpoints/README.md)",
     "https://huggingface.co/datasets/Ruoqu/DexX-Force (dataset card)"
    ],
    "unconfirmed": [
     "Training is in simulation; recorded fingertip touch enters only at real-world deployment, following the PTLD-style sim-to-real precedent.",
     "The fingertip sensor type is not named; the deployed policy uses one force magnitude per fingertip.",
-    "Whether checkpoints/ in the repository holds trained policies was not checked."
+    "The checkpoints were listed through the GitHub API and not downloaded or run; no separate license is stated for them."
    ],
    "checked": "2026-11-25"
   },
