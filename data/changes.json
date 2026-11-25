@@ -3,6 +3,141 @@
   {
    "kind": "added",
    "target": "dataset",
+   "id": "ht_bench",
+   "text": "HT-Bench: about 10M egocentric RGB and 7.8M full-hand tactile frames over 226 tasks, extending OpenTouch and EgoTouch with new recordings from an unnamed glove; release of data and weights announced, no link yet.",
+   "source": "https://arxiv.org/abs/2606.19161",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
+   "id": "touchbench",
+   "text": "TouchBench: 900 egocentric clips (75 min, 5 people, 11 tasks) with a right-hand glove of 132 pressure taxels and 5 flexion channels at about 98 Hz, probing fill level, tightness and other hidden properties; no release stated.",
+   "source": "https://arxiv.org/abs/2611.26883",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "cop_sim2real",
+   "text": "CoP: Center-of-Pressure touch from XELA uSkin on a 16-DoF Allegro hand for blind sim-to-real RL; 0.78 peg-in-hole success zero-shot against 0.48 for raw taxels; no code release.",
+   "source": "https://arxiv.org/abs/2605.28812",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tacforcing",
+   "text": "TacForcing: streaming action expert that refreshes Sharpa Wave fingertip touch after every executed block, with FTP-1's tactile encoder; 66% average real success on six tasks against 51% for FTP-1 and T-Rex; no code release.",
+   "source": "https://arxiv.org/abs/2608.25798",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "3dtouch",
+   "text": "3DTouch: pi0-based VLA placing 600 XHand three-axis taxels and an RGB-D cloud in one 3D frame; 65.0% average success on five real tasks against 45.0% for Tactile-VLA; no code release.",
+   "source": "https://arxiv.org/abs/2611.23961",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "cgp",
+   "text": "Contact-Grounded Policy (RSS 2026): diffusion policy forecasting robot state and Digit360 tactile latents on an Allegro V5 hand; 93.3% jar opening against 66.7% for a visuotactile diffusion policy; no code release.",
+   "source": "https://arxiv.org/abs/2603.05687",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "dex_x",
+   "text": "Dex-X (CoRL 2026): visual-tactile policy learned from human videos in simulation and deployed zero-shot on a Sharpa Wave hand with fingertip force, 28/30 cube picks; MIT-licensed code public.",
+   "source": "https://github.com/gcfy63821/dexx_lab",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tac2pix",
+   "text": "Tac2Pix: projects 44 LEAP Hand tactile nodes into image-space saliency for pretrained visual encoders; 51.7% real success under occlusion against 25.0% for cross-attention; code announced.",
+   "source": "https://arxiv.org/abs/2606.08765",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "handtouch",
+   "text": "HandTouch: vector-quantised vision-tactile encoder trained on HT-Bench full-hand touch; Recall@5 85.23% against 74.65% for a ViT encoder; code and weights announced.",
+   "source": "https://arxiv.org/abs/2606.19161",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tma",
+   "text": "TMA: sim-trained humanoid doorknob policy on a BrainCo Revo2 hand that adapts from capacitive fingertip force history; 27 of 40 real doors opened against 6 for a reactive tactile policy; no code release.",
+   "source": "https://humanoid-tma.github.io/",
+   "date": "2026-11-25",
+   "flow": "discovery"
+  },
+  {
+   "kind": "released",
+   "target": "model",
+   "id": "twla",
+   "text": "T-WLA: the repository README links checkpoints on Hugging Face for the visual policy (1.6 GB), the RGB world head (375.6 MB), a pretrained EgoTouch H8 tactile encoder and three baselines; the trained tactile editor is not linked. Weights not_released -> released; the 2026-11-24 read had received an empty README.",
+   "source": "https://github.com/kaichen-z/TWLA",
+   "date": "2026-11-25",
+   "flow": "status"
+  },
+  {
+   "kind": "released",
+   "target": "model",
+   "id": "hope",
+   "text": "HOPE: the repository README links a trained checkpoint on Google Drive (hope_checkpoint.tar, not downloaded) and states CC BY-NC 4.0. Weights not_released -> released; license not stated -> CC BY-NC 4.0.",
+   "source": "https://github.com/subin6/hope",
+   "date": "2026-11-25",
+   "flow": "status"
+  },
+  {
+   "kind": "released",
+   "target": "model",
+   "id": "dex_x",
+   "text": "Dex-X: the repository's checkpoints/ folder holds a point-cloud student with tactile points (1.8 MB) and two state teachers (3.0 MB each); the README says the release simulation differs from the one they were trained in. Weights not_released -> released.",
+   "source": "https://github.com/gcfy63821/dexx_lab/tree/main/checkpoints",
+   "date": "2026-11-25",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "vitacformer",
+   "text": "ViTacFormer: the repository README links an example data zip on Google Drive (not opened); it links no checkpoint, so weights stay not_released.",
+   "source": "https://github.com/RoboVerseOrg/ViTacFormer",
+   "date": "2026-11-25",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "transdex",
+   "text": "TransDex: the repository README, recorded earlier as empty, gives training steps, links no checkpoint and says an example pretraining dataset will be released on Google Drive later; weights stay not_released.",
+   "source": "https://github.com/LFGfg/TransDex",
+   "date": "2026-11-25",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
+   "target": "dataset",
    "id": "clinician_bathing",
    "text": "Clinician Bathing Demonstrations: 128 Vicon captures (257,000 frames) of 3 clinicians bathing 6 subjects while wearing 65-taxel PPS TactileGloves on both hands; release announced in the RSS 2026 paper, no link yet.",
    "source": "https://arxiv.org/abs/2608.09127",

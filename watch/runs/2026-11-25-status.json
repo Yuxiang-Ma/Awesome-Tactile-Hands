@@ -1,0 +1,41 @@
+{
+ "flow": "status",
+ "date": "2026-11-25",
+ "model": "claude-sonnet-5-5",
+ "reviewed": 37,
+ "updated": 5,
+ "searches": [
+  "\"High Fidelity Capture, Reconstruction, and Transfer of Human Demonstrations for Robot-Assisted Bathing\" dataset code release",
+  "\"Humanoid Visual-Tactile-Action Dataset for Contact-Rich Manipulation\" dataset download",
+  "TipDex-VTLA tactile dexterous manipulation code data release github",
+  "VICON visual-inertial-contact hand-object tracking dataset release github Jeon 2026",
+  "ExoBridge bare hand exoskeleton mapping human limb coupling code dataset github",
+  "OccluDex visuo-tactile egocentric dexterous manipulation self-occlusion code github",
+  "\"Tactile-ViewGCN\" tactile data graph convolutional network code github",
+  "\"BiView-Touch\" bimanual tactile representations cross-hand completion code"
+ ],
+ "for_the_owner": [
+  "Fix the lookup tool: 'nightly_tool.py gh' printed an empty README for every repository tried tonight. Likely cause: fetch() (scripts/nightly_lib.py line 97) reads a body only when the Content-Type matches text, html, json or xml, and the call at scripts/nightly_tool.py line 89 asks GitHub for application/vnd.github.raw. Earlier notes calling the T-WLA, ViTacFormer and TransDex READMEs empty were wrong, and T-WLA weights were missed. READMEs were read from raw.githubusercontent.com instead.",
+  "Judgment call: T-WLA weights set to released (visual policy, world head, pretrained tactile encoder), following the AdapTac-Dex entry where an encoder checkpoint counts. The trained tactile editor, the part that takes touch at run time, is not linked. Change it back if 'released' should require that part. https://github.com/kaichen-z/TWLA",
+  "Judgment call: HOPE weights set to released from the README link and the Google Drive file page (hope_checkpoint.tar); the file was not downloaded. https://drive.google.com/file/d/12Mpb1uOC-wjkNdfkmDc94pt-fGKHg0rm/view",
+  "Judgment call: the ViTacFormer README links example_data.zip on Google Drive. If it holds fingertip touch it could be a partial dataset entry; the status run did not add one. https://github.com/RoboVerseOrg/ViTacFormer",
+  "Judgment call: an anonymous supplementary page with the Ego2Contact title (https://yvonneoo.github.io/ego2contact-page/) is noted in that entry and not recorded as its project link, because the paper does not link it.",
+  "No dataset became public tonight and no new gate appeared, so no viewer samples are wanted and nothing needs a new access application."
+ ],
+ "notes": [
+  "2 signals, both on the dextacwam collection page and both Hugging Face front-end build files. DexTacWAM_OXT was last committed 2026-11-23, which the entry already covers. No edit for the signals. 5 change-log lines, all models, all found by reading repository READMEs and folders.",
+  "Reviewed 37: dextacwam, 29 of the 30 deep-check entries and 7 other models with released code (hope, dex_x, transdex, dtwm, egopressurediff, vitam, decal). cop_sim2real was not re-read; it already carried 2026-11-25 from tonight's discovery run.",
+  "Deep check, datasets (no change in availability): clinician_bathing (arXiv v1), gist_vta (arXiv v2), tipdex_vtla (arXiv v2), vicon_glove (README: 'upon publication'), dexvitac (Hugging Face repo still only a README dated 2026-03-17; the project page links github.com/xitong-c/DexViTac_Code, whose README says the codebase comes 'in the near future'), htac (sample unchanged since 2026-07-06; TTP README: full data 'coming soon'), paxini_omnisharing (sample last modified 2026-10-19), sharpa_origami (gate auto, last modified 2026-07-24), tacwam_wetlab (gate manual, last modified 2026-11-05). Gate check dates of sharpa_origami and tacwam_wetlab set to 2026-11-25.",
+  "Deep check, models without a release change: biview_touch (anonymous page still HTTP 404), dexflex, tk_stgn, touchtwin, star, witac and tacross (project pages; TACROSS still 'Software release coming soon'), exobridge and occludex (arXiv v1 and web search), tactile_viewgcn (arXiv abstract page and web search), ptld (Code link still HTTP 404), rlhnd (repository still holds only the project page), ego2contact, haco, htd, touchanything, uvta and tavi (repositories, READMEs or accounts; no new checkpoint linked by the authors).",
+  "Web search was run for 8 of the deep-check entries only (listed above); the rest were checked on arXiv, project pages, GitHub or Hugging Face. Authors' other GitHub and Hugging Face accounts were not swept.",
+  "dtwm, egopressurediff, vitam and decal: only the README was re-read for weights and none is linked; Hugging Face was not searched again. The README.md address for Tactile-GAT and in-hand-rotation returned HTTP 404, so their checked dates are unchanged.",
+  "Models with checked set to 2026-11-25: biview_touch, dexflex, ego2contact, exobridge, haco, htd, occludex, ptld, rlhnd, star, tacross, tactile_viewgcn, tavi, tk_stgn, touchanything, touchtwin, twla, uvta, vitacformer, witac, hope, transdex, dtwm, egopressurediff, vitam, decal. dex_x already carried it.",
+  "Dataset statuses that rested on a README read through the same tool may also be worth a second look; tonight only the VICON, H-Tac and DexViTac repository READMEs were re-read.",
+  "Not done: no viewer samples or integrity checks (a person runs them); no gated file opened; no dataset or checkpoint downloaded."
+ ],
+ "started": "2026-11-25T09:30:08Z",
+ "finished": "2026-11-25T09:48:13Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 12 changed files, 10 new entries"
+}

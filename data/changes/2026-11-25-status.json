@@ -1,0 +1,16 @@
+{"date": "2026-11-25", "flow": "status", "changes": [
+  {"kind": "released", "target": "model", "id": "twla",
+   "text": "T-WLA: the repository README links checkpoints on Hugging Face for the visual policy (1.6 GB), the RGB world head (375.6 MB), a pretrained EgoTouch H8 tactile encoder and three baselines; the trained tactile editor is not linked. Weights not_released -> released; the 2026-11-24 read had received an empty README.",
+   "source": "https://github.com/kaichen-z/TWLA"},
+  {"kind": "released", "target": "model", "id": "hope",
+   "text": "HOPE: the repository README links a trained checkpoint on Google Drive (hope_checkpoint.tar, not downloaded) and states CC BY-NC 4.0. Weights not_released -> released; license not stated -> CC BY-NC 4.0.",
+   "source": "https://github.com/subin6/hope"},
+  {"kind": "released", "target": "model", "id": "dex_x",
+   "text": "Dex-X: the repository's checkpoints/ folder holds a point-cloud student with tactile points (1.8 MB) and two state teachers (3.0 MB each); the README says the release simulation differs from the one they were trained in. Weights not_released -> released.",
+   "source": "https://github.com/gcfy63821/dexx_lab/tree/main/checkpoints"},
+  {"kind": "updated", "target": "model", "id": "vitacformer",
+   "text": "ViTacFormer: the repository README links an example data zip on Google Drive (not opened); it links no checkpoint, so weights stay not_released.",
+   "source": "https://github.com/RoboVerseOrg/ViTacFormer"},
+  {"kind": "updated", "target": "model", "id": "transdex",
+   "text": "TransDex: the repository README, recorded earlier as empty, gives training steps, links no checkpoint and says an example pretraining dataset will be released on Google Drive later; weights stay not_released.",
+   "source": "https://github.com/LFGfg/TransDex"}]}

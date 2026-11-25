@@ -1,66 +1,18 @@
 {
- "generated": "2026-11-24T09:34:18Z",
+ "generated": "2026-11-25T09:39:59Z",
  "baseline": false,
- "urls_checked": 333,
- "seconds": 256,
+ "urls_checked": 349,
+ "seconds": 590,
  "signals": [
   {
    "kind": "dataset",
-   "id": "egoexplorer",
-   "name": "EgoExplorer",
-   "url": "https://internrobotics.github.io/egoexplorer.github.io/",
+   "id": "dextacwam",
+   "name": "DexTacWAM",
+   "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
-   "type": "gone",
-   "detail": "HTTP 200 -> 404 on two scans in a row",
-   "availability": "partial"
-  },
-  {
-   "kind": "dataset",
-   "id": "tipdex_vtla",
-   "name": "TipDex-VTLA demonstrations",
-   "url": "https://arxiv.org/abs/2611.25683",
-   "priority": 2,
-   "type": "arxiv_version",
-   "detail": "1 -> 2",
-   "availability": "announced"
-  },
-  {
-   "kind": "dataset",
-   "id": "tipdex_vtla",
-   "name": "TipDex-VTLA demonstrations",
-   "url": "https://arxiv.org/abs/2611.25683",
-   "priority": 2,
-   "type": "arxiv_comment",
-   "detail": "None -> 10 pages, 5 figures. Title updated; main text and results unchanged",
-   "availability": "announced"
-  },
-  {
-   "kind": "model",
-   "id": "tipdex_vtla",
-   "name": "TipDex-VTLA",
-   "url": "https://arxiv.org/abs/2611.25683",
-   "priority": 2,
-   "type": "arxiv_version",
-   "detail": "1 -> 2",
-   "availability": {
-    "code": "announced",
-    "weights": "not_released",
-    "note": "The arXiv v1 text says 'We will release the collected data and source code.' and gives no link (read 2026-11-23)."
-   }
-  },
-  {
-   "kind": "model",
-   "id": "tipdex_vtla",
-   "name": "TipDex-VTLA",
-   "url": "https://arxiv.org/abs/2611.25683",
-   "priority": 2,
-   "type": "arxiv_comment",
-   "detail": "None -> 10 pages, 5 figures. Title updated; main text and results unchanged",
-   "availability": {
-    "code": "announced",
-    "weights": "not_released",
-    "note": "The arXiv v1 text says 'We will release the collected data and source code.' and gives no link (read 2026-11-23)."
-   }
+   "type": "links_added",
+   "detail": "https://huggingface.co/front/build/kube-a955789/index.js https://huggingface.co/front/build/kube-a955789/katex.css https://huggingface.co/front/build/kube-a955789/style.css",
+   "availability": "public"
   },
   {
    "kind": "dataset",
@@ -68,23 +20,23 @@
    "name": "DexTacWAM",
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
-   "type": "page_text",
-   "detail": "text length 1722 -> 1704",
+   "type": "links_removed",
+   "detail": "https://huggingface.co/front/build/kube-461cc29/index.js https://huggingface.co/front/build/kube-461cc29/katex.css https://huggingface.co/front/build/kube-461cc29/style.css",
    "availability": "public"
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "bvt20"
+   "id": "clinician_bathing"
   },
   {
    "kind": "dataset",
-   "id": "dexumi"
+   "id": "dexvitac"
   },
   {
    "kind": "dataset",
-   "id": "exobridge"
+   "id": "gist_vta"
   },
   {
    "kind": "dataset",
@@ -107,24 +59,32 @@
    "id": "tipdex_vtla"
   },
   {
-   "kind": "model",
-   "id": "aet_tacnet"
+   "kind": "dataset",
+   "id": "vicon_glove"
   },
   {
    "kind": "model",
-   "id": "decal"
+   "id": "biview_touch"
   },
   {
    "kind": "model",
-   "id": "dtwm"
+   "id": "cop_sim2real"
   },
   {
    "kind": "model",
-   "id": "egopressureformer"
+   "id": "dexflex"
   },
   {
    "kind": "model",
-   "id": "fbi"
+   "id": "ego2contact"
+  },
+  {
+   "kind": "model",
+   "id": "exobridge"
+  },
+  {
+   "kind": "model",
+   "id": "haco"
   },
   {
    "kind": "model",
@@ -148,15 +108,19 @@
   },
   {
    "kind": "model",
-   "id": "tactile_gat"
+   "id": "tacross"
   },
   {
    "kind": "model",
-   "id": "tactofind"
+   "id": "tactile_viewgcn"
   },
   {
    "kind": "model",
-   "id": "tipdex_vtla"
+   "id": "tavi"
+  },
+  {
+   "kind": "model",
+   "id": "tk_stgn"
   },
   {
    "kind": "model",
@@ -183,7 +147,7 @@
    "id": "witac"
   }
  ],
- "not_fully_released": 80,
+ "not_fully_released": 90,
  "errors": [],
  "problems": [],
  "sources_failed": []

@@ -2,76 +2,82 @@
  "runs": {
   "discovery": {
    "flow": "discovery",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "model": "claude-opus-5-5",
-   "reviewed": 35,
+   "reviewed": 23,
    "added": {
     "datasets": 2,
     "models": 8,
     "hardware": 0
    },
-   "updated": 1,
-   "queue_left": 366,
+   "updated": 0,
+   "queue_left": 380,
    "searches": [
-    "触觉手套 数据集 开源",
     "灵巧手 触觉 数据集 发布",
     "human tactile demonstration dataset robot hand",
-    "tactile pretraining dexterous policy human glove"
+    "tactile pretraining dexterous policy human glove",
+    "电子皮肤 灵巧手 数据集"
    ],
    "for_the_owner": [
-    "Viewer samples wanted: force_vision (public Google Drive zip d256.zip linked from the ICLR 2024 project site; size not shown, license not stated, files not opened) https://drive.google.com/file/d/1UPCkTTmPJGex2p3cJRnJHj4_A70sGQ8S/view",
-    "Judgment call: clinician_bathing was added although the gloved hands wipe human subjects with wet wipes rather than manipulate objects on a table; it is the only catalog entry of hand touch during caregiving.",
-    "Judgment call: FBI (arXiv 2508.14441) was added as a model although it is trained in simulation; recorded Shadow Hand touch (148 RunesKee sensors) enters only in its real-world evaluation, following the PTLD-style sim-to-real precedent added tonight."
+    "Judgment call: CoP (2605.28812), Dex-X (2609.07747) and TMA (2611.18976) were added as models although their policies are trained in simulation; recorded hand touch enters through real-world deployment (and CoP's 2,400-contact calibration set), following the PTLD and FBI precedent.",
+    "Judgment call: HT-Bench (ht_bench) was added as an announced dataset although the glove of its new recordings is not named and part of it is existing OpenTouch and EgoTouch data; its HandTouch model links both as training data.",
+    "Judgment call: Dex-X's Hugging Face release Ruoqu/DexX-Force (10,343 trajectories, 13.14 h, 8.2 GB) was not added as a dataset because its five-finger contact forces are simulated; it is described in the dex_x model's own_data."
    ],
    "notes": [
-    "Queue positions 0-59 were triaged; 34 queue candidates decided (8 models, 2 datasets, 1 duplicate, 23 rejects) plus the Baihu-VTouch search hit (reject). The 8-model cap was reached at position 20 (HOPE).",
-    "In-scope or unclear candidates left in the queue for the next run because the model cap was reached: HT-Bench / HandTouch 2606.19161 (announced full-hand tactile benchmark extending OpenTouch and TouchAnything; add dataset and model together), TacForcing 2608.25798 (two Sharpa Wave hands, tactile encoder initialised from FTP-1), Tac2Pix 2606.08765, 3DTouch 2611.23961, CGP 2603.05687, CoP 2605.28812, Dex-X 2609.07747, TMA 2611.18976, Touch2Robot 2609.24660, Touch2Trace 2609.15921, GIFT 2609.14173, BAT-WAM 2611.10967, TapTacTouch 2611.24207, KineFuse 2607.14842, 2512.02011, 2610.08870, V-HOP 2502.17434, full-hand tactile sim-to-real (doi:10.1109/wrcsara71458.2026.11732568), and surveys 2610.30438, 2608.07558, 2608.15490.",
-    "Left undecided because the primary source could not be read: DexMove (openalex:W7236513678, ICLR 2026; OpenReview PDF and forum behind browser verification, no arXiv version found; project page peilin-666.github.io/projects/DexMove names a wearable with PP-Tac-based vision tactile sensors), ForeTac 2610.18118 (arXiv HTML 404), N0-TWAM 2607.23783 (platforms named are ARX5, UR, Flexiv, Franka, PiPER and UMI, but no end-effector description was found in the HTML), DexGrasp copilot doi:10.1109/icra57385.2026.11697534 (IEEE only), LingBot-Touch 2611.12806.",
-    "data/datasets.json was edited by hand: python3 pipeline/merge_entry.py was refused by the shell again, so the entries of the two surveys (clinician_bathing, force_vision) were appended in the same format; build_readme.py --validate passes.",
-    "clinician_bathing is linked to hardware pps_tactileglove_ii; the paper cites PPS 'TactileGlove' without a revision, and its 65-taxel count matches the II record.",
-    "force_vision is not linked to hardware stag: its glove follows the STAG knitting method but reads a 16x16 grid, not STAG's 548 sensors.",
-    "The talos_electrician_conduit Zenodo mirror (DOI 10.5281/zenodo.24147501, record 24147502) was added to that entry's sources and logged as an update.",
-    "Search hits already in the catalog or reviewed: OpenTouch, TactiDex, TacClaw-Infinity, VTouch++, RoboTacDex, HapTile, DexViTac, UVTA (2609.34182), TactAlign, UniTacHand, Spark-0, TouchWorld, TachinGlove data, HANDX glove, SmartHand. Still not decided (listed last night as well): TacOT 2610.04363, DexTac 2601.21474, MimicTouch 2310.16917.",
-    "Paper versions read: WiTac v3, PTLD v3, TF2-Steering v1, T-WLA v2, ReTouch v2, ViTacFormer v2, HOPE v2 (PDF pages 5-9, HTML not available)."
+    "Queue positions 0-89 were triaged; 20 queue candidates decided (8 models, 1 dataset, 1 duplicate, 10 rejects; HT-Bench gave both a model and a dataset) plus 3 search-hit rejects. The 8-model cap was reached with TMA (position 20).",
+    "In-scope or unclear candidates left in the queue because the model cap was reached: DexMove openalex:W7236513678, N0-TWAM 2607.23783, ViTacPhys 2608.21355, ForeTac 2610.18118, FingerEye 2604.20689, LingBot-Touch 2611.12806 (arXiv HTML 404, PDF over 10 MB), CAAT 2608.01102, 2512.02011, Touch2Robot 2609.24660, Touch2Trace 2609.15921, GIFT 2609.14173, TacPAC 2609.05266, V-HOP 2502.17434, TapTacTouch 2611.24207, BAT-WAM 2611.10967, UniDex-ViTac 2609.16504, DexGrasp copilot doi:10.1109/icra57385.2026.11697534 and 2511.00139, Ego2Real 2611.32101, 2610.08870, full-hand sim-to-real doi:10.1109/wrcsara71458.2026.11732568, KineFuse 2607.14842, TAMEn 2604.07335, TouchWGNN doi:10.3389/frobt.2026.1791424, RealDexUMI 2606.06033, TACIT 2609.24507, DexTaG 2609.33882, ViTaDex doi:10.1109/tii.2025.3646626, Blind grasping Real2Sim2Real 2606.11767, KineDex 2505.01974, Kinematic-tactile retargeting 2610.39582, TaF-Foundation 2611.20718, MDF++ 2611.09293.",
+    "Surveys still undecided as leads (named items not extracted tonight): 2610.30438, 2608.07558, 2608.15490, 2605.17336.",
+    "TouchScale_OXT (hf:datasets/2077aidatafoundation/touchscale_oxt) is the same repository as the TouchScale-OXT link in touchscale used_by_other; the HF API now reports 2.5 TB used storage against ~1.01 TB in that note, which the status run may want to update.",
+    "data/datasets.json was edited by hand: python3 pipeline/merge_entry.py was refused by the shell again, so ht_bench and touchbench were appended from their survey files in the same format.",
+    "Search hits already in the catalog or reviewed: TachinGlove data, Baihu-VTouch, VTouch++, TacClaw-Infinity, TactiDex, ADL21, SmartHand, DexViTac, UVTA (2609.34182), RoboTacDex, HapTile, TactAlign, UniTacHand, TouchWorld, Spark-0. Still not decided (listed on earlier nights): TacOT 2610.04363, DexTac 2601.21474, MimicTouch 2310.16917.",
+    "Paper versions read: CoP v1, TacForcing v2, 3DTouch v1, CGP v3, Dex-X v3 (first 100,000 characters), Tac2Pix v3 (first 100,000 characters), HT-Bench v2, TMA v1, TouchBench v1."
    ],
-   "started": "2026-11-24T06:30:02Z",
-   "finished": "2026-11-24T06:48:25Z",
+   "started": "2026-11-25T06:30:01Z",
+   "finished": "2026-11-25T06:47:25Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 10 changed files, 10 new entries"
+   "guard": "nightly guard passed: 9 changed files, 10 new entries"
   },
   "status": {
    "flow": "status",
-   "date": "2026-11-24",
+   "date": "2026-11-25",
    "model": "claude-sonnet-5-5",
-   "reviewed": 6,
-   "updated": 3,
+   "reviewed": 37,
+   "updated": 5,
    "searches": [
-    "AET-TacNet tactile code github",
-    "DTWM Dexterous Tactile World Model weights Hugging Face",
-    "EgoPressureFormer code release egotactile",
-    "FBI dexterous tactile \"dex-fbi\" code weights",
-    "HTD Humanoid Transformer with Touch Dreaming weights checkpoint",
-    "OccluDex tactile dexterous code github",
-    "PTLD Sparsh privileged tactile learning dexterous code release",
-    "RLHND seungjun-moon code weights",
-    "STAR stardex tactile dexterous code release"
+    "\"High Fidelity Capture, Reconstruction, and Transfer of Human Demonstrations for Robot-Assisted Bathing\" dataset code release",
+    "\"Humanoid Visual-Tactile-Action Dataset for Contact-Rich Manipulation\" dataset download",
+    "TipDex-VTLA tactile dexterous manipulation code data release github",
+    "VICON visual-inertial-contact hand-object tracking dataset release github Jeon 2026",
+    "ExoBridge bare hand exoskeleton mapping human limb coupling code dataset github",
+    "OccluDex visuo-tactile egocentric dexterous manipulation self-occlusion code github",
+    "\"Tactile-ViewGCN\" tactile data graph convolutional network code github",
+    "\"BiView-Touch\" bimanual tactile representations cross-hand completion code"
    ],
    "for_the_owner": [
-    "Judgment call: the EgoExplorer project page link (internrobotics.github.io/egoexplorer.github.io/) is dead (HTTP 404 on two scans) but the dataset and code are intact, so nothing was marked withdrawn. If the authors moved the page, the link needs the new address; none was found on the Hugging Face card or the GitHub repository.",
-    "No dataset became public tonight and no new gate appeared, so no viewer samples are wanted and nothing needs an access application."
+    "Fix the lookup tool: 'nightly_tool.py gh' printed an empty README for every repository tried tonight. Likely cause: fetch() (scripts/nightly_lib.py line 97) reads a body only when the Content-Type matches text, html, json or xml, and the call at scripts/nightly_tool.py line 89 asks GitHub for application/vnd.github.raw. Earlier notes calling the T-WLA, ViTacFormer and TransDex READMEs empty were wrong, and T-WLA weights were missed. READMEs were read from raw.githubusercontent.com instead.",
+    "Judgment call: T-WLA weights set to released (visual policy, world head, pretrained tactile encoder), following the AdapTac-Dex entry where an encoder checkpoint counts. The trained tactile editor, the part that takes touch at run time, is not linked. Change it back if 'released' should require that part. https://github.com/kaichen-z/TWLA",
+    "Judgment call: HOPE weights set to released from the README link and the Google Drive file page (hope_checkpoint.tar); the file was not downloaded. https://drive.google.com/file/d/12Mpb1uOC-wjkNdfkmDc94pt-fGKHg0rm/view",
+    "Judgment call: the ViTacFormer README links example_data.zip on Google Drive. If it holds fingertip touch it could be a partial dataset entry; the status run did not add one. https://github.com/RoboVerseOrg/ViTacFormer",
+    "Judgment call: an anonymous supplementary page with the Ego2Contact title (https://yvonneoo.github.io/ego2contact-page/) is noted in that entry and not recorded as its project link, because the paper does not link it.",
+    "No dataset became public tonight and no new gate appeared, so no viewer samples are wanted and nothing needs a new access application."
    ],
    "notes": [
-    "6 signals, 3 change-log lines. egoexplorer P1 (project page 404 on two scans): caveat added, availability unchanged. tipdex_vtla P2 (arXiv v1 -> v2, dataset and model entries): title changed to the v2 wording, release sentence unchanged. dextacwam P3 page_text (1,722 -> 1,704 characters on the Hugging Face collection page) was not reviewed because the dataset is public.",
-    "Deep check (27 entries). Read from a primary source tonight: tipdex_vtla (arXiv v2 HTML and abstract), dtwm, htd, touchanything, vitacformer, decal, twla, tactile_gat and uvta (GitHub API, repositories exist and release status in the catalog is unchanged), egopressureformer (project page now links the EgoTactile repository and the Hugging Face dataset, both already catalogued under egopressurediff and egotactile; the repository was last pushed 2026-06-29 and no EgoPressureFormer-specific release was confirmed, so it stays not_released), ptld (project page now has a Code button pointing to github.com/akashsharma02/ptld, which returns HTTP 404, so code stays announced), rlhnd (the GitHub repository holds only the project page, pushed 2026-10-08; the page says 'Code will be released at github.com/seungjun-moon/rlhnd'), fbi, star, touchtwin, witac and tactofind (project pages, no code or weights link). Datasets: htac (Hugging Face H-Tac_Sample unchanged since 2026-07-06, TTP repository Apache-2.0), paxini_omnisharing (Hugging Face sample ungated, last modified 2026-10-19), sharpa_origami (gate auto, last modified 2026-07-24), dexumi (GitHub repository, last push 2026-04-18), exobridge (arXiv v1 only, no code or data link in the abstract), egoexplorer, tipdex_vtla. Not confirmed from a primary source, so no checked date changed: aet_tacnet and occludex (one web search each, no hits and no project page in the catalog), bvt20 and tacwam_wetlab (not opened tonight beyond last night's read). The weights status of the models whose code is released (dtwm, htd, touchanything, vitacformer, decal, twla, uvta) was not re-read in the READMEs; the catalog values stand.",
-    "Models with a changed checked date (2026-11-24): dtwm, egopressureformer, touchanything, uvta, rlhnd, tactile_gat, tactofind, htd, touchtwin, decal, star, tipdex_vtla. witac, ptld, fbi, twla and vitacformer already carried 2026-11-24 from tonight's discovery run.",
-    "Not done: no viewer samples or integrity checks (a person runs them); no gated file opened; no dataset downloaded."
+    "2 signals, both on the dextacwam collection page and both Hugging Face front-end build files. DexTacWAM_OXT was last committed 2026-11-23, which the entry already covers. No edit for the signals. 5 change-log lines, all models, all found by reading repository READMEs and folders.",
+    "Reviewed 37: dextacwam, 29 of the 30 deep-check entries and 7 other models with released code (hope, dex_x, transdex, dtwm, egopressurediff, vitam, decal). cop_sim2real was not re-read; it already carried 2026-11-25 from tonight's discovery run.",
+    "Deep check, datasets (no change in availability): clinician_bathing (arXiv v1), gist_vta (arXiv v2), tipdex_vtla (arXiv v2), vicon_glove (README: 'upon publication'), dexvitac (Hugging Face repo still only a README dated 2026-03-17; the project page links github.com/xitong-c/DexViTac_Code, whose README says the codebase comes 'in the near future'), htac (sample unchanged since 2026-07-06; TTP README: full data 'coming soon'), paxini_omnisharing (sample last modified 2026-10-19), sharpa_origami (gate auto, last modified 2026-07-24), tacwam_wetlab (gate manual, last modified 2026-11-05). Gate check dates of sharpa_origami and tacwam_wetlab set to 2026-11-25.",
+    "Deep check, models without a release change: biview_touch (anonymous page still HTTP 404), dexflex, tk_stgn, touchtwin, star, witac and tacross (project pages; TACROSS still 'Software release coming soon'), exobridge and occludex (arXiv v1 and web search), tactile_viewgcn (arXiv abstract page and web search), ptld (Code link still HTTP 404), rlhnd (repository still holds only the project page), ego2contact, haco, htd, touchanything, uvta and tavi (repositories, READMEs or accounts; no new checkpoint linked by the authors).",
+    "Web search was run for 8 of the deep-check entries only (listed above); the rest were checked on arXiv, project pages, GitHub or Hugging Face. Authors' other GitHub and Hugging Face accounts were not swept.",
+    "dtwm, egopressurediff, vitam and decal: only the README was re-read for weights and none is linked; Hugging Face was not searched again. The README.md address for Tactile-GAT and in-hand-rotation returned HTTP 404, so their checked dates are unchanged.",
+    "Models with checked set to 2026-11-25: biview_touch, dexflex, ego2contact, exobridge, haco, htd, occludex, ptld, rlhnd, star, tacross, tactile_viewgcn, tavi, tk_stgn, touchanything, touchtwin, twla, uvta, vitacformer, witac, hope, transdex, dtwm, egopressurediff, vitam, decal. dex_x already carried it.",
+    "Dataset statuses that rested on a README read through the same tool may also be worth a second look; tonight only the VICON, H-Tac and DexViTac repository READMEs were re-read.",
+    "Not done: no viewer samples or integrity checks (a person runs them); no gated file opened; no dataset or checkpoint downloaded."
    ],
-   "started": "2026-11-24T09:30:01Z",
-   "finished": "2026-11-24T09:37:25Z",
+   "started": "2026-11-25T09:30:08Z",
+   "finished": "2026-11-25T09:48:13Z",
    "ok": true,
    "review_exit": 0,
-   "guard": "nightly guard passed: 13 changed files, 10 new entries"
+   "guard": "nightly guard passed: 12 changed files, 10 new entries"
   }
  }
 }

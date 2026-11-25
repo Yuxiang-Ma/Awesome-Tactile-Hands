@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-11-24"
+  "last_updated": "2026-11-25"
  },
  "datasets": [
   {
@@ -399,6 +399,12 @@
      "url": "https://arxiv.org/abs/2610.22932",
      "note": "Human training data, with a seen-object test set of 179 episodes and an unseen-object test set of 85 episodes; compared against TouchAnything, which the authors reproduce.",
      "model": "ego2contact"
+    },
+    {
+     "name": "HandTouch, arXiv 2606.19161",
+     "url": "https://arxiv.org/abs/2606.19161",
+     "note": "Cited as TouchAnything (Zhou et al., 2026), the second open dataset HT-Bench extends; per-dataset frame counts not stated.",
+     "model": "handtouch"
     },
     {
      "name": "T-WLA, arXiv 2610.28814",
@@ -892,6 +898,12 @@
      "url": "https://arxiv.org/abs/2606.13102",
      "note": "OpenTouch glove as an array-type sensor, 1.5% of the mix. The checkpoint's statistics list 2,958 trajectories over 26 tasks; OpenTouch releases about 2,900 annotated clips.",
      "model": "ftp1"
+    },
+    {
+     "name": "HandTouch, arXiv 2606.19161",
+     "url": "https://arxiv.org/abs/2606.19161",
+     "note": "One of the two open datasets HT-Bench extends; per-dataset frame counts not stated.",
+     "model": "handtouch"
     },
     {
      "name": "HOPE, NeurIPS 2026 (arXiv 2608.06192)",
@@ -8487,7 +8499,7 @@
     "kind": "hf_gate",
     "approval": "automatic",
     "url": "https://huggingface.co/datasets/SharpaIT/Robotic_Origami_Challenge",
-    "checked": "2026-11-02",
+    "checked": "2026-11-25",
     "note": "No extra terms: the card sets no gate prompt or form fields; the Hugging Face gate shares the username and email with the authors. The ungated third-party mirror iris-kaist/origami-v3-merged holds the first 46 seasons."
    },
    "license": "CC BY 4.0",
@@ -10873,8 +10885,8 @@
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
-    "checked": "2026-11-23",
-    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-23)."
+    "checked": "2026-11-25",
+    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-25)."
    },
    "license": "CC BY-NC 4.0",
    "caveats": [
@@ -12107,6 +12119,225 @@
      "hand_pose": false,
      "scale": false,
      "diversity": false
+    }
+   }
+  },
+  {
+   "id": "ht_bench",
+   "name": "HT-Bench",
+   "title": "HT-Bench: Benchmarking and Learning Dexterous Full-Hand Tactile Representations with Egocentric Vision",
+   "authors": "Yuzhe Huang et al.",
+   "year": 2026,
+   "venue": "arXiv 2606.19161",
+   "summary": "Benchmark of egocentric RGB paired with full-hand tactile maps, about 10M RGB and 7.8M tactile frames over 226 tasks, built from OpenTouch and EgoTouch (TouchAnything) plus newly collected full-hand tactile sequences whose glove is not named, with four evaluation tasks (tactile retrieval, masked inpainting, vision-to-tactile synthesis, tactile frame prediction).",
+   "embodiment": "human",
+   "hand": null,
+   "bimanual": null,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": null,
+    "coverage": [
+     "tip",
+     "phalanx",
+     "palm"
+    ],
+    "rate_hz": null,
+    "note": "Tactile frames are used as 1x224x224 normalised full-hand maps; the device of the new sequences is not named.",
+    "maker": null,
+    "model": null,
+    "principle": "unspecified",
+    "range": null
+   },
+   "modalities": [
+    "egocentric"
+   ],
+   "scale": {
+    "hours": null,
+    "episodes": null,
+    "frames": 7800000,
+    "tasks": 226,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [
+     "home",
+     "lab",
+     "retail",
+     "workshop",
+     "outdoor"
+    ],
+    "text": "About 10M RGB frames and 7.8M tactile frames over 226 tasks; one task held out as OOD, the rest split 9:1; hours, subjects and the share of new data not stated"
+   },
+   "availability": "announced",
+   "access": "The paper states 'We will release all data, evaluation protocols, pretrained weights, and training/testing scripts.'; no link is given (checked 2026-11-25).",
+   "license": "not stated",
+   "caveats": [
+    "Part of HT-Bench is existing OpenTouch and EgoTouch data; how many frames are new is not stated.",
+    "The glove or sensor of the newly collected sequences is not named, so taxel count, rate and coverage are unknown.",
+    "The paper reports some figures inconsistently between the abstract, Section 5.1 and Table 2."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.19161"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "egocentric",
+      "count": 1,
+      "model": null,
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "head"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [],
+    "other": []
+   },
+   "sources": [
+    "https://arxiv.org/abs/2606.19161 (abstract via arXiv API; v2, 2026-08-20)",
+    "https://arxiv.org/html/2606.19161 (data sources, frame counts, scenes, splits, release sentence)"
+   ],
+   "unconfirmed": [
+    "coverage tip/phalanx/palm follows the paper's 'full-hand' wording; the new device's layout is not described.",
+    "Camera mount 'head' is assumed from 'egocentric'; the camera model is not named.",
+    "scene_types map the paper's list (home, electronics workbench, chemistry lab, retail, workbench, outdoor) onto catalog labels.",
+    "frames is the tactile frame count (7.8M); RGB frames are about 10M."
+   ],
+   "rank": {
+    "n": 6,
+    "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "release announced"
+    ]
+   },
+   "contents": {
+    "score": 2,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": false,
+     "scale": false,
+     "diversity": true
+    }
+   }
+  },
+  {
+   "id": "touchbench",
+   "name": "TouchBench",
+   "title": "TouchBench: Can Vision-Language Models Feel Invisible Physical Properties?",
+   "authors": "Ziyao Zeng et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.26883",
+   "summary": "900 egocentric clips (75 min) of five people wearing a right-hand tactile glove with 132 pressure taxels (60 fingertip, 72 palm), 5 finger-flexion channels and a wrist IMU at about 98 Hz while probing properties hidden from the camera (bottle fill level, cap tightness, ball inflation, pillow filling, cable seating) over 11 tasks, with 900 absolute and 4,102 relative vision-language questions.",
+   "embodiment": "human",
+   "hand": "tactile glove, right hand (maker not stated)",
+   "bimanual": false,
+   "sensor": {
+    "type": "unspecified",
+    "taxels_per_hand": 132,
+    "coverage": [
+     "tip",
+     "palm"
+    ],
+    "rate_hz": 98,
+    "note": "137 channels per sample: 132 pressure taxels (60 on fingertips, 72 on the palm) and 5 per-finger flexion values, plus a wrist IMU quaternion; median rate 98.5 Hz.",
+    "maker": null,
+    "model": null,
+    "principle": "unspecified",
+    "range": null
+   },
+   "modalities": [
+    "egocentric",
+    "imu",
+    "language"
+   ],
+   "scale": {
+    "hours": 1.25,
+    "episodes": 900,
+    "frames": null,
+    "tasks": 11,
+    "objects": null,
+    "subjects": 5,
+    "scenes": null,
+    "scene_types": [],
+    "text": "900 clips (152, 216, 182, 142 and 208 per participant), 75 min, 11 tasks, 5 participants; 900 absolute and 4,102 relative questions"
+   },
+   "availability": "not_released",
+   "access": "The paper gives no release statement, project page or data link (arXiv v1 read in full, 2026-11-25).",
+   "license": "not stated",
+   "caveats": [
+    "The glove maker and model are not named.",
+    "Models are given 32 uniformly spaced frames per clip; the stored video frame rate and resolution are not stated.",
+    "The paper's 20 h in-the-wild experiments use the existing EgoTouch corpus, which is not part of TouchBench."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.26883"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "egocentric",
+      "count": 1,
+      "model": null,
+      "type": "RGB",
+      "resolution": null,
+      "fps": null,
+      "mount": "head"
+     }
+    ],
+    "wrist_cameras": 0,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "fingers",
+      "method": "other",
+      "system": "glove flexion channels",
+      "note": "5 per-finger flexion values; the flexion sensor type is not stated"
+     },
+     {
+      "target": "wrist",
+      "method": "imu",
+      "system": "wrist-mounted IMU",
+      "note": "orientation as a quaternion"
+     }
+    ],
+    "other": [
+     "questions with answers per clip"
+    ]
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.26883 (abstract via the scan; v1, 2026-11-19)",
+    "https://arxiv.org/html/2611.26883 (glove channels, rate, clips, participants, tasks, objects, questions; read to the end)"
+   ],
+   "unconfirmed": [
+    "hours 1.25 is the paper's 75 minutes of manipulation.",
+    "Camera mount 'head' follows the paper's 'head-mounted egocentric camera'; the camera model is not named.",
+    "'language' in modalities: the release would pair clips with question and answer text; how it would be stored is unknown."
+   ],
+   "rank": {
+    "n": 6,
+    "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "not released"
+    ]
+   },
+   "contents": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": false,
+     "diversity": true
     }
    }
   }
