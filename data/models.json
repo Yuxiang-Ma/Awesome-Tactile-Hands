@@ -3169,6 +3169,288 @@
     "OpenTouch pressure is normalised with a 50 kPa reference taken as OpenTouch's nominal full-scale range."
    ],
    "checked": "2026-11-24"
+  },
+  {
+   "id": "cop_sim2real",
+   "name": "CoP",
+   "title": "Beyond Binary: Sim-to-Real Dexterous Manipulation with Physics-Grounded Contact Representation",
+   "authors": "Jiahe Pan et al.",
+   "year": 2026,
+   "venue": "arXiv 2605.28812",
+   "kind": "policy",
+   "summary": "Blind PPO policies (GRU, 256-D latent) for a 16-DoF Allegro hand with XELA uSkin on fingertips, phalanges and palm, trained in IsaacLab on a Center-of-Pressure representation (one 3-D force and one 3-D contact point per sensor, from taxel orientations calibrated through differentiable dynamics) plus joint angles and the previous action, outputting 16 joint-position increments; zero-shot on the real hand, 0.78 peg-in-hole success against 0.48 for raw taxels and 0.53 for binary contact, and 4.60 s mean ball-balancing time against 1.99 s for binary contact.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "A real calibration set of 2,400 random fingertip contacts (about 2 min at 20 Hz) used to learn taxel orientations; policies are trained in simulation; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text has no release statement; the project page mpan31415.github.io/tactile_rep/ has its Code and Data buttons commented out (read 2026-11-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2605.28812",
+    "project": "https://mpan31415.github.io/tactile_rep/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2605.28812 (v1: hand, sensors, calibration, inputs, outputs, results)",
+    "https://mpan31415.github.io/tactile_rep/ (hardware, links)"
+   ],
+   "unconfirmed": [
+    "Training is in simulation; recorded XELA touch enters through the calibration contacts and real-world evaluation, following the PTLD-style sim-to-real precedent.",
+    "The taxel count per sensor and the sensor rate are not stated in the text read."
+   ],
+   "checked": "2026-11-25"
+  },
+  {
+   "id": "tacforcing",
+   "name": "TacForcing",
+   "title": "TacForcing: Streaming Action Generation with Execution-Time Tactile Feedback",
+   "authors": "Jianbo Zhou et al.",
+   "year": 2026,
+   "venue": "arXiv 2608.25798",
+   "kind": "policy",
+   "summary": "VLA with a streaming flow-matching action expert that generates each 40-step chunk as 8 blocks of 5 and resumes the unfinished blocks after every executed block with fresh fingertip touch (Execution-Aware Tactile Attention), initialised from GR00T N1.7 with FTP-1's tactile encoder on two RealMan RM75 arms with 22-DoF Sharpa Wave hands and on Sharpa North; 66% average real-world success on six tasks against 51% for FTP-1 and T-Rex, and 65% on six UniVTAC simulation tasks against 59% for FTP-1.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "850 real teleoperated demonstrations over 6 tasks (100 per task, 150 for Close Cap, 300 for Close Lid) and 50 simulated demonstrations per UniVTAC task; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v2 text has no release statement; the anonymous project page tacforcing-review.pages.dev has no code or model link (read 2026-11-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2608.25798",
+    "project": "https://tacforcing-review.pages.dev/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2608.25798 (v2: hardware, inputs, outputs, data, results)",
+    "https://tacforcing-review.pages.dev/ (per-task results, no code link)"
+   ],
+   "unconfirmed": [
+    "The tactile encoder is initialised from the catalog model FTP-1; whether the ftp1_sharpa data itself enters TacForcing's training is not stated, so no uses link was made.",
+    "The fingertip sensor is not named; the paper says it produces deformation maps. The Sharpa North arm and hand are not described."
+   ],
+   "checked": "2026-11-25"
+  },
+  {
+   "id": "3dtouch",
+   "name": "3DTouch",
+   "title": "3DTouch: A Tactile-aware VLA Model with 3D Geometric Relations for Dexterous Manipulation",
+   "authors": "Xin Zhang et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.23961",
+   "kind": "policy",
+   "summary": "pi0-based VLA for a UR7e arm with a five-finger XHand (120 three-axis taxels per finger, 600 in all) that places each taxel's position and force vector and a 4,096-point RGB-D cloud in the robot-base frame, encodes them as 33 scene tokens, 5 finger tokens and 10 hand-object and object-object relation tokens, and outputs 18-D joint-action chunks; 65.0% average success on five real tasks against 45.0% for Tactile-VLA and 44.0% for pi0.5.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "About 100 real demonstrations per task over 5 tasks (funnel insertion, plug assembly, button press, sponge wiping, pipette press) with five-finger tactile measurements; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text has no release statement, project page or repository link (read 2026-11-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.23961"
+   },
+   "sources": [
+    "https://arxiv.org/html/2611.23961 (v1: hardware, inputs, outputs, data, results)"
+   ],
+   "unconfirmed": [
+    "The tactile sensor maker and rate are not stated; 120 three-axis taxels per finger is the paper's figure for the XHand."
+   ],
+   "checked": "2026-11-25"
+  },
+  {
+   "id": "cgp",
+   "name": "Contact-Grounded Policy (CGP)",
+   "title": "Contact-Grounded Policy: Dexterous Visuotactile Policy with Generative Contact Grounding",
+   "authors": "Zhengtong Xu et al.",
+   "year": 2026,
+   "venue": "RSS 2026 (arXiv 2603.05687)",
+   "kind": "policy",
+   "summary": "Diffusion policy that forecasts 16 steps of robot state and tactile latents from two RGB views, touch and robot state, then maps them through a learned contact-consistency model to targets for a compliance controller; on a Franka with a 16-DoF Allegro V5 hand and four Digit360 fingertips it reaches 93.3% jar opening and 80.0% in-hand box flipping against 66.7% and 60.0% for a visuotactile diffusion policy, and it is also run in simulation on a Tesollo DG-5F with 748 tactile units.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [],
+   "own_data": "Teleoperated demonstrations: 45 real jar-opening and 90 real box-flipping episodes (OptiTrack and an instrumented glove), 260 simulated episodes over three tasks, and 150 simulated grasp episodes (4,114 frames) for the contact-consistency mapping; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v3 text has no release statement; the project page contact-grounded-policy.github.io links the paper and a video only (read 2026-11-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2603.05687",
+    "project": "https://contact-grounded-policy.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2603.05687 (v3: hardware, inputs, outputs, data, results)",
+    "https://contact-grounded-policy.github.io/ (RSS 2026, links)"
+   ],
+   "unconfirmed": [
+    "touch 'both': tactile latents are forecast alongside robot state.",
+    "Digit360 images are used at 72x72 per sensor; the sensor rate is not stated."
+   ],
+   "checked": "2026-11-25"
+  },
+  {
+   "id": "dex_x",
+   "name": "Dex-X",
+   "title": "Dex-X: Learning Visual-Tactile Dexterous Manipulation From Human Videos with Simulated Interaction",
+   "authors": "Ruoqu Chen et al.",
+   "year": 2026,
+   "venue": "CoRL 2026 (arXiv 2609.07747)",
+   "kind": "policy",
+   "summary": "Reconstructs monocular human demonstrations in IsaacLab, trains a tactile-aware RL teacher and distils it into a student that reads a 1,055-point cloud with 25 tactile points and proprioception and outputs 29-D arm-hand actions at 30 Hz for a Franka FR3 with a 22-DoF Sharpa Wave hand; zero-shot on the real hand with five fingertip force magnitudes, 28/30 cube picks (11/30 without touch) and 16/30 squeegee table cleaning.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Simulated rollouts only; the authors publish 10,343 of them (13.14 h, simulated five-finger contact forces) as the Hugging Face dataset Ruoqu/DexX-Force, which is not a catalog entry because its touch is simulated.",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "github.com/gcfy63821/dexx_lab ('IsaacLab release version of Dex-X', MIT, last push 2026-10-30) is linked from the project page; a checkpoints/ folder is present but was not opened (read 2026-11-25)."
+   },
+   "license": "MIT",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.07747",
+    "project": "https://dexx-code.github.io/dexx-code/",
+    "code": "https://github.com/gcfy63821/dexx_lab"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.07747 (v3: hardware, inputs, outputs, results; first 100,000 characters)",
+    "https://dexx-code.github.io/dexx-code/ (CoRL 2026, code and dataset links)",
+    "https://github.com/gcfy63821/dexx_lab (repository metadata)",
+    "https://huggingface.co/datasets/Ruoqu/DexX-Force (dataset card)"
+   ],
+   "unconfirmed": [
+    "Training is in simulation; recorded fingertip touch enters only at real-world deployment, following the PTLD-style sim-to-real precedent.",
+    "The fingertip sensor type is not named; the deployed policy uses one force magnitude per fingertip.",
+    "Whether checkpoints/ in the repository holds trained policies was not checked."
+   ],
+   "checked": "2026-11-25"
+  },
+  {
+   "id": "tac2pix",
+   "name": "Tac2Pix",
+   "title": "Tac2Pix: Image-Space Visuo-Tactile Fusion for Dexterous Manipulation",
+   "authors": "Shengcheng Luo et al.",
+   "year": 2026,
+   "venue": "arXiv 2606.08765",
+   "kind": "representation",
+   "summary": "Projects 44 tactile nodes of a LEAP Hand on an xArm6 (4 TwinTac fingertip sensors with 8 taxels each, 12 joint FSRs) through forward kinematics and camera calibration into force-aware Gaussian saliency maps that enter a pretrained RGB encoder as a zero-initialised fourth channel; with Diffusion Policy outputting 22-D commands it reaches 51.7% average success on three real tasks under visual occlusion against 25.0% for cross-attention fusion and 10.0% vision-only.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Teleoperated demonstrations: 122 real (48 pick-and-place, 48 open-drawer, 26 flip-box) and 110 simulated over three tasks; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "The paper says the authors 'plan to release the modular Tac2Pix implementation' upon acceptance; the project page touch-as-saliency.github.io shows 'Code Soon' (read 2026-11-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.08765",
+    "project": "https://touch-as-saliency.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2606.08765 (v3: hardware, inputs, outputs, data, results; first 100,000 characters)",
+    "https://touch-as-saliency.github.io/ (setup, Code Soon)"
+   ],
+   "unconfirmed": [
+    "kind 'representation': Tac2Pix is a fusion input for existing policies (BC-MLP, ACT, Diffusion Policy, SmolVLA) and is evaluated through them."
+   ],
+   "checked": "2026-11-25"
+  },
+  {
+   "id": "handtouch",
+   "name": "HandTouch",
+   "title": "HT-Bench: Benchmarking and Learning Dexterous Full-Hand Tactile Representations with Egocentric Vision",
+   "authors": "Yuzhe Huang et al.",
+   "year": 2026,
+   "venue": "arXiv 2606.19161",
+   "kind": "representation",
+   "summary": "Progressive vector-quantised vision-tactile encoder (2,048-entry shared codebook, frozen ViT for vision) trained on 224x224 full-hand tactile maps through tactile reconstruction, masked inpainting from vision and tactile frame prediction; on HT-Bench it reaches Recall@5 85.23% against 74.65% for a ViT encoder and inpainting RMSE 0.009 against 0.022, and 68.3% average success on four real manipulation tasks against 50.0% for a trained ResNet.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "opentouch",
+     "role": "training",
+     "note": "One of the two open datasets HT-Bench extends; per-dataset frame counts not stated."
+    },
+    {
+     "id": "egotouch",
+     "role": "training",
+     "note": "Cited as TouchAnything (Zhou et al., 2026), the second open dataset HT-Bench extends; per-dataset frame counts not stated."
+    }
+   ],
+   "own_data": null,
+   "dataset": "ht_bench",
+   "release": {
+    "code": "announced",
+    "weights": "announced",
+    "note": "The paper says 'We will release all data, evaluation protocols, pretrained weights, and training/testing scripts.'; no link is given in arXiv v2 (read 2026-11-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.19161"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2606.19161 (abstract via arXiv API; v2, 2026-08-20)",
+    "https://arxiv.org/html/2606.19161 (model, data sources, results, release sentence)"
+   ],
+   "unconfirmed": [
+    "embodiment 'both': training data is human full-hand touch; the robot, hand and sensor of the four real tasks (board cleaning, pear picking, water pouring, sand shoveling) are not named.",
+    "The paper's figures differ between sections (inpainting RMSE 0.009 in Table 2, 0.010 in the abstract; the 0.628 to 0.689 cIoU gain is labelled OOD in the abstract and standard test in Table 2)."
+   ],
+   "checked": "2026-11-25"
+  },
+  {
+   "id": "tma",
+   "name": "TMA",
+   "title": "TMA: Sim-to-Real Forceful Humanoid Manipulation via Tactile-Driven Motor Adaptation",
+   "authors": "Yiting Chen et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.18976",
+   "kind": "policy",
+   "summary": "Upper-body RL policy for a Unitree G1 Edu humanoid with a BrainCo Revo2 hand that encodes capacitive 3-D fingertip force on thumb, index, middle and ring as normal load, cone angle and shear direction, adapts from 2 s of tactile history through an 8-D latent, and outputs 13 arm and hand joint increments beside a frozen locomotion controller; trained in mjlab, it opens 27 of 40 real doors over four commercial round knobs zero-shot, against 6 of 40 for a binary-contact reactive policy and 0 of 40 for RMA.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Simulation only; no recorded dataset is described; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text has no release statement; the project page humanoid-tma.github.io links the paper and arXiv only (read 2026-11-25)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.18976",
+    "project": "https://humanoid-tma.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2611.18976 (v1: hardware, inputs, outputs, simulation ablation)",
+    "https://humanoid-tma.github.io/ (real-world counts per knob)"
+   ],
+   "unconfirmed": [
+    "Training is in simulation; recorded fingertip touch enters only at real-world deployment, following the PTLD-style sim-to-real precedent.",
+    "Real-world counts are from the project page table; the paper gives them only in a figure."
+   ],
+   "checked": "2026-11-25"
   }
  ]
 }

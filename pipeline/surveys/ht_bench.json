@@ -1,0 +1,105 @@
+{
+ "id": "ht_bench",
+ "surveyed": "2026-11-25",
+ "entry": {
+  "id": "ht_bench",
+  "name": "HT-Bench",
+  "title": "HT-Bench: Benchmarking and Learning Dexterous Full-Hand Tactile Representations with Egocentric Vision",
+  "authors": "Yuzhe Huang et al.",
+  "year": 2026,
+  "venue": "arXiv 2606.19161",
+  "summary": "Benchmark of egocentric RGB paired with full-hand tactile maps, about 10M RGB and 7.8M tactile frames over 226 tasks, built from OpenTouch and EgoTouch (TouchAnything) plus newly collected full-hand tactile sequences whose glove is not named, with four evaluation tasks (tactile retrieval, masked inpainting, vision-to-tactile synthesis, tactile frame prediction).",
+  "embodiment": "human",
+  "hand": null,
+  "bimanual": null,
+  "sensor": {
+   "type": "unspecified",
+   "taxels_per_hand": null,
+   "coverage": [
+    "tip",
+    "phalanx",
+    "palm"
+   ],
+   "rate_hz": null,
+   "note": "Tactile frames are used as 1x224x224 normalised full-hand maps; the device of the new sequences is not named.",
+   "maker": null,
+   "model": null,
+   "principle": "unspecified",
+   "range": null
+  },
+  "modalities": [
+   "egocentric"
+  ],
+  "scale": {
+   "hours": null,
+   "episodes": null,
+   "frames": 7800000,
+   "tasks": 226,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [
+    "home",
+    "lab",
+    "retail",
+    "workshop",
+    "outdoor"
+   ],
+   "text": "About 10M RGB frames and 7.8M tactile frames over 226 tasks; one task held out as OOD, the rest split 9:1; hours, subjects and the share of new data not stated"
+  },
+  "availability": "announced",
+  "access": "The paper states 'We will release all data, evaluation protocols, pretrained weights, and training/testing scripts.'; no link is given (checked 2026-11-25).",
+  "license": "not stated",
+  "caveats": [
+    "Part of HT-Bench is existing OpenTouch and EgoTouch data; how many frames are new is not stated.",
+    "The glove or sensor of the newly collected sequences is not named, so taxel count, rate and coverage are unknown.",
+    "The paper reports some figures inconsistently between the abstract, Section 5.1 and Table 2."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2606.19161"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "egocentric",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": null,
+     "fps": null,
+     "mount": "head"
+    }
+   ],
+   "wrist_cameras": 0,
+   "depth": false,
+   "tracking": [],
+   "other": []
+  },
+  "sources": [
+   "https://arxiv.org/abs/2606.19161 (abstract via arXiv API; v2, 2026-08-20)",
+   "https://arxiv.org/html/2606.19161 (data sources, frame counts, scenes, splits, release sentence)"
+  ],
+  "unconfirmed": [
+   "coverage tip/phalanx/palm follows the paper's 'full-hand' wording; the new device's layout is not described.",
+   "Camera mount 'head' is assumed from 'egocentric'; the camera model is not named.",
+   "scene_types map the paper's list (home, electronics workbench, chemistry lab, retail, workbench, outdoor) onto catalog labels.",
+   "frames is the tactile frame count (7.8M); RGB frames are about 10M."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": null
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [],
+ "episode_index": null
+}
