@@ -1,0 +1,40 @@
+name: Nightly watchdog
+# The nightly runs happen on a workstation, which cannot report its own failure when it is off, offline or logged out
+# of GitHub. Every run commits a run report to claude/nightly and every publish moves main, so if neither branch has a
+# commit for 48 hours the runs have stopped. This job then opens one issue, assigned to the repository owner, and
+# closes it once commits resume. From 2026-11-04 to 2026-11-23 the runs failed for 19 days before anyone noticed.
+on:
+  schedule:
+    - cron: "30 16 * * *"  # 11:30 EST / 12:30 EDT, after the 09:00 publish
+  workflow_dispatch: {}
+permissions:
+  contents: read
+  issues: write
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 1
+      - name: Check the age of the newest nightly commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          git fetch -q --depth=1 origin claude/nightly:refs/remotes/origin/claude/nightly || true
+          newest=$(git log -1 --format=%ct HEAD origin/claude/nightly 2>/dev/null || git log -1 --format=%ct HEAD)
+          hours=$(( ($(date +%s) - newest) / 3600 ))
+          when=$(TZ=America/New_York date -d "@$newest" '+%Y-%m-%d %H:%M %Z')
+          title="Nightly runs stopped"
+          n=$(gh issue list --state open --search "\"$title\" in:title" --json number -q '.[0].number')
+          echo "newest commit on main or claude/nightly: $when ($hours h ago)"
+          if [ "$hours" -ge 48 ]; then
+            body="$(date -u +%F): no commit on main or claude/nightly since $when ($hours hours). The runs happen on the workstation; check \`~/taxel-nightly/logs/cron.log\` there for FAILED, 403 or 'exit 127', and run \`bash ~/taxel-nightly/nightly_local.sh discovery --check\`."
+            if [ -n "$n" ]; then gh issue comment "$n" --body "$body"
+            else gh issue create --title "$title" --assignee "$OWNER" --body "$body"; fi
+          elif [ -n "$n" ]; then
+            gh issue close "$n" --comment "$(date -u +%F): nightly commits resumed (newest $when)."
+          fi

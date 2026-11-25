@@ -2,38 +2,59 @@
 # One nightly flow of the Taxel Atlas on this machine (pipeline/NIGHTLY.md): scan, review in a restricted Claude Code
 # session, cache new figures, guard, commit and push to claude/nightly. The 09:00 publish job merges that branch.
 #
-#   scripts/nightly_local.sh discovery|status [--no-push]
+#   scripts/nightly_local.sh discovery|status [--no-push|--check]
+#
+# --check runs only the preflight (claude CLI, GitHub push access, commits left unpushed by an earlier run) and exits.
 #
 # Runs in its own clone ($TAXEL_NIGHTLY_HOME, default ~/taxel-nightly), never in a working checkout. The review session
 # cannot run git, cannot edit scripts, pages or settings, and cannot read outside that clone; git is done here.
 set -uo pipefail
-FLOW=${1:-}; [[ $FLOW == discovery || $FLOW == status ]] || { echo "usage: $0 discovery|status [--no-push]" >&2; exit 2; }
+FLOW=${1:-}; [[ $FLOW == discovery || $FLOW == status ]] || { echo "usage: $0 discovery|status [--no-push|--check]" >&2; exit 2; }
 PUSH=1; [[ ${2:-} == --no-push ]] && PUSH=0
+CHECK=0; [[ ${2:-} == --check ]] && CHECK=1
 HOME_DIR=${TAXEL_NIGHTLY_HOME:-$HOME/taxel-nightly}
 REPO=$HOME_DIR/Awesome-Tactile-Hands
 LOGS=$HOME_DIR/logs
 GH_REPO=Yuxiang-Ma/Awesome-Tactile-Hands
 BRANCH=claude/nightly
-CLAUDE=${CLAUDE_BIN:-$HOME/.nvm/versions/node/v20.20.2/bin/claude}
+# the claude CLI: CLAUDE_BIN, else PATH, else the native installer's ~/.local/bin, else the newest nvm install
+CLAUDE=${CLAUDE_BIN:-}
+if [[ -z $CLAUDE ]]; then
+  for c in "$(command -v claude 2>/dev/null)" "$HOME/.local/bin/claude" "$(ls -d "$HOME"/.nvm/versions/node/*/bin/claude 2>/dev/null | sort -V | tail -1)"; do
+    [[ -n $c && -x $c ]] && { CLAUDE=$c; break; }
+  done
+fi
 PY=/usr/bin/python3
 export PATH="$(dirname "$CLAUDE"):/snap/bin:/usr/local/bin:/usr/bin:/bin"
 DATE=$(TZ=America/New_York date +%F)
 STARTED=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 LOG=$LOGS/$DATE-$FLOW
 mkdir -p "$LOGS"
-exec > >(tee -a "$LOG.log") 2>&1
-echo "== $STARTED nightly $FLOW for $DATE"
+if [[ $CHECK == 0 ]]; then  # --check writes no log and takes no lock, so it can run beside a nightly run
+  exec > >(tee -a "$LOG.log") 2>&1
+  echo "== $STARTED nightly $FLOW for $DATE"
+fi
 
-if [[ -z ${NIGHTLY_LOCKED:-} ]]; then  # launch.sh already holds the lock on fd 9
+if [[ -z ${NIGHTLY_LOCKED:-} && $CHECK == 0 ]]; then  # launch.sh already holds the lock on fd 9
   exec 9>"$HOME_DIR/.lock"
   flock -w 7200 9 || { echo "another nightly run holds the lock"; exit 1; }
 fi
+
+# GitHub: ~/taxel-nightly/github.token (a token for this repository only), else GH_TOKEN, else the gh login of the
+# repository owner. Never gh's active account alone: on a machine with several gh logins it can change under the cron
+# job, and from 2026-11-04 to 2026-11-23 it did, so every push got 403 and the site went 19 days without an update.
+GH_OWNER=${NIGHTLY_GH_USER:-${GH_REPO%%/*}}
+if [[ -s $HOME_DIR/github.token ]]; then GH_TOKEN=$(tr -d '[:space:]' < "$HOME_DIR/github.token")
+elif [[ -z ${GH_TOKEN:-} ]]; then GH_TOKEN=$(gh auth token --user "$GH_OWNER" 2>/dev/null || gh auth token 2>/dev/null); fi
+export GH_TOKEN
+UNPUSHED=$HOME_DIR/unpushed  # the commit of a run whose push failed, pushed by the next run
 
 git_auth() { git -c credential.helper= -c "credential.helper=!f() { echo username=x-access-token; echo password=\$(gh auth token); }; f" "$@"; }
 
 fail() {  # one open issue per flow collects the failures, so a bad week sends one thread of mail
   local why=$1
   echo "FAILED: $why"
+  [[ $CHECK == 1 ]] && exit 1  # --check only reports
   local title="Nightly $FLOW run failed"
   local body="$DATE: $why"$'\n\n'"Log on the workstation: \`$LOG.log\`"
   local n; n=$(gh issue list -R "$GH_REPO" --state open --search "\"$title\" in:title" --json number -q '.[0].number' 2>/dev/null)
@@ -41,11 +62,43 @@ fail() {  # one open issue per flow collects the failures, so a bad week sends o
   exit 1
 }
 
+# 0. preflight: stop before the scan, and before the clone is reset, when tonight's run could not finish
+[[ -n $CLAUDE && -x $CLAUDE ]] && "$CLAUDE" --version >/dev/null 2>&1 \
+  || fail "claude CLI not found or not runnable (tried CLAUDE_BIN, PATH, ~/.local/bin/claude, ~/.nvm); set CLAUDE_BIN in ~/taxel-nightly/launch.sh"
+for try in 1 2 3; do  # three tries, so one GitHub API hiccup does not cost the night
+  WHO=$(gh api user -q .login 2>/dev/null); CAN_PUSH=$(gh api "repos/$GH_REPO" -q .permissions.push 2>/dev/null)
+  [[ -n $CAN_PUSH ]] && break; [[ $try == 3 ]] || sleep 30
+done
+[[ $PUSH == 0 || $CAN_PUSH == true ]] \
+  || fail "the GitHub token (account ${WHO:-unknown}) cannot push to $GH_REPO; put a token for this repository in ~/taxel-nightly/github.token or log gh in as $GH_OWNER"
+echo "preflight: $("$CLAUDE" --version 2>/dev/null | head -1) at $CLAUDE; GitHub as ${WHO:-unknown}, push ${CAN_PUSH:-unknown}"
+if [[ $CHECK == 1 ]]; then
+  [[ -s $UNPUSHED ]] && echo "commit $(head -c 12 "$UNPUSHED") from an earlier run is waiting to be pushed"
+  exit 0
+fi
+
 # 1. the staging branch, with main merged in
 [[ -d $REPO/.git ]] || git_auth clone -q "https://github.com/$GH_REPO.git" "$REPO" || fail "clone failed"
 cd "$REPO" || fail "no clone"
 git_auth fetch -q origin || fail "git fetch failed"
 git reset -q --hard && git clean -qfd
+# a run whose push failed left its commit on the local branch; push it now, rebased onto the branch's current tip
+# (the publish job resets claude/nightly to main), so a failed push never costs a night. If it will not rebase or push,
+# it stays in a bundle under logs/ for a person.
+if [[ $PUSH == 1 && -s $UNPUSHED ]]; then
+  WAITING=$(tr -d '[:space:]' < "$UNPUSHED")
+  if git cat-file -e "$WAITING^{commit}" 2>/dev/null && ! git merge-base --is-ancestor "$WAITING" "origin/$BRANCH" 2>/dev/null; then
+    git checkout -q -B "$BRANCH" "$WAITING"
+    if git rebase -q "origin/$BRANCH" && git_auth push -q origin "$BRANCH"; then
+      echo "pushed the commit left unpushed by an earlier run ($(git log -1 --format=%s))"
+      git_auth fetch -q origin
+    else
+      git rebase --abort 2>/dev/null
+      echo "could not push the commit left by an earlier run; it is in $(ls "$LOGS"/*.unpushed.bundle 2>/dev/null | tail -1)"
+    fi
+  fi
+  rm -f "$UNPUSHED"
+fi
 if git rev-parse -q --verify "origin/$BRANCH" >/dev/null; then git checkout -q -B "$BRANCH" "origin/$BRANCH"; else git checkout -q -B "$BRANCH" origin/main; fi
 git merge -q --no-edit origin/main || { git merge --abort; fail "claude/nightly does not merge cleanly with main; resolve by hand"; }
 BASE=$(git rev-parse origin/main)  # every comparison below uses this commit, whatever happens to the refs meanwhile
@@ -164,7 +217,12 @@ git -c user.name="$(git config user.name || echo Yuxiang-Ma)" commit -q -m "Nigh
   -m "Scan, review and guard by scripts/nightly_local.sh (pipeline/NIGHTLY.md). Review exit $RC; guard: $(echo "$GUARD" | tail -1)" \
   -m "Co-Authored-By: Claude <noreply@anthropic.com>" || echo "nothing to commit"
 if [[ $PUSH == 1 ]]; then
-  git_auth push -q origin "$BRANCH" || { git_auth fetch -q origin && git rebase -q "origin/$BRANCH" && git_auth push -q origin "$BRANCH"; } || fail "push failed"
+  if ! { git_auth push -q origin "$BRANCH" || { git_auth fetch -q origin && git rebase -q "origin/$BRANCH" && git_auth push -q origin "$BRANCH"; }; }; then
+    git rebase --abort 2>/dev/null
+    git rev-parse HEAD > "$UNPUSHED"
+    git bundle create "$LOG.unpushed.bundle" "$BASE..HEAD" >/dev/null 2>&1
+    fail "push failed; the commit is kept on the local branch and in $LOG.unpushed.bundle, and the next run pushes it first"
+  fi
 fi
 [[ $OK == true ]] || fail "review exit $RC; guard: $(echo "$GUARD" | tail -3 | tr '\n' ' ')"
 # one night without arXiv is routine; a source missing from the last three runs of this flow needs a person
@@ -181,4 +239,9 @@ print(", ".join(sorted(set.intersection(*sets))) if len(sets) == 3 else "")
 EOF
 )
 [[ -z $STREAK ]] || fail "not reached on the last three $FLOW runs: $STREAK (scan_problems in watch/runs/ says what failed)"
+# a run that finished and pushed closes its flow's failure issue, so an open issue always means the flow is broken now
+if [[ $PUSH == 1 ]]; then
+  n=$(gh issue list -R "$GH_REPO" --state open --search "\"Nightly $FLOW run failed\" in:title" --json number -q '.[0].number' 2>/dev/null)
+  [[ -n $n ]] && gh issue close "$n" -R "$GH_REPO" --comment "$DATE: the $FLOW run finished and pushed ($SUMMARY)." >/dev/null 2>&1
+fi
 echo "== done $(date -u +%H:%M:%SZ): $SUMMARY"

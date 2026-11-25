@@ -20,6 +20,17 @@ for the same windows again: the backfill cursor stays, and the recent window rea
 fully answered. The wrapper copies both fields into the run report, the site shows "not reached" next to that run, and a
 source missing from three runs in a row opens a GitHub issue. The review session has nothing to do about them.
 
+When a run fails, the wrapper adds a comment to the open issue "Nightly discovery run failed" or "Nightly status run
+failed" (it opens one if none is open), and the next run of that flow that finishes and pushes closes it. So an open
+issue means the flow is broken now. Before the scan the wrapper checks that the `claude` CLI runs and that its GitHub
+token can push. If either fails it stops there, without resetting the clone. A commit whose push failed is
+kept on the local branch and in `logs/<date>-<flow>.unpushed.bundle`, and the next run rebases and pushes it before it
+starts, so a failed push loses no work. `.github/workflows/watchdog.yml` covers what the workstation cannot report about
+itself: when neither `main` nor `claude/nightly` has a commit for 48 hours, it opens "Nightly runs stopped", assigned to
+the repository owner. From 2026-11-04 to 2026-11-23 the runs failed without notice. The machine's active `gh` account
+had changed to one without push access, and from 2026-11-15 the `claude` CLI had also moved out of `~/.nvm`. Each night's
+work was then thrown away by the next run's reset, which is why the wrapper now keeps it.
+
 ## Files
 
 | file | written by | content |
@@ -200,6 +211,7 @@ could not reach a source.
 ```
 scripts/nightly_local.sh discovery            # the full run: scan, review, guard, commit, push to claude/nightly
 scripts/nightly_local.sh status --no-push     # everything except the push
+scripts/nightly_local.sh status --check       # preflight only: claude CLI, GitHub push access, a commit waiting to be pushed
 python3 scripts/watch.py --dry-run            # the status scan alone, printing the signals
 python3 scripts/discover.py --dry-run         # the discovery scan alone, printing the top of the queue
 ```
@@ -215,8 +227,11 @@ workflow's own two schedules stay as the fallback for days the workstation is of
 
 ## Installing on a machine
 
-The runs need the `claude` CLI logged in to an account, `gh` logged in with push access to this repository, Python 3 and
-ffmpeg. Optional: a free OpenAlex API key (openalex.org/settings/api) in `~/taxel-nightly/openalex.key` gives the
+The runs need the `claude` CLI logged in to an account, a GitHub token with push access to this repository, Python 3 and
+ffmpeg. The wrapper finds `claude` through `CLAUDE_BIN`, then `PATH`, then `~/.local/bin/claude`, then the newest
+`~/.nvm` install. For GitHub it reads `~/taxel-nightly/github.token` (a fine-grained token for this repository only, with
+Contents, Issues and Actions read and write), else `GH_TOKEN`, else `gh auth token --user Yuxiang-Ma`. It never uses
+`gh`'s active account alone, because on a machine with several `gh` logins the active one can change. Optional: a free OpenAlex API key (openalex.org/settings/api) in `~/taxel-nightly/openalex.key` gives the
 discovery scan its own $1 a day; it uses about 20 list requests a night. `~/taxel-nightly/launch.sh` takes the lock
 before it fetches, so a waiting run never moves the refs under a running one, then runs main's copy of the wrapper:
 
@@ -225,6 +240,8 @@ before it fetches, so a waiting run never moves the refs under a running one, th
 set -u
 D=$HOME/taxel-nightly
 R=$D/Awesome-Tactile-Hands
+export PATH=/snap/bin:/usr/local/bin:/usr/bin:/bin
+export CLAUDE_BIN=${CLAUDE_BIN:-$HOME/.local/bin/claude}
 exec 9>"$D/.lock"
 flock -w 7200 9 || exit 1
 [[ -d $R/.git ]] || git clone -q https://github.com/Yuxiang-Ma/Awesome-Tactile-Hands.git "$R" || exit 1
@@ -240,6 +257,8 @@ NIGHTLY_LOCKED=1 exec /bin/bash "$D/nightly_local.sh" "$@"
 set -u
 D=$HOME/taxel-nightly
 export PATH=/snap/bin:/usr/local/bin:/usr/bin:/bin
+if [[ -s $D/github.token ]]; then export GH_TOKEN=$(tr -d '[:space:]' < "$D/github.token")
+else export GH_TOKEN=$(gh auth token --user Yuxiang-Ma) || exit 1; fi
 exec 9>"$D/.lock"
 flock -w 3600 9 || echo "$(date -u +%FT%TZ) a nightly run still holds the lock after 1 h; publishing what is pushed"
 gh workflow run publish.yml -R Yuxiang-Ma/Awesome-Tactile-Hands --ref main
