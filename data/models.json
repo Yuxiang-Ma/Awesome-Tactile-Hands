@@ -3460,6 +3460,279 @@
     "Real-world counts are from the project page table; the paper gives them only in a figure."
    ],
    "checked": "2026-11-25"
+  },
+  {
+   "id": "lingbot_touch",
+   "name": "LingBot-Touch",
+   "title": "Learning Heterogeneous Tactile Representation for General Dexterous Manipulation",
+   "authors": "Bing Han et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.12806",
+   "kind": "representation",
+   "summary": "JEPA-style tactile encoder (modality-specific tokenizers, shared Transformer) that maps piezoresistive, magnetic and visuotactile five-finger hand signals of shape [B,T,5,M,3] to finger- and taxel-addressed latent tokens, pretrained on 4,983 h (464,431 episodes, about 1.33 billion frames) from tactile gloves and robot hands; frozen tokens condition LingBot-VLA policies on 26 real tasks (20 on Sharpa Wave, 6 on XHand, 20 trials each).",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Pretraining corpus of 4,983 h: 2,197 h piezoresistive (86,906 episodes), 1,136 h magnetic (294,871 episodes), 1,650 h visuotactile (82,654 episodes); gloves and hands not named on the project page; not released. The GitHub repository ships 120 single-hand sample files (30 bilateral pairs each for Sharpa and XHand).",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "Inference code on GitHub (Robbyant/lingbot-touch, Apache-2.0, pushed 2026-11-11); encoder weights on Hugging Face as robbyant/lingbot-touch-tiny (encoder.pt 20.8 MB, Apache-2.0, not gated) and robbyant/lingbot-touch-small, also on ModelScope (read 2026-11-26). Training code, predictors and pretraining data are not included."
+   },
+   "license": "Apache-2.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.12806",
+    "project": "https://technology.robbyant.com/lingbot-touch",
+    "code": "https://github.com/Robbyant/lingbot-touch",
+    "weights": "https://huggingface.co/robbyant/lingbot-touch-tiny"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.12806 (abstract; HTML version not available, PDF over 10 MB not read)",
+    "https://technology.robbyant.com/lingbot-touch (pretraining hours and episodes per modality, 26 real tasks, encoder size)",
+    "https://github.com/Robbyant/lingbot-touch (README: platforms, sample data, links)",
+    "https://huggingface.co/robbyant/lingbot-touch-tiny (model card: input shape, finger order, files, license)"
+   ],
+   "unconfirmed": [
+    "The gloves, robot hands and any public datasets in the pretraining corpus are not named on the project page or README; OpenAlex lists FTP-1 (ftp1_sharpa) among the paper's references, so it is not linked under uses.",
+    "Success-rate gains are shown only in charts on the project page; the paper text was not read.",
+    "Encoder size: the project page gives 5.46M parameters for the Tiny encoder; the Small size is not stated."
+   ],
+   "checked": "2026-11-26"
+  },
+  {
+   "id": "ego2real",
+   "name": "Ego2Real",
+   "title": "Ego2Real: Learning Bimanual Dexterous Manipulation from Egocentric Visuo-Tactile Demonstrations",
+   "authors": "Ange Bao et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.32101",
+   "kind": "policy",
+   "summary": "Uses a pair of 1,123-taxel full-hand tactile gloves (125 Hz) with egocentric RealSense D435i RGB-D to refine human hand-object references and to set contact rewards for residual RL on two OmniHand 3 hands on Tianji Marvin Pro arms; deployed without robot touch, it completes Bottle Handover in 12 of 15 real trials against 2 of 15 for REGRIND, and 2 of 15 without tactile refinement.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Egocentric bimanual glove demonstrations for two tasks (Bottle Handover, Box Rotation); counts and hours not stated; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text read up to character 100,000 has no release statement and no project page (read 2026-11-26)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.32101"
+   },
+   "sources": [
+    "https://arxiv.org/abs/2611.32101 (abstract via arXiv API; v1, 2026-11-24)",
+    "https://arxiv.org/html/2611.32101 (glove, hands, cameras, results; first 100,000 of 115,918 characters)"
+   ],
+   "unconfirmed": [
+    "The glove maker and model are not named; the paper cites OSMO as related work only.",
+    "Touch enters only at training (reference refinement and RL rewards); the deployed policy uses object pose and proprioception."
+   ],
+   "checked": "2026-11-26"
+  },
+  {
+   "id": "bat_wam",
+   "name": "BAT-WAM",
+   "title": "BAT-WAM: Bridging Action and Touch in World-Action Models for Dexterous Hands",
+   "authors": "Dong Fang et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.10967",
+   "kind": "world_model",
+   "summary": "World-action model with separate tactile and action codebooks joined by an RGB-conditioned latent bridge that completes masked full-hand pressure maps (196 tokens per hand) and joint states, predicts future touch, and conditions a pi0.5 backbone; on a Linker Hand L6 with a Juqiao full-hand tactile glove on an AgileX PiPER arm it reaches 79.3% mean success on seven real tasks against 66.4% for OpenWAM-alpha, and full-mask touch completion RMSE 0.0145 against 0.0221 for HandTouch.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [
+    {
+     "id": "ht_bench",
+     "role": "evaluation",
+     "note": "Offline touch completion and future tactile prediction benchmark, compared with HandTouch; split sizes not stated."
+    }
+   ],
+   "own_data": "Seven real tasks with 200 teleoperated demonstrations each (about 1,400) on Linker Hand L6 with a Juqiao glove, RealSense D435 top and D405 wrist cameras; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv text has no release statement and no project page or code link (read 2026-11-26)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.10967"
+   },
+   "sources": [
+    "https://arxiv.org/html/2611.10967 (hardware, data, completion and real-world results)"
+   ],
+   "unconfirmed": [
+    "Taxel count of the Juqiao glove on the Linker Hand is not stated; 196 tokens per hand is the model's grid.",
+    "The abstract's 85.56% figure is against 'OpenWAM with HangTouch', which does not appear in the body tables."
+   ],
+   "checked": "2026-11-26"
+  },
+  {
+   "id": "touch2robot",
+   "name": "Touch2Robot",
+   "title": "Touch2Robot: Robot Touch in the Human Demonstration Loop",
+   "authors": "Shengcheng Luo et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.24660",
+   "kind": "other",
+   "summary": "Geometry-conditioned causal Transformer retargeter, distilled from object-specific RL teachers, that takes human hand motion, 256-taxel Juqiao glove touch and object motion and outputs LEAP Hand joint targets plus predicted robot contact shown to the demonstrator; demonstrations collected this way replay on the real LEAP Hand at 72.1% average completion over four tasks against 37.9% for visual feedback, with robot-contact F1 44.19% against 24.71% for DexMachina.",
+   "embodiment": "both",
+   "touch": "both",
+   "uses": [],
+   "own_data": "Four tasks (pick-and-place, object rotation, board wiping, drawer opening), 30 teacher trajectories per task augmented to 400 rollouts, and a 10-participant user study with 10 attempts per task and interface; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv text has no release statement; it links only the project page touch2robot.github.io (read 2026-11-26)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.24660",
+    "project": "https://touch2robot.github.io/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.24660 (glove, robot hand, retargeter inputs and outputs, results)"
+   ],
+   "unconfirmed": [
+    "kind 'other': the model is a contact-aware retargeter for data collection; downstream Diffusion Policies trained on its demonstrations average 62.0% completion against 32.9% for visual feedback.",
+    "The robot side uses TwinTac fingertip sensors and binary FSRs on the LEAP Hand linkages for the tactile-fidelity comparison; glove sampling rate is not stated."
+   ],
+   "checked": "2026-11-26"
+  },
+  {
+   "id": "touchwgnn",
+   "name": "TouchWGNN",
+   "title": "TouchWGNN: spatio-temporal tactile perception for multimodal dexterous manipulation",
+   "authors": "Yu Ning et al.",
+   "year": 2026,
+   "venue": "Frontiers in Robotics and AI 13 (2026)",
+   "kind": "estimation",
+   "summary": "Spatio-temporal graph network (ET-Net equivariant spatial encoder, STF-Net temporal fusion with confidence-gated vision) that estimates 9-D object state from 113 piezoresistive normal-force taxels on a Shadow Hand (36 thumb, 12 per other finger, 25 palm, 4 sub-palm) plus wrist-camera pose and joint states, feeding a PPO policy; in Isaac Gym it reaches 90.56% cube-reorientation success against 85.64% for TacGNN.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Taxel calibration presses on 113 positions with an HP-200 force gauge; RL training in Isaac Gym; sizes not reported. Data availability statement: 'The original contributions presented in the study are included in the article'.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The article gives no code repository; further inquiries are directed to the corresponding author (read 2026-11-26)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://doi.org/10.3389/frobt.2026.1791424"
+   },
+   "sources": [
+    "https://www.frontiersin.org/articles/10.3389/frobt.2026.1791424/full (hand, sensor layout, model, Table 6 results, data statement; first 100,000 of 105,432 characters)"
+   ],
+   "unconfirmed": [
+    "Training and quantitative results are in simulation; real-hand deployment on the recorded 113-taxel touch is shown only qualitatively (Figure 4).",
+    "Tactile sampling rate is not stated; real-world control runs at 20 Hz."
+   ],
+   "checked": "2026-11-26"
+  },
+  {
+   "id": "touch2trace",
+   "name": "Touch2Trace",
+   "title": "Touch2Trace: Tactile-Driven Imitation Learning for Dexterous Cable Tracing",
+   "authors": "Matteo Grimaldi et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.15921",
+   "kind": "policy",
+   "summary": "Causal GPT-style behavior-cloning policy with a Gaussian-mixture head that takes 8 joint positions and two 32x32 piezoresistive TacV5 pressure images (thumb, index; 60 Hz) through a frozen 1.6M-parameter ViT-MAE encoder and outputs joint targets for a Tesollo DG-5F hand; it traces Ethernet cable 20.1 cm on average with 93% SR@10 against 0.2 cm and 0% for proprioception only.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "16 teleoperated demonstrations (about 14 min; 12 train, 4 validation); encoder pretrained on about 2M simulated contact frames over 72 objects and about 30K real frames from a TacV5-equipped UMI gripper; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv text has no release statement, code link or project page (read 2026-11-26)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.15921"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.15921 (hand, sensor, encoder pretraining, demonstrations, results)"
+   ],
+   "unconfirmed": [
+    "The hand is fixed without an arm and the policy controls 8 of 20 DoF; ring and pinky are held still.",
+    "TacV5 is also mounted on the middle fingertip, which the policy does not use."
+   ],
+   "checked": "2026-11-26"
+  },
+  {
+   "id": "vitacphys",
+   "name": "ViTacPhys",
+   "title": "ViTacPhys: Physical Property-Aware Grasping from Human Visual-Tactile Demonstrations",
+   "authors": "Yiwen Liu et al.",
+   "year": 2026,
+   "venue": "arXiv 2608.21355",
+   "kind": "estimation",
+   "summary": "Estimates mass and friction-coefficient classes and continuous stiffness from 1 s of wrist RGB and a 180x40 fingertip pressure map (thumb, index, middle of a human hand, 30 Hz) with a VLM text prior, then conditions grasping on a 6-DoF linkage hand; held-out objects reach 87.5% mass and 97.5% friction accuracy with 9.08% stiffness MAPE, and robot grasp success is 95.0% in distribution and 83.4% on OOD objects.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [],
+   "own_data": "1,800 human grasping demonstrations by one participant over 60 rigid and deformable objects in seven categories (fingertip pressure arrays, wrist RGB, mocap markers); release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv text gives the project page vitacphys.github.io/ViTacPhys but no code or data link and no release statement (read 2026-11-26)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2608.21355",
+    "project": "https://vitacphys.github.io/ViTacPhys/"
+   },
+   "sources": [
+    "https://arxiv.org/html/2608.21355 (sensing setup, data, inputs and outputs, results; first 100,000 of 103,937 characters)"
+   ],
+   "unconfirmed": [
+    "The fingertip pressure-array maker and taxel count are not stated; 180x40 is the tactile input size.",
+    "The robot hand (in-house linkage-driven 6-DoF on a 7-DoF arm, teleoperated with a Manus Quantum glove) is not said to carry tactile sensors."
+   ],
+   "checked": "2026-11-26"
+  },
+  {
+   "id": "gift",
+   "name": "GIFT",
+   "title": "GIFT: Glove-Inferred Force Transfer: Force-Aware Human-to-Robot Skill Transfer from a Wearable Sensing Glove to a Robot Hand Without Tactile Sensors",
+   "authors": "Tzah Sarusi",
+   "year": 2026,
+   "venue": "arXiv 2609.14173",
+   "kind": "policy",
+   "summary": "ACT policy trained on human glove demonstrations (egocentric image plus 5 flex, 5 newton-calibrated fingertip FSR forces and 3 IMU angles) that outputs five finger targets for a TetherIA Aero Hand Open without tactile sensors, where force is estimated from actuator-current residuals at deployment; in a constant-force cup grasp-and-hold it holds at a median 1.20 N against 2.55 N for the policy trained with force zeroed, both 25 of 25 successful.",
+   "embodiment": "human",
+   "touch": "input",
+   "uses": [],
+   "own_data": "73 glove sessions, 38,150 frames, one plastic cup, head-mounted camera, no robot present; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v2 text has no release statement or GIFT repository; it links tzahsarusi.github.io for videos and evaluation logs (read 2026-11-26)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.14173",
+    "project": "https://tzahsarusi.github.io"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.14173 (glove, hand, policy inputs and outputs, data, results)"
+   ],
+   "unconfirmed": [
+    "FSR maker and glove sampling rate are not stated.",
+    "Evaluation covers one object at one position; the paper notes the current-based force estimate saturates near 5 N."
+   ],
+   "checked": "2026-11-26"
   }
  ]
 }
