@@ -46,10 +46,12 @@
    ],
    "text": "102 processed segments (54,237 frames at 30 fps, 30.1 min) cut from 31 of 34 raw sessions (37.9 min of video), 11 motion categories, 31 task recordings; card says about 1 h"
   },
-  "availability": "public",
-  "access": "Hugging Face Tachintech/TachinTactileGlove-Demo01, ungated, 4.1 GB: 102 per-segment LeRobot v3 ZIPs (5-119 MB each) under Processed/<category>/ and 34 raw sessions under Origin/.",
+  "availability": "unclear",
+  "access": "Hugging Face Tachintech/TachinTactileGlove-Demo01 returned HTTP 401 on 2026-11-26. When surveyed it was ungated, 4.1 GB: 102 per-segment LeRobot v3 ZIPs (5-119 MB each) under Processed/<category>/ and 34 raw sessions under Origin/.",
   "license": "GPL-3.0",
   "caveats": [
+   "Withdrawn or made private, seen 2026-11-26: the repository went from HTTP 200 to 401 on two scans in a row, its page, file listing and commit history refused an anonymous request, and the Tachintech account's dataset list showed 3 other datasets and not this one. No notice or replacement was found on that account, on the Tachin-TachinTech account, on the tachin.com/en home and downloads pages or in two web searches.",
+   "MIT-Media-Lab/tachin-vitra-precut-mano-v1 (GPL-3.0, ungated on 2026-11-26) states on its card that it holds the 102 processed segment videos with fitted MANO hand poses and two (T, 880) pressure arrays; the card says the 3 raw sessions without a processed segment are not included. Its files were not opened.",
    "Small: 102 segments of 1.5-62.5 s (median 12.8 s) recorded on one day (2026-07-10, 16:26-17:38) at one desk, with two glove pairs (two MAC address pairs) and overlapping session times, so likely two stations; the number of subjects is not stated.",
    "Hand pose and camera pose are estimated from the egocentric video (21 OpenPose-style joints, 16 joint rotation matrices per hand, SLAM camera trajectory); there is no hand-tracking hardware. Joints are in the camera frame at raw SLAM scale.",
    "Task names and descriptions (meta/segment_info.json) are in Chinese only; folder names give 11 English motion categories (Fold, Grasp, Plug&Unplug, Pour, Press, Push&Pull, Scroll, Squeeze, Tighten a screw, Twist the bottle cap, Wipe). Launch press describes the release as covering 20 task categories.",

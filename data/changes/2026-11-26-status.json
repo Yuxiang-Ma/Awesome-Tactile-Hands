@@ -1,0 +1,13 @@
+{"date": "2026-11-26", "flow": "status", "changes": [
+  {"kind": "released", "target": "dataset", "id": "egoexplorer",
+   "text": "EgoExplorer: InternRobotics/EgoExplorer-100 (created 2026-11-04; 3,130 episodes, 104.8 h, 949 GB, tactile among the per-episode modalities, card license Apache-2.0) is up behind a manual Hugging Face gate; availability partial -> gated. The OXT export now holds 1,513 episodes (111 GB), and the zarr copy left the mini repository (now 7.35 GB).",
+   "source": "https://huggingface.co/datasets/InternRobotics/EgoExplorer-100"},
+  {"kind": "withdrawn", "target": "dataset", "id": "tachin_demo01",
+   "text": "TachinTactileGlove-Demo01: the Hugging Face repository returned HTTP 401 on two scans in a row and the Tachintech account no longer lists it; availability public -> unclear. The derived MIT-Media-Lab/tachin-vitra-precut-mano-v1 card still describes the 102 processed segment videos with pressure arrays.",
+   "source": "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01"},
+  {"kind": "updated", "target": "model", "id": "vitacphys",
+   "text": "ViTacPhys: the project page shows 'Code (Coming Soon)' and 'Dataset (Coming Soon)' with no link; code not_released -> announced.",
+   "source": "https://vitacphys.github.io/ViTacPhys/"},
+  {"kind": "updated", "target": "model", "id": "touch2trace",
+   "text": "Touch2Trace: accepted to CoRL 2026 (arXiv comment); the project website has disabled Code and Dataset buttons labelled 'not yet available'. Code not_released -> announced; project link added.",
+   "source": "https://grmmtt.github.io/corl26-touch2trace/"}]}

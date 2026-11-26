@@ -2,6 +2,114 @@
  "changes": [
   {
    "kind": "added",
+   "target": "model",
+   "id": "lingbot_touch",
+   "text": "LingBot-Touch: five-finger tactile encoder for piezoresistive, magnetic and visuotactile hands, pretrained on 4,983 h from gloves and robot hands; Tiny and Small encoder weights released under Apache-2.0 on Hugging Face, pretraining data not released.",
+   "source": "https://technology.robbyant.com/lingbot-touch",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "ego2real",
+   "text": "Ego2Real: 1,123-taxel tactile gloves refine egocentric hand-object references and RL contact rewards for two OmniHand 3 hands; 12 of 15 real bottle handovers against 2 of 15 for REGRIND; no release stated.",
+   "source": "https://arxiv.org/abs/2611.32101",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "bat_wam",
+   "text": "BAT-WAM: world-action model that completes and predicts full-hand touch on a Linker Hand L6 with a Juqiao glove; 79.3% mean success on seven real tasks, evaluated on HT-Bench; no release stated.",
+   "source": "https://arxiv.org/abs/2611.10967",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "touch2robot",
+   "text": "Touch2Robot: retargeter from 256-taxel Juqiao glove touch and hand motion to LEAP Hand joints and predicted robot contact; demonstrations replay at 72.1% average completion against 37.9% for visual feedback; no release stated.",
+   "source": "https://arxiv.org/abs/2609.24660",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "touchwgnn",
+   "text": "TouchWGNN: graph network on 113 piezoresistive taxels across a Shadow Hand estimating object state for reorientation; 90.56% cube success in Isaac Gym, real deployment shown qualitatively; no code given.",
+   "source": "https://doi.org/10.3389/frobt.2026.1791424",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "touch2trace",
+   "text": "Touch2Trace: cable-tracing policy on a Tesollo DG-5F using two 32x32 TacV5 fingertip pressure images; 93% SR@10 against 0% without touch, from 16 demonstrations; no release stated.",
+   "source": "https://arxiv.org/abs/2609.15921",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "vitacphys",
+   "text": "ViTacPhys: estimates object mass, friction and stiffness from human fingertip pressure arrays and wrist RGB over 60 objects (1,800 demonstrations); held-out mass accuracy 87.5%; no release stated.",
+   "source": "https://arxiv.org/abs/2608.21355",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "gift",
+   "text": "GIFT: ACT policy trained on glove fingertip FSR forces in newtons, run on a TetherIA Aero hand with current-estimated force; median hold force 1.20 N against 2.55 N without force input; no release stated.",
+   "source": "https://arxiv.org/abs/2609.14173",
+   "date": "2026-11-26",
+   "flow": "discovery"
+  },
+  {
+   "kind": "released",
+   "target": "dataset",
+   "id": "egoexplorer",
+   "text": "EgoExplorer: InternRobotics/EgoExplorer-100 (created 2026-11-04; 3,130 episodes, 104.8 h, 949 GB, tactile among the per-episode modalities, card license Apache-2.0) is up behind a manual Hugging Face gate; availability partial -> gated. The OXT export now holds 1,513 episodes (111 GB), and the zarr copy left the mini repository (now 7.35 GB).",
+   "source": "https://huggingface.co/datasets/InternRobotics/EgoExplorer-100",
+   "date": "2026-11-26",
+   "flow": "status"
+  },
+  {
+   "kind": "withdrawn",
+   "target": "dataset",
+   "id": "tachin_demo01",
+   "text": "TachinTactileGlove-Demo01: the Hugging Face repository returned HTTP 401 on two scans in a row and the Tachintech account no longer lists it; availability public -> unclear. The derived MIT-Media-Lab/tachin-vitra-precut-mano-v1 card still describes the 102 processed segment videos with pressure arrays.",
+   "source": "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01",
+   "date": "2026-11-26",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "vitacphys",
+   "text": "ViTacPhys: the project page shows 'Code (Coming Soon)' and 'Dataset (Coming Soon)' with no link; code not_released -> announced.",
+   "source": "https://vitacphys.github.io/ViTacPhys/",
+   "date": "2026-11-26",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "touch2trace",
+   "text": "Touch2Trace: accepted to CoRL 2026 (arXiv comment); the project website has disabled Code and Dataset buttons labelled 'not yet available'. Code not_released -> announced; project link added.",
+   "source": "https://grmmtt.github.io/corl26-touch2trace/",
+   "date": "2026-11-26",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
    "target": "dataset",
    "id": "ht_bench",
    "text": "HT-Bench: about 10M egocentric RGB and 7.8M full-hand tactile frames over 226 tasks, extending OpenTouch and EgoTouch with new recordings from an unnamed glove; release of data and weights announced, no link yet.",
