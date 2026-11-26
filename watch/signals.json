@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-25T09:39:59Z",
+ "generated": "2026-11-26T09:34:05Z",
  "baseline": false,
- "urls_checked": 349,
- "seconds": 590,
+ "urls_checked": 366,
+ "seconds": 243,
  "signals": [
   {
    "kind": "dataset",
@@ -11,7 +11,17 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://huggingface.co/front/build/kube-a955789/index.js https://huggingface.co/front/build/kube-a955789/katex.css https://huggingface.co/front/build/kube-a955789/style.css",
+   "detail": "https://huggingface.co/front/build/kube-afb3d7a/index.js https://huggingface.co/front/build/kube-afb3d7a/katex.css https://huggingface.co/front/build/kube-afb3d7a/style.css",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "tachin_demo01",
+   "name": "TachinTactileGlove-Demo01",
+   "url": "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01",
+   "priority": 1,
+   "type": "gone",
+   "detail": "HTTP 200 -> 401 on two scans in a row",
    "availability": "public"
   },
   {
@@ -21,46 +31,50 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "links_removed",
-   "detail": "https://huggingface.co/front/build/kube-461cc29/index.js https://huggingface.co/front/build/kube-461cc29/katex.css https://huggingface.co/front/build/kube-461cc29/style.css",
+   "detail": "https://huggingface.co/front/build/kube-a955789/index.js https://huggingface.co/front/build/kube-a955789/katex.css https://huggingface.co/front/build/kube-a955789/style.css",
    "availability": "public"
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "clinician_bathing"
+   "id": "ace_data_0"
   },
   {
    "kind": "dataset",
-   "id": "dexvitac"
+   "id": "dex_mptd"
   },
   {
    "kind": "dataset",
-   "id": "gist_vta"
+   "id": "egoexplorer"
   },
   {
    "kind": "dataset",
-   "id": "htac"
+   "id": "glove2hand_handsense"
   },
   {
    "kind": "dataset",
-   "id": "paxini_omnisharing"
+   "id": "kaiwu"
   },
   {
    "kind": "dataset",
-   "id": "sharpa_origami"
+   "id": "robotacdex"
   },
   {
    "kind": "dataset",
-   "id": "tacwam_wetlab"
+   "id": "tacross"
   },
   {
    "kind": "dataset",
-   "id": "tipdex_vtla"
+   "id": "talos_electrician_conduit"
   },
   {
    "kind": "dataset",
-   "id": "vicon_glove"
+   "id": "touchbench"
+  },
+  {
+   "kind": "model",
+   "id": "3dtouch"
   },
   {
    "kind": "model",
@@ -72,11 +86,11 @@
   },
   {
    "kind": "model",
-   "id": "dexflex"
+   "id": "dextouch_wm"
   },
   {
    "kind": "model",
-   "id": "ego2contact"
+   "id": "ego2real"
   },
   {
    "kind": "model",
@@ -84,7 +98,7 @@
   },
   {
    "kind": "model",
-   "id": "haco"
+   "id": "gift"
   },
   {
    "kind": "model",
@@ -124,30 +138,34 @@
   },
   {
    "kind": "model",
-   "id": "touchanything"
+   "id": "touch2trace"
   },
   {
    "kind": "model",
-   "id": "touchtwin"
+   "id": "touchbridge"
   },
   {
    "kind": "model",
-   "id": "twla"
+   "id": "touchwgnn"
   },
   {
    "kind": "model",
-   "id": "uvta"
+   "id": "unitachand"
   },
   {
    "kind": "model",
-   "id": "vitacformer"
+   "id": "vint_net"
+  },
+  {
+   "kind": "model",
+   "id": "vitacphys"
   },
   {
    "kind": "model",
    "id": "witac"
   }
  ],
- "not_fully_released": 90,
+ "not_fully_released": 94,
  "errors": [],
  "problems": [],
  "sources_failed": []

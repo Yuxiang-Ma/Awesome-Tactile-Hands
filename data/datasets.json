@@ -3693,8 +3693,8 @@
     "kind": "form",
     "approval": "not stated",
     "url": "https://huggingface.co/datasets/ACERobotics/ACE-Data-0",
-    "checked": "2026-11-02",
-    "note": "The dataset card asks for a personal access form for non-commercial academic research; the Hugging Face gate itself was off on 2026-10-16, 2026-10-18 and 2026-11-02 (API gated: false; repository last modified 2026-10-14)."
+    "checked": "2026-11-26",
+    "note": "The dataset card asks for a personal access form for non-commercial academic research; the Hugging Face gate itself was off on 2026-10-16, 2026-10-18, 2026-11-02 and 2026-11-26 (API gated: false; repository last modified 2026-10-14)."
    },
    "license": "ACE-Data-0 Research License Agreement v1.0 (non-commercial academic research only, no redistribution)",
    "caveats": [
@@ -4799,9 +4799,9 @@
     "language"
    ],
    "scale": {
-    "hours": 100,
-    "episodes": 2715,
-    "frames": null,
+    "hours": 104.8,
+    "episodes": 3130,
+    "frames": 11320870,
     "tasks": 10,
     "objects": null,
     "subjects": null,
@@ -4813,36 +4813,40 @@
      "food-preparation area",
      "study"
     ],
-    "text": "Paper: 2,715 recordings, 100 h, 10 task templates, 5 environments; touch in 41% of regular recordings (Wuji gloves). Released: mini release of 18 recordings, 118,910 frames at 30 Hz (66 min), all 10 tasks"
+    "text": "EgoExplorer-100: 3,130 episodes, 11,320,870 frames at 30 Hz (~104.8 h), 10 task categories, episodes with touch not counted. Paper: 2,715 recordings, 100 h, 10 task templates, 5 environments; touch in 41% of regular recordings (Wuji gloves). Mini release: 18 recordings, 118,910 frames (66 min)"
    },
-   "availability": "partial",
-   "access": "Hugging Face InternRobotics/EgoExplorer, gated behind a Google form that is checked automatically (access in about a minute); it holds the 66-min mini release (18 recordings, 21.1 GB), and the full collection opens in stages through a waitlist.",
+   "availability": "gated",
+   "access": "Hugging Face InternRobotics/EgoExplorer-100, gate listed as manual approval: 3,130 episodes, LeRobot v3.0, 949 GB. The same publisher's InternRobotics/EgoExplorer_OXT (1,513 episodes, zarr, 111 GB) and InternRobotics/EgoExplorer (66-min mini release, 18 recordings, 7.35 GB) are gated separately, each with a Google form that its card says is checked automatically (access in about a minute).",
    "gate": {
     "kind": "hf_gate",
     "approval": "manual",
-    "url": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
-    "checked": "2026-10-18",
-    "note": "Hugging Face lists the gate as manual approval; the gate asks for a Google form that the project says is checked automatically, with access in about a minute. It covers the 66-min mini release; the full collection opens in stages through a waitlist."
+    "url": "https://huggingface.co/datasets/InternRobotics/EgoExplorer-100",
+    "checked": "2026-11-26",
+    "note": "Hugging Face lists the EgoExplorer-100 gate as manual approval; the page asks for a log-in and agreement to share account information and names no form (read 2026-11-26; access not requested). The mini and OXT repositories, also listed as manual approval on 2026-11-26, each ask for their own Google form."
    },
-   "license": "CC BY-NC 4.0",
+   "license": "Apache-2.0 (EgoExplorer-100 card); CC BY-NC 4.0 (mini release and OXT cards)",
    "caveats": [
-    "Only the 66-min mini release (18 recordings) can be downloaded; the paper's 2,715 recordings (100 h) are opened in stages to waitlisted groups.",
-    "Touch exists only in Wuji-glove recordings: 41% of regular recordings. The MANUS recordings (58%) have finger articulation and no tactile data.",
+    "EgoExplorer-100 (created 2026-11-04, first recorded here 2026-11-26) holds 3,130 episodes and 104.8 h against the paper's 2,715 recordings and 100 h. Its card does not cite the paper or explain the difference; the publisher's Hugging Face collection 'EgoExplorer' lists it with the paper, the mini release and the OXT export.",
+    "EgoExplorer-100's card says modalities vary by episode (video, tracker poses, hand joint positions, tactile, gravity direction, SMPL-X; see valid_modalities in each metadata.json) and gives no count of episodes with touch.",
+    "Licenses differ between repositories: the EgoExplorer-100 card says Apache-2.0, the mini and OXT cards say CC BY-NC 4.0.",
+    "The mini and OXT cards still say the full collection is being opened in stages through a waitlist (read 2026-11-26).",
+    "Paper: touch exists only in Wuji-glove recordings, 41% of regular recordings. The MANUS recordings (58%) have finger articulation and no tactile data.",
     "Released taxel values are normalized readings with invalid cells masked; the paper calls them contact indicators and says they are not calibrated force or pressure. The GitHub README describes them as 'calibrated taxels'.",
     "Tactile is resampled from ~120 Hz native to the 30 Hz grid; regional contact is the logical OR of native detections inside each 1/30 s bin.",
     "Paper statistics mark the right-hand index and central-palm regions n/a: fewer than three recordings have 30% or more live taxels there.",
     "Whole-body SMPL-X is reconstructed from 5 trackers (head, wrists, ankles); 17 joints are inferred. The 18.0 mm / 20.3 mm body-point errors are measured against tracker-fitted reference labels, with no optical mocap reference.",
     "Step annotations are VLM drafts reviewed by operators; the expert audit of drafts found factual errors in 11.09% of segments before correction.",
-    "The card and paper name the video key observation.images.ego; the mini release stores it as observation.images.camera_0. The repository also holds a per-task zarr copy (dataset/oxt/EgoExplorer/<task>.zarr) that the card does not describe.",
+    "The card and paper name the video key observation.images.ego; the mini release stores it as observation.images.camera_0.",
+    "The zarr copy that the 2026-10-16 survey found in the mini repository (dataset/oxt/EgoExplorer/) returned HTTP 404 on 2026-11-26. InternRobotics/EgoExplorer_OXT holds a zarr export: 1,513 episodes, 6,183,563 frames (~57.3 h) in 11 task stores, with Wuji tactile readings over 17 hand regions.",
     "Number of participants and objects not stated.",
-    "The release files were not opened for this survey (gated, access not requested); channels come from the card, the paper and the file tree.",
-    "The code repository now sits at github.com/Sage-PhysicalAI/EgoExplorer (the GitHub API full_name on 2026-11-23; github.com/InternRobotics/EgoExplorer was the earlier address); last push 2026-10-23, 32 stars, no license reported. The Hugging Face dataset is still under InternRobotics, gate manual, last modified 2026-10-22, so the release itself is unchanged.",
-    "The project page internrobotics.github.io/egoexplorer.github.io/ returned HTTP 404 on two scans in a row, the second on 2026-11-24; the Hugging Face card, the GitHub repository and the gate were reachable the same day and no replacement project page was found, so the link is kept and availability stays partial."
+    "No release file was opened (gated, access not requested); channels come from the cards, the paper and the 2026-10-16 file tree of the mini release.",
+    "The code repository now sits at github.com/Sage-PhysicalAI/EgoExplorer (the GitHub API full_name on 2026-11-23; github.com/InternRobotics/EgoExplorer was the earlier address); last push 2026-10-23, no license reported (checked 2026-11-26).",
+    "The project page internrobotics.github.io/egoexplorer.github.io/ returned HTTP 404 on two scans in a row, the second on 2026-11-24, and again on 2026-11-26; no replacement project page was found, so the link is kept."
    ],
    "links": {
     "paper": "https://arxiv.org/abs/2610.18872",
     "project": "https://internrobotics.github.io/egoexplorer.github.io/",
-    "data": "https://huggingface.co/datasets/InternRobotics/EgoExplorer",
+    "data": "https://huggingface.co/datasets/InternRobotics/EgoExplorer-100",
     "code": "https://github.com/Sage-PhysicalAI/EgoExplorer"
    },
    "image": "https://internrobotics.github.io/egoexplorer.github.io/assets/hero-poster.jpg",
@@ -4897,16 +4901,22 @@
     "https://github.com/InternRobotics/EgoExplorer (README.md)",
     "https://wuji.tech/en/glove",
     "https://www.shlab.org.cn/ (Chinese organisation name)",
-    "https://api.github.com/orgs/InternRobotics (org description: 'from Shanghai AI Lab')"
+    "https://api.github.com/orgs/InternRobotics (org description: 'from Shanghai AI Lab')",
+    "https://huggingface.co/datasets/InternRobotics/EgoExplorer-100 (card, API metadata, tree size 948,535,955,662 B; read 2026-11-26)",
+    "https://huggingface.co/datasets/InternRobotics/EgoExplorer_OXT (card, API metadata, tree size 111,149,439,060 B; read 2026-11-26)",
+    "https://huggingface.co/api/collections?item=datasets/InternRobotics/EgoExplorer-100 (collection 'EgoExplorer'; read 2026-11-26)",
+    "https://huggingface.co/api/datasets/InternRobotics/EgoExplorer/treesize/main (7,345,010,744 B) and .../tree/main/dataset/oxt (HTTP 404), read 2026-11-26"
    ],
    "unconfirmed": [
-    "Mini release counts (18 episodes, 118,910 frames, 66 min) are the card's; the files are gated and were not opened. The tree has 18 episode_meta folders (episode_000001-000018), 18 data shards and 18 camera_0 MP4s.",
+    "hours=104.8, episodes=3,130 and frames=11,320,870 are the EgoExplorer-100 card's figures (377,258 s); its files are gated and were not opened.",
+    "That EgoExplorer-100 is the paper's collection rests on the name, the publisher, the 10 task categories and the Hugging Face collection that lists it with arXiv 2610.18872; its card does not say so. scenes=5 and scene_types are the paper's.",
+    "Mini release counts (18 episodes, 118,910 frames, 66 min) are the card's; the files are gated and were not opened. The tree read on 2026-10-16 had 18 episode_meta folders (episode_000001-000018), 18 data shards and 18 camera_0 MP4s.",
     "One episode per shard is inferred: data/chunk-000/file-i.parquet, videos/.../file-i.mp4 and episode_meta/episode_(i+1)/smplx_episode.npz sizes rise and fall together (video/data ratio 35-62). The card says a shard may hold several episodes.",
     "Episode lengths estimated from MP4 sizes at the mean bitrate (7.0 GB over 66 min): ~50 s (file-004, 87 MB) to ~440 s (file-008, 781 MB); mean ~3.7 min.",
     "That all 18 mini-release recordings carry Wuji tactile follows from the card ('every one with all four streams', '24x31 Wuji tactile per hand'); not checked in the files.",
     "In the card, the mini release keeps 17-region contact under episode_meta/<episode>/, while the paper's Table 9 puts it in every row; episode_meta holds annotations/, calibration/, metadata.json, quality/ and smplx/ only, so it is not clear which file carries contact.",
     "Hand representation: paper Table 9 gives 2 x 45 SMPL-X finger rotations per row; the card's mini-release list says both hands' 21-joint skeletons; the paper's fitting keeps 20 non-wrist landmarks from a 25-node glove layout.",
-    "The zarr copy (dataset/oxt/EgoExplorer/, one group per task, ~13.7 GB) has arrays camera_ego_rgb, camera_ego_pose, left/right_wrist_pose, left/right_hand_pose, left/right_hand_joints(_idx), left/right_tactile_{data,sensor,type,area}_wuji each with _contact and _score variants, sub_task_instruction, timestamps and meta/episode_ends. Shapes, rates and meanings were not read (gated) and are not documented.",
+    "The zarr copy seen on 2026-10-16 and gone on 2026-11-26 (dataset/oxt/EgoExplorer/, one group per task, ~13.7 GB) had arrays camera_ego_rgb, camera_ego_pose, left/right_wrist_pose, left/right_hand_pose, left/right_hand_joints(_idx), left/right_tactile_{data,sensor,type,area}_wuji each with _contact and _score variants, sub_task_instruction, timestamps and meta/episode_ends. Shapes, rates and meanings were not read (gated) and are not documented.",
     "120 Hz is the manufacturer's nominal glove rate (paper Table 8); per-recording timing follows native timestamps.",
     "Taxel count: the Wuji product page states '24 x 31 Pressure Sensor Matrix (526 active points)'; the paper says its health mask, estimated from earlier recordings, retains 526 of 744 taxels. Sensing principle not stated by either.",
     "Coverage 'phalanx' comes from the paper's 17-region map (3 regions on each non-thumb finger); the maker page states only full palm coverage.",
@@ -4917,9 +4927,9 @@
    ],
    "used_by_other": [
     {
-     "name": "InternRobotics/EgoExplorer-oxt (Hugging Face dataset)",
-     "url": "https://huggingface.co/datasets/InternRobotics/EgoExplorer-oxt",
-     "note": "separate repository by the same publisher (created 2026-10-17): one EgoExplorer folder, 25.5 GB, CC BY-NC 4.0, tagged zarr, tactile, hand-pose and arxiv:2610.18872; Hugging Face gate with manual approval per the HF API (2026-10-27); card body and files not read"
+     "name": "InternRobotics/EgoExplorer_OXT (Hugging Face dataset)",
+     "url": "https://huggingface.co/datasets/InternRobotics/EgoExplorer_OXT",
+     "note": "zarr export by the same publisher (created 2026-10-17, last modified 2026-11-25): 1,513 episodes, 6,183,563 frames at 30 Hz (~57.3 h) in 11 task stores, 111 GB, CC BY-NC 4.0; Google form and Hugging Face gate; card read 2026-11-26, files not opened"
     }
    ],
    "zh": {
@@ -9317,10 +9327,12 @@
     ],
     "text": "102 processed segments (54,237 frames at 30 fps, 30.1 min) cut from 31 of 34 raw sessions (37.9 min of video), 11 motion categories, 31 task recordings; card says about 1 h"
    },
-   "availability": "public",
-   "access": "Hugging Face Tachintech/TachinTactileGlove-Demo01, ungated, 4.1 GB: 102 per-segment LeRobot v3 ZIPs (5-119 MB each) under Processed/<category>/ and 34 raw sessions under Origin/.",
+   "availability": "unclear",
+   "access": "Hugging Face Tachintech/TachinTactileGlove-Demo01 returned HTTP 401 on 2026-11-26. When surveyed it was ungated, 4.1 GB: 102 per-segment LeRobot v3 ZIPs (5-119 MB each) under Processed/<category>/ and 34 raw sessions under Origin/.",
    "license": "GPL-3.0",
    "caveats": [
+    "Withdrawn or made private, seen 2026-11-26: the repository went from HTTP 200 to 401 on two scans in a row, its page, file listing and commit history refused an anonymous request, and the Tachintech account's dataset list showed 3 other datasets and not this one. No notice or replacement was found on that account, on the Tachin-TachinTech account, on the tachin.com/en home and downloads pages or in two web searches.",
+    "MIT-Media-Lab/tachin-vitra-precut-mano-v1 (GPL-3.0, ungated on 2026-11-26) states on its card that it holds the 102 processed segment videos with fitted MANO hand poses and two (T, 880) pressure arrays; the card says the 3 raw sessions without a processed segment are not included. Its files were not opened.",
     "Small: 102 segments of 1.5-62.5 s (median 12.8 s) recorded on one day (2026-07-10, 16:26-17:38) at one desk, with two glove pairs (two MAC address pairs) and overlapping session times, so likely two stations; the number of subjects is not stated.",
     "Hand pose and camera pose are estimated from the egocentric video (21 OpenPose-style joints, 16 joint rotation matrices per hand, SLAM camera trajectory); there is no hand-tracking hardware. Joints are in the camera frame at raw SLAM scale.",
     "Task names and descriptions (meta/segment_info.json) are in Chinese only; folder names give 11 English motion categories (Fold, Grasp, Plug&Unplug, Pour, Press, Push&Pull, Scroll, Squeeze, Tighten a screw, Twist the bottle cap, Wipe). Launch press describes the release as covering 20 task categories.",

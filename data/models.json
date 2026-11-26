@@ -145,7 +145,7 @@
     "dataset null: the paper does not describe the public HumanTouch release as its data, although the authors overlap (HumanTouch's first author Chuqiao Lyu is a co-author). The release's 10-task and 17,608-episode counts used here come from the catalog's humantouch entry.",
     "Venue from the arXiv comment 'Accept to IROS 2026 Workshop RoBoWoMo (Lightning Talk)'."
    ],
-   "checked": "2026-10-31"
+   "checked": "2026-11-26"
   },
   {
    "id": "dtwm",
@@ -514,7 +514,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the project page still reads 'Software release coming soon' and links only the hardware-v1 release; a web search found no repository."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "tactalign",
@@ -1024,7 +1024,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: grasplikehuman.github.io still offers only the dataset zip and the paper (a 'Dataset (Coming soon)' line is commented out in the page); a web search found no code or weights."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "vt_jointpretrain",
@@ -1191,7 +1191,7 @@
     "https://huggingface.co/api/datasets/vint6d/vint6d/tree/main"
    ],
    "unconfirmed": [],
-   "checked": "2026-11-01"
+   "checked": "2026-11-26"
   },
   {
    "id": "tdex",
@@ -1551,7 +1551,7 @@
     "Re-checked 2026-11-03: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page still says 'Code will be released at github.com/seungjun-moon/rlhnd'.",
     "Re-checked 2026-11-23: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page text still says 'Code will be released at github.com/seungjun-moon/rlhnd'."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "dexskills",
@@ -1827,7 +1827,7 @@
     "The paper names the framework ExoBridge and gives no separate name for the network; the catalog uses ExoBridge for both the data and the model.",
     "A companion policy on an XHand (12 DoF) on a Franka arm reached 0.80 on egg carton opening and 0.55 on lid twisting over 20 rollouts each; how the bridge's outputs feed that policy was not read in detail."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "dexflex",
@@ -1898,7 +1898,7 @@
     "WiseGlove maker and the glove's sensing principle not stated; the real Shadow Hand carries 19 force-sensitive resistors on fingertips, finger links and palm read at 1 kHz and binarized.",
     "Simulation average success over the two tasks is 86.2% against 75.8% for the baseline the paper calls VTDexManip; the VTDexManip data were not used to train OccluDex itself."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "hutact",
@@ -2163,7 +2163,7 @@
     "No venue appears in the sources read; the arXiv record lists none.",
     "The released demonstrations (6 tasks x 6 demonstrations per the README, against one per task in the paper) were not opened and are not catalogued as a dataset; their tactile content is not confirmed."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "unitachand",
@@ -2200,7 +2200,7 @@
     "The last 6,752 characters of the arXiv HTML (end of appendix, references) were not read.",
     "Re-checked 2026-11-01: the project page links github.com/BeingBeyond/UniTacHand, whose last push is still 2025-12-25 and whose top level is still README.md and docs/."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-26"
   },
   {
    "id": "touchbridge",
@@ -2241,7 +2241,7 @@
     "License: the repository has no LICENSE file in its top-level listing and the GitHub API reports none; THIRD_PARTY.md covers only SAM2, SAM3 and ProPainter (the last under the non-commercial S-Lab License 1.0). The licence of TouchBridge's own code is therefore 'not stated'.",
     "arXiv v2 (2026-11-17) was not diffed against v1; the v2 abstract read on 2026-11-23 gives the same headline results as the summary (72.5% against 77.5%, collection 7.0x faster, +25.0 and +42.5 points over DexPilot and UniDex)."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-26"
   },
   {
    "id": "touch_jepa",
@@ -2444,7 +2444,7 @@
     "The 709 training demonstrations come from the paper; the public release holds 760 DFTP episodes for the same five tasks plus 111 F1 lab episodes that the paper does not report.",
     "The project page lists IROS 2026; the arXiv record has no venue."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "tactile_jepa",
@@ -2534,7 +2534,7 @@
     "Only the abstract and search-result excerpts were read; the 8-cluster view construction and ResNet-18 backbone come from search excerpts of the paper, not from the full text.",
     "Year 2022 is the arXiv submission (March 2022); the IEEE ISPCC version is dated 2025."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "touchtwin",
@@ -2780,7 +2780,7 @@
     "code 'announced': the paper points to an anonymous page for code that could not be reached.",
     "How HumanTouch's 320-360 taxels per hand were mapped to the 290-taxel canonical layout was not read."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "haco",
@@ -2851,7 +2851,7 @@
     "The hand model and tactile maker are not named; the affiliations (Shanghai Innovation Institute, Agibot) suggest an Agibot hand.",
     "touch 'both': future tactile prediction is a training objective; tactile signals are a policy input."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "witac",
@@ -2892,7 +2892,7 @@
     "The spatial tactile backbone is initialised from the 'SharpaWave Deform Encoder'; whether that encoder is public was not checked.",
     "Authors are from Sharpa Robotics, PKU, SJTU, ShanghaiTech and CUHK (project page)."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "ptld",
@@ -2928,7 +2928,7 @@
     "code 'announced': a Code link exists but the repository was not reachable.",
     "On cube rotation the paper's table gives the AAC teacher a higher rotation reward (17.3) than PTLD (4.5), while the text says PTLD outperforms it."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "tf2_steering",
@@ -3210,7 +3210,7 @@
     "Training is in simulation; recorded XELA touch enters through the calibration contacts and real-world evaluation, following the PTLD-style sim-to-real precedent.",
     "The taxel count per sensor and the sensor rate are not stated in the text read."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "tacforcing",
@@ -3275,7 +3275,7 @@
    "unconfirmed": [
     "The tactile sensor maker and rate are not stated; 120 three-axis taxels per finger is the paper's figure for the XHand."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-26"
   },
   {
    "id": "cgp",
@@ -3642,27 +3642,31 @@
    "title": "Touch2Trace: Tactile-Driven Imitation Learning for Dexterous Cable Tracing",
    "authors": "Matteo Grimaldi et al.",
    "year": 2026,
-   "venue": "arXiv 2609.15921",
+   "venue": "CoRL 2026 (arXiv 2609.15921)",
    "kind": "policy",
    "summary": "Causal GPT-style behavior-cloning policy with a Gaussian-mixture head that takes 8 joint positions and two 32x32 piezoresistive TacV5 pressure images (thumb, index; 60 Hz) through a frozen 1.6M-parameter ViT-MAE encoder and outputs joint targets for a Tesollo DG-5F hand; it traces Ethernet cable 20.1 cm on average with 93% SR@10 against 0.2 cm and 0% for proprioception only.",
    "embodiment": "robot",
    "touch": "input",
    "uses": [],
-   "own_data": "16 teleoperated demonstrations (about 14 min; 12 train, 4 validation); encoder pretrained on about 2M simulated contact frames over 72 objects and about 30K real frames from a TacV5-equipped UMI gripper; release not stated.",
+   "own_data": "16 teleoperated demonstrations (about 14 min; 12 train, 4 validation); encoder pretrained on about 2M simulated contact frames over 72 objects and about 30K real frames from a TacV5-equipped UMI gripper; the project website's 'Dataset' button is disabled and labelled 'Dataset is not yet available' (read 2026-11-26).",
    "dataset": null,
    "release": {
-    "code": "not_released",
+    "code": "announced",
     "weights": "not_released",
-    "note": "The arXiv text has no release statement, code link or project page (read 2026-11-26)."
+    "note": "The project website grmmtt.github.io/corl26-touch2trace has a disabled 'Code' button labelled 'Code is not yet available' and no weights statement. The arXiv text has no release statement or code link (read 2026-11-26)."
    },
    "license": "not stated",
    "links": {
-    "paper": "https://arxiv.org/abs/2609.15921"
+    "paper": "https://arxiv.org/abs/2609.15921",
+    "project": "https://grmmtt.github.io/corl26-touch2trace/"
    },
    "sources": [
-    "https://arxiv.org/html/2609.15921 (hand, sensor, encoder pretraining, demonstrations, results)"
+    "https://arxiv.org/html/2609.15921 (hand, sensor, encoder pretraining, demonstrations, results)",
+    "arXiv API record for 2609.15921 (comment 'Accepted to CoRL 2026'; read 2026-11-26)",
+    "https://grmmtt.github.io/corl26-touch2trace/ and https://github.com/grmmtt/corl26-touch2trace (index.html button markup, repository description; read 2026-11-26)"
    ],
    "unconfirmed": [
+    "The arXiv text does not link the project website. It is taken as the authors' page because it lists the paper's authors, links arXiv 2609.15921 and an OpenReview PDF labelled CoRL 2026, and its repository description reads 'Project website for Touch2Trace, accepted at CoRL 2026'.",
     "The hand is fixed without an arm and the policy controls 8 of 20 DoF; ring and pinky are held still.",
     "TacV5 is also mounted on the middle fingertip, which the policy does not use."
    ],
@@ -3680,12 +3684,12 @@
    "embodiment": "human",
    "touch": "input",
    "uses": [],
-   "own_data": "1,800 human grasping demonstrations by one participant over 60 rigid and deformable objects in seven categories (fingertip pressure arrays, wrist RGB, mocap markers); release not stated.",
+   "own_data": "1,800 human grasping demonstrations by one participant over 60 rigid and deformable objects in seven categories (fingertip pressure arrays, wrist RGB, mocap markers); the project page shows 'Dataset (Coming Soon)' with no link (read 2026-11-26).",
    "dataset": null,
    "release": {
-    "code": "not_released",
+    "code": "announced",
     "weights": "not_released",
-    "note": "The arXiv text gives the project page vitacphys.github.io/ViTacPhys but no code or data link and no release statement (read 2026-11-26)."
+    "note": "The project page vitacphys.github.io/ViTacPhys, given in the arXiv comment, shows 'Code (Coming Soon)' and 'Dataset (Coming Soon)' with no link and no weights statement. The arXiv text has no code or data link or release statement (read 2026-11-26)."
    },
    "license": "not stated",
    "links": {
@@ -3693,7 +3697,8 @@
     "project": "https://vitacphys.github.io/ViTacPhys/"
    },
    "sources": [
-    "https://arxiv.org/html/2608.21355 (sensing setup, data, inputs and outputs, results; first 100,000 of 103,937 characters)"
+    "https://arxiv.org/html/2608.21355 (sensing setup, data, inputs and outputs, results; first 100,000 of 103,937 characters)",
+    "https://vitacphys.github.io/ViTacPhys/ (release labels and dataset section; read 2026-11-26)"
    ],
    "unconfirmed": [
     "The fingertip pressure-array maker and taxel count are not stated; 180x40 is the tactile input size.",
