@@ -1,17 +1,17 @@
 {
  "id": "tipdex_vtla",
- "surveyed": "2026-11-23",
+ "surveyed": "2026-11-27",
  "entry": {
   "id": "tipdex_vtla",
   "name": "TipDex-VTLA demonstrations",
-  "title": "TipDex-VTLA: Learning When to Refine Actions with Touch for Dexterous Manipulation",
+  "title": "TipDex-VTLA: Learning to Refine Actions with Visual Reliability and Tactile Feedback for Dexterous Manipulation",
   "authors": "Xudi Ge et al.",
   "year": 2026,
   "venue": "arXiv 2611.25683",
-  "summary": "300 teleoperated demonstrations of four bimanual tasks (Egg Transfer, Grape Pinching, Tissue Extraction, Mung Bean Pouring) on two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands, each carrying eight piezoresistive arrays with 364 taxels over five fingertips and three palm regions at 30 Hz, with one overhead and two wrist RGB cameras.",
+  "summary": "50 released Egg Transfer demonstrations plus 50 synthetic lighting variants of them (94,172 frames in all, nominally 30 fps) from a right 7-DoF arm with a 6-DoF Inspire hand, with 364 raw tactile words per frame and three 224x224 RGB views; the paper reports 300 demonstrations over four tasks on two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands, each with eight piezoresistive arrays (364 taxels).",
   "embodiment": "robot",
-  "hand": "Inspire RH56F2-E2-T1 x 2 on two RealMan RM75 arms",
-  "bimanual": true,
+  "hand": "Inspire 6-DoF hand on a right 7-DoF arm in the release (metadata: right_7dof_inspire_f1_6dof); the paper names Inspire RH56F2-E2-T1 x 2 on two RealMan RM75 arms",
+  "bimanual": false,
   "sensor": {
    "type": "piezoresistive",
    "taxels_per_hand": 364,
@@ -20,7 +20,7 @@
     "palm"
    ],
    "rate_hz": 30,
-   "note": "Eight piezoresistive arrays per hand (five fingertip regions, three palm regions), 364 taxels per hand.",
+   "note": "Paper: eight piezoresistive arrays per hand (five fingertip regions, three palm regions), 364 taxels per hand, sampled at 30 Hz. Release: observation.tactile.right, uint16 (364) raw transport words in SDK register order, with validity flags and timestamps; the metadata assumes no force conversion or spatial layout and says sensor refresh rate and force units are not verified. From the dataset card and meta/info.json; data files not opened.",
    "maker": null,
    "model": null,
    "principle": "piezoresistive",
@@ -34,26 +34,34 @@
   ],
   "scale": {
    "hours": null,
-   "episodes": 300,
-   "frames": null,
-   "tasks": 4,
+   "episodes": 50,
+   "frames": 47086,
+   "tasks": 1,
    "objects": null,
    "subjects": null,
    "scenes": null,
    "scene_types": [
     "lab"
    ],
-   "text": "300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2); per-task counts and hours not stated"
+   "text": "Released: 50 original Egg Transfer episodes (47,086 frames, derived) plus 50 synthetic lighting variants, 100 episodes and 94,172 frames in all; the paper reports 300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2)"
   },
-  "availability": "announced",
-  "access": "The paper states 'We will release the collected data and source code.'; no link is given (checked 2026-11-23).",
-  "license": "not stated",
+  "availability": "partial",
+  "access": "Hugging Face TipDex-VTLA/TipDex-Data, ungated (7.7 GB by the Hugging Face API; LeRobot v2.1 parquet with embedded images; uploaded 2026-11-19, last changed 2026-11-20; seen 2026-11-27). The project page says 'The public release covers Egg Transfer'; data for Grape Pinching, Tissue Extraction and Mung Bean Pouring was not found.",
+  "license": "not stated (code: Apache-2.0)",
   "caveats": [
-   "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it.",
-   "Per-task demonstration counts, episode length and storage format are not stated."
+   "A subset: 50 original episodes of one task (Egg Transfer, 'Move the egg into the box.'), against 300 demonstrations over four tasks in the paper.",
+   "Half of the 100 episodes are synthetic: episode i+50 is episode i with perturbed RGB (low or strong exposure, directional light, moving shadow, uneven camera light) and the same non-image data; the card says they are not additional physical demonstrations.",
+   "Touch in the release is 364 raw uint16 words from the right hand; the card calls them 'not a verified physical taxel/pressure map'.",
+   "The release records one right arm and hand (13-D action, 19-D state) and its metadata names an Inspire F1 hand, while the paper describes two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands.",
+   "No data license: the card says 'No new license is granted by this packaging operation; consult the data owner for reuse permission.'",
+   "The card says one split training source and all 8 development and 4 final-evaluation recordings are excluded, raw MCAP files are not bundled, and task success has not been re-judged.",
+   "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it."
   ],
   "links": {
-   "paper": "https://arxiv.org/abs/2611.25683"
+   "paper": "https://arxiv.org/abs/2611.25683",
+   "project": "https://tiplab.github.io/TipDex-VTLA/",
+   "data": "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data",
+   "code": "https://github.com/tiplab/TipDex-VTLA"
   },
   "setup": {
    "cameras": [
@@ -62,8 +70,8 @@
      "count": 1,
      "model": "Intel RealSense D405",
      "type": "RGB",
-     "resolution": null,
-     "fps": null,
+     "resolution": "224x224",
+     "fps": 30,
      "mount": "static"
     },
     {
@@ -71,8 +79,8 @@
      "count": 2,
      "model": "Intel RealSense D435i",
      "type": "RGB",
-     "resolution": null,
-     "fps": null,
+     "resolution": "224x224",
+     "fps": 30,
      "mount": "wrist"
     }
    ],
@@ -82,8 +90,8 @@
     {
      "target": "fingers",
      "method": "robot_proprioception",
-     "system": "RealMan RM75 (7 DoF) arms and Inspire RH56F2-E2-T1 hands",
-     "note": "teleoperation method not read"
+     "system": "Inspire 6-DoF hand and 7-DoF arm joint states",
+     "note": "released data covers the right arm and hand; teleoperation method not read"
     }
    ],
    "other": [
@@ -91,29 +99,103 @@
    ]
   },
   "sources": [
-   "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19)",
-   "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)"
+   "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19; v2 2026-11-22)",
+   "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)",
+   "https://arxiv.org/html/2611.25683v2 (hardware, tactile arrays and demonstration total reread 2026-11-27)",
+   "https://tiplab.github.io/TipDex-VTLA/ (release scope and links; read 2026-11-27)",
+   "https://github.com/tiplab/TipDex-VTLA (repository metadata and README; read 2026-11-27)",
+   "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data (README.md, meta/info.json, API metadata, top-level listing, commit history; read 2026-11-27)"
   ],
   "unconfirmed": [
    "The tactile maker is not stated; the hand model RH56F2-E2-T1 suggests Inspire's own sensors, which the paper does not say. The catalog's RH56F1 record (8 capacitive sites per hand) does not match the 364 piezoresistive taxels given here, so no hardware link was made.",
-   "'language' in modalities: the policy takes a language instruction; how it is stored in the release is unknown.",
-   "Camera frame rates and resolutions not read; depth from the RealSense cameras is not mentioned as recorded."
+   "frames = 47,086 is half of the card's 94,172, since the 50 variants pair one to one with the 50 originals; about 26 minutes at the nominal 30 fps.",
+   "Coverage 'tip' and 'palm' and the piezoresistive principle come from the paper; the release assigns its 364 words no anatomical positions.",
+   "Camera models are the paper's; 224x224 and 30 fps are the released image size and nominal rate. Which camera model recorded each released view is not stated. Depth is not in the release metadata."
   ]
  },
  "license": {
   "name": "not stated",
   "redistribution": "not_stated",
-  "quote": null,
-  "url": null
+  "quote": "No new license is granted by this packaging operation; consult the data owner for reuse permission.",
+  "url": "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data"
  },
  "download": {
-  "where": null,
-  "access": "none",
-  "format": null,
-  "total_size": null,
-  "per_episode": null,
+  "where": "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data",
+  "access": "open",
+  "format": "LeRobot v2.1: parquet under data/chunk-000/ with embedded images; meta/episode_sources.jsonl and provenance/pairs.jsonl map each episode to its source recording; nine raw stream sidecars per source under meta/raw_streams/.",
+  "total_size": "7.7 GB (Hugging Face API)",
+  "per_episode": "about 77 MB on average (7.7 GB / 100), derived",
   "partial_fetch": null
  },
- "channels": [],
- "episode_index": null
+ "channels": [
+  {
+   "name": "observation.images.top, left_wrist, right_wrist",
+   "kind": "camera",
+   "shape": "(224, 224, 3) x 3",
+   "rate_hz": 30,
+   "unit": "RGB image",
+   "frame": "overhead and two wrist views",
+   "note": "from the dataset card and meta/info.json; files not opened"
+  },
+  {
+   "name": "observation.tactile.right",
+   "kind": "tactile_grid",
+   "shape": "(364,)",
+   "rate_hz": 30,
+   "unit": "raw uint16 words",
+   "frame": "SDK register order, no spatial layout",
+   "note": "30 is the dataset frame rate; sensor refresh rate not verified. From the dataset card and meta/info.json; files not opened"
+  },
+  {
+   "name": "observation.state",
+   "kind": "joint_state",
+   "shape": "(19,)",
+   "rate_hz": 30,
+   "unit": "rad and m",
+   "frame": "right arm 7 joints, hand 6 joints, end-effector xyz and roll, pitch, yaw",
+   "note": "from meta/info.json; files not opened"
+  },
+  {
+   "name": "action",
+   "kind": "action",
+   "shape": "(13,)",
+   "rate_hz": 30,
+   "unit": "rad",
+   "frame": "next measured right arm and hand joint positions",
+   "note": "from meta/info.json; files not opened"
+  },
+  {
+   "name": "observation.command",
+   "kind": "action",
+   "shape": "(13,)",
+   "rate_hz": 30,
+   "unit": "not stated",
+   "frame": "filtered targets issued to the right arm and hand, kept for audit",
+   "note": "from meta/info.json; files not opened"
+  },
+  {
+   "name": "task",
+   "kind": "language",
+   "shape": "one string",
+   "rate_hz": null,
+   "unit": null,
+   "frame": null,
+   "note": "'Move the egg into the box.'; from the dataset card; files not opened"
+  }
+ ],
+ "episode_index": {
+  "where": "meta/episode_sources.jsonl and provenance/pairs.jsonl",
+  "count": 100,
+  "fields": [
+   "source recording",
+   "episode ID",
+   "lighting recipe",
+   "seed",
+   "file hashes"
+  ],
+  "tasks": [
+   "egg transfer: Move the egg into the box."
+  ],
+  "scenes": null
+ }
 }

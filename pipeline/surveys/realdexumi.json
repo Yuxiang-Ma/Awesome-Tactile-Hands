@@ -1,0 +1,185 @@
+{
+ "id": "realdexumi",
+ "surveyed": "2026-11-27",
+ "entry": {
+  "id": "realdexumi",
+  "name": "RealDexUMI",
+  "title": "RealDexUMI: A Wearable Universal Manipulation Interface for Dexterous Robot Learning",
+  "authors": "Chaoyi Xu et al.",
+  "year": 2026,
+  "venue": "CoRL 2026 (arXiv 2606.06033)",
+  "summary": "Over 100 h of demonstrations (more than 200 episodes per task, more than eight tasks) recorded with a wearable module: an 11-DoF dexterous hand with piezoresistive fingertip arrays (20 Hz), an in-hand RGB camera (30 Hz) and a 6-DoF tracker, driven by the operator through a palm-side isomorphic glove; the dataset used in the experiments is announced.",
+  "embodiment": "robot",
+  "hand": "RealDexUMI hand (11 DoF, 6 actuated), carried by the operator and driven through a palm-side isomorphic glove; the same module is mounted on a Franka FR3 for deployment",
+  "bimanual": true,
+  "sensor": {
+   "type": "piezoresistive",
+   "taxels_per_hand": null,
+   "sensors_per_hand": null,
+   "coverage": [
+    "tip"
+   ],
+   "rate_hz": 20,
+   "note": "Piezoresistive tactile array on each fingertip; the policy's tactile input is 5x10x4. Maker, taxels per fingertip and units not stated. Described in the paper; no files released.",
+   "maker": "not stated",
+   "model": null,
+   "principle": "piezoresistive",
+   "range": null,
+   "calibrated": null
+  },
+  "modalities": [
+   "wrist_rgb",
+   "robot_action"
+  ],
+  "scale": {
+   "hours": 100,
+   "episodes": null,
+   "frames": null,
+   "tasks": 8,
+   "objects": null,
+   "subjects": null,
+   "scenes": null,
+   "scene_types": [],
+   "text": "over 100 h, more than 200 episodes per task over more than eight tasks (eight evaluated, one bimanual); not released"
+  },
+  "availability": "announced",
+  "access": "Section 3.4 of the paper states the authors 'will release the collected dataset used in our experiments'; no link on the arXiv page or the project page research.beingbeyond.com/realdexumi (read 2026-11-27).",
+  "license": "not stated",
+  "caveats": [
+   "Not released: the numbers come from the paper, and no file was seen.",
+   "The robot hand touches the objects; the operator's own hand is inside a palm-side glove that sends press-and-release commands, so the touch is robot-side.",
+   "Total episodes, operator count and objects are not reported; 'over 100 hours' and 'more than 200 episodes per task' are the paper's wording.",
+   "Hand, tactile sensor, camera and tracker makers are not named."
+  ],
+  "links": {
+   "paper": "https://arxiv.org/abs/2606.06033",
+   "project": "https://research.beingbeyond.com/realdexumi"
+  },
+  "setup": {
+   "cameras": [
+    {
+     "role": "wrist",
+     "count": 1,
+     "model": null,
+     "type": "RGB",
+     "resolution": "256x256 (policy input, resized)",
+     "fps": 30,
+     "mount": "wrist"
+    }
+   ],
+   "wrist_cameras": 1,
+   "depth": false,
+   "tracking": [
+    {
+     "target": "wrist",
+     "method": "other",
+     "system": "6-DoF tracker rigidly mounted on the hand module (system not named)",
+     "note": "gives hand-frame pose for relative-motion labels; not a policy input"
+    },
+    {
+     "target": "fingers",
+     "method": "robot_proprioception",
+     "system": "measured joint state of the 6 actuated hand joints",
+     "note": "recorded together with the glove commands"
+    },
+    {
+     "target": "fingers",
+     "method": "teleop_glove",
+     "system": "palm-side isomorphic glove",
+     "note": "press-and-release finger inputs mapped to linear hand commands"
+    }
+   ],
+   "other": []
+  },
+  "sources": [
+   "https://arxiv.org/abs/2606.06033 (abstract via arXiv metadata)",
+   "https://arxiv.org/html/2606.06033 (hardware, Table 4 rates, data scale, Section 3.4 release statement, results; v2)",
+   "https://research.beingbeyond.com/realdexumi (CoRL 2026 acceptance, system overview; read 2026-11-27)"
+  ],
+  "unconfirmed": [
+   "hours = 100 is the paper's lower bound ('over 100 hours').",
+   "tasks = 8 counts the evaluated tasks; the paper says data covers 'more than eight' tasks.",
+   "The 5x10x4 tactile input may be five fingertips with 10x4 taxels each; the paper does not say, so taxels_per_hand is left null.",
+   "Tactile 20 Hz and camera 30 Hz are the 'typical' rates in Table 4."
+  ]
+ },
+ "license": {
+  "name": "not stated",
+  "redistribution": "not_stated",
+  "quote": null,
+  "url": "https://arxiv.org/html/2606.06033"
+ },
+ "download": {
+  "where": null,
+  "access": "none",
+  "format": null,
+  "total_size": null,
+  "per_episode": null,
+  "partial_fetch": null
+ },
+ "channels": [
+  {
+   "name": "fingertip tactile (per paper; no release)",
+   "kind": "tactile_grid",
+   "shape": "5x10x4 (policy input)",
+   "rate_hz": 20,
+   "unit": "not stated",
+   "frame": "robot hand fingertips",
+   "note": "described in the paper, not checked against files"
+  },
+  {
+   "name": "in-hand RGB (per paper)",
+   "kind": "camera",
+   "shape": "256x256x3 (policy input)",
+   "rate_hz": 30,
+   "unit": null,
+   "frame": "camera on the hand module",
+   "note": null
+  },
+  {
+   "name": "hand joint state (per paper)",
+   "kind": "joint_state",
+   "shape": "(6,)",
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "actuated hand joints",
+   "note": null
+  },
+  {
+   "name": "glove commands (per paper)",
+   "kind": "action",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "hand action space",
+   "note": "paired with measured joint state"
+  },
+  {
+   "name": "6-DoF tracker pose (per paper)",
+   "kind": "hand_pose",
+   "shape": null,
+   "rate_hz": null,
+   "unit": "not stated",
+   "frame": "hand module",
+   "note": "used to build hand-frame relative motion labels"
+  }
+ ],
+ "episode_index": {
+  "where": null,
+  "count": null,
+  "fields": [
+   "task"
+  ],
+  "tasks": [
+   "cube pick-and-place",
+   "multi-object grasping",
+   "plug insertion",
+   "cap twisting",
+   "tea picking with tweezers",
+   "drawer stowing",
+   "egg carton handling",
+   "bimanual package scanning"
+  ],
+  "scenes": []
+ }
+}

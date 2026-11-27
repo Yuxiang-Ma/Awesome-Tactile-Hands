@@ -1,0 +1,10 @@
+{"date": "2026-11-27", "flow": "status", "changes": [
+  {"kind": "released", "target": "dataset", "id": "tipdex_vtla",
+   "text": "TipDex-VTLA demonstrations: TipDex-VTLA/TipDex-Data is on Hugging Face, ungated, with 50 original Egg Transfer episodes and 50 synthetic lighting variants (94,172 frames, 7.7 GB, no data license); the paper reports 300 demonstrations over four tasks. Availability announced -> partial.",
+   "source": "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data"},
+  {"kind": "released", "target": "model", "id": "tipdex_vtla",
+   "text": "TipDex-VTLA: inference code (github.com/tiplab/TipDex-VTLA, Apache-2.0) and the Egg Transfer checkpoints (TipDex-VTLA/TipDex-VTLA, 11.6 GB, Apache-2.0 and Gemma terms) are out; code announced -> released, weights not released -> released.",
+   "source": "https://github.com/tiplab/TipDex-VTLA"},
+  {"kind": "updated", "target": "dataset", "id": "htd",
+   "text": "Humanoid Touch Dream (HTD): the Open-X-Tactile repository chrisyrniu/HTD is now chrisyrniu/HumanoidTouchDream_OXT, and on 2026-11-26 its episode ZIPs moved to six folders under HumanoidTouchDream_OXT/; the card still gives 871 episodes, 994,778 frames and about 388 GB.",
+   "source": "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT"}]}

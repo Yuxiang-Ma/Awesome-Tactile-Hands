@@ -1,6 +1,6 @@
 {
  "id": "htd",
- "surveyed": "2026-11-03",
+ "surveyed": "2026-11-27",
  "entry": {
   "id": "htd",
   "name": "Humanoid Touch Dream (HTD)",
@@ -47,7 +47,7 @@
    "text": "871 episodes, 994,778 frames at about 30 Hz, 6 tasks (book 162, insert-T 208, litter scooping 163, tea serving 77, towel folding 150 on DFTP hands; lab cleanup 111 on F1 hands); paper trains on 193 / 150 / 141 / 153 / 72 demonstrations for its five DFTP tasks"
   },
   "availability": "public",
-  "access": "Two ungated Hugging Face releases under CC BY 4.0: chrisyrniu/HTD (Open-X-Tactile Zarr v2, one ZIP per episode, about 388 GB, with a per-episode manifest) and chrisyrniu/humanoid-touch-dream (repaired source HDF5 plus MP4 videos, about 391 GB).",
+  "access": "Two ungated Hugging Face releases under CC BY 4.0: chrisyrniu/HumanoidTouchDream_OXT, renamed from chrisyrniu/HTD (Open-X-Tactile Zarr v2, one ZIP per episode, about 388 GB, with a per-episode manifest) and chrisyrniu/humanoid-touch-dream (repaired source HDF5 plus MP4 videos, about 391 GB).",
   "license": "CC BY 4.0",
   "caveats": [
    "Two hand types with different touch: the five DFTP tasks have 1,062-taxel arrays, the lab-cleanup task (F1 hands) has 37 capacitive features per hand. The source release's card says the F1 lab recordings contain informative tactile data; it does not say the same of the DFTP recordings.",
@@ -60,7 +60,7 @@
   "links": {
    "paper": "https://arxiv.org/abs/2604.13015",
    "project": "https://humanoid-touch-dream.github.io/",
-   "data": "https://huggingface.co/datasets/chrisyrniu/HTD",
+   "data": "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT",
    "code": "https://github.com/chrisyrniu/humanoid-touch-dream"
   },
   "setup": {
@@ -109,7 +109,7 @@
    "https://arxiv.org/abs/2604.13015 (abstract via arXiv API, v3 2026-08-17)",
    "https://arxiv.org/html/2604.13015v3 (tactile observation, demonstrations per task, teleoperation, baselines; first 100,000 characters)",
    "https://humanoid-touch-dream.github.io/",
-   "https://huggingface.co/datasets/chrisyrniu/HTD (README.md, API metadata, top-level listing)",
+   "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT (README.md, API metadata, commit history, folder listing; read 2026-11-27, named chrisyrniu/HTD before)",
    "https://huggingface.co/datasets/chrisyrniu/humanoid-touch-dream (README.md, API metadata, top-level listing)",
    "https://github.com/chrisyrniu/humanoid-touch-dream (repository metadata and README)"
   ],
@@ -128,9 +128,9 @@
   "url": "https://huggingface.co/datasets/chrisyrniu/humanoid-touch-dream"
  },
  "download": {
-  "where": "https://huggingface.co/datasets/chrisyrniu/HTD",
+  "where": "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT",
   "access": "open",
-  "format": "Open-X-Tactile: Zarr v2, one ZIP per episode under HTD/InspireHandDFTP/<task>/ and HTD/InspireHandF1/lab/; dataset_manifest.json lists archive, size, SHA-256, split and frame count. Source release: HDF5 per episode plus MP4 per camera.",
+  "format": "Open-X-Tactile: Zarr v2, one ZIP per episode under HumanoidTouchDream_OXT/InspireHandDFTP_<task>/ (book, insert_t, scoop, tea, towel) and HumanoidTouchDream_OXT/InspireHandF1_lab/; dataset_manifest.json lists archive, size, SHA-256, split and frame count. Source release: HDF5 per episode plus MP4 per camera.",
   "total_size": "about 388 GB (Open-X-Tactile); about 391 GB (source HDF5 + MP4)",
   "per_episode": "about 0.45 GB on average (388 GB / 871), derived",
   "partial_fetch": "single episode ZIPs via hf_hub_download, selected from dataset_manifest.json"

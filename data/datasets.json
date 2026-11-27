@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-11-26"
+  "last_updated": "2026-11-27"
  },
  "datasets": [
   {
@@ -5528,6 +5528,12 @@
    },
    "used_by": [
     {
+     "name": "V-HOP, RSS 2025 (arXiv 2502.17434)",
+     "url": "https://arxiv.org/abs/2502.17434",
+     "note": "Occlusion subset (Allegro hand with DIGIT fingertips, Rubik's cube) compared against NeuralFeels: ADD-S error 1.46 mm against 2.14 mm, 32 FPS against 3 FPS.",
+     "model": "v_hop"
+    },
+    {
      "name": "NeuralFeels, Science Robotics 2024 (arXiv 2312.13469)",
      "url": "https://arxiv.org/abs/2312.13469",
      "note": "Evaluated on FeelSight's 70 runs: 30 real in-hand rotations of 6 objects (30 s each, this catalog entry) and 40 simulated runs in the same release.",
@@ -10895,8 +10901,8 @@
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-wetlab-tasks",
-    "checked": "2026-11-25",
-    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-25)."
+    "checked": "2026-11-27",
+    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-25 and 2026-11-27)."
    },
    "license": "CC BY-NC 4.0",
    "caveats": [
@@ -11310,7 +11316,7 @@
     "text": "871 episodes, 994,778 frames at about 30 Hz, 6 tasks (book 162, insert-T 208, litter scooping 163, tea serving 77, towel folding 150 on DFTP hands; lab cleanup 111 on F1 hands); paper trains on 193 / 150 / 141 / 153 / 72 demonstrations for its five DFTP tasks"
    },
    "availability": "public",
-   "access": "Two ungated Hugging Face releases under CC BY 4.0: chrisyrniu/HTD (Open-X-Tactile Zarr v2, one ZIP per episode, about 388 GB, with a per-episode manifest) and chrisyrniu/humanoid-touch-dream (repaired source HDF5 plus MP4 videos, about 391 GB).",
+   "access": "Two ungated Hugging Face releases under CC BY 4.0: chrisyrniu/HumanoidTouchDream_OXT, renamed from chrisyrniu/HTD (Open-X-Tactile Zarr v2, one ZIP per episode, about 388 GB, with a per-episode manifest) and chrisyrniu/humanoid-touch-dream (repaired source HDF5 plus MP4 videos, about 391 GB).",
    "license": "CC BY 4.0",
    "caveats": [
     "Two hand types with different touch: the five DFTP tasks have 1,062-taxel arrays, the lab-cleanup task (F1 hands) has 37 capacitive features per hand. The source release's card says the F1 lab recordings contain informative tactile data; it does not say the same of the DFTP recordings.",
@@ -11323,7 +11329,7 @@
    "links": {
     "paper": "https://arxiv.org/abs/2604.13015",
     "project": "https://humanoid-touch-dream.github.io/",
-    "data": "https://huggingface.co/datasets/chrisyrniu/HTD",
+    "data": "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT",
     "code": "https://github.com/chrisyrniu/humanoid-touch-dream"
    },
    "setup": {
@@ -11372,7 +11378,7 @@
     "https://arxiv.org/abs/2604.13015 (abstract via arXiv API, v3 2026-08-17)",
     "https://arxiv.org/html/2604.13015v3 (tactile observation, demonstrations per task, teleoperation, baselines; first 100,000 characters)",
     "https://humanoid-touch-dream.github.io/",
-    "https://huggingface.co/datasets/chrisyrniu/HTD (README.md, API metadata, top-level listing)",
+    "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT (README.md, API metadata, commit history, folder listing; read 2026-11-27, named chrisyrniu/HTD before)",
     "https://huggingface.co/datasets/chrisyrniu/humanoid-touch-dream (README.md, API metadata, top-level listing)",
     "https://github.com/chrisyrniu/humanoid-touch-dream (repository metadata and README)"
    ],
@@ -11557,10 +11563,10 @@
    "authors": "Xudi Ge et al.",
    "year": 2026,
    "venue": "arXiv 2611.25683",
-   "summary": "300 teleoperated demonstrations of four bimanual tasks (Egg Transfer, Grape Pinching, Tissue Extraction, Mung Bean Pouring) on two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands, each carrying eight piezoresistive arrays with 364 taxels over five fingertips and three palm regions at 30 Hz, with one overhead and two wrist RGB cameras.",
+   "summary": "50 released Egg Transfer demonstrations plus 50 synthetic lighting variants of them (94,172 frames in all, nominally 30 fps) from a right 7-DoF arm with a 6-DoF Inspire hand, with 364 raw tactile words per frame and three 224x224 RGB views; the paper reports 300 demonstrations over four tasks on two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands, each with eight piezoresistive arrays (364 taxels).",
    "embodiment": "robot",
-   "hand": "Inspire RH56F2-E2-T1 x 2 on two RealMan RM75 arms",
-   "bimanual": true,
+   "hand": "Inspire 6-DoF hand on a right 7-DoF arm in the release (metadata: right_7dof_inspire_f1_6dof); the paper names Inspire RH56F2-E2-T1 x 2 on two RealMan RM75 arms",
+   "bimanual": false,
    "sensor": {
     "type": "piezoresistive",
     "taxels_per_hand": 364,
@@ -11569,7 +11575,7 @@
      "palm"
     ],
     "rate_hz": 30,
-    "note": "Eight piezoresistive arrays per hand (five fingertip regions, three palm regions), 364 taxels per hand.",
+    "note": "Paper: eight piezoresistive arrays per hand (five fingertip regions, three palm regions), 364 taxels per hand, sampled at 30 Hz. Release: observation.tactile.right, uint16 (364) raw transport words in SDK register order, with validity flags and timestamps; the metadata assumes no force conversion or spatial layout and says sensor refresh rate and force units are not verified. From the dataset card and meta/info.json; data files not opened.",
     "maker": null,
     "model": null,
     "principle": "piezoresistive",
@@ -11583,26 +11589,34 @@
    ],
    "scale": {
     "hours": null,
-    "episodes": 300,
-    "frames": null,
-    "tasks": 4,
+    "episodes": 50,
+    "frames": 47086,
+    "tasks": 1,
     "objects": null,
     "subjects": null,
     "scenes": null,
     "scene_types": [
      "lab"
     ],
-    "text": "300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2); per-task counts and hours not stated"
+    "text": "Released: 50 original Egg Transfer episodes (47,086 frames, derived) plus 50 synthetic lighting variants, 100 episodes and 94,172 frames in all; the paper reports 300 demonstrations over 4 tasks (200 for stage 1, 100 for stage 2)"
    },
-   "availability": "announced",
-   "access": "The paper states 'We will release the collected data and source code.'; no link is given in v1 or v2 (checked 2026-11-24).",
-   "license": "not stated",
+   "availability": "partial",
+   "access": "Hugging Face TipDex-VTLA/TipDex-Data, ungated (7.7 GB by the Hugging Face API; LeRobot v2.1 parquet with embedded images; uploaded 2026-11-19, last changed 2026-11-20; seen 2026-11-27). The project page says 'The public release covers Egg Transfer'; data for Grape Pinching, Tissue Extraction and Mung Bean Pouring was not found.",
+   "license": "not stated (code: Apache-2.0)",
    "caveats": [
-    "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it.",
-    "Per-task demonstration counts, episode length and storage format are not stated."
+    "A subset: 50 original episodes of one task (Egg Transfer, 'Move the egg into the box.'), against 300 demonstrations over four tasks in the paper.",
+    "Half of the 100 episodes are synthetic: episode i+50 is episode i with perturbed RGB (low or strong exposure, directional light, moving shadow, uneven camera light) and the same non-image data; the card says they are not additional physical demonstrations.",
+    "Touch in the release is 364 raw uint16 words from the right hand; the card calls them 'not a verified physical taxel/pressure map'.",
+    "The release records one right arm and hand (13-D action, 19-D state) and its metadata names an Inspire F1 hand, while the paper describes two RealMan RM75 arms with Inspire RH56F2-E2-T1 hands.",
+    "No data license: the card says 'No new license is granted by this packaging operation; consult the data owner for reuse permission.'",
+    "The card says one split training source and all 8 development and 4 final-evaluation recordings are excluded, raw MCAP files are not bundled, and task success has not been re-judged.",
+    "All demonstrations were collected under normal lighting; the paper evaluates under unseen lighting without collecting data under it."
    ],
    "links": {
-    "paper": "https://arxiv.org/abs/2611.25683"
+    "paper": "https://arxiv.org/abs/2611.25683",
+    "project": "https://tiplab.github.io/TipDex-VTLA/",
+    "data": "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data",
+    "code": "https://github.com/tiplab/TipDex-VTLA"
    },
    "setup": {
     "cameras": [
@@ -11611,8 +11625,8 @@
       "count": 1,
       "model": "Intel RealSense D405",
       "type": "RGB",
-      "resolution": null,
-      "fps": null,
+      "resolution": "224x224",
+      "fps": 30,
       "mount": "static"
      },
      {
@@ -11620,8 +11634,8 @@
       "count": 2,
       "model": "Intel RealSense D435i",
       "type": "RGB",
-      "resolution": null,
-      "fps": null,
+      "resolution": "224x224",
+      "fps": 30,
       "mount": "wrist"
      }
     ],
@@ -11631,8 +11645,8 @@
      {
       "target": "fingers",
       "method": "robot_proprioception",
-      "system": "RealMan RM75 (7 DoF) arms and Inspire RH56F2-E2-T1 hands",
-      "note": "teleoperation method not read"
+      "system": "Inspire 6-DoF hand and 7-DoF arm joint states",
+      "note": "released data covers the right arm and hand; teleoperation method not read"
      }
     ],
     "other": [
@@ -11642,20 +11656,25 @@
    "sources": [
     "https://arxiv.org/abs/2611.25683 (abstract via arXiv API, v1 2026-11-19; v2 2026-11-22)",
     "https://arxiv.org/html/2611.25683v1 (hardware, tactile arrays, data, tasks, release sentence)",
-    "https://arxiv.org/html/2611.25683v2 (title, abstract and release sentence rechecked 2026-11-24)"
+    "https://arxiv.org/html/2611.25683v2 (hardware, tactile arrays and demonstration total reread 2026-11-27)",
+    "https://tiplab.github.io/TipDex-VTLA/ (release scope and links; read 2026-11-27)",
+    "https://github.com/tiplab/TipDex-VTLA (repository metadata and README; read 2026-11-27)",
+    "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data (README.md, meta/info.json, API metadata, top-level listing, commit history; read 2026-11-27)"
    ],
    "unconfirmed": [
     "The tactile maker is not stated; the hand model RH56F2-E2-T1 suggests Inspire's own sensors, which the paper does not say. The catalog's RH56F1 record (8 capacitive sites per hand) does not match the 364 piezoresistive taxels given here, so no hardware link was made.",
-    "'language' in modalities: the policy takes a language instruction; how it is stored in the release is unknown.",
-    "Camera frame rates and resolutions not read; depth from the RealSense cameras is not mentioned as recorded."
+    "frames = 47,086 is half of the card's 94,172, since the 50 variants pair one to one with the 50 originals; about 26 minutes at the nominal 30 fps.",
+    "Coverage 'tip' and 'palm' and the piezoresistive principle come from the paper; the release assigns its 364 words no anatomical positions.",
+    "Camera models are the paper's; 224x224 and 30 fps are the released image size and nominal rate. Which camera model recorded each released view is not stated. Depth is not in the release metadata."
    ],
    "rank": {
-    "n": 6,
-    "label": "Paper only",
+    "n": 5,
+    "label": "Sample only",
     "integrity": "not checked",
     "failed": [],
     "why": [
-     "release announced"
+     "only a sample or part released",
+     "files not opened yet"
     ]
    },
    "contents": {
@@ -12356,6 +12375,128 @@
      "hand_pose": true,
      "scale": false,
      "diversity": true
+    }
+   }
+  },
+  {
+   "id": "realdexumi",
+   "name": "RealDexUMI",
+   "title": "RealDexUMI: A Wearable Universal Manipulation Interface for Dexterous Robot Learning",
+   "authors": "Chaoyi Xu et al.",
+   "year": 2026,
+   "venue": "CoRL 2026 (arXiv 2606.06033)",
+   "summary": "Over 100 h of demonstrations (more than 200 episodes per task, more than eight tasks) recorded with a wearable module: an 11-DoF dexterous hand with piezoresistive fingertip arrays (20 Hz), an in-hand RGB camera (30 Hz) and a 6-DoF tracker, driven by the operator through a palm-side isomorphic glove; the dataset used in the experiments is announced.",
+   "embodiment": "robot",
+   "hand": "RealDexUMI hand (11 DoF, 6 actuated), carried by the operator and driven through a palm-side isomorphic glove; the same module is mounted on a Franka FR3 for deployment",
+   "bimanual": true,
+   "sensor": {
+    "type": "piezoresistive",
+    "taxels_per_hand": null,
+    "sensors_per_hand": null,
+    "coverage": [
+     "tip"
+    ],
+    "rate_hz": 20,
+    "note": "Piezoresistive tactile array on each fingertip; the policy's tactile input is 5x10x4. Maker, taxels per fingertip and units not stated. Described in the paper; no files released.",
+    "maker": "not stated",
+    "model": null,
+    "principle": "piezoresistive",
+    "range": null,
+    "calibrated": null
+   },
+   "modalities": [
+    "wrist_rgb",
+    "robot_action"
+   ],
+   "scale": {
+    "hours": 100,
+    "episodes": null,
+    "frames": null,
+    "tasks": 8,
+    "objects": null,
+    "subjects": null,
+    "scenes": null,
+    "scene_types": [],
+    "text": "over 100 h, more than 200 episodes per task over more than eight tasks (eight evaluated, one bimanual); not released"
+   },
+   "availability": "announced",
+   "access": "Section 3.4 of the paper states the authors 'will release the collected dataset used in our experiments'; no link on the arXiv page or the project page research.beingbeyond.com/realdexumi (read 2026-11-27).",
+   "license": "not stated",
+   "caveats": [
+    "Not released: the numbers come from the paper, and no file was seen.",
+    "The robot hand touches the objects; the operator's own hand is inside a palm-side glove that sends press-and-release commands, so the touch is robot-side.",
+    "Total episodes, operator count and objects are not reported; 'over 100 hours' and 'more than 200 episodes per task' are the paper's wording.",
+    "Hand, tactile sensor, camera and tracker makers are not named."
+   ],
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.06033",
+    "project": "https://research.beingbeyond.com/realdexumi"
+   },
+   "setup": {
+    "cameras": [
+     {
+      "role": "wrist",
+      "count": 1,
+      "model": null,
+      "type": "RGB",
+      "resolution": "256x256 (policy input, resized)",
+      "fps": 30,
+      "mount": "wrist"
+     }
+    ],
+    "wrist_cameras": 1,
+    "depth": false,
+    "tracking": [
+     {
+      "target": "wrist",
+      "method": "other",
+      "system": "6-DoF tracker rigidly mounted on the hand module (system not named)",
+      "note": "gives hand-frame pose for relative-motion labels; not a policy input"
+     },
+     {
+      "target": "fingers",
+      "method": "robot_proprioception",
+      "system": "measured joint state of the 6 actuated hand joints",
+      "note": "recorded together with the glove commands"
+     },
+     {
+      "target": "fingers",
+      "method": "teleop_glove",
+      "system": "palm-side isomorphic glove",
+      "note": "press-and-release finger inputs mapped to linear hand commands"
+     }
+    ],
+    "other": []
+   },
+   "sources": [
+    "https://arxiv.org/abs/2606.06033 (abstract via arXiv metadata)",
+    "https://arxiv.org/html/2606.06033 (hardware, Table 4 rates, data scale, Section 3.4 release statement, results; v2)",
+    "https://research.beingbeyond.com/realdexumi (CoRL 2026 acceptance, system overview; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "hours = 100 is the paper's lower bound ('over 100 hours').",
+    "tasks = 8 counts the evaluated tasks; the paper says data covers 'more than eight' tasks.",
+    "The 5x10x4 tactile input may be five fingertips with 10x4 taxels each; the paper does not say, so taxels_per_hand is left null.",
+    "Tactile 20 Hz and camera 30 Hz are the 'typical' rates in Table 4."
+   ],
+   "rank": {
+    "n": 6,
+    "label": "Paper only",
+    "integrity": "not checked",
+    "failed": [],
+    "why": [
+     "release announced"
+    ]
+   },
+   "contents": {
+    "score": 3,
+    "of": 5,
+    "flags": {
+     "calibrated": false,
+     "video": true,
+     "hand_pose": true,
+     "scale": true,
+     "diversity": false
     }
    }
   }

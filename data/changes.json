@@ -2,6 +2,114 @@
  "changes": [
   {
    "kind": "added",
+   "target": "dataset",
+   "id": "realdexumi",
+   "text": "RealDexUMI: over 100 h of demonstrations from a wearable 11-DoF hand with piezoresistive fingertip arrays (20 Hz) and an in-hand camera, more than 200 episodes per task; release announced in the paper, no link yet.",
+   "source": "https://arxiv.org/abs/2606.06033",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "realdexumi",
+   "text": "RealDexUMI: ACT policy on in-hand RGB, fingertip touch and joint state; 88.75% mean success over eight real tasks against 70.00% without touch; no code release stated.",
+   "source": "https://arxiv.org/abs/2606.06033",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tacit",
+   "text": "TACIT: visuotactile diffusion policy on a LEAP hand with three 9DTact fingertips, attention supervised by measured contacts; 73.3% on real peg insertion against 20.0% for plain fusion; no release stated.",
+   "source": "https://arxiv.org/abs/2609.24507",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "fingereye",
+   "text": "FingerEye: policy on binocular camera fingertips with a compliant marker ring on a LEAP hand; real mean success 71.3% against 37.5% wrist-only; code released, no license file.",
+   "source": "https://github.com/ariszxxu/FingerEye",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tacot",
+   "text": "TacOT: flow-matching policy co-trained on Manus glove demonstrations with PaXini fingertip sensors and XHand touch, paired by tactile-guided optimal transport; 93% on the tissue task against 60% robot-only; no release stated.",
+   "source": "https://arxiv.org/abs/2610.04363",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "dextac",
+   "text": "DexTac: ACT policy on a GEX hand with three GelStereo BioTip fingertips that also predicts fingertip force and center of pressure; 91.67% syringe injection against 0% without touch; no release stated.",
+   "source": "https://arxiv.org/abs/2601.21474",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "dexfit",
+   "text": "DexFIT: vision-free diffusion policy on touch from a 16-DoF isomorphic glove and the robot hand's onboard sensors; 100% light-bulb screwing in its best configuration (IROS 2026, read from the abstract); no release stated.",
+   "source": "https://doi.org/10.1109/iros61738.2026.11777583",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "taptactouch",
+   "text": "TapTacTouch: training-free shape completion from 3x3 finger-pad pressure arrays on a 20-DoF ROBOTIS HX5 hand; 1.610 mm mean Chamfer distance over six printed objects; no release stated.",
+   "source": "https://arxiv.org/abs/2611.24207",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "v_hop",
+   "text": "V-HOP: visuo-haptic 6D pose tracker; 1.46 mm ADD-S error on FeelSight against 2.14 mm for NeuralFeels and 80% bimanual handovers on a 96-taxel Barrett Hand; code and checkpoint released under CC BY-NC 4.0.",
+   "source": "https://github.com/brown-ivl/v-hop",
+   "date": "2026-11-27",
+   "flow": "discovery"
+  },
+  {
+   "kind": "released",
+   "target": "dataset",
+   "id": "tipdex_vtla",
+   "text": "TipDex-VTLA demonstrations: TipDex-VTLA/TipDex-Data is on Hugging Face, ungated, with 50 original Egg Transfer episodes and 50 synthetic lighting variants (94,172 frames, 7.7 GB, no data license); the paper reports 300 demonstrations over four tasks. Availability announced -> partial.",
+   "source": "https://huggingface.co/datasets/TipDex-VTLA/TipDex-Data",
+   "date": "2026-11-27",
+   "flow": "status"
+  },
+  {
+   "kind": "released",
+   "target": "model",
+   "id": "tipdex_vtla",
+   "text": "TipDex-VTLA: inference code (github.com/tiplab/TipDex-VTLA, Apache-2.0) and the Egg Transfer checkpoints (TipDex-VTLA/TipDex-VTLA, 11.6 GB, Apache-2.0 and Gemma terms) are out; code announced -> released, weights not released -> released.",
+   "source": "https://github.com/tiplab/TipDex-VTLA",
+   "date": "2026-11-27",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "htd",
+   "text": "Humanoid Touch Dream (HTD): the Open-X-Tactile repository chrisyrniu/HTD is now chrisyrniu/HumanoidTouchDream_OXT, and on 2026-11-26 its episode ZIPs moved to six folders under HumanoidTouchDream_OXT/; the card still gives 871 episodes, 994,778 frames and about 388 GB.",
+   "source": "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT",
+   "date": "2026-11-27",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
    "target": "model",
    "id": "lingbot_touch",
    "text": "LingBot-Touch: five-finger tactile encoder for piezoresistive, magnetic and visuotactile hands, pretrained on 4,983 h from gloves and robot hands; Tiny and Small encoder weights released under Apache-2.0 on Hugging Face, pretraining data not released.",

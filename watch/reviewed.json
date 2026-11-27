@@ -660,5 +660,19 @@
  "doi:10.1002/admt.71494": {"decision": "reject", "id": null, "reason": "hybrid piezoelectric-thermoresistive glove hardware with texture discrimination; no data release or named model in the abstract", "date": "2026-11-26"},
  "arxiv:2609.16586": {"decision": "reject", "id": null, "reason": "ProxiDex: proximity cues from reconstructed point clouds; no touch sensing", "date": "2026-11-26"},
  "arxiv:2611.10490": {"decision": "reject", "id": null, "reason": "no named model (visuotactile ACT with two tactile arrays); hand not named in the abstract", "date": "2026-11-26"},
- "arxiv:2310.16917": {"decision": "reject", "id": null, "reason": "MimicTouch: robot gripper per the abstract; human tactile data release not stated (search hit)", "date": "2026-11-26"}
+ "arxiv:2310.16917": {"decision": "reject", "id": null, "reason": "MimicTouch: robot gripper per the abstract; human tactile data release not stated (search hit)", "date": "2026-11-26"},
+ "arxiv:2608.01102": {"decision": "reject", "id": null, "reason": "CAAT: two-finger PPTac gripper (UMI-style) and UniVTAC simulation; gripper only", "date": "2026-11-27"},
+ "doi:10.1109/iros61738.2026.11777583": {"decision": "model", "id": "dexfit", "reason": "DexFIT: diffusion policy on touch from a 16-DoF isomorphic glove with fingertip sensors and the robot hand's onboard sensors; abstract only, paper closed", "date": "2026-11-27"},
+ "arxiv:2609.24507": {"decision": "model", "id": "tacit", "reason": "TACIT: visuotactile diffusion policy on a LEAP hand with three 9DTact fingertips; contact-supervised attention", "date": "2026-11-27"},
+ "arxiv:2610.18118": {"decision": "reject", "id": null, "reason": "ForeTac: marker-based tactile sensor on a gripper of a Realman RM75 (Fig. 3); gripper only", "date": "2026-11-27"},
+ "arxiv:2604.20689": {"decision": "model", "id": "fingereye", "reason": "FingerEye: policy on binocular visuotactile fingertip modules on a LEAP hand; code released", "date": "2026-11-27"},
+ "arxiv:2606.06033": {"decision": "dataset", "id": "realdexumi", "reason": "RealDexUMI: over 100 h of wearable-hand demonstrations with piezoresistive fingertip arrays, dataset announced; RealDexUMI policy added as model", "date": "2026-11-27"},
+ "arxiv:2610.04363": {"decision": "model", "id": "tacot", "reason": "TacOT: co-training on Manus glove with PaXini fingertip sensors and XHand touch via tactile-guided optimal transport (search hit)", "date": "2026-11-27"},
+ "arxiv:2601.21474": {"decision": "model", "id": "dextac", "reason": "DexTac: kinesthetic visuotactile policy on a GEX hand with three GelStereo BioTip fingertips (search hit)", "date": "2026-11-27"},
+ "arxiv:2611.24207": {"decision": "model", "id": "taptactouch", "reason": "TapTacTouch: shape completion from 3x3 pressure arrays on a 20-DoF ROBOTIS hand", "date": "2026-11-27"},
+ "arxiv:2502.17434": {"decision": "model", "id": "v_hop", "reason": "V-HOP: visuo-haptic pose tracker evaluated on FeelSight and a 96-taxel Barrett Hand; code and checkpoint released", "date": "2026-11-27"},
+ "arxiv:2609.05266": {"decision": "reject", "id": null, "reason": "TacPAC: two InTac S1 sensors in a Flexiv Rizon 4 gripper; gripper only", "date": "2026-11-27"},
+ "arxiv:2609.30969": {"decision": "reject", "id": null, "reason": "TACTIC: Franka Hand with two DIGIT sensors; gripper only", "date": "2026-11-27"},
+ "doi:10.1109/iros61738.2026.11776848": {"decision": "reject", "id": null, "reason": "DexTact: 174,500 grasping demonstrations and contact forces collected in simulation per the abstract; no recorded hand touch visible (closed access)", "date": "2026-11-27"},
+ "arxiv:2603.28542": {"decision": "reject", "id": null, "reason": "TAG: glove giving tactile feedback to the teleoperator; haptic feedback device", "date": "2026-11-27"}
 }
