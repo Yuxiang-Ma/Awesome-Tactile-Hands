@@ -145,7 +145,7 @@
     "dataset null: the paper does not describe the public HumanTouch release as its data, although the authors overlap (HumanTouch's first author Chuqiao Lyu is a co-author). The release's 10-task and 17,608-episode counts used here come from the catalog's humantouch entry.",
     "Venue from the arXiv comment 'Accept to IROS 2026 Workshop RoBoWoMo (Lightning Talk)'."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-27"
   },
   {
    "id": "dtwm",
@@ -712,7 +712,7 @@
     "Force values are raw glove units (active-taxel threshold 5 units, contact threshold 1 unit), not newtons.",
     "Re-checked 2026-11-01: arXiv lists only v1 (2026-09-17) and a web search for the name found no repository or model."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-27"
   },
   {
    "id": "touchworld",
@@ -766,7 +766,7 @@
     "Venue: arXiv only; no conference is named on the abstract page or the project page.",
     "Re-checked 2026-11-23: the project page text still has only a Paper button and no code, data or weights link; github.com/flyingGH/TouchWorld-Tactile_World_Model is unchanged (last push 2026-07-03, Apache-2.0)."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-27"
   },
   {
    "id": "ttp",
@@ -1379,7 +1379,7 @@
     "The text says the learning model is adapted from the authors' earlier VTacO work, which is not in the catalog.",
     "The last 37,115 characters of the full text (methods tail, references) were not read."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-27"
   },
   {
    "id": "m2vtp",
@@ -1627,7 +1627,7 @@
     "embodiment human: the text records 'the pressure distribution and curvature degree of the hand when grasping 19 different types of objects' with a glove and mentions no robot hand; who wore the glove is not stated.",
     "The split of the 16 pressure sensors between fingertips and palm is only in Figure 2, which was not read."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-27"
   },
   {
    "id": "fact",
@@ -1657,7 +1657,7 @@
    "release": {
     "code": "announced",
     "weights": "not_released",
-    "note": "Project page fact-1-0.github.io (read 2026-11-23): 'Code (Coming Soon)' remains and 'Data' now links to the Hugging Face repository zhicao/EgoForce (CC BY-NC 4.0; 739 h, 18,373 recordings, 25 tasks), first seen as 'Data (Coming Soon)' on 2026-10-27. The arXiv v1 HTML has no code, weights or license statement and no repository link; no FACT code repository or weights were found."
+    "note": "Project page fact-1-0.github.io (read 2026-11-23 and 2026-11-27): 'Code (Coming Soon)' remains and 'Data' now links to the Hugging Face repository zhicao/EgoForce (CC BY-NC 4.0; 739 h, 18,373 recordings, 25 tasks), first seen as 'Data (Coming Soon)' on 2026-10-27. The arXiv v1 HTML has no code, weights or license statement and no repository link; no FACT code repository or weights were found."
    },
    "license": "not stated",
    "links": {
@@ -1674,7 +1674,7 @@
     "The T-Rex hours are the paper's (100 h); the public T-Rex release in the catalog holds about 50 h, so FACT may have used data beyond the public release.",
     "The public EgoForce release (739 h, 18,373 recordings, fingertip taxels only) is smaller than the 2,000 h of human data with palm taxels that the paper describes for pretraining; whether the released subset is what FACT used is not stated."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-27"
   },
   {
    "id": "physword",
@@ -1716,7 +1716,7 @@
     "Table 3 labels the robot hand data 'Sharpa data' without naming T-Rex; the link to T-Rex is from the text. Co-author Dantong Niu is also T-Rex's first author.",
     "OpenNeoData (5,000+ h with touch) is not in the catalog; its embodiments were not checked."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-27"
   },
   {
    "id": "transdex",
@@ -1827,7 +1827,7 @@
     "The paper names the framework ExoBridge and gives no separate name for the network; the catalog uses ExoBridge for both the data and the model.",
     "A companion policy on an XHand (12 DoF) on a Franka arm reached 0.80 on egg carton opening and 0.55 on lid twisting over 20 rollouts each; how the bridge's outputs feed that policy was not read in detail."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-27"
   },
   {
    "id": "dexflex",
@@ -2009,7 +2009,7 @@
     "Training touch is simulated and binarized; the real FSR readings are thresholded to match. FSR model not named.",
     "Real-world results are 5 episodes per setting (Table III); for example Double Balls, 22.9 rounds of continuous rotation in 60 s trials with the full method."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-27"
   },
   {
    "id": "tactofind",
@@ -2046,7 +2046,7 @@
     "Re-checked 2026-11-01: the project page still links only the arXiv paper and BibTeX; a web search for the name with 'code' found no repository.",
     "Re-checked 2026-11-23: the project page text (abstract, paper summary, BibTeX) has no code link; a web search for the name with 'code' returned only the paper, the project page and aggregator listings."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-27"
   },
   {
    "id": "vtao_bimanip",
@@ -2295,7 +2295,7 @@
     "The tactile sensors behind the HRDexDB robot labels are not named in the paper; it calls those readings 'noisy and sparse'.",
     "The planning results (86% grasp-lift, 84% place over 50 scenes per task with Touch-JEPA-AC) are in simulation."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-27"
   },
   {
    "id": "redex",
@@ -2328,7 +2328,7 @@
     "The tactile array maker and sampling rate are not stated; the arm is not described.",
     "An ablation found net fingertip force with an MLP encoder worked best, so the deployed policy may use per-finger net force rather than all 120 taxels."
    ],
-   "checked": "2026-11-01"
+   "checked": "2026-11-27"
   },
   {
    "id": "upvital",
@@ -2361,7 +2361,7 @@
     "Only the abstract was read. The glove make, taxel count, robot hand, task names and success rates are not known.",
     "Embodiment 'human': the abstract says tactile data come from tactile gloves and that the robot hand needs no tactile sensors at deployment."
    ],
-   "checked": "2026-11-03"
+   "checked": "2026-11-27"
   },
   {
    "id": "mts_3dcnns",
@@ -2400,7 +2400,7 @@
     "The number of sampled frames N and the clip length are not given in the paper; M = 3 temporal scales is the best configuration.",
     "Embodiment 'both': MIT-STAG is a human glove dataset and the iCub set comes from a five-finger robot hand."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-27"
   },
   {
    "id": "htd",
@@ -2665,7 +2665,7 @@
     "Tactile alignment reduces both glove and robot touch to one force per finger, so the policy does not see the full taxel arrays.",
     "Authors are from the arXiv listing; the project page is anonymous."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-27"
   },
   {
    "id": "decal",
@@ -2719,24 +2719,31 @@
    "own_data": null,
    "dataset": "tipdex_vtla",
    "release": {
-    "code": "announced",
-    "weights": "not_released",
-    "note": "The arXiv v1 text says 'We will release the collected data and source code.' and gives no link (read 2026-11-23). v2 (2026-11-22, title changed, results unchanged) repeats the sentence with no link (read 2026-11-24); no GitHub repository found."
+    "code": "released",
+    "weights": "released",
+    "note": "github.com/tiplab/TipDex-VTLA ('Official inference implementation', Apache-2.0, created 2026-11-19, pushed 2026-11-24) links Hugging Face TipDex-VTLA/TipDex-VTLA (ungated, 11.6 GB, last changed 2026-11-24: base policy, VASE, TACE, tactile forecaster, tokenizer, normalization statistics and a replay sample). The project page says 'The public release covers Egg Transfer'; checkpoints for the other three real tasks and the simulation tasks were not found, and the README describes no training code (read 2026-11-27)."
    },
-   "license": "not stated",
+   "license": "Apache-2.0 (code); the model card gives Apache-2.0 and Gemma terms for the weights",
    "links": {
-    "paper": "https://arxiv.org/abs/2611.25683"
+    "paper": "https://arxiv.org/abs/2611.25683",
+    "project": "https://tiplab.github.io/TipDex-VTLA/",
+    "code": "https://github.com/tiplab/TipDex-VTLA",
+    "weights": "https://huggingface.co/TipDex-VTLA/TipDex-VTLA"
    },
    "sources": [
     "https://arxiv.org/abs/2611.25683 (abstract via arXiv API; v1, 2026-11-19; v2, 2026-11-22)",
     "https://arxiv.org/html/2611.25683v1 (hardware, inputs, outputs, data, results, release sentence)",
-    "https://arxiv.org/html/2611.25683v2 (title, abstract and release sentence rechecked 2026-11-24)"
+    "https://arxiv.org/html/2611.25683v2 (title, abstract and release sentence rechecked 2026-11-24)",
+    "https://tiplab.github.io/TipDex-VTLA/ (release scope and links; read 2026-11-27)",
+    "https://github.com/tiplab/TipDex-VTLA (repository metadata and README; read 2026-11-27)",
+    "https://huggingface.co/TipDex-VTLA/TipDex-VTLA (model card, API metadata, file listing, commit history; read 2026-11-27)"
    ],
    "unconfirmed": [
     "The simulation results use the UniVTAC benchmark and its released optical tactile encoder, not the Inspire hands.",
-    "N0-VTLA, a baseline here, reaches 31.3% under unseen lighting in the authors' runs."
+    "N0-VTLA, a baseline here, reaches 31.3% under unseen lighting in the authors' runs.",
+    "The released policy outputs 30 x 13 joint targets for one arm and hand and reads 16 frames of 364 raw 'F1' tactile words, while the paper describes two arms with RH56F2-E2-T1 hands; which arm setup produced the paper's results was not read. Code and weights were not downloaded or run."
    ],
-   "checked": "2026-11-23"
+   "checked": "2026-11-27"
   },
   {
    "id": "biview_touch",
@@ -2973,7 +2980,7 @@
     "The paper does not name the tactile sensor; Sharpa hands carry fingertip deformation sensors.",
     "The abstract gives a 10.7-point simulation gain; the table values give 10.6."
    ],
-   "checked": "2026-11-24"
+   "checked": "2026-11-27"
   },
   {
    "id": "fbi",
@@ -3309,7 +3316,7 @@
     "touch 'both': tactile latents are forecast alongside robot state.",
     "Digit360 images are used at 72x72 per sensor; the sensor rate is not stated."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-27"
   },
   {
    "id": "dex_x",
@@ -3381,7 +3388,7 @@
    "unconfirmed": [
     "kind 'representation': Tac2Pix is a fusion input for existing policies (BC-MLP, ACT, Diffusion Policy, SmolVLA) and is evaluated through them."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-27"
   },
   {
    "id": "handtouch",
@@ -3425,7 +3432,7 @@
     "embodiment 'both': training data is human full-hand touch; the robot, hand and sensor of the four real tasks (board cleaning, pear picking, water pouring, sand shoveling) are not named.",
     "The paper's figures differ between sections (inpainting RMSE 0.009 in Table 2, 0.010 in the abstract; the 0.628 to 0.689 cIoU gain is labelled OOD in the abstract and standard test in Table 2)."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-27"
   },
   {
    "id": "tma",
@@ -3459,7 +3466,7 @@
     "Training is in simulation; recorded fingertip touch enters only at real-world deployment, following the PTLD-style sim-to-real precedent.",
     "Real-world counts are from the project page table; the paper gives them only in a figure."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-27"
   },
   {
    "id": "lingbot_touch",
@@ -3531,7 +3538,7 @@
     "The glove maker and model are not named; the paper cites OSMO as related work only.",
     "Touch enters only at training (reference refinement and RL rewards); the deployed policy uses object pose and proprioception."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-27"
   },
   {
    "id": "bat_wam",
@@ -3569,7 +3576,7 @@
     "Taxel count of the Juqiao glove on the Linker Hand is not stated; 196 tokens per hand is the model's grid.",
     "The abstract's 85.56% figure is against 'OpenWAM with HangTouch', which does not appear in the body tables."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-27"
   },
   {
    "id": "touch2robot",

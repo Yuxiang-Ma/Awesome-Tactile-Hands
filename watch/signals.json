@@ -1,8 +1,8 @@
 {
- "generated": "2026-11-26T09:34:05Z",
+ "generated": "2026-11-27T09:34:16Z",
  "baseline": false,
- "urls_checked": 366,
- "seconds": 243,
+ "urls_checked": 381,
+ "seconds": 254,
  "signals": [
   {
    "kind": "dataset",
@@ -11,17 +11,51 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 1,
    "type": "links_added",
-   "detail": "https://huggingface.co/front/build/kube-afb3d7a/index.js https://huggingface.co/front/build/kube-afb3d7a/katex.css https://huggingface.co/front/build/kube-afb3d7a/style.css",
+   "detail": "https://huggingface.co/front/build/kube-edd4bcc/index.js https://huggingface.co/front/build/kube-edd4bcc/katex.css https://huggingface.co/front/build/kube-edd4bcc/style.css",
+   "availability": "public"
+  },
+  {
+   "kind": "model",
+   "id": "fact",
+   "name": "FACT",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 1,
+   "type": "phrase_removed",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data FACT Force · Action · Track Real-world task demonstrations Tas",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io (read 2026-11-23): 'Code (Coming Soon)' remains and 'Data' now links to the Hugging Face repository zhicao/EgoForce (CC BY-NC 4.0; 739 h, 18,373 recordings, 25 tasks), first seen as 'Data (Coming Soon)' on 2026-10-27. The arXiv v1 HTML has no code, weights or license statement and no repository link; no FACT code repository or weights were found."
+   }
+  },
+  {
+   "kind": "dataset",
+   "id": "egoforce",
+   "name": "EgoForce",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 2,
+   "type": "phrase_removed",
+   "detail": "ng† University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data FACT Force · Action · Track Real-world task demonstrations Tas",
    "availability": "public"
   },
   {
    "kind": "dataset",
-   "id": "tachin_demo01",
-   "name": "TachinTactileGlove-Demo01",
-   "url": "https://huggingface.co/datasets/Tachintech/TachinTactileGlove-Demo01",
-   "priority": 1,
-   "type": "gone",
-   "detail": "HTTP 200 -> 401 on two scans in a row",
+   "id": "htd",
+   "name": "Humanoid Touch Dream (HTD)",
+   "url": "https://huggingface.co/datasets/chrisyrniu/HTD",
+   "priority": 2,
+   "type": "hf_id",
+   "detail": "chrisyrniu/HTD -> chrisyrniu/HumanoidTouchDream_OXT",
+   "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "htd",
+   "name": "Humanoid Touch Dream (HTD)",
+   "url": "https://huggingface.co/datasets/chrisyrniu/HTD",
+   "priority": 2,
+   "type": "hf_commit",
+   "detail": "files 889 -> 889, last modified 2026-11-26T12:37:08.000Z",
    "availability": "public"
   },
   {
@@ -31,30 +65,68 @@
    "url": "https://huggingface.co/collections/JensenYuan/dextacwam-6aba3aa25d3362d882cdefbc",
    "priority": 3,
    "type": "links_removed",
-   "detail": "https://huggingface.co/front/build/kube-a955789/index.js https://huggingface.co/front/build/kube-a955789/katex.css https://huggingface.co/front/build/kube-a955789/style.css",
+   "detail": "https://huggingface.co/front/build/kube-afb3d7a/index.js https://huggingface.co/front/build/kube-afb3d7a/katex.css https://huggingface.co/front/build/kube-afb3d7a/style.css",
    "availability": "public"
+  },
+  {
+   "kind": "dataset",
+   "id": "egoforce",
+   "name": "EgoForce",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 3,
+   "type": "phrase_added",
+   "detail": "g † University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data FACT Force · Action · Track Real-world task demonstrations Tas",
+   "availability": "public"
+  },
+  {
+   "kind": "model",
+   "id": "fact",
+   "name": "FACT",
+   "url": "https://fact-1-0.github.io/",
+   "priority": 3,
+   "type": "phrase_added",
+   "detail": "g † University of Michigan · Stanford University · Microsoft Research * Equal contribution † Equal advising Paper Code (Coming Soon) Data FACT Force · Action · Track Real-world task demonstrations Tas",
+   "availability": {
+    "code": "announced",
+    "weights": "not_released",
+    "note": "Project page fact-1-0.github.io (read 2026-11-23): 'Code (Coming Soon)' remains and 'Data' now links to the Hugging Face repository zhicao/EgoForce (CC BY-NC 4.0; 739 h, 18,373 recordings, 25 tasks), first seen as 'Data (Coming Soon)' on 2026-10-27. The arXiv v1 HTML has no code, weights or license statement and no repository link; no FACT code repository or weights were found."
+   }
+  },
+  {
+   "kind": "model",
+   "id": "lingbot_touch",
+   "name": "LingBot-Touch",
+   "url": "https://technology.robbyant.com/lingbot-touch",
+   "priority": 3,
+   "type": "page_text",
+   "detail": "text length 6793 -> 6869",
+   "availability": {
+    "code": "released",
+    "weights": "released",
+    "note": "Inference code on GitHub (Robbyant/lingbot-touch, Apache-2.0, pushed 2026-11-11); encoder weights on Hugging Face as robbyant/lingbot-touch-tiny (encoder.pt 20.8 MB, Apache-2.0, not gated) and robbyant/lingbot-touch-small, also on ModelScope (read 2026-11-26). Training code, predictors and pretraining data are not included."
+   }
   }
  ],
  "deep_check_tonight": [
   {
    "kind": "dataset",
-   "id": "ace_data_0"
+   "id": "bvt20"
   },
   {
    "kind": "dataset",
-   "id": "dex_mptd"
+   "id": "dexumi"
   },
   {
    "kind": "dataset",
-   "id": "egoexplorer"
+   "id": "exobridge"
   },
   {
    "kind": "dataset",
-   "id": "glove2hand_handsense"
+   "id": "ht_bench"
   },
   {
    "kind": "dataset",
-   "id": "kaiwu"
+   "id": "osmo"
   },
   {
    "kind": "dataset",
@@ -62,27 +134,31 @@
   },
   {
    "kind": "dataset",
-   "id": "tacross"
+   "id": "tachin_demo01"
   },
   {
    "kind": "dataset",
-   "id": "talos_electrician_conduit"
+   "id": "tacwam_wetlab"
   },
   {
    "kind": "dataset",
-   "id": "touchbench"
+   "id": "tipdex_vtla"
+  },
+  {
+   "kind": "dataset",
+   "id": "vicon_glove"
   },
   {
    "kind": "model",
-   "id": "3dtouch"
+   "id": "bat_wam"
   },
   {
    "kind": "model",
-   "id": "biview_touch"
+   "id": "cgp"
   },
   {
    "kind": "model",
-   "id": "cop_sim2real"
+   "id": "dexfit"
   },
   {
    "kind": "model",
@@ -98,74 +174,78 @@
   },
   {
    "kind": "model",
-   "id": "gift"
+   "id": "fingereye"
   },
   {
    "kind": "model",
-   "id": "htd"
+   "id": "handtouch"
   },
   {
    "kind": "model",
-   "id": "occludex"
+   "id": "mts_3dcnns"
   },
   {
    "kind": "model",
-   "id": "ptld"
+   "id": "physword"
   },
   {
    "kind": "model",
-   "id": "rlhnd"
+   "id": "redex"
   },
   {
    "kind": "model",
-   "id": "star"
+   "id": "robot_synesthesia"
   },
   {
    "kind": "model",
-   "id": "tacross"
+   "id": "tac2pix"
   },
   {
    "kind": "model",
-   "id": "tactile_viewgcn"
+   "id": "tacot"
   },
   {
    "kind": "model",
-   "id": "tavi"
+   "id": "tactile_gat"
   },
   {
    "kind": "model",
-   "id": "tk_stgn"
+   "id": "tactofind"
   },
   {
    "kind": "model",
-   "id": "touch2trace"
+   "id": "tf2_steering"
   },
   {
    "kind": "model",
-   "id": "touchbridge"
+   "id": "tma"
   },
   {
    "kind": "model",
-   "id": "touchwgnn"
+   "id": "touch_jepa"
   },
   {
    "kind": "model",
-   "id": "unitachand"
+   "id": "touchsight"
   },
   {
    "kind": "model",
-   "id": "vint_net"
+   "id": "touchworld"
   },
   {
    "kind": "model",
-   "id": "vitacphys"
+   "id": "upvital"
   },
   {
    "kind": "model",
-   "id": "witac"
+   "id": "vistacalign"
+  },
+  {
+   "kind": "model",
+   "id": "vitam"
   }
  ],
- "not_fully_released": 94,
+ "not_fully_released": 103,
  "errors": [],
  "problems": [],
  "sources_failed": []
