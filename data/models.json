@@ -3738,6 +3738,283 @@
     "Evaluation covers one object at one position; the paper notes the current-based force estimate saturates near 5 N."
    ],
    "checked": "2026-11-26"
+  },
+  {
+   "id": "tacit",
+   "name": "TACIT",
+   "title": "TACIT: Tactile Contact Supervision for Spatial Attention in Dexterous Manipulation",
+   "authors": "Yanhou Lai et al.",
+   "year": 2026,
+   "venue": "arXiv 2609.24507",
+   "kind": "policy",
+   "summary": "Visuotactile diffusion policy on a LEAP hand that takes 600 camera points, 900 tactile points from three 9DTact fingertips (20x15 taxel grids on thumb, index, middle) and 23-D proprioception; during training only, measured contacts supervise a spatial attention head; real ball placement reaches 66.7% and peg insertion 73.3% (30 trials each) against 10.0% and 20.0% for 3D visuotactile fusion without the attention target.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "10 teleoperated demonstrations per real task (ball placement, peg insertion) on a LEAP hand with a Franka FR3, plus scripted IsaacLab demonstrations for four simulated tasks; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text has no code, weights or data statement and no project link (read 2026-11-27)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2609.24507"
+   },
+   "sources": [
+    "https://arxiv.org/html/2609.24507 (hand, sensors, policy inputs, demonstrations, results; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "The ring fingertip has no sensor; the tactile sample rate is not stated apart from the 20 Hz recorder.",
+    "In simulation the gain is smaller (peg 14.8% against 2.5%, cube stacking 20.9% against 10.7%); fruit placement ties and handover shows no clear advantage."
+   ],
+   "checked": "2026-11-27"
+  },
+  {
+   "id": "fingereye",
+   "name": "FingerEye",
+   "title": "FingerEye: Learning Dexterous Manipulation with Continuous Vision-Tactile Sensing",
+   "authors": "Zhixuan Xu et al.",
+   "year": 2026,
+   "venue": "CoRL 2026 (arXiv 2604.20689)",
+   "kind": "policy",
+   "summary": "FingerEye Policy takes wrist RGB, proprioception and binocular RGB from a FingerEye module on each LEAP hand fingertip (two cameras behind an acrylic plate in a compliant silicone ring with an AprilTag array) through frozen RADIO features with group-structured fusion and outputs action chunks; mean success rises from 37.5% to 71.3% in four real tasks and from 26.7% to 65.9% in simulation over wrist-only input.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Leader-follower teleoperated demonstrations on a LEAP hand with an xArm7 (coin standing, chip picking, letter retrieval, syringe manipulation) at 10 Hz, plus simulation data from a digital twin; the repository has collection and sim-generation code but no dataset link (read 2026-11-27).",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "not_released",
+    "note": "The project page links github.com/ariszxxu/FingerEye, which holds FingerEyePolicy (policy architectures and offline training), FingerEyeRW (teleoperation, data collection, deployment) and FingerEyeLab (simulation); the README links a hardware guide and no checkpoint or dataset, and the repository has no license file (read 2026-11-27)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2604.20689",
+    "project": "https://nus-lins-lab.github.io/FingerEyeWeb/",
+    "code": "https://github.com/ariszxxu/FingerEye"
+   },
+   "sources": [
+    "https://arxiv.org/html/2604.20689 (sensor design, hand, policy, tasks, results; first 100,000 of 116,202 characters; v4)",
+    "https://nus-lins-lab.github.io/FingerEyeWeb/ (CoRL 2026 Spotlight label, links; read 2026-11-27)",
+    "https://github.com/ariszxxu/FingerEye (repository listing and README; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "The plate pose (a contact-wrench proxy from AprilTag PnP) is recorded but not used by the main policies; touch enters as fingertip RGB images.",
+    "The GelSight comparison covers only chip picking (45% against 70%) and syringe (65% against 85%).",
+    "Number of demonstrations per task is not given in the part of the paper read."
+   ],
+   "checked": "2026-11-27"
+  },
+  {
+   "id": "realdexumi",
+   "name": "RealDexUMI",
+   "title": "RealDexUMI: A Wearable Universal Manipulation Interface for Dexterous Robot Learning",
+   "authors": "Chaoyi Xu et al.",
+   "year": 2026,
+   "venue": "CoRL 2026 (arXiv 2606.06033)",
+   "kind": "policy",
+   "summary": "ACT policy that takes in-hand RGB (256x256), 5x10x4 piezoresistive fingertip touch (20 Hz) and 6-D joint state of an 11-DoF hand and outputs hand-frame relative motion plus hand commands; over eight real tasks with 200 demonstrations each it averages 88.75% success against 70.00% without touch, and the same checkpoints run on Franka FR3, RealMan RM65 and PND Adam-U arms.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": null,
+   "dataset": "realdexumi",
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The paper (Section 3.4) announces the dataset only; neither the arXiv text nor the project page research.beingbeyond.com/realdexumi mentions code or weights (read 2026-11-27)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2606.06033",
+    "project": "https://research.beingbeyond.com/realdexumi"
+   },
+   "sources": [
+    "https://arxiv.org/html/2606.06033 (hand, sensors, policy inputs and outputs, data, results; v2)",
+    "https://research.beingbeyond.com/realdexumi (CoRL 2026 acceptance, cross-embodiment results; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "The tactile array maker and the meaning of the 5x10x4 input shape are not stated.",
+    "Diffusion Policy with the same interface reaches 63.75%; state-as-action supervision 51.25%."
+   ],
+   "checked": "2026-11-27"
+  },
+  {
+   "id": "tacot",
+   "name": "TacOT",
+   "title": "TacOT: Learning Contact-Rich Dexterous Manipulation from Human Demonstrations via Tactile-Guided Optimal Transport",
+   "authors": "Xingting Li et al.",
+   "year": 2026,
+   "venue": "arXiv 2610.04363",
+   "kind": "policy",
+   "summary": "Flow-matching policy that co-trains on human Manus-glove demonstrations with five three-axis PaXini fingertip sensors and XHand robot demonstrations with the hand's own fingertip sensors (15 force channels, 30 Hz), pairing them by optimal transport guided by tactile trajectories; in-distribution success on tissue, wiping, egg and block tasks is 93/83/73/80% against 60/53/47/47% robot-only.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Per task (tissue, wiping, egg, block): 60 XHand robot episodes on a UR5 and 200 Manus-glove human episodes (100 in-distribution, 100 out-of-distribution) with dual-view RGB; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text has no release statement, repository or project page (read 2026-11-27)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2610.04363"
+   },
+   "sources": [
+    "https://arxiv.org/html/2610.04363 (glove, sensors, hand, policy, data, results; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "Tactile trajectories are used only in training per the paper; whether the 15-D fingertip force is also a policy input at deployment was read from the method summary, not checked in the code.",
+    "On human-only out-of-distribution configurations TacOT reaches 73/60/40/53% against 60/47/27/33% for action-guided OT.",
+    "XHand tactile sensor model and taxel count are not stated."
+   ],
+   "checked": "2026-11-27"
+  },
+  {
+   "id": "dextac",
+   "name": "DexTac",
+   "title": "DexTac: Learning Contact-aware Visuotactile Policies via Hand-by-hand Teaching",
+   "authors": "Xingyu Zhang et al.",
+   "year": 2026,
+   "venue": "arXiv 2601.21474",
+   "kind": "policy",
+   "summary": "ACT-based policy for a GEX dexterous hand that takes one RGB image, three GelStereo BioTip fingertip tactile images (thumb, index, middle) and joint angles, and predicts joint changes together with fingertip normal force and center of pressure; with kinesthetic hand-by-hand demonstrations it injects with 30-60 mL syringes at 91.67% (55/60) against 60.00% without center of pressure and 0% without touch.",
+   "embodiment": "robot",
+   "touch": "both",
+   "uses": [],
+   "own_data": "Kinesthetic demonstrations at 30 Hz: 30 per syringe size for the ablation and 50 each for 20, 30, 50 and 60 mL syringes; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text has no code, weights or data statement and no project page (read 2026-11-27)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2601.21474"
+   },
+   "sources": [
+    "https://arxiv.org/html/2601.21474 (hand, sensors, teaching method, policy, data, results; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "Each GelStereo BioTip gives a 415-point tactile point cloud; the paper gives the tactile input as 6 images in one place and 3 in another.",
+    "Syringe sizes are listed as 30/40/50 mL in the text and 30/50/60 mL in Table I.",
+    "Zero-shot on an unseen 20 mL syringe: 65% (13/20) against 5% without center of pressure."
+   ],
+   "checked": "2026-11-27"
+  },
+  {
+   "id": "dexfit",
+   "name": "DexFIT",
+   "title": "DexFIT: Force Informed Transfer for Dexterous Manipulation using Kinematically Isomorphic Tactile Glove",
+   "authors": "Jaesung Lee et al.",
+   "year": 2026,
+   "venue": "IROS 2026 (doi 10.1109/IROS61738.2026.11777583)",
+   "kind": "policy",
+   "summary": "Vision-free Diffusion Policy trained on joint positions, kinesthetic signals and touch recorded through a 16-DoF glove whose joints match the robot hand, with fingertip sensors whose readings become extra grasp commands during collection; at deployment an adaptive force module reads the robot hand's onboard tactile sensors; on light-bulb screwing it reaches 100% completion in its best configuration, with 36.8% shorter task time.",
+   "embodiment": "both",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Light-bulb screwing demonstrations collected with the glove; size and release not stated in the abstract.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "Read from the abstract only: the IEEE page did not load and one search found no preprint or project page (2026-11-27). No release is mentioned in the abstract."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://doi.org/10.1109/iros61738.2026.11777583"
+   },
+   "sources": [
+    "OpenAlex abstract for doi:10.1109/iros61738.2026.11777583 (via the discovery queue, 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "The robot hand is not named in the abstract; its 16 DoF match an Allegro hand, which is not confirmed.",
+    "Tactile sensor makers, taxel counts and the number of demonstrations are not in the abstract; the paper body was not read."
+   ],
+   "checked": "2026-11-27"
+  },
+  {
+   "id": "taptactouch",
+   "name": "TapTacTouch",
+   "title": "TapTacTouch: Shape Completion from Sparse Tactile Contacts with Geometric Priors",
+   "authors": "Yoobin Shin et al.",
+   "year": 2026,
+   "venue": "arXiv 2611.24207",
+   "kind": "estimation",
+   "summary": "Training-free, vision-free shape completion that turns 3x3 pressure-array contacts on four finger pads of a 20-DoF ROBOTIS HX5-D20-MRT hand into 3D points and normals by forward kinematics and fits a multi-scale Gaussian-process implicit surface with a cross-section prior; over six 3D-printed objects it averages 1.610 mm Chamfer distance and 95.00% F-score at 5 mm.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [],
+   "own_data": "Tactile exploration of six 3D-printed objects with the hand on a ROBOTIS OMY arm; release not stated.",
+   "dataset": null,
+   "release": {
+    "code": "not_released",
+    "weights": "not_released",
+    "note": "The arXiv v1 text has no code or data statement and no project page (read 2026-11-27)."
+   },
+   "license": "not stated",
+   "links": {
+    "paper": "https://arxiv.org/abs/2611.24207"
+   },
+   "sources": [
+    "https://arxiv.org/html/2611.24207 (hand, sensors, method, objects, results; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "The reported comparisons project contact positions onto the ground-truth surface and add 0.5 mm Gaussian noise, so they are ground-truth assisted.",
+    "Sensor maker and sampling rate are not stated; each element is an 8-bit value."
+   ],
+   "checked": "2026-11-27"
+  },
+  {
+   "id": "v_hop",
+   "name": "V-HOP",
+   "title": "V-HOP: Visuo-Haptic 6D Object Pose Tracking",
+   "authors": "Hongyu Li et al.",
+   "year": 2025,
+   "venue": "RSS 2025 (arXiv 2502.17434)",
+   "kind": "estimation",
+   "summary": "Transformer pose tracker built on FoundationPose that fuses RGB-D with a hand-object point cloud from taxel positions, readings and joint states, trained on synthetic data from seven hands and grippers; it reaches 1.46 mm ADD-S error on FeelSight against 2.14 mm for NeuralFeels, and on a Barrett Hand with 96 capacitive taxels it completes 80% of bimanual handovers against 40% for FoundationPose.",
+   "embodiment": "robot",
+   "touch": "input",
+   "uses": [
+    {
+     "id": "feelsight",
+     "role": "evaluation",
+     "note": "Occlusion subset (Allegro hand with DIGIT fingertips, Rubik's cube) compared against NeuralFeels: ADD-S error 1.46 mm against 2.14 mm, 32 FPS against 3 FPS."
+    }
+   ],
+   "own_data": "Synthetic Isaac Sim visuo-haptic sequences over eight grippers (Allegro, Barrett, Inspire, LEAP, Robotiq 3-Finger, SCHUNK SVH, Shadow; D'Claw held out); only a small subset is released and the full download is marked WIP in the README (read 2026-11-27).",
+   "dataset": null,
+   "release": {
+    "code": "released",
+    "weights": "released",
+    "note": "github.com/brown-ivl/v-hop (linked from the project page) holds training and test code; its README links a checkpoint on Google Drive and a small dataset subset, and states the project is licensed under Attribution-NonCommercial 4.0 International (read 2026-11-27)."
+   },
+   "license": "CC BY-NC 4.0",
+   "links": {
+    "paper": "https://arxiv.org/abs/2502.17434",
+    "project": "https://ivl.cs.brown.edu/research/v-hop",
+    "code": "https://github.com/brown-ivl/v-hop",
+    "weights": "https://drive.google.com/file/d/1aRIzmf4PaeC62diDl3ifxVq7p0wqP2ud"
+   },
+   "sources": [
+    "https://arxiv.org/html/2502.17434 (hands, inputs and outputs, FeelSight evaluation, real-world results; v2)",
+    "https://ivl.cs.brown.edu/research/v-hop (RSS 2025 citation, code link; read 2026-11-27)",
+    "https://github.com/brown-ivl/v-hop (repository listing and README; read 2026-11-27)"
+   ],
+   "unconfirmed": [
+    "The GitHub API reports the license as NOASSERTION; the license name is taken from the README.",
+    "The Barrett Hand taxels (24 per fingertip, 24 on the palm) are described in the paper; the sensor maker is not named.",
+    "Training touch is simulated; the recorded touch it is evaluated on is FeelSight and the authors' real Barrett Hand runs."
+   ],
+   "checked": "2026-11-27"
   }
  ]
 }
