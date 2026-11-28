@@ -2,6 +2,105 @@
  "changes": [
   {
    "kind": "added",
+   "target": "model",
+   "id": "dexgrasp_vla",
+   "text": "DexGrasp-VLA: hand VLA on a 12-DoF XHand with 120-element tri-axial fingertip arrays; grasp success 21% without touch, 90% with both tactile embeddings (ICRA 2026); no release stated.",
+   "source": "https://arxiv.org/abs/2511.00139",
+   "date": "2026-11-28",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "pp_tac",
+   "text": "PP-Tac: diffusion policy on four R-Tac camera fingertips of an Allegro-based hand for picking paper; 87.5% overall success (RSS 2025); sensor hardware and code released, no license file.",
+   "source": "https://github.com/bigai-ai/PP-Tac",
+   "date": "2026-11-28",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "dexmove",
+   "text": "DexMove: flow-matching wrist-finger policy for non-prehensile manipulation, trained with wearable vision-based tactile demonstrations; 77.8% over six real objects (ICLR 2026, read from abstract and project page); no release stated.",
+   "source": "https://peilin-666.github.io/projects/DexMove",
+   "date": "2026-11-28",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "dexscrew",
+   "text": "DexScrew: behavior-cloning policy on XHand fingertip tactile arrays for screwdriving and nut-bolt fastening; screwdriving progress 95.00% against 69.20% without touch or history (ICRA 2026); code released under MIT.",
+   "source": "https://github.com/x-robotics-lab/dexscrew",
+   "date": "2026-11-28",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "kinefuse",
+   "text": "KineFuse: pose tracker fusing binary fingertip contact and joint force/torque of a 16-DoF hand with RGB-D; 4.04 cm against 8.11 cm vision-only in simulated tracking (IROS 2026); no release stated.",
+   "source": "https://arxiv.org/abs/2607.14842",
+   "date": "2026-11-28",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "unidex_vitac",
+   "text": "UniDex-ViTac: ACT policy with four barometric fingertip contact bits on a 16-DoF hand, trained only in simulation from 50 DexYCB videos; 73/110 real successes against 60/110 without contact; no release stated.",
+   "source": "https://arxiv.org/abs/2609.16504",
+   "date": "2026-11-28",
+   "flow": "discovery"
+  },
+  {
+   "kind": "added",
+   "target": "model",
+   "id": "tacbpm",
+   "text": "TacBPM: tactile-conditioned latent prior for 22-DoF SharpaWave reorientation; 60.38% against 40.05% without touch on held-out shapes, 9/10 real corner-block rotations; code announced.",
+   "source": "https://tacbpm.github.io",
+   "date": "2026-11-28",
+   "flow": "discovery"
+  },
+  {
+   "kind": "released",
+   "target": "model",
+   "id": "fact",
+   "text": "FACT: model code and four checkpoints found on Hugging Face (zhicao/FACT, MIT, ungated, last changed 2026-10-29) with no training script; the project page still says 'Code (Coming Soon)'. Code announced -> released, weights not released -> released.",
+   "source": "https://huggingface.co/zhicao/FACT",
+   "date": "2026-11-28",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "dataset",
+   "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile: 100 box-flip trajectories recorded 2026-11-23 were uploaded on 2026-11-24, bringing the card's successful demonstrations to 300 over 3 tasks (card total 701 GB; gate still manual approval).",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
+   "date": "2026-11-28",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "tacforcing",
+   "text": "TacForcing: the project page given in arXiv v1 shows 'Code · Coming soon'; code not released -> announced.",
+   "source": "https://88runaway.github.io/tacforcing/",
+   "date": "2026-11-28",
+   "flow": "status"
+  },
+  {
+   "kind": "updated",
+   "target": "model",
+   "id": "vtao_bimanip",
+   "text": "VTAO-BiManip: venue set to IROS 2025 from the authors' project page and the publisher record, and the project page linked; no code or weights.",
+   "source": "https://suzend.github.io/VTAO-Bimanip",
+   "date": "2026-11-28",
+   "flow": "status"
+  },
+  {
+   "kind": "added",
    "target": "dataset",
    "id": "realdexumi",
    "text": "RealDexUMI: over 100 h of demonstrations from a wearable 11-DoF hand with piezoresistive fingertip arrays (20 Hz) and an in-hand camera, more than 200 episodes per task; release announced in the paper, no link yet.",

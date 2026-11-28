@@ -1,0 +1,23 @@
+{"date": "2026-11-28", "flow": "discovery", "changes": [
+  {"kind": "added", "target": "model", "id": "dexgrasp_vla",
+   "text": "DexGrasp-VLA: hand VLA on a 12-DoF XHand with 120-element tri-axial fingertip arrays; grasp success 21% without touch, 90% with both tactile embeddings (ICRA 2026); no release stated.",
+   "source": "https://arxiv.org/abs/2511.00139"},
+  {"kind": "added", "target": "model", "id": "pp_tac",
+   "text": "PP-Tac: diffusion policy on four R-Tac camera fingertips of an Allegro-based hand for picking paper; 87.5% overall success (RSS 2025); sensor hardware and code released, no license file.",
+   "source": "https://github.com/bigai-ai/PP-Tac"},
+  {"kind": "added", "target": "model", "id": "dexmove",
+   "text": "DexMove: flow-matching wrist-finger policy for non-prehensile manipulation, trained with wearable vision-based tactile demonstrations; 77.8% over six real objects (ICLR 2026, read from abstract and project page); no release stated.",
+   "source": "https://peilin-666.github.io/projects/DexMove"},
+  {"kind": "added", "target": "model", "id": "dexscrew",
+   "text": "DexScrew: behavior-cloning policy on XHand fingertip tactile arrays for screwdriving and nut-bolt fastening; screwdriving progress 95.00% against 69.20% without touch or history (ICRA 2026); code released under MIT.",
+   "source": "https://github.com/x-robotics-lab/dexscrew"},
+  {"kind": "added", "target": "model", "id": "kinefuse",
+   "text": "KineFuse: pose tracker fusing binary fingertip contact and joint force/torque of a 16-DoF hand with RGB-D; 4.04 cm against 8.11 cm vision-only in simulated tracking (IROS 2026); no release stated.",
+   "source": "https://arxiv.org/abs/2607.14842"},
+  {"kind": "added", "target": "model", "id": "unidex_vitac",
+   "text": "UniDex-ViTac: ACT policy with four barometric fingertip contact bits on a 16-DoF hand, trained only in simulation from 50 DexYCB videos; 73/110 real successes against 60/110 without contact; no release stated.",
+   "source": "https://arxiv.org/abs/2609.16504"},
+  {"kind": "added", "target": "model", "id": "tacbpm",
+   "text": "TacBPM: tactile-conditioned latent prior for 22-DoF SharpaWave reorientation; 60.38% against 40.05% without touch on held-out shapes, 9/10 real corner-block rotations; code announced.",
+   "source": "https://tacbpm.github.io"}
+]}

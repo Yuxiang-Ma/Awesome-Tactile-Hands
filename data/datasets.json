@@ -2,7 +2,7 @@
  "metadata": {
   "title": "Awesome Tactile Hands",
   "scope": "Public datasets that record touch across the hand during manipulation: human tactile gloves and dexterous robot hands with tactile sensing.",
-  "last_updated": "2026-11-27"
+  "last_updated": "2026-11-28"
  },
  "datasets": [
   {
@@ -10720,7 +10720,7 @@
    "authors": "SingleBicycle (Hugging Face account)",
    "year": 2026,
    "venue": "Hugging Face dataset (2026)",
-   "summary": "Teleoperated bimanual tube pouring (100 successful trajectories in two batches) and, since 2026-11-08, USB plugging (100 successful trajectories in two batches) on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm, plus labelled failures and several hundred real-robot policy rollouts (pi0.5 and Diffusion Policy, noise-space RL), behind a Hugging Face gate.",
+   "summary": "Teleoperated bimanual tube pouring, USB plugging (since 2026-11-08) and box flipping (since 2026-11-24), 100 successful trajectories each, on two UFACTORY xArm6 arms with BrainCo Revo2 hands, each hand wearing a Tujian (Tachin) tactile glove, with a static head camera and a wrist camera per arm, plus labelled failures and several hundred real-robot policy rollouts (pi0.5 and Diffusion Policy, noise-space RL), behind a Hugging Face gate.",
    "embodiment": "robot",
    "hand": "BrainCo Revo2 x 2 on UFACTORY xArm6 arms, each covered by a Tujian (Tachin) tactile glove",
    "bimanual": true,
@@ -10742,16 +10742,16 @@
    ],
    "scale": {
     "hours": null,
-    "episodes": 200,
+    "episodes": 300,
     "frames": null,
-    "tasks": 2,
+    "tasks": 3,
     "objects": null,
     "subjects": null,
     "scenes": null,
     "scene_types": [
      "lab"
     ],
-    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders. USB plug (added 2026-11-08): 57 (2026-11-08/09) + 43 (2026-11-10, with a teleop push perturbation) successful trajectories plus 8 failures. Policy rollouts are not counted in episodes: task4_pi05_rl_rollouts_20261030 (82 episodes), task4_dp_rl_rollouts_20261103 (120 episodes, added 2026-11-03), 40 pi0.5 pour evaluation trials of 2026-11-21/22 in four groups, and 140 USB-plug rollouts (20 + 40 + 30 + 40 + 10, 2026-11-15 to 11-20) with 3/20 success for the Diffusion Policy base and 0/10 for each of the 12 later policy groups, per the card; pipette, cap, hold-and-wipe and cloth folding listed as planned"
+    "text": "Tube pour: 50 successful trajectories (2026-10-05) + 50 (2026-10-21/22), plus 2 and 7 failed or aborted attempts in separate folders. USB plug (added 2026-11-08): 57 (2026-11-08/09) + 43 (2026-11-10, with a teleop push perturbation) successful trajectories plus 8 failures. Box flip (uploaded 2026-11-24): 100 successful trajectories recorded 2026-11-23, one per box placement. Policy rollouts are not counted in episodes: task4_pi05_rl_rollouts_20261030 (82 episodes), task4_dp_rl_rollouts_20261103 (120 episodes, added 2026-11-03), 40 pi0.5 pour evaluation trials of 2026-11-21/22 in four groups, and 140 USB-plug rollouts (20 + 40 + 30 + 40 + 10, 2026-11-15 to 11-20) with 3/20 success for the Diffusion Policy base and 0/10 for each of the 12 later policy groups, per the card; pipette, cap, hold-and-wipe and cloth folding listed as planned"
    },
    "availability": "gated",
    "access": "Hugging Face SingleBicycle/rss-dual-arm-tactile; the files open after agreeing to share Hugging Face contact information (gate listed as manual approval). The repository also holds policy rollout code (rollout_code_20261026), a policy-rollout folder (task4_pi05_rl_rollouts_20261030) and, since 2026-11-02, glove code (tujian_glove_code_20261102).",
@@ -10759,18 +10759,19 @@
     "kind": "hf_gate",
     "approval": "manual",
     "url": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile",
-    "checked": "2026-11-23",
-    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-23; the nightly scan returned empty values for this repository that night, but a later direct read showed the repository public, not disabled and still gated manual, last modified 2026-11-24 02:27 UTC)."
+    "checked": "2026-11-28",
+    "note": "Gate text: 'You need to agree to share your Hugging Face information to access this dataset.' Hugging Face API reports gated: manual (re-read 2026-11-28; repository public, not disabled, last modified 2026-11-25 04:59 UTC)."
    },
    "license": "not stated",
    "caveats": [
-    "A second task, dual-arm USB plugging (right hand holds a USB hub, left hand pinches a flash drive or cable plug and plugs it in), appeared on 2026-11-08 and the card now lists tube pour and USB plug as done. Of its 100 successful trajectories, 57 are batch 1 and 43 are batch 2 with a push perturbation; 8 failed attempts are published as not for training. The task_box_flip_preview_20261123 and task_case_videos_20261115 folders are listed in the repository but are not described on the public card; files not opened.",
-    "The card gives 516 GB as the total size on 2026-11-23, while the Hugging Face API reports 238.4 GB of storage.",
+    "A second task, dual-arm USB plugging (right hand holds a USB hub, left hand pinches a flash drive or cable plug and plugs it in), appeared on 2026-11-08 and the card now lists tube pour and USB plug as done. Of its 100 successful trajectories, 57 are batch 1 and 43 are batch 2 with a push perturbation; 8 failed attempts are published as not for training. No description of the task_case_videos_20261115 folder was found in the card text read; files not opened.",
+    "The card gives 701 GB as the total size on 2026-11-28, while the Hugging Face API reports 260.0 GB of storage; on 2026-11-23 the figures were 516 GB and 238.4 GB.",
+    "Box flip (task_box_flip_dual_20261123): both hands hook the far top edge of a black box of about 20×10×10 cm and pull it toward the robot so it tips onto its next face. The card puts all 100 trajectories in the train split, in the same package format as the USB folders. The operator counted every trajectory as a success, the folder README lists those where both hands did not hold the box together (gated, not read), and one trajectory (dual_box_20261123_180537_c001) is start-trimmed because its recording began 13.4 s after teleoperation launched. task_box_flip_preview_20261123 is a 32.9 s head-camera clip marked preview only.",
     "Policy rollouts, not demonstrations: for the Diffusion Policy trained on USB-plug batch 1, base success was 3/20, and the later Diffusion Policy and pi0.5 groups (12 groups of 10 trials, 2026-11-17 to 11-20) all scored 0/10. Pour evaluation of 2026-11-21/22 (pi0.5, four reward-weighting groups x 10 trials) scored 8, 7, 8 and 8 of 10 (demo, plain, Ours, vision); the card says the stage-point advantage of Ours over vision (p = 0.047) is not significant after correcting for 5 comparisons.",
     "No paper or project page; the card refers to an 'RSS project' without a link, and the publisher is a personal account.",
     "Touch comes from gloves pulled over the robot hands, not from the Revo2's own fingertip sensors; the card does not say whether the hands are the tactile Revo2 TOUCH variant.",
     "The card gave 137 GB as the total size on 2026-10-28, 157 GB on 2026-11-01 and 163 GB on 2026-11-02, while the Hugging Face API reported 31.2 GB of storage on 2026-10-28, 48.2 GB on 2026-11-01 and 53.7 GB on 2026-11-02; the batch-1 folder is described as a copy of a release in another repository, which is not named.",
-    "Two demonstration tasks so far (tube pour, USB plug); the failure folders are marked 'Not for training'.",
+    "Three demonstration tasks so far (tube pour, USB plug, box flip); the tube-pour and USB-plug failure folders are marked 'Not for training'.",
     "task4_pi05_rl_rollouts_20261030 (public card, files not opened) holds policy rollouts, not demonstrations: 22 pi0.5 base-policy episodes and 39 episodes of one round of noise-space RL (DSRL-SAC) in two learner groups, plus one voided attempt, with videos, per-decision records, Revo2 and glove tactile and the authors' 'Ours scorer' outputs. Since 2026-11-02 it also lists dp_base/ (20 Diffusion Policy base-policy episodes, 13/20 successes, 3 of the 7 failures are collision-guard aborts) and pi05_s1_dsrl_na_partial/ (the first training episode of the DSRL-NA stage), which brings the card's count to 82 episodes. The card reports pi0.5 base policy 13/20, label 4/10 training and 5/10 evaluation, label_ours 5/10 training and 5/9 evaluation, and no measurable difference between the groups or against the base policy.",
     "Per-episode streams, rates and the tactile array layout are only in the gated per-folder READMEs, which were not read.",
     "A top-level folder tujian_glove_code_20261102 (README.md 6.06 kB and a 215 kB zip) appeared on 2026-11-02; the commit message says it adds paths.py, xhost.py, arm_frames.py and __init__.py as support modules for align.py and packing. The main card does not mention it, the files are gated and were not opened, so whether it documents the glove's taxel layout is unknown."
@@ -10822,11 +10823,13 @@
    "sources": [
     "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text and gate prompt via the dataset page; repository metadata and top-level listing via the Hugging Face API)",
     "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile/tree/main/task4_pi05_rl_rollouts_20261030 (public file listing, read 2026-11-02)",
-    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public dataset page text and repository metadata via the Hugging Face API, read 2026-11-23; no gated file opened)"
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public dataset page text and repository metadata via the Hugging Face API, read 2026-11-23; no gated file opened)",
+    "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile (public card text on the box flip, status table and total size; repository metadata and top-level listing via the Hugging Face API; read 2026-11-28; no gated file opened)"
    ],
    "unconfirmed": [
     "Tujian = 途见, the Chinese name of Tachin Technology, whose TachinGlove is in the catalog; the card does not give the glove model, so the TachinGlove hardware link rests on the maker name.",
-    "episodes = 100 successful trajectories as counted on the card; the 9 failures are not counted.",
+    "episodes = 300 is the sum of the card's successful trajectories (tube pour 100, USB plug 100, box flip 100); the 17 tube-pour and USB-plug failures are not counted.",
+    "The box-flip counts and upload dates are quoted from the public card through a page reader; the raw README and the folder README are behind the gate.",
     "Teleoperation interface not named; 'teleoperated demonstrations' is from the card summary.",
     "Modalities beyond the three cameras and touch (joint states, actions) are not listed on the public card.",
     "The same account's gated SingleBicycle/tacwam-wetlab-tasks (catalog: tacwam_wetlab) holds task4_dual_arm_tube_pour_20261005 and _20261022 folders plus two failure folders, matching the dates of these two batches; it is probably the unnamed repository the batch-1 folder was copied from, not confirmed (seen 2026-10-29, files not opened)."

@@ -1,0 +1,13 @@
+{"date": "2026-11-28", "flow": "status", "changes": [
+  {"kind": "released", "target": "model", "id": "fact",
+   "text": "FACT: model code and four checkpoints found on Hugging Face (zhicao/FACT, MIT, ungated, last changed 2026-10-29) with no training script; the project page still says 'Code (Coming Soon)'. Code announced -> released, weights not released -> released.",
+   "source": "https://huggingface.co/zhicao/FACT"},
+  {"kind": "updated", "target": "dataset", "id": "rss_dual_arm_tactile",
+   "text": "RSS Dual-Arm Tactile: 100 box-flip trajectories recorded 2026-11-23 were uploaded on 2026-11-24, bringing the card's successful demonstrations to 300 over 3 tasks (card total 701 GB; gate still manual approval).",
+   "source": "https://huggingface.co/datasets/SingleBicycle/rss-dual-arm-tactile"},
+  {"kind": "updated", "target": "model", "id": "tacforcing",
+   "text": "TacForcing: the project page given in arXiv v1 shows 'Code · Coming soon'; code not released -> announced.",
+   "source": "https://88runaway.github.io/tacforcing/"},
+  {"kind": "updated", "target": "model", "id": "vtao_bimanip",
+   "text": "VTAO-BiManip: venue set to IROS 2025 from the authors' project page and the publisher record, and the project page linked; no code or weights.",
+   "source": "https://suzend.github.io/VTAO-Bimanip"}]}

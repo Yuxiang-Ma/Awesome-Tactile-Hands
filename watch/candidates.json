@@ -1,59 +1,20 @@
 {
- "generated": "2026-11-27T06:33:35Z",
+ "generated": "2026-11-28T06:37:50Z",
  "log": [
-  "arXiv recent (2026-11-06 to 2026-11-27): 13 new",
-  "arXiv backfill 2019-01 (2019-01-01 to 2019-04-01): 2 new",
-  "OpenAlex search recent (2026-10-28 to 2026-11-27): 27 new",
-  "OpenAlex search backfill 2018-04 (2018-04-01 to 2018-07-01): 19 new",
-  "OpenAlex citations of 113 catalog papers: 413 new",
-  "Hugging Face: 233 new from name searches, 233 new from publishers of catalog entries",
+  "arXiv recent (2026-11-07 to 2026-11-28): 10 new",
+  "arXiv backfill 2019-04 (2019-04-01 to 2019-07-01): 0 new",
+  "OpenAlex search recent (2026-10-29 to 2026-11-28): 27 new",
+  "OpenAlex search backfill 2018-07 (2018-07-01 to 2018-10-01): 32 new",
+  "OpenAlex citations of 121 catalog papers: 405 new",
+  "Hugging Face: 233 new from name searches, 234 new from publishers of catalog entries",
   "GitHub: 11 new"
  ],
  "problems": [],
  "sources_failed": [],
- "new_tonight": 46,
+ "new_tonight": 14,
  "queued": 400,
- "dropped_low_score": 565,
+ "dropped_low_score": 572,
  "candidates": [
-  {
-   "key": "arxiv:2608.01102",
-   "title": "CAAT: Contact-Aware Attention Scaling and Tactile Masking for Data-Efficient Contact-Rich Manipulation",
-   "date": "2026-08-02",
-   "url": "https://arxiv.org/abs/2608.01102",
-   "authors": "Jiaming Jiang et al.",
-   "abstract": "In contact-rich manipulation, visual observations primarily guide motion in free space, whereas tactile observations become particularly informative during contact. However, standard Transformer-based visuo-tactile policies typically rely on either token concatenation or learnable gating. These approaches lack explicit contact-aware priors, making it difficult to efficiently learn effective cross-modal representations from demonstrations. To address this limitation, we propose CAAT, a lightweight contact-aware framework that explicitly incorporates contact priors through attention scaling and dynamic tactile masking. Specifically, CAAT emphasizes visual information before contact and tactile information during contact. It also suppresses static background tokens by comparing the current tactile observation with a non-contact reference. CAAT can be integrated into commonly used Transformer-based policies without modifying their action decoders. In simulation, integrating CAAT with ACT improves the average success rate by 18.0 percentage points over direct visuo-tactile fusion and by 10.0 percentage points over gated fusion. In real-world experiments using a visuo-tactile UMI platform, CAAT achieves an average success rate of 60.0% across ACT, Diffusion Policy, and $π_0$, outperforming the strongest baseline by an average of 21.1 percentage points. These results demonstrate that explicit contact priors and dynamic tactile masking are effective in improving visuo-tactile policy ",
-   "score": 14.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:ht_bench",
-    "openalex cites model:omnivtla",
-    "openalex cites model:tac2pix",
-    "openalex cites model:vitacformer"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "doi:10.1109/iros61738.2026.11777583",
-   "title": "DexFIT: Force Informed Transfer for Dexterous Manipulation using Kinematically Isomorphic Tactile Glove",
-   "date": "2026-09-01",
-   "url": "https://doi.org/10.1109/iros61738.2026.11777583",
-   "authors": "Jaesung Lee et al.",
-   "abstract": "Acquiring high-quality demonstration data for dexterous robotic hand manipulation remains challenging because conventional methods either lose critical force information during collection or require complex, error-prone retargeting processes. In this paper, we propose DexFIT (Dexterous Force-Informed Transfer), a system designed to transfer human contact forces to a robotic hand in real-time through a kine-matically isomorphic wearable glove equipped with integrated fingertip tactile sensors. The glove’s 16-degree-of-freedom (DoF) joint structure is mechanically identical to the target robot hand, thereby eliminating the need for retargeting entirely. During data collection, a Force Generation (FG) module converts tactile readings from the operator’s fingertips into supplementary joint angle commands, enabling the robot hand to generate contact forces proportional to the human’s applied pressure. For autonomous deployment, an Adaptive Force Control (AFC) module monitors task progress and dynamically adjusts the grasp force of contacting fingers, detected via the robot’s onboard tactile sensors. We trained a vision-free Diffusion Policy on the collected proprioceptive data—including joint positions, kinesthetic sensors, and tactile signals—and evaluated the system on a light bulb-screwing task. Experimental results show that DexFIT achieves a 100% task completion rate in its optimal configuration, with a 36.8% reduction in task completion time and 16.7% reduction in energy con",
-   "score": 13.5,
-   "hints": [
-    "glove",
-    "hand",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:hato",
-    "openalex cites model:vitacformer"
-   ],
-   "first_seen": "2026-11-26"
-  },
   {
    "key": "openalex:W7236513678",
    "title": "DexMove: Learning Tactile-Guided Non-Prehensile Manipulation with Dexterous Hands",
@@ -75,96 +36,59 @@
    "first_seen": "2026-11-24"
   },
   {
-   "key": "doi:10.1109/iros61738.2026.11776848",
-   "title": "DexTact: A Visuo-Tactile Foundation Model for Dexterous Hand Grasping",
-   "date": "2026-09-01",
-   "url": "https://doi.org/10.1109/iros61738.2026.11776848",
-   "authors": "Xinmin Fang et al.",
-   "abstract": "Dexterous hand grasping has advanced rapidly through large-scale datasets and learned policies, yet these approaches predominantly rely on visual or geometric modalities, with tactile sensing remaining largely unexplored for dexterous manipulation, limiting their robustness to visual perturbations. We present DexTact, the first visuo-tactile foundation model for dexterous hand grasping. We construct a large-scale dataset of 174,500 grasping demonstrations across nearly 200 objects, 5 environments, and 10 lighting conditions, collected in simulation. Built on this dataset, we train a visuotactile-language-action (VTLA) model that jointly processes RGB images, 3D contact forces from all finger joints, and natural language instructions to generate coordinated grasping actions. Experiments demonstrate that DexTact achieves 84.2% grasping success on seen objects and 68.6% on unseen objects, while generalizing effectively to novel environments (81.6%) and lighting conditions (75.1%). Ablation studies reveal that vision and tactile modalities serve complementary roles: vision dominates object-level generalization, while tactile sensing provides robustness to visual perturbations, reducing the lighting generalization gap from 16.6% (w/o Tactile) to 4.2% (full model). We further validate favorable scaling behavior following power-law trends (R2≥0.999), with seen-object success improving from 32.3% to 84.2% as data scales from 100 to 174,500 demonstrations; the fitted curves project th",
-   "score": 12.5,
+   "key": "arxiv:2611.03520",
+   "title": "PanoTac: A Dense Three-Axis Tactile Sensor for Robust Touch-Centric Manipulation",
+   "date": "2026-11-02",
+   "url": "https://arxiv.org/abs/2611.03520",
+   "authors": "Binglin et al.",
+   "abstract": "Contact-rich manipulation benefits from tactile feedback that captures both detailed contact geometry and interaction forces. When scooping grains, contact patterns help infer spoon orientation, while resistance transmitted through the grasp guides motion. To provide these complementary sensing capabilities, we present PanoTac, a low-cost, compliant tactile fingertip designed for dense three-axis tactile sensing. Each fingertip provides a $12 \\times 32 \\times 3$ tactile representation, with one normal ($z$) and two shear ($x$, $y$) response components at each taxel. The sensor operates at 60 Hz and costs less than $50 per fingertip. Sensor characterization quantifies response repeatability and consistency across sensor instances and contact locations. We integrate PanoTac into a robotic system with a visuo-tactile pipeline. Across test-tube preparation, grain scooping, and salt pouring, the resulting policies outperform vision-only baselines by an average of 46.7 percentage points. Ablations show that removing either spatial contact information or shear feedback reduces overall performance across the task suite. Our project page is available at https://panotac.github.io.",
+   "score": 11.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:sparsh_x",
+    "openalex cites dataset:stag",
+    "openalex cites model:fingereye"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "arxiv:2610.08870",
+   "title": "From Wearable Interfaces to Dexterous Policies: Contact Shifts and Tactile Representations",
+   "date": "2026-10-06",
+   "url": "https://arxiv.org/abs/2610.08870",
+   "authors": "Ruitong Tian et al.",
+   "abstract": "Unlike conventional teleoperation, wearable interfaces allow operators to collect dexterous demonstrations through their own hand motions while directly interacting with task objects. This direct interaction reduces dependence on the target robot during collection, but it also makes the collection hardware part of the physical process that generates each demonstration. Interface geometry can influence both how a task is performed and what tactile observations are recorded for learning. We study two versions of a DexUMI-family exoskeleton that share the same robot command definition, mapping procedure, and tactile module type but differ in hand-side geometry. The revised interface reduces reported physical demand, improves selected device ratings, enables tactile access in a precision grasp that is mechanically blocked by the baseline, and produces task-dependent changes in recorded contact. Lid twisting primarily exhibits a change in contact location, whereas egg carton opening primarily exhibits a change in contact occurrence. We then train matched policies using either a binary aggregate input or a spatial-plus-force input. On lid twisting and egg carton opening, policies trained on revised-interface demonstrations achieve higher success than those trained on baseline demonstrations, with a significant pooled interface effect. Across these and two additional tasks, USB insertion and soldering tool pick and place, the spatial-plus-force input likewise outperforms binary aggr",
+   "score": 10.5,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:dexumi",
+    "openalex cites dataset:dexvitac",
+    "openalex cites dataset:realdexumi",
+    "openalex cites model:robot_synesthesia",
+    "openalex recent"
+   ],
+   "first_seen": "2026-11-02"
+  },
+  {
+   "key": "arxiv:2607.14842",
+   "title": "KineFuse: Kinematic-Aware Haptic Fusion for In-Hand Occluded-Object Pose Tracking",
+   "date": "2026-07-16",
+   "url": "https://arxiv.org/abs/2607.14842",
+   "authors": "Chanyoung Ahn et al.",
+   "abstract": "Dexterous in-hand manipulation requires continuous 6D pose tracking, yet the manipulating fingers inevitably occlude the object from the camera. We study how to structure the sparse haptic signals already available on multi-fingered hands, including proprioception, proximal force/torque, and binary contact, to complement a pretrained visual pose tracker under occlusion. We propose a kinematic-aware finger-level encoder and systematically compare it against four alternative designs through three levels of evaluation: per-frame refinement, sequential open-loop tracking, and closed-loop manipulation. Our experiments reveal that (i) per-frame evaluation cannot distinguish encoder quality, while sequential tracking amplifies architectural differences by up to 15 times; (ii) the structured encoder learns task-specific cross-modal gating, using vision exclusively for translation and dedicating one attention head to haptics for rotation, without explicit supervision; and (iii) compact finger-level tokenization with 4 tokens outperforms both flat fusion and joint-level representations, which suppress vision through norm dominance. We validate that improved tracking yields higher success in a downstream reorientation task and provide qualitative real-world demonstrations. Our project page is available at https://cold-young.github.io/kine-fuse/.",
+   "score": 10.5,
    "hints": [
     "hand",
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:hato",
-    "openalex cites dataset:tdex"
-   ],
-   "first_seen": "2026-11-26"
-  },
-  {
-   "key": "arxiv:2609.24507",
-   "title": "TACIT: Tactile Contact Supervision for Spatial Attention in Dexterous Manipulation",
-   "date": "2026-09-21",
-   "url": "https://arxiv.org/abs/2609.24507",
-   "authors": "Yanhou Lai et al.",
-   "abstract": "Visuomotor policies trained from a few demonstrations may reproduce demonstrated trajectories without reliably following changes in object position. Existing approaches with explicit attention typically obtain spatial priors from human annotation or visual models. We introduce TACIT (tactile contact informs attention), which uses measured tactile contacts from teleoperated demonstrations to supervise spatial attention without additional point annotation. Gaussian targets over preceding camera point clouds supervise an attention head whose pooled output conditions a visuotactile diffusion policy. Targets are used only during training; tactile observations remain inputs at inference. In the primary real-robot benchmark, with ten demonstrations per task and five demonstrated placement regions, TACIT achieves 66.7% success on ball placement and 73.3% on peg insertion, compared with 10.0% and 20.0% for input-matched 3D visuotactile fusion and 20.0% and 43.3% for vision-only DP3. TACIT enters the 150 mm palm-to-object approach region within 12 seconds in all 30 trials per task; all remaining failures occur after arrival. Across three training seeds on real ball and simulated peg, TACIT outperforms input-matched fusion and an architecture-matched control without explicit attention supervision, supporting the contribution of supervision beyond branch capacity. Pre-contact and contact-time supervision show no consistent ordering. These results demonstrate that measured tactile contact",
-   "score": 12.0,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites model:cgp",
-    "openalex cites model:tac2pix",
-    "openalex cites model:transdex"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2610.18118",
-   "title": "ForeTac: Predictive Contact Guidance for Generative Robot Policies",
-   "date": "2026-10-13",
-   "url": "https://arxiv.org/abs/2610.18118",
-   "authors": "Zhiyuan Chen et al.",
-   "abstract": "In contact-rich manipulation, actions that appear equally plausible from vision can produce different contact outcomes, while reactive control based on current tactile feedback may respond too late to prevent failure. We present ForeTac, a predictive contact-guidance framework organized as a represent-predict-evaluate-guide loop. ForeTac encodes the current tactile state, predicts future tactile latent trajectories conditioned on candidate action sequences, and evaluates each predicted trajectory with a contact-quality objective learned from successful and failed physical interactions. At inference, gradients of this objective are backpropagated through the tactile predictor to guide action generation before execution while keeping all model parameters frozen. We evaluate ForeTac on four real-robot tasks (planar and curved-surface wiping, card swiping, and fragile-object grasping) with diffusion and flow-matching policies. Compared with vision-only Diffusion Policy, ForeTac improves the average task success rate (SR) from 36.3% to 71.3% and the average contact success rate (CSR) from 20.0% to 66.3% across these tasks, and yields gains in both metrics with a flow-matching policy. Component analyses support the learned tactile representation, action-conditioned foresight, and generation-time gradient guidance, while predicted tactile latent trajectories preserve contact-quality ordering. Project page: https://foretac.github.io/.",
-   "score": 10.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:sparsh_x",
-    "openalex cites model:touchworld",
-    "openalex cites model:vitacformer"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2604.20689",
-   "title": "FingerEye: Learning Dexterous Manipulation with Continuous Vision-Tactile Sensing",
-   "date": "2026-04-22",
-   "url": "https://arxiv.org/abs/2604.20689",
-   "authors": "Zhixuan Xu et al.",
-   "abstract": "Dexterous robotic manipulation requires perception that remains informative from pre-contact approach to contact initiation and post-contact control. We introduce FingerEye, a sensing and learning framework that strengthens robotic dexterity through continuous vision-tactile feedback throughout interaction. On the sensing side, FingerEye integrates binocular RGB cameras with a compliant contact interface to support perception both before and after contact. Before contact, the fingertip cameras provide close-range visual cues and implicit stereo for precise approach and object localization. After contact, marker-tracked deformation of the compliant ring provides a proxy for contact wrench sensing. On the learning side, we build real-and-sim infrastructure for data collection and evaluation, systematically study policy-interface designs for learning with multiple FingerEye sensors, and develop FingerEye Policy, which applies group-structured modality fusion to reduce modality shortcuts and better exploit distributed fingertip feedback. Across seven contact-sensitive task settings, FingerEye improves wrist-only policy by over 30 percentage points in mean success rate in both simulation and the real world.",
-   "score": 10.5,
-   "hints": [
     "model"
    ],
    "found_by": [
     "openalex cites dataset:feelsight",
     "openalex cites dataset:hato",
-    "openalex cites dataset:sparsh_x",
-    "openalex cites model:vitacformer"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2606.06033",
-   "title": "RealDexUMI: A Wearable Universal Manipulation Interface for Dexterous Robot Learning",
-   "date": "2026-06-04",
-   "url": "https://arxiv.org/abs/2606.06033",
-   "authors": "Chaoyi Xu et al.",
-   "abstract": "Learning dexterous manipulation requires demonstrations that preserve fine hand-object interactions while remaining executable at deployment. Existing pipelines either lose deployable dexterity through retargeting or embodiment conversion, or rely on robot-specific teleoperation that is costly to scale and often lacks intuitive, contact-aware control for dexterous data collection. We present RealDexUMI, a wearable universal manipulation interface built around a shared dexterous end-effector module that integrates a lightweight dexterous hand, in-hand vision, and fingertip tactile sensing. A palm-side isomorphic teleoperation glove maps human finger inputs to robot-hand joint commands, enabling real-time, retargeting-free, intuitive, and precise hand control. The shared hand and sensing modules yield zero-gap end-effector data, with matched in-hand observations, tactile signals, contacts, and hand actions between collection and deployment. Across eight real-robot tasks spanning fine-grained, contact-rich, long-horizon, and bimanual manipulation, policies trained on RealDexUMI data achieve an average success rate of 88.75%, generalize to unseen initial poses, and transfer across three embodiments. Website: https://research.beingbeyond.com/realdexumi",
-   "score": 10.0,
-   "hints": [
-    "hand",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:dexumi",
-    "openalex cites dataset:dexvitac"
+    "openalex cites model:v_hop"
    ],
    "first_seen": "2026-11-24"
   },
@@ -183,6 +107,24 @@
    "found_by": [
     "openalex cites dataset:dexumi",
     "openalex cites dataset:hato"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
+   "key": "doi:10.1109/tii.2025.3646626",
+   "title": "ViTaDex: Vision–Tactile Fusion for 6-D Object-in-Hand Pose Estimation in Dexterous Anthropomorphic Manipulation",
+   "date": "2026-01-06",
+   "url": "https://doi.org/10.1109/tii.2025.3646626",
+   "authors": "Ling Tong et al.",
+   "abstract": "Object-in-hand 6-D pose estimation is critical for dexterous manipulation and assembly tasks. Existing object-in-hand pose estimation methods neglect the varying significance of tactile information from distinct hand regions during feature extraction and employ simplistic concatenation for vision–tactile fusion, which fails to capture the complementary relationships between these modalities. Moreover, prevailing object-in-hand datasets predominantly rely on predefined motion trajectories and single-point fingertip contact information, which inadequately represent real-world scenarios. To address these limitations, we propose the vision–tactile adaptive fusion network. Specifically, we design a novel tactile-gated adaptive graph convolution to dynamically model multiregional tactile features across the hand. We also introduce a vision–tactile cross-attention gated fusion module that facilitates efficient integration of multimodal sensory information. In addition, we construct the Vision–Tactile Object-in-Hand Dexterous Manipulation dataset based on human demonstration for 6-D pose estimation. The dataset employs a teleoperation system that combines an exoskeleton hand with a pose tracking system to replicate human dexterous behaviors and encompasses high-density tactile data spanning the entire hand. Extensive experiments demonstrate the robustness of our framework against occlusions.",
+   "score": 10.0,
+   "hints": [
+    "dataset"
+   ],
+   "found_by": [
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:vint6d",
+    "openalex cites model:v_hop"
    ],
    "first_seen": "2026-11-24"
   },
@@ -225,41 +167,6 @@
    "first_seen": "2026-11-24"
   },
   {
-   "key": "arxiv:2609.30969",
-   "title": "TACTIC: Understanding Tactile Encoders and Conditioning for Contact-rich Robot Manipulation Policies",
-   "date": "2026-09-25",
-   "url": "https://arxiv.org/abs/2609.30969",
-   "authors": "Seongjin Bien et al.",
-   "abstract": "Tactile information is essential for contact-rich manipulation tasks in robotics. Vision-based tactile sensors make it particularly easy to design end-to-end manipulation policies with tactile sensing, as they enable the use of existing encoders from computer vision. However, this has led to a huge variety of architectures, training datasets, and evaluation protocols, making it difficult to determine which design choices best encode touch. In this work, we address this gap and present a comprehensive study of tactile encoders and fusion strategies across various contact-rich manipulation tasks in real-world experiments. To enable a controlled comparison, we train and evaluate all models under the same pipeline and experimental setup, comprising more than 2000 real-world rollouts. Our results go beyond other studies that only compare simulation performance, which does not necessarily translate to real-world settings, where large-scale evaluations are needed to obtain reliable statistics. Our key finding is that there is no universally optimal representation or fusion strategy for encoding visual-tactile. Instead, the best encoder backbone and fusion scheme depend strongly on the task.",
-   "score": 9.5,
-   "hints": [
-    "dataset",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites model:omnivtla",
-    "openalex cites model:vitacformer"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2609.05266",
-   "title": "TacPAC: Tactile Prediction and Real-Time Action Correction in World-Action Models for Contact-Rich Manipulation",
-   "date": "2026-09-04",
-   "url": "https://arxiv.org/abs/2609.05266",
-   "authors": "麻滋沛 et al.",
-   "abstract": "World-action models guide action generation with predicted future observations, but vision-centric predictions miss the local contact cues that decide contact-rich manipulation. However, naively predicting future tactile observations as additional views recovers only a third of the achievable gain in our experiments. This gap reflects a timing mismatch: predictions precede execution, while tactile feedback arrives during it. We introduce TacPAC, which turns tactile prediction into real-time action correction. Once the base model has planned an action chunk, TacPAC caches the predicted contact that plan was conditioned on together with the plan's own representation, and a tactile expert reads each newly observed tactile image against that cache to correct the actions not yet executed. Feedback is thus interpreted against what the plan anticipated rather than in isolation, and one correction is a single pass over that cache, $20.7\\times$ cheaper than regenerating the chunk. On five real-robot tasks spanning precision insertion, fragile-object handling, object reorientation, and long-horizon manipulation, TacPAC leads every task and raises the average from 22% for its vision-only base model to 64%. Code is available at https://github.com/LogosRoboticsGroup/TacPAC.",
-   "score": 9.5,
-   "hints": [],
-   "found_by": [
-    "openalex cites dataset:ftp1_sharpa",
-    "openalex cites dataset:htd",
-    "openalex cites dataset:trex",
-    "openalex cites model:vitacformer"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
    "key": "doi:10.1109/iros61738.2026.11776961",
    "title": "HaptiLink: One Glove, Two Roles — Low-Cost Shared Tactile Sensing for Contact-Rich Robot Learning",
    "date": "2026-09-01",
@@ -276,77 +183,6 @@
     "openalex cites dataset:tdex"
    ],
    "first_seen": "2026-11-26"
-  },
-  {
-   "key": "arxiv:2603.28542",
-   "title": "Feel Robot Feels: Tactile Feedback Array Glove for Dexterous Manipulation",
-   "date": "2026-03-30",
-   "url": "https://arxiv.org/abs/2603.28542",
-   "authors": "Feiyu Jia et al.",
-   "abstract": "Teleoperation is a key approach for collecting high-quality, physically consistent demonstrations for robotic manipulation. However, teleoperation for dexterous manipulation remains constrained by: (i) inaccurate hand-robot motion mapping, which limits teleoperated dexterity, and (ii) limited tactile feedback that forces vision-dominated interaction and hinders perception of contact geometry and force variation. To address these challenges, we present TAG, a low-cost glove system that integrates precise hand motion capture with high-resolution tactile feedback, enabling effective tactile-in-the-loop dexterous teleoperation. For motion capture, TAG employs a non-contact magnetic sensing design that provides drift-free, electromagnetically robust 21-DoF joint tracking with joint angle estimation errors below 1 degree. Meanwhile, to restore tactile sensation, TAG equips each finger with a 32-actuator tactile array within a compact 2 cm^2 module, allowing operators to directly feel physical interactions at the robot end-effector through spatial activation patterns. Through real-world teleoperation experiments and user studies, we show that TAG enables reliable real-time perception of contact geometry and dynamic force, improves success rates in contact-rich teleoperation tasks, and increases the reliability of demonstration data collection for learning-based manipulation.",
-   "score": 9.5,
-   "hints": [],
-   "found_by": [
-    "openalex cites dataset:dexumi",
-    "openalex cites dataset:hato",
-    "openalex cites model:vitacformer"
-   ],
-   "first_seen": "2026-11-25"
-  },
-  {
-   "key": "arxiv:2502.17434",
-   "title": "V-HOP: Visuo-Haptic 6D Object Pose Tracking",
-   "date": "2025-06-21",
-   "url": "https://arxiv.org/abs/2502.17434",
-   "authors": "Hongyu Li et al.",
-   "abstract": "Humans naturally integrate vision and haptics for robust object perception during manipulation. The loss of either modality significantly degrades performance. Inspired by this multisensory integration, prior object pose estimation research has attempted to combine visual and haptic/tactile feedback. Although these works demonstrate improvements in controlled environments or synthetic datasets, they often underperform vision-only approaches in real-world settings due to poor generalization across diverse grippers, sensor layouts, or sim-to-real environments. Furthermore, they typically estimate the object pose for each frame independently, resulting in less coherent tracking over sequences in real-world deployments. To address these limitations, we introduce a novel unified haptic representation that effectively handles multiple gripper embodiments. Building on this representation, we introduce a new visuo-haptic transformer-based object pose tracker that seamlessly integrates visual and haptic input. We validate our framework in our dataset and the Feelsight dataset, demonstrating significant performance improvement on challenging sequences. Notably, our method achieves superior generalization and robustness across novel embodiments, objects, and sensor types (both taxel-based and vision-based tactile sensors). In real-world experiments, we demonstrate that our approach outperforms state-of-the-art visual trackers by a large margin. We further show that we can achieve precis",
-   "score": 9.5,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:tdex",
-    "openalex cites dataset:vint6d"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.24207",
-   "title": "TapTacTouch: Shape Completion from Sparse Tactile Contacts with Geometric Priors",
-   "url": "https://arxiv.org/abs/2611.24207",
-   "date": "2026-11-18",
-   "authors": "Yoobin Shin et al.",
-   "abstract": "3D object reconstruction is essential for robotic perception and manipulation, yet conventional approaches predominantly rely on visual observations that can be limited by occlusion or unavailable in visually constrained environments. In this work, we propose a vision-free, training-free, and category-agnostic framework for reconstructing 3D object meshes from sparse tactile contacts without relying on pretrained shape models. A 6-DoF robotic arm equipped with a 20-DoF multi-finger robotic hand collects tactile observations using 3x3 pressure sensor arrays mounted on the finger pads. The acquired tactile measurements are transformed into 3D contact constraints through robot kinematics and integrated into a multi-scale Gaussian Process Implicit Surface (GPIS). To address sparse and incomplete surface observations, the proposed method incorporates contact confidence weighting, weak pseudo-surface constraints, and an observation-driven geometric prior to preserve local surface geometry and provide structural guidance in unobserved regions. Real-world experiments on six objects achieve a Chamfer Distance (CD) of 1.610, an Earth Mover's Distance (EMD) of 7.738, and an F-Score of 95.00, with reconstruction completed in an average of 49.99 s per object. These results demonstrate that sparse tactile sensing can provide sufficient geometric information for continuous 3D object reconstruction without visual or semantic information.",
-   "score": 9.0,
-   "hints": [
-    "hand",
-    "model"
-   ],
-   "found_by": [
-    "arxiv recent",
-    "openalex cites dataset:feelsight",
-    "openalex cites model:tactofind",
-    "openalex recent"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2611.03520",
-   "title": "PanoTac: A Dense Three-Axis Tactile Sensor for Robust Touch-Centric Manipulation",
-   "date": "2026-11-02",
-   "url": "https://arxiv.org/abs/2611.03520",
-   "authors": "Binglin et al.",
-   "abstract": "Contact-rich manipulation benefits from tactile feedback that captures both detailed contact geometry and interaction forces. When scooping grains, contact patterns help infer spoon orientation, while resistance transmitted through the grasp guides motion. To provide these complementary sensing capabilities, we present PanoTac, a low-cost, compliant tactile fingertip designed for dense three-axis tactile sensing. Each fingertip provides a $12 \\times 32 \\times 3$ tactile representation, with one normal ($z$) and two shear ($x$, $y$) response components at each taxel. The sensor operates at 60 Hz and costs less than $50 per fingertip. Sensor characterization quantifies response repeatability and consistency across sensor instances and contact locations. We integrate PanoTac into a robotic system with a visuo-tactile pipeline. Across test-tube preparation, grain scooping, and salt pouring, the resulting policies outperform vision-only baselines by an average of 46.7 percentage points. Ablations show that removing either spatial contact information or shear feedback reduces overall performance across the task suite. Our project page is available at https://panotac.github.io.",
-   "score": 9.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:sparsh_x",
-    "openalex cites dataset:stag"
-   ],
-   "first_seen": "2026-11-24"
   },
   {
    "key": "arxiv:2609.18174",
@@ -422,25 +258,6 @@
    "first_seen": "2026-11-24"
   },
   {
-   "key": "arxiv:2610.08870",
-   "title": "From Wearable Interfaces to Dexterous Policies: Contact Shifts and Tactile Representations",
-   "date": "2026-10-06",
-   "url": "https://arxiv.org/abs/2610.08870",
-   "authors": "Ruitong Tian et al.",
-   "abstract": "Unlike conventional teleoperation, wearable interfaces allow operators to collect dexterous demonstrations through their own hand motions while directly interacting with task objects. This direct interaction reduces dependence on the target robot during collection, but it also makes the collection hardware part of the physical process that generates each demonstration. Interface geometry can influence both how a task is performed and what tactile observations are recorded for learning. We study two versions of a DexUMI-family exoskeleton that share the same robot command definition, mapping procedure, and tactile module type but differ in hand-side geometry. The revised interface reduces reported physical demand, improves selected device ratings, enables tactile access in a precision grasp that is mechanically blocked by the baseline, and produces task-dependent changes in recorded contact. Lid twisting primarily exhibits a change in contact location, whereas egg carton opening primarily exhibits a change in contact occurrence. We then train matched policies using either a binary aggregate input or a spatial-plus-force input. On lid twisting and egg carton opening, policies trained on revised-interface demonstrations achieve higher success than those trained on baseline demonstrations, with a significant pooled interface effect. Across these and two additional tasks, USB insertion and soldering tool pick and place, the spatial-plus-force input likewise outperforms binary aggr",
-   "score": 8.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:dexumi",
-    "openalex cites dataset:dexvitac",
-    "openalex cites model:robot_synesthesia",
-    "openalex recent"
-   ],
-   "first_seen": "2026-11-02"
-  },
-  {
    "key": "doi:10.1109/wrcsara71458.2026.11732568",
    "title": "High-Rate Full-Hand Tactile Sensing for Sim-to-Real Recognition and Grasping",
    "date": "2026-08-01",
@@ -454,24 +271,6 @@
    ],
    "found_by": [
     "openalex cites dataset:sparsh_skin"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2607.14842",
-   "title": "KineFuse: Kinematic-Aware Haptic Fusion for In-Hand Occluded-Object Pose Tracking",
-   "date": "2026-07-16",
-   "url": "https://arxiv.org/abs/2607.14842",
-   "authors": "Chanyoung Ahn et al.",
-   "abstract": "Dexterous in-hand manipulation requires continuous 6D pose tracking, yet the manipulating fingers inevitably occlude the object from the camera. We study how to structure the sparse haptic signals already available on multi-fingered hands, including proprioception, proximal force/torque, and binary contact, to complement a pretrained visual pose tracker under occlusion. We propose a kinematic-aware finger-level encoder and systematically compare it against four alternative designs through three levels of evaluation: per-frame refinement, sequential open-loop tracking, and closed-loop manipulation. Our experiments reveal that (i) per-frame evaluation cannot distinguish encoder quality, while sequential tracking amplifies architectural differences by up to 15 times; (ii) the structured encoder learns task-specific cross-modal gating, using vision exclusively for translation and dedicating one attention head to haptics for rotation, without explicit supervision; and (iii) compact finger-level tokenization with 4 tokens outperforms both flat fusion and joint-level representations, which suppress vision through norm dominance. We validate that improved tracking yields higher success in a downstream reorientation task and provide qualitative real-world demonstrations. Our project page is available at https://cold-young.github.io/kine-fuse/.",
-   "score": 8.5,
-   "hints": [
-    "hand",
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:hato"
    ],
    "first_seen": "2026-11-24"
   },
@@ -689,23 +488,6 @@
    "first_seen": "2026-11-24"
   },
   {
-   "key": "doi:10.1109/tii.2025.3646626",
-   "title": "ViTaDex: Vision–Tactile Fusion for 6-D Object-in-Hand Pose Estimation in Dexterous Anthropomorphic Manipulation",
-   "date": "2026-01-06",
-   "url": "https://doi.org/10.1109/tii.2025.3646626",
-   "authors": "Ling Tong et al.",
-   "abstract": "Object-in-hand 6-D pose estimation is critical for dexterous manipulation and assembly tasks. Existing object-in-hand pose estimation methods neglect the varying significance of tactile information from distinct hand regions during feature extraction and employ simplistic concatenation for vision–tactile fusion, which fails to capture the complementary relationships between these modalities. Moreover, prevailing object-in-hand datasets predominantly rely on predefined motion trajectories and single-point fingertip contact information, which inadequately represent real-world scenarios. To address these limitations, we propose the vision–tactile adaptive fusion network. Specifically, we design a novel tactile-gated adaptive graph convolution to dynamically model multiregional tactile features across the hand. We also introduce a vision–tactile cross-attention gated fusion module that facilitates efficient integration of multimodal sensory information. In addition, we construct the Vision–Tactile Object-in-Hand Dexterous Manipulation dataset based on human demonstration for 6-D pose estimation. The dataset employs a teleoperation system that combines an exoskeleton hand with a pose tracking system to replicate human dexterous behaviors and encompasses high-density tactile data spanning the entire hand. Extensive experiments demonstrate the robustness of our framework against occlusions.",
-   "score": 8.0,
-   "hints": [
-    "dataset"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:vint6d"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
    "key": "arxiv:2512.23864",
    "title": "Learning to Feel the Future: DreamTacVLA for Contact-Rich Manipulation",
    "date": "2025-12-29",
@@ -736,8 +518,8 @@
    ],
    "found_by": [
     "arxiv recent",
-    "openalex cites model:vitam",
-    "openalex cites dataset:feelsight"
+    "openalex cites dataset:feelsight",
+    "openalex cites model:vitam"
    ],
    "first_seen": "2026-11-27"
   },
@@ -1180,6 +962,24 @@
    "first_seen": "2026-11-27"
   },
   {
+   "key": "arxiv:2605.17929",
+   "title": "TacSE3: Constrained SE(3) Motion Estimation from Low-Texture Visuotactile Images for In-Gripper Tracking and Compensation",
+   "date": "2026-01-01",
+   "url": "https://arxiv.org/abs/2605.17929",
+   "authors": "Zhongyuan Liao et al.",
+   "abstract": "Robotic in-hand manipulation requires reliable object-motion tracking under frequent visual occlusion, yet low-texture visuotactile images provide few stable correspondences for conventional image- or geometry-matching methods. This paper presents TacSE3, a tactile motion-estimation pipeline that maps tactile observations to a calibrated three-dimensional surfacede-formation field and estimates constrained incremental contact motion onSE(3). Planar translation is obtained from contact-centroid motion, while rotation is recovered from the spatial variation of tangential elastomer deformation using a rigid-body fit. Estimates from two opposing fingertips are transformed to the end-effector frame and fused. The normal response remains part of the local three-dimensional contact geometry, whereas the opposing-finger mechanism constrains independent object-level normal translation. Experiments demonstrate improved motion-estimation accuracy over geometry-based registration baselines and further reductions in translation–rotation cross-coupling through dual-sensor fusion. Additional evaluations show consistent behavior across tested robot poses, contact locations, object geometries, and downstream execution-time compensation with a frozen policy. The method provides short-horizon motion feedback for in-gripper tracking and compensation.",
+   "score": 7.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:feelsight",
+    "openalex cites dataset:sparsh_x",
+    "openalex cites model:v_hop"
+   ],
+   "first_seen": "2026-11-24"
+  },
+  {
    "key": "arxiv:2505.01974",
    "title": "KineDex: Learning Tactile-Informed Visuomotor Policies via Kinesthetic Teaching for Dexterous Manipulation",
    "date": "2025-10-07",
@@ -1293,24 +1093,6 @@
     "openalex cites model:touchworld"
    ],
    "first_seen": "2026-11-24"
-  },
-  {
-   "key": "arxiv:2610.04363",
-   "title": "TacOT: Learning Contact-Rich Dexterous Manipulation from Human Demonstrations via Tactile-Guided Optimal Transport",
-   "date": "2026-10-03",
-   "url": "https://arxiv.org/abs/2610.04363",
-   "authors": "Xingting Li et al.",
-   "abstract": "Learning contact-rich dexterous manipulation from human demonstrations provides a scalable source of interaction data, yet transferring such skills to robots remains challenging due to unreliable human--robot correspondence. Existing human-to-robot transfer methods typically rely on visual appearance or motion similarity, which may associate similar motions with different contact states and force patterns. Tactile dynamics provide interaction-aware cues to distinguish manipulation processes with similar motions but different contact states. We introduce tactile-guided optimal transport (TacOT), a framework for human-to-robot contact-rich manipulation. TacOT leverages action--tactile dynamic time warping to identify human--robot demonstration correspondences with consistent interaction dynamics and uses these correspondences to guide soft optimal transport alignment in a shared policy representation space. This enables human demonstrations to provide contact-rich supervision for robot policy learning without requiring predefined frame-level human--robot pairing. Across four real-world dexterous manipulation tasks, TacOT improves closed-loop success rates over action-guided OT by up to 17 points on in-distribution tasks and 20 points under targeted human-to-robot out-of-distribution transfer. Further analyses show that tactile-guided correspondence selects demonstration pairs with more consistent contact dynamics and produces latent representations that better reflect interacti",
-   "score": 6.5,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:tactalign",
-    "openalex cites model:unitachand",
-    "openalex recent"
-   ],
-   "first_seen": "2026-11-02"
   },
   {
    "key": "arxiv:2609.34006",
@@ -1820,20 +1602,6 @@
     "hf datasets 'touch'"
    ],
    "first_seen": "2026-11-24"
-  },
-  {
-   "key": "hf:datasets/chrisyrniu/humanoidtouchdream_oxt",
-   "title": "chrisyrniu/HumanoidTouchDream_OXT",
-   "url": "https://huggingface.co/datasets/chrisyrniu/HumanoidTouchDream_OXT",
-   "date": "2026-11-01",
-   "authors": "chrisyrniu",
-   "abstract": "language:en license:cc-by-4.0 arxiv:2604.13015 robotics humanoid tactile egocentric open-x-tactile",
-   "score": 6.0,
-   "hints": [],
-   "found_by": [
-    "hf publisher of a catalog entry"
-   ],
-   "first_seen": "2026-11-27"
   },
   {
    "key": "arxiv:2610.40646",
@@ -2747,6 +2515,23 @@
    "first_seen": "2026-11-24"
   },
   {
+   "key": "doi:10.1109/lra.2026.3748688",
+   "title": "DT-TacVLA: A Dual-Timescale Tactile-Enhanced Vision-Language-Action Model for Contact-Rich Manipulation",
+   "date": "2026-10-29",
+   "url": "https://doi.org/10.1109/lra.2026.3748688",
+   "authors": "Zhaokun Yue et al.",
+   "abstract": "Vision-Language-Action (VLA) models exhibit strong semantic understanding and policy generalization, yet their predominantly vision-centric perception struggles to characterize key contact states such as contact establishment, in-hand slip, and normal and shear contact interactions. This limits their performance in contact-rich manipulation. In this paper, we proposeDT-TacVLA(Dual-Timescale Tactile-Enhanced VLA), a dual-timescale tactile fusion framework built on top of SmolVLA that processes tactile inputs along two complementary slow and fast pathways. Theslow semantic pathwayoperates at a lower update rate and adaptively fuses tactile image sequences with VLM features through a semantic-guided gating mechanism, producing a task-contact context that can be reused across multiple fast reflex updates. Thefast reflex pathwayis updated multiple times within each slow-context window. Under the fixed slow-context conditioning, it encodes the current tactile marker displacements into compact tokens and injects them into the action expert through a Tactile-Marker Adapter, modulating the action chunk with real-time contact feedback. Across three contact-rich real-world manipulation tasks, including power plug insertion, USB connector insertion, and test tube placement, DT-TacVLA consistently achieves higher success rates than vision-only VLA baselines and its ablation variants.",
+   "score": 5.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites model:dextac",
+    "openalex cites model:omnivtla"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
    "key": "doi:10.1002/admt.71424",
    "title": "A Flexible Multi‐Modal Tactile Sensor Enabling Decoupled Pressure–Temperature–Proximity Perception for Closed‐Loop Robotic Contact Control",
    "date": "2026-10-23",
@@ -3143,23 +2928,6 @@
    "first_seen": "2026-11-27"
   },
   {
-   "key": "arxiv:2605.17929",
-   "title": "TacSE3: Constrained SE(3) Motion Estimation from Low-Texture Visuotactile Images for In-Gripper Tracking and Compensation",
-   "date": "2026-01-01",
-   "url": "https://arxiv.org/abs/2605.17929",
-   "authors": "Zhongyuan Liao et al.",
-   "abstract": "Robotic in-hand manipulation requires reliable object-motion tracking under frequent visual occlusion, yet low-texture visuotactile images provide few stable correspondences for conventional image- or geometry-matching methods. This paper presents TacSE3, a tactile motion-estimation pipeline that maps tactile observations to a calibrated three-dimensional surfacede-formation field and estimates constrained incremental contact motion onSE(3). Planar translation is obtained from contact-centroid motion, while rotation is recovered from the spatial variation of tangential elastomer deformation using a rigid-body fit. Estimates from two opposing fingertips are transformed to the end-effector frame and fused. The normal response remains part of the local three-dimensional contact geometry, whereas the opposing-finger mechanism constrains independent object-level normal translation. Experiments demonstrate improved motion-estimation accuracy over geometry-based registration baselines and further reductions in translation–rotation cross-coupling through dual-sensor fusion. Additional evaluations show consistent behavior across tested robot poses, contact locations, object geometries, and downstream execution-time compensation with a frozen policy. The method provides short-horizon motion feedback for in-gripper tracking and compensation.",
-   "score": 5.0,
-   "hints": [
-    "model"
-   ],
-   "found_by": [
-    "openalex cites dataset:feelsight",
-    "openalex cites dataset:sparsh_x"
-   ],
-   "first_seen": "2026-11-24"
-  },
-  {
    "key": "arxiv:2508.20959",
    "title": "Scaling Fabric-Based Piezoresistive Sensor Arrays for Whole-Body Tactile Sensing",
    "date": "2025-08-28",
@@ -3222,6 +2990,22 @@
     "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
+  },
+  {
+   "key": "doi:10.1109/biorob.2018.8487705",
+   "title": "Modeling Target-Distractor Discrimination for Haptic Search in a 3D Environment",
+   "date": "2018-08-01",
+   "url": "https://doi.org/10.1109/biorob.2018.8487705",
+   "authors": "Alexandra Moringen et al.",
+   "abstract": "The ability to discriminate between target and distractors, using the information perceived by the hand over time, is essential to perform haptic search successfully, be it for a human hand or a suitably sensorized anthropomorphic robot hand. To address the latter, we train a binary classifier to perform this discrimination during unconstrained haptic search performed by sighted study participants who were blindfolded. In this work, we test different representational concepts and compare the results with the human classification performance. This approach both guides our understanding of human haptic interaction with the 3D environment and aids future modeling of artificial touch for anthropomorphic robot hands. Our contribution is three-fold. Firstly, we are able to acquire a synchronized multimodal time series of exceptionally high spatio-temporal resolution of both the 3D environment and the hand with our novel experimental setup. It includes our Modular Haptic Stimulus Board to represent a 3D environment and a novel tactile glove equipped with position tracking markers and joint angle sensors. Secondly, we introduce a machine learning approach inspired by a novel application of the feature guidance concept for vision (Wolfe et al., 2007 [1]) to modeling of haptic search in a 3D environment, focusing on the target-distractor discrimination. Finally, we compare results for two different types of artificial neural networks, a feedforward and a recurrent network. We show that",
+   "score": 5.0,
+   "hints": [
+    "glove"
+   ],
+   "found_by": [
+    "openalex backfill 2018-07"
+   ],
+   "first_seen": "2026-11-28"
   },
   {
    "key": "openalex:W3120040354",
@@ -3404,6 +3188,24 @@
    "first_seen": "2026-11-24"
   },
   {
+   "key": "arxiv:2611.15802",
+   "title": "RUMI: A Robotiq-Matched Universal Manipulation Interface for Robot Learning with Augmented Reality and Haptic Feedback",
+   "date": "2026-11-11",
+   "url": "https://arxiv.org/abs/2611.15802",
+   "authors": "Kevin Avdiu et al.",
+   "abstract": "Many manipulation tasks require carefully controlled contact forces for successful execution, yet large-scale, force-aware datasets remain scarce. Handheld interfaces can help by transmitting interaction forces directly through the operator's arm, but most existing designs are tailored to simple linear grippers and do not match the nonlinear mechanics of widely used robotic grippers. We present RUMI, a handheld universal manipulation interface matched to the Robotiq 2F-85 with exchangeable fingertip sensors that preserves the target gripper geometry while enabling natural input before contact and force measurement after contact. By integrating the tracking system into a virtual reality headset, our method provides real-time augmented reality feedback about the kinematic feasibility of motion on the target robot platform. We further introduce a haptic feedback mechanism that supports force-aware teleoperation for simulated and real robots. A user study shows fewer episodes containing joint-limit violations with live robot visualization and pose initialization (3/50) than without augmented reality (16/50). We additionally train imitation policies from demonstrations, collected using two different fingertip modalities enabled by the gripper-matched hardware, and assess the haptic interface's capability for collecting force-aware teleoperation datasets in simulation.",
+   "score": 4.5,
+   "hints": [
+    "dataset",
+    "model"
+   ],
+   "found_by": [
+    "openalex cites dataset:dexumi",
+    "openalex cites dataset:realdexumi"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
    "key": "arxiv:2611.10647",
    "title": "Which Taxels, Not How Many: Tactile Sensor Placement for Dexterous Policies",
    "url": "https://arxiv.org/abs/2611.10647",
@@ -3450,6 +3252,21 @@
     "openalex cites model:vitam"
    ],
    "first_seen": "2026-11-24"
+  },
+  {
+   "key": "arxiv:2610.31334",
+   "title": "GelSlim 5.0: Unifying Vision and Touch with a Single Fingertip Camera",
+   "date": "2026-10-22",
+   "url": "https://arxiv.org/abs/2610.31334",
+   "authors": "Xiangdong Wang et al.",
+   "abstract": "Vision and touch provide complementary cues for object pose and local contact geometry, but external cameras are often occluded at the contact site. We present GelSlim 5.0, a fingertip sensor that acquires visual and tactile observations with one fixed camera and a continuous UV-responsive contact layer. By switching illumination, the camera sequentially acquires through-membrane visual images and contact-sensitive tactile images from a shared viewpoint, avoiding inter-camera extrinsic calibration. To combine these observations, we introduce VisTacFusion, a multimodal transformer with separate prediction paths for planar object pose and contact geometry. Asymmetric bottleneck fusion incorporates visual context while preserving tactile spatial features for depth and surface-normal estimation. Modality dropout enables inference with paired inputs or either modality alone. On real validation data from 12 known objects, paired inputs reduce depth MSE, angular error, and translation $L_1$ by 61.2%, 72.3%, and 61.3%, respectively, relative to tactile-only inference with the same model. Relative to visual-only inference, the corresponding reductions are 93.7%, 6.1%, and 8.6%.",
+   "score": 4.5,
+   "hints": [],
+   "found_by": [
+    "openalex cites dataset:sparsh_x",
+    "openalex cites model:fingereye"
+   ],
+   "first_seen": "2026-11-28"
   },
   {
    "key": "arxiv:2610.28457",
@@ -3629,6 +3446,20 @@
    "first_seen": "2026-11-26"
   },
   {
+   "key": "doi:10.1109/iros61738.2026.11777450",
+   "title": "QTac: Quantitative Robotic Grasping with Tactile Sensing",
+   "date": "2026-09-01",
+   "url": "https://doi.org/10.1109/iros61738.2026.11777450",
+   "authors": "Huajin Chen et al.",
+   "abstract": "In this work, we investigate the novel task of quantitative robotic grasping and propose QTac, a tactile-driven framework designed to grasp a user-specified number of objects. Existing vision-only approaches struggle with severe occlusions in such tasks, making tactile feedback essential for reliably verifying the in-hand quantity. However, applying this concept faces two key challenges: the inherent unreliability of single-attempt grasping paradigms, and the difficulty of integrating high-dimensional tactile signals into existing manipulation models. QTac addresses these challenges through two key innovations: (1) A human-inspired demonstration strategy that endows the robot with iterative regrasping capabilities to rectify initial count mismatches, reducing the reliance on complex sensory feedback hardware in teleoperation; (2) A decoupled tactile perception module that translates high-dimensional tactile signals into explicit quantitative feedback, directly guiding corrective regrasping. Comprehensive real-world experiments across diverse objects validate that QTac achieves effective quantitative grasping in dense clutter and demonstrates encouraging transfer to the evaluated novel objects. Project page: https://kibry-spin.github.io/qtac.",
+   "score": 4.5,
+   "hints": [],
+   "found_by": [
+    "openalex cites model:v_hop"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
    "key": "arxiv:2608.19574",
    "title": "HiTac-WAM: A Hierarchical Tactile World Action Model for Contact-Rich Robot Manipulation",
    "date": "2026-08-20",
@@ -3691,6 +3522,22 @@
     "openalex cites model:robot_synesthesia"
    ],
    "first_seen": "2026-11-24"
+  },
+  {
+   "key": "doi:10.1109/lra.2026.3699258",
+   "title": "HIVE-6D: Hierarchical Visual-Tactile In-Hand Pose Estimation and Tracking",
+   "date": "2026-06-01",
+   "url": "https://doi.org/10.1109/lra.2026.3699258",
+   "authors": "J S Liu et al.",
+   "abstract": "Robust in-hand 6D pose estimation is essential for dexterous robotic manipulation. Existing approaches typically rely on vision or tactile sensing, yet both modalities have inherent limitations: vision provides global pose cues but degrades under hand–object occlusion, while tactile remains available during contact but is local and often geometrically ambiguous. Moreover, their reliability varies across manipulation stages, making effective fusion challenging. In this work, we propose HIVE 6D, a hierarchical visual–tactile framework with two-level fusion for in-hand 6D pose estimation and tracking. At the feature level, an asymmetric anchor-and-refine design first establishes a global pose anchor from vision and then performs tactile residual refinement using a render-and-compare strategy with vision guided cross-attention. At the policy level, an uncertainty-aware routing mechanism dynamically selects the trusted modality and refinement anchor over time to stabilize tracking under contact and occlusion. Extensive experiments in simulation and on a real robot show that HIVE-6D improves single-frame pose accuracy, strengthens long-horizon tracking robustness, and increases success rates on a real-world peg insertion task, including under external disturbances.",
+   "score": 4.5,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites model:v_hop"
+   ],
+   "first_seen": "2026-11-28"
   },
   {
    "key": "arxiv:2605.07308",
@@ -3940,7 +3787,8 @@
     "hand"
    ],
    "found_by": [
-    "openalex backfill 2018-04"
+    "openalex backfill 2018-04",
+    "openalex backfill 2018-07"
    ],
    "first_seen": "2026-11-27"
   },
@@ -3976,6 +3824,20 @@
     "openalex backfill 2017-07"
    ],
    "first_seen": "2026-11-24"
+  },
+  {
+   "key": "hf:datasets/anon-submission-0518/stitch_previews",
+   "title": "anon-submission-0518/stitch_previews",
+   "url": "https://huggingface.co/datasets/anon-submission-0518/stitch_previews",
+   "date": "2026-11-27",
+   "authors": "anon-submission-0518",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-28"
   },
   {
    "key": "hf:datasets/johnnyho1234567/tactile",
@@ -4830,6 +4692,20 @@
     "openalex cites model:vitacformer"
    ],
    "first_seen": "2026-11-26"
+  },
+  {
+   "key": "hf:datasets/singlebicycle/tacwam-pick-up-bottle",
+   "title": "SingleBicycle/tacwam-pick-up-bottle",
+   "url": "https://huggingface.co/datasets/SingleBicycle/tacwam-pick-up-bottle",
+   "date": "2026-08-25",
+   "authors": "SingleBicycle",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-28"
   },
   {
    "key": "hf:datasets/carolinepascal/grabette-tactile-soft",
@@ -6276,6 +6152,92 @@
     "hf publisher of a catalog entry"
    ],
    "first_seen": "2026-10-29"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/peel_tcp_in_state_lerobot",
+   "title": "JensenYuan/peel_tcp_in_state_lerobot",
+   "url": "https://huggingface.co/datasets/JensenYuan/peel_tcp_in_state_lerobot",
+   "date": "2026-03-04",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/chip_tcp_in_state_lerobot",
+   "title": "JensenYuan/chip_tcp_in_state_lerobot",
+   "url": "https://huggingface.co/datasets/JensenYuan/chip_tcp_in_state_lerobot",
+   "date": "2026-03-04",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/chip_task_lerobot",
+   "title": "JensenYuan/chip_task_lerobot",
+   "url": "https://huggingface.co/datasets/JensenYuan/chip_task_lerobot",
+   "date": "2026-03-03",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
+   "key": "arxiv:2603.01700",
+   "title": "TacMamba: A Tactile History Compression Adapter Bridging Fast Reflexes and Slow VLA Reasoning",
+   "date": "2026-03-02",
+   "url": "https://arxiv.org/abs/2603.01700",
+   "authors": "Zhenan Wang et al.",
+   "abstract": "In visually ambiguous manipulation such as detecting button click tactile feedback is often the sole source of ground truth. However, fusing tactile data poses a significant challenge due to a spatiotemporal mismatch: tactile perception requires high-frequency processing with long-horizon memory (System 1), whereas visual policies operate at low control frequencies (System 2). Existing architectures struggle to bridge this gap: Transformers are computationally prohibitive for high-frequency loops (>100Hz), while LSTMs suffer from forgetting over extended interaction histories. In this paper, we introduce TacMamba, a hierarchical architecture that aligns high-bandwidth tactile reflexes with low-frequency visual planning. Our approach comprises three core contributions: (1) a custom high-frequency tactile interface designed for flexible integration; (2) a Mamba-based Tactile History Compressor that encodes continuous force history into a compact state with O(1) inference latency (0.45 ms), enabling plug-and-play fusion with VLA models without joint pre-training and (3) a Tactile-Guided Dual-Stage Training strategy that leverages temporal discrimination for self-supervised representation learning and phase-uniform sampling to mitigate data sparsity. Experiments on discrete counting and implicit state switching demonstrate that TacMamba achieves 100% success rates, significantly outperforming the visual-only pi_0.5 baseline, while strictly satisfying hard real-time constraints.",
+   "score": 4.0,
+   "hints": [
+    "model"
+   ],
+   "found_by": [
+    "openalex cites model:omnivtla"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
+   "key": "hf:models/acerobotics/ace-brain-0-8b",
+   "title": "ACERobotics/ACE-Brain-0-8B",
+   "url": "https://huggingface.co/ACERobotics/ACE-Brain-0-8B",
+   "date": "2026-02-26",
+   "authors": "ACERobotics",
+   "abstract": "transformers safetensors qwen3_vl image-text-to-text conversational arxiv:2603.03198 base_model:ACERobotics/ACE-Brain-0-8B base_model:finetune:ACERobotics/ACE-Brain-0-8B license:mit endpoints_compatible",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-28"
+  },
+  {
+   "key": "hf:datasets/jensenyuan/calvin_lerobot",
+   "title": "JensenYuan/calvin_lerobot",
+   "url": "https://huggingface.co/datasets/JensenYuan/calvin_lerobot",
+   "date": "2026-02-26",
+   "authors": "JensenYuan",
+   "abstract": "",
+   "score": 4.0,
+   "hints": [],
+   "found_by": [
+    "hf publisher of a catalog entry"
+   ],
+   "first_seen": "2026-11-28"
   }
  ]
 }
