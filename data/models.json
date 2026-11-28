@@ -194,7 +194,7 @@
     "Re-checked 2026-11-01: the last push is still 2026-09-29 and the top-level listing is unchanged (no checkpoint folder).",
     "Re-checked 2026-11-02: the last push is still 2026-09-29 and the top-level listing is unchanged; a Hugging Face and web search for the name found no checkpoint."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-28"
   },
   {
    "id": "egopressurediff",
@@ -244,7 +244,7 @@
    "unconfirmed": [
     "ACE-Data-0 (arXiv 2607.28625) says it evaluated EgoPressureDiff 'using their released pre-trained weights'; no public checkpoint was found."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-28"
   },
   {
    "id": "egopressureformer",
@@ -514,7 +514,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the project page still reads 'Software release coming soon' and links only the hardware-v1 release; a web search found no repository."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "tactalign",
@@ -854,7 +854,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: the repository's last push is still 2026-09-30; no checkpoint link found in the listing or by web search."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-28"
   },
   {
    "id": "tacdex3d",
@@ -1024,7 +1024,7 @@
    "unconfirmed": [
     "Re-checked 2026-11-02: grasplikehuman.github.io still offers only the dataset zip and the paper (a 'Dataset (Coming soon)' line is commented out in the page); a web search found no code or weights."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "vt_jointpretrain",
@@ -1551,7 +1551,7 @@
     "Re-checked 2026-11-03: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page still says 'Code will be released at github.com/seungjun-moon/rlhnd'.",
     "Re-checked 2026-11-23: seungjun-moon/rlhnd still last pushed 2026-10-08 with the same four items; the project page text still says 'Code will be released at github.com/seungjun-moon/rlhnd'."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "dexskills",
@@ -1655,26 +1655,32 @@
    "own_data": "Fine-tuning data for ten tasks (lab pipetting, test-tube and flip caps, shoelaces, card shuffling, multi-object grasp, screwdriver, harp, xylophone, pipette volume): 10 robot trajectories per task teleoperated with Manus gloves and VIVE Tracker 3.0 wrist trackers, plus 90 human demonstrations per task recorded with a Wuji tactile glove; release not stated.",
    "dataset": "egoforce",
    "release": {
-    "code": "announced",
-    "weights": "not_released",
-    "note": "Project page fact-1-0.github.io (read 2026-11-23 and 2026-11-27): 'Code (Coming Soon)' remains and 'Data' now links to the Hugging Face repository zhicao/EgoForce (CC BY-NC 4.0; 739 h, 18,373 recordings, 25 tasks), first seen as 'Data (Coming Soon)' on 2026-10-27. The arXiv v1 HTML has no code, weights or license statement and no repository link; no FACT code repository or weights were found."
+    "code": "released",
+    "weights": "released",
+    "note": "Hugging Face zhicao/FACT (ungated, MIT; the same account as zhicao/EgoForce, which the project page links as 'Data') holds the fact/ model package, configs, method documents and four checkpoints: fact_small (213 M parameters, 853 MB), fact_large (5.09 B, 10.3 GB), fact_large_human (human data only, 10.3 GB) and trex_human (a T-Rex policy pretrained on human data only, 8.4 GB). Repository created 2026-10-15, last commit 2026-10-29, first seen by the catalog 2026-11-28; the file listing shows no training script. The project page fact-1-0.github.io still shows 'Code (Coming Soon)' and does not link the repository (read 2026-11-28)."
    },
-   "license": "not stated",
+   "license": "MIT",
    "links": {
     "paper": "https://arxiv.org/abs/2610.19155",
-    "project": "https://fact-1-0.github.io/"
+    "project": "https://fact-1-0.github.io/",
+    "code": "https://huggingface.co/zhicao/FACT",
+    "weights": "https://huggingface.co/zhicao/FACT"
    },
    "sources": [
     "https://arxiv.org/abs/2610.19155 (abstract via arXiv API)",
     "https://arxiv.org/html/2610.19155v1 (method, hardware appendix, pretraining data, fine-tuning data, acknowledgments)",
-    "https://fact-1-0.github.io/ (release buttons, ablation tables)"
+    "https://fact-1-0.github.io/ (release buttons, ablation tables)",
+    "https://huggingface.co/zhicao/FACT (README.md, docs/METHOD.md, docs/FACT_LARGE.md, LICENSE, file listings of the root, fact/ and scripts/, commit history; read 2026-11-28)"
    ],
    "unconfirmed": [
+    "The released documents describe action, future-state and force prediction; docs/FACT_LARGE.md says 'no video head, no track tokens', while the paper's FACT also predicts future video and visual tracks. Which checkpoint produced the paper's results is not stated.",
+    "The repository's LICENSE reads 'Copyright (c) 2026 The Regents of the University of California', which is not one of the affiliations on the project page. The README says fact/perception/ and fact/large/wan/ derive from Wan2.2 and keep its license.",
+    "Checkpoint files were listed with sizes, not downloaded or loaded. The README does not name the training data of fact_small or fact_large. Commits are titled 'Add FACT training code' (2026-10-15) and 'Keep model code and checkpoints only' (2026-10-29).",
     "embodiment 'both': human glove force (taxels in N) in pretraining and robot fingertip wrenches at fine-tuning and test; how the two force representations are mapped onto each other was not read in detail.",
     "The T-Rex hours are the paper's (100 h); the public T-Rex release in the catalog holds about 50 h, so FACT may have used data beyond the public release.",
     "The public EgoForce release (739 h, 18,373 recordings, fingertip taxels only) is smaller than the 2,000 h of human data with palm taxels that the paper describes for pretraining; whether the released subset is what FACT used is not stated."
    ],
-   "checked": "2026-11-27"
+   "checked": "2026-11-28"
   },
   {
    "id": "physword",
@@ -1716,7 +1722,7 @@
     "Table 3 labels the robot hand data 'Sharpa data' without naming T-Rex; the link to T-Rex is from the text. Co-author Dantong Niu is also T-Rex's first author.",
     "OpenNeoData (5,000+ h with touch) is not in the catalog; its embodiments were not checked."
    ],
-   "checked": "2026-11-27"
+   "checked": "2026-11-28"
   },
   {
    "id": "transdex",
@@ -1863,7 +1869,7 @@
     "Simulated data collection also used a 22-DoF Sharpa hand; whether one controller covers both hands was not read in detail.",
     "Policy-learning results (three tasks, 50 demonstrations each): 46.7% average success against 13.3% for direct joint-action prediction."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-28"
   },
   {
    "id": "occludex",
@@ -2054,7 +2060,7 @@
    "title": "VTAO-BiManip: Masked Visual-Tactile-Action Pre-training with Object Understanding for Bimanual Dexterous Manipulation",
    "authors": "Zhengnan Sun et al.",
    "year": 2025,
-   "venue": "arXiv 2501.03606",
+   "venue": "IROS 2025 (arXiv 2501.03606)",
    "kind": "representation",
    "summary": "Masked visual-tactile-action pretraining on human bimanual bottle-cap unscrewing (HoloLens 2 video, two gloves with 20 binarized touch sensors each, mocap hand motion) that predicts future actions plus bottle pose and size, used to guide two-stage curriculum RL for dual Shadow Hands in Isaac Gym (63% seen and 51% unseen bottles) and run on dual LEAP hands with tactile sensors.",
    "embodiment": "both",
@@ -2065,15 +2071,18 @@
    "release": {
     "code": "not_released",
     "weights": "not_released",
-    "note": "The arXiv v2 HTML (2025-12-25) has no code, data or weights statement or link (read 2026-10-29)."
+    "note": "The arXiv v2 HTML (2025-12-25) has no code, data or weights statement or link (read 2026-10-29). The project page suzend.github.io/VTAO-Bimanip shows a Paper button only; a 'Code is coming soon' line in its source is commented out (read 2026-11-28)."
    },
    "license": "not stated",
    "links": {
-    "paper": "https://arxiv.org/abs/2501.03606"
+    "paper": "https://arxiv.org/abs/2501.03606",
+    "project": "https://suzend.github.io/VTAO-Bimanip"
    },
    "sources": [
     "https://arxiv.org/abs/2501.03606 (abstract and versions via arXiv API)",
-    "https://arxiv.org/html/2501.03606v2 (capture system, data counts, simulation results, real-robot platform)"
+    "https://arxiv.org/html/2501.03606v2 (capture system, data counts, simulation results, real-robot platform)",
+    "https://suzend.github.io/VTAO-Bimanip (authors, IROS 2025 BibTeX, buttons; read 2026-11-28)",
+    "https://api.crossref.org/works?query.bibliographic=VTAO-BiManip+Masked+Visual-Tactile-Action+Pre-training+Bimanual+Dexterous+Manipulation&rows=3&select=title,DOI,container-title (IROS 2025, DOI 10.1109/iros60139.2025.11246950; read 2026-11-28)"
    ],
    "unconfirmed": [
     "Each glove has 'an inner layer with 20 tactile sensors', identical to the authors' earlier glove; sensor type not stated, readings binarized at 0.4 V. The earlier glove data are catalogued as m2vtp_bottlecap and VTDexManip, but this paper records its own bimanual set.",
@@ -2081,7 +2090,7 @@
     "How touch is produced for RL in Isaac Gym is not described; the abstract's 'over 20%' margin over visual-tactile pretraining matches 63% against 41% for the closest visual-tactile row in Table II, which the paper does not name as the comparison.",
     "Re-checked 2026-11-02: arXiv lists v1 and v2 (2025-12-25) only; no code, data or weights link found by web search."
    ],
-   "checked": "2026-11-02"
+   "checked": "2026-11-28"
   },
   {
    "id": "omnivtla",
@@ -2241,7 +2250,7 @@
     "License: the repository has no LICENSE file in its top-level listing and the GitHub API reports none; THIRD_PARTY.md covers only SAM2, SAM3 and ProPainter (the last under the non-commercial S-Lab License 1.0). The licence of TouchBridge's own code is therefore 'not stated'.",
     "arXiv v2 (2026-11-17) was not diffed against v1; the v2 abstract read on 2026-11-23 gives the same headline results as the summary (72.5% against 77.5%, collection 7.0x faster, +25.0 and +42.5 points over DexPilot and UniDex)."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "touch_jepa",
@@ -2400,7 +2409,7 @@
     "The number of sampled frames N and the clip length are not given in the paper; M = 3 temporal scales is the best configuration.",
     "Embodiment 'both': MIT-STAG is a human glove dataset and the iCub set comes from a five-finger robot hand."
    ],
-   "checked": "2026-11-27"
+   "checked": "2026-11-28"
   },
   {
    "id": "htd",
@@ -2444,7 +2453,7 @@
     "The 709 training demonstrations come from the paper; the public release holds 760 DFTP episodes for the same five tasks plus 111 F1 lab episodes that the paper does not report.",
     "The project page lists IROS 2026; the arXiv record has no venue."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "tactile_jepa",
@@ -2534,7 +2543,7 @@
     "Only the abstract and search-result excerpts were read; the 8-cluster view construction and ResNet-18 backbone come from search excerpts of the paper, not from the full text.",
     "Year 2022 is the arXiv submission (March 2022); the IEEE ISPCC version is dated 2025."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "touchtwin",
@@ -2787,7 +2796,7 @@
     "code 'announced': the paper points to an anonymous page for code that could not be reached.",
     "How HumanTouch's 320-360 taxels per hand were mapped to the 290-taxel canonical layout was not read."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "haco",
@@ -2858,7 +2867,7 @@
     "The hand model and tactile maker are not named; the affiliations (Shanghai Innovation Institute, Agibot) suggest an Agibot hand.",
     "touch 'both': future tactile prediction is a training objective; tactile signals are a policy input."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "witac",
@@ -3138,7 +3147,7 @@
     "The policy uses 3-axis force and torque per fingertip, not the raw tactile images.",
     "The README's example_data.zip (file name read from the Drive page, not downloaded) and the dataset/ folder were not opened; the README does not state the zip's task or size."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-28"
   },
   {
    "id": "hope",
@@ -3217,7 +3226,7 @@
     "Training is in simulation; recorded XELA touch enters through the calibration contacts and real-world evaluation, following the PTLD-style sim-to-real precedent.",
     "The taxel count per sensor and the sensor rate are not stated in the text read."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "tacforcing",
@@ -3234,9 +3243,9 @@
    "own_data": "850 real teleoperated demonstrations over 6 tasks (100 per task, 150 for Close Cap, 300 for Close Lid) and 50 simulated demonstrations per UniVTAC task; release not stated.",
    "dataset": null,
    "release": {
-    "code": "not_released",
+    "code": "announced",
     "weights": "not_released",
-    "note": "The arXiv v2 text has no release statement; the anonymous project page tacforcing-review.pages.dev has no code or model link (read 2026-11-25)."
+    "note": "The page 88runaway.github.io/tacforcing, given as 'Project Website' in arXiv v1 and listing the authors, shows 'Code · Coming soon' (read 2026-11-28; its repository was last pushed 2026-08-28). arXiv v2 links the anonymous page tacforcing-review.pages.dev instead, which has no code or model link, and v2 has no release statement. Weights are not mentioned."
    },
    "license": "not stated",
    "links": {
@@ -3245,13 +3254,16 @@
    },
    "sources": [
     "https://arxiv.org/html/2608.25798 (v2: hardware, inputs, outputs, data, results)",
-    "https://tacforcing-review.pages.dev/ (per-task results, no code link)"
+    "https://tacforcing-review.pages.dev/ (per-task results, no code link)",
+    "https://arxiv.org/html/2608.25798v1 (project website link; read 2026-11-28)",
+    "https://88runaway.github.io/tacforcing/ ('Code · Coming soon'; read 2026-11-28)"
    ],
    "unconfirmed": [
+    "The page with the 'Code · Coming soon' label still shows the v1 results (three real tasks, 69% average); the figures here are from v2 (six tasks, 66%).",
     "The tactile encoder is initialised from the catalog model FTP-1; whether the ftp1_sharpa data itself enters TacForcing's training is not stated, so no uses link was made.",
     "The fingertip sensor is not named; the paper says it produces deformation maps. The Sharpa North arm and hand are not described."
    ],
-   "checked": "2026-11-25"
+   "checked": "2026-11-28"
   },
   {
    "id": "3dtouch",
@@ -3282,7 +3294,7 @@
    "unconfirmed": [
     "The tactile sensor maker and rate are not stated; 120 three-axis taxels per finger is the paper's figure for the XHand."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "cgp",
@@ -3641,7 +3653,7 @@
     "Training and quantitative results are in simulation; real-hand deployment on the recorded 113-taxel touch is shown only qualitatively (Figure 4).",
     "Tactile sampling rate is not stated; real-world control runs at 20 Hz."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "touch2trace",
@@ -3677,7 +3689,7 @@
     "The hand is fixed without an arm and the policy controls 8 of 20 DoF; ring and pinky are held still.",
     "TacV5 is also mounted on the middle fingertip, which the policy does not use."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "vitacphys",
@@ -3744,7 +3756,7 @@
     "FSR maker and glove sampling rate are not stated.",
     "Evaluation covers one object at one position; the paper notes the current-based force estimate saturates near 5 N."
    ],
-   "checked": "2026-11-26"
+   "checked": "2026-11-28"
   },
   {
    "id": "tacit",
@@ -3847,7 +3859,7 @@
     "The tactile array maker and the meaning of the 5x10x4 input shape are not stated.",
     "Diffusion Policy with the same interface reaches 63.75%; state-as-action supervision 51.25%."
    ],
-   "checked": "2026-11-27"
+   "checked": "2026-11-28"
   },
   {
    "id": "tacot",
@@ -3977,7 +3989,7 @@
     "The reported comparisons project contact positions onto the ground-truth surface and add 0.5 mm Gaussian noise, so they are ground-truth assisted.",
     "Sensor maker and sampling rate are not stated; each element is an 8-bit value."
    ],
-   "checked": "2026-11-27"
+   "checked": "2026-11-28"
   },
   {
    "id": "v_hop",
