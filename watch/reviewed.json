@@ -674,5 +674,17 @@
  "arxiv:2609.05266": {"decision": "reject", "id": null, "reason": "TacPAC: two InTac S1 sensors in a Flexiv Rizon 4 gripper; gripper only", "date": "2026-11-27"},
  "arxiv:2609.30969": {"decision": "reject", "id": null, "reason": "TACTIC: Franka Hand with two DIGIT sensors; gripper only", "date": "2026-11-27"},
  "doi:10.1109/iros61738.2026.11776848": {"decision": "reject", "id": null, "reason": "DexTact: 174,500 grasping demonstrations and contact forces collected in simulation per the abstract; no recorded hand touch visible (closed access)", "date": "2026-11-27"},
- "arxiv:2603.28542": {"decision": "reject", "id": null, "reason": "TAG: glove giving tactile feedback to the teleoperator; haptic feedback device", "date": "2026-11-27"}
+ "arxiv:2603.28542": {"decision": "reject", "id": null, "reason": "TAG: glove giving tactile feedback to the teleoperator; haptic feedback device", "date": "2026-11-27"},
+ "openalex:W7236513678": {"decision": "model", "id": "dexmove", "reason": "DexMove: flow policy for non-prehensile wrist-finger control with wearable vision-based tactile demonstrations (ICLR 2026); paper body not readable", "date": "2026-11-28"},
+ "arxiv:2511.00139": {"decision": "model", "id": "dexgrasp_vla", "reason": "DexGrasp-VLA: hand VLA on XHand with 120-taxel tri-axial fingertip arrays; 21% to 90% grasp success with touch", "date": "2026-11-28"},
+ "doi:10.1109/icra57385.2026.11697534": {"decision": "duplicate", "id": "dexgrasp_vla", "reason": "ICRA 2026 version of DexGrasp-VLA (arXiv 2511.00139); added to sources", "date": "2026-11-28"},
+ "arxiv:2504.16649": {"decision": "model", "id": "pp_tac", "reason": "PP-Tac: diffusion policy on four R-Tac fingertips of an Allegro-based hand for paper picking; sensor hardware and code released", "date": "2026-11-28"},
+ "arxiv:2512.02011": {"decision": "model", "id": "dexscrew", "reason": "DexScrew: tactile behavior cloning on XHand fingertip arrays for screwdriving and nut-bolt fastening; code released (MIT)", "date": "2026-11-28"},
+ "arxiv:2607.14842": {"decision": "model", "id": "kinefuse", "reason": "KineFuse: pose tracker fusing fingertip binary contact and joint F/T of a 16-DoF hand with RGB-D (IROS 2026)", "date": "2026-11-28"},
+ "arxiv:2609.16504": {"decision": "model", "id": "unidex_vitac", "reason": "UniDex-ViTac: ACT policy with four barometric fingertip contact bits on a 16-DoF hand; 66.4% against 54.5% real", "date": "2026-11-28"},
+ "arxiv:2609.18174": {"decision": "model", "id": "tacbpm", "reason": "TacBPM: tactile-conditioned latent prior for SharpaWave reorientation, deployed on real hardware; code announced", "date": "2026-11-28"},
+ "arxiv:2611.03520": {"decision": "reject", "id": null, "reason": "PanoTac: sensor on both fingers of a Robotiq 2F-85; gripper only", "date": "2026-11-28"},
+ "arxiv:2610.08870": {"decision": "reject", "id": null, "reason": "interface study on a DexUMI-family exoskeleton with XHand 120-taxel fingertips; no named model (Diffusion Policy), data release not stated", "date": "2026-11-28"},
+ "arxiv:2604.07335": {"decision": "reject", "id": null, "reason": "TAMEn: wearable interface for heterogeneous grippers; gripper only", "date": "2026-11-28"},
+ "arxiv:2406.13640": {"decision": "reject", "id": null, "reason": "T3/FoTa: camera-based sensor datasets from grippers and benches; no multi-finger hand (search hit)", "date": "2026-11-28"}
 }

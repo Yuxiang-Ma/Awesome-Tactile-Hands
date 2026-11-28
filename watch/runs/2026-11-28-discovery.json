@@ -1,0 +1,30 @@
+{
+ "flow": "discovery",
+ "date": "2026-11-28",
+ "model": "claude-opus-5-5",
+ "reviewed": 13,
+ "added": {
+  "datasets": 0,
+  "models": 7,
+  "hardware": 0
+ },
+ "updated": 0,
+ "queue_left": 388,
+ "searches": [
+  "电子皮肤 灵巧手 数据集",
+  "tactile hand dataset ModelScope OR OpenDataLab",
+  "egocentric video tactile glove dataset",
+  "tactile foundation model multi-finger hand open source"
+ ],
+ "for_the_owner": [],
+ "notes": [
+  "DexMove was added from its abstract and project page; OpenReview served a verification page, so the robot hand, sensor count and demonstration counts should be checked when the paper is readable.",
+  "In-scope candidates left in the queue for the next run: Motus2 (arXiv 2608.30237, tactile on dual dexterous hands), TaF-Foundation with TaF-Policy (arXiv 2611.20718), articulated-tool refinement with whole-hand touch (arXiv 2509.23075), TactX (arXiv 2606.31236), HaptiLink (doi:10.1109/iros61738.2026.11776961; still no preprint found), DexTaG (arXiv 2609.33882), ViTaDex (doi:10.1109/tii.2025.3646626, closed access, possible dataset), full-hand piezoresistive sim-to-real (doi:10.1109/wrcsara71458.2026.11732568).",
+  "Search sweep hits already in the catalog or reviewed: OpenTouch, EgoTouch, TouchScale, FEEL, TouchSight, HandSense, Sparsh-skin, LingBot-Touch, TacCompress, TacViT, Ti3D-contact, the Mendeley electrotactile set; FreeTacMan is gripper data."
+ ],
+ "started": "2026-11-28T06:30:02Z",
+ "finished": "2026-11-28T06:43:40Z",
+ "ok": true,
+ "review_exit": 0,
+ "guard": "nightly guard passed: 6 changed files, 7 new entries"
+}
